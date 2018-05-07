@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { MdProAngularCliPage } from './app.po';
 
-describe('fightfor-ui App', () => {
-  let page: AppPage;
+describe('md-pro-angular-cli App', () => {
+  let page: MdProAngularCliPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new MdProAngularCliPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });
