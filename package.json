@@ -26,6 +26,7 @@
     "@angular/platform-server": "5.2.9",
     "@angular/router": "5.2.9",
     "ajv": "6.4.0",
+    "angular-calendar": "0.23.1",
     "arrive": "2.4.1",
     "bootstrap": "4.1.0",
     "bootstrap-material-design": "4.1.1",
@@ -40,6 +41,7 @@
     "perfect-scrollbar": "1.1.0",
     "popper.js": "1.14.3",
     "rxjs": "5.5.10",
+    "sweetalert2": "7.17.0",
     "web-animations-js": "2.3.1",
     "zone.js": "0.8.4"
   },
