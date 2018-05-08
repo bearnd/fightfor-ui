@@ -1,111 +1,46 @@
-import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatStepperModule,
-} from '@angular/material';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+
+
+import { AppRoutingModule } from './app.routing';
+import { ComponentsModule } from './components/components.module';
 
 import { AppComponent } from './app.component';
 
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
-import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-
-import { AppRoutes } from './app.routing';
-
-@NgModule({
-  exports: [
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule
-  ]
-})
-export class MaterialModule {}
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TableListComponent } from './table-list/table-list.component';
+import { TypographyComponent } from './typography/typography.component';
+import { IconsComponent } from './icons/icons.component';
+import { MapsComponent } from './maps/maps.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { UpgradeComponent } from './upgrade/upgrade.component';
+import {
+  AgmCoreModule
+} from '@agm/core';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
 @NgModule({
-    imports:      [
-        CommonModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        RouterModule.forRoot(AppRoutes),
-        HttpModule,
-        MaterialModule,
-        MatNativeDateModule,
-        SidebarModule,
-        NavbarModule,
-        FooterModule,
-        FixedpluginModule
-    ],
-    declarations: [
-        AppComponent,
-        AdminLayoutComponent,
-        AuthLayoutComponent
-    ],
-    bootstrap:    [ AppComponent ]
+  imports: [
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpModule,
+    ComponentsModule,
+    RouterModule,
+    AppRoutingModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
+    })
+  ],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,34 +1,25 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../app.module';
+import { RouterModule } from '@angular/router';
 
-import { ButtonsComponent } from './buttons/buttons.component';
-import { ComponentsRoutes } from './components.routing';
-import { GridSystemComponent } from './grid/grid.component';
-import { IconsComponent } from './icons/icons.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { PanelsComponent } from './panels/panels.component';
-import { SweetAlertComponent } from './sweetalert/sweetalert.component';
-import { TypographyComponent } from './typography/typography.component';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ComponentsRoutes),
-    FormsModule,
-    MaterialModule
+    RouterModule,
   ],
   declarations: [
-      ButtonsComponent,
-      GridSystemComponent,
-      IconsComponent,
-      NotificationsComponent,
-      PanelsComponent,
-      SweetAlertComponent,
-      TypographyComponent
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent
+  ],
+  exports: [
+    FooterComponent,
+    NavbarComponent,
+    SidebarComponent
   ]
 })
-
-export class ComponentsModule {}
+export class ComponentsModule { }

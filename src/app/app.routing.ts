@@ -1,54 +1,41 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule, } from '@angular/common';
+import { BrowserModule  } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
 
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-export const AppRoutes: Routes = [
-    {
+const routes: Routes =[
+  {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  }, {
+    path: '',
+    component: AdminLayoutComponent,
+    children: [
+        {
       path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
-    }, {
-      path: '',
-      component: AdminLayoutComponent,
-      children: [
-          {
-        path: '',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
-    }, {
-        path: 'components',
-        loadChildren: './components/components.module#ComponentsModule'
-    }, {
-        path: 'forms',
-        loadChildren: './forms/forms.module#Forms'
-    }, {
-        path: 'tables',
-        loadChildren: './tables/tables.module#TablesModule'
-    }, {
-        path: 'maps',
-        loadChildren: './maps/maps.module#MapsModule'
-    }, {
-        path: 'widgets',
-        loadChildren: './widgets/widgets.module#WidgetsModule'
-    }, {
-        path: 'charts',
-        loadChildren: './charts/charts.module#ChartsModule'
-    }, {
-        path: 'calendar',
-        loadChildren: './calendar/calendar.module#CalendarModule'
-    }, {
-        path: '',
-        loadChildren: './userpage/user.module#UserModule'
-    }, {
-        path: '',
-        loadChildren: './timeline/timeline.module#TimelineModule'
-    }
-  ]}, {
-      path: '',
-      component: AuthLayoutComponent,
-      children: [{
-        path: 'pages',
-        loadChildren: './pages/pages.module#PagesModule'
-      }]
-    }
+      loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+  }]}
+    // { path: 'dashboard',      component: DashboardComponent },
+    // { path: 'user-profile',   component: UserProfileComponent },
+    // { path: 'table-list',     component: TableListComponent },
+    // { path: 'typography',     component: TypographyComponent },
+    // { path: 'icons',          component: IconsComponent },
+    // { path: 'maps',           component: MapsComponent },
+    // { path: 'notifications',  component: NotificationsComponent },
+    // { path: 'upgrade',        component: UpgradeComponent },
+    // { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
 ];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+  ],
+})
+export class AppRoutingModule { }
