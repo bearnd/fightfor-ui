@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule} from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -31,7 +32,8 @@ import { SearchesService } from './searches/searches.service';
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    SlimLoadingBarModule.forRoot()
   ],
   declarations: [
     AppComponent,
