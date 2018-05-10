@@ -1,14 +1,14 @@
-import { AppPage } from './app.po';
+import { MaterialDashboardAngularPage } from './app.po';
 
-describe('fightfor-ui App', () => {
-  let page: AppPage;
+describe('material-dashboard-angular App', () => {
+  let page: MaterialDashboardAngularPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    page = new MaterialDashboardAngularPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    expect(page.getParagraphText()).toEqual('app works!');
   });
 });
