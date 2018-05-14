@@ -1,0 +1,63 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+
+        <!--New search card.-->
+        <div class="card search-card">
+          <div class="card-header card-header-rose">
+            <h4 class="card-title">New Search</h4>
+            <p class="card-category">Create a new Search</p>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Website Views</h4>
+            <p class="card-category">Last Campaign Performance</p>
+
+            <!--New search button.-->
+            <button
+              mat-raised-button
+              class="btn btn-rose mat-raised-button pull-right"
+              (click)="onNewSearch()"
+            >
+              <span class="mat-button-wrapper">New Search</span>
+            </button>
+
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons"></i>&nbsp;
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4" *ngFor="let search of searches; let i=index">
+        <div class="card search-card">
+          <div class="card-header card-header-rose">
+            <h4 class="card-title">{{ search.title }}</h4>
+            <p class="card-category">{{ search.description }}</p>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Website Views</h4>
+            <p class="card-category">Last Campaign Performance</p>
+            <button
+              mat-raised-button
+              class="btn btn-rose mat-raised-button pull-right"
+              routerLink="results"
+              (click)="onSeeMore(i)"
+            >
+              <span class="mat-button-wrapper">See More</span>
+            </button>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> last updated 2 days ago
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

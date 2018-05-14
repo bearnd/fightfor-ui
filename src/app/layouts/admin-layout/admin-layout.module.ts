@@ -15,6 +15,12 @@ import {
   MatTooltipModule,
   MatChipsModule,
 } from '@angular/material';
+
+import { SearchResultsComponent } from '../../searches/search-results/search-results.component';
+import { SearchNewComponent } from '../../searches/search-new/search-new.component';
+import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -30,8 +36,11 @@ import {
     DashboardComponent,
     UserProfileComponent,
     TableListComponent,
-    SearchesComponent
-  ]
+    SearchesComponent,
+    SearchResultsComponent,
+    SearchNewComponent,
+    SearchesGridComponent
+  ],
 })
 
 export class AdminLayoutModule {}

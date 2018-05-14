@@ -1,0 +1,41 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-2">
+        <!--<ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column" role="tablist">-->
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column" role="tablist" style="position: fixed;">
+          <li class="nav-item pill-small" *ngFor="let name of names">
+            <!--<a class="nav-link active" data-toggle="tab" href="#{{ name }}" role="tablist">-->
+            <a class="nav-link" data-toggle="tab" href="#{{ name }}" role="tablist" [routerLink]="" fragment="{{ name }}">
+              <i class="material-icons">dashboard</i> Home
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <div class="row" *ngFor="let name of names" id="{{ name }}">
+          <div class="card">
+            <div class="card-header card-header-rose">
+              <h4 class="card-title">{{ name | uppercase}}</h4>
+              <p class="card-category">Perform a new search</p>
+            </div>
+            <div class="card-body">
+              <h4>Content</h4>
+              <p>Something something something something something something something something something something
+               something something something something something something something something something something
+               something something something something something something something something something something</p>
+            </div>
+            <div class="card-footer">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
