@@ -13,6 +13,7 @@ import {
   MatInputModule,
   MatRippleModule,
   MatTooltipModule,
+  MatChipsModule,
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {
     MatRippleModule,
     MatInputModule,
     MatTooltipModule,
+    MatChipsModule,
   ],
   declarations: [
     DashboardComponent,
