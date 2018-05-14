@@ -1,0 +1,9 @@
+<ul *ngIf="breadcrumbs.length" class="breadcrumb list-inline">
+  <li *ngFor="let crumb of breadcrumbs; let last = last"
+      [ngClass]="{ 'active': last }"
+      class="breadcrumb-item list-inline-item"
+  >
+    <a *ngIf="!last" [routerLink]="crumb.path">{{ crumb.text }}</a>
+    <span *ngIf="last">{{ crumb.text }}</span>
+  </li>
+</ul>
