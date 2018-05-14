@@ -1,11 +1,11 @@
-import {
-  AngularFirestore,
-  AngularFirestoreCollection
-} from 'angularfire2/firestore';
+import { Injectable } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
 import { SearchModel } from './search.model';
-import {Injectable} from '@angular/core';
+
 
 @Injectable()
 export class SearchesService {

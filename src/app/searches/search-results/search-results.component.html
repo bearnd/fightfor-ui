@@ -1,0 +1,54 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-2">
+
+        <!--Nav-pill fixed navigation menu.-->
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column nav-pills-fixed" role="tablist">
+          <li class="nav-item pill-small" *ngFor="let name of names; let idx = index">
+            <!--The nav-pill links are used to smoothly scroll to the corresponding card. In addition their `active`
+            state is defined via the `isNavPillActive` method which uses the current scroll location of the page to
+            automatically activate the nav-pill corresponding to the currently viewed card.-->
+            <a
+              class="nav-link"
+              data-toggle="tab"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#{{ name }}"
+              role="tablist"
+              [ngClass]="{active: isNavPillActive(idx)}"
+            >
+              <i class="material-icons">dashboard</i> Home
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <!--Content cards. Each card has an `id` with a name used for in-page navigation.-->
+        <div class="row" *ngFor="let name of names; let idx = index" id="{{ name }}">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-rose" (ngx-scroll-tracker)="onScroll($event, idx)">
+              <h4 class="card-title">{{ name | uppercase }}</h4>
+              <p class="card-category">Perform a new search</p>
+            </div>
+            <div class="card-body">
+              <h4>Content</h4>
+              <p>Something something something something something something something something something something
+               something something something something something something something something something something
+               something something something something something something something something something something</p>
+              <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+            <div class="card-footer">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

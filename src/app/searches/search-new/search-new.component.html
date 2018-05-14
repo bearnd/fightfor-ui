@@ -1,0 +1,26 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-rose">
+            <h4 class="card-title">Search</h4>
+            <p class="card-category">Perform a new search</p>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Search term" type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="card-footer">
+            <mat-chip-list>
+              <mat-chip *ngFor="let tag of tags">{{ tag }}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
