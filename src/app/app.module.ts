@@ -14,11 +14,11 @@ import { AppComponent } from './app.component';
 
 import { environment } from '../environments/environment';
 
-import {
-  AgmCoreModule
-} from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
+
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { SearchesService } from './searches/searches.service';
+
 
 @NgModule({
   imports: [
