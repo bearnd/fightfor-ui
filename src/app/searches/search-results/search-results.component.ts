@@ -1,16 +1,15 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import { Component, OnInit} from '@angular/core';
+import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
+
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.scss']
 })
-export class SearchResultsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SearchResultsComponent implements OnInit {
 
-  private fragment: string;
-  private routerSubscription: Subscription;
+  private navPillIndexActive = 0;
 
   names = [
     "Results01",
@@ -18,34 +17,32 @@ export class SearchResultsComponent implements OnInit, AfterViewInit, OnDestroy 
     "Results03",
     "Results04",
   ];
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-    // this.routerSubscription = this.route.fragment.subscribe(fragment => { this.fragment = fragment; });
-    // console.log(this.route.data);
-    this.router.events.subscribe(s => {
-      if (s instanceof NavigationEnd) {
-        const tree = this.router.parseUrl(this.router.url);
-        if (tree.fragment) {
-          const element = document.querySelector('#' + tree.fragment);
-          // if (element) { element.scrollIntoView({block: 'start', inline: 'nearest', behavior: 'smooth'}); }
-          if (element) { element.scrollIntoView(true); }
-        }
-      }
-    });
+  ngOnInit() { }
+
+  public onScroll(event: ScrollTrackerEventData, navPillIndex: number) {
+    // Retrieve the ratios between the tracked element and the container.
+    const ratioTop = event.data.elementTop.fromContainerTop.ratio;
+    const ratioBottom = event.data.elementTop.fromContainerTop.ratio;
+
+    // Should the ratios fall within given ranges the tracked element is
+    // in view thus we set `navPillIndexActive` to the current pill index.
+    if (
+      (ratioTop < 0.1 && ratioTop > -0.75) &&
+      (ratioBottom < 0.1 && ratioBottom > -1.75)
+    ) {
+      this.navPillIndexActive = navPillIndex;
+    }
   }
 
-  ngAfterViewInit(): void {
-    // try {
-    //   document.querySelector('#' + this.fragment).scrollIntoView();
-    // } catch (e) { }
+  /**
+   * Checks whether a nav-pill with a given index is supposed to be active or not.
+   * @param {number} navPillIndex The index of the nav-pill to be checked.
+   * @returns {boolean} Whether the defined nav-pill is supposed to be active or not.
+   */
+  public isNavPillActive(navPillIndex: number) {
+    // Check whether the defined nav-pill is supposed to be active or not.
+    return navPillIndex === this.navPillIndexActive;
   }
-
-  ngOnDestroy() {
-    this.routerSubscription.unsubscribe();
-  }
-
 }
