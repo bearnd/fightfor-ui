@@ -4,20 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireModule} from 'angularfire2';
+import { AgmCoreModule } from '@agm/core';
+import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
+import { SearchesService } from './searches/searches.service';
 
 import { environment } from '../environments/environment';
-
-import { AgmCoreModule } from '@agm/core';
-
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { SearchesService } from './searches/searches.service';
 
 
 @NgModule({
@@ -33,13 +33,18 @@ import { SearchesService } from './searches/searches.service';
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    SlimLoadingBarModule.forRoot()
+    SlimLoadingBarModule.forRoot(),
+    McBreadcrumbsModule.forRoot()
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [SearchesService],
-  bootstrap: [AppComponent]
+  providers: [SearchesService, McBreadcrumbsService],
+  bootstrap: [AppComponent],
+  exports: [
+    McBreadcrumbsModule,
+    McBreadcrumbsComponent
+  ]
 })
 export class AppModule { }
