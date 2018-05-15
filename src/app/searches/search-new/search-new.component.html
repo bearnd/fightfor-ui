@@ -14,7 +14,7 @@
               <mat-form-field class="tag-list-input">
                 <mat-chip-list #tagsConditionsChipList>
                   <mat-chip
-                    *ngFor="let tag of tagsConditions"
+                    *ngFor="let tag of tagsConditionsSelected"
                     [selectable]="false"
                     [selected]="true"
                     [removable]="true"
@@ -30,8 +30,6 @@
                     [matAutocomplete]="tagsConditionsAutocomplete"
                     [matChipInputFor]="tagsConditionsChipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                    [matChipInputAddOnBlur]="addOnBlur"
-                    (matChipInputTokenEnd)="onAddTagCondition($event)"
                   />
                 </mat-chip-list>
                 <mat-autocomplete
@@ -39,8 +37,8 @@
                   #tagsConditionsAutocomplete="matAutocomplete"
                   (optionSelected)="onSelected($event)"
                 >
-                  <mat-option *ngFor="let tag of tagsConditionsFiltered | async" [value]="tag">
-                    {{ tag }}
+                  <mat-option *ngFor="let tag of tagsConditionsFiltered" [value]="tag">
+                    {{ tag.name }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>

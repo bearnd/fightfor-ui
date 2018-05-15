@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 
-import { Observable } from 'rxjs/Observable';
-import { map, startWith } from 'rxjs/operators';
 import { TagInterface } from './tag.interface';
 
 
@@ -15,15 +13,13 @@ import { TagInterface } from './tag.interface';
 })
 export class SearchNewComponent implements OnInit {
 
-  addOnBlur: boolean = false;
-
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   tagsConditionsCtrl = new FormControl();
 
-  tagsConditionsFiltered: Observable<any[]>;
+  tagsConditionsFiltered: TagInterface[] = [];
 
-  tagsConditions: TagInterface[] = [];
+  tagsConditionsSelected: TagInterface[] = [];
 
   tagsConditionsAll: TagInterface[] = [
     {id: 1, name: 'Bowel Cancer'},
@@ -35,54 +31,61 @@ export class SearchNewComponent implements OnInit {
     {id: 7, name: 'Irritable Bowel Syndrome'},
   ];
 
-  tagsConditionsAllValues = this.tagsConditionsAll.map(x => x.name);
-
   @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
 
   constructor() {
-    this.tagsConditionsFiltered = this.tagsConditionsCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this.onFilter(tag) : this.tagsConditionsAllValues)
-    )
+    this.tagsConditionsCtrl.valueChanges.subscribe(
+      (value => {
+        // If the incoming value is of type `string` then perform a filtering
+        // and update the `tagsConditionsFiltered` array.
+        if (typeof value === 'string') {
+          this.filterConditions(value);
+        }
+      })
+    );
   }
 
-  ngOnInit() {}
-
-  onAddTagCondition(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add the new condition-tag to the array.
-    if ((value || '').trim()) {
-      this.tagsConditions.push({name: value.trim()});
-    }
-
-    // Reset the input value to an empty string.
-    if (input) {
-      input.value = '';
-    }
+  ngOnInit() {
+    // Allow all tags to be selected.
+    this.tagsConditionsFiltered = this.tagsConditionsAll
   }
 
+  /**
+   *
+   * @param {string} query The value entered in the input field used to filter the tags.
+   */
+  filterConditions(query: string): void {
+
+    // Exclude tags that have already been included in `tagsConditionsFiltered`.
+    this.tagsConditionsFiltered = this.tagsConditionsAll.filter(tagCondition =>
+      this.tagsConditionsSelected.indexOf(tagCondition) === -1
+    );
+
+    // If the `query` is an empty string then skip the filtering.
+    if (query === '') {
+      return
+    }
+
+    this.tagsConditionsFiltered = this.tagsConditionsFiltered.filter(tagCondition =>
+      tagCondition.name.toLowerCase().indexOf(query.toLowerCase()) === 0
+    );
+  }
+
+  /**
+   * Removes a tag from `tagsConditionsSelected`.
+   * @param {TagInterface} tag The tag object to be removed.
+   */
   onRemoveTagCondition(tag: TagInterface): void {
-    const index = this.tagsConditions.indexOf(tag);
+    const index = this.tagsConditionsSelected.indexOf(tag);
 
     if (index >= 0) {
-      this.tagsConditions.splice(index, 1);
+      this.tagsConditionsSelected.splice(index, 1);
     }
-  }
-
-  onFilter(name: string) {
-
-    const result = this.tagsConditionsAllValues.filter(tag =>
-      tag.toLowerCase().indexOf(name.toLowerCase()) === 0);
-
-    console.log(name, result);
-
-    return result;
   }
 
   onSelected(event: MatAutocompleteSelectedEvent): void {
-    this.tagsConditions.push({name: event.option.viewValue});
+    const tagSelected = event.option.value;
+    this.tagsConditionsSelected.push(tagSelected);
     this.tagsConditionsInput.nativeElement.value = '';
   }
 }
