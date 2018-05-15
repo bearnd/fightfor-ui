@@ -4,6 +4,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 
 import { TagInterface } from './tag.interface';
+import * as Fuse from 'fuse.js';
 
 
 @Component({
@@ -13,6 +14,19 @@ import { TagInterface } from './tag.interface';
 })
 export class SearchNewComponent implements OnInit {
 
+  // Options for fuzzy-seaching via Fuse.js.
+  optionsFuse = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      'name',
+    ]
+  };
+  
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   tagsConditionsCtrl = new FormControl();
@@ -27,8 +41,8 @@ export class SearchNewComponent implements OnInit {
     {id: 3, name: 'Hepatic Carcinoma'},
     {id: 4, name: 'Irritable Bowel Syndrome'},
     {id: 5, name: 'Renal Carcinoma'},
-    {id: 6, name: 'Irritable Bowel Syndrome'},
-    {id: 7, name: 'Irritable Bowel Syndrome'},
+    {id: 6, name: 'Skin Cancer'},
+    {id: 6, name: 'Squamous Cell Carcinoma'},
   ];
 
   @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
@@ -47,7 +61,7 @@ export class SearchNewComponent implements OnInit {
 
   ngOnInit() {
     // Allow all tags to be selected.
-    this.tagsConditionsFiltered = this.tagsConditionsAll
+    this.tagsConditionsFiltered = this.tagsConditionsAll;
   }
 
   /**
@@ -63,12 +77,14 @@ export class SearchNewComponent implements OnInit {
 
     // If the `query` is an empty string then skip the filtering.
     if (query === '') {
-      return
+      return;
     }
 
-    this.tagsConditionsFiltered = this.tagsConditionsFiltered.filter(tagCondition =>
-      tagCondition.name.toLowerCase().indexOf(query.toLowerCase()) === 0
-    );
+    // Create a new `Fuse` search object with the predefined options.
+    const fuse = new Fuse(this.tagsConditionsFiltered, this.optionsFuse);
+
+    // Perform a fuzzy-search through the tag names using the query.
+    this.tagsConditionsFiltered = fuse.search(query);
   }
 
   /**
