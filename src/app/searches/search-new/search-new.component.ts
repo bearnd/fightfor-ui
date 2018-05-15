@@ -25,14 +25,14 @@ export class SearchNewComponent implements OnInit {
 
   tagsConditions: TagInterface[] = [];
 
-  tagsConditionsAll = [
-    {name: 'Bowel Cancer'},
-    {name: 'Brain Cancer'},
-    {name: 'Hepatic Carcinoma'},
-    {name: 'Irritable Bowel Syndrome'},
-    {name: 'Renal Carcinoma'},
-    {name: 'Irritable Bowel Syndrome'},
-    {name: 'Irritable Bowel Syndrome'},
+  tagsConditionsAll: TagInterface[] = [
+    {id: 1, name: 'Bowel Cancer'},
+    {id: 2, name: 'Brain Cancer'},
+    {id: 3, name: 'Hepatic Carcinoma'},
+    {id: 4, name: 'Irritable Bowel Syndrome'},
+    {id: 5, name: 'Renal Carcinoma'},
+    {id: 6, name: 'Irritable Bowel Syndrome'},
+    {id: 7, name: 'Irritable Bowel Syndrome'},
   ];
 
   tagsConditionsAllValues = this.tagsConditionsAll.map(x => x.name);
