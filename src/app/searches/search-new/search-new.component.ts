@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 
-import { Observable } from 'rxjs/Observable';
-import { map, startWith } from 'rxjs/operators';
 import { TagInterface } from './tag.interface';
+import * as Fuse from 'fuse.js';
 
 
 @Component({
@@ -15,74 +14,94 @@ import { TagInterface } from './tag.interface';
 })
 export class SearchNewComponent implements OnInit {
 
-  addOnBlur: boolean = false;
-
+  // Options for fuzzy-seaching via Fuse.js.
+  optionsFuse = {
+    shouldSort: true,
+    threshold: 0.6,
+    location: 0,
+    distance: 100,
+    maxPatternLength: 32,
+    minMatchCharLength: 1,
+    keys: [
+      'name',
+    ]
+  };
+  
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   tagsConditionsCtrl = new FormControl();
 
-  tagsConditionsFiltered: Observable<any[]>;
+  tagsConditionsFiltered: TagInterface[] = [];
 
-  tagsConditions: TagInterface[] = [];
+  tagsConditionsSelected: TagInterface[] = [];
 
-  tagsConditionsAll = [
-    {name: 'Bowel Cancer'},
-    {name: 'Brain Cancer'},
-    {name: 'Hepatic Carcinoma'},
-    {name: 'Irritable Bowel Syndrome'},
-    {name: 'Renal Carcinoma'},
-    {name: 'Irritable Bowel Syndrome'},
-    {name: 'Irritable Bowel Syndrome'},
+  tagsConditionsAll: TagInterface[] = [
+    {id: 1, name: 'Bowel Cancer'},
+    {id: 2, name: 'Brain Cancer'},
+    {id: 3, name: 'Hepatic Carcinoma'},
+    {id: 4, name: 'Irritable Bowel Syndrome'},
+    {id: 5, name: 'Renal Carcinoma'},
+    {id: 6, name: 'Skin Cancer'},
+    {id: 6, name: 'Squamous Cell Carcinoma'},
   ];
-
-  tagsConditionsAllValues = this.tagsConditionsAll.map(x => x.name);
 
   @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
 
   constructor() {
-    this.tagsConditionsFiltered = this.tagsConditionsCtrl.valueChanges.pipe(
-      startWith(null),
-      map((tag: string | null) => tag ? this.onFilter(tag) : this.tagsConditionsAllValues)
-    )
+    this.tagsConditionsCtrl.valueChanges.subscribe(
+      (value => {
+        // If the incoming value is of type `string` then perform a filtering
+        // and update the `tagsConditionsFiltered` array.
+        if (typeof value === 'string') {
+          this.filterConditions(value);
+        }
+      })
+    );
   }
 
-  ngOnInit() {}
-
-  onAddTagCondition(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add the new condition-tag to the array.
-    if ((value || '').trim()) {
-      this.tagsConditions.push({name: value.trim()});
-    }
-
-    // Reset the input value to an empty string.
-    if (input) {
-      input.value = '';
-    }
+  ngOnInit() {
+    // Allow all tags to be selected.
+    this.tagsConditionsFiltered = this.tagsConditionsAll;
   }
 
+  /**
+   *
+   * @param {string} query The value entered in the input field used to filter the tags.
+   */
+  filterConditions(query: string): void {
+
+    // Exclude tags that have already been included in `tagsConditionsFiltered`.
+    this.tagsConditionsFiltered = this.tagsConditionsAll.filter(tagCondition =>
+      this.tagsConditionsSelected.indexOf(tagCondition) === -1
+    );
+
+    // If the `query` is an empty string then skip the filtering.
+    if (query === '') {
+      return;
+    }
+
+    // Create a new `Fuse` search object with the predefined options.
+    const fuse = new Fuse(this.tagsConditionsFiltered, this.optionsFuse);
+
+    // Perform a fuzzy-search through the tag names using the query.
+    this.tagsConditionsFiltered = fuse.search(query);
+  }
+
+  /**
+   * Removes a tag from `tagsConditionsSelected`.
+   * @param {TagInterface} tag The tag object to be removed.
+   */
   onRemoveTagCondition(tag: TagInterface): void {
-    const index = this.tagsConditions.indexOf(tag);
+    const index = this.tagsConditionsSelected.indexOf(tag);
 
     if (index >= 0) {
-      this.tagsConditions.splice(index, 1);
+      this.tagsConditionsSelected.splice(index, 1);
     }
-  }
-
-  onFilter(name: string) {
-
-    const result = this.tagsConditionsAllValues.filter(tag =>
-      tag.toLowerCase().indexOf(name.toLowerCase()) === 0);
-
-    console.log(name, result);
-
-    return result;
   }
 
   onSelected(event: MatAutocompleteSelectedEvent): void {
-    this.tagsConditions.push({name: event.option.viewValue});
+    const tagSelected = event.option.value;
+    this.tagsConditionsSelected.push(tagSelected);
     this.tagsConditionsInput.nativeElement.value = '';
   }
 }
