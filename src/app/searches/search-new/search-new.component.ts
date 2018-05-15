@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
+import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
+
+import { Observable } from 'rxjs/Observable';
+import { map, startWith } from 'rxjs/operators';
+import { TagInterface } from './tag.interface';
+
 
 @Component({
   selector: 'app-search-new',
@@ -7,15 +15,74 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchNewComponent implements OnInit {
 
-  tags = [
-    'Tag 01',
-    'Tag 02',
-    'Tag 03',
+  addOnBlur: boolean = false;
+
+  separatorKeysCodes = [ENTER, COMMA, TAB];
+
+  tagsConditionsCtrl = new FormControl();
+
+  tagsConditionsFiltered: Observable<any[]>;
+
+  tagsConditions: TagInterface[] = [];
+
+  tagsConditionsAll = [
+    {name: 'Bowel Cancer'},
+    {name: 'Brain Cancer'},
+    {name: 'Hepatic Carcinoma'},
+    {name: 'Irritable Bowel Syndrome'},
+    {name: 'Renal Carcinoma'},
+    {name: 'Irritable Bowel Syndrome'},
+    {name: 'Irritable Bowel Syndrome'},
   ];
 
-  constructor() { }
+  tagsConditionsAllValues = this.tagsConditionsAll.map(x => x.name);
 
-  ngOnInit() {
+  @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
+
+  constructor() {
+    this.tagsConditionsFiltered = this.tagsConditionsCtrl.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) => tag ? this.onFilter(tag) : this.tagsConditionsAllValues)
+    )
   }
 
+  ngOnInit() {}
+
+  onAddTagCondition(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add the new condition-tag to the array.
+    if ((value || '').trim()) {
+      this.tagsConditions.push({name: value.trim()});
+    }
+
+    // Reset the input value to an empty string.
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  onRemoveTagCondition(tag: TagInterface): void {
+    const index = this.tagsConditions.indexOf(tag);
+
+    if (index >= 0) {
+      this.tagsConditions.splice(index, 1);
+    }
+  }
+
+  onFilter(name: string) {
+
+    const result = this.tagsConditionsAllValues.filter(tag =>
+      tag.toLowerCase().indexOf(name.toLowerCase()) === 0);
+
+    console.log(name, result);
+
+    return result;
+  }
+
+  onSelected(event: MatAutocompleteSelectedEvent): void {
+    this.tagsConditions.push({name: event.option.viewValue});
+    this.tagsConditionsInput.nativeElement.value = '';
+  }
 }

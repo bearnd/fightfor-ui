@@ -1,26 +1,55 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-rose">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons">add_circle</i>
+            </div>
             <h4 class="card-title">Search</h4>
-            <p class="card-category">Perform a new search</p>
           </div>
           <div class="card-body">
             <div class="form-group">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="Search term" type="text">
+              <mat-form-field class="tag-list-input">
+                <mat-chip-list #tagsConditionsChipList>
+                  <mat-chip
+                    *ngFor="let tag of tagsConditions"
+                    [selectable]="false"
+                    [selected]="true"
+                    [removable]="true"
+                    (remove)="onRemoveTagCondition(tag)"
+                  >
+                    {{ tag.name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Condition/Disease"
+                    #tagsConditionsInput
+                    [formControl]="tagsConditionsCtrl"
+                    [matAutocomplete]="tagsConditionsAutocomplete"
+                    [matChipInputFor]="tagsConditionsChipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="onAddTagCondition($event)"
+                  />
+                </mat-chip-list>
+                <mat-autocomplete
+                  [autoActiveFirstOption]="true"
+                  #tagsConditionsAutocomplete="matAutocomplete"
+                  (optionSelected)="onSelected($event)"
+                >
+                  <mat-option *ngFor="let tag of tagsConditionsFiltered | async" [value]="tag">
+                    {{ tag }}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
-          </div>
-          <div class="card-footer">
-            <mat-chip-list>
-              <mat-chip *ngFor="let tag of tags">{{ tag }}</mat-chip>
-            </mat-chip-list>
+            <div class="card-footer">
+
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

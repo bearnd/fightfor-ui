@@ -8,6 +8,8 @@ import {
   MatRippleModule,
   MatTooltipModule,
   MatChipsModule,
+  MatIconModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
@@ -29,11 +31,14 @@ import { SearchesGridComponent } from '../../searches/searches-grid/searches-gri
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatRippleModule,
     MatInputModule,
     MatTooltipModule,
     MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
   ],
@@ -44,7 +49,7 @@ import { SearchesGridComponent } from '../../searches/searches-grid/searches-gri
     SearchesComponent,
     SearchResultsComponent,
     SearchNewComponent,
-    SearchesGridComponent
+    SearchesGridComponent,
   ],
   providers: [PageScrollService]
 })
