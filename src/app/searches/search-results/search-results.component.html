@@ -5,14 +5,13 @@
       <div class="col-md-2">
 
         <!--Nav-pill fixed navigation menu.-->
-        <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column nav-pills-fixed" role="tablist">
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons nav-pills-fixed flex-column">
           <li class="nav-item pill-small" *ngFor="let name of names; let idx = index">
             <!--The nav-pill links are used to smoothly scroll to the corresponding card. In addition their `active`
             state is defined via the `isNavPillActive` method which uses the current scroll location of the page to
             automatically activate the nav-pill corresponding to the currently viewed card.-->
             <a
               class="nav-link"
-              data-toggle="tab"
               pageScroll
               [pageScrollDuration]="500"
               href="#{{ name }}"
