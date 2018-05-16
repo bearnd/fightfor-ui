@@ -64,7 +64,7 @@ export class SearchNewComponent implements OnInit {
         // If the incoming value is of type `string` then perform a filtering
         // and update the `tagsConditionsFiltered` array.
         if (typeof value === 'string') {
-          this.filterConditions(value);
+          this.tagsConditionsFiltered = this.filterTags(this.tagsConditionsAll, this.tagsConditionsSelected, value);
         }
       })
     );
@@ -79,27 +79,31 @@ export class SearchNewComponent implements OnInit {
     this.isSaved = !this.isSaved;
   }
 
-  /**
-   *
-   * @param {string} query The value entered in the input field used to filter the tags.
-   */
-  filterConditions(query: string): void {
+  filterTags(
+    tagsAll: TagInterface[],
+    tagsSelected: TagInterface[],
+    query: string,
+  ): TagInterface[] {
+
+    let tagsFiltered: TagInterface[];
 
     // Exclude tags that have already been included in `tagsConditionsFiltered`.
-    this.tagsConditionsFiltered = this.tagsConditionsAll.filter(tagCondition =>
-      this.tagsConditionsSelected.indexOf(tagCondition) === -1
+    tagsFiltered = tagsAll.filter(tagCondition =>
+      tagsSelected.indexOf(tagCondition) === -1
     );
 
     // If the `query` is an empty string then skip the filtering.
     if (query === '') {
-      return;
+      return tagsFiltered;
     }
 
     // Create a new `Fuse` search object with the predefined options.
-    const fuse = new Fuse(this.tagsConditionsFiltered, this.optionsFuse);
+    const fuse = new Fuse(tagsFiltered, this.optionsFuse);
 
     // Perform a fuzzy-search through the tag names using the query.
-    this.tagsConditionsFiltered = fuse.search(query);
+    tagsFiltered = fuse.search(query);
+
+    return tagsFiltered;
   }
 
   /**
