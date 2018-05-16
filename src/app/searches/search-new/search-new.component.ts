@@ -44,7 +44,7 @@ export class SearchNewComponent implements OnInit {
     {id: 4, name: 'Irritable Bowel Syndrome'},
     {id: 5, name: 'Renal Carcinoma'},
     {id: 6, name: 'Skin Cancer'},
-    {id: 6, name: 'Squamous Cell Carcinoma'},
+    {id: 7, name: 'Squamous Cell Carcinoma'},
   ];
 
   @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
