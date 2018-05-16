@@ -14,6 +14,8 @@ import * as Fuse from 'fuse.js';
 })
 export class SearchNewComponent implements OnInit {
 
+  isSaved = false;
+
   // Options for fuzzy-seaching via Fuse.js.
   optionsFuse = {
     shouldSort: true,
@@ -26,7 +28,7 @@ export class SearchNewComponent implements OnInit {
       'name',
     ]
   };
-  
+
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   tagsConditionsCtrl = new FormControl();
@@ -62,6 +64,10 @@ export class SearchNewComponent implements OnInit {
   ngOnInit() {
     // Allow all tags to be selected.
     this.tagsConditionsFiltered = this.tagsConditionsAll;
+  }
+
+  toggleSaved() {
+    this.isSaved = !this.isSaved;
   }
 
   /**

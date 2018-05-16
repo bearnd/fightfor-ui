@@ -7,7 +7,25 @@
             <div class="card-icon">
               <i class="material-icons">add_circle</i>
             </div>
-            <h4 class="card-title">Search</h4>
+            <div class="row">
+              <div class="col-md-8">
+                <h4 class="card-title">
+                  Search
+                </h4>
+              </div>
+
+              <div class="col-md-4">
+                <button
+                  mat-raised-button mat-min-fab
+                  class="btn btn-rose btn-link btn-round btn-fab pull-right"
+                  (click)="toggleSaved()"
+                  [disableRipple]="true"
+                  matTooltip="Save this search" [matTooltipPosition]="'left'"
+                >
+                  <i class="material-icons">{{ isSaved ? "favorite" : "favorite_border" }}</i>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <div class="form-group">
