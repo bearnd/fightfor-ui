@@ -47,6 +47,15 @@ export class SearchNewComponent implements OnInit {
     {id: 7, name: 'Squamous Cell Carcinoma'},
   ];
 
+  tagsInterventionsAll: TagInterface[] = [
+    {id: 1, name: 'Surgery'},
+    {id: 2, name: 'Chemotherapy'},
+    {id: 3, name: 'Radiotherapy'},
+    {id: 4, name: 'Immunotherapy'},
+    {id: 5, name: 'Hyperthermia'},
+    {id: 6, name: 'Focused Ultrasound Ablation'},
+  ];
+
   @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
 
   constructor() {
