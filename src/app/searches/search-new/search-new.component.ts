@@ -1,10 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
-import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material';
+import {COMMA, ENTER, TAB} from '@angular/cdk/keycodes';
 
-import { TagInterface } from './tag.interface';
-import * as Fuse from 'fuse.js';
+import {TermInterface} from './term.interface';
+import {TermFilterConditionsService, TermFilterInterventionsService} from './term-filter.service';
 
 
 @Component({
@@ -16,28 +16,19 @@ export class SearchNewComponent implements OnInit {
 
   isSaved = false;
 
-  // Options for fuzzy-seaching via Fuse.js.
-  optionsFuse = {
-    shouldSort: true,
-    threshold: 0.6,
-    location: 0,
-    distance: 100,
-    maxPatternLength: 32,
-    minMatchCharLength: 1,
-    keys: [
-      'name',
-    ]
-  };
+  termsFilterConditionsService: TermFilterConditionsService;
+  termsFilterInterventionsService: TermFilterInterventionsService;
+
+  termsConditionsFiltered: TermInterface[] = [];
+  termsInterventionsFiltered: TermInterface[] = [];
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
-  tagsConditionsCtrl = new FormControl();
+  termsConditionsCtrl = new FormControl();
+  termsInterventionsCtrl = new FormControl();
 
-  tagsConditionsFiltered: TagInterface[] = [];
 
-  tagsConditionsSelected: TagInterface[] = [];
-
-  tagsConditionsAll: TagInterface[] = [
+  termsConditionsAll: TermInterface[] = [
     {id: 1, name: 'Bowel Cancer'},
     {id: 2, name: 'Brain Cancer'},
     {id: 3, name: 'Hepatic Carcinoma'},
@@ -47,7 +38,7 @@ export class SearchNewComponent implements OnInit {
     {id: 7, name: 'Squamous Cell Carcinoma'},
   ];
 
-  tagsInterventionsAll: TagInterface[] = [
+  termsInterventionsAll: TermInterface[] = [
     {id: 1, name: 'Surgery'},
     {id: 2, name: 'Chemotherapy'},
     {id: 3, name: 'Radiotherapy'},
@@ -56,71 +47,61 @@ export class SearchNewComponent implements OnInit {
     {id: 6, name: 'Focused Ultrasound Ablation'},
   ];
 
-  @ViewChild('tagsConditionsInput') tagsConditionsInput: ElementRef;
+  @ViewChild('termsConditionsInput') termsConditionsInput: ElementRef;
+  @ViewChild('termsInterventionsInput') termsInterventionsInput: ElementRef;
 
   constructor() {
-    this.tagsConditionsCtrl.valueChanges.subscribe(
+  }
+
+  ngOnInit() {
+    this.termsFilterConditionsService = new TermFilterConditionsService(this.termsConditionsAll);
+    this.termsFilterInterventionsService = new TermFilterInterventionsService(this.termsInterventionsAll);
+
+    this.termsConditionsFiltered = this.termsConditionsAll;
+    this.termsInterventionsFiltered = this.termsInterventionsAll;
+
+    this.termsConditionsCtrl.valueChanges.subscribe(
       (value => {
         // If the incoming value is of type `string` then perform a filtering
         // and update the `tagsConditionsFiltered` array.
         if (typeof value === 'string') {
-          this.tagsConditionsFiltered = this.filterTags(this.tagsConditionsAll, this.tagsConditionsSelected, value);
+          this.termsConditionsFiltered = this.termsFilterConditionsService.filterTerms(value, true);
         }
       })
     );
-  }
 
-  ngOnInit() {
-    // Allow all tags to be selected.
-    this.tagsConditionsFiltered = this.tagsConditionsAll;
+    this.termsInterventionsCtrl.valueChanges.subscribe(
+      (value => {
+        // If the incoming value is of type `string` then perform a filtering
+        // and update the `tagsConditionsFiltered` array.
+        if (typeof value === 'string') {
+          this.termsInterventionsFiltered = this.termsFilterInterventionsService.filterTerms(value, true);
+        }
+      })
+    );
   }
 
   toggleSaved() {
     this.isSaved = !this.isSaved;
   }
 
-  filterTags(
-    tagsAll: TagInterface[],
-    tagsSelected: TagInterface[],
-    query: string,
-  ): TagInterface[] {
-
-    let tagsFiltered: TagInterface[];
-
-    // Exclude tags that have already been included in `tagsConditionsFiltered`.
-    tagsFiltered = tagsAll.filter(tagCondition =>
-      tagsSelected.indexOf(tagCondition) === -1
-    );
-
-    // If the `query` is an empty string then skip the filtering.
-    if (query === '') {
-      return tagsFiltered;
-    }
-
-    // Create a new `Fuse` search object with the predefined options.
-    const fuse = new Fuse(tagsFiltered, this.optionsFuse);
-
-    // Perform a fuzzy-search through the tag names using the query.
-    tagsFiltered = fuse.search(query);
-
-    return tagsFiltered;
+  onRemoveTermCondition(term: TermInterface): void {
+    this.termsFilterConditionsService.removeTerm(term);
   }
 
-  /**
-   * Removes a tag from `tagsConditionsSelected`.
-   * @param {TagInterface} tag The tag object to be removed.
-   */
-  onRemoveTagCondition(tag: TagInterface): void {
-    const index = this.tagsConditionsSelected.indexOf(tag);
-
-    if (index >= 0) {
-      this.tagsConditionsSelected.splice(index, 1);
-    }
+  onRemoveTermIntervention(term: TermInterface): void {
+    this.termsFilterInterventionsService.removeTerm(term);
   }
 
-  onSelected(event: MatAutocompleteSelectedEvent): void {
-    const tagSelected = event.option.value;
-    this.tagsConditionsSelected.push(tagSelected);
-    this.tagsConditionsInput.nativeElement.value = '';
+  onTermConditionSelected(event: MatAutocompleteSelectedEvent): void {
+    const term = event.option.value;
+    this.termsFilterConditionsService.addTerm(term);
+    this.termsConditionsInput.nativeElement.value = '';
+  }
+
+  onTermInterventionSelected(event: MatAutocompleteSelectedEvent): void {
+    const term = event.option.value;
+    this.termsFilterInterventionsService.addTerm(term);
+    this.termsInterventionsInput.nativeElement.value = '';
   }
 }

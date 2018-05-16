@@ -29,37 +29,75 @@
           </div>
           <div class="card-body">
             <div class="form-group">
-              <mat-form-field class="tag-list-input">
-                <mat-chip-list #tagsConditionsChipList>
+
+              <!--Conditions chip-input with autocomplete.-->
+              <mat-form-field class="term-list-input">
+                <mat-chip-list #termsConditionsChipList>
                   <mat-chip
-                    *ngFor="let tag of tagsConditionsSelected"
+                    *ngFor="let term of termsFilterConditionsService.termsSelected"
                     [selectable]="false"
                     [selected]="true"
                     [removable]="true"
-                    (remove)="onRemoveTagCondition(tag)"
+                    (remove)="onRemoveTermCondition(term)"
                   >
-                    {{ tag.name }}
+                    {{ term.name }}
                     <mat-icon matChipRemove>cancel</mat-icon>
                   </mat-chip>
                   <input
                     placeholder="Condition/Disease"
-                    #tagsConditionsInput
-                    [formControl]="tagsConditionsCtrl"
-                    [matAutocomplete]="tagsConditionsAutocomplete"
-                    [matChipInputFor]="tagsConditionsChipList"
+                    #termsConditionsInput
+                    [formControl]="termsConditionsCtrl"
+                    [matAutocomplete]="termsConditionsAutocomplete"
+                    [matChipInputFor]="termsConditionsChipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   />
                 </mat-chip-list>
+                <!--Autocomplete for conditions chip-input.-->
                 <mat-autocomplete
                   [autoActiveFirstOption]="true"
-                  #tagsConditionsAutocomplete="matAutocomplete"
-                  (optionSelected)="onSelected($event)"
+                  #termsConditionsAutocomplete="matAutocomplete"
+                  (optionSelected)="onTermConditionSelected($event)"
                 >
-                  <mat-option *ngFor="let tag of tagsConditionsFiltered" [value]="tag">
-                    {{ tag.name }}
+                  <mat-option *ngFor="let term of termsConditionsFiltered" [value]="term">
+                    {{ term.name }}
                   </mat-option>
                 </mat-autocomplete>
               </mat-form-field>
+
+              <!--Interventions chip-input with autocomplete.-->
+              <mat-form-field class="term-list-input">
+                <mat-chip-list #termsInterventionsChipList>
+                  <mat-chip
+                    *ngFor="let term of termsFilterInterventionsService.termsSelected"
+                    [selectable]="false"
+                    [selected]="true"
+                    [removable]="true"
+                    (remove)="onRemoveTermIntervention(term)"
+                  >
+                    {{ term.name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Therapies/Interventions"
+                    #termsInterventionsInput
+                    [formControl]="termsInterventionsCtrl"
+                    [matAutocomplete]="termsInterventionsAutocomplete"
+                    [matChipInputFor]="termsInterventionsChipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  />
+                </mat-chip-list>
+                <!--Autocomplete for interventions chip-input.-->
+                <mat-autocomplete
+                  [autoActiveFirstOption]="true"
+                  #termsInterventionsAutocomplete="matAutocomplete"
+                  (optionSelected)="onTermInterventionSelected($event)"
+                >
+                  <mat-option *ngFor="let term of termsInterventionsFiltered" [value]="term">
+                    {{ term.name }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
             </div>
             <div class="card-footer">
 
@@ -69,3 +107,4 @@
       </div>
     </div>
   </div>
+</div>
