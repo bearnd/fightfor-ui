@@ -12,10 +12,10 @@ export class SearchResultsComponent implements OnInit {
   private navPillIndexActive = 0;
 
   names = [
-    "Results01",
-    "Results02",
-    "Results03",
-    "Results04",
+    'Results01',
+    'Results02',
+    'Results03',
+    'Results04',
   ];
   constructor() { }
 

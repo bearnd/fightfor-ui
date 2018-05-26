@@ -28,75 +28,81 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="form-group">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-              <!--Conditions chip-input with autocomplete.-->
-              <mat-form-field class="term-list-input">
-                <mat-chip-list #termsConditionsChipList>
-                  <mat-chip
-                    *ngFor="let term of termsFilterConditionsService.termsSelected"
-                    [selectable]="false"
-                    [selected]="true"
-                    [removable]="true"
-                    (remove)="onRemoveTermCondition(term)"
+              <div class="form-group">
+                <!--Conditions chip-input with autocomplete.-->
+                <mat-form-field class="term-list-input">
+                  <mat-chip-list #termsConditionsChipList>
+                    <mat-chip
+                      *ngFor="let term of termsFilterConditionsService.termsSelected"
+                      [selectable]="false"
+                      [selected]="true"
+                      [removable]="true"
+                      (remove)="onRemoveTermCondition(term)"
+                    >
+                      {{ term.name }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      type="text"
+                      id="conditions"
+                      formControlName="conditions"
+                      placeholder="Condition/Disease"
+                      [matAutocomplete]="termsConditionsAutocomplete"
+                      [matChipInputFor]="termsConditionsChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    />
+                  </mat-chip-list>
+                  <!--Autocomplete for conditions chip-input.-->
+                  <mat-autocomplete
+                    [autoActiveFirstOption]="true"
+                    #termsConditionsAutocomplete="matAutocomplete"
+                    (optionSelected)="onTermConditionSelected($event)"
                   >
-                    {{ term.name }}
-                    <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                  <input
-                    placeholder="Condition/Disease"
-                    #termsConditionsInput
-                    [formControl]="termsConditionsCtrl"
-                    [matAutocomplete]="termsConditionsAutocomplete"
-                    [matChipInputFor]="termsConditionsChipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  />
-                </mat-chip-list>
-                <!--Autocomplete for conditions chip-input.-->
-                <mat-autocomplete
-                  [autoActiveFirstOption]="true"
-                  #termsConditionsAutocomplete="matAutocomplete"
-                  (optionSelected)="onTermConditionSelected($event)"
-                >
-                  <mat-option *ngFor="let term of termsConditionsFiltered" [value]="term">
-                    {{ term.name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+                    <mat-option *ngFor="let term of termsConditionsFiltered" [value]="term">
+                      {{ term.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
 
-              <!--Interventions chip-input with autocomplete.-->
-              <mat-form-field class="term-list-input">
-                <mat-chip-list #termsInterventionsChipList>
-                  <mat-chip
-                    *ngFor="let term of termsFilterInterventionsService.termsSelected"
-                    [selectable]="false"
-                    [selected]="true"
-                    [removable]="true"
-                    (remove)="onRemoveTermIntervention(term)"
+              <div class="form-group">
+                <!--Interventions chip-input with autocomplete.-->
+                <mat-form-field class="term-list-input">
+                  <mat-chip-list #termsInterventionsChipList>
+                    <mat-chip
+                      *ngFor="let term of termsFilterInterventionsService.termsSelected"
+                      [selectable]="false"
+                      [selected]="true"
+                      [removable]="true"
+                      (remove)="onRemoveTermIntervention(term)"
+                    >
+                      {{ term.name }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      type="text"
+                      id="interventions"
+                      formControlName="interventions"
+                      placeholder="Therapies/Interventions"
+                      [matAutocomplete]="termsInterventionsAutocomplete"
+                      [matChipInputFor]="termsInterventionsChipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    />
+                  </mat-chip-list>
+                  <!--Autocomplete for interventions chip-input.-->
+                  <mat-autocomplete
+                    [autoActiveFirstOption]="true"
+                    #termsInterventionsAutocomplete="matAutocomplete"
+                    (optionSelected)="onTermInterventionSelected($event)"
                   >
-                    {{ term.name }}
-                    <mat-icon matChipRemove>cancel</mat-icon>
-                  </mat-chip>
-                  <input
-                    placeholder="Therapies/Interventions"
-                    #termsInterventionsInput
-                    [formControl]="termsInterventionsCtrl"
-                    [matAutocomplete]="termsInterventionsAutocomplete"
-                    [matChipInputFor]="termsInterventionsChipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  />
-                </mat-chip-list>
-                <!--Autocomplete for interventions chip-input.-->
-                <mat-autocomplete
-                  [autoActiveFirstOption]="true"
-                  #termsInterventionsAutocomplete="matAutocomplete"
-                  (optionSelected)="onTermInterventionSelected($event)"
-                >
-                  <mat-option *ngFor="let term of termsInterventionsFiltered" [value]="term">
-                    {{ term.name }}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
+                    <mat-option *ngFor="let term of termsInterventionsFiltered" [value]="term">
+                      {{ term.name }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
 
             </div>
             <div class="card-footer">

@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
+import { Apollo, ApolloModule } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-
 import { SearchesService } from './searches/searches.service';
+import { TrialsManagerService } from './searches/trials-manager.service';
 
 import { environment } from '../environments/environment';
 
@@ -28,23 +29,37 @@ import { environment } from '../environments/environment';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    }),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     SlimLoadingBarModule.forRoot(),
-    McBreadcrumbsModule.forRoot()
+    McBreadcrumbsModule.forRoot(),
+    ApolloModule,
+    HttpLinkModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [SearchesService, McBreadcrumbsService],
+  providers: [
+    SearchesService,
+    McBreadcrumbsService,
+    TrialsManagerService,
+  ],
   bootstrap: [AppComponent],
   exports: [
     McBreadcrumbsModule,
-    McBreadcrumbsComponent
+    McBreadcrumbsComponent,
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    apollo: Apollo,
+    httpLink: HttpLink
+  ) {
+    // Initialize an Apollo GraphQL client pointed to the GraphQL defined in the environment.
+    apollo.create({
+      link: httpLink.create({uri: environment.graphql.uri}),
+      // Enable in-memory cache.
+      cache: new InMemoryCache(),
+    });
+  }
+}

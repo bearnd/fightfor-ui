@@ -12,5 +12,8 @@ export const environment = {
     projectId: 'fightfor-ui-dev',
     storageBucket: 'fightfor-ui-dev.appspot.com',
     messagingSenderId: '1062613303831'
-  }
+  },
+  graphql: {
+    uri: 'http://localhost:5555/graphql',
+  },
 };

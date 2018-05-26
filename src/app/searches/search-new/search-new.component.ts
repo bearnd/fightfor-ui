@@ -1,10 +1,12 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material';
-import {COMMA, ENTER, TAB} from '@angular/cdk/keycodes';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
+import { Subscription } from 'rxjs/Subscription';
 
-import {TermInterface} from './term.interface';
-import {TermFilterConditionsService, TermFilterInterventionsService} from './term-filter.service';
+import { TermInterface } from './term.interface';
+import { TermFilterConditionsService, TermFilterInterventionsService } from './term-filter.service';
+import { TrialsManagerService } from '../trials-manager.service';
 
 
 @Component({
@@ -12,7 +14,11 @@ import {TermFilterConditionsService, TermFilterInterventionsService} from './ter
   templateUrl: './search-new.component.html',
   styleUrls: ['./search-new.component.scss']
 })
-export class SearchNewComponent implements OnInit {
+export class SearchNewComponent implements OnInit, OnDestroy {
+
+  subscriptionSearch: Subscription;
+
+  form: FormGroup;
 
   isSaved = false;
 
@@ -24,10 +30,6 @@ export class SearchNewComponent implements OnInit {
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
-  termsConditionsCtrl = new FormControl();
-  termsInterventionsCtrl = new FormControl();
-
-
   termsConditionsAll: TermInterface[] = [
     {id: 1, name: 'Bowel Cancer'},
     {id: 2, name: 'Brain Cancer'},
@@ -36,6 +38,7 @@ export class SearchNewComponent implements OnInit {
     {id: 5, name: 'Renal Carcinoma'},
     {id: 6, name: 'Skin Cancer'},
     {id: 7, name: 'Squamous Cell Carcinoma'},
+    {id: 8, name: 'Heart Diseases'},
   ];
 
   termsInterventionsAll: TermInterface[] = [
@@ -47,20 +50,22 @@ export class SearchNewComponent implements OnInit {
     {id: 6, name: 'Focused Ultrasound Ablation'},
   ];
 
-  @ViewChild('termsConditionsInput') termsConditionsInput: ElementRef;
-  @ViewChild('termsInterventionsInput') termsInterventionsInput: ElementRef;
-
-  constructor() {
+  constructor(private trialsManager: TrialsManagerService) {
   }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      conditions: new FormControl(null, [Validators.required]),
+      interventions: new FormControl(null),
+      years: new FormControl([10, 50]),
+    });
     this.termsFilterConditionsService = new TermFilterConditionsService(this.termsConditionsAll);
     this.termsFilterInterventionsService = new TermFilterInterventionsService(this.termsInterventionsAll);
 
     this.termsConditionsFiltered = this.termsConditionsAll;
     this.termsInterventionsFiltered = this.termsInterventionsAll;
 
-    this.termsConditionsCtrl.valueChanges.subscribe(
+    this.form.get('conditions').valueChanges.subscribe(
       (value => {
         // If the incoming value is of type `string` then perform a filtering
         // and update the `tagsConditionsFiltered` array.
@@ -70,7 +75,7 @@ export class SearchNewComponent implements OnInit {
       })
     );
 
-    this.termsInterventionsCtrl.valueChanges.subscribe(
+    this.form.get('interventions').valueChanges.subscribe(
       (value => {
         // If the incoming value is of type `string` then perform a filtering
         // and update the `tagsConditionsFiltered` array.
@@ -85,23 +90,61 @@ export class SearchNewComponent implements OnInit {
     this.isSaved = !this.isSaved;
   }
 
+  /**
+   * Removes a term from the selected condition terms.
+   * @param {TermInterface} term The term to be removed.
+   */
   onRemoveTermCondition(term: TermInterface): void {
     this.termsFilterConditionsService.removeTerm(term);
   }
 
+  /**
+   * Removes a term from the selected intervention terms.
+   * @param {TermInterface} term The term to be removed.
+   */
   onRemoveTermIntervention(term: TermInterface): void {
     this.termsFilterInterventionsService.removeTerm(term);
   }
 
+  /**
+   * Adds a selected term to the selected condition-terms.
+   * @param {MatAutocompleteSelectedEvent} event The selection event.
+   */
   onTermConditionSelected(event: MatAutocompleteSelectedEvent): void {
+    // Retrieve the selected term.
     const term = event.option.value;
+    // Add the term to the selected condition-terms.
     this.termsFilterConditionsService.addTerm(term);
-    this.termsConditionsInput.nativeElement.value = '';
+    // Clear the form input's value.
+    this.form.get('conditions').setValue('');
   }
 
+  /**
+   * Adds a selected term to the selected intervention-terms.
+   * @param {MatAutocompleteSelectedEvent} event The selection event.
+   */
   onTermInterventionSelected(event: MatAutocompleteSelectedEvent): void {
+    // Retrieve the selected term.
     const term = event.option.value;
+    // Add the term to the selected intervention-terms.
     this.termsFilterInterventionsService.addTerm(term);
-    this.termsInterventionsInput.nativeElement.value = '';
+    // Clear the form input's value.
+    this.form.get('interventions').setValue('');
+  }
+
+  onSubmit() {
+    this.subscriptionSearch = this.trialsManager.searchTrials(
+      ['Heart Diseases']
+    ).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscriptionSearch) {
+      this.subscriptionSearch.unsubscribe();
+    }
   }
 }
