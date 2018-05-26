@@ -131,5 +131,20 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     // Clear the form input's value.
     this.form.get('interventions').setValue('');
   }
+
+  onSubmit() {
+    this.subscriptionSearch = this.trialsManager.searchTrials(
+      ['Heart Diseases']
+    ).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscriptionSearch) {
+      this.subscriptionSearch.unsubscribe();
+    }
   }
 }
