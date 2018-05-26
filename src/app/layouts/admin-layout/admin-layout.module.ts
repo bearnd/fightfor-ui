@@ -25,7 +25,6 @@ import { SearchNewComponent } from '../../searches/search-new/search-new.compone
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
