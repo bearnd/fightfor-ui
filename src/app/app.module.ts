@@ -9,6 +9,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
+import { Apollo, ApolloModule } from 'apollo-angular';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -35,6 +38,8 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     SlimLoadingBarModule.forRoot(),
     McBreadcrumbsModule.forRoot(),
+    ApolloModule,
+    HttpLinkModule,
   ],
   declarations: [
     AppComponent,
@@ -47,4 +52,16 @@ import { environment } from '../environments/environment';
     McBreadcrumbsComponent,
   ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    apollo: Apollo,
+    httpLink: HttpLink
+  ) {
+    // Initialize an Apollo GraphQL client pointed to the GraphQL defined in the environment.
+    apollo.create({
+      link: httpLink.create({uri: environment.graphql.uri}),
+      // Enable in-memory cache.
+      cache: new InMemoryCache(),
+    });
+  }
+}
