@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
 import { Apollo, ApolloModule } from 'apollo-angular';
@@ -31,7 +30,6 @@ import { environment } from '../environments/environment';
     RouterModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     SlimLoadingBarModule.forRoot(),
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
