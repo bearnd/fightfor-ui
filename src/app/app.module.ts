@@ -34,7 +34,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     SlimLoadingBarModule.forRoot(),
-    McBreadcrumbsModule.forRoot()
+    McBreadcrumbsModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -44,7 +44,7 @@ import { environment } from '../environments/environment';
   bootstrap: [AppComponent],
   exports: [
     McBreadcrumbsModule,
-    McBreadcrumbsComponent
+    McBreadcrumbsComponent,
   ]
 })
 export class AppModule { }
