@@ -20,7 +20,6 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.breadcrumbsService.crumbs$.subscribe(
       (breadcrumbs: IBreadcrumb[]) => {
-        console.log(breadcrumbs);
         this.breadcrumbs = breadcrumbs;
       }
     );
