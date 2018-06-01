@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { SearchesComponent } from '../../searches/searches.component';
 import { SearchResultsComponent } from '../../searches/search-results/search-results.component';
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
@@ -14,10 +13,6 @@ export const AdminLayoutRoutes: Routes = [
     data: {
       breadcrumbs: 'Dashboard'
     }
-  },
-  {
-    path: 'user-profile',
-    component: UserProfileComponent
   },
   {
     path: 'searches',
