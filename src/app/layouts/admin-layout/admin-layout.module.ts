@@ -18,7 +18,6 @@ import { ScrollTrackerModule } from '@nicky-lenaers/ngx-scroll-tracker';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent } from '../../table-list/table-list.component';
 import { SearchesComponent } from '../../searches/searches.component';
 import { SearchResultsComponent } from '../../searches/search-results/search-results.component';
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
