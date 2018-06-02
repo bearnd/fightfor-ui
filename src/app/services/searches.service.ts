@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { SearchModel } from './search.model';
+import { SearchModel } from '../searches/search.model';
 
 
 @Injectable()
