@@ -41,8 +41,6 @@ import { SearchesGridComponent } from '../../searches/searches-grid/searches-gri
   ],
   declarations: [
     DashboardComponent,
-    UserProfileComponent,
-    TableListComponent,
     SearchesComponent,
     SearchResultsComponent,
     SearchNewComponent,
