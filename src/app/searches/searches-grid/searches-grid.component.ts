@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchesService } from '../searches.service';
 import { Router } from '@angular/router';
-import { SearchModel } from '../search.model';
+
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+
+import { SearchesService } from '../../services/searches.service';
+import { SearchModel } from '../search.model';
+
 
 @Component({
   selector: 'app-searches-grid',
