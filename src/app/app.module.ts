@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { SearchesService } from './services/searches.service';
 import { TrialsManagerService } from './services/trials-manager.service';
+import { MeshDescriptorRetrieverService } from './services/mesh-descriptor-retriever.service';
 
 import { environment } from '../environments/environment';
 
@@ -43,6 +44,7 @@ import { environment } from '../environments/environment';
     SearchesService,
     McBreadcrumbsService,
     TrialsManagerService,
+    MeshDescriptorRetrieverService
   ],
   bootstrap: [AppComponent],
   exports: [

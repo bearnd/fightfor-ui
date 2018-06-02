@@ -4,10 +4,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs/Subscription';
 
-
 import { TrialsManagerService } from '../../services/trials-manager.service';
 import { MeshDescriptorFilterService } from '../../services/mesh-descriptor-filter.service';
 import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
+import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
 
 
 @Component({
@@ -17,7 +17,12 @@ import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interf
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
+  loadingDescriptorsConditions = true;
+  loadingDescriptorsInterventions = true;
+
   subscriptionSearch: Subscription;
+  subscriptionMeshDescriptorConditionsRetrieval: Subscription;
+  subscriptionMeshDescriptorInterventionsRetrieval: Subscription;
 
   form: FormGroup;
 
@@ -51,21 +56,20 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     {ui: '6', name: 'Focused Ultrasound Ablation'},
   ];
 
-  constructor(private trialsManager: TrialsManagerService) {
+  constructor(
+    private trialsManager: TrialsManagerService,
+    private meshDescriptorRetriever: MeshDescriptorRetrieverService,
+  ) {
   }
 
   ngOnInit() {
+
+    this.fetchDescriptors();
+
     this.form = new FormGroup({
       conditions: new FormControl(null, [Validators.required]),
       interventions: new FormControl(null),
-      years: new FormControl([10, 50]),
     });
-
-    this.descriptorsFilterConditionsService = new MeshDescriptorFilterService(this.descriptorsConditionsAll);
-    this.descriptorsFilterInterventionsService = new MeshDescriptorFilterService(this.descriptorsInterventionsAll);
-
-    this.descriptorsConditionsFiltered = this.descriptorsConditionsAll;
-    this.descriptorsInterventionsFiltered = this.descriptorsInterventionsAll;
 
     this.form.get('conditions').valueChanges.subscribe(
       (value => {
@@ -86,6 +90,49 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  isLoading() {
+    return this.loadingDescriptorsConditions || this.loadingDescriptorsInterventions;
+  }
+
+  fetchDescriptors() {
+
+    this.subscriptionMeshDescriptorConditionsRetrieval = this.meshDescriptorRetriever
+      .getMeshDescriptorsByTreeNumberPrefix('C04')
+      .subscribe(
+        (response: MeshDescriptorInterface[]) => {
+          this.descriptorsConditionsAll = response;
+          this.descriptorsFilterConditionsService = new MeshDescriptorFilterService(this.descriptorsConditionsAll);
+          this.descriptorsConditionsFiltered = this.descriptorsConditionsAll;
+          this.loadingDescriptorsConditions = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.loadingDescriptorsConditions = false;
+        },
+        () => {
+          this.loadingDescriptorsConditions = false;
+        }
+      );
+
+    this.subscriptionMeshDescriptorInterventionsRetrieval = this.meshDescriptorRetriever
+      .getMeshDescriptorsByTreeNumberPrefix('E02')
+      .subscribe(
+        (response: MeshDescriptorInterface[]) => {
+          this.descriptorsInterventionsAll = response;
+          this.descriptorsFilterInterventionsService = new MeshDescriptorFilterService(this.descriptorsInterventionsAll);
+          this.descriptorsInterventionsFiltered = this.descriptorsInterventionsAll;
+          this.loadingDescriptorsInterventions = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.loadingDescriptorsInterventions = false;
+        },
+        () => {
+          this.loadingDescriptorsInterventions = false;
+        }
+      );
   }
 
   toggleSaved() {
