@@ -5,18 +5,19 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { SearchesService } from './searches/searches.service';
-import { TrialsManagerService } from './searches/trials-manager.service';
+import { SearchesService } from './services/searches.service';
+import { TrialsManagerService } from './services/trials-manager.service';
+import { MeshDescriptorRetrieverService } from './services/mesh-descriptor-retriever.service';
 
 import { environment } from '../environments/environment';
 
@@ -30,7 +31,7 @@ import { environment } from '../environments/environment';
     RouterModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    SlimLoadingBarModule.forRoot(),
+    LoadingBarHttpClientModule,
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
     HttpLinkModule,
@@ -43,6 +44,7 @@ import { environment } from '../environments/environment';
     SearchesService,
     McBreadcrumbsService,
     TrialsManagerService,
+    MeshDescriptorRetrieverService
   ],
   bootstrap: [AppComponent],
   exports: [

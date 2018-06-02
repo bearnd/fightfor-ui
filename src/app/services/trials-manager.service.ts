@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
-import { ClinicalTrialStudyInterface } from './clinical-trial-study.interface';
+import { ClinicalTrialStudyInterface } from '../interfaces/clinical-trial-study.interface';
+
+
 
 
 interface ResponseSearchTrials {

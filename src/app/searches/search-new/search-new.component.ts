@@ -4,9 +4,10 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs/Subscription';
 
-import { TermInterface } from './term.interface';
-import { TermFilterConditionsService, TermFilterInterventionsService } from './term-filter.service';
-import { TrialsManagerService } from '../trials-manager.service';
+import { TrialsManagerService } from '../../services/trials-manager.service';
+import { MeshDescriptorFilterService } from '../../services/mesh-descriptor-filter.service';
+import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
+import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
 
 
 @Component({
@@ -16,61 +17,66 @@ import { TrialsManagerService } from '../trials-manager.service';
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
+  loadingDescriptorsConditions = true;
+  loadingDescriptorsInterventions = true;
+
   subscriptionSearch: Subscription;
+  subscriptionMeshDescriptorConditionsRetrieval: Subscription;
+  subscriptionMeshDescriptorInterventionsRetrieval: Subscription;
 
   form: FormGroup;
 
   isSaved = false;
 
-  termsFilterConditionsService: TermFilterConditionsService;
-  termsFilterInterventionsService: TermFilterInterventionsService;
+  descriptorsFilterConditionsService: MeshDescriptorFilterService;
+  descriptorsFilterInterventionsService: MeshDescriptorFilterService;
 
-  termsConditionsFiltered: TermInterface[] = [];
-  termsInterventionsFiltered: TermInterface[] = [];
+  descriptorsConditionsFiltered: MeshDescriptorInterface[] = [];
+  descriptorsInterventionsFiltered: MeshDescriptorInterface[] = [];
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
-  termsConditionsAll: TermInterface[] = [
-    {id: 1, name: 'Bowel Cancer'},
-    {id: 2, name: 'Brain Cancer'},
-    {id: 3, name: 'Hepatic Carcinoma'},
-    {id: 4, name: 'Irritable Bowel Syndrome'},
-    {id: 5, name: 'Renal Carcinoma'},
-    {id: 6, name: 'Skin Cancer'},
-    {id: 7, name: 'Squamous Cell Carcinoma'},
-    {id: 8, name: 'Heart Diseases'},
+  descriptorsConditionsAll: MeshDescriptorInterface[] = [
+    {ui: '1', name: 'Bowel Cancer'},
+    {ui: '2', name: 'Brain Cancer'},
+    {ui: '3', name: 'Hepatic Carcinoma'},
+    {ui: '4', name: 'Irritable Bowel Syndrome'},
+    {ui: '5', name: 'Renal Carcinoma'},
+    {ui: '6', name: 'Skin Cancer'},
+    {ui: '7', name: 'Squamous Cell Carcinoma'},
+    {ui: '8', name: 'Heart Diseases'},
   ];
 
-  termsInterventionsAll: TermInterface[] = [
-    {id: 1, name: 'Surgery'},
-    {id: 2, name: 'Chemotherapy'},
-    {id: 3, name: 'Radiotherapy'},
-    {id: 4, name: 'Immunotherapy'},
-    {id: 5, name: 'Hyperthermia'},
-    {id: 6, name: 'Focused Ultrasound Ablation'},
+  descriptorsInterventionsAll: MeshDescriptorInterface[] = [
+    {ui: '1', name: 'Surgery'},
+    {ui: '2', name: 'Chemotherapy'},
+    {ui: '3', name: 'Radiotherapy'},
+    {ui: '4', name: 'Immunotherapy'},
+    {ui: '5', name: 'Hyperthermia'},
+    {ui: '6', name: 'Focused Ultrasound Ablation'},
   ];
 
-  constructor(private trialsManager: TrialsManagerService) {
+  constructor(
+    private trialsManager: TrialsManagerService,
+    private meshDescriptorRetriever: MeshDescriptorRetrieverService,
+  ) {
   }
 
   ngOnInit() {
+
+    this.fetchDescriptors();
+
     this.form = new FormGroup({
       conditions: new FormControl(null, [Validators.required]),
       interventions: new FormControl(null),
-      years: new FormControl([10, 50]),
     });
-    this.termsFilterConditionsService = new TermFilterConditionsService(this.termsConditionsAll);
-    this.termsFilterInterventionsService = new TermFilterInterventionsService(this.termsInterventionsAll);
-
-    this.termsConditionsFiltered = this.termsConditionsAll;
-    this.termsInterventionsFiltered = this.termsInterventionsAll;
 
     this.form.get('conditions').valueChanges.subscribe(
       (value => {
         // If the incoming value is of type `string` then perform a filtering
-        // and update the `tagsConditionsFiltered` array.
+        // and update the `descriptorsConditionsFiltered` array.
         if (typeof value === 'string') {
-          this.termsConditionsFiltered = this.termsFilterConditionsService.filterTerms(value, true);
+          this.descriptorsConditionsFiltered = this.descriptorsFilterConditionsService.filterDescriptors(value, true);
         }
       })
     );
@@ -78,12 +84,55 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     this.form.get('interventions').valueChanges.subscribe(
       (value => {
         // If the incoming value is of type `string` then perform a filtering
-        // and update the `tagsConditionsFiltered` array.
+        // and update the `descriptorsInterventionsFiltered` array.
         if (typeof value === 'string') {
-          this.termsInterventionsFiltered = this.termsFilterInterventionsService.filterTerms(value, true);
+          this.descriptorsInterventionsFiltered = this.descriptorsFilterInterventionsService.filterDescriptors(value, true);
         }
       })
     );
+  }
+
+  isLoading() {
+    return this.loadingDescriptorsConditions || this.loadingDescriptorsInterventions;
+  }
+
+  fetchDescriptors() {
+
+    this.subscriptionMeshDescriptorConditionsRetrieval = this.meshDescriptorRetriever
+      .getMeshDescriptorsByTreeNumberPrefix('C04')
+      .subscribe(
+        (response: MeshDescriptorInterface[]) => {
+          this.descriptorsConditionsAll = response;
+          this.descriptorsFilterConditionsService = new MeshDescriptorFilterService(this.descriptorsConditionsAll);
+          this.descriptorsConditionsFiltered = this.descriptorsConditionsAll;
+          this.loadingDescriptorsConditions = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.loadingDescriptorsConditions = false;
+        },
+        () => {
+          this.loadingDescriptorsConditions = false;
+        }
+      );
+
+    this.subscriptionMeshDescriptorInterventionsRetrieval = this.meshDescriptorRetriever
+      .getMeshDescriptorsByTreeNumberPrefix('E02')
+      .subscribe(
+        (response: MeshDescriptorInterface[]) => {
+          this.descriptorsInterventionsAll = response;
+          this.descriptorsFilterInterventionsService = new MeshDescriptorFilterService(this.descriptorsInterventionsAll);
+          this.descriptorsInterventionsFiltered = this.descriptorsInterventionsAll;
+          this.loadingDescriptorsInterventions = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.loadingDescriptorsInterventions = false;
+        },
+        () => {
+          this.loadingDescriptorsInterventions = false;
+        }
+      );
   }
 
   toggleSaved() {
@@ -91,43 +140,43 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Removes a term from the selected condition terms.
-   * @param {TermInterface} term The term to be removed.
+   * Removes a descriptor from the selected condition descriptors.
+   * @param {MeshDescriptorInterface} descriptor The descriptor to be removed.
    */
-  onRemoveTermCondition(term: TermInterface): void {
-    this.termsFilterConditionsService.removeTerm(term);
+  onRemoveDescriptorCondition(descriptor: MeshDescriptorInterface): void {
+    this.descriptorsFilterConditionsService.removeDescriptor(descriptor);
   }
 
   /**
-   * Removes a term from the selected intervention terms.
-   * @param {TermInterface} term The term to be removed.
+   * Removes a descriptor from the selected intervention descriptors.
+   * @param {TermInterface} descriptor The descriptor to be removed.
    */
-  onRemoveTermIntervention(term: TermInterface): void {
-    this.termsFilterInterventionsService.removeTerm(term);
+  onRemoveDescriptorIntervention(descriptor: MeshDescriptorInterface): void {
+    this.descriptorsFilterInterventionsService.removeDescriptor(descriptor);
   }
 
   /**
-   * Adds a selected term to the selected condition-terms.
+   * Adds a selected descriptor to the selected condition-descriptors.
    * @param {MatAutocompleteSelectedEvent} event The selection event.
    */
-  onTermConditionSelected(event: MatAutocompleteSelectedEvent): void {
-    // Retrieve the selected term.
-    const term = event.option.value;
-    // Add the term to the selected condition-terms.
-    this.termsFilterConditionsService.addTerm(term);
+  onDescriptorConditionSelected(event: MatAutocompleteSelectedEvent): void {
+    // Retrieve the selected descriptor.
+    const descriptor = event.option.value;
+    // Add the descriptor to the selected condition-descriptors.
+    this.descriptorsFilterConditionsService.addDescriptor(descriptor);
     // Clear the form input's value.
     this.form.get('conditions').setValue('');
   }
 
   /**
-   * Adds a selected term to the selected intervention-terms.
+   * Adds a selected descriptor to the selected intervention-descriptors.
    * @param {MatAutocompleteSelectedEvent} event The selection event.
    */
-  onTermInterventionSelected(event: MatAutocompleteSelectedEvent): void {
-    // Retrieve the selected term.
-    const term = event.option.value;
-    // Add the term to the selected intervention-terms.
-    this.termsFilterInterventionsService.addTerm(term);
+  onDescriptorInterventionSelected(event: MatAutocompleteSelectedEvent): void {
+    // Retrieve the selected descriptor.
+    const descriptor = event.option.value;
+    // Add the descriptor to the selected intervention-descriptors.
+    this.descriptorsFilterInterventionsService.addDescriptor(descriptor);
     // Clear the form input's value.
     this.form.get('interventions').setValue('');
   }

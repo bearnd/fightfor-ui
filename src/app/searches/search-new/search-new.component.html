@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="!isLoading()">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-icon card-header-rose">
@@ -33,15 +33,15 @@
               <div class="form-group">
                 <!--Conditions chip-input with autocomplete.-->
                 <mat-form-field class="term-list-input">
-                  <mat-chip-list #termsConditionsChipList>
+                  <mat-chip-list #descriptorsConditionsChipList>
                     <mat-chip
-                      *ngFor="let term of termsFilterConditionsService.termsSelected"
+                      *ngFor="let descriptor of descriptorsFilterConditionsService.descriptorsSelected"
                       [selectable]="false"
                       [selected]="true"
                       [removable]="true"
-                      (remove)="onRemoveTermCondition(term)"
+                      (remove)="onRemoveDescriptorCondition(descriptor)"
                     >
-                      {{ term.name }}
+                      {{ descriptor.name }}
                       <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
                     <input
@@ -49,19 +49,19 @@
                       id="conditions"
                       formControlName="conditions"
                       placeholder="Condition/Disease"
-                      [matAutocomplete]="termsConditionsAutocomplete"
-                      [matChipInputFor]="termsConditionsChipList"
+                      [matAutocomplete]="descriptorsConditionsAutocomplete"
+                      [matChipInputFor]="descriptorsConditionsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
                   </mat-chip-list>
                   <!--Autocomplete for conditions chip-input.-->
                   <mat-autocomplete
                     [autoActiveFirstOption]="true"
-                    #termsConditionsAutocomplete="matAutocomplete"
-                    (optionSelected)="onTermConditionSelected($event)"
+                    #descriptorsConditionsAutocomplete="matAutocomplete"
+                    (optionSelected)="onDescriptorConditionSelected($event)"
                   >
-                    <mat-option *ngFor="let term of termsConditionsFiltered" [value]="term">
-                      {{ term.name }}
+                    <mat-option *ngFor="let descriptor of descriptorsConditionsFiltered" [value]="descriptor">
+                      {{ descriptor.name }}
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
@@ -70,15 +70,15 @@
               <div class="form-group">
                 <!--Interventions chip-input with autocomplete.-->
                 <mat-form-field class="term-list-input">
-                  <mat-chip-list #termsInterventionsChipList>
+                  <mat-chip-list #descriptorsInterventionsChipList>
                     <mat-chip
-                      *ngFor="let term of termsFilterInterventionsService.termsSelected"
+                      *ngFor="let descriptor of descriptorsFilterInterventionsService.descriptorsSelected"
                       [selectable]="false"
                       [selected]="true"
                       [removable]="true"
-                      (remove)="onRemoveTermIntervention(term)"
+                      (remove)="onRemoveDescriptorIntervention(descriptor)"
                     >
-                      {{ term.name }}
+                      {{ descriptor.name }}
                       <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
                     <input
@@ -86,28 +86,36 @@
                       id="interventions"
                       formControlName="interventions"
                       placeholder="Therapies/Interventions"
-                      [matAutocomplete]="termsInterventionsAutocomplete"
-                      [matChipInputFor]="termsInterventionsChipList"
+                      [matAutocomplete]="descriptorsInterventionsAutocomplete"
+                      [matChipInputFor]="descriptorsInterventionsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
                   </mat-chip-list>
                   <!--Autocomplete for interventions chip-input.-->
                   <mat-autocomplete
                     [autoActiveFirstOption]="true"
-                    #termsInterventionsAutocomplete="matAutocomplete"
-                    (optionSelected)="onTermInterventionSelected($event)"
+                    #descriptorsInterventionsAutocomplete="matAutocomplete"
+                    (optionSelected)="onDescriptorInterventionSelected($event)"
                   >
-                    <mat-option *ngFor="let term of termsInterventionsFiltered" [value]="term">
-                      {{ term.name }}
+                    <mat-option *ngFor="let descriptor of descriptorsInterventionsFiltered" [value]="descriptor">
+                      {{ descriptor.name }}
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
               </div>
 
-            </div>
-            <div class="card-footer">
-
-            </div>
+              <div class="form-group">
+                <button
+                  mat-raised-button
+                  type="submit"
+                  class="btn btn-rose mat-raised-button pull-right"
+                >
+                  <span class="mat-button-wrapper">Search</span>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
           </div>
         </div>
       </div>
