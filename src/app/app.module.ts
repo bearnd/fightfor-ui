@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AngularFireModule } from 'angularfire2';
-import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -30,7 +30,7 @@ import { environment } from '../environments/environment';
     RouterModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    SlimLoadingBarModule.forRoot(),
+    LoadingBarHttpClientModule,
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
     HttpLinkModule,
