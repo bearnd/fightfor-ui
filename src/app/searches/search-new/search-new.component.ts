@@ -4,10 +4,11 @@ import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs/Subscription';
 
-import { TrialsManagerService } from '../../services/trials-manager.service';
+import { ClinicalTrialsStudiesRetrieverService } from '../../services/clinical-trials-studies-retriever.service';
 import { MeshDescriptorFilterService } from '../../services/mesh-descriptor-filter.service';
 import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
 import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
+import { ClinicalTrialsStudiesStatsRetrieverService } from '../../services/clinical-trials-studies-stats-retriever.service';
 
 
 @Component({
@@ -39,8 +40,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   constructor(
-    private trialsManager: TrialsManagerService,
+    private trialsManager: ClinicalTrialsStudiesRetrieverService,
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
+    private studiesStatsRetriever: ClinicalTrialsStudiesStatsRetrieverService
   ) {
   }
 
@@ -164,9 +166,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.subscriptionSearch = this.trialsManager.searchTrials(
-      ['Heart Diseases']
-    ).subscribe(
+    this.subscriptionSearch = this.studiesStatsRetriever
+      .countStudiesByOverallStatus()
+      .subscribe(
       (response) => {
         console.log(response);
       }
