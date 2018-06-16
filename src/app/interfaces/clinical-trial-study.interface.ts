@@ -1,4 +1,4 @@
-enum ClinicalTrialStudyOverallStatus {
+export enum ClinicalTrialStudyOverallStatus {
   ACTIVE_NOT = 'Active, not recruiting',
   COMPLETED = 'Completed',
   INVITATION = 'Enrolling by invitation',

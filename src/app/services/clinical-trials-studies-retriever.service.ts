@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { ClinicalTrialStudyInterface } from '../interfaces/clinical-trial-study.interface';
+import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
 
 
 
@@ -21,20 +22,15 @@ interface VariablesGetStudyByNctId {
 }
 
 @Injectable()
-export class TrialsManagerService {
+export class ClinicalTrialsStudiesRetrieverService {
 
   querySearchTrials = gql`
     query searchStudies(
-      $meshTermsConditions: [String]!,
-      $meshTermsInterventions: [String],
+      $meshDescriptorNames: [String]!,
     ){
-      searchStudies(
-        meshTermsConditions: $meshTermsConditions,
-        meshTermsInterventions: $meshTermsInterventions
-      ) {
+      searchStudies(meshDescriptors: $meshDescriptorNames) {
         nctId,
         source
-        
       }
     }
   `;
@@ -62,16 +58,18 @@ export class TrialsManagerService {
   }
 
   searchTrials(
-    meshTermsConditions: String[],
-    meshTermsInterventions?: String[],
+    meshDescriptorsConditions: MeshDescriptorInterface[],
+    meshDescriptorsInterventions?: MeshDescriptorInterface[],
   ) {
-    console.log('Performing search');
+
+    const meshDescriptorsConditionNames: String[] = meshDescriptorsConditions.map(function (d) { return d.name });
+    const meshDescriptorsInterventionNames: String[] = meshDescriptorsInterventions.map(function (d) { return d.name });
 
     return this.apollo.query<ResponseSearchTrials>({
       query: this.querySearchTrials,
       variables: {
-        meshTermsConditions: meshTermsConditions,
-        meshTermsInterventions: meshTermsInterventions,
+        meshTermsConditions: meshDescriptorsConditionNames,
+        meshTermsInterventions: meshDescriptorsInterventionNames,
       }
     }).map((response) => {
       console.log(response);
