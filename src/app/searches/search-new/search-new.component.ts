@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs/Subscription';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 
 import { ClinicalTrialsStudiesRetrieverService } from '../../services/clinical-trials-studies-retriever.service';
-import { MeshDescriptorFilterService } from '../../services/mesh-descriptor-filter.service';
 import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
 import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
 import { ClinicalTrialsStudiesStatsRetrieverService } from '../../services/clinical-trials-studies-stats-retriever.service';
@@ -18,24 +18,15 @@ import { ClinicalTrialsStudiesStatsRetrieverService } from '../../services/clini
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
-  loadingDescriptorsConditions = true;
-  loadingDescriptorsInterventions = true;
-
   subscriptionSearch: Subscription;
-  subscriptionMeshDescriptorConditionsRetrieval: Subscription;
-  subscriptionMeshDescriptorInterventionsRetrieval: Subscription;
+  subscriptionMeshDescriptorRetrieval: Subscription;
 
   form: FormGroup;
 
   isSaved = false;
 
-  descriptorsFilterConditionsService: MeshDescriptorFilterService;
-  descriptorsFilterInterventionsService: MeshDescriptorFilterService;
-
-  descriptorsConditionsAll: MeshDescriptorInterface[] = [];
-  descriptorsInterventionsAll: MeshDescriptorInterface[] = [];
-  descriptorsConditionsFiltered: MeshDescriptorInterface[] = [];
-  descriptorsInterventionsFiltered: MeshDescriptorInterface[] = [];
+  descriptorsAll: MeshDescriptorInterface[] = [];
+  descriptorsSelected: MeshDescriptorInterface[] = [];
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
@@ -48,75 +39,30 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.fetchDescriptors();
-
     this.form = new FormGroup({
-      conditions: new FormControl(null, [Validators.required]),
-      interventions: new FormControl(null),
+      descriptors: new FormControl(null, [Validators.required]),
     });
 
-    this.form.get('conditions').valueChanges.subscribe(
-      (value => {
-        // If the incoming value is of type `string` then perform a filtering
-        // and update the `descriptorsConditionsFiltered` array.
+    // Subscribe to the `valueChanges` observable of the input control and perform a synonym-search for matching MeSH descriptors with a
+    // 250ms debounce so that we don't perform a search for every keystroke.
+    this.form.get('descriptors').valueChanges.pipe(debounceTime(400)).subscribe(
+      (value) => {
+        // If the incoming value is of type `string` then perform a synonym search through the `meshDescriptorRetriever` service and update
+        // `descriptorsAll` with the results.
         if (typeof value === 'string') {
-          this.descriptorsConditionsFiltered = this.descriptorsFilterConditionsService.filterDescriptors(value, true);
+          this.meshDescriptorRetriever.getMeshDescriptorsBySynonym(value, 10)
+            .subscribe(
+              (response) => {
+                this.descriptorsAll = response;
+              }
+            );
         }
-      })
-    );
-
-    this.form.get('interventions').valueChanges.subscribe(
-      (value => {
-        // If the incoming value is of type `string` then perform a filtering
-        // and update the `descriptorsInterventionsFiltered` array.
-        if (typeof value === 'string') {
-          this.descriptorsInterventionsFiltered = this.descriptorsFilterInterventionsService.filterDescriptors(value, true);
-        }
-      })
+      }
     );
   }
 
   isLoading() {
-    return this.loadingDescriptorsConditions || this.loadingDescriptorsInterventions;
-  }
-
-  fetchDescriptors() {
-
-    this.subscriptionMeshDescriptorConditionsRetrieval = this.meshDescriptorRetriever
-      .getMeshDescriptorsByTreeNumberPrefix('C04')
-      .subscribe(
-        (response: MeshDescriptorInterface[]) => {
-          this.descriptorsConditionsAll = response;
-          this.descriptorsFilterConditionsService = new MeshDescriptorFilterService(this.descriptorsConditionsAll);
-          this.descriptorsConditionsFiltered = this.descriptorsConditionsAll;
-          this.loadingDescriptorsConditions = false;
-        },
-        (error: any) => {
-          console.log(error);
-          this.loadingDescriptorsConditions = false;
-        },
-        () => {
-          this.loadingDescriptorsConditions = false;
-        }
-      );
-
-    this.subscriptionMeshDescriptorInterventionsRetrieval = this.meshDescriptorRetriever
-      .getMeshDescriptorsByTreeNumberPrefix('D12')
-      .subscribe(
-        (response: MeshDescriptorInterface[]) => {
-          this.descriptorsInterventionsAll = response;
-          this.descriptorsFilterInterventionsService = new MeshDescriptorFilterService(this.descriptorsInterventionsAll);
-          this.descriptorsInterventionsFiltered = this.descriptorsInterventionsAll;
-          this.loadingDescriptorsInterventions = false;
-        },
-        (error: any) => {
-          console.log(error);
-          this.loadingDescriptorsInterventions = false;
-        },
-        () => {
-          this.loadingDescriptorsInterventions = false;
-        }
-      );
+    return false;
   }
 
   toggleSaved() {
@@ -124,45 +70,28 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Removes a descriptor from the selected condition descriptors.
+   * Removes a descriptor from the selected descriptors.
    * @param {MeshDescriptorInterface} descriptor The descriptor to be removed.
    */
-  onRemoveDescriptorCondition(descriptor: MeshDescriptorInterface): void {
-    this.descriptorsFilterConditionsService.removeDescriptor(descriptor);
+  onRemoveDescriptor(descriptor: MeshDescriptorInterface): void {
+    const index = this.descriptorsSelected.indexOf(descriptor);
+
+    if (index >= 0) {
+      this.descriptorsSelected.splice(index, 1);
+    }
   }
 
   /**
-   * Removes a descriptor from the selected intervention descriptors.
-   * @param {MeshDescriptorInterface} descriptor The descriptor to be removed.
-   */
-  onRemoveDescriptorIntervention(descriptor: MeshDescriptorInterface): void {
-    this.descriptorsFilterInterventionsService.removeDescriptor(descriptor);
-  }
-
-  /**
-   * Adds a selected descriptor to the selected condition-descriptors.
+   * Adds a selected descriptor to the selected descriptors.
    * @param {MatAutocompleteSelectedEvent} event The selection event.
    */
-  onDescriptorConditionSelected(event: MatAutocompleteSelectedEvent): void {
+  onDescriptorSelected(event: MatAutocompleteSelectedEvent): void {
     // Retrieve the selected descriptor.
     const descriptor = event.option.value;
     // Add the descriptor to the selected condition-descriptors.
-    this.descriptorsFilterConditionsService.addDescriptor(descriptor);
+    this.descriptorsSelected.push(descriptor);
     // Clear the form input's value.
-    this.form.get('conditions').setValue('');
-  }
-
-  /**
-   * Adds a selected descriptor to the selected intervention-descriptors.
-   * @param {MatAutocompleteSelectedEvent} event The selection event.
-   */
-  onDescriptorInterventionSelected(event: MatAutocompleteSelectedEvent): void {
-    // Retrieve the selected descriptor.
-    const descriptor = event.option.value;
-    // Add the descriptor to the selected intervention-descriptors.
-    this.descriptorsFilterInterventionsService.addDescriptor(descriptor);
-    // Clear the form input's value.
-    this.form.get('interventions').setValue('');
+    this.form.get('descriptors').setValue('');
   }
 
   onSubmit() {
@@ -178,8 +107,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscriptionSearch) {
       this.subscriptionSearch.unsubscribe();
-      this.subscriptionMeshDescriptorConditionsRetrieval.unsubscribe();
-      this.subscriptionMeshDescriptorInterventionsRetrieval.unsubscribe();
+      this.subscriptionMeshDescriptorRetrieval.unsubscribe();
     }
   }
 }

@@ -35,31 +35,32 @@
                 <mat-form-field class="term-list-input">
                   <mat-chip-list #descriptorsConditionsChipList>
                     <mat-chip
-                      *ngFor="let descriptor of descriptorsFilterConditionsService.descriptorsSelected"
+                      *ngFor="let descriptor of descriptorsSelected"
                       [selectable]="false"
                       [selected]="true"
                       [removable]="true"
-                      (remove)="onRemoveDescriptorCondition(descriptor)"
+                      (remove)="onRemoveDescriptor(descriptor)"
                     >
                       {{ descriptor.name }}
                       <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
                     <input
                       type="text"
-                      id="conditions"
-                      formControlName="conditions"
-                      placeholder="Condition/Disease"
-                      [matAutocomplete]="descriptorsConditionsAutocomplete"
-                      [matChipInputFor]="descriptorsConditionsChipList"
+                      id="descriptors"
+                      formControlName="descriptors"
+                      placeholder="MeSH Descriptors"
+                      [matAutocomplete]="descriptorsAutocomplete"
+                      [matChipInputFor]="descriptorsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
                   </mat-chip-list>
                   <!--Autocomplete for conditions chip-input.-->
                   <mat-autocomplete
                     [autoActiveFirstOption]="true"
-                    #descriptorsConditionsAutocomplete="matAutocomplete"
-                    (optionSelected)="onDescriptorConditionSelected($event)"
+                    #descriptorsAutocomplete="matAutocomplete"
+                    (optionSelected)="onDescriptorSelected($event)"
                   >
+                    <mat-option *ngFor="let descriptor of descriptorsAll" [value]="descriptor">
                       {{ descriptor.name }}
                     </mat-option>
                   </mat-autocomplete>
