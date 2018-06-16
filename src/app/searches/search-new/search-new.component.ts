@@ -31,30 +31,12 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   descriptorsFilterConditionsService: MeshDescriptorFilterService;
   descriptorsFilterInterventionsService: MeshDescriptorFilterService;
 
+  descriptorsConditionsAll: MeshDescriptorInterface[] = [];
+  descriptorsInterventionsAll: MeshDescriptorInterface[] = [];
   descriptorsConditionsFiltered: MeshDescriptorInterface[] = [];
   descriptorsInterventionsFiltered: MeshDescriptorInterface[] = [];
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
-
-  descriptorsConditionsAll: MeshDescriptorInterface[] = [
-    {ui: '1', name: 'Bowel Cancer'},
-    {ui: '2', name: 'Brain Cancer'},
-    {ui: '3', name: 'Hepatic Carcinoma'},
-    {ui: '4', name: 'Irritable Bowel Syndrome'},
-    {ui: '5', name: 'Renal Carcinoma'},
-    {ui: '6', name: 'Skin Cancer'},
-    {ui: '7', name: 'Squamous Cell Carcinoma'},
-    {ui: '8', name: 'Heart Diseases'},
-  ];
-
-  descriptorsInterventionsAll: MeshDescriptorInterface[] = [
-    {ui: '1', name: 'Surgery'},
-    {ui: '2', name: 'Chemotherapy'},
-    {ui: '3', name: 'Radiotherapy'},
-    {ui: '4', name: 'Immunotherapy'},
-    {ui: '5', name: 'Hyperthermia'},
-    {ui: '6', name: 'Focused Ultrasound Ablation'},
-  ];
 
   constructor(
     private trialsManager: TrialsManagerService,
@@ -117,7 +99,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       );
 
     this.subscriptionMeshDescriptorInterventionsRetrieval = this.meshDescriptorRetriever
-      .getMeshDescriptorsByTreeNumberPrefix('E02')
+      .getMeshDescriptorsByTreeNumberPrefix('D12')
       .subscribe(
         (response: MeshDescriptorInterface[]) => {
           this.descriptorsInterventionsAll = response;
@@ -149,7 +131,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   /**
    * Removes a descriptor from the selected intervention descriptors.
-   * @param {TermInterface} descriptor The descriptor to be removed.
+   * @param {MeshDescriptorInterface} descriptor The descriptor to be removed.
    */
   onRemoveDescriptorIntervention(descriptor: MeshDescriptorInterface): void {
     this.descriptorsFilterInterventionsService.removeDescriptor(descriptor);
@@ -194,6 +176,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscriptionSearch) {
       this.subscriptionSearch.unsubscribe();
+      this.subscriptionMeshDescriptorConditionsRetrieval.unsubscribe();
+      this.subscriptionMeshDescriptorInterventionsRetrieval.unsubscribe();
     }
   }
 }
