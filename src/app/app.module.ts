@@ -16,8 +16,9 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { SearchesService } from './services/searches.service';
-import { TrialsManagerService } from './services/trials-manager.service';
+import { ClinicalTrialsStudiesRetrieverService } from './services/clinical-trials-studies-retriever.service';
 import { MeshDescriptorRetrieverService } from './services/mesh-descriptor-retriever.service';
+import { ClinicalTrialsStudiesStatsRetrieverService } from './services/clinical-trials-studies-stats-retriever.service';
 
 import { environment } from '../environments/environment';
 
@@ -43,8 +44,9 @@ import { environment } from '../environments/environment';
   providers: [
     SearchesService,
     McBreadcrumbsService,
-    TrialsManagerService,
-    MeshDescriptorRetrieverService
+    ClinicalTrialsStudiesRetrieverService,
+    MeshDescriptorRetrieverService,
+    ClinicalTrialsStudiesStatsRetrieverService,
   ],
   bootstrap: [AppComponent],
   exports: [
