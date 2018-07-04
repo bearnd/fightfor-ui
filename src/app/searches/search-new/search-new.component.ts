@@ -5,10 +5,8 @@ import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
-import { ClinicalTrialsStudiesRetrieverService } from '../../services/clinical-trials-studies-retriever.service';
 import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
 import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
-import { ClinicalTrialsStudiesStatsRetrieverService } from '../../services/clinical-trials-studies-stats-retriever.service';
 
 
 @Component({
@@ -18,7 +16,6 @@ import { ClinicalTrialsStudiesStatsRetrieverService } from '../../services/clini
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
-  subscriptionSearch: Subscription;
   subscriptionMeshDescriptorRetrieval: Subscription;
 
   form: FormGroup;
@@ -31,9 +28,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   constructor(
-    private trialsManager: ClinicalTrialsStudiesRetrieverService,
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
-    private studiesStatsRetriever: ClinicalTrialsStudiesStatsRetrieverService
   ) {
   }
 
@@ -95,18 +90,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.subscriptionSearch = this.studiesStatsRetriever
-      .countStudiesByOverallStatus()
-      .subscribe(
-      (response) => {
-        console.log(response);
-      }
-    );
   }
 
   ngOnDestroy() {
-    if (this.subscriptionSearch) {
-      this.subscriptionSearch.unsubscribe();
       this.subscriptionMeshDescriptorRetrieval.unsubscribe();
     }
   }
