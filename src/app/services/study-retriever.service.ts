@@ -5,12 +5,17 @@ import gql from 'graphql-tag';
 
 import { ClinicalTrialStudyInterface } from '../interfaces/clinical-trial-study.interface';
 import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
+import { CountByCountryInterface } from '../interfaces/search.interface';
 
 
+interface VariablesSearchStudies {
+  meshDescriptorIds: Number[]
+}
 
-
-interface ResponseSearchTrials {
-  searchStudies: ClinicalTrialStudyInterface
+interface ResponseSearchStudies {
+  studies: {
+    search: ClinicalTrialStudyInterface[]
+  }
 }
 
 interface ResponseGetStudyByNctId {
@@ -24,13 +29,16 @@ interface VariablesGetStudyByNctId {
 @Injectable()
 export class ClinicalTrialsStudiesRetrieverService {
 
-  querySearchTrials = gql`
-    query searchStudies(
-      $meshDescriptorNames: [String]!,
-    ){
-      searchStudies(meshDescriptors: $meshDescriptorNames) {
-        nctId,
-        source
+  querySearchStudies = gql`
+    query searchStudies($meshDescriptorIds: [Int]!) {
+      studies {
+        search(
+          meshDescriptorIds: $meshDescriptorIds,
+          doIncludeChildren: true,
+        ) {
+          studyId,
+          nctId
+        }
       }
     }
   `;
@@ -42,6 +50,7 @@ export class ClinicalTrialsStudiesRetrieverService {
       }
     }
   `;
+
 
   constructor(private apollo: Apollo) {
   }
@@ -57,23 +66,26 @@ export class ClinicalTrialsStudiesRetrieverService {
     });
   }
 
-  searchTrials(
-    meshDescriptorsConditions: MeshDescriptorInterface[],
-    meshDescriptorsInterventions?: MeshDescriptorInterface[],
+  searchStudies(
+    descriptors: MeshDescriptorInterface[],
   ) {
 
-    const meshDescriptorsConditionNames: String[] = meshDescriptorsConditions.map(function (d) { return d.name });
-    const meshDescriptorsInterventionNames: String[] = meshDescriptorsInterventions.map(function (d) { return d.name });
+    // Retrieve the IDs out of the provided MeSH descriptors.
+    const descriptorIds: Number[] = descriptors.map(
+      function (d) {
+        return d.descriptorId;
+      }
+    );
 
-    return this.apollo.query<ResponseSearchTrials>({
-      query: this.querySearchTrials,
+    return this.apollo.query<ResponseSearchStudies, VariablesSearchStudies>({
+      query: this.querySearchStudies,
       variables: {
-        meshTermsConditions: meshDescriptorsConditionNames,
-        meshTermsInterventions: meshDescriptorsInterventionNames,
+        meshDescriptorIds: descriptorIds,
       }
     }).map((response) => {
       console.log(response);
-      return response.data.searchStudies;
+      return response.data.studies.search;
     });
   }
+
 }
