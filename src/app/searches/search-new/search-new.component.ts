@@ -2,11 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
+import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
 import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
 import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
+import { SearchesService } from '../../services/searches.service';
+import { SearchInterface } from '../../interfaces/search.interface';
 
 
 @Component({
@@ -16,7 +20,7 @@ import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-r
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
-  subscriptionMeshDescriptorRetrieval: Subscription;
+  subscriptionDescriptors: Subscription;
 
   form: FormGroup;
 
@@ -29,23 +33,34 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   constructor(
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
+    private searches: SearchesService,
+    private router: Router,
   ) {
   }
 
   ngOnInit() {
 
     this.form = new FormGroup({
-      descriptors: new FormControl(null, [Validators.required]),
+      descriptors: new FormControl(
+        null,
+        [Validators.required]
+      ),
     });
 
-    // Subscribe to the `valueChanges` observable of the input control and perform a synonym-search for matching MeSH descriptors with a
-    // 250ms debounce so that we don't perform a search for every keystroke.
-    this.form.get('descriptors').valueChanges.pipe(debounceTime(400)).subscribe(
+    // Subscribe to the `valueChanges` observable of the input control and
+    // perform a synonym-search for matching MeSH descriptors with a 400ms
+    // debounce so that we don't perform a search for every keystroke.
+    this.form.get('descriptors')
+      .valueChanges
+      .pipe(debounceTime(400))
+      .subscribe(
       (value) => {
-        // If the incoming value is of type `string` then perform a synonym search through the `meshDescriptorRetriever` service and update
+        // If the incoming value is of type `string` then perform a synonym
+        // search through the `meshDescriptorRetriever` service and update
         // `descriptorsAll` with the results.
         if (typeof value === 'string') {
-          this.meshDescriptorRetriever.getMeshDescriptorsBySynonym(value, 10)
+          this.subscriptionDescriptors = this.meshDescriptorRetriever
+            .getMeshDescriptorsBySynonym(value, 10)
             .subscribe(
               (response) => {
                 this.descriptorsAll = response;
@@ -90,10 +105,18 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    // Create a new search with the selected descriptors.
+    const search: SearchInterface = this.searches.createSearch(
+      this.descriptorsSelected
+    );
+
+    // Navigate to the `SearchResultsComponent` with the new search.
+    this.router.navigate(['/searches', search.searchUuid]);
   }
 
   ngOnDestroy() {
-      this.subscriptionMeshDescriptorRetrieval.unsubscribe();
+    if (this.subscriptionDescriptors) {
+      this.subscriptionDescriptors.unsubscribe();
     }
   }
 }
