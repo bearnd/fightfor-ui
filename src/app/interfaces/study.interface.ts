@@ -1,4 +1,4 @@
-export enum ClinicalTrialStudyOverallStatus {
+export enum StudyOverallStatus {
   ACTIVE_NOT = 'Active, not recruiting',
   COMPLETED = 'Completed',
   INVITATION = 'Enrolling by invitation',
@@ -15,7 +15,7 @@ export enum ClinicalTrialStudyOverallStatus {
   UNKNOWN = 'Unknown status',
 }
 
-export enum ClinicalTrialStudyPhase {
+export enum StudyPhase {
   NA = 'N/A',
   PHASE_1_EARLY = 'Early Phase 1',
   PHASE_1 = 'Phase 1',
@@ -26,7 +26,7 @@ export enum ClinicalTrialStudyPhase {
   PHASE_4 = 'Phase 4',
 }
 
-export enum ClinicalTrialStudyType {
+export enum StudyType {
   EXPANDED = 'Expanded Access',
   INTERVENTIONAL = 'Interventional',
   NA = 'N/A',
@@ -35,7 +35,7 @@ export enum ClinicalTrialStudyType {
 }
 
 
-export interface ClinicalTrialStudyInterface {
+export interface StudyInterface {
   studyId?: number
   orgStudyId?: string
   secondaryId?: string
@@ -46,14 +46,14 @@ export interface ClinicalTrialStudyInterface {
   source?: string
   briefSummary?: string
   detailedDescription?: string
-  overallStatus?: ClinicalTrialStudyOverallStatus
-  lastKnownStatus?: ClinicalTrialStudyOverallStatus
+  overallStatus?: StudyOverallStatus
+  lastKnownStatus?: StudyOverallStatus
   whyStopped?: string
   startDate?: Date
   completionDate?: Date
   primaryCompletionDate?: Date
   verificationDate?: Date
-  phase?: ClinicalTrialStudyPhase
-  studyType?: ClinicalTrialStudyType
+  phase?: StudyPhase
+  studyType?: StudyType
   targetDuration?: string
 }

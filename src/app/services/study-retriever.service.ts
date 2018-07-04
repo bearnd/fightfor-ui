@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
-import { ClinicalTrialStudyInterface } from '../interfaces/clinical-trial-study.interface';
+import { StudyInterface } from '../interfaces/study.interface';
 import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
-import { CountByCountryInterface } from '../interfaces/search.interface';
 
 
 interface VariablesSearchStudies {
@@ -14,12 +13,12 @@ interface VariablesSearchStudies {
 
 interface ResponseSearchStudies {
   studies: {
-    search: ClinicalTrialStudyInterface[]
+    search: StudyInterface[]
   }
 }
 
 interface ResponseGetStudyByNctId {
-  getStudyByNctId: ClinicalTrialStudyInterface
+  getStudyByNctId: StudyInterface
 }
 
 interface VariablesGetStudyByNctId {
@@ -27,7 +26,7 @@ interface VariablesGetStudyByNctId {
 }
 
 @Injectable()
-export class ClinicalTrialsStudiesRetrieverService {
+export class StudyRetrieverService {
 
   querySearchStudies = gql`
     query searchStudies($meshDescriptorIds: [Int]!) {
@@ -83,7 +82,6 @@ export class ClinicalTrialsStudiesRetrieverService {
         meshDescriptorIds: descriptorIds,
       }
     }).map((response) => {
-      console.log(response);
       return response.data.studies.search;
     });
   }
