@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { SearchModel } from './search.model';
-
 
 @Component({
   selector: 'app-searches',
