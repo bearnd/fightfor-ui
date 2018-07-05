@@ -21,7 +21,7 @@ export class SearchesGridComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searches = this.searchesService.searches;
+    this.searches = this.searchesService.getSearches();
   }
 
   onNewSearch() {
