@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SearchesService } from '../../services/searches.service';
-import { SearchModel } from '../search.model';
+import { SearchInterface } from '../../interfaces/search.interface';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { SearchModel } from '../search.model';
 })
 export class SearchesGridComponent implements OnInit {
 
-  searches: SearchModel[];
+  searches: SearchInterface[];
 
   constructor(
     private searchesService: SearchesService,
@@ -21,7 +21,7 @@ export class SearchesGridComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searches = this.searchesService.searches;
+    this.searches = this.searchesService.getSearches();
   }
 
   onNewSearch() {

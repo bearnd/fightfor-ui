@@ -41,7 +41,7 @@ export const AdminLayoutRoutes: Routes = [
         }
       },
       {
-        path: ':id',
+        path: ':searchUuid',
         component: SearchResultsComponent,
         data: {
           breadcrumbs: 'Result'

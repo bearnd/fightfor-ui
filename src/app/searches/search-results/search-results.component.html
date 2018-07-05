@@ -6,48 +6,328 @@
 
         <!--Nav-pill fixed navigation menu.-->
         <ul class="nav nav-pills nav-pills-rose nav-pills-icons nav-pills-fixed flex-column">
-          <li class="nav-item pill-small" *ngFor="let name of names; let idx = index">
-            <!--The nav-pill links are used to smoothly scroll to the corresponding card. In addition their `active`
-            state is defined via the `isNavPillActive` method which uses the current scroll location of the page to
-            automatically activate the nav-pill corresponding to the currently viewed card.-->
+
+          <li class="nav-item pill-small">
+            <!--The nav-pill links are used to smoothly scroll to the
+            corresponding card. In addition their `active` state is defined via
+            the `isNavPillActive` method which uses the current scroll location
+            of the page to automatically activate the nav-pill corresponding to
+            the currently viewed card.-->
             <a
               class="nav-link"
               pageScroll
               [pageScrollDuration]="500"
-              href="#{{ name }}"
-              role="tablist"
-              [ngClass]="{active: isNavPillActive(idx)}"
+              href="#overview"
+              [ngClass]="{active: isNavPillActive(0)}"
             >
-              <i class="material-icons">dashboard</i> Home
+              <i class="material-icons">find_in_page</i> Overview
             </a>
           </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#trials"
+              [ngClass]="{active: isNavPillActive(1)}"
+            >
+              <i class="material-icons">local_pharmacy</i> Trials
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#locations"
+              [ngClass]="{active: isNavPillActive(2)}"
+            >
+              <i class="material-icons">location_on</i> Locations
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#locations"
+              [ngClass]="{active: isNavPillActive(3)}"
+            >
+              <i class="material-icons">account_balance</i> Institutions
+            </a>
+          </li>
+
         </ul>
       </div>
 
       <div class="col-md-10">
 
-        <!--Content cards. Each card has an `id` with a name used for in-page navigation.-->
-        <div class="row" *ngFor="let name of names; let idx = index" id="{{ name }}">
+        <div class="row" id="overview">
           <div class="card">
             <!--Set a scroll-tracker on the card header.-->
-            <div class="card-header card-header-rose" (ngx-scroll-tracker)="onScroll($event, idx)">
-              <h4 class="card-title">{{ name | uppercase }}</h4>
-              <p class="card-category">Perform a new search</p>
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 0)">
+              <div class="card-icon">
+                <i class="material-icons">find_in_page</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Overview' | uppercase }}
+                  </h4>
+                </div>
+
+                <div class="col-md-4">
+                  <button
+                    mat-raised-button mat-min-fab
+                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
+                    (click)="toggleEditable()"
+                    [disableRipple]="true"
+                    matTooltip="Edit this search" [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">{{ isEditable ? "create" : "create_outline" }}</i>
+                  </button>
+                  <button
+                    mat-raised-button mat-min-fab
+                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
+                    (click)="toggleSaved()"
+                    [disableRipple]="true"
+                    matTooltip="Save this search" [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">{{ isSaved ? "favorite" : "favorite_outline" }}</i>
+                  </button>
+                </div>
+              </div>
+
             </div>
             <div class="card-body">
-              <h4>Content</h4>
-              <p>Something something something something something something something something something something
-               something something something something something something something something something something
-               something something something something something something something something something something</p>
-              <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+              <h5>MeSH Descriptors</h5>
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let descriptor of search.descriptors"
+                  [selectable]="false"
+                  [selected]="false"
+                  [removable]="false"
+                >
+                  {{ descriptor.name }}
+                </mat-chip>
+              </mat-chip-list>
+              <!--TODO: Add year range as disabled slider.-->
             </div>
             <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="trials">
+          <div class="card" style="background-color: transparent">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 1)">
+              <div class="card-icon">
+                <i class="material-icons">local_pharmacy</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Clinical Trials' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">add_circle</i>
+                    </div>
+                    <p class="card-category">Recruiting</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.recruiting) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">date_range</i> See more
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">slow_motion_video</i>
+                    </div>
+                    <p class="card-category">Active</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.active) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">date_range</i> See more
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">check_circle</i>
+                    </div>
+                    <p class="card-category">Completed</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.completed) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">date_range</i> See more
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">donut_small</i>
+                    </div>
+                    <p class="card-category">All</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.all) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons">date_range</i> See more
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="locations">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 2)">
+              <div class="card-icon">
+                <i class="material-icons">local_pharmacy</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Locations' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <!--<div class="col-md-6">-->
+                <div class="col-md-12">
+                  <div class="content table-responsive">
+                    <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>Rank</th>
+                      <th>Country</th>
+                      <th>Trials</th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let entry of search.studiesStats.byCountry | slice:0:numLocationsDisplay; let idx = index">
+                      <td>{{ idx + 1 }}</td>
+                      <td>{{ entry.country }}</td>
+                      <td>{{ entry.countStudies }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+
+              </div>
 
             </div>
           </div>
         </div>
-      </div>
 
+        <div class="row" id="institutions">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 3)">
+              <div class="card-icon">
+                <i class="material-icons">account_balance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Institutions' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <!--<div class="col-md-6">-->
+                <div class="col-md-12">
+                  <div class="content table-responsive">
+                    <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>Rank</th>
+                      <th>Institutions</th>
+                      <th>Country</th>
+                      <th>City</th>
+                      <th>State</th>
+                      <th>Zip Code</th>
+                      <th>Trials</th>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let entry of search.studiesStats.byFacility | slice:0:numFacilitiesDisplay; let idx = index">
+                      <td>{{ idx + 1 }}</td>
+                      <td>{{ entry.facility.name }}</td>
+                      <td>{{ entry.facility.country }}</td>
+                      <td>{{ entry.facility.city }}</td>
+                      <td>{{ entry.facility.state }}</td>
+                      <td>{{ entry.facility.zipCode }}</td>
+                      <td>{{ entry.countStudies }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
