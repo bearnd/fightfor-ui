@@ -5,6 +5,7 @@ import { SearchesComponent } from '../../searches/searches.component';
 import { SearchResultsComponent } from '../../searches/search-results/search-results.component';
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
+import { SearchResultsSummaryComponent } from '../../searches/search-results/search-results-summary/search-results-summary.component';
 
 export const AdminLayoutRoutes: Routes = [
   {
@@ -44,9 +45,23 @@ export const AdminLayoutRoutes: Routes = [
         path: ':searchUuid',
         component: SearchResultsComponent,
         data: {
-          breadcrumbs: 'Result'
-        }
-      }
-    ]
+          breadcrumbs: 'Search'
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'summary',
+            pathMatch: 'full',
+          {
+            path: 'summary',
+            component: SearchResultsSummaryComponent,
+            data: {
+              breadcrumbs: 'Summary'
+            }
+          },
+          },
+        ],
+      },
+    ],
   },
 ];

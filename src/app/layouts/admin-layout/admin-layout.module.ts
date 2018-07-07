@@ -21,6 +21,7 @@ import { SearchesComponent } from '../../searches/searches.component';
 import { SearchResultsComponent } from '../../searches/search-results/search-results.component';
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
+import { SearchResultsSummaryComponent } from '../../searches/search-results/search-results-summary/search-results-summary.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { SearchesGridComponent } from '../../searches/searches-grid/searches-gri
     DashboardComponent,
     SearchesComponent,
     SearchResultsComponent,
+    SearchResultsSummaryComponent,
     SearchNewComponent,
     SearchesGridComponent,
   ],
