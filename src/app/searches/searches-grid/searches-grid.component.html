@@ -32,11 +32,11 @@
 
       </div>
 
-      <div class="col-md-4" *ngFor="let search of searches; let i=index">
+      <div class="col-md-4" *ngFor="let search of searches">
         <div class="card search-card">
           <div class="card-header card-header-rose">
             <h4 class="card-title">{{ search.title }}</h4>
-            <p class="card-category">{{ search.description }}</p>
+            <p class="card-category">Description</p>
           </div>
           <div class="card-body">
             <h4 class="card-title">Website Views</h4>
@@ -45,7 +45,7 @@
               mat-raised-button
               class="btn btn-rose mat-raised-button pull-right"
               routerLink="results"
-              (click)="onSeeMore(i)"
+              (click)="onSeeMore(search.searchUuid)"
             >
               <span class="mat-button-wrapper">See More</span>
             </button>
