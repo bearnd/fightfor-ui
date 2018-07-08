@@ -22,6 +22,7 @@ import { SearchResultsComponent } from '../../searches/search-results/search-res
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
 import { SearchResultsSummaryComponent } from '../../searches/search-results/search-results-summary/search-results-summary.component';
+import { StudiesListComponent } from '../../searches/search-results/studies-list/studies-list.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { SearchResultsSummaryComponent } from '../../searches/search-results/sea
     SearchResultsSummaryComponent,
     SearchNewComponent,
     SearchesGridComponent,
+    StudiesListComponent,
   ],
   providers: [PageScrollService]
 })

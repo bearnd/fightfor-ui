@@ -6,6 +6,7 @@ import { SearchResultsComponent } from '../../searches/search-results/search-res
 import { SearchNewComponent } from '../../searches/search-new/search-new.component';
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
 import { SearchResultsSummaryComponent } from '../../searches/search-results/search-results-summary/search-results-summary.component';
+import { StudiesListComponent } from '../../searches/search-results/studies-list/studies-list.component';
 
 export const AdminLayoutRoutes: Routes = [
   {
@@ -52,6 +53,7 @@ export const AdminLayoutRoutes: Routes = [
             path: '',
             redirectTo: 'summary',
             pathMatch: 'full',
+          },
           {
             path: 'summary',
             component: SearchResultsSummaryComponent,
@@ -59,6 +61,12 @@ export const AdminLayoutRoutes: Routes = [
               breadcrumbs: 'Summary'
             }
           },
+          {
+            path: 'trials/:overallStatus',
+            component: StudiesListComponent,
+            data: {
+              breadcrumbs: 'Trials'
+            },
           },
         ],
       },
