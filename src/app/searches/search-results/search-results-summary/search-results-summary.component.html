@@ -255,16 +255,18 @@
                   <div class="content table-responsive">
                     <table class="table table-hover">
                     <thead class="text-warning">
-                      <th>Rank</th>
-                      <th>Country</th>
-                      <th>Trials</th>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Country</th>
+                        <th>Trials</th>
+                      </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let entry of search.studiesStats.byCountry | slice:0:numLocationsDisplay; let idx = index">
-                      <td>{{ idx + 1 }}</td>
-                      <td>{{ entry.country }}</td>
-                      <td>{{ entry.countStudies }}</td>
-                    </tr>
+                      <tr *ngFor="let entry of search.studiesStats.byCountry | slice:0:numLocationsDisplay; let idx = index">
+                        <td>{{ idx + 1 }}</td>
+                        <td>{{ entry.country }}</td>
+                        <td>{{ entry.countStudies }}</td>
+                      </tr>
                     </tbody>
                   </table>
                   </div>
@@ -302,24 +304,26 @@
                   <div class="content table-responsive">
                     <table class="table table-hover">
                     <thead class="text-warning">
-                      <th>Rank</th>
-                      <th>Institutions</th>
-                      <th>Country</th>
-                      <th>City</th>
-                      <th>State</th>
-                      <th>Zip Code</th>
-                      <th>Trials</th>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Institutions</th>
+                        <th>Country</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip Code</th>
+                        <th>Trials</th>
+                      </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let entry of search.studiesStats.byFacility | slice:0:numFacilitiesDisplay; let idx = index">
-                      <td>{{ idx + 1 }}</td>
-                      <td>{{ entry.facility.name }}</td>
-                      <td>{{ entry.facility.country }}</td>
-                      <td>{{ entry.facility.city }}</td>
-                      <td>{{ entry.facility.state }}</td>
-                      <td>{{ entry.facility.zipCode }}</td>
-                      <td>{{ entry.countStudies }}</td>
-                    </tr>
+                      <tr *ngFor="let entry of search.studiesStats.byFacility | slice:0:numFacilitiesDisplay; let idx = index">
+                        <td>{{ idx + 1 }}</td>
+                        <td>{{ entry.facility.name }}</td>
+                        <td>{{ entry.facility.country }}</td>
+                        <td>{{ entry.facility.city }}</td>
+                        <td>{{ entry.facility.state }}</td>
+                        <td>{{ entry.facility.zipCode }}</td>
+                        <td>{{ entry.countStudies }}</td>
+                      </tr>
                     </tbody>
                   </table>
                   </div>

@@ -47,7 +47,6 @@ export class SearchResultsSummaryComponent implements OnInit {
   constructor(
     private searchesService: SearchesService,
     private route: ActivatedRoute,
-    private router: Router,
   ) {
   }
 
