@@ -10,6 +10,7 @@ import {
   MatChipsModule,
   MatIconModule,
   MatAutocompleteModule,
+  MatTableModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
@@ -37,6 +38,10 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     MatTooltipModule,
     MatChipsModule,
     MatIconModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatTableModule,
     MatAutocompleteModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),

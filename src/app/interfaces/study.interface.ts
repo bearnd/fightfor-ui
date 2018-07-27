@@ -36,7 +36,7 @@ export enum StudyType {
 
 
 export interface StudyInterface {
-  studyId?: number
+  studyId: number
   orgStudyId?: string
   secondaryId?: string
   nctId: string

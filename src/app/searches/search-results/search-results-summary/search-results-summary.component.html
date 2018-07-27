@@ -250,26 +250,35 @@
 
               <div class="row">
 
-                <!--<div class="col-md-6">-->
                 <div class="col-md-12">
+
+                  <!--Locations table.-->
                   <div class="content table-responsive">
-                    <table class="table table-hover">
-                    <thead class="text-warning">
-                      <tr>
-                        <th>Rank</th>
-                        <th>Country</th>
-                        <th>Trials</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let entry of search.studiesStats.byCountry | slice:0:numLocationsDisplay; let idx = index">
-                        <td>{{ idx + 1 }}</td>
-                        <td>{{ entry.country }}</td>
-                        <td>{{ entry.countStudies }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <mat-table #tableLocations [dataSource]="dataSourceLocations" class="table table-hover">
+                      <!--Header.-->
+                      <mat-header-row *matHeaderRowDef="displayedColumnsLocations"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsLocations;"></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.country }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
+                      </ng-container>
+                    </mat-table>
                   </div>
+
                 </div>
 
               </div>
@@ -299,34 +308,59 @@
 
               <div class="row">
 
-                <!--<div class="col-md-6">-->
                 <div class="col-md-12">
+
+                  <!--Locations table.-->
                   <div class="content table-responsive">
-                    <table class="table table-hover">
-                    <thead class="text-warning">
-                      <tr>
-                        <th>Rank</th>
-                        <th>Institutions</th>
-                        <th>Country</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Zip Code</th>
-                        <th>Trials</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let entry of search.studiesStats.byFacility | slice:0:numFacilitiesDisplay; let idx = index">
-                        <td>{{ idx + 1 }}</td>
-                        <td>{{ entry.facility.name }}</td>
-                        <td>{{ entry.facility.country }}</td>
-                        <td>{{ entry.facility.city }}</td>
-                        <td>{{ entry.facility.state }}</td>
-                        <td>{{ entry.facility.zipCode }}</td>
-                        <td>{{ entry.countStudies }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <mat-table #tableFacilities [dataSource]="dataSourceFacilities" class="table table-hover">
+                      <!--Header.-->
+                      <mat-header-row *matHeaderRowDef="displayedColumnsFacilities"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsFacilities;" (click)="onRowClicked(row)"></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.name }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.country }}</mat-cell>
+                      </ng-container>
+
+                      <!-- City Column -->
+                      <ng-container matColumnDef="city">
+                        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.city }}</mat-cell>
+                      </ng-container>
+
+                      <!-- State Column -->
+                      <ng-container matColumnDef="state">
+                        <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.state }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Zip Code Column -->
+                      <ng-container matColumnDef="zipCode">
+                        <mat-header-cell *matHeaderCellDef>Zip Code</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.zipCode }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
+                      </ng-container>
+                    </mat-table>
                   </div>
+
                 </div>
 
               </div>

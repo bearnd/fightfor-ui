@@ -23,6 +23,20 @@
 
             <!--TODO: Add table-->
 
+            <mat-table #table [dataSource]="dataSourceStudies" matSort>
+
+              <!--Header.-->
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+              <!-- NCT ID Column -->
+              <ng-container matColumnDef="nctId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>NCT ID</mat-header-cell>
+                <mat-cell *matCellDef="let study">{{study.nctId}}</mat-cell>
+              </ng-container>
+
+            </mat-table>
+
           </div>
         </div>
 

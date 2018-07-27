@@ -4,8 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 
 import { SearchesService } from '../../../services/searches.service';
-import { SearchInterface } from '../../../interfaces/search.interface';
-import { StudyOverallStatus } from '../../../interfaces/study.interface';
+import { CountByCountryInterface, CountByFacilityInterface, SearchInterface } from '../../../interfaces/search.interface';
+import { StudyInterface, StudyOverallStatus } from '../../../interfaces/study.interface';
+import { MatTableDataSource } from '@angular/material';
 
 
 @Component({
@@ -16,9 +17,27 @@ import { StudyOverallStatus } from '../../../interfaces/study.interface';
 export class SearchResultsSummaryComponent implements OnInit {
 
   // Number of top locations to display.
-  public numLocationsDisplay = 5;
+  numLocationsDisplay = 5;
+  // Location columns to display.
+  displayedColumnsLocations = ['rank', 'country', 'countStudies'];
+  // Locations table data-source.
+  dataSourceLocations: MatTableDataSource<CountByCountryInterface>;
+
   // Number of top facilities to display.
-  public numFacilitiesDisplay = 5;
+  numFacilitiesDisplay = 5;
+  // Facility columns to display.
+  displayedColumnsFacilities = [
+    'rank',
+    'name',
+    'country',
+    'city',
+    'state',
+    'zipCode',
+    'countStudies',
+  ];
+  // Facilities table data-source.
+  dataSourceFacilities: MatTableDataSource<CountByFacilityInterface>;
+
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
 
@@ -58,6 +77,20 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Perform the search.
     this.searchesService.searchStudies(searchUuid);
+
+    // Instantiate the data-source for the locations table.
+    this.dataSourceLocations = new MatTableDataSource
+      <CountByCountryInterface>(
+        this.search.studiesStats.byCountry.slice(0, this.numLocationsDisplay)
+      );
+
+    // Instantiate the data-source for the facilities table.
+    this.dataSourceFacilities = new MatTableDataSource
+      <CountByFacilityInterface>(
+        this.search.studiesStats.byFacility.slice(0, this.numFacilitiesDisplay)
+      );
+
+
   }
 
   toggleSaved() {
@@ -116,6 +149,10 @@ export class SearchResultsSummaryComponent implements OnInit {
       this.search.searchUuid,
       overallStatusValues
     )
+  }
+
+  onRowClicked(row) {
+    console.log('Row clicked: ', row);
   }
 
 }

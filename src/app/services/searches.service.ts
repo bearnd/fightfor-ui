@@ -21,6 +21,10 @@ export class SearchesService {
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService
   ) {
+
+    // TODO: REMOVE
+    this.searches['7c2f8f55-c44a-7ccd-5576-6cb0eec129f0'] = searchSample;
+
     this.searchStudiesUpdated.subscribe(
       (searchUuid: string) => {
         this.getCountStudiesByCountry(searchUuid);

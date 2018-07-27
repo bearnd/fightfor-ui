@@ -45,6 +45,7 @@ export class StudyRetrieverService {
   queryGetStudyByNctId = gql`
     query($nctId: String!) {
        getStudyByNctId(nctId: $nctId) {
+        studyId,
         nctId
       }
     }
