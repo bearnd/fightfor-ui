@@ -34,6 +34,19 @@ export enum StudyType {
   OBSERVATIONAL_PR = 'Observational [Patient Registry]',
 }
 
+export enum InterventionType {
+  BEHAVIORAL = 'Behavioral',
+  BIOLOGICAL = 'Biological',
+  COMBINATION = 'Combination Product',
+  DEVICE = 'Device',
+  DIAGNOSTIC = 'Diagnostic Test',
+  DIETARY = 'Dietary Supplement',
+  DRUG = 'Drug',
+  GENETIC = 'Genetic',
+  PROCEDURE = 'Procedure',
+  RADIATION = 'Radiation',
+  OTHER = 'Other',
+}
 
 export interface StudyInterface {
   studyId: number
