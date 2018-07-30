@@ -48,6 +48,12 @@ export enum InterventionType {
   OTHER = 'Other',
 }
 
+export enum OrderType {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
+
+
 export interface StudyInterface {
   studyId: number
   orgStudyId?: string
