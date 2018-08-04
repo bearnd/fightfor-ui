@@ -24,6 +24,7 @@ export interface SearchInterface {
   title?: string
   descriptors: MeshDescriptorInterface[]
   studies?: StudyInterface[]
+  studiesFiltered?: StudyInterface[]
   studiesStats: {
     byCountry?: CountByCountryInterface[]
     byOverallStatus?: CountByOverallStatusInterface[]
