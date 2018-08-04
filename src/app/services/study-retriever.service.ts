@@ -4,7 +4,14 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { StudyInterface } from '../interfaces/study.interface';
+import {
+  InterventionType,
+  OrderType,
+  StudyInterface,
+  StudyOverallStatus,
+  StudyPhase,
+  StudyType
+} from '../interfaces/study.interface';
 import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
 
 
@@ -12,9 +19,51 @@ interface VariablesSearchStudies {
   meshDescriptorIds: number[]
 }
 
+interface VariablesFilterStudies {
+  studyIds: number[]
+  countries?: string[]
+  states?: string[]
+  cities?: string[]
+  overallStatuses?: StudyOverallStatus[]
+  interventionTypes?: InterventionType[]
+  phases?: StudyPhase[]
+  studyTypes?: StudyType[]
+  yearBeg?: number
+  yearEnd?: number
+  orderBy?: string
+  order?: OrderType
+  limit?: number
+  offset?: number
+}
+
+interface VariablesCountStudies {
+  studyIds: number[]
+  countries?: string[]
+  states?: string[]
+  cities?: string[]
+  overallStatuses?: StudyOverallStatus[]
+  interventionTypes?: InterventionType[]
+  phases?: StudyPhase[]
+  studyTypes?: StudyType[]
+  yearBeg?: number
+  yearEnd?: number
+}
+
 interface ResponseSearchStudies {
   studies: {
     search: StudyInterface[]
+  }
+}
+
+interface ResponseFilterStudies {
+  studies: {
+    filter: StudyInterface[]
+  }
+}
+
+interface ResponseCountStudies {
+  studies: {
+    count: number
   }
 }
 
@@ -62,6 +111,93 @@ export class StudyRetrieverService {
     }
   `;
 
+  queryFilterStudies = gql`
+    query filterStudies(
+      $studyIds: [Int]!,
+      $countries: [String],
+      $states: [String],
+      $cities: [String],
+      $overallStatuses: [OverallStatusType],
+      $interventionTypes: [InterventionType],
+      $phases: [PhaseType],
+      $studyTypes: [StudyType],
+      $yearBeg: Int,
+      $yearEnd: Int,
+      $orderBy: String,
+      $order: TypeEnumOrder,
+      $limit: Int,
+      $offset: Int,
+    ) {
+      studies {
+        filter(
+          studyIds: $studyIds,
+          countries: $countries,
+          states: $states,
+          cities: $cities,
+          overallStatuses: $overallStatuses,
+          interventionTypes: $interventionTypes,
+          phases: $phases,
+          studyTypes: $studyTypes,
+          yearBeg: $yearBeg,
+          yearEnd: $yearEnd,
+          orderBy: $orderBy,
+          order: $order,
+          limit: $limit,
+          offset: $offset,
+        ) {
+          studyId,
+          nctId,
+          briefTitle,
+          locations {
+            facility {
+              name,
+              city,
+              state,
+              country
+            }
+          },
+          overallStatus,
+          interventions {
+            interventionType,
+            name
+          },
+          phase,
+          studyType,
+          startDate
+        }
+      }
+    }
+  `;
+
+  queryCountStudies = gql`
+    query countStudies(
+      $studyIds: [Int]!,
+      $countries: [String],
+      $states: [String],
+      $cities: [String],
+      $overallStatuses: [OverallStatusType],
+      $interventionTypes: [InterventionType],
+      $phases: [PhaseType],
+      $studyTypes: [StudyType],
+      $yearBeg: Int,
+      $yearEnd: Int,
+    ) {
+      studies {
+        count(
+          studyIds: $studyIds,
+          countries: $countries,
+          states: $states,
+          cities: $cities,
+          overallStatuses: $overallStatuses,
+          interventionTypes: $interventionTypes,
+          phases: $phases,
+          studyTypes: $studyTypes,
+          yearBeg: $yearBeg,
+          yearEnd: $yearEnd,
+        ) 
+      }
+    }
+  `;
 
   constructor(private apollo: Apollo) {
   }
@@ -118,10 +254,146 @@ export class StudyRetrieverService {
         return response.data.studies.search;
       });
   }
+
+  /**
+   * Filter clinical-trial studies with support for filtering, ordering, and
+   * pagination.
+   * @param {StudyInterface[]} studies The studies on which filtering will be
+   * performed.
+   * @param {string[]} countries Array of country names to filter on.
+   * @param {string[]} states Array of state/region names to filter on.
+   * @param {string[]} cities Array of city names to filter on.
+   * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
+   * filter on.
+   * @param {InterventionType[]} interventionTypes Array of intervention-types
+   * to filter on.
+   * @param {StudyPhase[]} phases Array of study-phases to filter on.
+   * @param {StudyType[]} studyTypes Array of study-types to filter on.
+   * @param {number} yearBeg Earliest year (inclusive) a filtered study can
+   * start to be included.
+   * @param {number} yearEnd Latest year (inclusive) a filtered study can start
+   * to be included.
+   * @param {string} orderBy Field to order the results by.
+   * @param {OrderType} order The ordering direction.
+   * @param {number} limit The number of studies to limit the results to (used
+   * in pagination).
+   * @param {number} offset The study offset (used in pagination).
+   */
+  filterStudies(
+    studies: StudyInterface[],
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    overallStatuses?: StudyOverallStatus[],
+    interventionTypes?: InterventionType[],
+    phases?: StudyPhase[],
+    studyTypes?: StudyType[],
+    yearBeg?: number,
+    yearEnd?: number,
+    orderBy?: string,
+    order?: OrderType,
+    limit?: number,
+    offset?: number,
+  ) {
+    // Update the 'loading' observable to indicate that loading is in progress.
+    this.loadingFilterStudies.next(true);
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (s) {
+        return s.studyId;
       }
-    }).map((response) => {
-      return response.data.studies.search;
-    });
+    );
+
+    return this.apollo
+      .query<ResponseFilterStudies, VariablesFilterStudies>({
+        query: this.queryFilterStudies,
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+          states: states,
+          cities: cities,
+          overallStatuses: overallStatuses,
+          interventionTypes: interventionTypes,
+          phases: phases,
+          studyTypes: studyTypes,
+          yearBeg: yearBeg,
+          yearEnd: yearEnd,
+          orderBy: orderBy,
+          order: order,
+          limit: limit,
+          offset: offset,
+        }
+      }).map((response) => {
+        // Update the 'loading' observable to indicate that loading is complete.
+        this.loadingFilterStudies.next(false);
+
+        return response.data.studies.filter;
+      });
+  }
+
+  /**
+   * Count clinical-trial studies with support for filtering, ordering, and
+   * pagination.
+   * @param {StudyInterface[]} studies The studies on which filtering will be
+   * performed.
+   * @param {string[]} countries Array of country names to filter on.
+   * @param {string[]} states Array of state/region names to filter on.
+   * @param {string[]} cities Array of city names to filter on.
+   * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
+   * filter on.
+   * @param {InterventionType[]} interventionTypes Array of intervention-types
+   * to filter on.
+   * @param {StudyPhase[]} phases Array of study-phases to filter on.
+   * @param {StudyType[]} studyTypes Array of study-types to filter on.
+   * @param {number} yearBeg Earliest year (inclusive) a filtered study can
+   * start to be included.
+   * @param {number} yearEnd Latest year (inclusive) a filtered study can start
+   * to be included.
+   */
+  countStudies(
+    studies: StudyInterface[],
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    overallStatuses?: StudyOverallStatus[],
+    interventionTypes?: InterventionType[],
+    phases?: StudyPhase[],
+    studyTypes?: StudyType[],
+    yearBeg?: number,
+    yearEnd?: number,
+  ) {
+    // Update the 'loading' observable to indicate that loading is in progress.
+    this.loadingCountStudies.next(true);
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (s) {
+        return s.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseCountStudies, VariablesCountStudies>({
+        query: this.queryCountStudies,
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+          states: states,
+          cities: cities,
+          overallStatuses: overallStatuses,
+          interventionTypes: interventionTypes,
+          phases: phases,
+          studyTypes: studyTypes,
+          yearBeg: yearBeg,
+          yearEnd: yearEnd,
+        }
+      }).map((response) => {
+        // Update the 'loading' observable to indicate that loading is complete.
+        this.loadingCountStudies.next(false);
+
+        return response.data.studies.count;
+      });
   }
 
 }
