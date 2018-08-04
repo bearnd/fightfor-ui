@@ -151,8 +151,4 @@ export class SearchResultsSummaryComponent implements OnInit {
     )
   }
 
-  onRowClicked(row) {
-    console.log('Row clicked: ', row);
-  }
-
 }
