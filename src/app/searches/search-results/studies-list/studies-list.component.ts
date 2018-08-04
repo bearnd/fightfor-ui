@@ -1,10 +1,15 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTable } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { merge, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
-import { MatSort, MatTable, MatTableDataSource } from '@angular/material';
-import { StudyInterface } from '../../../interfaces/study.interface';
+import { OrderType } from '../../../interfaces/study.interface';
+import { StudiesDataSource } from './studies.datasource';
+import { StudyRetrieverService } from '../../../services/study-retriever.service';
 
 
 @Component({
@@ -16,17 +21,22 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // Studies columns to display.
-  displayedColumns: string[] = ['nctId'];
+  displayedColumns: string[] = ['nctId', 'overallStatus', 'briefTitle'];
   // Studies table data-source.
-  dataSourceStudies: MatTableDataSource<StudyInterface>;
+  dataSourceStudies: StudiesDataSource;
+
+  studiesCount: number;
+  isLoadingStudiesCount: Observable<boolean>;
 
   // The search the component will display results for.
   public search: SearchInterface;
 
   constructor(
     private searchesService: SearchesService,
+    private studyRetrieverService: StudyRetrieverService,
     private route: ActivatedRoute,
   ) {
   }
@@ -37,16 +47,82 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     // Retrieve the referenced search.
     this.search = this.searchesService.getSearch(searchUuid);
 
-    // Perform the search.
-    this.searchesService.searchStudies(searchUuid);
+    this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
+    this.dataSourceStudies.filterStudies(
+      this.search.studies,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      10,
+      0,
+    );
 
-    // Create a new `MatTableDataSource` with the search studies.
-    this.dataSourceStudies = new MatTableDataSource(this.search.studies);
+    this.isLoadingStudiesCount = this.studyRetrieverService.isLoadingCountStudies;
+    this.studyRetrieverService.countStudies(
+      this.search.studies,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ).subscribe(
+      (studiesCount: number) => {
+        this.studiesCount = studiesCount;
+      }
+    )
   }
 
   ngAfterViewInit() {
-    // Enable column sorting on the studies table dat-source.
-    this.dataSourceStudies.sort = this.sort;
+    // Reset the paginator after sorting.
+    this.sort.sortChange
+      .subscribe(() => this.paginator.pageIndex = 0);
+
+    // Subscribe to pagination events to refresh the studies.
+    this.paginator.page
+      .pipe(
+        merge(this.sort.sortChange)
+      ).pipe(
+      tap(() => this.getStudiesPage())
+    ).subscribe();
   }
+
+  getStudiesPage() {
+
+    const map_sort = {
+      nctId: 'nct_id',
+      overallStatus: 'overall_status',
+      briefTitle: 'brief_title',
+    };
+
+    this.dataSourceStudies.filterStudies(
+      this.search.studies,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      map_sort[this.sort.active],
+      OrderType[this.sort.direction.toUpperCase()],
+      this.paginator.pageSize,
+      this.paginator.pageIndex * this.paginator.pageSize,
+    );
+  }
+
 
 }
