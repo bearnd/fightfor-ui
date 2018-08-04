@@ -28,8 +28,8 @@ export class SearchesGridComponent implements OnInit {
     this.router.navigate(['/searches', 'new']);
   }
 
-  onSeeMore(searchIdx: number) {
-    this.router.navigate(['/searches', searchIdx]);
+  onSeeMore(searchUuid: string) {
+    this.router.navigate(['/searches', searchUuid]);
   }
 
 }

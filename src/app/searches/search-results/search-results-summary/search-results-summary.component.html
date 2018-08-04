@@ -1,0 +1,375 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-2">
+
+        <!--Nav-pill fixed navigation menu.-->
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons nav-pills-fixed flex-column">
+
+          <li class="nav-item pill-small">
+            <!--The nav-pill links are used to smoothly scroll to the
+            corresponding card. In addition their `active` state is defined via
+            the `isNavPillActive` method which uses the current scroll location
+            of the page to automatically activate the nav-pill corresponding to
+            the currently viewed card.-->
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#overview"
+              [ngClass]="{active: isNavPillActive(0)}"
+            >
+              <i class="material-icons">find_in_page</i> Overview
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#trials"
+              [ngClass]="{active: isNavPillActive(1)}"
+            >
+              <i class="material-icons">local_pharmacy</i> Trials
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#locations"
+              [ngClass]="{active: isNavPillActive(2)}"
+            >
+              <i class="material-icons">location_on</i> Locations
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#locations"
+              [ngClass]="{active: isNavPillActive(3)}"
+            >
+              <i class="material-icons">account_balance</i> Institutions
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <div class="row" id="overview">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 0)">
+              <div class="card-icon">
+                <i class="material-icons">find_in_page</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Overview' | uppercase }}
+                  </h4>
+                </div>
+
+                <div class="col-md-4">
+                  <button
+                    mat-raised-button mat-min-fab
+                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
+                    (click)="toggleEditable()"
+                    [disableRipple]="true"
+                    matTooltip="Edit this search" [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">{{ isEditable ? "create" : "create_outline" }}</i>
+                  </button>
+                  <button
+                    mat-raised-button mat-min-fab
+                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
+                    (click)="toggleSaved()"
+                    [disableRipple]="true"
+                    matTooltip="Save this search" [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">{{ isSaved ? "favorite" : "favorite_outline" }}</i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body">
+              <h5>MeSH Descriptors</h5>
+              <mat-chip-list>
+                <mat-chip
+                  *ngFor="let descriptor of search.descriptors"
+                  [selectable]="false"
+                  [selected]="false"
+                  [removable]="false"
+                >
+                  {{ descriptor.name }}
+                </mat-chip>
+              </mat-chip-list>
+              <!--TODO: Add year range as disabled slider.-->
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="trials">
+          <div class="card" style="background-color: transparent">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 1)">
+              <div class="card-icon">
+                <i class="material-icons">local_pharmacy</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Clinical Trials' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">add_circle</i>
+                    </div>
+                    <p class="card-category">Recruiting</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.recruiting) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons text-primary">list_alt</i>
+                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'recruiting']">View recruiting trials</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">slow_motion_video</i>
+                    </div>
+                    <p class="card-category">Active</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.active) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons text-primary">list_alt</i>
+                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View active trials</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">check_circle</i>
+                    </div>
+                    <p class="card-category">Completed</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.completed) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons text-primary">list_alt</i>
+                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View completed trials</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="card card-stats" style="background-color: white">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">donut_small</i>
+                    </div>
+                    <p class="card-category">All</p>
+                    <h3 class="card-title">
+                      {{ findCountStudiesOverallStatus(overallStatusGroups.all) }}
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                      <i class="material-icons text-primary">list_alt</i>
+                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View all trials</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="locations">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 2)">
+              <div class="card-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Locations' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-12">
+
+                  <!--Locations table.-->
+                  <div class="content table-responsive">
+                    <mat-table #tableLocations [dataSource]="dataSourceLocations" class="table table-hover">
+                      <!--Header.-->
+                      <mat-header-row *matHeaderRowDef="displayedColumnsLocations"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsLocations;"></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.country }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
+                      </ng-container>
+                    </mat-table>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="institutions">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 3)">
+              <div class="card-icon">
+                <i class="material-icons">account_balance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Institutions' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-12">
+
+                  <!--Locations table.-->
+                  <div class="content table-responsive">
+                    <mat-table #tableFacilities [dataSource]="dataSourceFacilities" class="table table-hover">
+                      <!--Header.-->
+                      <mat-header-row *matHeaderRowDef="displayedColumnsFacilities"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsFacilities;" (click)="onRowClicked(row)"></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.name }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.country }}</mat-cell>
+                      </ng-container>
+
+                      <!-- City Column -->
+                      <ng-container matColumnDef="city">
+                        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.city }}</mat-cell>
+                      </ng-container>
+
+                      <!-- State Column -->
+                      <ng-container matColumnDef="state">
+                        <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.state }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Zip Code Column -->
+                      <ng-container matColumnDef="zipCode">
+                        <mat-header-cell *matHeaderCellDef>Zip Code</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.facility.zipCode }}</mat-cell>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
+                        <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
+                      </ng-container>
+                    </mat-table>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
