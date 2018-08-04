@@ -100,12 +100,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
 
   getStudiesPage() {
 
-    const map_sort = {
-      nctId: 'nct_id',
-      overallStatus: 'overall_status',
-      briefTitle: 'brief_title',
-    };
-
     this.dataSourceStudies.filterStudies(
       this.search.studies,
       null,
@@ -117,7 +111,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       null,
       null,
       null,
-      map_sort[this.sort.active],
+      this.sort.active,
       OrderType[this.sort.direction.toUpperCase()],
       this.paginator.pageSize,
       this.paginator.pageIndex * this.paginator.pageSize,
