@@ -8,6 +8,13 @@ import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface
 import { StudyRetrieverService } from './study-retriever.service';
 import { StudyStatsRetrieverService } from './study-stats-retriever.service';
 import { searchSample } from './search-example';
+import {
+  InterventionType,
+  OrderType,
+  StudyOverallStatus,
+  StudyPhase,
+  StudyType
+} from '../interfaces/study.interface';
 
 
 @Injectable()
@@ -219,6 +226,69 @@ export class SearchesService {
     }
 
     return count;
+  }
+
+  /**
+   * Filter clinical-trial studies with support for filtering, ordering, and pagination.
+   * @param {string} searchUuid The UUID of the search for which filtering will be performed.
+   * @param {string[]} countries Array of country names to filter on.
+   * @param {string[]} states Array of state/region names to filter on.
+   * @param {string[]} cities Array of city names to filter on.
+   * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to filter on.
+   * @param {InterventionType[]} interventionTypes Array of intervention-types to filter on.
+   * @param {StudyPhase[]} phases Array of study-phases to filter on.
+   * @param {StudyType[]} studyTypes Array of study-types to filter on.
+   * @param {number} yearBeg Earliest year (inclusive) a filtered study can start to be included.
+   * @param {number} yearEnd Latest year (inclusive) a filtered study can start to be included.
+   * @param {string} orderBy Field to order the results by.
+   * @param {OrderType} order The ordering direction.
+   * @param {number} limit The number of studies to limit the results to (used in pagination).
+   * @param {number} offset The study offset (used in pagination).
+   */
+  filterStudies(
+    searchUuid: string,
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    overallStatuses?: StudyOverallStatus[],
+    interventionTypes?: InterventionType[],
+    phases?: StudyPhase[],
+    studyTypes?: StudyType[],
+    yearBeg?: number,
+    yearEnd?: number,
+    orderBy?: string,
+    order?: OrderType,
+    limit?: number,
+    offset?: number,
+  ) {
+    // Retrieve the referenced search.
+    const search: SearchInterface = this.getSearch(searchUuid);
+
+    // Perform the search retrieving the clinical-trial studies and setting
+    // them under the search object.
+    this.studyRetrieverService
+      .filterStudies(
+        search.studies,
+        countries,
+        states,
+        cities,
+        overallStatuses,
+        interventionTypes,
+        phases,
+        studyTypes,
+        yearBeg,
+        yearEnd,
+        orderBy,
+        order,
+        limit,
+        offset,
+      ).subscribe(
+        (response) => {
+          search.studiesFiltered = response;
+          this.searchStudiesUpdated.next(searchUuid);
+        }
+      );
+
   }
 
 }
