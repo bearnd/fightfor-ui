@@ -12,7 +12,9 @@ import {
   StudyPhase,
   StudyType
 } from '../interfaces/study.interface';
-import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
+import {
+  MeshDescriptorInterface
+} from '../interfaces/mesh-descriptor.interface';
 
 
 interface VariablesSearchStudies {
