@@ -4,7 +4,7 @@ import { UUID } from 'angular2-uuid';
 
 import { SearchInterface } from '../interfaces/search.interface';
 import {
-  MeshDescriptorInterface
+  MeshDescriptorInterface,
 } from '../interfaces/mesh-descriptor.interface';
 import { searchSample } from './search-example';
 

@@ -4,9 +4,19 @@ import { ActivatedRoute } from '@angular/router';
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 
 import { SearchesService } from '../../../services/searches.service';
-import { CountByCountryInterface, CountByFacilityInterface, SearchInterface } from '../../../interfaces/search.interface';
+import {
+  CountByCountryInterface,
+  CountByFacilityInterface,
+  SearchInterface,
+} from '../../../interfaces/search.interface';
 import { StudyOverallStatus } from '../../../interfaces/study.interface';
 import { MatTableDataSource } from '@angular/material';
+import {
+  StudyRetrieverService,
+} from '../../../services/study-retriever.service';
+import {
+  StudyStatsRetrieverService,
+} from '../../../services/study-stats-retriever.service';
 
 
 @Component({
