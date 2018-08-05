@@ -315,7 +315,7 @@
                     <mat-table #tableFacilities [dataSource]="dataSourceFacilities" class="table table-hover">
                       <!--Header.-->
                       <mat-header-row *matHeaderRowDef="displayedColumnsFacilities"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumnsFacilities;" (click)="onRowClicked(row)"></mat-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumnsFacilities;"></mat-row>
 
                       <!-- Rank Column -->
                       <ng-container matColumnDef="rank">
