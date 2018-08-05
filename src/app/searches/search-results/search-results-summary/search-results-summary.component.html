@@ -141,7 +141,7 @@
 
             <div class="card-body">
 
-              <div class="row">
+              <div class="row" *ngIf="!(isLoadingGetCountStudiesByOverallStatus | async)">
                 <div class="col-md-3">
                 <div class="card card-stats" style="background-color: white">
                   <div class="card-header card-header-danger card-header-icon">
@@ -253,7 +253,7 @@
                 <div class="col-md-12">
 
                   <!--Locations table.-->
-                  <div class="content table-responsive">
+                  <div class="content table-responsive" *ngIf="!(isLoadingGetCountStudiesByCountry | async)">
                     <mat-table #tableLocations [dataSource]="dataSourceLocations" class="table table-hover">
                       <!--Header.-->
                       <mat-header-row *matHeaderRowDef="displayedColumnsLocations"></mat-header-row>
@@ -308,7 +308,7 @@
 
               <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="!(isLoadingGetCountStudiesByFacility | async)">
 
                   <!--Locations table.-->
                   <div class="content table-responsive">
