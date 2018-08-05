@@ -230,6 +230,7 @@ export class SearchResultsSummaryComponent implements OnInit {
         }
       );
   }
+
   /**
    * Count the number of studies whose `overallStatus` has one of the values
    * defined under `overallStatusValues`.
@@ -238,11 +239,23 @@ export class SearchResultsSummaryComponent implements OnInit {
    * @returns {number} The number of studies whose overall status matches one of
    * the values under `overallStatusValues`.
    */
-  findCountStudiesOverallStatus(overallStatusValues: string[]): number {
-    return this.searchesService.findCountStudiesOverallStatus(
-      this.search.searchUuid,
-      overallStatusValues
-    )
+  getCountStudiesOverallStatus(
+    overallStatusValues: string[],
+  ): number {
+
+    // Initialize the count.
+    let count = 0;
+
+    // Iterate over the count of studies by overall status and add the number
+    // of studies if their overall status is one of those defined under
+    // `overallStatusValues`.
+    for (const entry of this.search.studiesStats.byOverallStatus) {
+      if (overallStatusValues.indexOf(entry.overallStatus) !== -1) {
+        count += entry.countStudies;
+      }
+    }
+
+    return count;
   }
 
 }
