@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Apollo } from 'apollo-angular';
+import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
 import { StudyInterface } from '../interfaces/study.interface';
@@ -8,7 +9,6 @@ import {
   CountByCountryInterface, CountByFacilityInterface,
   CountByOverallStatusInterface
 } from '../interfaces/search.interface';
-import { Observable } from 'rxjs/Observable';
 
 
 interface VariablesGetCountStudiesByCountry {
