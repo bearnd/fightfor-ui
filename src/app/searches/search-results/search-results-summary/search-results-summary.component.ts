@@ -166,6 +166,38 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
+   * Retrieve the count of clinical-trial studies by facility for the studies
+   * previously attributed to a given search. The search is performed via the
+   * `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getCountStudiesByFacility(limit?: number) {
+    // Indicate that `getCountStudiesByFacility` is ongoing for this search.
+    this.loadingGetCountStudiesByFacility.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getCountStudiesByFacility(this.search.studies, limit)
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.byFacility = response;
+
+          // Instantiate the data-source for the facilities table.
+          this.dataSourceFacilities = new MatTableDataSource
+            <CountByFacilityInterface>(
+              this.search.studiesStats.byFacility
+            );
+
+          // Indicate that `getCountStudiesByFacility` is complete for this
+          // search.
+          this.loadingGetCountStudiesByFacility.next(false);
+        }
+      );
+  }
+  /**
    * Count the number of studies whose `overallStatus` has one of the values
    * defined under `overallStatusValues`.
    * @param {string[]} overallStatusValues The possible overall status values
