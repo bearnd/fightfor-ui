@@ -89,6 +89,13 @@ export class SearchResultsSummaryComponent implements OnInit {
     all: Object.values(StudyOverallStatus),
   };
 
+  countStudiesOverStatus = {
+    recruiting: null,
+    completed: null,
+    active: null,
+    all: null,
+  };
+
   isSaved = false;
   isEditable = false;
 
@@ -198,6 +205,57 @@ export class SearchResultsSummaryComponent implements OnInit {
         }
       );
   }
+
+  /**
+   * Retrieve the count of clinical-trial studies by overall status for the
+   * studies previously attributed to the search. The search is performed
+   * via the `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getCountStudiesByOverallStatus() {
+    // Indicate that `getCountStudiesByOverallStatus` is ongoing for this
+    // search.
+    this.loadingGetCountStudiesByOverallStatus.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getCountStudiesByOverallStatus(this.search.studies)
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.byOverallStatus = response;
+
+          // Calculate the number of studies by grouped overall status so they
+          // can be rendered in the template.
+          this.countStudiesOverStatus.recruiting =
+            this.getCountStudiesOverallStatus(
+              this.overallStatusGroups.recruiting,
+            );
+
+          this.countStudiesOverStatus.active =
+            this.getCountStudiesOverallStatus(
+              this.overallStatusGroups.active,
+            );
+
+          this.countStudiesOverStatus.completed =
+            this.getCountStudiesOverallStatus(
+              this.overallStatusGroups.completed,
+            );
+
+          this.countStudiesOverStatus.all =
+            this.getCountStudiesOverallStatus(
+              this.overallStatusGroups.all,
+            );
+
+          // Indicate that `getCountStudiesByOverallStatus` is complete for
+          // this search.
+          this.loadingGetCountStudiesByOverallStatus.next(false);
+        }
+      );
+  }
+
   /**
    * Retrieve the count of clinical-trial studies by facility for the studies
    * previously attributed to a given search. The search is performed via the
