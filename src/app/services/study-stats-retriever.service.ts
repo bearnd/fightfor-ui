@@ -44,7 +44,7 @@ interface ResponseGetCountStudiesByFacility {
 @Injectable()
 export class StudyStatsRetrieverService {
 
-  queryGetCountStudiesByOverallStatus = gql`
+  queryGetCountStudiesByCountry = gql`
     query getCountStudiesByCountry(
       $studyIds: [Int]!, 
       $limit: Int
@@ -61,7 +61,7 @@ export class StudyStatsRetrieverService {
     }
   `;
 
-  queryGetCountStudiesByCountry = gql`
+  queryGetCountStudiesByOverallStatus = gql`
     query getCountStudiesByOverallStatus(
       $studyIds: [Int]!, 
       $limit: Int
