@@ -93,7 +93,9 @@ export class SearchResultsSummaryComponent implements OnInit {
   isEditable = false;
 
   constructor(
-    private searchesService: SearchesService,
+    public searchesService: SearchesService,
+    private studyRetrieverService: StudyRetrieverService,
+    private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
   ) {
   }
