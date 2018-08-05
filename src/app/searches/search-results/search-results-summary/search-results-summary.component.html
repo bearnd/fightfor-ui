@@ -143,84 +143,84 @@
 
               <div class="row" *ngIf="!(isLoadingGetCountStudiesByOverallStatus | async)">
                 <div class="col-md-3">
-                <div class="card card-stats" style="background-color: white">
-                  <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">add_circle</i>
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">add_circle</i>
+                      </div>
+                      <p class="card-category">Recruiting</p>
+                      <h3 class="card-title">
+                        {{ countStudiesOverStatus.recruiting }}
+                      </h3>
                     </div>
-                    <p class="card-category">Recruiting</p>
-                    <h3 class="card-title">
-                      {{ findCountStudiesOverallStatus(overallStatusGroups.recruiting) }}
-                    </h3>
-                  </div>
-                  <div class="card-footer">
-                    <div class="stats">
-                      <i class="material-icons text-primary">list_alt</i>
-                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'recruiting']">View recruiting trials</a>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'recruiting']">View recruiting trials</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-3">
-                <div class="card card-stats" style="background-color: white">
-                  <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">slow_motion_video</i>
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">slow_motion_video</i>
+                      </div>
+                      <p class="card-category">Active</p>
+                      <h3 class="card-title">
+                        {{ countStudiesOverStatus.active }}
+                      </h3>
                     </div>
-                    <p class="card-category">Active</p>
-                    <h3 class="card-title">
-                      {{ findCountStudiesOverallStatus(overallStatusGroups.active) }}
-                    </h3>
-                  </div>
-                  <div class="card-footer">
-                    <div class="stats">
-                      <i class="material-icons text-primary">list_alt</i>
-                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View active trials</a>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View active trials</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-3">
-                <div class="card card-stats" style="background-color: white">
-                  <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">check_circle</i>
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">check_circle</i>
+                      </div>
+                      <p class="card-category">Completed</p>
+                      <h3 class="card-title">
+                        {{ countStudiesOverStatus.completed }}
+                      </h3>
                     </div>
-                    <p class="card-category">Completed</p>
-                    <h3 class="card-title">
-                      {{ findCountStudiesOverallStatus(overallStatusGroups.completed) }}
-                    </h3>
-                  </div>
-                  <div class="card-footer">
-                    <div class="stats">
-                      <i class="material-icons text-primary">list_alt</i>
-                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View completed trials</a>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View completed trials</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-3">
-                <div class="card card-stats" style="background-color: white">
-                  <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                      <i class="material-icons">donut_small</i>
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">donut_small</i>
+                      </div>
+                      <p class="card-category">All</p>
+                      <h3 class="card-title">
+                        {{ countStudiesOverStatus.all }}
+                      </h3>
                     </div>
-                    <p class="card-category">All</p>
-                    <h3 class="card-title">
-                      {{ findCountStudiesOverallStatus(overallStatusGroups.all) }}
-                    </h3>
-                  </div>
-                  <div class="card-footer">
-                    <div class="stats">
-                      <i class="material-icons text-primary">list_alt</i>
-                      <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View all trials</a>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View all trials</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
               </div>
             </div>
