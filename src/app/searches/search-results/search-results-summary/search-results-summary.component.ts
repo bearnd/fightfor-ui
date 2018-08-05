@@ -114,21 +114,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.search = this.searchesService.getSearch(searchUuid);
 
     // Perform the search.
-    this.searchesService.searchStudies(searchUuid);
-
-    // Instantiate the data-source for the locations table.
-    this.dataSourceLocations = new MatTableDataSource
-      <CountByCountryInterface>(
-        this.search.studiesStats.byCountry.slice(0, this.numLocationsDisplay)
-      );
-
-    // Instantiate the data-source for the facilities table.
-    this.dataSourceFacilities = new MatTableDataSource
-      <CountByFacilityInterface>(
-        this.search.studiesStats.byFacility.slice(0, this.numFacilitiesDisplay)
-      );
-
-
+    this.performSearch();
   }
 
   toggleSaved() {
@@ -172,6 +158,37 @@ export class SearchResultsSummaryComponent implements OnInit {
   public isNavPillActive(navPillIndex: number) {
     // Check whether the defined nav-pill is supposed to be active or not.
     return navPillIndex === this.navPillIndexActive;
+  }
+
+  /**
+   * Perform the defined search by retrieving the clinical-trial studies
+   * corresponding to the selected descriptors of the search. The search is
+   * performed via the `StudyRetrieverService`.
+   */
+  performSearch() {
+
+    // Indicate that `searchStudies` is ongoing for this search.
+    this.loadingSearchStudies.next(true);
+
+    // Perform the search retrieving the clinical-trial studies and setting
+    // them under the search object.
+    this.studyRetrieverService
+      .searchStudies(this.search.descriptors)
+      .subscribe(
+        (studies) => {
+          // Assign the retrieved studies to the search.
+          this.search.studies = studies;
+
+          // Trigger an update the study-statistics via the corresponding
+          // methods.
+          this.getCountStudiesByOverallStatus();
+          this.getCountStudiesByCountry(this.numLocationsDisplay);
+          this.getCountStudiesByFacility(this.numFacilitiesDisplay);
+
+          // Indicate that `searchStudies` is complete for this search.
+          this.loadingSearchStudies.next(false);
+        }
+      );
   }
 
   /**
