@@ -166,6 +166,37 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
+   * Retrieve the count of clinical-trial studies by country for the studies
+   * previously attributed to the search. The search is performed via the
+   * `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getCountStudiesByCountry(limit?: number) {
+    // Indicate that `getCountStudiesByCountry` is ongoing for this search.
+    this.loadingGetCountStudiesByCountry.next(true);
+
+    this.studyStatsRetrieverService
+      .getCountStudiesByCountry(this.search.studies, limit)
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.byCountry = response;
+
+          // Instantiate the data-source for the locations table.
+          this.dataSourceLocations = new MatTableDataSource
+            <CountByCountryInterface>(
+              this.search.studiesStats.byCountry
+            );
+
+          // Indicate that `getCountStudiesByCountry` is complete for this
+          // search.
+          this.loadingGetCountStudiesByCountry.next(false);
+        }
+      );
+  }
+  /**
    * Retrieve the count of clinical-trial studies by facility for the studies
    * previously attributed to a given search. The search is performed via the
    * `StudyStatsRetrieverService`.
