@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 
 import { SearchesService } from '../../../services/searches.service';
 import { CountByCountryInterface, CountByFacilityInterface, SearchInterface } from '../../../interfaces/search.interface';
-import { StudyInterface, StudyOverallStatus } from '../../../interfaces/study.interface';
+import { StudyOverallStatus } from '../../../interfaces/study.interface';
 import { MatTableDataSource } from '@angular/material';
 
 
@@ -56,7 +56,9 @@ export class SearchResultsSummaryComponent implements OnInit {
       'Terminated',
       'Withdrawn',
     ],
-    active: [],
+    active: [
+      'Active, not recruiting',
+    ],
     all: Object.values(StudyOverallStatus),
   };
 
