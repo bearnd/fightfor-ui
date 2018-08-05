@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { SearchesService } from '../../../services/searches.service';
 import {
@@ -47,6 +48,22 @@ export class SearchResultsSummaryComponent implements OnInit {
   ];
   // Facilities table data-source.
   dataSourceFacilities: MatTableDataSource<CountByFacilityInterface>;
+
+  private loadingSearchStudies = new BehaviorSubject<boolean>(false);
+  private loadingGetCountStudiesByCountry =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetCountStudiesByOverallStatus =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetCountStudiesByFacility =
+    new BehaviorSubject<boolean>(false);
+
+  public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
+  public isLoadingGetCountStudiesByCountry =
+    this.loadingGetCountStudiesByCountry.asObservable();
+  public isLoadingGetCountStudiesByOverallStatus =
+    this.loadingGetCountStudiesByOverallStatus.asObservable();
+  public isLoadingGetCountStudiesByFacility =
+    this.loadingGetCountStudiesByFacility.asObservable();
 
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
