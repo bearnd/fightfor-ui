@@ -145,63 +145,34 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Returns a copy of an array of objects alphabetically sorted by a given
-   * property.
-   * @param {any[]} entries The array of objects to be copied and sorted.
-   * @param {string} prop The property by which sorting will be performed.
-   * @returns {any[]} The sorted copy of the array.
+   * Processes an array of interventions and either returns an intervention if
+   * there is only one, a string of value `Multiple` if there are multiple, or
+   * `null` if there are none..
+   * @param {Intervention[]} interventions The array of interventions to
+   * process.
+   * @returns {(Intervention|string)} The result.
    */
-  private orderByProperty(entries: any[], prop: string): any[] {
+  rollupInterventions(interventions: Intervention[]): Intervention | string {
 
-    // Create a copy of the array.
-    const entriesSorted = entries.slice();
-
-    // Sort the array copy alphabetically by intervention name.
-    entriesSorted.sort(
-      (left, right) => {
-        if (left[prop] < right[prop]) {
-          return -1;
-        }
-        if (left[prop] > right[prop]) {
-          return 1;
-        }
-        return 0;
-      }
-    );
-
-    return entriesSorted
-  }
-
-  /**
-   * Rolls-up an array of intervention objects into a single newline-delimited
-   * string where each line contains the intervention type and name.
-   * @param {Intervention[]} interventions The array of interventions to roll
-   * up.
-   * @returns {string} The rolled-up interventions.
-   */
-  rollupInterventions(interventions: Intervention[]): string {
-
-    // Create a copy of the interventions array and sort it alphabetically by
-    // the intervention name.
-    const interventionsSorted: Intervention[]
-      = this.orderByProperty(interventions, 'name');
-
-    // Iterate over the sorted interventions and roll them up into a single
-    // newline-delimited string including the intervention type and name
-    const interventionsFull: string[] = [];
-    for (const intervention of interventionsSorted) {
-      let interventionFull = '';
+    // Return the intervention in a `type: name` format if there is only one,
+    // return a string of value `Multiple` if there are multiple, and null if
+    // the array is empty.
+    if (interventions.length === 1) {
+      // Retrieve the only intervention.
+      const intervention = interventions[0];
+      // Get the intervention type enum member out of the string.
       const interventionTypeMember =
         intervention.interventionType.split('.')[1];
+      // Retrieve the intervention type enum value out of the string.
       const interventionTypeValue = InterventionType[interventionTypeMember];
 
-      interventionFull += interventionTypeValue + ': ' + intervention.name;
-
-      interventionsFull.push(interventionFull);
+      // Create a `type: name` representation of the intervention.
+      return interventionTypeValue + ': ' + intervention.name;
+    } else if (interventions.length > 1) {
+      return 'Multiple';
+    } else {
+      return null;
     }
-
-    return interventionsFull.join('\n');
   }
-
 
 }
