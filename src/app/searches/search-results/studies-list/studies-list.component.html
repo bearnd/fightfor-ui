@@ -69,7 +69,7 @@
                   Title
                 </mat-header-cell>
                 <mat-cell *matCellDef="let study">
-                  {{study.briefTitle}}
+                  {{study.briefTitle | truncate:77}}
                 </mat-cell>
               </ng-container>
 
