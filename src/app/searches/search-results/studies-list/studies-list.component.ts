@@ -7,7 +7,7 @@ import { merge, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
-import { OrderType } from '../../../interfaces/study.interface';
+import { OrderType, StudyOverallStatus } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import { StudyRetrieverService } from '../../../services/study-retriever.service';
 
@@ -116,6 +116,21 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       this.paginator.pageSize,
       this.paginator.pageIndex * this.paginator.pageSize,
     );
+  }
+
+  /**
+   * Casts a fully-qualified overall-status enum string coming from GraphQL,
+   * e.g. `OverallStatusType.COMPLETED` to the enum value as defined under the
+   * the `StudyOverallStatus` enum.
+   * @param {string} status The fully-qualified overall-status enum string.
+   * @returns {string} The corresponding `StudyOverallStatus` value.
+   */
+  castOverallStatus(status: string): StudyOverallStatus {
+    // Split the string on `.` and keep the second part of the string with the
+    // enum member name.
+    const status_value = status.split('.')[1];
+    
+    return StudyOverallStatus[status_value];
   }
 
 
