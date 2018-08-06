@@ -7,9 +7,16 @@ import { merge, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
-import { OrderType, StudyOverallStatus } from '../../../interfaces/study.interface';
+import {
+  Intervention,
+  InterventionType,
+  OrderType,
+  StudyOverallStatus
+} from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
-import { StudyRetrieverService } from '../../../services/study-retriever.service';
+import {
+  StudyRetrieverService
+} from '../../../services/study-retriever.service';
 
 
 @Component({
@@ -24,7 +31,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // Studies columns to display.
-  displayedColumns: string[] = ['nctId', 'overallStatus', 'briefTitle'];
+  displayedColumns: string[] = [
+    'briefTitle',
+    'overallStatus',
+    'interventions',
+  ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
 
