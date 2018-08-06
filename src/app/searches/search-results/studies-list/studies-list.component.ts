@@ -161,4 +161,36 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     return entriesSorted
   }
 
+  /**
+   * Rolls-up an array of intervention objects into a single newline-delimited
+   * string where each line contains the intervention type and name.
+   * @param {Intervention[]} interventions The array of interventions to roll
+   * up.
+   * @returns {string} The rolled-up interventions.
+   */
+  rollupInterventions(interventions: Intervention[]): string {
+
+    // Create a copy of the interventions array and sort it alphabetically by
+    // the intervention name.
+    const interventionsSorted: Intervention[]
+      = this.orderByProperty(interventions, 'name');
+
+    // Iterate over the sorted interventions and roll them up into a single
+    // newline-delimited string including the intervention type and name
+    const interventionsFull: string[] = [];
+    for (const intervention of interventionsSorted) {
+      let interventionFull = '';
+      const interventionTypeMember =
+        intervention.interventionType.split('.')[1];
+      const interventionTypeValue = InterventionType[interventionTypeMember];
+
+      interventionFull += interventionTypeValue + ': ' + intervention.name;
+
+      interventionsFull.push(interventionFull);
+    }
+
+    return interventionsFull.join('\n');
+  }
+
+
 }
