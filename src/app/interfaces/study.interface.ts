@@ -81,4 +81,5 @@ export interface StudyInterface {
   phase?: StudyPhase
   studyType?: StudyType
   targetDuration?: string
+  interventions?: Intervention[]
 }
