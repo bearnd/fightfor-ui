@@ -53,6 +53,12 @@ export enum OrderType {
   DESC = 'DESC',
 }
 
+export interface Intervention {
+  interventionId: number
+  interventionType?: InterventionType
+  name?: string
+  description?: string
+}
 
 export interface StudyInterface {
   studyId: number
