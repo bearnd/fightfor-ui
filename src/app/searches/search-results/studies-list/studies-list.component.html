@@ -45,7 +45,7 @@
               <!-- Overall status column -->
               <ng-container matColumnDef="overallStatus">
                 <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header>Status</mat-header-cell>
-                <mat-cell *matCellDef="let study">{{study.overallStatus}}</mat-cell>
+                <mat-cell *matCellDef="let study">{{castOverallStatus(study.overallStatus)}}</mat-cell>
               </ng-container>
 
               <!-- Brief title column -->
