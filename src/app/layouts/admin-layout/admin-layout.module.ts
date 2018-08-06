@@ -15,6 +15,7 @@ import {
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
 import { ScrollTrackerModule } from '@nicky-lenaers/ngx-scroll-tracker';
+import { TruncateModule } from 'ng2-truncate';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -45,6 +46,7 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     MatAutocompleteModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
+    TruncateModule,
   ],
   declarations: [
     DashboardComponent,
