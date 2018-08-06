@@ -7,9 +7,16 @@ import { merge, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
-import { OrderType, StudyOverallStatus } from '../../../interfaces/study.interface';
+import {
+  Intervention,
+  InterventionType,
+  OrderType,
+  StudyOverallStatus
+} from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
-import { StudyRetrieverService } from '../../../services/study-retriever.service';
+import {
+  StudyRetrieverService
+} from '../../../services/study-retriever.service';
 
 
 @Component({
@@ -24,7 +31,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   // Studies columns to display.
-  displayedColumns: string[] = ['nctId', 'overallStatus', 'briefTitle'];
+  displayedColumns: string[] = [
+    'briefTitle',
+    'overallStatus',
+    'interventions',
+  ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
 
@@ -131,6 +142,65 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     const status_value = status.split('.')[1];
     
     return StudyOverallStatus[status_value];
+  }
+
+  /**
+   * Returns a copy of an array of objects alphabetically sorted by a given
+   * property.
+   * @param {any[]} entries The array of objects to be copied and sorted.
+   * @param {string} prop The property by which sorting will be performed.
+   * @returns {any[]} The sorted copy of the array.
+   */
+  private orderByProperty(entries: any[], prop: string): any[] {
+
+    // Create a copy of the array.
+    const entriesSorted = entries.slice();
+
+    // Sort the array copy alphabetically by intervention name.
+    entriesSorted.sort(
+      (left, right) => {
+        if (left[prop] < right[prop]) {
+          return -1;
+        }
+        if (left[prop] > right[prop]) {
+          return 1;
+        }
+        return 0;
+      }
+    );
+
+    return entriesSorted
+  }
+
+  /**
+   * Rolls-up an array of intervention objects into a single newline-delimited
+   * string where each line contains the intervention type and name.
+   * @param {Intervention[]} interventions The array of interventions to roll
+   * up.
+   * @returns {string} The rolled-up interventions.
+   */
+  rollupInterventions(interventions: Intervention[]): string {
+
+    // Create a copy of the interventions array and sort it alphabetically by
+    // the intervention name.
+    const interventionsSorted: Intervention[]
+      = this.orderByProperty(interventions, 'name');
+
+    // Iterate over the sorted interventions and roll them up into a single
+    // newline-delimited string including the intervention type and name
+    const interventionsFull: string[] = [];
+    for (const intervention of interventionsSorted) {
+      let interventionFull = '';
+      const interventionTypeMember =
+        intervention.interventionType.split('.')[1];
+      const interventionTypeValue = InterventionType[interventionTypeMember];
+
+      interventionFull += interventionTypeValue + ': ' + intervention.name;
+
+      interventionsFull.push(interventionFull);
+    }
+
+    return interventionsFull.join('\n');
   }
 
 
