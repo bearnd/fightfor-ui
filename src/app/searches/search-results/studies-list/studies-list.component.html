@@ -38,20 +38,40 @@
 
               <!-- NCT ID column -->
               <ng-container matColumnDef="nctId">
-                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header>NCT ID</mat-header-cell>
+                <mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  NCT ID
+                </mat-header-cell>
                 <mat-cell *matCellDef="let study">{{study.nctId}}</mat-cell>
               </ng-container>
 
               <!-- Overall status column -->
               <ng-container matColumnDef="overallStatus">
-                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header>Status</mat-header-cell>
-                <mat-cell *matCellDef="let study">{{castOverallStatus(study.overallStatus)}}</mat-cell>
+                <mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  Status
+                </mat-header-cell>
+                <mat-cell *matCellDef="let study">
+                  {{castOverallStatus(study.overallStatus)}}
+                </mat-cell>
               </ng-container>
 
               <!-- Brief title column -->
               <ng-container matColumnDef="briefTitle">
-                <mat-header-cell *matHeaderCellDef mat-sort-header mat-sort-header>Title</mat-header-cell>
-                <mat-cell *matCellDef="let study">{{study.briefTitle}}</mat-cell>
+                <mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  Title
+                </mat-header-cell>
+                <mat-cell *matCellDef="let study">
+                  {{study.briefTitle}}
+                </mat-cell>
+              </ng-container>
               </ng-container>
 
             </mat-table>
