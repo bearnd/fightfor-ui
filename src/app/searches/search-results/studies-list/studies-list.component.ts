@@ -133,5 +133,32 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     return StudyOverallStatus[status_value];
   }
 
+  /**
+   * Returns a copy of an array of objects alphabetically sorted by a given
+   * property.
+   * @param {any[]} entries The array of objects to be copied and sorted.
+   * @param {string} prop The property by which sorting will be performed.
+   * @returns {any[]} The sorted copy of the array.
+   */
+  private orderByProperty(entries: any[], prop: string): any[] {
+
+    // Create a copy of the array.
+    const entriesSorted = entries.slice();
+
+    // Sort the array copy alphabetically by intervention name.
+    entriesSorted.sort(
+      (left, right) => {
+        if (left[prop] < right[prop]) {
+          return -1;
+        }
+        if (left[prop] > right[prop]) {
+          return 1;
+        }
+        return 0;
+      }
+    );
+
+    return entriesSorted
+  }
 
 }
