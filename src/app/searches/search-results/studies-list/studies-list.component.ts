@@ -76,7 +76,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       0,
     );
 
-    this.isLoadingStudiesCount = this.studyRetrieverService.isLoadingCountStudies;
+    this.isLoadingStudiesCount =
+      this.studyRetrieverService.isLoadingCountStudies;
     this.studyRetrieverService.countStudies(
       this.search.studies,
       null,
@@ -140,7 +141,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     // Split the string on `.` and keep the second part of the string with the
     // enum member name.
     const status_value = status.split('.')[1];
-    
+
+    // Get corresponding `StudyOverallStatus` member.
     return StudyOverallStatus[status_value];
   }
 
