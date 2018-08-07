@@ -148,7 +148,6 @@ export class StudyRetrieverService {
           offset: $offset,
         ) {
           studyId,
-          nctId,
           briefTitle,
           locations {
             facility {
@@ -159,13 +158,15 @@ export class StudyRetrieverService {
             }
           },
           overallStatus,
-          interventions {
-            interventionType,
-            name
+          studyMeshTerms {
+            meshTermType,
+            meshTerm {
+              term,
+            },
           },
           phase,
           studyType,
-          startDate
+          startDate,
         }
       }
     }
