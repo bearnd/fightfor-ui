@@ -8,9 +8,11 @@ import { merge, tap } from 'rxjs/operators';
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
 import {
-  Intervention,
-  InterventionType,
+  FacilityInterface,
+  MeshTermInterface,
+  MeshTermType,
   OrderType,
+  StudyInterface,
   StudyOverallStatus
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
@@ -161,6 +163,61 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     // Get corresponding `MeshTermType` member.
     return MeshTermType[type_value];
   }
+
+  getStudyInterventionMeshTerms(
+    study: StudyInterface,
+  ): MeshTermInterface[] | string | null {
+    const meshTerms: MeshTermInterface[] = [];
+
+    for (const studyMeshTerm of study.studyMeshTerms) {
+      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      if (meshTermType === MeshTermType.INTERVENTION) {
+        meshTerms.push(studyMeshTerm.meshTerm);
+      }
+    }
+
+    if (meshTerms.length === 1) {
+      return meshTerms[0].term;
+    } else if (meshTerms.length > 1) {
+      return 'Multiple';
+    } else {
+      return null;
+    }
+  }
+
+  getStudyConditionMeshTerms(
+    study: StudyInterface,
+  ): MeshTermInterface[] | string | null {
+    const meshTerms: MeshTermInterface[] = [];
+
+    for (const studyMeshTerm of study.studyMeshTerms) {
+      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      if (meshTermType === MeshTermType.CONDITION) {
+        meshTerms.push(studyMeshTerm.meshTerm);
+      }
+    }
+
+    if (meshTerms.length === 1) {
+      return meshTerms[0].term;
+    } else if (meshTerms.length > 1) {
+      return 'Multiple';
+    } else {
+      return null;
+    }
+  }
+
+  getStudyLocation(
+    study: StudyInterface,
+  ): string | null {
+    if (study.locations.length === 1) {
+      const facility: FacilityInterface = study.locations[0].facility;
+      const components: string[] = [
+        facility.city,
+        facility.state,
+        facility.country,
+      ];
+      return components.join(', ');
+    } else if (study.locations.length > 1) {
       return 'Multiple';
     } else {
       return null;
