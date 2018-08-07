@@ -36,7 +36,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'briefTitle',
     'overallStatus',
+    'conditions',
     'interventions',
+    'locations',
   ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
