@@ -8,9 +8,11 @@ import { merge, tap } from 'rxjs/operators';
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
 import {
-  Intervention,
-  InterventionType,
+  FacilityInterface,
+  MeshTermInterface,
+  MeshTermType,
   OrderType,
+  StudyInterface,
   StudyOverallStatus
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
@@ -34,7 +36,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'briefTitle',
     'overallStatus',
+    'conditions',
     'interventions',
+    'locations',
   ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
@@ -76,7 +80,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       0,
     );
 
-    this.isLoadingStudiesCount = this.studyRetrieverService.isLoadingCountStudies;
+    this.isLoadingStudiesCount =
+      this.studyRetrieverService.isLoadingCountStudies;
     this.studyRetrieverService.countStudies(
       this.search.studies,
       null,
@@ -140,35 +145,81 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     // Split the string on `.` and keep the second part of the string with the
     // enum member name.
     const status_value = status.split('.')[1];
-    
+
+    // Get corresponding `StudyOverallStatus` member.
     return StudyOverallStatus[status_value];
   }
 
   /**
-   * Processes an array of interventions and either returns an intervention if
-   * there is only one, a string of value `Multiple` if there are multiple, or
-   * `null` if there are none..
-   * @param {Intervention[]} interventions The array of interventions to
-   * process.
-   * @returns {(Intervention|string)} The result.
+   * Casts a fully-qualified mesh-term-type enum string coming from GraphQL,
+   * e.g. `MeshTermType.CONDITION` to the enum value as defined under the
+   * the `MeshTermType` enum.
+   * @param {string} type The fully-qualified mesh-term-type enum string.
+   * @returns {string} The corresponding `MeshTermType` value.
    */
-  rollupInterventions(interventions: Intervention[]): Intervention | string {
+  castMeshTermType(type: string): MeshTermType {
+    // Split the string on `.` and keep the second part of the string with the
+    // enum member name.
+    const type_value = type.split('.')[1];
 
-    // Return the intervention in a `type: name` format if there is only one,
-    // return a string of value `Multiple` if there are multiple, and null if
-    // the array is empty.
-    if (interventions.length === 1) {
-      // Retrieve the only intervention.
-      const intervention = interventions[0];
-      // Get the intervention type enum member out of the string.
-      const interventionTypeMember =
-        intervention.interventionType.split('.')[1];
-      // Retrieve the intervention type enum value out of the string.
-      const interventionTypeValue = InterventionType[interventionTypeMember];
+    // Get corresponding `MeshTermType` member.
+    return MeshTermType[type_value];
+  }
 
-      // Create a `type: name` representation of the intervention.
-      return interventionTypeValue + ': ' + intervention.name;
-    } else if (interventions.length > 1) {
+  getStudyInterventionMeshTerms(
+    study: StudyInterface,
+  ): MeshTermInterface[] | string | null {
+    const meshTerms: MeshTermInterface[] = [];
+
+    for (const studyMeshTerm of study.studyMeshTerms) {
+      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      if (meshTermType === MeshTermType.INTERVENTION) {
+        meshTerms.push(studyMeshTerm.meshTerm);
+      }
+    }
+
+    if (meshTerms.length === 1) {
+      return meshTerms[0].term;
+    } else if (meshTerms.length > 1) {
+      return 'Multiple';
+    } else {
+      return null;
+    }
+  }
+
+  getStudyConditionMeshTerms(
+    study: StudyInterface,
+  ): MeshTermInterface[] | string | null {
+    const meshTerms: MeshTermInterface[] = [];
+
+    for (const studyMeshTerm of study.studyMeshTerms) {
+      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      if (meshTermType === MeshTermType.CONDITION) {
+        meshTerms.push(studyMeshTerm.meshTerm);
+      }
+    }
+
+    if (meshTerms.length === 1) {
+      return meshTerms[0].term;
+    } else if (meshTerms.length > 1) {
+      return 'Multiple';
+    } else {
+      return null;
+    }
+  }
+
+  getStudyLocation(
+    study: StudyInterface,
+  ): string | null {
+    if (study.locations.length === 1) {
+      const facility: FacilityInterface = study.locations[0].facility;
+      const components: string[] = [
+        facility.city,
+        facility.state,
+        facility.country,
+      ];
+      return components.join(', ');
+    } else if (study.locations.length > 1) {
       return 'Multiple';
     } else {
       return null;

@@ -77,13 +77,33 @@
                 </mat-cell>
               </ng-container>
 
+              <!-- Conditions column -->
+              <ng-container matColumnDef="conditions">
+                <mat-header-cell
+                  *matHeaderCellDef
+                >Conditions</mat-header-cell>
+                <mat-cell *matCellDef="let study">
+                  {{ getStudyConditionMeshTerms(study) }}
+                </mat-cell>
+              </ng-container>
+
               <!-- Interventions column -->
               <ng-container matColumnDef="interventions">
                 <mat-header-cell
                   *matHeaderCellDef
                 >Interventions</mat-header-cell>
                 <mat-cell *matCellDef="let study">
-                  {{rollupInterventions(study.interventions)}}
+                  {{ getStudyInterventionMeshTerms(study) }}
+                </mat-cell>
+              </ng-container>
+
+              <!-- Locations column -->
+              <ng-container matColumnDef="locations">
+                <mat-header-cell
+                  *matHeaderCellDef
+                >Locations</mat-header-cell>
+                <mat-cell *matCellDef="let study">
+                  {{ getStudyLocation(study) }}
                 </mat-cell>
               </ng-container>
 
