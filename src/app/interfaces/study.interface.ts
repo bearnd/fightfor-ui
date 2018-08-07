@@ -60,6 +60,14 @@ export interface Intervention {
   description?: string
 }
 
+export interface FacilityInterface {
+  facilityId?: number
+  name?: string
+  city?: string
+  state?: string
+  zipCode?: string
+  country?: string
+}
 export interface StudyInterface {
   studyId: number
   orgStudyId?: string

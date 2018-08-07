@@ -1,6 +1,6 @@
 import { MeshDescriptorInterface } from './mesh-descriptor.interface';
-import { StudyInterface } from './study.interface';
-import { FacilityInterface } from './facility.interface';
+import { FacilityInterface, StudyInterface } from './study.interface';
+
 
 
 export interface CountByCountryInterface {
