@@ -147,30 +147,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Processes an array of interventions and either returns an intervention if
-   * there is only one, a string of value `Multiple` if there are multiple, or
-   * `null` if there are none..
-   * @param {Intervention[]} interventions The array of interventions to
-   * process.
-   * @returns {(Intervention|string)} The result.
    */
-  rollupInterventions(interventions: Intervention[]): Intervention | string {
-
-    // Return the intervention in a `type: name` format if there is only one,
-    // return a string of value `Multiple` if there are multiple, and null if
-    // the array is empty.
-    if (interventions.length === 1) {
-      // Retrieve the only intervention.
-      const intervention = interventions[0];
-      // Get the intervention type enum member out of the string.
-      const interventionTypeMember =
-        intervention.interventionType.split('.')[1];
-      // Retrieve the intervention type enum value out of the string.
-      const interventionTypeValue = InterventionType[interventionTypeMember];
-
-      // Create a `type: name` representation of the intervention.
-      return interventionTypeValue + ': ' + intervention.name;
-    } else if (interventions.length > 1) {
       return 'Multiple';
     } else {
       return null;
