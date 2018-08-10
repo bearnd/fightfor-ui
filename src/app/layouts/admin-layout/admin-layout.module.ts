@@ -14,11 +14,13 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSortModule,
+  MatSelectModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
 import { ScrollTrackerModule } from '@nicky-lenaers/ngx-scroll-tracker';
 import { TruncateModule } from 'ng2-truncate';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -47,9 +49,11 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     MatSortModule,
     MatTableModule,
     MatAutocompleteModule,
+    MatSelectModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
     TruncateModule,
+    NgxMatSelectSearchModule,
   ],
   declarations: [
     DashboardComponent,
