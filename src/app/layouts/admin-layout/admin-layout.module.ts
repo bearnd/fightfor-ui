@@ -10,7 +10,10 @@ import {
   MatChipsModule,
   MatIconModule,
   MatAutocompleteModule,
-  MatTableModule, MatPaginatorModule, MatProgressSpinnerModule, MatSortModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatProgressSpinnerModule,
+  MatSortModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';

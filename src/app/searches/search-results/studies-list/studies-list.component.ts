@@ -129,8 +129,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    console.log(this.recruitmentStatuses);
-
     // set initial selection
     this.selectRecruitmentStatusFilterCtrl
       .setValue(null);
