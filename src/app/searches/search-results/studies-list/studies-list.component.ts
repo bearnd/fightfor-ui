@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTable } from '@angular/material';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSelect, MatSort, MatTable } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
-import { merge, tap } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
+import { merge, take, takeUntil, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
@@ -11,7 +14,7 @@ import {
   FacilityInterface,
   MeshTermInterface,
   MeshTermType,
-  OrderType,
+  OrderType, RecruitmentStatusType,
   StudyInterface,
   StudyOverallStatus
 } from '../../../interfaces/study.interface';
@@ -19,6 +22,13 @@ import { StudiesDataSource } from './studies.datasource';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
+import { castEnumToArray } from '../../../shared/utils';
+
+
+interface EnumInterface {
+  id: string;
+  name: string;
+}
 
 
 @Component({
@@ -26,11 +36,26 @@ import {
   templateUrl: './studies-list.component.html',
   styleUrls: ['./studies-list.component.scss']
 })
-export class StudiesListComponent implements OnInit, AfterViewInit {
+export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('multiSelect') multiSelect: MatSelect;
+
+  // Form-controllers for the recruitment-status multi-select and filter.
+  public selectRecruitmentStatusCtrl: FormControl = new FormControl();
+  public selectRecruitmentStatusFilterCtrl: FormControl = new FormControl();
+
+  /** list of banks */
+  private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
+
+  /** list of banks filtered by search keyword for multi-selection */
+  public filteredRecruitmentStatusMulti: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+
+   /** Subject that emits when the component has been destroyed. */
+  private _onDestroy = new Subject<void>();
 
   // Studies columns to display.
   displayedColumns: string[] = [
@@ -97,7 +122,22 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       (studiesCount: number) => {
         this.studiesCount = studiesCount;
       }
-    )
+    );
+
+    console.log(this.recruitmentStatuses);
+
+    // set initial selection
+    this.selectRecruitmentStatusFilterCtrl
+      .setValue(null);
+
+    // load the initial bank list
+    this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
+
+    this.selectRecruitmentStatusFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterBanksMulti();
+      });
   }
 
   ngAfterViewInit() {
@@ -112,6 +152,53 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       ).pipe(
       tap(() => this.getStudiesPage())
     ).subscribe();
+
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+  /**
+   * Sets the initial value after the filteredBanks are loaded initially
+   */
+  private setInitialValue() {
+    this.filteredRecruitmentStatusMulti
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        // this.multiSelect.compareWith = (a, b) => a.id === b.id;
+        this.multiSelect.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+  }
+
+  private filterBanksMulti() {
+    if (!this.recruitmentStatuses) {
+      return;
+    }
+    // get the search keyword
+    let search = this.selectRecruitmentStatusFilterCtrl.value;
+    if (!search) {
+      this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the banks
+    this.filteredRecruitmentStatusMulti.next(
+      this.recruitmentStatuses.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+    );
   }
 
   getStudiesPage() {
