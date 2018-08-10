@@ -23,6 +23,41 @@
 
             <div class="col-md-12">
 
+              <h5>Filters</h5>
+              <div class="row">
+
+                <form [formGroup]="formFilters" (ngSubmit)="onSubmitFilters()">
+                  <div class="form-group">
+
+                    <div class="col-md-3">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectRecruitmentStatus"
+                          formControlName="selectRecruitmentStatus"
+                          placeholder="Recruitment Status"
+                          [multiple]="true"
+                          #selectRecruitmentStatus
+                        >
+                          <ngx-mat-select-search
+                            formControlName="filterRecruitmentStatus"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such recruitment-status found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let status of filteredRecruitmentStatusMulti | async"
+                            [value]="status"
+                          >
+                            {{ status.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+
               <h5>Studies</h5>
               <div class="row">
 
