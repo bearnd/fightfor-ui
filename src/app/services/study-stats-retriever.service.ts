@@ -41,6 +41,36 @@ interface ResponseGetCountStudiesByFacility {
   }
 }
 
+interface VariablesGetUniqueCities {
+  studyIds: number[]
+}
+
+interface ResponseGetUniqueCities {
+  studiesStats: {
+    getUniqueCities: string[]
+  }
+}
+
+interface VariablesGetUniqueStates {
+  studyIds: number[]
+}
+
+interface ResponseGetUniqueStates {
+  studiesStats: {
+    getUniqueStates: string[]
+  }
+}
+
+interface VariablesGetUniqueCountries {
+  studyIds: number[]
+}
+
+interface ResponseGetUniqueCountries {
+  studiesStats: {
+    getUniqueCountries: string[]
+  }
+}
+
 @Injectable()
 export class StudyStatsRetrieverService {
 
@@ -98,6 +128,42 @@ export class StudyStatsRetrieverService {
           }
           countStudies
         }
+      }
+    }
+  `;
+
+  queryGetUniqueCities = gql`
+    query getUniqueCities(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getUniqueCities(
+          studyIds: $studyIds,
+        )
+      }
+    }
+  `;
+
+  queryGetUniqueStates = gql`
+    query getUniqueStates(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getUniqueStates(
+          studyIds: $studyIds,
+        )
+      }
+    }
+  `;
+
+  queryGetUniqueCountries = gql`
+    query getUniqueCountries(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getUniqueCountries(
+          studyIds: $studyIds,
+        )
       }
     }
   `;
@@ -205,6 +271,90 @@ export class StudyStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.studiesStats.countStudiesByFacility;
+      });
+  }
+
+  /**
+   * Retrieve the unique cities for given studies.
+   * @param {StudyInterface[]} studies The studies for which the unique cities
+   * will be retrieved.
+   * @returns {Observable<string[]>} The unique cities.
+   */
+  getUniqueCities(
+    studies: StudyInterface[],
+  ): Observable<string[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetUniqueCities,
+        VariablesGetUniqueCities>
+      ({
+        query: this.queryGetUniqueCities,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueCities;
+      });
+  }
+
+  /**
+   * Retrieve the unique states for given studies.
+   * @param {StudyInterface[]} studies The studies for which the unique states
+   * will be retrieved.
+   * @returns {Observable<string[]>} The unique states.
+   */
+  getUniqueStates(
+    studies: StudyInterface[],
+  ): Observable<string[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetUniqueStates,
+        VariablesGetUniqueStates>
+      ({
+        query: this.queryGetUniqueStates,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueStates;
+      });
+  }
+
+  /**
+   * Retrieve the unique countries for given studies.
+   * @param {StudyInterface[]} studies The studies for which the unique
+   * countries will be retrieved.
+   * @returns {Observable<string[]>} The unique countries.
+   */
+  getUniqueCountries(
+    studies: StudyInterface[],
+  ): Observable<string[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetUniqueCountries,
+        VariablesGetUniqueCountries>
+      ({
+        query: this.queryGetUniqueCountries,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueCountries;
       });
   }
 
