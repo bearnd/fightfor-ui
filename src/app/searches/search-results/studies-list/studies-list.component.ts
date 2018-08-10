@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { MatPaginator, MatSelect, MatSort, MatTable } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -23,6 +23,7 @@ import {
   OrderType,
   RecruitmentStatusType,
   StudyInterface,
+  StudyOverallStatus,
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import {
@@ -51,11 +52,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('multiSelect') multiSelect: MatSelect;
+  @ViewChild('selectRecruitmentStatus') selectRecruitmentStatus: MatSelect;
 
-  // Form-controllers for the recruitment-status multi-select and filter.
-  public selectRecruitmentStatusCtrl: FormControl = new FormControl();
-  public selectRecruitmentStatusFilterCtrl: FormControl = new FormControl();
+  // `FormGroup` to encompass the filter form controls.
+  formFilters: FormGroup;
 
   /** list of banks */
   private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
@@ -140,17 +140,23 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    // set initial selection
-    this.selectRecruitmentStatusFilterCtrl
-      .setValue(null);
+    // Initialize the filter-form controls.
+    this.formFilters = new FormGroup({
+      // Multi-select for recruitment-status.
+      selectRecruitmentStatus: new FormControl(this.recruitmentStatuses),
+      // Filter for recruitment-status.
+      filterRecruitmentStatus: new FormControl(null),
+    });
 
     // load the initial bank list
     this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
 
-    this.selectRecruitmentStatusFilterCtrl.valueChanges
+    this.formFilters
+      .get('filterRecruitmentStatus')
+      .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterBanksMulti();
+        this.filterRecruitmentStatuses();
       });
   }
 
@@ -187,8 +193,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        // this.multiSelect.compareWith = (a, b) => a.id === b.id;
-        this.multiSelect.compareWith = (a, b) => {
+        // this.selectRecruitmentStatus.compareWith = (a, b) => a.id === b.id;
+        this.selectRecruitmentStatus.compareWith = (a, b) => {
           if (a && b) {
             return a.id === b.id;
           }
@@ -197,21 +203,28 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  private filterBanksMulti() {
+  private filterRecruitmentStatuses() {
     if (!this.recruitmentStatuses) {
       return;
     }
-    // get the search keyword
-    let search = this.selectRecruitmentStatusFilterCtrl.value;
-    if (!search) {
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterRecruitmentStatus').value;
+
+    // If no query was provided emit all possible recruitment-status values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
       this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
       return;
     } else {
-      search = search.toLowerCase();
+      query = query.toLowerCase();
     }
-    // filter the banks
+
+    // Filter the possible recruitment-status values based on the search query
+    // and emit the results.
     this.filteredRecruitmentStatusMulti.next(
-      this.recruitmentStatuses.filter(bank => bank.name.toLowerCase().indexOf(search) > -1)
+      this.recruitmentStatuses.filter(
+        status => status.name.toLowerCase().indexOf(query) > -1
+      )
     );
   }
 
