@@ -66,8 +66,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
-
+  // Page-size options used in the studies-table paginator.
+  studiesPageSizeOptions = [10, 25, 50];
+  // Total number of studies used in the studies-table paginator.
   studiesCount: number;
+  // An observable indicating whether the total number of studies populating
+  // `studiesCount` which is used in the paginator is being loaded.
   isLoadingStudiesCount: Observable<boolean>;
 
   // The search the component will display results for.

@@ -21,99 +21,116 @@
           <!--Card body.-->
           <div class="card-body">
 
-            <!--TODO: Add table-->
+            <div class="col-md-12">
 
-            <mat-table
-              #table
-              [dataSource]="dataSourceStudies"
-              matSort
-              matSortActive="nctId"
-              matSortDirection="asc"
-              matSortDisableClear
-            >
+              <h5>Studies</h5>
+              <div class="row">
 
-              <!--Header.-->
-              <mat-header-row
-                *matHeaderRowDef="displayedColumns"
-              ></mat-header-row>
-              <mat-row
-                *matRowDef="let row; columns: displayedColumns;"
-              ></mat-row>
+                <div class="col-md-12">
 
-              <!-- NCT ID column -->
-              <ng-container matColumnDef="nctId">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  NCT ID
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">{{study.nctId}}</mat-cell>
-              </ng-container>
+                  <mat-table
+                    #table
+                    [dataSource]="dataSourceStudies"
+                    matSort
+                    matSortActive="nctId"
+                    matSortDirection="asc"
+                    matSortDisableClear
+                  >
 
-              <!-- Overall status column -->
-              <ng-container matColumnDef="overallStatus">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  Status
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{castOverallStatus(study.overallStatus)}}
-                </mat-cell>
-              </ng-container>
+                    <!--Header.-->
+                    <mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                      *matRowDef="let row; columns: displayedColumns;"
+                    ></mat-row>
 
-              <!-- Brief title column -->
-              <ng-container matColumnDef="briefTitle">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  Title
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{study.briefTitle | truncate:77}}
-                </mat-cell>
-              </ng-container>
+                    <!-- NCT ID column -->
+                    <ng-container matColumnDef="nctId">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        NCT ID
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let study"
+                      >
+                        {{study.nctId}}
+                      </mat-cell>
+                    </ng-container>
 
-              <!-- Conditions column -->
-              <ng-container matColumnDef="conditions">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Conditions</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyConditionMeshTerms(study) }}
-                </mat-cell>
-              </ng-container>
+                    <!-- Overall status column -->
+                    <ng-container matColumnDef="overallStatus">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Status
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{castOverallStatus(study.overallStatus)}}
+                      </mat-cell>
+                    </ng-container>
 
-              <!-- Interventions column -->
-              <ng-container matColumnDef="interventions">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Interventions</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyInterventionMeshTerms(study) }}
-                </mat-cell>
-              </ng-container>
+                    <!-- Brief title column -->
+                    <ng-container matColumnDef="briefTitle">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Title
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{study.briefTitle | truncate:77}}
+                      </mat-cell>
+                    </ng-container>
 
-              <!-- Locations column -->
-              <ng-container matColumnDef="locations">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Locations</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyLocation(study) }}
-                </mat-cell>
-              </ng-container>
+                    <!-- Conditions column -->
+                    <ng-container matColumnDef="conditions">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Conditions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyConditionMeshTerms(study) }}
+                      </mat-cell>
+                    </ng-container>
 
-            </mat-table>
+                    <!-- Interventions column -->
+                    <ng-container matColumnDef="interventions">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Interventions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyInterventionMeshTerms(study) }}
+                      </mat-cell>
+                    </ng-container>
 
-            <mat-paginator
-              [length]="studiesCount"
-              [pageSize]="10"
-              [pageSizeOptions]="[10, 25, 50]"
-            ></mat-paginator>
+                    <!-- Locations column -->
+                    <ng-container matColumnDef="locations">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Locations
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyLocation(study) }}
+                      </mat-cell>
+                    </ng-container>
+
+                  </mat-table>
+
+                  <mat-paginator
+                    [length]="studiesCount"
+                    [pageSize]="10"
+                    [pageSizeOptions]="studiesPageSizeOptions"
+                  ></mat-paginator>
+
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </div>
