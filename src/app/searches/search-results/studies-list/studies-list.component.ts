@@ -91,6 +91,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.search = this.searchesService.getSearch(searchUuid);
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
+
+    // Load the initial set of studies.
     this.dataSourceStudies.filterStudies(
       this.search.studies,
       null,
@@ -104,7 +106,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       null,
       null,
       null,
-      10,
+      this.studiesPageSizeOptions[0],
       0,
     );
 
