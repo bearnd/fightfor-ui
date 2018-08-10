@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MatPaginator, MatSelect, MatSort, MatTable } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
@@ -14,14 +20,19 @@ import {
   FacilityInterface,
   MeshTermInterface,
   MeshTermType,
-  OrderType, RecruitmentStatusType,
+  OrderType,
+  RecruitmentStatusType,
   StudyInterface,
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
-import { castEnumToArray, castMeshTermType } from '../../../shared/utils';
+import {
+  castEnumToArray,
+  castMeshTermType,
+  castOverallStatus
+} from '../../../shared/utils';
 
 
 interface EnumInterface {
@@ -284,4 +295,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  castOverallStatus(status: string): StudyOverallStatus {
+    return castOverallStatus(status);
+  }
+
 }
+
