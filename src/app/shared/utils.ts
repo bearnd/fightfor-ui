@@ -35,3 +35,26 @@ export function castMeshTermType(type: string): MeshTermType {
   // Get corresponding `MeshTermType` member.
   return MeshTermType[type_value];
 }
+
+/**
+ * Casts an enumeration into an array of objects with and `id` property holding
+ * the enumeration member and a `name` property holding the enumeration value.
+ * @param enumeration The enumeration to cast.
+ * @returns {{id: string, name: string}[]} The enumeration casted to an array
+ * of objects.
+ */
+export function castEnumToArray(enumeration) {
+  // Initialize an empty array to be populated with the casted enumeration.
+  const arr: { id: string, name: string }[] = [];
+
+  // Iterate over the enumeration keys, i.e., member-names, setting them as
+  // the values of the `id` property while setting the enumeration values as
+  // the values of the `name` property.
+  for (const n of Object.keys(enumeration)) {
+    if (typeof enumeration[n] === 'string') {
+      arr.push({id: n, name: <any>enumeration[n]});
+    }
+  }
+
+  return arr
+}

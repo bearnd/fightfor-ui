@@ -21,7 +21,7 @@ import { StudiesDataSource } from './studies.datasource';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
-import { castMeshTermType } from '../../../shared/utils';
+import { castEnumToArray, castMeshTermType } from '../../../shared/utils';
 
 
 interface EnumInterface {
