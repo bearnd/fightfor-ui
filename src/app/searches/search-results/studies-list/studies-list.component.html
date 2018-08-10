@@ -29,30 +29,85 @@
                 <form [formGroup]="formFilters" (ngSubmit)="onSubmitFilters()">
                   <div class="form-group">
 
-                    <div class="col-md-3">
-                      <mat-form-field>
-                        <mat-select
-                          id="selectRecruitmentStatus"
-                          formControlName="selectRecruitmentStatus"
-                          placeholder="Recruitment Status"
-                          [multiple]="true"
-                          #selectRecruitmentStatus
-                        >
-                          <ngx-mat-select-search
-                            formControlName="filterRecruitmentStatus"
-                            placeholderLabel="Search"
-                            noEntriesFoundLabel="No such recruitment-status found"
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectRecruitmentStatus"
+                            formControlName="selectRecruitmentStatus"
+                            placeholder="Recruitment Status"
+                            [multiple]="true"
+                            #selectRecruitmentStatus
                           >
-                          </ngx-mat-select-search>
-                          <mat-option
-                            *ngFor="let status of filteredRecruitmentStatusMulti | async"
-                            [value]="status"
+                            <ngx-mat-select-search
+                              formControlName="filterRecruitmentStatus"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such recruitment-status found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let status of recruitmentStatusesFiltered | async"
+                              [value]="status"
+                            >
+                              {{ status.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectPhase"
+                            formControlName="selectPhase"
+                            placeholder="Trial Phase"
+                            [multiple]="true"
+                            #selectPhase
                           >
-                            {{ status.name }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
+                            <ngx-mat-select-search
+                              formControlName="filterPhase"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such phase found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let phase of phasesFiltered | async"
+                              [value]="phase"
+                            >
+                              {{ phase.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyType"
+                            formControlName="selectStudyType"
+                            placeholder="Study Type"
+                            [multiple]="true"
+                            #selectStudyType
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyType"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such study-type found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let studyType of studyTypesFiltered | async"
+                              [value]="studyType"
+                            >
+                              {{ studyType.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
                     </div>
+
+
                   </div>
                 </form>
 

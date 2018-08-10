@@ -24,6 +24,8 @@ import {
   RecruitmentStatusType,
   StudyInterface,
   StudyOverallStatus,
+  StudyPhase,
+  StudyType,
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import {
@@ -53,18 +55,30 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('selectRecruitmentStatus') selectRecruitmentStatus: MatSelect;
+  @ViewChild('selectPhase') selectPhase: MatSelect;
+  @ViewChild('selectStudyType') selectStudyType: MatSelect;
 
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
 
-  /** list of banks */
+  // Possible recruitment-status values.
   private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
+  // Possible phase values.
+  private phases = castEnumToArray(StudyPhase);
+  // Possible phase values.
+  private studyTypes = castEnumToArray(StudyType);
 
-  /** list of banks filtered by search keyword for multi-selection */
-  public filteredRecruitmentStatusMulti: ReplaySubject<EnumInterface[]> =
+  // Replay-subjects storing the latest filtered recruitment-statuses.
+  public recruitmentStatusesFiltered: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+  // Replay-subjects storing the latest filtered phases.
+  public phasesFiltered: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+  // Replay-subjects storing the latest filtered study-types.
+  public studyTypesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
 
-   /** Subject that emits when the component has been destroyed. */
+  // Subject that emits when the component has been destroyed.
   private _onDestroy = new Subject<void>();
 
   // Studies columns to display.
@@ -143,13 +157,25 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
       // Multi-select for recruitment-status.
-      selectRecruitmentStatus: new FormControl(this.recruitmentStatuses),
+      selectRecruitmentStatus: new FormControl(null),
       // Filter for recruitment-status.
       filterRecruitmentStatus: new FormControl(null),
+      // Multi-select for phase.
+      selectPhase: new FormControl(null),
+      // Filter for phase.
+      filterPhase: new FormControl(null),
+      // Multi-select for study-type.
+      selectStudyType: new FormControl(null),
+      // Filter for study-type.
+      filterStudyType: new FormControl(null),
     });
 
-    // load the initial bank list
-    this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
+    // Load the initial list of recruitment-statuses.
+    this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
+    // Load the initial list of phases.
+    this.phasesFiltered.next(this.phases.slice());
+    // Load the initial list of study-types.
+    this.studyTypesFiltered.next(this.studyTypes.slice());
 
     this.formFilters
       .get('filterRecruitmentStatus')
@@ -157,6 +183,22 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterRecruitmentStatuses();
+      });
+
+    this.formFilters
+      .get('filterPhase')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterPhases();
+      });
+
+    this.formFilters
+      .get('filterStudyType')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyTypes();
       });
   }
 
@@ -185,7 +227,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Sets the initial value after the filteredBanks are loaded initially
    */
   private setInitialValue() {
-    this.filteredRecruitmentStatusMulti
+    this.recruitmentStatusesFiltered
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
         // setting the compareWith property to a comparison function
@@ -195,6 +237,28 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         // and after the mat-option elements are available
         // this.selectRecruitmentStatus.compareWith = (a, b) => a.id === b.id;
         this.selectRecruitmentStatus.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.phasesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectPhase.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyTypesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyType.compareWith = (a, b) => {
           if (a && b) {
             return a.id === b.id;
           }
@@ -213,7 +277,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // If no query was provided emit all possible recruitment-status values.
     // Otherwise lowercase the query in preparation for filtering.
     if (!query) {
-      this.filteredRecruitmentStatusMulti.next(this.recruitmentStatuses.slice());
+      this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
       return;
     } else {
       query = query.toLowerCase();
@@ -221,8 +285,58 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Filter the possible recruitment-status values based on the search query
     // and emit the results.
-    this.filteredRecruitmentStatusMulti.next(
+    this.recruitmentStatusesFiltered.next(
       this.recruitmentStatuses.filter(
+        status => status.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterPhases() {
+    if (!this.phases) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterPhase').value;
+
+    // If no query was provided emit all possible phase values. Otherwise
+    // lowercase the query in preparation for filtering.
+    if (!query) {
+      this.phasesFiltered.next(this.phases.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible recruitment-status values based on the search query
+    // and emit the results.
+    this.phasesFiltered.next(
+      this.phases.filter(
+        status => status.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterStudyTypes() {
+    if (!this.studyTypes) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyType').value;
+
+    // If no query was provided emit all possible study-type values. Otherwise
+    // lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyTypesFiltered.next(this.studyTypes.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-types values based on the search query and emit
+    // the results.
+    this.studyTypesFiltered.next(
+      this.studyTypes.filter(
         status => status.name.toLowerCase().indexOf(query) > -1
       )
     );
