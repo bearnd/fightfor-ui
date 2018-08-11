@@ -30,6 +30,7 @@
                   <div class="form-group">
 
                     <div class="row">
+
                       <div class="col-md-4">
                         <mat-form-field>
                           <mat-select
@@ -100,6 +101,85 @@
                               [value]="studyType"
                             >
                               {{ studyType.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyCountry"
+                            formControlName="selectStudyCountry"
+                            placeholder="Country"
+                            [multiple]="true"
+                            #selectStudyCountry
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyCountry"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let country of studyCountriesFiltered | async"
+                              [value]="country"
+                            >
+                              {{ country.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyState"
+                            formControlName="selectStudyState"
+                            placeholder="State/Region"
+                            [multiple]="true"
+                            #selectStudyState
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyState"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let state of studyStatesFiltered | async"
+                              [value]="state"
+                            >
+                              {{ state.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyCity"
+                            formControlName="selectStudyCity"
+                            placeholder="City"
+                            [multiple]="true"
+                            #selectStudyCity
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyCity"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let city of studyCitiesFiltered | async"
+                              [value]="city"
+                            >
+                              {{ city.name }}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
