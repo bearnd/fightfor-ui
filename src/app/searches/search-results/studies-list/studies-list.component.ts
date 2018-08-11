@@ -1,9 +1,18 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTable } from '@angular/material';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import { MatPaginator, MatSelect, MatSort, MatTable } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
-import { merge, tap } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subject } from 'rxjs/Subject';
+import { merge, take, takeUntil, tap } from 'rxjs/operators';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
@@ -12,13 +21,34 @@ import {
   MeshTermInterface,
   MeshTermType,
   OrderType,
+  RecruitmentStatusType,
   StudyInterface,
-  StudyOverallStatus
+  StudyOverallStatus,
+  StudyPhase,
+  StudyType,
 } from '../../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
+import {
+  castEnumToArray,
+  castMeshTermType,
+  castOverallStatus,
+  orderStringArray,
+} from '../../../shared/utils';
+import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
+
+
+interface EnumInterface {
+  id: string;
+  name: string;
+}
+
+interface StudyLocationInterface {
+  id: number
+  name: string
+}
 
 
 @Component({
@@ -26,11 +56,55 @@ import {
   templateUrl: './studies-list.component.html',
   styleUrls: ['./studies-list.component.scss']
 })
-export class StudiesListComponent implements OnInit, AfterViewInit {
+export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('selectRecruitmentStatus') selectRecruitmentStatus: MatSelect;
+  @ViewChild('selectPhase') selectPhase: MatSelect;
+  @ViewChild('selectStudyType') selectStudyType: MatSelect;
+  @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
+  @ViewChild('selectStudyState') selectStudyState: MatSelect;
+  @ViewChild('selectStudyCity') selectStudyCity: MatSelect;
+
+  // `FormGroup` to encompass the filter form controls.
+  formFilters: FormGroup;
+
+  // Possible recruitment-status values.
+  private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
+  // Possible study-phase values.
+  private phases = castEnumToArray(StudyPhase);
+  // Possible study-type values.
+  private studyTypes = castEnumToArray(StudyType);
+  // Possible country values (to be populated in `ngOnInit`).
+  private studyCountries: StudyLocationInterface[] = [];
+  // Possible state values (to be populated in `ngOnInit`).
+  private studyStates: StudyLocationInterface[] = [];
+  // Possible city values (to be populated in `ngOnInit`).
+  private studyCities: StudyLocationInterface[] = [];
+
+  // Replay-subject storing the latest filtered recruitment-statuses.
+  public recruitmentStatusesFiltered: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+  // Replay-subject storing the latest filtered study-phases.
+  public phasesFiltered: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+  // Replay-subject storing the latest filtered study-types.
+  public studyTypesFiltered: ReplaySubject<EnumInterface[]> =
+    new ReplaySubject<EnumInterface[]>(1);
+  // Replay-subject storing the latest filtered study-countries.
+  public studyCountriesFiltered: ReplaySubject<StudyLocationInterface[]> =
+    new ReplaySubject<StudyLocationInterface[]>(1);
+  // Replay-subject storing the latest filtered study-states.
+  public studyStatesFiltered: ReplaySubject<StudyLocationInterface[]> =
+    new ReplaySubject<StudyLocationInterface[]>(1);
+  // Replay-subject storing the latest filtered study-cities.
+  public studyCitiesFiltered: ReplaySubject<StudyLocationInterface[]> =
+    new ReplaySubject<StudyLocationInterface[]>(1);
+
+  // Subject that emits when the component has been destroyed.
+  private _onDestroy = new Subject<void>();
 
   // Studies columns to display.
   displayedColumns: string[] = [
@@ -42,8 +116,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   ];
   // Studies table data-source.
   dataSourceStudies: StudiesDataSource;
-
+  // Page-size options used in the studies-table paginator.
+  studiesPageSizeOptions = [10, 25, 50];
+  // Total number of studies used in the studies-table paginator.
   studiesCount: number;
+  // An observable indicating whether the total number of studies populating
+  // `studiesCount` which is used in the paginator is being loaded.
   isLoadingStudiesCount: Observable<boolean>;
 
   // The search the component will display results for.
@@ -52,6 +130,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
   constructor(
     private searchesService: SearchesService,
     private studyRetrieverService: StudyRetrieverService,
+    private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
   ) {
   }
@@ -63,6 +142,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     this.search = this.searchesService.getSearch(searchUuid);
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
+
+    // Load the initial set of studies.
     this.dataSourceStudies.filterStudies(
       this.search.studies,
       null,
@@ -76,7 +157,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       null,
       null,
       null,
-      10,
+      this.studiesPageSizeOptions[0],
       0,
     );
 
@@ -97,7 +178,174 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       (studiesCount: number) => {
         this.studiesCount = studiesCount;
       }
-    )
+    );
+
+    // Initialize the filter-form controls.
+    this.formFilters = new FormGroup({
+      // Multi-select for recruitment-status.
+      selectRecruitmentStatus: new FormControl(null),
+      // Filter for recruitment-status.
+      filterRecruitmentStatus: new FormControl(null),
+      // Multi-select for phase.
+      selectPhase: new FormControl(null),
+      // Filter for phase.
+      filterPhase: new FormControl(null),
+      // Multi-select for study-type.
+      selectStudyType: new FormControl(null),
+      // Filter for study-type.
+      filterStudyType: new FormControl(null),
+      // Multi-select for study-country.
+      selectStudyCountry: new FormControl(null),
+      // Filter for study-country.
+      filterStudyCountry: new FormControl(null),
+      // Multi-select for study-state.
+      selectStudyState: new FormControl(null),
+      // Filter for study-state.
+      filterStudyState: new FormControl(null),
+      // Multi-select for study-city.
+      selectStudyCity: new FormControl(null),
+      // Filter for study-city.
+      filterStudyCity: new FormControl(null),
+    });
+
+    // Load the initial list of recruitment-statuses.
+    this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
+    // Load the initial list of phases.
+    this.phasesFiltered.next(this.phases.slice());
+    // Load the initial list of study-types.
+    this.studyTypesFiltered.next(this.studyTypes.slice());
+
+    this.studyStatsRetrieverService.getUniqueCountries(
+      this.search.studies,
+    ).map(
+      // Sort returned countries alphabetically.
+      (uniqueCountries: string[]) => {
+        return orderStringArray(uniqueCountries);
+      }
+    ).map(
+      // Cast returned countries to an array of objects with `id` and `name`
+      // properties that can be used in a multi-select component.
+      (uniqueCountries: string[]) => {
+        let counter = 1;
+        const uniqueCountriesMap: {id: number, name: string}[] = [];
+        for (const country of uniqueCountries) {
+          if (!country) {
+            continue;
+          }
+          uniqueCountriesMap.push({id: counter, name: country});
+          counter++;
+        }
+        return uniqueCountriesMap;
+      }
+    ).subscribe(
+      (uniqueCountriesMap: {id: number, name: string}[]) => {
+        this.studyCountries = uniqueCountriesMap;
+        this.studyCountriesFiltered.next(uniqueCountriesMap);
+      }
+    );
+
+    this.studyStatsRetrieverService.getUniqueStates(
+      this.search.studies,
+    ).map(
+      // Sort returned states alphabetically.
+      (uniqueStates: string[]) => {
+        return orderStringArray(uniqueStates);
+      }
+    ).map(
+      // Cast returned states to an array of objects with `id` and `name`
+      // properties that can be used in a multi-select component.
+      (uniqueStates: string[]) => {
+        let counter = 1;
+        const uniqueStatesMap: {id: number, name: string}[] = [];
+        for (const state of uniqueStates) {
+          if (!state) {
+            continue;
+          }
+          uniqueStatesMap.push({id: counter, name: state});
+          counter++;
+        }
+        return uniqueStatesMap;
+      }
+    ).subscribe(
+      (uniqueStatesMap: {id: number, name: string}[]) => {
+        this.studyStates = uniqueStatesMap;
+        this.studyStatesFiltered.next(uniqueStatesMap);
+      }
+    );
+
+    this.studyStatsRetrieverService.getUniqueCities(
+      this.search.studies,
+    ).map(
+      // Sort returned cities alphabetically.
+      (uniqueCities: string[]) => {
+        return orderStringArray(uniqueCities);
+      }
+    ).map(
+      // Cast returned cities to an array of objects with `id` and `name`
+      // properties that can be used in a multi-select component.
+      (uniqueCities: string[]) => {
+        let counter = 1;
+        const uniqueCitiesMap: {id: number, name: string}[] = [];
+        for (const city of uniqueCities) {
+          uniqueCitiesMap.push({id: counter, name: city});
+          counter++;
+        }
+        return uniqueCitiesMap;
+      }
+    ).subscribe(
+      (uniqueCitiesMap: {id: number, name: string}[]) => {
+        this.studyCities = uniqueCitiesMap;
+        this.studyCitiesFiltered.next(uniqueCitiesMap);
+      }
+    );
+
+    this.formFilters
+      .get('filterRecruitmentStatus')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterRecruitmentStatuses();
+      });
+
+    this.formFilters
+      .get('filterPhase')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterPhases();
+      });
+
+    this.formFilters
+      .get('filterStudyType')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyTypes();
+      });
+
+    this.formFilters
+      .get('filterStudyCountry')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyCountries();
+      });
+
+    this.formFilters
+      .get('filterStudyState')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyStates();
+      });
+
+    this.formFilters
+      .get('filterStudyCity')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyCities();
+      });
   }
 
   ngAfterViewInit() {
@@ -112,6 +360,240 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
       ).pipe(
       tap(() => this.getStudiesPage())
     ).subscribe();
+
+    this.setInitialValue();
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+  /**
+   * Sets the initial value after the filteredBanks are loaded initially
+   */
+  private setInitialValue() {
+    this.recruitmentStatusesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        // setting the compareWith property to a comparison function
+        // triggers initializing the selection according to the initial value of
+        // the form control (i.e. _initializeSelection())
+        // this needs to be done after the filteredBanks are loaded initially
+        // and after the mat-option elements are available
+        // this.selectRecruitmentStatus.compareWith = (a, b) => a.id === b.id;
+        this.selectRecruitmentStatus.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.phasesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectPhase.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyTypesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyType.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyCountriesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyCountry.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyStatesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyState.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyCitiesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyCity.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+  }
+
+  private filterRecruitmentStatuses() {
+    if (!this.recruitmentStatuses) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterRecruitmentStatus').value;
+
+    // If no query was provided emit all possible recruitment-status values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
+      this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible recruitment-status values based on the search query
+    // and emit the results.
+    this.recruitmentStatusesFiltered.next(
+      this.recruitmentStatuses.filter(
+        status => status.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterPhases() {
+    if (!this.phases) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterPhase').value;
+
+    // If no query was provided emit all possible phase values. Otherwise
+    // lowercase the query in preparation for filtering.
+    if (!query) {
+      this.phasesFiltered.next(this.phases.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible recruitment-status values based on the search query
+    // and emit the results.
+    this.phasesFiltered.next(
+      this.phases.filter(
+        phase => phase.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterStudyTypes() {
+    if (!this.studyTypes) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyType').value;
+
+    // If no query was provided emit all possible study-type values. Otherwise
+    // lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyTypesFiltered.next(this.studyTypes.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-types values based on the search query and emit
+    // the results.
+    this.studyTypesFiltered.next(
+      this.studyTypes.filter(
+        type => type.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterStudyCountries() {
+    if (!this.studyCountries) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyCountry').value;
+
+    // If no query was provided emit all possible study-country values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyCountriesFiltered.next(this.studyCountries.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-countries values based on the search query and
+    // emit the results.
+    this.studyCountriesFiltered.next(
+      this.studyCountries.filter(
+        country => country.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterStudyStates() {
+    if (!this.studyStates) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyState').value;
+
+    // If no query was provided emit all possible study-state values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyStatesFiltered.next(this.studyStates.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-states values based on the search query and
+    // emit the results.
+    this.studyStatesFiltered.next(
+      this.studyStates.filter(
+        state => state.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+  private filterStudyCities() {
+    if (!this.studyCities) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyCity').value;
+
+    // If no query was provided emit all possible study-city values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyCitiesFiltered.next(this.studyCities.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-cities values based on the search query and
+    // emit the results.
+    this.studyCitiesFiltered.next(
+      this.studyCities.filter(
+        city => city.name.toLowerCase().indexOf(query) > -1
+      )
+    );
   }
 
   getStudiesPage() {
@@ -134,45 +616,13 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     );
   }
 
-  /**
-   * Casts a fully-qualified overall-status enum string coming from GraphQL,
-   * e.g. `OverallStatusType.COMPLETED` to the enum value as defined under the
-   * the `StudyOverallStatus` enum.
-   * @param {string} status The fully-qualified overall-status enum string.
-   * @returns {string} The corresponding `StudyOverallStatus` value.
-   */
-  castOverallStatus(status: string): StudyOverallStatus {
-    // Split the string on `.` and keep the second part of the string with the
-    // enum member name.
-    const status_value = status.split('.')[1];
-
-    // Get corresponding `StudyOverallStatus` member.
-    return StudyOverallStatus[status_value];
-  }
-
-  /**
-   * Casts a fully-qualified mesh-term-type enum string coming from GraphQL,
-   * e.g. `MeshTermType.CONDITION` to the enum value as defined under the
-   * the `MeshTermType` enum.
-   * @param {string} type The fully-qualified mesh-term-type enum string.
-   * @returns {string} The corresponding `MeshTermType` value.
-   */
-  castMeshTermType(type: string): MeshTermType {
-    // Split the string on `.` and keep the second part of the string with the
-    // enum member name.
-    const type_value = type.split('.')[1];
-
-    // Get corresponding `MeshTermType` member.
-    return MeshTermType[type_value];
-  }
-
   getStudyInterventionMeshTerms(
     study: StudyInterface,
   ): MeshTermInterface[] | string | null {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
-      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      const meshTermType = castMeshTermType(studyMeshTerm.meshTermType);
       if (meshTermType === MeshTermType.INTERVENTION) {
         meshTerms.push(studyMeshTerm.meshTerm);
       }
@@ -193,7 +643,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
-      const meshTermType = this.castMeshTermType(studyMeshTerm.meshTermType);
+      const meshTermType = castMeshTermType(studyMeshTerm.meshTermType);
       if (meshTermType === MeshTermType.CONDITION) {
         meshTerms.push(studyMeshTerm.meshTerm);
       }
@@ -226,4 +676,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit {
     }
   }
 
+  castOverallStatus(status: string): StudyOverallStatus {
+    return castOverallStatus(status);
+  }
+
 }
+

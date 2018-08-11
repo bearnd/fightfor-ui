@@ -21,99 +21,286 @@
           <!--Card body.-->
           <div class="card-body">
 
-            <!--TODO: Add table-->
+            <div class="col-md-12">
 
-            <mat-table
-              #table
-              [dataSource]="dataSourceStudies"
-              matSort
-              matSortActive="nctId"
-              matSortDirection="asc"
-              matSortDisableClear
-            >
+              <h5>Filters</h5>
+              <div class="row">
 
-              <!--Header.-->
-              <mat-header-row
-                *matHeaderRowDef="displayedColumns"
-              ></mat-header-row>
-              <mat-row
-                *matRowDef="let row; columns: displayedColumns;"
-              ></mat-row>
+                <form [formGroup]="formFilters" (ngSubmit)="onSubmitFilters()">
+                  <div class="form-group">
 
-              <!-- NCT ID column -->
-              <ng-container matColumnDef="nctId">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  NCT ID
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">{{study.nctId}}</mat-cell>
-              </ng-container>
+                    <div class="row">
 
-              <!-- Overall status column -->
-              <ng-container matColumnDef="overallStatus">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  Status
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{castOverallStatus(study.overallStatus)}}
-                </mat-cell>
-              </ng-container>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectRecruitmentStatus"
+                            formControlName="selectRecruitmentStatus"
+                            placeholder="Recruitment Status"
+                            [multiple]="true"
+                            #selectRecruitmentStatus
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterRecruitmentStatus"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such recruitment-status found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let status of recruitmentStatusesFiltered | async"
+                              [value]="status"
+                            >
+                              {{ status.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
 
-              <!-- Brief title column -->
-              <ng-container matColumnDef="briefTitle">
-                <mat-header-cell
-                  *matHeaderCellDef
-                  mat-sort-header
-                >
-                  Title
-                </mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{study.briefTitle | truncate:77}}
-                </mat-cell>
-              </ng-container>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectPhase"
+                            formControlName="selectPhase"
+                            placeholder="Trial Phase"
+                            [multiple]="true"
+                            #selectPhase
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterPhase"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such phase found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let phase of phasesFiltered | async"
+                              [value]="phase"
+                            >
+                              {{ phase.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
 
-              <!-- Conditions column -->
-              <ng-container matColumnDef="conditions">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Conditions</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyConditionMeshTerms(study) }}
-                </mat-cell>
-              </ng-container>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyType"
+                            formControlName="selectStudyType"
+                            placeholder="Study Type"
+                            [multiple]="true"
+                            #selectStudyType
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyType"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such study-type found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let studyType of studyTypesFiltered | async"
+                              [value]="studyType"
+                            >
+                              {{ studyType.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
 
-              <!-- Interventions column -->
-              <ng-container matColumnDef="interventions">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Interventions</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyInterventionMeshTerms(study) }}
-                </mat-cell>
-              </ng-container>
+                    </div>
 
-              <!-- Locations column -->
-              <ng-container matColumnDef="locations">
-                <mat-header-cell
-                  *matHeaderCellDef
-                >Locations</mat-header-cell>
-                <mat-cell *matCellDef="let study">
-                  {{ getStudyLocation(study) }}
-                </mat-cell>
-              </ng-container>
+                    <div class="row">
 
-            </mat-table>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyCountry"
+                            formControlName="selectStudyCountry"
+                            placeholder="Country"
+                            [multiple]="true"
+                            #selectStudyCountry
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyCountry"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let country of studyCountriesFiltered | async"
+                              [value]="country"
+                            >
+                              {{ country.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
 
-            <mat-paginator
-              [length]="studiesCount"
-              [pageSize]="10"
-              [pageSizeOptions]="[10, 25, 50]"
-            ></mat-paginator>
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyState"
+                            formControlName="selectStudyState"
+                            placeholder="State/Region"
+                            [multiple]="true"
+                            #selectStudyState
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyState"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let state of studyStatesFiltered | async"
+                              [value]="state"
+                            >
+                              {{ state.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <mat-select
+                            id="selectStudyCity"
+                            formControlName="selectStudyCity"
+                            placeholder="City"
+                            [multiple]="true"
+                            #selectStudyCity
+                          >
+                            <ngx-mat-select-search
+                              formControlName="filterStudyCity"
+                              placeholderLabel="Search"
+                              noEntriesFoundLabel="No such country found"
+                            >
+                            </ngx-mat-select-search>
+                            <mat-option
+                              *ngFor="let city of studyCitiesFiltered | async"
+                              [value]="city"
+                            >
+                              {{ city.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                </form>
+
+              </div>
+
+              <h5>Studies</h5>
+              <div class="row">
+
+                <div class="col-md-12">
+
+                  <mat-table
+                    #table
+                    [dataSource]="dataSourceStudies"
+                    matSort
+                    matSortActive="nctId"
+                    matSortDirection="asc"
+                    matSortDisableClear
+                  >
+
+                    <!--Header.-->
+                    <mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <mat-row
+                      *matRowDef="let row; columns: displayedColumns;"
+                    ></mat-row>
+
+                    <!-- NCT ID column -->
+                    <ng-container matColumnDef="nctId">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        NCT ID
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let study"
+                      >
+                        {{study.nctId}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Overall status column -->
+                    <ng-container matColumnDef="overallStatus">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Status
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{castOverallStatus(study.overallStatus)}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Brief title column -->
+                    <ng-container matColumnDef="briefTitle">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Title
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{study.briefTitle | truncate:77}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Conditions column -->
+                    <ng-container matColumnDef="conditions">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Conditions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyConditionMeshTerms(study) }}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Interventions column -->
+                    <ng-container matColumnDef="interventions">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Interventions
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyInterventionMeshTerms(study) }}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- Locations column -->
+                    <ng-container matColumnDef="locations">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                      >Locations
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let study">
+                        {{ getStudyLocation(study) }}
+                      </mat-cell>
+                    </ng-container>
+
+                  </mat-table>
+
+                  <mat-paginator
+                    [length]="studiesCount"
+                    [pageSize]="10"
+                    [pageSizeOptions]="studiesPageSizeOptions"
+                  ></mat-paginator>
+
+                </div>
+
+              </div>
+            </div>
 
           </div>
         </div>
