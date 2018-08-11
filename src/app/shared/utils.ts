@@ -58,3 +58,29 @@ export function castEnumToArray(enumeration) {
 
   return arr
 }
+
+/**
+ * Returns a copy of an array of strings sorted alphabetically.
+ * @param {string[]} entries The array of strings to be copied and sorted.
+ * @returns {string[]} The sorted copy of the array.
+ */
+export function orderStringArray(entries: string[]): string[] {
+
+  // Create a copy of the array.
+  const entriesSorted = entries.slice();
+
+  // Sort the array copy alphabetically.
+  entriesSorted.sort(
+    (left, right) => {
+      if (left < right) {
+        return -1;
+      }
+      if (left > right) {
+        return 1;
+      }
+      return 0;
+    }
+  );
+
+  return entriesSorted
+}
