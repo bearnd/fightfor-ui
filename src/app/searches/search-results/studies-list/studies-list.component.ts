@@ -213,6 +213,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       selectStudyCity: new FormControl(null),
       // Filter for study-city.
       filterStudyCity: new FormControl(null),
+      // Radio buttons for patient-sex.
+      radioStudySex: new FormControl(null),
     });
 
     // Load the initial list of recruitment-statuses.
