@@ -692,3 +692,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 }
 
+  /**
+   * Loads studies using the current filter values.
+   */
+  onSubmitFilters() {
+    // Refresh the studies to reflect the selected filters.
+    this.getStudiesPage();
+  }
+
+}
