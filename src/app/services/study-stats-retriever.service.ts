@@ -9,6 +9,7 @@ import {
   CountByCountryInterface, CountByFacilityInterface,
   CountByOverallStatusInterface
 } from '../interfaces/search.interface';
+import { DateRange } from '../shared/common.interface';
 
 
 interface VariablesGetCountStudiesByCountry {
@@ -68,6 +69,16 @@ interface VariablesGetUniqueCountries {
 interface ResponseGetUniqueCountries {
   studiesStats: {
     getUniqueCountries: string[]
+  }
+}
+
+interface VariablesGetStartDateRange {
+  studyIds: number[]
+}
+
+interface ResponseGetStartDateRange {
+  studiesStats: {
+    getDateRange: DateRange
   }
 }
 
@@ -164,6 +175,21 @@ export class StudyStatsRetrieverService {
         getUniqueCountries(
           studyIds: $studyIds,
         )
+      }
+    }
+  `;
+
+  queryGetStartDateRange = gql`
+    query getDateRange(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getDateRange(
+          studyIds: $studyIds,
+        ) {
+          dateBeg,
+          dateEnd,
+        }
       }
     }
   `;
@@ -355,6 +381,38 @@ export class StudyStatsRetrieverService {
         variables: {studyIds: studyIds},
       }).map((response) => {
         return response.data.studiesStats.getUniqueCountries;
+      });
+  }
+
+  /**
+   * Retrieve the start-date date-range for given studies.
+   * @param {StudyInterface[]} studies The studies for which the start-date
+   * date-range will be retrieved.
+   * @returns {Observable<DateRange>} The start-date
+   * date-range.
+   */
+  getStartDateRange(
+    studies: StudyInterface[],
+  ): Observable<DateRange> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetStartDateRange,
+        VariablesGetStartDateRange>
+      ({
+        query: this.queryGetStartDateRange,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return {
+          dateBeg: new Date(response.data.studiesStats.getDateRange.dateBeg),
+          dateEnd: new Date(response.data.studiesStats.getDateRange.dateEnd),
+        };
       });
   }
 
