@@ -34,20 +34,20 @@
                       <div class="col-md-4">
                         <mat-form-field>
                           <mat-select
-                            id="selectRecruitmentStatus"
-                            formControlName="selectRecruitmentStatus"
-                            placeholder="Recruitment Status"
+                            id="selectOverallStatus"
+                            formControlName="selectOverallStatus"
+                            placeholder="Overall Status"
                             [multiple]="true"
-                            #selectRecruitmentStatus
+                            #selectOverallStatus
                           >
                             <ngx-mat-select-search
-                              formControlName="filterRecruitmentStatus"
+                              formControlName="filterOverallStatus"
                               placeholderLabel="Search"
-                              noEntriesFoundLabel="No such recruitment-status found"
+                              noEntriesFoundLabel="No such overall-status found"
                             >
                             </ngx-mat-select-search>
                             <mat-option
-                              *ngFor="let status of recruitmentStatusesFiltered | async"
+                              *ngFor="let status of overallStatusesFiltered | async"
                               [value]="status"
                             >
                               {{ status.name }}

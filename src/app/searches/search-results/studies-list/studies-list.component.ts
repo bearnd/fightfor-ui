@@ -21,7 +21,6 @@ import {
   MeshTermInterface,
   MeshTermType,
   OrderType,
-  RecruitmentStatusType,
   StudyInterface,
   StudyOverallStatus,
   StudyPhase,
@@ -62,7 +61,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('selectRecruitmentStatus') selectRecruitmentStatus: MatSelect;
+  @ViewChild('selectOverallStatus') selectOverallStatus: MatSelect;
   @ViewChild('selectPhase') selectPhase: MatSelect;
   @ViewChild('selectStudyType') selectStudyType: MatSelect;
   @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
@@ -72,8 +71,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
 
-  // Possible recruitment-status values.
-  private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
+  // Possible overall-status values.
+  private overallStatuses = castEnumToArray(StudyOverallStatus);
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -94,8 +93,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public studyEligibilityAgeRange: AgeRange = {ageBeg: 0, ageEnd: 150};
 
 
-  // Replay-subject storing the latest filtered recruitment-statuses.
-  public recruitmentStatusesFiltered: ReplaySubject<EnumInterface[]> =
+  // Replay-subject storing the latest filtered overall-statuses.
+  public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
   // Replay-subject storing the latest filtered study-phases.
   public phasesFiltered: ReplaySubject<EnumInterface[]> =
@@ -192,10 +191,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for recruitment-status.
-      selectRecruitmentStatus: new FormControl(null),
-      // Filter for recruitment-status.
-      filterRecruitmentStatus: new FormControl(null),
+      // Multi-select for overall-status.
+      selectOverallStatus: new FormControl(null),
+      // Filter for overall-status.
+      filterOverallStatus: new FormControl(null),
       // Multi-select for phase.
       selectPhase: new FormControl(null),
       // Filter for phase.
@@ -220,9 +219,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       radioStudySex: new FormControl(null),
     });
 
-    // Load the initial list of recruitment-statuses.
-    this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
     // Load the initial list of phases.
+    // Set the initial list of overall-statuses.
+    this.overallStatusesFiltered.next(this.overallStatuses.slice());
     this.phasesFiltered.next(this.phases.slice());
     // Load the initial list of study-types.
     this.studyTypesFiltered.next(this.studyTypes.slice());
@@ -312,11 +311,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.formFilters
-      .get('filterRecruitmentStatus')
+      .get('filterOverallStatus')
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterRecruitmentStatuses();
+        this.filterOverallStatuses();
       });
 
     this.formFilters
@@ -408,7 +407,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Sets the initial value after the filteredBanks are loaded initially
    */
   private setInitialValue() {
-    this.recruitmentStatusesFiltered
+    this.overallStatusesFiltered
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
         // setting the compareWith property to a comparison function
@@ -416,8 +415,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        // this.selectRecruitmentStatus.compareWith = (a, b) => a.id === b.id;
-        this.selectRecruitmentStatus.compareWith = (a, b) => {
+        this.selectOverallStatus.compareWith = (a, b) => {
           if (a && b) {
             return a.id === b.id;
           }
@@ -481,26 +479,26 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  private filterRecruitmentStatuses() {
-    if (!this.recruitmentStatuses) {
+  private filterOverallStatuses() {
+    if (!this.overallStatuses) {
       return;
     }
     // Retrieve the search query.
-    let query = this.formFilters.get('filterRecruitmentStatus').value;
+    let query = this.formFilters.get('filterOverallStatus').value;
 
-    // If no query was provided emit all possible recruitment-status values.
+    // If no query was provided emit all possible overall-status values.
     // Otherwise lowercase the query in preparation for filtering.
     if (!query) {
-      this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
+      this.overallStatusesFiltered.next(this.overallStatuses.slice());
       return;
     } else {
       query = query.toLowerCase();
     }
 
-    // Filter the possible recruitment-status values based on the search query
+    // Filter the possible overall-status values based on the search query
     // and emit the results.
-    this.recruitmentStatusesFiltered.next(
-      this.recruitmentStatuses.filter(
+    this.overallStatusesFiltered.next(
+      this.overallStatuses.filter(
         status => status.name.toLowerCase().indexOf(query) > -1
       )
     );
@@ -522,7 +520,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       query = query.toLowerCase();
     }
 
-    // Filter the possible recruitment-status values based on the search query
+    // Filter the possible overall-status values based on the search query
     // and emit the results.
     this.phasesFiltered.next(
       this.phases.filter(
