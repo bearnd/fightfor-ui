@@ -690,7 +690,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return castOverallStatus(status);
   }
 
-}
+  /**
+   * Resets all filters to their default values and reloads studies.
+   */
+  onResetFilters() {
+    // Reset the form to its initial values.
+    this.formFilters.reset();
+    // Reset the year-range to its initial values.
+    this.sliderYearRange.reset();
+    // Reset the year-range to its initial values.
+    this.sliderAgeRange.reset();
+
+    // Refresh the studies to reflect the reset filters.
+    this.getStudiesPage();
+  }
 
   /**
    * Loads studies using the current filter values.
