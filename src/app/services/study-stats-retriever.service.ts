@@ -9,7 +9,7 @@ import {
   CountByCountryInterface, CountByFacilityInterface,
   CountByOverallStatusInterface
 } from '../interfaces/search.interface';
-import { DateRange } from '../shared/common.interface';
+import { AgeRange, DateRange } from '../shared/common.interface';
 
 
 interface VariablesGetCountStudiesByCountry {
@@ -81,6 +81,17 @@ interface ResponseGetStartDateRange {
     getDateRange: DateRange
   }
 }
+
+interface VariablesGetEligibilityAgeRange {
+  studyIds: number[]
+}
+
+interface ResponseGetEligibilityAgeRange {
+  studiesStats: {
+    getAgeRange: AgeRange
+  }
+}
+
 
 @Injectable()
 export class StudyStatsRetrieverService {
@@ -189,6 +200,21 @@ export class StudyStatsRetrieverService {
         ) {
           dateBeg,
           dateEnd,
+        }
+      }
+    }
+  `;
+
+  queryGetEligibilityAgeRange = gql`
+    query getAgeRange(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getAgeRange(
+          studyIds: $studyIds,
+        ) {
+          ageBeg,
+          ageEnd,
         }
       }
     }
@@ -388,8 +414,7 @@ export class StudyStatsRetrieverService {
    * Retrieve the start-date date-range for given studies.
    * @param {StudyInterface[]} studies The studies for which the start-date
    * date-range will be retrieved.
-   * @returns {Observable<DateRange>} The start-date
-   * date-range.
+   * @returns {Observable<DateRange>} The start-date date-range.
    */
   getStartDateRange(
     studies: StudyInterface[],
@@ -413,6 +438,34 @@ export class StudyStatsRetrieverService {
           dateBeg: new Date(response.data.studiesStats.getDateRange.dateBeg),
           dateEnd: new Date(response.data.studiesStats.getDateRange.dateEnd),
         };
+      });
+  }
+
+  /**
+   * Retrieve the eligibility age-range for given studies.
+   * @param {StudyInterface[]} studies The studies for which the eligibility
+   * age-range will be retrieved.
+   * @returns {Observable<AgeRange>} The eligibility age-range.
+   */
+  getEligibilityAgeRange(
+    studies: StudyInterface[],
+  ): Observable<AgeRange> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetEligibilityAgeRange,
+        VariablesGetEligibilityAgeRange>
+      ({
+        query: this.queryGetEligibilityAgeRange,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return response.data.studiesStats.getAgeRange;
       });
   }
 

@@ -38,7 +38,7 @@ import {
   orderStringArray,
 } from '../../../shared/utils';
 import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
-import { DateRange } from '../../../shared/common.interface';
+import { AgeRange, DateRange } from '../../../shared/common.interface';
 
 
 interface EnumInterface {
@@ -89,6 +89,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     dateBeg: new Date('1900-01-01'),
     dateEnd: new Date('2100-12-31'),
   };
+  // Possible eligibility age-range values in years (to be populated in
+  // `ngOnInit`).
+  public studyEligibilityAgeRange: AgeRange = {ageBeg: 0, ageEnd: 150};
 
 
   // Replay-subject storing the latest filtered recruitment-statuses.
@@ -364,7 +367,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       (range: DateRange) => {
         this.studyStartDateRange = range;
       }
-    )
+    );
+
+    // Query out the eligibility age-range of this search's studies to populate
+    // the slider range.
+    this.studyStatsRetrieverService.getEligibilityAgeRange(
+      this.search.studies
+    ).subscribe(
+      (range: AgeRange) => {
+        this.studyEligibilityAgeRange = {
+          ageBeg: Math.floor(range.ageBeg / 31536000.0),
+          ageEnd: Math.ceil(range.ageEnd / 31536000.0),
+        };
+      }
+    );
   }
 
   ngAfterViewInit() {
