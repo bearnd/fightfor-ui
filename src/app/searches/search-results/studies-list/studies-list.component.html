@@ -187,6 +187,23 @@
 
                     </div>
 
+                    <div class="row">
+
+                      <div class="col-md-4">
+                          <label for="yearRange">Year-Range</label>
+                          <ion-range-slider
+                            id="yearRange"
+                            #sliderElement
+                            type="double"
+                            [min]="studyStartDateRange.dateBeg.getFullYear()"
+                            [max]="studyStartDateRange.dateEnd.getFullYear()"
+                            style="width: 300px;"
+                            [prettify_enabled]="false"
+                          >
+                          </ion-range-slider>
+                      </div>
+                    </div>
+
 
                   </div>
                 </form>

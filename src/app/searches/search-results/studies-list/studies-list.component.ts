@@ -38,6 +38,7 @@ import {
   orderStringArray,
 } from '../../../shared/utils';
 import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
+import { DateRange } from '../../../shared/common.interface';
 
 
 interface EnumInterface {
@@ -83,6 +84,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyStates: StudyLocationInterface[] = [];
   // Possible city values (to be populated in `ngOnInit`).
   private studyCities: StudyLocationInterface[] = [];
+  // Possible year values (to be populated in `ngOnInit`).
+  public studyStartDateRange: DateRange = {
+    dateBeg: new Date('1900-01-01'),
+    dateEnd: new Date('2100-12-31'),
+  };
+
 
   // Replay-subject storing the latest filtered recruitment-statuses.
   public recruitmentStatusesFiltered: ReplaySubject<EnumInterface[]> =
@@ -346,6 +353,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.filterStudyCities();
       });
+
+    this.studyStatsRetrieverService.getStartDateRange(
+      this.search.studies
+    ).subscribe(
+      (range: DateRange) => {
+        this.studyStartDateRange = range;
+      }
+    )
   }
 
   ngAfterViewInit() {

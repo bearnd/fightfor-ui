@@ -21,6 +21,7 @@ import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
 import { ScrollTrackerModule } from '@nicky-lenaers/ngx-scroll-tracker';
 import { TruncateModule } from 'ng2-truncate';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { IonRangeSliderModule } from 'ng2-ion-range-slider';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
@@ -54,6 +55,7 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     ScrollTrackerModule.forRoot(),
     TruncateModule,
     NgxMatSelectSearchModule,
+    IonRangeSliderModule,
   ],
   declarations: [
     DashboardComponent,
