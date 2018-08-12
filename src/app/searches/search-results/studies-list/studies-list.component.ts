@@ -84,7 +84,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyStates: StudyLocationInterface[] = [];
   // Possible city values (to be populated in `ngOnInit`).
   private studyCities: StudyLocationInterface[] = [];
-  // Possible year values (to be populated in `ngOnInit`).
+  // Possible start-date year values (to be populated in `ngOnInit`).
   public studyStartDateRange: DateRange = {
     dateBeg: new Date('1900-01-01'),
     dateEnd: new Date('2100-12-31'),
@@ -354,6 +354,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.filterStudyCities();
       });
 
+    // Query out the date-range of this search's studies to populate the slider
+    // range.
     this.studyStatsRetrieverService.getStartDateRange(
       this.search.studies
     ).subscribe(
