@@ -190,9 +190,9 @@
                     <div class="row">
 
                       <div class="col-md-4">
-                          <label for="yearRange">Year-Range</label>
+                          <label for="sliderYearRange">Year-Range</label>
                           <ion-range-slider
-                            id="yearRange"
+                            id="sliderYearRange"
                             #sliderYearRange
                             type="double"
                             [min]="studyStartDateRange.dateBeg.getFullYear()"
@@ -215,19 +215,15 @@
                           >
                             <mat-radio-button value="1">Male</mat-radio-button>
                             <mat-radio-button value="2">Female</mat-radio-button>
-                            <mat-radio-button
-                              value="3"
-                              [checked]="true"
-                            >All
-                            </mat-radio-button>
+                            <mat-radio-button value="3">All</mat-radio-button>
                           </mat-radio-group>
                         </div>
                       </div>
 
                       <div class="col-md-4">
-                          <label for="ageRange">Age-Range</label>
+                          <label for="sliderAgeRange">Age-Range</label>
                           <ion-range-slider
-                            id="ageRange"
+                            id="sliderAgeRange"
                             #sliderAgeRange
                             type="double"
                             [min]="studyEligibilityAgeRange.ageBeg"
@@ -264,7 +260,7 @@
                 </form>
 
               </div>
-
+              <hr>
               <h5>Studies</h5>
               <div class="row">
 
