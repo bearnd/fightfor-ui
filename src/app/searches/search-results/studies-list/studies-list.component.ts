@@ -152,6 +152,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
 
+    // Retrieve a reference to the observable defining whether the total number
+    // of studies is being loaded.
     this.isLoadingStudiesCount =
       this.studyRetrieverService.isLoadingCountStudies;
 
@@ -190,10 +192,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Set the initial list of overall-statuses.
     this.overallStatusesFiltered.next(this.overallStatuses.slice());
+    // Set the initial list of phases.
     this.phasesFiltered.next(this.phases.slice());
-    // Load the initial list of study-types.
+    // Set the initial list of study-types.
     this.studyTypesFiltered.next(this.studyTypes.slice());
 
+    // Retrieve the unique countries for this search's studies.
     this.studyStatsRetrieverService.getUniqueCountries(
       this.search.studies,
     ).map(
@@ -223,6 +227,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    // Retrieve the unique states/regions for this search's studies.
     this.studyStatsRetrieverService.getUniqueStates(
       this.search.studies,
     ).map(
@@ -252,6 +257,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    // Retrieve the unique cities for this search's studies.
     this.studyStatsRetrieverService.getUniqueCities(
       this.search.studies,
     ).map(
