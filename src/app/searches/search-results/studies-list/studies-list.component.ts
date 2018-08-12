@@ -38,6 +38,7 @@ import {
 } from '../../../shared/utils';
 import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
 import { AgeRange, DateRange } from '../../../shared/common.interface';
+import { IonRangeSliderComponent } from 'ng2-ion-range-slider';
 
 
 interface EnumInterface {
@@ -67,6 +68,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
   @ViewChild('selectStudyState') selectStudyState: MatSelect;
   @ViewChild('selectStudyCity') selectStudyCity: MatSelect;
+  @ViewChild('sliderYearRange') sliderYearRange: IonRangeSliderComponent;
+  @ViewChild('sliderAgeRange') sliderAgeRange: IonRangeSliderComponent;
 
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
