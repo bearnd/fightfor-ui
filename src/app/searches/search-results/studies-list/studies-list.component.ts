@@ -152,42 +152,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
 
-    // Load the initial set of studies.
-    this.dataSourceStudies.filterStudies(
-      this.search.studies,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      this.studiesPageSizeOptions[0],
-      0,
-    );
-
     this.isLoadingStudiesCount =
       this.studyRetrieverService.isLoadingCountStudies;
-    this.studyRetrieverService.countStudies(
-      this.search.studies,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ).subscribe(
-      (studiesCount: number) => {
-        this.studiesCount = studiesCount;
-      }
-    );
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
@@ -219,7 +185,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       radioStudySex: new FormControl(null),
     });
 
-    // Load the initial list of phases.
+    // Retrieve the initial set of studies.
+    this.getStudiesPage();
+
     // Set the initial list of overall-statuses.
     this.overallStatusesFiltered.next(this.overallStatuses.slice());
     this.phasesFiltered.next(this.phases.slice());
