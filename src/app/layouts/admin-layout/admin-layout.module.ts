@@ -15,6 +15,7 @@ import {
   MatProgressSpinnerModule,
   MatSortModule,
   MatSelectModule,
+  MatRadioModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
@@ -51,6 +52,7 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     MatTableModule,
     MatAutocompleteModule,
     MatSelectModule,
+    MatRadioModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
     TruncateModule,
