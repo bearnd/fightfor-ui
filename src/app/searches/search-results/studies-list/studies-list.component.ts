@@ -13,6 +13,10 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { merge, take, takeUntil, tap } from 'rxjs/operators';
+import {
+  IonRangeSliderCallback,
+  IonRangeSliderComponent,
+} from 'ng2-ion-range-slider';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
@@ -36,13 +40,13 @@ import {
   castOverallStatus,
   orderStringArray,
 } from '../../../shared/utils';
-import { IonRangeSliderComponent } from 'ng2-ion-range-slider';
 import {
   StudyStatsRetrieverService,
 } from '../../../services/study-stats-retriever.service';
 import {
   AgeRange,
   DateRange,
+  YearRange,
 } from '../../../shared/common.interface';
 
 
@@ -103,7 +107,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   };
   // Possible eligibility age-range values in years (to be populated in
   // `ngOnInit`).
-  public studyEligibilityAgeRange: AgeRange = {ageBeg: 0, ageEnd: 150};
+  public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
+  public studyEligibilityAgeRangeSelected: AgeRange = {
+    ageBeg: null,
+    ageEnd: null,
+  };
 
 
   // Replay-subject storing the latest filtered overall-statuses.
@@ -361,7 +369,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.search.studies
     ).subscribe(
       (range: AgeRange) => {
-        this.studyEligibilityAgeRange = {
+        this.studyEligibilityAgeRangeAll = {
           ageBeg: Math.floor(range.ageBeg / 31536000.0),
           ageEnd: Math.ceil(range.ageEnd / 31536000.0),
         };
@@ -705,6 +713,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.studyStartYearRangeSelected.yearEnd = event.to || null;
   }
 
+  onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
+    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
+    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
+  }
+
   /**
    * Resets all filters to their default values and reloads studies.
    */
@@ -720,6 +733,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.studyStartYearRangeSelected.yearEnd = null;
     // Reset the year-range to its initial values.
     this.sliderAgeRange.reset();
+    this.studyEligibilityAgeRangeSelected.ageBeg = null;
+    this.studyEligibilityAgeRangeSelected.ageEnd = null;
 
     // Refresh the studies to reflect the reset filters.
     this.getStudiesPage();
