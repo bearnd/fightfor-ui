@@ -13,6 +13,10 @@ import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { merge, take, takeUntil, tap } from 'rxjs/operators';
+import {
+  IonRangeSliderCallback,
+  IonRangeSliderComponent,
+} from 'ng2-ion-range-slider';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
@@ -21,7 +25,6 @@ import {
   MeshTermInterface,
   MeshTermType,
   OrderType,
-  RecruitmentStatusType,
   StudyInterface,
   StudyOverallStatus,
   StudyPhase,
@@ -37,8 +40,14 @@ import {
   castOverallStatus,
   orderStringArray,
 } from '../../../shared/utils';
-import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
-import { AgeRange, DateRange } from '../../../shared/common.interface';
+import {
+  StudyStatsRetrieverService,
+} from '../../../services/study-stats-retriever.service';
+import {
+  AgeRange,
+  DateRange,
+  YearRange,
+} from '../../../shared/common.interface';
 
 
 interface EnumInterface {
@@ -62,18 +71,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild('selectRecruitmentStatus') selectRecruitmentStatus: MatSelect;
+  @ViewChild('selectOverallStatus') selectOverallStatus: MatSelect;
   @ViewChild('selectPhase') selectPhase: MatSelect;
   @ViewChild('selectStudyType') selectStudyType: MatSelect;
   @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
   @ViewChild('selectStudyState') selectStudyState: MatSelect;
   @ViewChild('selectStudyCity') selectStudyCity: MatSelect;
+  @ViewChild('sliderYearRange') sliderYearRange: IonRangeSliderComponent;
+  @ViewChild('sliderAgeRange') sliderAgeRange: IonRangeSliderComponent;
 
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
 
-  // Possible recruitment-status values.
-  private recruitmentStatuses = castEnumToArray(RecruitmentStatusType);
+  // Possible overall-status values.
+  private overallStatuses = castEnumToArray(StudyOverallStatus);
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -85,17 +96,26 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Possible city values (to be populated in `ngOnInit`).
   private studyCities: StudyLocationInterface[] = [];
   // Possible start-date year values (to be populated in `ngOnInit`).
-  public studyStartDateRange: DateRange = {
+  public studyStartDateRangeAll: DateRange = {
     dateBeg: new Date('1900-01-01'),
     dateEnd: new Date('2100-12-31'),
   };
+  // Selected start-date year values (to be populated in `ngOnInit`).
+  public studyStartYearRangeSelected: YearRange = {
+    yearBeg: null,
+    yearEnd: null,
+  };
   // Possible eligibility age-range values in years (to be populated in
   // `ngOnInit`).
-  public studyEligibilityAgeRange: AgeRange = {ageBeg: 0, ageEnd: 150};
+  public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
+  public studyEligibilityAgeRangeSelected: AgeRange = {
+    ageBeg: null,
+    ageEnd: null,
+  };
 
 
-  // Replay-subject storing the latest filtered recruitment-statuses.
-  public recruitmentStatusesFiltered: ReplaySubject<EnumInterface[]> =
+  // Replay-subject storing the latest filtered overall-statuses.
+  public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
   // Replay-subject storing the latest filtered study-phases.
   public phasesFiltered: ReplaySubject<EnumInterface[]> =
@@ -153,49 +173,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
 
-    // Load the initial set of studies.
-    this.dataSourceStudies.filterStudies(
-      this.search.studies,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      this.studiesPageSizeOptions[0],
-      0,
-    );
-
+    // Retrieve a reference to the observable defining whether the total number
+    // of studies is being loaded.
     this.isLoadingStudiesCount =
       this.studyRetrieverService.isLoadingCountStudies;
-    this.studyRetrieverService.countStudies(
-      this.search.studies,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-    ).subscribe(
-      (studiesCount: number) => {
-        this.studiesCount = studiesCount;
-      }
-    );
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for recruitment-status.
-      selectRecruitmentStatus: new FormControl(null),
-      // Filter for recruitment-status.
-      filterRecruitmentStatus: new FormControl(null),
+      // Multi-select for overall-status.
+      selectOverallStatus: new FormControl(null),
+      // Filter for overall-status.
+      filterOverallStatus: new FormControl(null),
       // Multi-select for phase.
       selectPhase: new FormControl(null),
       // Filter for phase.
@@ -220,13 +208,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       radioStudySex: new FormControl(null),
     });
 
-    // Load the initial list of recruitment-statuses.
-    this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
-    // Load the initial list of phases.
+    // Retrieve the initial set of studies.
+    this.getStudiesPage();
+
+    // Set the initial list of overall-statuses.
+    this.overallStatusesFiltered.next(this.overallStatuses.slice());
+    // Set the initial list of phases.
     this.phasesFiltered.next(this.phases.slice());
-    // Load the initial list of study-types.
+    // Set the initial list of study-types.
     this.studyTypesFiltered.next(this.studyTypes.slice());
 
+    // Retrieve the unique countries for this search's studies.
     this.studyStatsRetrieverService.getUniqueCountries(
       this.search.studies,
     ).map(
@@ -256,6 +248,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    // Retrieve the unique states/regions for this search's studies.
     this.studyStatsRetrieverService.getUniqueStates(
       this.search.studies,
     ).map(
@@ -285,6 +278,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    // Retrieve the unique cities for this search's studies.
     this.studyStatsRetrieverService.getUniqueCities(
       this.search.studies,
     ).map(
@@ -312,11 +306,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.formFilters
-      .get('filterRecruitmentStatus')
+      .get('filterOverallStatus')
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterRecruitmentStatuses();
+        this.filterOverallStatuses();
       });
 
     this.formFilters
@@ -365,7 +359,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.search.studies
     ).subscribe(
       (range: DateRange) => {
-        this.studyStartDateRange = range;
+        this.studyStartDateRangeAll = range;
       }
     );
 
@@ -375,7 +369,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.search.studies
     ).subscribe(
       (range: AgeRange) => {
-        this.studyEligibilityAgeRange = {
+        this.studyEligibilityAgeRangeAll = {
           ageBeg: Math.floor(range.ageBeg / 31536000.0),
           ageEnd: Math.ceil(range.ageEnd / 31536000.0),
         };
@@ -408,7 +402,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Sets the initial value after the filteredBanks are loaded initially
    */
   private setInitialValue() {
-    this.recruitmentStatusesFiltered
+    this.overallStatusesFiltered
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
         // setting the compareWith property to a comparison function
@@ -416,8 +410,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         // the form control (i.e. _initializeSelection())
         // this needs to be done after the filteredBanks are loaded initially
         // and after the mat-option elements are available
-        // this.selectRecruitmentStatus.compareWith = (a, b) => a.id === b.id;
-        this.selectRecruitmentStatus.compareWith = (a, b) => {
+        this.selectOverallStatus.compareWith = (a, b) => {
           if (a && b) {
             return a.id === b.id;
           }
@@ -481,26 +474,26 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  private filterRecruitmentStatuses() {
-    if (!this.recruitmentStatuses) {
+  private filterOverallStatuses() {
+    if (!this.overallStatuses) {
       return;
     }
     // Retrieve the search query.
-    let query = this.formFilters.get('filterRecruitmentStatus').value;
+    let query = this.formFilters.get('filterOverallStatus').value;
 
-    // If no query was provided emit all possible recruitment-status values.
+    // If no query was provided emit all possible overall-status values.
     // Otherwise lowercase the query in preparation for filtering.
     if (!query) {
-      this.recruitmentStatusesFiltered.next(this.recruitmentStatuses.slice());
+      this.overallStatusesFiltered.next(this.overallStatuses.slice());
       return;
     } else {
       query = query.toLowerCase();
     }
 
-    // Filter the possible recruitment-status values based on the search query
+    // Filter the possible overall-status values based on the search query
     // and emit the results.
-    this.recruitmentStatusesFiltered.next(
-      this.recruitmentStatuses.filter(
+    this.overallStatusesFiltered.next(
+      this.overallStatuses.filter(
         status => status.name.toLowerCase().indexOf(query) > -1
       )
     );
@@ -522,7 +515,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       query = query.toLowerCase();
     }
 
-    // Filter the possible recruitment-status values based on the search query
+    // Filter the possible overall-status values based on the search query
     // and emit the results.
     this.phasesFiltered.next(
       this.phases.filter(
@@ -633,21 +626,87 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getStudiesPage() {
 
+    let countries: string[] = [];
+    let states: string[] = [];
+    let cities: string[] = [];
+    let overallStatuses: StudyOverallStatus[] = [];
+    let phases: StudyPhase[] = [];
+    let studyTypes: StudyType[] = [];
+
+    // Retrieve the names of the selected countries (if any).
+    if (this.formFilters.get('selectStudyCountry').value) {
+      countries = this.formFilters.get('selectStudyCountry')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the names of the selected states (if any).
+    if (this.formFilters.get('selectStudyState').value) {
+      states = this.formFilters.get('selectStudyState')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the names of the selected cities (if any).
+    if (this.formFilters.get('selectStudyCity').value) {
+      cities = this.formFilters.get('selectStudyCity')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the selected overall-statuses (if any).
+    if (this.formFilters.get('selectOverallStatus').value) {
+      overallStatuses = this.formFilters.get('selectOverallStatus')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve the selected study-phases (if any).
+    if (this.formFilters.get('selectPhase').value) {
+      phases = this.formFilters.get('selectPhase')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve the selected study-types (if any).
+    if (this.formFilters.get('selectStudyType').value) {
+      studyTypes = this.formFilters.get('selectStudyType')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve studies using the selected filters.
     this.dataSourceStudies.filterStudies(
       this.search.studies,
+      countries || null,
+      states || null,
+      cities || null,
+      overallStatuses || null,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      this.sort.active,
-      OrderType[this.sort.direction.toUpperCase()],
-      this.paginator.pageSize,
+      phases || null,
+      studyTypes || null,
+      this.studyStartYearRangeSelected.yearBeg || null,
+      this.studyStartYearRangeSelected.yearEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      this.sort.active || 'nctId',
+      OrderType[this.sort.direction.toUpperCase()] || null,
+      this.paginator.pageSize || this.studiesPageSizeOptions[0],
       this.paginator.pageIndex * this.paginator.pageSize,
+    );
+
+    // Retrieve the number of studies matching the current filters.
+    this.studyRetrieverService.countStudies(
+      this.search.studies,
+      countries || null,
+      states || null,
+      cities || null,
+      overallStatuses || null,
+      null,
+      phases || null,
+      studyTypes || null,
+      this.studyStartYearRangeSelected.yearBeg || null,
+      this.studyStartYearRangeSelected.yearEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+    ).subscribe(
+      (studiesCount: number) => {
+        this.studiesCount = studiesCount;
+      }
     );
   }
 
@@ -715,5 +774,47 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return castOverallStatus(status);
   }
 
-}
+  onSliderYearRangeFinish(event: IonRangeSliderCallback) {
+    this.studyStartYearRangeSelected.yearBeg = event.from || null;
+    this.studyStartYearRangeSelected.yearEnd = event.to || null;
+  }
 
+  onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
+    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
+    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
+  }
+
+  /**
+   * Resets all filters to their default values and reloads studies.
+   */
+  onResetFilters() {
+    // Reset the paginator.
+    this.paginator.pageIndex = 0;
+
+    // Reset the form to its initial values.
+    this.formFilters.reset();
+    // Reset the year-range to its initial values.
+    this.sliderYearRange.reset();
+    this.studyStartYearRangeSelected.yearBeg = null;
+    this.studyStartYearRangeSelected.yearEnd = null;
+    // Reset the year-range to its initial values.
+    this.sliderAgeRange.reset();
+    this.studyEligibilityAgeRangeSelected.ageBeg = null;
+    this.studyEligibilityAgeRangeSelected.ageEnd = null;
+
+    // Refresh the studies to reflect the reset filters.
+    this.getStudiesPage();
+  }
+
+  /**
+   * Loads studies using the current filter values.
+   */
+  onSubmitFilters() {
+    // Reset the paginator.
+    this.paginator.pageIndex = 0;
+
+    // Refresh the studies to reflect the selected filters.
+    this.getStudiesPage();
+  }
+
+}

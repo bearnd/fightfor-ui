@@ -34,20 +34,20 @@
                       <div class="col-md-4">
                         <mat-form-field>
                           <mat-select
-                            id="selectRecruitmentStatus"
-                            formControlName="selectRecruitmentStatus"
-                            placeholder="Recruitment Status"
+                            id="selectOverallStatus"
+                            formControlName="selectOverallStatus"
+                            placeholder="Overall Status"
                             [multiple]="true"
-                            #selectRecruitmentStatus
+                            #selectOverallStatus
                           >
                             <ngx-mat-select-search
-                              formControlName="filterRecruitmentStatus"
+                              formControlName="filterOverallStatus"
                               placeholderLabel="Search"
-                              noEntriesFoundLabel="No such recruitment-status found"
+                              noEntriesFoundLabel="No such overall-status found"
                             >
                             </ngx-mat-select-search>
                             <mat-option
-                              *ngFor="let status of recruitmentStatusesFiltered | async"
+                              *ngFor="let status of overallStatusesFiltered | async"
                               [value]="status"
                             >
                               {{ status.name }}
@@ -190,15 +190,16 @@
                     <div class="row">
 
                       <div class="col-md-4">
-                          <label for="yearRange">Year-Range</label>
+                          <label for="sliderYearRange">Year-Range</label>
                           <ion-range-slider
-                            id="yearRange"
+                            id="sliderYearRange"
                             #sliderYearRange
                             type="double"
-                            [min]="studyStartDateRange.dateBeg.getFullYear()"
-                            [max]="studyStartDateRange.dateEnd.getFullYear()"
+                            [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
+                            [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
                             style="width: 300px;"
                             [prettify_enabled]="false"
+                            (onFinish)="onSliderYearRangeFinish($event)"
                           >
                           </ion-range-slider>
                       </div>
@@ -215,37 +216,53 @@
                           >
                             <mat-radio-button value="1">Male</mat-radio-button>
                             <mat-radio-button value="2">Female</mat-radio-button>
-                            <mat-radio-button
-                              value="3"
-                              [checked]="true"
-                            >All
-                            </mat-radio-button>
+                            <mat-radio-button value="3">All</mat-radio-button>
                           </mat-radio-group>
                         </div>
                       </div>
 
                       <div class="col-md-4">
-                          <label for="ageRange">Age-Range</label>
+                          <label for="sliderAgeRange">Age-Range</label>
                           <ion-range-slider
-                            id="ageRange"
+                            id="sliderAgeRange"
                             #sliderAgeRange
                             type="double"
-                            [min]="studyEligibilityAgeRange.ageBeg"
-                            [max]="studyEligibilityAgeRange.ageEnd"
+                            [min]="studyEligibilityAgeRangeAll.ageBeg"
+                            [max]="studyEligibilityAgeRangeAll.ageEnd"
                             style="width: 300px;"
                             [prettify_enabled]="false"
+                            (onFinish)="onSliderAgeRangeFinish($event)"
                           >
                           </ion-range-slider>
                       </div>
 
                     </div>
 
+                    <div class="row">
+                      <div class="col-md-12" style="padding-top: 20px">
+                        <button
+                          mat-raised-button
+                          type="button"
+                          class="btn btn-rose mat-raised-button"
+                          (click)="onResetFilters()"
+                        >
+                          <span class="mat-button-wrapper">Reset Filters</span>
+                        </button>
+                        <button
+                          mat-raised-button
+                          type="submit"
+                          class="btn btn-rose mat-raised-button pull-right"
+                        >
+                          <span class="mat-button-wrapper">Filter</span>
+                        </button>
+                      </div>
+                    </div>
 
                   </div>
                 </form>
 
               </div>
-
+              <hr>
               <h5>Studies</h5>
               <div class="row">
 
