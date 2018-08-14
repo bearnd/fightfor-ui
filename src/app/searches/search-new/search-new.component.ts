@@ -30,6 +30,9 @@ import { SearchInterface } from '../../interfaces/search.interface';
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
+  // Reference to the input-field element.
+  @ViewChild('inputDescriptors') inputDescriptors: ElementRef;
+
   // Subscription to the observable returned by `getMeshDescriptorsBySynonym`.
   subscriptionDescriptors: Subscription;
 
