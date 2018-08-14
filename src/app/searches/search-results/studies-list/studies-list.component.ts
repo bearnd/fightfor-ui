@@ -694,6 +694,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Resets all filters to their default values and reloads studies.
    */
   onResetFilters() {
+    // Reset the paginator.
+    this.paginator.pageIndex = 0;
+
     // Reset the form to its initial values.
     this.formFilters.reset();
     // Reset the year-range to its initial values.
@@ -709,6 +712,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Loads studies using the current filter values.
    */
   onSubmitFilters() {
+    // Reset the paginator.
+    this.paginator.pageIndex = 0;
+
     // Refresh the studies to reflect the selected filters.
     this.getStudiesPage();
   }
