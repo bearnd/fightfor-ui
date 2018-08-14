@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { COMMA, ENTER, TAB } from '@angular/cdk/keycodes';
@@ -7,8 +13,12 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
-import { MeshDescriptorInterface } from '../../interfaces/mesh-descriptor.interface';
-import { MeshDescriptorRetrieverService } from '../../services/mesh-descriptor-retriever.service';
+import {
+  MeshDescriptorInterface
+} from '../../interfaces/mesh-descriptor.interface';
+import {
+  MeshDescriptorRetrieverService
+} from '../../services/mesh-descriptor-retriever.service';
 import { SearchesService } from '../../services/searches.service';
 import { SearchInterface } from '../../interfaces/search.interface';
 
@@ -20,12 +30,15 @@ import { SearchInterface } from '../../interfaces/search.interface';
 })
 export class SearchNewComponent implements OnInit, OnDestroy {
 
+  // Subscription to the observable returned by `getMeshDescriptorsBySynonym`.
   subscriptionDescriptors: Subscription;
 
+  // `FormGroup` to encompass the form controls.
   form: FormGroup;
 
   isSaved = false;
 
+  // Arrays to hold the available and selected descriptors.
   descriptorsAll: MeshDescriptorInterface[] = [];
   descriptorsSelected: MeshDescriptorInterface[] = [];
 
@@ -40,6 +53,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    // Initialize the form controls.
     this.form = new FormGroup({
       descriptors: new FormControl(
         null,
@@ -104,6 +118,10 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     this.form.get('descriptors').setValue('');
   }
 
+  /**
+   * Creates a new search with the selected descriptors and navigates to the
+   * results-summary page where the search is performed.
+   */
   onSubmit() {
     // Create a new search with the selected descriptors.
     const search: SearchInterface = this.searches.createSearch(
