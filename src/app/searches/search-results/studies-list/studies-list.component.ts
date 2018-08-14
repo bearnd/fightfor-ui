@@ -626,21 +626,87 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getStudiesPage() {
 
+    let countries: string[] = [];
+    let states: string[] = [];
+    let cities: string[] = [];
+    let overallStatuses: StudyOverallStatus[] = [];
+    let phases: StudyPhase[] = [];
+    let studyTypes: StudyType[] = [];
+
+    // Retrieve the names of the selected countries (if any).
+    if (this.formFilters.get('selectStudyCountry').value) {
+      countries = this.formFilters.get('selectStudyCountry')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the names of the selected states (if any).
+    if (this.formFilters.get('selectStudyState').value) {
+      states = this.formFilters.get('selectStudyState')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the names of the selected cities (if any).
+    if (this.formFilters.get('selectStudyCity').value) {
+      cities = this.formFilters.get('selectStudyCity')
+        .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the selected overall-statuses (if any).
+    if (this.formFilters.get('selectOverallStatus').value) {
+      overallStatuses = this.formFilters.get('selectOverallStatus')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve the selected study-phases (if any).
+    if (this.formFilters.get('selectPhase').value) {
+      phases = this.formFilters.get('selectPhase')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve the selected study-types (if any).
+    if (this.formFilters.get('selectStudyType').value) {
+      studyTypes = this.formFilters.get('selectStudyType')
+        .value.map((entry) => entry.id);
+    }
+
+    // Retrieve studies using the selected filters.
     this.dataSourceStudies.filterStudies(
       this.search.studies,
+      countries || null,
+      states || null,
+      cities || null,
+      overallStatuses || null,
       null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      this.sort.active,
-      OrderType[this.sort.direction.toUpperCase()],
-      this.paginator.pageSize,
+      phases || null,
+      studyTypes || null,
+      this.studyStartYearRangeSelected.yearBeg || null,
+      this.studyStartYearRangeSelected.yearEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      this.sort.active || 'nctId',
+      OrderType[this.sort.direction.toUpperCase()] || null,
+      this.paginator.pageSize || this.studiesPageSizeOptions[0],
       this.paginator.pageIndex * this.paginator.pageSize,
+    );
+
+    // Retrieve the number of studies matching the current filters.
+    this.studyRetrieverService.countStudies(
+      this.search.studies,
+      countries || null,
+      states || null,
+      cities || null,
+      overallStatuses || null,
+      null,
+      phases || null,
+      studyTypes || null,
+      this.studyStartYearRangeSelected.yearBeg || null,
+      this.studyStartYearRangeSelected.yearEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+    ).subscribe(
+      (studiesCount: number) => {
+        this.studiesCount = studiesCount;
+      }
     );
   }
 
