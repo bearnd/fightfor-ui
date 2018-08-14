@@ -195,10 +195,11 @@
                             id="sliderYearRange"
                             #sliderYearRange
                             type="double"
-                            [min]="studyStartDateRange.dateBeg.getFullYear()"
-                            [max]="studyStartDateRange.dateEnd.getFullYear()"
+                            [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
+                            [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
                             style="width: 300px;"
                             [prettify_enabled]="false"
+                            (onFinish)="onSliderYearRangeFinish($event)"
                           >
                           </ion-range-slider>
                       </div>
@@ -226,10 +227,11 @@
                             id="sliderAgeRange"
                             #sliderAgeRange
                             type="double"
-                            [min]="studyEligibilityAgeRange.ageBeg"
-                            [max]="studyEligibilityAgeRange.ageEnd"
+                            [min]="studyEligibilityAgeRangeAll.ageBeg"
+                            [max]="studyEligibilityAgeRangeAll.ageEnd"
                             style="width: 300px;"
                             [prettify_enabled]="false"
+                            (onFinish)="onSliderAgeRangeFinish($event)"
                           >
                           </ion-range-slider>
                       </div>
