@@ -36,9 +36,14 @@ import {
   castOverallStatus,
   orderStringArray,
 } from '../../../shared/utils';
-import { StudyStatsRetrieverService } from '../../../services/study-stats-retriever.service';
-import { AgeRange, DateRange } from '../../../shared/common.interface';
 import { IonRangeSliderComponent } from 'ng2-ion-range-slider';
+import {
+  StudyStatsRetrieverService,
+} from '../../../services/study-stats-retriever.service';
+import {
+  AgeRange,
+  DateRange,
+} from '../../../shared/common.interface';
 
 
 interface EnumInterface {
@@ -87,9 +92,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Possible city values (to be populated in `ngOnInit`).
   private studyCities: StudyLocationInterface[] = [];
   // Possible start-date year values (to be populated in `ngOnInit`).
-  public studyStartDateRange: DateRange = {
+  public studyStartDateRangeAll: DateRange = {
     dateBeg: new Date('1900-01-01'),
     dateEnd: new Date('2100-12-31'),
+  };
+  // Selected start-date year values (to be populated in `ngOnInit`).
+  public studyStartYearRangeSelected: YearRange = {
+    yearBeg: null,
+    yearEnd: null,
   };
   // Possible eligibility age-range values in years (to be populated in
   // `ngOnInit`).
@@ -341,7 +351,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.search.studies
     ).subscribe(
       (range: DateRange) => {
-        this.studyStartDateRange = range;
+        this.studyStartDateRangeAll = range;
       }
     );
 
@@ -690,6 +700,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return castOverallStatus(status);
   }
 
+  onSliderYearRangeFinish(event: IonRangeSliderCallback) {
+    this.studyStartYearRangeSelected.yearBeg = event.from || null;
+    this.studyStartYearRangeSelected.yearEnd = event.to || null;
+  }
+
   /**
    * Resets all filters to their default values and reloads studies.
    */
@@ -701,6 +716,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.formFilters.reset();
     // Reset the year-range to its initial values.
     this.sliderYearRange.reset();
+    this.studyStartYearRangeSelected.yearBeg = null;
+    this.studyStartYearRangeSelected.yearEnd = null;
     // Reset the year-range to its initial values.
     this.sliderAgeRange.reset();
 
