@@ -32,6 +32,8 @@ interface VariablesFilterStudies {
   studyTypes?: StudyType[]
   yearBeg?: number
   yearEnd?: number
+  ageBeg?: number
+  ageEnd?: number
   orderBy?: string
   order?: OrderType
   limit?: number
@@ -49,6 +51,8 @@ interface VariablesCountStudies {
   studyTypes?: StudyType[]
   yearBeg?: number
   yearEnd?: number
+  ageBeg?: number
+  ageEnd?: number
 }
 
 interface ResponseSearchStudies {
@@ -98,7 +102,7 @@ export class StudyRetrieverService {
           doIncludeChildren: true,
         ) {
           studyId,
-          nctId
+          nctId,
         }
       }
     }
@@ -108,7 +112,7 @@ export class StudyRetrieverService {
     query($nctId: String!) {
        getStudyByNctId(nctId: $nctId) {
         studyId,
-        nctId
+        nctId,
       }
     }
   `;
@@ -125,6 +129,8 @@ export class StudyRetrieverService {
       $studyTypes: [StudyType],
       $yearBeg: Int,
       $yearEnd: Int,
+      $ageBeg: Int,
+      $ageEnd: Int,
       $orderBy: String,
       $order: TypeEnumOrder,
       $limit: Int,
@@ -142,6 +148,8 @@ export class StudyRetrieverService {
           studyTypes: $studyTypes,
           yearBeg: $yearBeg,
           yearEnd: $yearEnd,
+          ageBeg: $ageBeg,
+          ageEnd: $ageEnd,
           orderBy: $orderBy,
           order: $order,
           limit: $limit,
@@ -163,10 +171,7 @@ export class StudyRetrieverService {
             meshTerm {
               term,
             },
-          },
-          phase,
-          studyType,
-          startDate,
+          }
         }
       }
     }
@@ -184,6 +189,8 @@ export class StudyRetrieverService {
       $studyTypes: [StudyType],
       $yearBeg: Int,
       $yearEnd: Int,
+      $ageBeg: Int,
+      $ageEnd: Int,
     ) {
       studies {
         count(
@@ -197,6 +204,8 @@ export class StudyRetrieverService {
           studyTypes: $studyTypes,
           yearBeg: $yearBeg,
           yearEnd: $yearEnd,
+          ageBeg: $ageBeg,
+          ageEnd: $ageEnd,
         ) 
       }
     }
@@ -276,6 +285,10 @@ export class StudyRetrieverService {
    * start to be included.
    * @param {number} yearEnd Latest year (inclusive) a filtered study can start
    * to be included.
+   * @param {number} ageBeg Minimum eligibility age in seconds a filtered
+   * study may have to be included.
+   * @param {number} ageEnd Maximum eligibility age in seconds a filtered
+   * study may have to be included.
    * @param {string} orderBy Field to order the results by.
    * @param {OrderType} order The ordering direction.
    * @param {number} limit The number of studies to limit the results to (used
@@ -293,6 +306,8 @@ export class StudyRetrieverService {
     studyTypes?: StudyType[],
     yearBeg?: number,
     yearEnd?: number,
+    ageBeg?: number,
+    ageEnd?: number,
     orderBy?: string,
     order?: OrderType,
     limit?: number,
@@ -322,6 +337,8 @@ export class StudyRetrieverService {
           studyTypes: studyTypes,
           yearBeg: yearBeg,
           yearEnd: yearEnd,
+          ageBeg: ageBeg,
+          ageEnd: ageEnd,
           orderBy: orderBy,
           order: order,
           limit: limit,
@@ -353,6 +370,10 @@ export class StudyRetrieverService {
    * start to be included.
    * @param {number} yearEnd Latest year (inclusive) a filtered study can start
    * to be included.
+   * @param {number} ageBeg Minimum eligibility age in seconds a filtered
+   * study may have to be included.
+   * @param {number} ageEnd Maximum eligibility age in seconds a filtered
+   * study may have to be included.
    */
   countStudies(
     studies: StudyInterface[],
@@ -365,6 +386,8 @@ export class StudyRetrieverService {
     studyTypes?: StudyType[],
     yearBeg?: number,
     yearEnd?: number,
+    ageBeg?: number,
+    ageEnd?: number,
   ) {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingCountStudies.next(true);
@@ -390,6 +413,8 @@ export class StudyRetrieverService {
           studyTypes: studyTypes,
           yearBeg: yearBeg,
           yearEnd: yearEnd,
+          ageBeg: ageBeg,
+          ageEnd: ageEnd,
         }
       }).map((response) => {
         // Update the 'loading' observable to indicate that loading is complete.
