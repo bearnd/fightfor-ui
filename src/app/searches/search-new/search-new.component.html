@@ -33,7 +33,10 @@
 
               <div class="form-group">
                 <!--Conditions chip-input with autocomplete.-->
-                <mat-form-field class="term-list-input">
+                <mat-form-field
+                  class="term-list-input"
+                  [hintLabel]="descriptorsSelected.length ? null: 'Enter terms you would like to search for and select the corresponding descriptors'"
+                >
                   <mat-chip-list #descriptorsChipList>
                     <mat-chip
                       *ngFor="let descriptor of descriptorsSelected"
