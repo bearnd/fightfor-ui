@@ -20,7 +20,8 @@
                   class="btn btn-rose btn-link btn-round btn-fab pull-right"
                   (click)="toggleSaved()"
                   [disableRipple]="true"
-                  matTooltip="Save this search" [matTooltipPosition]="'left'"
+                  matTooltip="Save this search"
+                  [matTooltipPosition]="'before'"
                 >
                   <i class="material-icons">{{ isSaved ? "favorite" : "favorite_border" }}</i>
                 </button>
