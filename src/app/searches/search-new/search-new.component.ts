@@ -25,6 +25,7 @@ import { DateRange, YearRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
+import { IonRangeSliderCallback } from 'ng2-ion-range-slider';
 
 
 @Component({
@@ -161,6 +162,11 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
     // Navigate to the `SearchResultsComponent` with the new search.
     this.router.navigate(['/searches', search.searchUuid]);
+  }
+
+  onSliderYearRangeFinish(event: IonRangeSliderCallback) {
+    this.studyStartYearRangeSelected.yearBeg = event.from || null;
+    this.studyStartYearRangeSelected.yearEnd = event.to || null;
   }
 
   ngOnDestroy() {
