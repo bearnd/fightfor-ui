@@ -21,6 +21,11 @@ import {
 } from '../../services/mesh-descriptor-retriever.service';
 import { SearchesService } from '../../services/searches.service';
 import { SearchInterface } from '../../interfaces/search.interface';
+import { DateRange, YearRange } from '../../shared/common.interface';
+import {
+  StudyStatsRetrieverService
+} from '../../services/study-stats-retriever.service';
+import { IonRangeSliderCallback } from 'ng2-ion-range-slider';
 
 
 @Component({
@@ -45,11 +50,24 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   descriptorsAll: MeshDescriptorInterface[] = [];
   descriptorsSelected: MeshDescriptorInterface[] = [];
 
+  // Possible start-date year values (to be populated in `ngOnInit`).
+  public studyStartDateRangeAll: DateRange = {
+    dateBeg: new Date('1900-01-01'),
+    dateEnd: new Date('2100-12-31'),
+  };
+  // Selected start-date year values (defaulting to +-5 years around the
+  // current year).
+  public studyStartYearRangeSelected: YearRange = {
+    yearBeg: (new Date).getFullYear() - 5,
+    yearEnd: (new Date).getFullYear() + 5,
+  };
+
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
   constructor(
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
     private searches: SearchesService,
+    private studyStatsRetrieverService: StudyStatsRetrieverService,
     private router: Router,
   ) {
   }
@@ -63,6 +81,14 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         [Validators.required]
       ),
     });
+
+    // Query out the date-range of all studies to populate the slider range.
+    this.studyStatsRetrieverService.getStartDateRange()
+      .subscribe(
+      (range: DateRange) => {
+        this.studyStartDateRangeAll = range;
+      }
+    );
 
     // Subscribe to the `valueChanges` observable of the input control and
     // perform a synonym-search for matching MeSH descriptors with a 400ms
@@ -129,11 +155,18 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   onSubmit() {
     // Create a new search with the selected descriptors.
     const search: SearchInterface = this.searches.createSearch(
-      this.descriptorsSelected
+      this.descriptorsSelected,
+      this.studyStartYearRangeSelected.yearBeg,
+      this.studyStartYearRangeSelected.yearEnd,
     );
 
     // Navigate to the `SearchResultsComponent` with the new search.
     this.router.navigate(['/searches', search.searchUuid]);
+  }
+
+  onSliderYearRangeFinish(event: IonRangeSliderCallback) {
+    this.studyStartYearRangeSelected.yearBeg = event.from || null;
+    this.studyStartYearRangeSelected.yearEnd = event.to || null;
   }
 
   ngOnDestroy() {

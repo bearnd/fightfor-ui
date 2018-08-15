@@ -35,9 +35,17 @@ export class SearchesService {
    * `this.searches`.
    * @param {MeshDescriptorInterface[]} descriptors The MeSH descriptors
    * selected for this search.
+   * @param {number} yearBeg The beginning of the year-range studies will be
+   * limited to for this search.
+   * @param {number} yearEnd The end of the year-range studies will be limited
+   * to for this search.
    * @returns {SearchInterface} The created search.
    */
-  createSearch(descriptors: MeshDescriptorInterface[]) {
+  createSearch(
+    descriptors: MeshDescriptorInterface[],
+    yearBeg?: number,
+    yearEnd?: number,
+  ) {
     // Create a new UUID for the new search.
     const searchUuid = UUID.UUID();
 
@@ -45,6 +53,8 @@ export class SearchesService {
     const search: SearchInterface = {
       searchUuid: searchUuid,
       descriptors: descriptors,
+      yearBeg: yearBeg || null,
+      yearEnd: yearEnd || null,
       studiesStats: {},
     };
 

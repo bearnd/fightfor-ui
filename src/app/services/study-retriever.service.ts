@@ -19,6 +19,9 @@ import {
 
 interface VariablesSearchStudies {
   meshDescriptorIds: number[]
+  yearBeg?: number
+  yearEnd?: number
+  doIncludeChildren?: boolean
 }
 
 interface VariablesFilterStudies {
@@ -95,11 +98,18 @@ export class StudyRetrieverService {
   public isLoadingCountStudies = this.loadingCountStudies.asObservable();
 
   querySearchStudies = gql`
-    query searchStudies($meshDescriptorIds: [Int]!) {
+    query searchStudies(
+      $meshDescriptorIds: [Int]!,
+      $yearBeg: Int,
+      $yearEnd: Int,
+      $doIncludeChildren: Boolean,
+    ) {
       studies {
         search(
           meshDescriptorIds: $meshDescriptorIds,
-          doIncludeChildren: true,
+          yearBeg: $yearBeg,
+          yearEnd: $yearEnd,
+          doIncludeChildren: $doIncludeChildren,
         ) {
           studyId,
           nctId,
@@ -240,9 +250,15 @@ export class StudyRetrieverService {
    * studies are associated with.
    * @param {MeshDescriptorInterface[]} descriptors Array of MeSH descriptors
    * for which the search is performed
+   * @param {number} yearBeg The beginning of the year-range studies will be
+   * limited to for this search.
+   * @param {number} yearEnd The end of the year-range studies will be limited
+   * to for this search.
    */
   searchStudies(
     descriptors: MeshDescriptorInterface[],
+    yearBeg?: number,
+    yearEnd?: number,
   ) {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingSearchStudies.next(true);
@@ -259,6 +275,9 @@ export class StudyRetrieverService {
         query: this.querySearchStudies,
         variables: {
           meshDescriptorIds: descriptorIds,
+          yearBeg: yearBeg || null,
+          yearEnd: yearEnd || null,
+          doIncludeChildren: true,
         }
       }).map((response) => {
         // Update the 'loading' observable to indicate that loading is complete.

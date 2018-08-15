@@ -20,7 +20,8 @@
                   class="btn btn-rose btn-link btn-round btn-fab pull-right"
                   (click)="toggleSaved()"
                   [disableRipple]="true"
-                  matTooltip="Save this search" [matTooltipPosition]="'left'"
+                  matTooltip="Save this search"
+                  [matTooltipPosition]="'before'"
                 >
                   <i class="material-icons">{{ isSaved ? "favorite" : "favorite_border" }}</i>
                 </button>
@@ -32,7 +33,10 @@
 
               <div class="form-group">
                 <!--Conditions chip-input with autocomplete.-->
-                <mat-form-field class="term-list-input">
+                <mat-form-field
+                  class="term-list-input"
+                  [hintLabel]="descriptorsSelected.length ? null: 'Enter terms you would like to search for and select the corresponding descriptors'"
+                >
                   <mat-chip-list #descriptorsChipList>
                     <mat-chip
                       *ngFor="let descriptor of descriptorsSelected"
@@ -54,6 +58,7 @@
                       [matChipInputFor]="descriptorsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
+                    <mat-error *ngIf="form.get('descriptors').touched && !descriptorsSelected.length">Please select at least one descriptor</mat-error>
                   </mat-chip-list>
                   <!--Autocomplete for conditions chip-input.-->
                   <mat-autocomplete
@@ -69,10 +74,28 @@
               </div>
 
               <div class="form-group">
+                <label for="sliderYearRange">Year-Range</label>
+                <ion-range-slider
+                  id="sliderYearRange"
+                  #sliderYearRange
+                  type="double"
+                  [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
+                  [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
+                  [from]="studyStartYearRangeSelected.yearBeg"
+                  [to]="studyStartYearRangeSelected.yearEnd"
+                  style="width: 300px;"
+                  [prettify_enabled]="false"
+                  (onFinish)="onSliderYearRangeFinish($event)"
+                >
+                </ion-range-slider>
+              </div>
+
+              <div class="form-group">
                 <button
                   mat-raised-button
                   type="submit"
                   class="btn btn-rose mat-raised-button pull-right"
+                  [disabled]="!descriptorsSelected.length"
                 >
                   <span class="mat-button-wrapper">Search</span>
                 </button>

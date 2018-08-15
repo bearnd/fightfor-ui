@@ -173,7 +173,11 @@ export class SearchResultsSummaryComponent implements OnInit {
     // Perform the search retrieving the clinical-trial studies and setting
     // them under the search object.
     this.studyRetrieverService
-      .searchStudies(this.search.descriptors)
+      .searchStudies(
+        this.search.descriptors,
+        this.search.yearBeg || null,
+        this.search.yearEnd || null,
+      )
       .subscribe(
         (studies) => {
           // Assign the retrieved studies to the search.
