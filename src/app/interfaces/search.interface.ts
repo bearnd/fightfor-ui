@@ -23,6 +23,8 @@ export interface SearchInterface {
   searchUuid: string
   title?: string
   descriptors: MeshDescriptorInterface[]
+  yearBeg?: number
+  yearEnd?: number
   studies?: StudyInterface[]
   studiesFiltered?: StudyInterface[]
   studiesStats: {
