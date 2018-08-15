@@ -73,7 +73,7 @@ interface ResponseGetUniqueCountries {
 }
 
 interface VariablesGetStartDateRange {
-  studyIds: number[]
+  studyIds?: number[]
 }
 
 interface ResponseGetStartDateRange {
@@ -192,7 +192,7 @@ export class StudyStatsRetrieverService {
 
   queryGetStartDateRange = gql`
     query getDateRange(
-      $studyIds: [Int]!,
+      $studyIds: [Int],
     ) {
       studiesStats {
         getDateRange(
@@ -417,22 +417,26 @@ export class StudyStatsRetrieverService {
    * @returns {Observable<DateRange>} The start-date date-range.
    */
   getStartDateRange(
-    studies: StudyInterface[],
+    studies?: StudyInterface[],
   ): Observable<DateRange> {
 
     // Retrieve the IDs out of the provided studies.
-    const studyIds: number[] = studies.map(
-      function (d) {
-        return d.studyId;
-      }
-    );
+    let studyIds: number[] = [];
+    if (studies) {
+      studyIds = studies.map(
+        function (d) {
+          return d.studyId;
+        }
+      );
+    }
+
 
     return this.apollo
       .query<ResponseGetStartDateRange,
         VariablesGetStartDateRange>
       ({
         query: this.queryGetStartDateRange,
-        variables: {studyIds: studyIds},
+        variables: {studyIds: studyIds || null},
       }).map((response) => {
         return {
           dateBeg: new Date(response.data.studiesStats.getDateRange.dateBeg),
