@@ -91,6 +91,7 @@
                   mat-raised-button
                   type="submit"
                   class="btn btn-rose mat-raised-button pull-right"
+                  [disabled]="!descriptorsSelected.length"
                 >
                   <span class="mat-button-wrapper">Search</span>
                 </button>
