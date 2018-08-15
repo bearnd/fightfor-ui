@@ -11,6 +11,8 @@ export let searchSample: SearchInterface = {
 
     }
   ],
+  yearBeg: 2015,
+  yearEnd: 2018,
   studiesStats: {
     byCountry: [
       {
