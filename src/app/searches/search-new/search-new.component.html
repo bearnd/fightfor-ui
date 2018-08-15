@@ -58,6 +58,7 @@
                       [matChipInputFor]="descriptorsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
+                    <mat-error *ngIf="form.get('descriptors').touched && !descriptorsSelected.length">Please select at least one descriptor</mat-error>
                   </mat-chip-list>
                   <!--Autocomplete for conditions chip-input.-->
                   <mat-autocomplete
