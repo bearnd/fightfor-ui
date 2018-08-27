@@ -16,6 +16,7 @@ import {
   MatSortModule,
   MatSelectModule,
   MatRadioModule,
+  MatDialogModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
@@ -32,6 +33,9 @@ import { SearchNewComponent } from '../../searches/search-new/search-new.compone
 import { SearchesGridComponent } from '../../searches/searches-grid/searches-grid.component';
 import { SearchResultsSummaryComponent } from '../../searches/search-results/search-results-summary/search-results-summary.component';
 import { StudiesListComponent } from '../../searches/search-results/studies-list/studies-list.component';
+import {
+  StudyPreviewDialogComponent
+} from '../../searches/search-results/studies-list/study-preview-dialog/study-preview-dialog.component';
 
 
 @NgModule({
@@ -53,6 +57,7 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     MatAutocompleteModule,
     MatSelectModule,
     MatRadioModule,
+    MatDialogModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
     TruncateModule,
@@ -67,8 +72,10 @@ import { StudiesListComponent } from '../../searches/search-results/studies-list
     SearchNewComponent,
     SearchesGridComponent,
     StudiesListComponent,
+    StudyPreviewDialogComponent,
   ],
-  providers: [PageScrollService]
+  providers: [PageScrollService],
+  entryComponents: [StudyPreviewDialogComponent],
 })
 
 export class AdminLayoutModule {}
