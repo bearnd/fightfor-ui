@@ -54,6 +54,7 @@ import {
   AgeRange,
   DateRange,
   YearRange,
+  overallStatusGroups,
 } from '../../../shared/common.interface';
 import { StudyPreviewDialogComponent } from './study-preview-dialog/study-preview-dialog.component';
 
@@ -91,8 +92,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
 
-  // Possible overall-status values.
-  private overallStatuses = castEnumToArray(StudyOverallStatus);
+  // Possible overall-status values (to be populated in `ngOnInit`).
+  private overallStatuses: {id: string, name: string}[];
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -179,6 +180,22 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
     // Retrieve the referenced search.
     this.search = this.searchesService.getSearch(searchUuid);
+
+    // Retrieve the referenced overall-status.
+    const overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    // Convert the referenced overall-status enum members and convert them to
+    // an array of `{id: key, name: value}` objects which can be used in the
+    // filter element.
+    this.overallStatuses = overallStatusGroups[overallStatusGroup]
+      .map(
+        (member) => {
+          return {
+            id: Object.keys(StudyOverallStatus)
+              .find(key => StudyOverallStatus[key] === member),
+            name: member.valueOf(),
+          }
+        }
+      );
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
 
@@ -638,9 +655,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     let countries: string[] = [];
     let states: string[] = [];
     let cities: string[] = [];
-    let overallStatuses: StudyOverallStatus[] = [];
-    let phases: StudyPhase[] = [];
-    let studyTypes: StudyType[] = [];
+    let overallStatuses: string[] = [];
+    let phases: string[] = [];
+    let studyTypes: string[] = [];
 
     // Retrieve the names of the selected countries (if any).
     if (this.formFilters.get('selectStudyCountry').value) {
@@ -664,6 +681,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.formFilters.get('selectOverallStatus').value) {
       overallStatuses = this.formFilters.get('selectOverallStatus')
         .value.map((entry) => entry.id);
+    } else {
+      overallStatuses = this.overallStatuses
+        .map((entry) => entry.id)
     }
 
     // Retrieve the selected study-phases (if any).

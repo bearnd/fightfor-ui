@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -18,6 +18,7 @@ import {
 import {
   StudyStatsRetrieverService,
 } from '../../../services/study-stats-retriever.service';
+import { overallStatusGroups } from '../../../shared/common.interface';
 
 
 @Component({
@@ -71,24 +72,6 @@ export class SearchResultsSummaryComponent implements OnInit {
   // The search the component will display results for.
   public search: SearchInterface;
 
-  // Create a grouping of overall status values to match the template desing.
-  overallStatusGroups = {
-    recruiting: [
-      'Enrolling by invitation',
-      'Recruiting',
-      'Available'
-    ],
-    completed: [
-      'Completed',
-      'Terminated',
-      'Withdrawn',
-    ],
-    active: [
-      'Active, not recruiting',
-    ],
-    all: Object.values(StudyOverallStatus),
-  };
-
   countStudiesOverStatus = {
     recruiting: null,
     completed: null,
@@ -104,6 +87,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -252,22 +236,22 @@ export class SearchResultsSummaryComponent implements OnInit {
           // can be rendered in the template.
           this.countStudiesOverStatus.recruiting =
             this.getCountStudiesOverallStatus(
-              this.overallStatusGroups.recruiting,
+              overallStatusGroups.recruiting,
             );
 
           this.countStudiesOverStatus.active =
             this.getCountStudiesOverallStatus(
-              this.overallStatusGroups.active,
+              overallStatusGroups.active,
             );
 
           this.countStudiesOverStatus.completed =
             this.getCountStudiesOverallStatus(
-              this.overallStatusGroups.completed,
+              overallStatusGroups.completed,
             );
 
           this.countStudiesOverStatus.all =
             this.getCountStudiesOverallStatus(
-              this.overallStatusGroups.all,
+              overallStatusGroups.all,
             );
 
           // Indicate that `getCountStudiesByOverallStatus` is complete for
@@ -313,17 +297,22 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Count the number of studies whose `overallStatus` has one of the values
    * defined under `overallStatusValues`.
-   * @param {string[]} overallStatusValues The possible overall status values
-   * for which studies will be counted.
+   * @param {StudyOverallStatus[]} overallStatusMembers The possible overall
+   * status values for which studies will be counted.
    * @returns {number} The number of studies whose overall status matches one of
    * the values under `overallStatusValues`.
    */
   getCountStudiesOverallStatus(
-    overallStatusValues: string[],
+    overallStatusMembers: StudyOverallStatus[],
   ): number {
 
     // Initialize the count.
     let count = 0;
+
+    // Create an array of the defined overallStatus members.
+    const overallStatusValues = overallStatusMembers.map(
+      (member) => {return member.valueOf()}
+      );
 
     // Iterate over the count of studies by overall status and add the number
     // of studies if their overall status is one of those defined under
@@ -335,6 +324,25 @@ export class SearchResultsSummaryComponent implements OnInit {
     }
 
     return count;
+  }
+
+  /**
+   * Navigate to the `StudiesListComponent` passing the search UUID and
+   * overall-status group to be used in filtering studies.
+   * @param searchUuid The search UUID for which to display studies.
+   * @param overallStatusGroupName The group of overall-statuses to filter the
+   * studies by.
+   */
+  onNavigateToList(searchUuid: string, overallStatusGroupName: string) {
+
+    this.router.navigate(
+      [
+        '/searches',
+        searchUuid,
+        'trials',
+        overallStatusGroupName,
+      ],
+    );
   }
 
 }
