@@ -281,8 +281,12 @@
                     <mat-header-row
                       *matHeaderRowDef="displayedColumns"
                     ></mat-header-row>
+                    <!--Clicking any row will open a preview-dialog for that
+                    study.-->
                     <mat-row
                       *matRowDef="let row; columns: displayedColumns;"
+                      (click)="onOpenStudyPreviewDialog(row)"
+                      style="cursor: pointer"
                     ></mat-row>
 
                     <!-- NCT ID column -->
