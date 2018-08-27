@@ -156,7 +156,10 @@
                     <div class="card-footer">
                       <div class="stats">
                         <i class="material-icons text-primary">list_alt</i>
-                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'recruiting']">View recruiting trials</a>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'recruiting')"
+                          style="cursor: pointer"
+                        >View recruiting trials</a>
                       </div>
                     </div>
                   </div>
@@ -176,7 +179,10 @@
                     <div class="card-footer">
                       <div class="stats">
                         <i class="material-icons text-primary">list_alt</i>
-                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View active trials</a>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'active')"
+                          style="cursor: pointer"
+                        >View active trials</a>
                       </div>
                     </div>
                   </div>
@@ -196,7 +202,10 @@
                     <div class="card-footer">
                       <div class="stats">
                         <i class="material-icons text-primary">list_alt</i>
-                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View completed trials</a>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'completed')"
+                          style="cursor: pointer"
+                        >View completed trials</a>
                       </div>
                     </div>
                   </div>
@@ -216,7 +225,10 @@
                     <div class="card-footer">
                       <div class="stats">
                         <i class="material-icons text-primary">list_alt</i>
-                        <a [routerLink]="['/searches', search.searchUuid, 'trials', 'all']">View all trials</a>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'all')"
+                          style="cursor: pointer"
+                        >View all trials</a>
                       </div>
                     </div>
                   </div>

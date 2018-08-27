@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -87,6 +87,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -323,6 +324,25 @@ export class SearchResultsSummaryComponent implements OnInit {
     }
 
     return count;
+  }
+
+  /**
+   * Navigate to the `StudiesListComponent` passing the search UUID and
+   * overall-status group to be used in filtering studies.
+   * @param searchUuid The search UUID for which to display studies.
+   * @param overallStatusGroupName The group of overall-statuses to filter the
+   * studies by.
+   */
+  onNavigateToList(searchUuid: string, overallStatusGroupName: string) {
+
+    this.router.navigate(
+      [
+        '/searches',
+        searchUuid,
+        'trials',
+        overallStatusGroupName,
+      ],
+    );
   }
 
 }
