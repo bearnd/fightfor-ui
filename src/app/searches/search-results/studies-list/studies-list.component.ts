@@ -655,9 +655,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     let countries: string[] = [];
     let states: string[] = [];
     let cities: string[] = [];
-    let overallStatuses: StudyOverallStatus[] = [];
-    let phases: StudyPhase[] = [];
-    let studyTypes: StudyType[] = [];
+    let overallStatuses: string[] = [];
+    let phases: string[] = [];
+    let studyTypes: string[] = [];
 
     // Retrieve the names of the selected countries (if any).
     if (this.formFilters.get('selectStudyCountry').value) {

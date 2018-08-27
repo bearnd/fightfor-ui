@@ -29,10 +29,10 @@ interface VariablesFilterStudies {
   countries?: string[]
   states?: string[]
   cities?: string[]
-  overallStatuses?: StudyOverallStatus[]
-  interventionTypes?: InterventionType[]
-  phases?: StudyPhase[]
-  studyTypes?: StudyType[]
+  overallStatuses?: string[]
+  interventionTypes?: string[]
+  phases?: string[]
+  studyTypes?: string[]
   yearBeg?: number
   yearEnd?: number
   ageBeg?: number
@@ -48,10 +48,10 @@ interface VariablesCountStudies {
   countries?: string[]
   states?: string[]
   cities?: string[]
-  overallStatuses?: StudyOverallStatus[]
-  interventionTypes?: InterventionType[]
-  phases?: StudyPhase[]
-  studyTypes?: StudyType[]
+  overallStatuses?: string[]
+  interventionTypes?: string[]
+  phases?: string[]
+  studyTypes?: string[]
   yearBeg?: number
   yearEnd?: number
   ageBeg?: number
@@ -319,10 +319,10 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
-    overallStatuses?: StudyOverallStatus[],
-    interventionTypes?: InterventionType[],
-    phases?: StudyPhase[],
-    studyTypes?: StudyType[],
+    overallStatuses?: string[],
+    interventionTypes?: string[],
+    phases?: string[],
+    studyTypes?: string[],
     yearBeg?: number,
     yearEnd?: number,
     ageBeg?: number,
@@ -399,10 +399,10 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
-    overallStatuses?: StudyOverallStatus[],
-    interventionTypes?: InterventionType[],
-    phases?: StudyPhase[],
-    studyTypes?: StudyType[],
+    overallStatuses?: string[],
+    interventionTypes?: string[],
+    phases?: string[],
+    studyTypes?: string[],
     yearBeg?: number,
     yearEnd?: number,
     ageBeg?: number,
