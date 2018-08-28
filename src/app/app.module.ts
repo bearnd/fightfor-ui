@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireModule } from 'angularfire2';
 import { McBreadcrumbsComponent, McBreadcrumbsModule, McBreadcrumbsService } from 'ngx-breadcrumbs';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
@@ -31,7 +30,6 @@ import { environment } from '../environments/environment';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
     LoadingBarHttpClientModule,
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
