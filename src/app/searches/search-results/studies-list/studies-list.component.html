@@ -268,102 +268,112 @@
 
                 <div class="col-md-12">
 
-                  <mat-table
+                  <table
+                    mat-table
                     #table
                     [dataSource]="dataSourceStudies"
                     matSort
                     matSortActive="nctId"
                     matSortDirection="asc"
                     matSortDisableClear
+                    width="100%"
                   >
 
                     <!--Header.-->
-                    <mat-header-row
+                    <tr
+                      mat-header-row
                       *matHeaderRowDef="displayedColumns"
-                    ></mat-header-row>
+                    ></tr>
                     <!--Clicking any row will open a preview-dialog for that
                     study.-->
-                    <mat-row
+                    <tr
+                      mat-row
                       *matRowDef="let row; columns: displayedColumns;"
                       (click)="onOpenStudyPreviewDialog(row)"
                       style="cursor: pointer"
-                    ></mat-row>
+                    ></tr>
 
                     <!-- NCT ID column -->
                     <ng-container matColumnDef="nctId">
-                      <mat-header-cell
+                      <th mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
                         NCT ID
-                      </mat-header-cell>
-                      <mat-cell
+                      </th>
+                      <td
+                        mat-cell
                         *matCellDef="let study"
                       >
                         {{study.nctId}}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
                     <!-- Overall status column -->
                     <ng-container matColumnDef="overallStatus">
-                      <mat-header-cell
+                      <th
+                        mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
                         Status
-                      </mat-header-cell>
-                      <mat-cell *matCellDef="let study">
+                      </th>
+                      <td mat-cell *matCellDef="let study">
                         {{castOverallStatus(study.overallStatus)}}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
                     <!-- Brief title column -->
                     <ng-container matColumnDef="briefTitle">
-                      <mat-header-cell
+                      <th
+                        mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
                         Title
-                      </mat-header-cell>
-                      <mat-cell *matCellDef="let study">
+                      </th>
+                      <td mat-cell *matCellDef="let study">
                         {{study.briefTitle | truncate:77}}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
                     <!-- Conditions column -->
                     <ng-container matColumnDef="conditions">
-                      <mat-header-cell
+                      <th
+                        mat-header-cell
                         *matHeaderCellDef
                       >Conditions
-                      </mat-header-cell>
-                      <mat-cell *matCellDef="let study">
+                      </th>
+                      <td mat-cell *matCellDef="let study">
                         {{ getStudyConditionMeshTerms(study) }}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
                     <!-- Interventions column -->
                     <ng-container matColumnDef="interventions">
-                      <mat-header-cell
+                      <th
+                        mat-header-cell
                         *matHeaderCellDef
                       >Interventions
-                      </mat-header-cell>
-                      <mat-cell *matCellDef="let study">
+                      </th>
+                      <td mat-cell *matCellDef="let study">
                         {{ getStudyInterventionMeshTerms(study) }}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
                     <!-- Locations column -->
                     <ng-container matColumnDef="locations">
-                      <mat-header-cell
+                      <th
+                        mat-header-cell
                         *matHeaderCellDef
                       >Locations
-                      </mat-header-cell>
-                      <mat-cell *matCellDef="let study">
+                      </th>
+                      <td mat-cell *matCellDef="let study">
                         {{ getStudyLocation(study) }}
-                      </mat-cell>
+                      </td>
                     </ng-container>
 
-                  </mat-table>
+                  </table>
 
                   <mat-paginator
                     [length]="studiesCount"
