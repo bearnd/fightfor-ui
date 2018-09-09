@@ -266,7 +266,7 @@
 
                   <!--Locations table.-->
                   <div class="content table-responsive" *ngIf="!(isLoadingGetCountStudiesByCountry | async)">
-                    <mat-table #tableLocations [dataSource]="dataSourceLocations" class="table table-hover">
+                    <table mat-table #tableLocations [dataSource]="dataSourceLocations" class="table table-hover" width="100%">
                       <!--Header.-->
                       <mat-header-row *matHeaderRowDef="displayedColumnsLocations"></mat-header-row>
                       <mat-row *matRowDef="let row; columns: displayedColumnsLocations;"></mat-row>
@@ -288,7 +288,7 @@
                         <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
                         <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
                       </ng-container>
-                    </mat-table>
+                    </table>
                   </div>
 
                 </div>
@@ -324,53 +324,53 @@
 
                   <!--Locations table.-->
                   <div class="content table-responsive">
-                    <mat-table #tableFacilities [dataSource]="dataSourceFacilities" class="table table-hover">
+                    <table mat-table #tableFacilities [dataSource]="dataSourceFacilities" width="100%">
                       <!--Header.-->
-                      <mat-header-row *matHeaderRowDef="displayedColumnsFacilities"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumnsFacilities;"></mat-row>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumnsFacilities"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumnsFacilities;"></tr>
 
                       <!-- Rank Column -->
                       <ng-container matColumnDef="rank">
-                        <mat-header-cell *matHeaderCellDef>Rank</mat-header-cell>
-                        <mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>Rank</th>
+                        <td mat-cell *matCellDef="let idx = index">{{ idx + 1 }}</td>
                       </ng-container>
 
                       <!-- Name Column -->
                       <ng-container matColumnDef="name">
-                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.facility.name }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facility.name }}</td>
                       </ng-container>
 
                       <!-- Country Column -->
                       <ng-container matColumnDef="country">
-                        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.facility.country }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>Country</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facility.country }}</td>
                       </ng-container>
 
                       <!-- City Column -->
                       <ng-container matColumnDef="city">
-                        <mat-header-cell *matHeaderCellDef>City</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.facility.city }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>City</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facility.city }}</td>
                       </ng-container>
 
                       <!-- State Column -->
                       <ng-container matColumnDef="state">
-                        <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.facility.state }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>State</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facility.state }}</td>
                       </ng-container>
 
                       <!-- Zip Code Column -->
                       <ng-container matColumnDef="zipCode">
-                        <mat-header-cell *matHeaderCellDef>Zip Code</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.facility.zipCode }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>Zip Code</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facility.zipCode }}</td>
                       </ng-container>
 
                       <!-- Trials Column -->
                       <ng-container matColumnDef="countStudies">
-                        <mat-header-cell *matHeaderCellDef>Trials</mat-header-cell>
-                        <mat-cell *matCellDef="let entry">{{ entry.countStudies }}</mat-cell>
+                        <th mat-header-cell *matHeaderCellDef>Trials</th>
+                        <td mat-cell *matCellDef="let entry">{{ entry.countStudies }}</td>
                       </ng-container>
-                    </mat-table>
+                    </table>
                   </div>
 
                 </div>
