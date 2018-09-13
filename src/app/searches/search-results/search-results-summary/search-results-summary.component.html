@@ -338,31 +338,31 @@
                       <!-- Name Column -->
                       <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef>Name</th>
-                        <td mat-cell *matCellDef="let entry">{{ entry.facility.name }}</td>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facilityCanonical.name }}</td>
                       </ng-container>
 
                       <!-- Country Column -->
                       <ng-container matColumnDef="country">
                         <th mat-header-cell *matHeaderCellDef>Country</th>
-                        <td mat-cell *matCellDef="let entry">{{ entry.facility.country }}</td>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facilityCanonical.country }}</td>
                       </ng-container>
 
                       <!-- City Column -->
-                      <ng-container matColumnDef="city">
+                      <ng-container matColumnDef="locality">
                         <th mat-header-cell *matHeaderCellDef>City</th>
-                        <td mat-cell *matCellDef="let entry">{{ entry.facility.city }}</td>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facilityCanonical.locality }}</td>
                       </ng-container>
 
                       <!-- State Column -->
-                      <ng-container matColumnDef="state">
+                      <ng-container matColumnDef="administrativeAreaLevel1">
                         <th mat-header-cell *matHeaderCellDef>State</th>
-                        <td mat-cell *matCellDef="let entry">{{ entry.facility.state }}</td>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facilityCanonical.administrativeAreaLevel1 }}</td>
                       </ng-container>
 
                       <!-- Zip Code Column -->
-                      <ng-container matColumnDef="zipCode">
+                      <ng-container matColumnDef="postalCode">
                         <th mat-header-cell *matHeaderCellDef>Zip Code</th>
-                        <td mat-cell *matCellDef="let entry">{{ entry.facility.zipCode }}</td>
+                        <td mat-cell *matCellDef="let entry">{{ entry.facilityCanonical.postalCode }}</td>
                       </ng-container>
 
                       <!-- Trials Column -->

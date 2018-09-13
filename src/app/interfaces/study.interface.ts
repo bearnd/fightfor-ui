@@ -105,6 +105,15 @@ export interface FacilityInterface {
   country?: string
 }
 
+export interface FacilityCanonicalInterface {
+  facilityCanonicalId?: number
+  name?: string
+  locality?: string
+  administrativeAreaLevel1?: string
+  country?: string
+  postalCode?: string
+}
+
 export interface PersonInterface {
   personId?: number
   nameFirst?: string
@@ -168,4 +177,6 @@ export interface StudyInterface {
   interventions?: InterventionInterface[]
   studyMeshTerms?: StudyMeshTermInterface[]
   locations?: LocationInterface[]
+  facilities?: FacilityInterface[]
+  facilitiesCanonical?: FacilityCanonicalInterface[]
 }

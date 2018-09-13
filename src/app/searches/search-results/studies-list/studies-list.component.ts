@@ -29,7 +29,7 @@ import {
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
 import {
-  FacilityInterface,
+  FacilityCanonicalInterface,
   MeshTermInterface,
   MeshTermType,
   OrderType,
@@ -785,15 +785,15 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   getStudyLocation(
     study: StudyInterface,
   ): string | null {
-    if (study.locations.length === 1) {
-      const facility: FacilityInterface = study.locations[0].facility;
+    if (study.facilitiesCanonical.length === 1) {
+      const facility: FacilityCanonicalInterface = study.facilitiesCanonical[0];
       const components: string[] = [
-        facility.city,
-        facility.state,
+        facility.locality,
+        facility.administrativeAreaLevel1,
         facility.country,
       ];
       return components.join(', ');
-    } else if (study.locations.length > 1) {
+    } else if (study.facilitiesCanonical.length > 1) {
       return 'Multiple';
     } else {
       return null;

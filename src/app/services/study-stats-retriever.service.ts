@@ -6,7 +6,8 @@ import gql from 'graphql-tag';
 
 import { StudyInterface } from '../interfaces/study.interface';
 import {
-  CountByCountryInterface, CountByFacilityInterface,
+  CountByCountryInterface,
+  CountByFacilityInterface,
   CountByOverallStatusInterface
 } from '../interfaces/search.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
@@ -140,13 +141,13 @@ export class StudyStatsRetrieverService {
           studyIds: $studyIds, 
           limit: $limit
         ) {
-          facility {
-            facilityId,
+          facilityCanonical {
+            facilityCanonicalId,
             name,
-            city,
-            state,
-            zipCode,
-            country
+            locality,
+            administrativeAreaLevel1,
+            postalCode,
+            country,
           }
           countStudies
         }

@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
-import { Observable } from 'rxjs/Observable';
 
 import { SearchesService } from '../../../services/searches.service';
 import {
@@ -46,9 +45,9 @@ export class SearchResultsSummaryComponent implements OnInit {
     'rank',
     'name',
     'country',
-    'city',
-    'state',
-    'zipCode',
+    'locality',
+    'administrativeAreaLevel1',
+    'postalCode',
     'countStudies',
   ];
   // Facilities table data-source.

@@ -320,12 +320,12 @@ export let searchSample: SearchInterface = {
     ],
     byFacility: [
       {
-        facility: {
-          facilityId: 9801,
+        facilityCanonical: {
+          facilityCanonicalId: 9801,
           name: 'National Institutes of Health Clinical Center, 9000 Rockville Pike',
-          city: 'Bethesda',
-          state: 'Maryland',
-          zipCode: '20892',
+          locality: 'Bethesda',
+          administrativeAreaLevel1: 'Maryland',
+          postalCode: '20892',
           country: 'United States',
 
         },
@@ -333,12 +333,12 @@ export let searchSample: SearchInterface = {
 
       },
       {
-        facility: {
-          facilityId: 18534,
+        facilityCanonical: {
+          facilityCanonicalId: 18534,
           name: 'Memorial Sloan Kettering Cancer Center',
-          city: 'New York',
-          state: 'New York',
-          zipCode: '10065',
+          locality: 'New York',
+          administrativeAreaLevel1: 'New York',
+          postalCode: '10065',
           country: 'United States',
 
         },
@@ -346,12 +346,12 @@ export let searchSample: SearchInterface = {
 
       },
       {
-        facility: {
-          facilityId: 86765,
+        facilityCanonical: {
+          facilityCanonicalId: 86765,
           name: 'University of Texas MD Anderson Cancer Center',
-          city: 'Houston',
-          state: 'Texas',
-          zipCode: '77030',
+          locality: 'Houston',
+          administrativeAreaLevel1: 'Texas',
+          postalCode: '77030',
           country: 'United States',
 
         },
@@ -359,12 +359,12 @@ export let searchSample: SearchInterface = {
 
       },
       {
-        facility: {
-          facilityId: 400,
+        facilityCanonical: {
+          facilityCanonicalId: 400,
           name: 'Duke University Medical Center',
-          city: 'Durham',
-          state: 'North Carolina',
-          zipCode: '27710',
+          locality: 'Durham',
+          administrativeAreaLevel1: 'North Carolina',
+          postalCode: '27710',
           country: 'United States',
 
         },
@@ -372,12 +372,12 @@ export let searchSample: SearchInterface = {
 
       },
       {
-        facility: {
-          facilityId: 14562,
+        facilityCanonical: {
+          facilityCanonicalId: 14562,
           name: 'Washington University School of Medicine',
-          city: 'Saint Louis',
-          state: 'Missouri',
-          zipCode: '63110',
+          locality: 'Saint Louis',
+          administrativeAreaLevel1: 'Missouri',
+          postalCode: '63110',
           country: 'United States',
 
         },
