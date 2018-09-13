@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
-import { Observable } from 'rxjs/Observable';
 
 import { SearchesService } from '../../../services/searches.service';
 import {

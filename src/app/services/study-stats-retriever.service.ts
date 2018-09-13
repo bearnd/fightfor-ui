@@ -6,7 +6,8 @@ import gql from 'graphql-tag';
 
 import { StudyInterface } from '../interfaces/study.interface';
 import {
-  CountByCountryInterface, CountByFacilityInterface,
+  CountByCountryInterface,
+  CountByFacilityInterface,
   CountByOverallStatusInterface
 } from '../interfaces/search.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
