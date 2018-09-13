@@ -167,13 +167,11 @@ export class StudyRetrieverService {
         ) {
           studyId,
           briefTitle,
-          locations {
-            facility {
-              name,
-              city,
-              state,
-              country
-            }
+          facilitiesCanonical {
+            name,
+            locality,
+            administrativeAreaLevel1,
+            country,
           },
           overallStatus,
           studyMeshTerms {

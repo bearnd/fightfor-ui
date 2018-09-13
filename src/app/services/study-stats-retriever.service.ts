@@ -141,13 +141,13 @@ export class StudyStatsRetrieverService {
           studyIds: $studyIds, 
           limit: $limit
         ) {
-          facility {
-            facilityId,
+          facilityCanonical {
+            facilityCanonicalId,
             name,
-            city,
-            state,
-            zipCode,
-            country
+            locality,
+            administrativeAreaLevel1,
+            postalCode,
+            country,
           }
           countStudies
         }

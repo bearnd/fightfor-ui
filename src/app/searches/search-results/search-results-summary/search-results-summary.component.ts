@@ -45,9 +45,9 @@ export class SearchResultsSummaryComponent implements OnInit {
     'rank',
     'name',
     'country',
-    'city',
-    'state',
-    'zipCode',
+    'locality',
+    'administrativeAreaLevel1',
+    'postalCode',
     'countStudies',
   ];
   // Facilities table data-source.
