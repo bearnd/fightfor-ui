@@ -28,6 +28,7 @@ import {
 import {
   StudyStatsRetrieverService
 } from './services/study-stats-retriever.service';
+import { GeolocationService } from './services/geolocation.service';
 
 import { environment } from '../environments/environment';
 
@@ -55,6 +56,7 @@ import { environment } from '../environments/environment';
     StudyRetrieverService,
     MeshDescriptorRetrieverService,
     StudyStatsRetrieverService,
+    GeolocationService,
   ],
   bootstrap: [AppComponent],
   exports: [
