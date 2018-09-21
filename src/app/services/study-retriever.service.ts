@@ -29,6 +29,9 @@ interface VariablesFilterStudies {
   countries?: string[]
   states?: string[]
   cities?: string[]
+  currentLocationLongitude?: number
+  currentLocationLatitude?: number
+  distanceMaxKm?: number
   overallStatuses?: string[]
   interventionTypes?: string[]
   phases?: string[]
@@ -48,6 +51,9 @@ interface VariablesCountStudies {
   countries?: string[]
   states?: string[]
   cities?: string[]
+  currentLocationLongitude?: number
+  currentLocationLatitude?: number
+  distanceMaxKm?: number
   overallStatuses?: string[]
   interventionTypes?: string[]
   phases?: string[]
@@ -133,6 +139,9 @@ export class StudyRetrieverService {
       $countries: [String],
       $states: [String],
       $cities: [String],
+      $currentLocationLongitude: Float,
+      $currentLocationLatitude: Float,
+      $distanceMaxKm: Int,
       $overallStatuses: [OverallStatusType],
       $interventionTypes: [InterventionType],
       $phases: [PhaseType],
@@ -152,6 +161,9 @@ export class StudyRetrieverService {
           countries: $countries,
           states: $states,
           cities: $cities,
+          currentLocationLongitude: $currentLocationLongitude,
+          currentLocationLatitude: $currentLocationLatitude,
+          distanceMaxKm: $distanceMaxKm,
           overallStatuses: $overallStatuses,
           interventionTypes: $interventionTypes,
           phases: $phases,
@@ -191,6 +203,9 @@ export class StudyRetrieverService {
       $countries: [String],
       $states: [String],
       $cities: [String],
+      $currentLocationLongitude: Float,
+      $currentLocationLatitude: Float,
+      $distanceMaxKm: Int,
       $overallStatuses: [OverallStatusType],
       $interventionTypes: [InterventionType],
       $phases: [PhaseType],
@@ -206,6 +221,9 @@ export class StudyRetrieverService {
           countries: $countries,
           states: $states,
           cities: $cities,
+          currentLocationLongitude: $currentLocationLongitude,
+          currentLocationLatitude: $currentLocationLatitude,
+          distanceMaxKm: $distanceMaxKm,
           overallStatuses: $overallStatuses,
           interventionTypes: $interventionTypes,
           phases: $phases,
@@ -292,6 +310,14 @@ export class StudyRetrieverService {
    * @param {string[]} countries Array of country names to filter on.
    * @param {string[]} states Array of state/region names to filter on.
    * @param {string[]} cities Array of city names to filter on.
+   * @param {number} currentLocationLongitude The longitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param {number} currentLocationLatitude The latitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param {number} distanceMaxKm The maximum distance in kilometers from the
+   * current location coordinates within which study facilities will be allowed.
    * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
    * filter on.
    * @param {InterventionType[]} interventionTypes Array of intervention-types
@@ -317,6 +343,9 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
+    currentLocationLongitude?: number,
+    currentLocationLatitude?: number,
+    distanceMaxKm?: number,
     overallStatuses?: string[],
     interventionTypes?: string[],
     phases?: string[],
@@ -348,6 +377,9 @@ export class StudyRetrieverService {
           countries: countries,
           states: states,
           cities: cities,
+          currentLocationLongitude: currentLocationLongitude,
+          currentLocationLatitude: currentLocationLatitude,
+          distanceMaxKm: distanceMaxKm,
           overallStatuses: overallStatuses,
           interventionTypes: interventionTypes,
           phases: phases,
@@ -377,6 +409,14 @@ export class StudyRetrieverService {
    * @param {string[]} countries Array of country names to filter on.
    * @param {string[]} states Array of state/region names to filter on.
    * @param {string[]} cities Array of city names to filter on.
+   * @param {number} currentLocationLongitude The longitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param {number} currentLocationLatitude The latitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param {number} distanceMaxKm The maximum distance in kilometers from the
+   * current location coordinates within which study facilities will be allowed.
    * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
    * filter on.
    * @param {InterventionType[]} interventionTypes Array of intervention-types
@@ -397,6 +437,9 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
+    currentLocationLongitude?: number,
+    currentLocationLatitude?: number,
+    distanceMaxKm?: number,
     overallStatuses?: string[],
     interventionTypes?: string[],
     phases?: string[],
@@ -424,6 +467,9 @@ export class StudyRetrieverService {
           countries: countries,
           states: states,
           cities: cities,
+          currentLocationLongitude: currentLocationLongitude,
+          currentLocationLatitude: currentLocationLatitude,
+          distanceMaxKm: distanceMaxKm,
           overallStatuses: overallStatuses,
           interventionTypes: interventionTypes,
           phases: phases,
