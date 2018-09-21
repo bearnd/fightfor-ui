@@ -107,10 +107,55 @@
 
                   </div>
 
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <input
+                          matInput
+                          type="text"
+                          id="currentLocation"
+                          formControlName="currentLocation"
+                          placeholder="Current Location"
+                          [matAutocomplete]="locationsAutocomplete"
+                        />
+                        <mat-autocomplete
+                          [autoActiveFirstOption]="true"
+                          #locationsAutocomplete="matAutocomplete"
+                          (optionSelected)="onLocationSelected($event)"
+                        >
+                          <mat-option *ngFor="let location of locationsAll | async" [value]="location">
+                            {{ location.place_name }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
                     </div>
 
-                    <div class="row">
+                    <div class="col-md-2">
+                      <button
+                        mat-raised-button
+                        class="btn btn-rose mat-raised-button"
+                        type="button"
+                        (click)="onDetectLocation()"
+                      >
+                        <span class="mat-button-wrapper">Detect</span>
+                      </button>
+                    </div>
 
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectDistanceMax"
+                          formControlName="selectDistanceMax"
+                          placeholder="Maximum Distance"
+                          #selectDistanceMax
+                        >
+                          <mat-option *ngFor="let distanceMaxKm of distancesMaxKmAll" [value]="distanceMaxKm">
+                            {{ distanceMaxKm <= 10000 ? distanceMaxKm + "km" : "10000km+" }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
 
                   <div class="row">
 

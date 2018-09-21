@@ -12,6 +12,7 @@ import {
   MatSort,
   MatDialog,
   MatDialogConfig,
+  MatAutocompleteSelectedEvent,
 } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -19,7 +20,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
-import { merge, take, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 import {
   IonRangeSliderCallback,
@@ -57,7 +58,14 @@ import {
   YearRange,
   overallStatusGroups,
 } from '../../../shared/common.interface';
-import { StudyPreviewDialogComponent } from './study-preview-dialog/study-preview-dialog.component';
+import {
+  StudyPreviewDialogComponent
+} from './study-preview-dialog/study-preview-dialog.component';
+import {
+  GeolocationService,
+  MapBoxFeature,
+  MapBoxGeocodeResponse
+} from '../../../services/geolocation.service';
 
 
 interface EnumInterface {
@@ -122,7 +130,16 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     ageBeg: null,
     ageEnd: null,
   };
-
+  // Current position defined either through auto-detection or provided via a
+  // location search.
+  private currentPosition: {longitude: number, latitude: number} = null;
+  // Possible locations retrieved by forward geocoding via the
+  // `GeoLocationService`.
+  public locationsAll: ReplaySubject<MapBoxFeature[]> =
+    new ReplaySubject<MapBoxFeature[]>(1);
+  public distancesMaxKmAll: number[] = [
+    10, 25, 50, 100, 500, 1000, 5000, 1000000
+  ];
 
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
@@ -172,11 +189,15 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private geolocationService: GeolocationService,
   ) {
   }
 
   ngOnInit() {
+    // Initialize the `locationsAll` subject with an empty array.
+    this.locationsAll.next([]);
+
     // Retrieve the referenced search UUID.
     const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
     // Retrieve the referenced search.
@@ -233,6 +254,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       filterStudyCity: new FormControl(null),
       // Radio buttons for patient-sex.
       radioStudySex: new FormControl(null),
+      // Input box that holds the current location name, either population
+      // through auto-detection and reverse geocoding or by auto-completing
+      // after a manually typed query.
+      currentLocation: new FormControl(null),
+      // Select for the maximum distance from the current location.
+      selectDistanceMax: new FormControl(null),
     });
 
     // Retrieve the initial set of studies.
@@ -402,6 +429,28 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         };
       }
     );
+
+    // Subscribe to the `valueChanges` observable of the location input control
+    // and perform a search for matching locations with a 400ms debounce so
+    // that we don't perform a search for every keystroke.
+    this.formFilters.get('currentLocation')
+      .valueChanges
+      .pipe(debounceTime(400))
+      .subscribe(
+      (query) => {
+        // If the incoming value is of type `string` then perform a synonym
+        // search through the `GeolocationService` and update the `locationsAll`
+        // subject with the results.
+        if (typeof query === 'string') {
+          this.geolocationService.geocodeForward(query)
+            .subscribe(
+              (response: MapBoxGeocodeResponse) => {
+                this.locationsAll.next(response.features);
+              }
+            );
+        }
+      }
+    )
   }
 
   ngAfterViewInit() {
@@ -659,6 +708,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     let overallStatuses: string[] = [];
     let phases: string[] = [];
     let studyTypes: string[] = [];
+    let currentLocationLongitude: number = null;
+    let currentLocationLatitude: number = null;
+    let distanceMaxKm: number = null;
 
     // Retrieve the names of the selected countries (if any).
     if (this.formFilters.get('selectStudyCountry').value) {
@@ -699,12 +751,26 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         .value.map((entry) => entry.id);
     }
 
+    // Retrieve the selected current coordinates (if any).
+    if (this.currentPosition) {
+      currentLocationLongitude = this.currentPosition.longitude;
+      currentLocationLatitude = this.currentPosition.latitude;
+    }
+
+    // Retrieve the selected maximum distance (if any).
+    if (this.formFilters.get('selectDistanceMax').value) {
+      distanceMaxKm = this.formFilters.get('selectDistanceMax').value;
+    }
+
     // Retrieve studies using the selected filters.
     this.dataSourceStudies.filterStudies(
       this.search.studies,
       countries || null,
       states || null,
       cities || null,
+      currentLocationLongitude || null,
+      currentLocationLatitude || null,
+      distanceMaxKm || null,
       overallStatuses || null,
       null,
       phases || null,
@@ -725,6 +791,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       countries || null,
       states || null,
       cities || null,
+      currentLocationLongitude || null,
+      currentLocationLatitude || null,
+      distanceMaxKm || null,
       overallStatuses || null,
       null,
       phases || null,
@@ -872,5 +941,61 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     };
 
     this.dialog.open(StudyPreviewDialogComponent, dialogConfig);
+  }
+
+  /**
+   * Auto-detects the current location coordinates through the browser and then
+   * uses the MapBox API via the `GeolocationService` to find the locality the
+   * coordinates correspond to which it populates in the `currentLocation`
+   * input.
+   */
+  onDetectLocation() {
+    // Get the current location coordinates through the browser.
+    this.geolocationService.getCurrentPositionBrowser({})
+      .subscribe(
+        (position: Position) => {
+          // Set the coordinates to `currentPosition`.
+          this.currentPosition = {
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude,
+          };
+          // Perform a reverse-geocoding request to identify the possible
+          // places the retrieved coordinates may correspond to.
+          this.geolocationService.geocodeReverse(
+            position.coords.longitude,
+            position.coords.latitude,
+          ).subscribe(
+            (response: MapBoxGeocodeResponse) => {
+              // Find the first `locality` feature and set the value of the
+              // `currentLocation` input to its name.
+              for (const feature of response.features) {
+                if (feature.place_type.indexOf('locality') > -1) {
+                  this.formFilters
+                    .get('currentLocation').setValue(feature.place_name);
+                  break;
+                }
+              }
+            }
+          );
+        }
+      );
+  }
+
+  /**
+   * Uses the selected location out of the location auto-complete, sets that
+   * location's name as the input value and sets the location's center
+   * coordinates to `currentPosition`.
+   * @param {MatAutocompleteSelectedEvent} event The event triggered when a
+   * location from the location auto-complete is selected.
+   */
+  onLocationSelected(event: MatAutocompleteSelectedEvent): void {
+    // Retrieve the selected location.
+    const location = event.option.value;
+    // Clear the form input's value.
+    this.formFilters.get('currentLocation').setValue(location.place_name);
+    this.currentPosition = this.currentPosition = {
+      longitude: location.center[0],
+      latitude: location.center[1],
+    };
   }
 }
