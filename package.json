@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl --ssl-cert ./ssl/server.crt --ssl-key ./ssl/server.key",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -27,6 +27,7 @@
     "@angular/router": "6.0.2",
     "@ngx-loading-bar/http-client": "^2.0.0",
     "@nicky-lenaers/ngx-scroll-tracker": "^0.2.2",
+    "@types/url-join": "^0.8.2",
     "ajv": "6.3.0",
     "angular-calendar": "0.23.1",
     "angular2-uuid": "^1.1.1",
@@ -61,6 +62,7 @@
     "rxjs": "6.1.0",
     "rxjs-compat": "6.1.0",
     "sweetalert2": "7.22.0",
+    "url-join": "^4.0.0",
     "web-animations-js": "2.3.1",
     "webpack": "^4.3.0",
     "zone.js": "^0.8.26"

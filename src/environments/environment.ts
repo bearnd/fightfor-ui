@@ -16,4 +16,8 @@ export const environment = {
   graphql: {
     uri: 'http://localhost:5555/graphql',
   },
+  mapbox: {
+    uri: 'https://api.mapbox.com',
+    apiKey: 'pk.eyJ1IjoiYmVhcm5kIiwiYSI6ImNqbGU4emhhczBqYjczd3BjMHFsZDJsZHYifQ.fo5-TxZxgIPFNqT8sJzchw',
+  }
 };
