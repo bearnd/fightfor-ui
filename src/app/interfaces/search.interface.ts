@@ -18,6 +18,12 @@ export interface CountByFacilityInterface {
   countStudies: number
 }
 
+export interface CountByFacilityMeshTermInterface {
+  facilityCanonical: FacilityCanonicalInterface
+  meshTerm: MeshTermInterface
+  countStudies: number
+}
+
 export interface SearchInterface {
   searchId?: number
   searchUuid: string
