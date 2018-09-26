@@ -16,7 +16,6 @@ export interface CountByOverallStatusInterface {
 export interface CountByFacilityInterface {
   facilityCanonical: FacilityCanonicalInterface
   countStudies: number
-  topMeshTerms?: MeshTermInterface[]
 }
 
 export interface CountByFacilityMeshTermInterface {
