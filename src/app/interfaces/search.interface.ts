@@ -1,5 +1,5 @@
 import { MeshDescriptorInterface } from './mesh-descriptor.interface';
-import { FacilityCanonicalInterface, StudyInterface } from './study.interface';
+import { FacilityCanonicalInterface, MeshTermInterface, StudyInterface } from './study.interface';
 
 
 
@@ -16,6 +16,7 @@ export interface CountByOverallStatusInterface {
 export interface CountByFacilityInterface {
   facilityCanonical: FacilityCanonicalInterface
   countStudies: number
+  topMeshTerms?: MeshTermInterface[]
 }
 
 export interface CountByFacilityMeshTermInterface {
