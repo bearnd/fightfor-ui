@@ -4,11 +4,12 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
-import { StudyInterface } from '../interfaces/study.interface';
+import { MeshTermType, StudyInterface } from '../interfaces/study.interface';
 import {
   CountByCountryInterface,
   CountByFacilityInterface,
-  CountByOverallStatusInterface
+  CountByOverallStatusInterface,
+  CountByFacilityMeshTermInterface,
 } from '../interfaces/search.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
 
@@ -40,6 +41,19 @@ interface VariablesGetCountStudiesByFacility {
 interface ResponseGetCountStudiesByFacility {
   studiesStats: {
     countStudiesByFacility: CountByFacilityInterface[]
+  }
+}
+
+interface VariablesGetCountStudiesByFacilityMeshTerm {
+  studyIds: number[]
+  facilityCanonicalIds?: number[]
+  meshTermType?: string
+  limit?: number
+}
+
+interface ResponseGetCountStudiesByFacilityMeshTerm {
+  studiesStats: {
+    countStudiesByFacilityMeshTerm: CountByFacilityMeshTermInterface[]
   }
 }
 
@@ -221,6 +235,32 @@ export class StudyStatsRetrieverService {
     }
   `;
 
+  queryGetCountStudiesByFacilityMeshTerm = gql`
+    query getCountStudiesByFacility(
+      $studyIds: [Int]!, 
+      $facilityCanonicalIds: [Int],
+      $meshTermType: MeshTermType,
+      $limit: Int
+    ) {
+      studiesStats {
+        countStudiesByFacilityMeshTerm(
+          studyIds: $studyIds,
+          facilityCanonicalIds: $facilityCanonicalIds,
+          meshTermType: $meshTermType,
+          limit: $limit
+        ) {
+          facilityCanonical {
+            facilityCanonicalId,
+          },
+          meshTerm {
+            term,
+          },
+          countStudies
+        }
+      }
+    }
+  `;
+
   constructor(private apollo: Apollo) {
   }
 
@@ -324,6 +364,52 @@ export class StudyStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.studiesStats.countStudiesByFacility;
+      });
+  }
+
+  /**
+   * Retrieve the count of clinical-trial studies by facility and MeSH
+   * descriptor for given studies.
+   * @param {StudyInterface[]} studies The studies which will be grouped and
+   * counted by facility.
+   * @param {number[]} facilityCanonicalIds The IDs of the canonical facilities
+   * to limit the aggregation to.
+   * @param {MeshTermType} meshTermType The type of MeSH descriptor to limit
+   * the aggregation to.
+   * @param {number} limit The number of results to return (ordered by a
+   * descending number of studies).
+   * @returns {Observable<CountByFacilityMeshTermInterface[]>}
+   */
+  getCountStudiesByFacilityMeshTerm(
+    studies: StudyInterface[],
+    facilityCanonicalIds: number[],
+    meshTermType?: MeshTermType,
+    limit: number = null,
+  ): Observable<CountByFacilityMeshTermInterface[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    const meshTermTypeKey = Object.keys(MeshTermType)
+              .find(key => MeshTermType[key] === meshTermType);
+
+    return this.apollo
+      .query<ResponseGetCountStudiesByFacilityMeshTerm,
+        VariablesGetCountStudiesByFacilityMeshTerm>
+      ({
+        query: this.queryGetCountStudiesByFacilityMeshTerm,
+        variables: {
+          studyIds: studyIds,
+          facilityCanonicalIds: facilityCanonicalIds,
+          meshTermType: meshTermTypeKey,
+          limit: limit,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.countStudiesByFacilityMeshTerm;
       });
   }
 

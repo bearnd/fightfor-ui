@@ -13,13 +13,17 @@ import {
   CountByFacilityInterface,
   SearchInterface,
 } from '../../../interfaces/search.interface';
-import { StudyOverallStatus } from '../../../interfaces/study.interface';
+import {
+  MeshTermInterface,
+  MeshTermType,
+  StudyOverallStatus,
+} from '../../../interfaces/study.interface';
 import { MatTableDataSource } from '@angular/material';
 import {
-  StudyRetrieverService,
+  StudyRetrieverService
 } from '../../../services/study-retriever.service';
 import {
-  StudyStatsRetrieverService,
+  StudyStatsRetrieverService
 } from '../../../services/study-stats-retriever.service';
 import { overallStatusGroups } from '../../../shared/common.interface';
 
@@ -49,9 +53,14 @@ export class SearchResultsSummaryComponent implements OnInit {
     'administrativeAreaLevel1',
     'postalCode',
     'countStudies',
+    'topInterventions',
   ];
   // Facilities table data-source.
   dataSourceFacilities: MatTableDataSource<CountByFacilityInterface>;
+  // The top MeSH intervention descriptors by facility.
+  public topFacilityMeshTerms: {
+    [key: string]: MeshTermInterface[]
+  } = {};
 
   private loadingSearchStudies = new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByCountry =
@@ -267,7 +276,9 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Retrieve the count of clinical-trial studies by facility for the studies
    * previously attributed to a given search. The search is performed via the
-   * `StudyStatsRetrieverService`.
+   * `StudyStatsRetrieverService`. Once this query is performed the top MeSH
+   * descriptors denoting interventions are retrieved per facility again
+   * through `StudyStatsRetrieverService`.
    *
    * This function assumes that the `searchStudies` function has been previously
    * run for the given search and that its `studies` property is populated.
@@ -283,6 +294,28 @@ export class SearchResultsSummaryComponent implements OnInit {
         (response) => {
           // Assign the retrieved stats to the search.
           this.search.studiesStats.byFacility = response;
+
+          // Iterate over the aggregation results and retrieve the top 3
+          // intervention MeSH descriptors per facility.
+          for (const result of response) {
+            this.studyStatsRetrieverService
+            .getCountStudiesByFacilityMeshTerm(
+              this.search.studies,
+              [result.facilityCanonical.facilityCanonicalId],
+              MeshTermType.INTERVENTION,
+              3
+            ).subscribe(
+              (response_sub) => {
+                this.topFacilityMeshTerms[
+                  result.facilityCanonical.facilityCanonicalId
+                  ] = response_sub.map(
+                  function (entry) {
+                    return entry.meshTerm
+                  }
+                );
+              }
+            )
+          }
 
           // Instantiate the data-source for the facilities table.
           this.dataSourceFacilities = new MatTableDataSource
