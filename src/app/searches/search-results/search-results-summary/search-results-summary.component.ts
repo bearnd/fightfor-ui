@@ -224,7 +224,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.loadingGetCountStudiesByCountry.next(true);
 
     this.studyStatsRetrieverService
-      .getCountStudiesByCountry(this.search.studies, limit)
+      .getCountStudiesByCountry(this.search.studies)
       .subscribe(
         (response) => {
           // Assign the retrieved stats to the search.
@@ -233,8 +233,10 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Instantiate the data-source for the locations table.
           this.dataSourceLocations = new MatTableDataSource
             <CountByCountryInterface>(
-              this.search.studiesStats.byCountry
+              this.search.studiesStats.byCountry.slice(0, limit)
             );
+
+          this.configureLocationsMap(response);
 
           // Indicate that `getCountStudiesByCountry` is complete for this
           // search.
