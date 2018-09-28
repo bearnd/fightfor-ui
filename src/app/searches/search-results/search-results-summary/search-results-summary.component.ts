@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
@@ -26,6 +26,9 @@ import {
   StudyStatsRetrieverService
 } from '../../../services/study-stats-retriever.service';
 import { overallStatusGroups } from '../../../shared/common.interface';
+import { getCountryCode } from '../../../shared/countries';
+
+declare var $: any;
 
 
 @Component({
@@ -34,6 +37,11 @@ import { overallStatusGroups } from '../../../shared/common.interface';
   styleUrls: ['./search-results-summary.component.scss']
 })
 export class SearchResultsSummaryComponent implements OnInit {
+
+  @ViewChild('cardLocations') cardLocations: ElementRef;
+
+  public locationMapHeight: number;
+  public locationMapWidth: number;
 
   // Number of top locations to display.
   numLocationsDisplay = 5;
@@ -111,6 +119,18 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Perform the search.
     this.performSearch();
+  }
+
+  /**
+   * Trigger when resizing and calculate the map dimensions as 80% height and
+   * 45% of the card it is included in.
+   * @param {Event} event The resizing event.
+   */
+  onResize(event: Event) {
+    this.locationMapHeight = 0.8 * this
+      .cardLocations.nativeElement.clientHeight;
+    this.locationMapWidth = 0.45 * this
+      .cardLocations.nativeElement.clientWidth;
   }
 
   toggleSaved() {
@@ -204,7 +224,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.loadingGetCountStudiesByCountry.next(true);
 
     this.studyStatsRetrieverService
-      .getCountStudiesByCountry(this.search.studies, limit)
+      .getCountStudiesByCountry(this.search.studies)
       .subscribe(
         (response) => {
           // Assign the retrieved stats to the search.
@@ -213,8 +233,10 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Instantiate the data-source for the locations table.
           this.dataSourceLocations = new MatTableDataSource
             <CountByCountryInterface>(
-              this.search.studiesStats.byCountry
+              this.search.studiesStats.byCountry.slice(0, limit)
             );
+
+          this.configureLocationsMap(response);
 
           // Indicate that `getCountStudiesByCountry` is complete for this
           // search.
@@ -381,4 +403,87 @@ export class SearchResultsSummaryComponent implements OnInit {
     );
   }
 
+  /**
+   * Configures and initializes the locations map based on the results of the
+   * studies-by-country aggregation.
+   * @param {CountByCountryInterface[]} studiesByCountry The results of the
+   * studies-by-country aggregation.
+   */
+  configureLocationsMap(studiesByCountry: CountByCountryInterface[]) {
+
+    // Set the starting color of the scale.
+    const startColor = [200, 238, 255];
+    // Set the ending color of the scale.
+    const endColor = [0, 100, 145];
+    const colors = {};
+
+    const mapValues: {[key: string]: number} = {};
+
+    // Iterate over the `studiesByCountry` results, retrieve the ISO Alpha2
+    // code for each country and assemble a code:study-count object.
+    for (const entry of studiesByCountry) {
+      const code = getCountryCode(entry.country);
+      if (code) {
+        mapValues[
+          getCountryCode(entry.country).toLowerCase()
+          ] = entry.countStudies;
+      }
+    }
+
+    // Calculate the maximum and minimum values of study-count.
+    const mapMax: number = Math.max(...Object.values(mapValues));
+    const mapMin: number = Math.min(...Object.values(mapValues));
+
+    // Calculate a color per region based on the study-count and the
+    // color-scale defined prior.
+    for (const key in mapValues) {
+      if (mapValues[key] > 0) {
+        colors[key] = '#';
+        for (let i = 0; i < 3; i++) {
+          let hex = Math.round(startColor[i]
+            + (endColor[i]
+              - startColor[i])
+            * (mapValues[key] / (mapMax - mapMin))).toString(16);
+
+          if (hex.length === 1) {
+            hex = '0' + hex;
+          }
+
+          colors[key] += (hex.length === 1 ? '0' : '') + hex;
+        }
+      }
+    }
+
+    // Initialize and configure the map.
+    $('#worldMap').vectorMap({
+      map: 'world_en',
+      backgroundColor: 'transparent',
+      borderColor: '#818181',
+      borderOpacity: 0.25,
+      borderWidth: 1,
+      colors: colors,
+      hoverColor: '#eee',
+      hoverOpacity: null,
+      normalizeFunction: 'linear',
+      selectedColor: '#c9dfaf',
+      selectedRegions: null,
+      showTooltip: true,
+      series: {
+        regions: [{
+          values: mapValues,
+        }]
+      },
+      // Defines the tooltip label per region.
+      onLabelShow: function (event, label, code) {
+
+        let value = 0;
+        if (mapValues.hasOwnProperty(code)) {
+          value = mapValues[code]
+        }
+
+        label[0].innerHTML =
+          label[0].innerHTML + ': ' + value + ' Trials';
+      },
+    });
+  }
 }
