@@ -34,12 +34,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectOverallStatus"
+                          type="select"
                           formControlName="selectOverallStatus"
                           placeholder="Overall Status"
                           [multiple]="true"
                           #selectOverallStatus
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterOverallStatus"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such overall-status found"
@@ -59,12 +61,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectPhase"
+                          type="select"
                           formControlName="selectPhase"
                           placeholder="Trial Phase"
                           [multiple]="true"
                           #selectPhase
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterPhase"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such phase found"
@@ -84,12 +88,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectStudyType"
+                          type="select"
                           formControlName="selectStudyType"
                           placeholder="Study Type"
                           [multiple]="true"
                           #selectStudyType
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterStudyType"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such study-type found"
@@ -145,6 +151,7 @@
                       <mat-form-field>
                         <mat-select
                           id="selectDistanceMax"
+                          type="select"
                           formControlName="selectDistanceMax"
                           placeholder="Maximum Distance"
                           #selectDistanceMax
@@ -163,12 +170,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectStudyCountry"
+                          type="select"
                           formControlName="selectStudyCountry"
                           placeholder="Country"
                           [multiple]="true"
                           #selectStudyCountry
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterStudyCountry"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such country found"
@@ -188,12 +197,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectStudyState"
+                          type="select"
                           formControlName="selectStudyState"
                           placeholder="State/Region"
                           [multiple]="true"
                           #selectStudyState
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterStudyState"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such country found"
@@ -213,12 +224,14 @@
                       <mat-form-field>
                         <mat-select
                           id="selectStudyCity"
+                          type="select"
                           formControlName="selectStudyCity"
                           placeholder="City"
                           [multiple]="true"
                           #selectStudyCity
                         >
                           <ngx-mat-select-search
+                            type="select"
                             formControlName="filterStudyCity"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such country found"
@@ -261,6 +274,7 @@
                         <mat-radio-group
                           style="padding-top: 20px"
                           id="studySex"
+                          type="radio"
                           formControlName="radioStudySex"
                         >
                           <mat-radio-button value="1">Male</mat-radio-button>
