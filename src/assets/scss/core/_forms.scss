@@ -368,8 +368,16 @@ fieldset[disabled] .form-group .form-control{
   background-repeat: no-repeat;
 }
 
-
-
+.mat-form-field{
+  &.mat-focused{
+    .mat-form-field-ripple{
+      background-color: $brand-primary;
+    }
+    .mat-form-field-label{
+      color: $brand-primary;
+    }
+  }
+}
 
 
 .mat-form-field{
