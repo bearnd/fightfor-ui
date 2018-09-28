@@ -26,6 +26,7 @@
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.skinFlat.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
+              "node_modules/jqvmap/dist/jqvmap.css",
               "src/assets/css/demo.css",
               "src/assets/scss/material-dashboard.scss"
             ],
@@ -39,7 +40,9 @@
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/chartist/dist/chartist.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js"
+              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+              "node_modules/jqvmap/dist/jquery.vmap.min.js",
+              "node_modules/jqvmap/dist/maps/jquery.vmap.world.js"
             ]
           },
           "configurations": {
@@ -96,7 +99,9 @@
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/chartist/dist/chartist.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js"
+              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+              "node_modules/jqvmap/dist/jquery.vmap.min.js",
+              "node_modules/jqvmap/dist/maps/jquery.vmap.world.js"
             ],
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
@@ -104,6 +109,7 @@
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.skinFlat.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
+              "node_modules/jqvmap/dist/jqvmap.css",
               "src/assets/css/demo.css",
               "src/assets/scss/material-dashboard.scss"
             ],
