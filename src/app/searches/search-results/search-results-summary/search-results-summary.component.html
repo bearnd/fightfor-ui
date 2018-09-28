@@ -257,7 +257,11 @@
               </div>
             </div>
 
-            <div class="card-body">
+            <div
+              class="card-body"
+              #cardLocations
+              (window:resize)="onResize($event)"
+            >
 
               <div class="row">
 
