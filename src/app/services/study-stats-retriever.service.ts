@@ -6,10 +6,10 @@ import gql from 'graphql-tag';
 
 import { MeshTermType, StudyInterface } from '../interfaces/study.interface';
 import {
-  CountByCountryInterface,
-  CountByFacilityInterface,
-  CountByOverallStatusInterface,
-  CountByFacilityMeshTermInterface,
+  StudiesCountByCountryInterface,
+  StudiesCountByFacilityInterface,
+  StudiesCountByOverallStatusInterface,
+  StudiesCountByFacilityMeshTermInterface,
 } from '../interfaces/search.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
 
@@ -20,7 +20,7 @@ interface VariablesGetCountStudiesByCountry {
 
 interface ResponseGetCountStudiesByCountry {
   studiesStats: {
-    countStudiesByCountry: CountByCountryInterface[]
+    countStudiesByCountry: StudiesCountByCountryInterface[]
   }
 }
 
@@ -30,7 +30,7 @@ interface VariablesGetCountStudiesByOverallStatus {
 
 interface ResponseGetCountStudiesByOverallStatus {
   studiesStats: {
-    countStudiesByOverallStatus: CountByOverallStatusInterface[]
+    countStudiesByOverallStatus: StudiesCountByOverallStatusInterface[]
   }
 }
 
@@ -40,7 +40,7 @@ interface VariablesGetCountStudiesByFacility {
 
 interface ResponseGetCountStudiesByFacility {
   studiesStats: {
-    countStudiesByFacility: CountByFacilityInterface[]
+    countStudiesByFacility: StudiesCountByFacilityInterface[]
   }
 }
 
@@ -53,7 +53,7 @@ interface VariablesGetCountStudiesByFacilityMeshTerm {
 
 interface ResponseGetCountStudiesByFacilityMeshTerm {
   studiesStats: {
-    countStudiesByFacilityMeshTerm: CountByFacilityMeshTermInterface[]
+    countStudiesByFacilityMeshTerm: StudiesCountByFacilityMeshTermInterface[]
   }
 }
 
@@ -270,12 +270,12 @@ export class StudyStatsRetrieverService {
    * counted by country.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<CountByCountryInterface[]>}
+   * @returns {Observable<StudiesCountByCountryInterface[]>}
    */
   getCountStudiesByCountry(
     studies: StudyInterface[],
     limit: number = null,
-  ): Observable<CountByCountryInterface[]> {
+  ): Observable<StudiesCountByCountryInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
@@ -305,12 +305,12 @@ export class StudyStatsRetrieverService {
    * counted by overall status.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<CountByOverallStatusInterface[]>}
+   * @returns {Observable<StudiesCountByOverallStatusInterface[]>}
    */
   getCountStudiesByOverallStatus(
     studies: StudyInterface[],
     limit: number = null,
-  ): Observable<CountByOverallStatusInterface[]> {
+  ): Observable<StudiesCountByOverallStatusInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
@@ -339,12 +339,12 @@ export class StudyStatsRetrieverService {
    * counted by facility.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<CountByFacilityInterface[]>}
+   * @returns {Observable<StudiesCountByFacilityInterface[]>}
    */
   getCountStudiesByFacility(
     studies: StudyInterface[],
     limit: number = null,
-  ): Observable<CountByFacilityInterface[]> {
+  ): Observable<StudiesCountByFacilityInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
@@ -378,14 +378,14 @@ export class StudyStatsRetrieverService {
    * the aggregation to.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<CountByFacilityMeshTermInterface[]>}
+   * @returns {Observable<StudiesCountByFacilityMeshTermInterface[]>}
    */
   getCountStudiesByFacilityMeshTerm(
     studies: StudyInterface[],
     facilityCanonicalIds: number[],
     meshTermType?: MeshTermType,
     limit: number = null,
-  ): Observable<CountByFacilityMeshTermInterface[]> {
+  ): Observable<StudiesCountByFacilityMeshTermInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
