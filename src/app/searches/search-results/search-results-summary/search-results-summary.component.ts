@@ -9,8 +9,8 @@ import 'rxjs/add/operator/finally';
 
 import { SearchesService } from '../../../services/searches.service';
 import {
-  CountByCountryInterface,
-  CountByFacilityInterface,
+  StudiesCountByCountryInterface,
+  StudiesCountByFacilityInterface,
   SearchInterface,
 } from '../../../interfaces/search.interface';
 import {
@@ -48,7 +48,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   // Location columns to display.
   displayedColumnsLocations = ['rank', 'country', 'countStudies'];
   // Locations table data-source.
-  dataSourceLocations: MatTableDataSource<CountByCountryInterface>;
+  dataSourceLocations: MatTableDataSource<StudiesCountByCountryInterface>;
 
   // Number of top facilities to display.
   numFacilitiesDisplay = 5;
@@ -64,7 +64,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     'topInterventions',
   ];
   // Facilities table data-source.
-  dataSourceFacilities: MatTableDataSource<CountByFacilityInterface>;
+  dataSourceFacilities: MatTableDataSource<StudiesCountByFacilityInterface>;
   // The top MeSH intervention descriptors by facility.
   public topFacilityMeshTerms: {
     [key: string]: MeshTermInterface[]
@@ -232,7 +232,7 @@ export class SearchResultsSummaryComponent implements OnInit {
 
           // Instantiate the data-source for the locations table.
           this.dataSourceLocations = new MatTableDataSource
-            <CountByCountryInterface>(
+            <StudiesCountByCountryInterface>(
               this.search.studiesStats.byCountry.slice(0, limit)
             );
 
@@ -341,7 +341,7 @@ export class SearchResultsSummaryComponent implements OnInit {
 
           // Instantiate the data-source for the facilities table.
           this.dataSourceFacilities = new MatTableDataSource
-            <CountByFacilityInterface>(
+            <StudiesCountByFacilityInterface>(
               this.search.studiesStats.byFacility
             );
 
@@ -406,10 +406,10 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Configures and initializes the locations map based on the results of the
    * studies-by-country aggregation.
-   * @param {CountByCountryInterface[]} studiesByCountry The results of the
+   * @param {StudiesCountByCountryInterface[]} studiesByCountry The results of the
    * studies-by-country aggregation.
    */
-  configureLocationsMap(studiesByCountry: CountByCountryInterface[]) {
+  configureLocationsMap(studiesByCountry: StudiesCountByCountryInterface[]) {
 
     // Set the starting color of the scale.
     const startColor = [200, 238, 255];

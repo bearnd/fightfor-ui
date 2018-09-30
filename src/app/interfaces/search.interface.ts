@@ -3,22 +3,25 @@ import { FacilityCanonicalInterface, MeshTermInterface, StudyInterface } from '.
 
 
 
-export interface CountByCountryInterface {
+export interface StudiesCountByCountryInterface {
   country: string
   countStudies: number
 }
 
-export interface CountByOverallStatusInterface {
+
+export interface StudiesCountByOverallStatusInterface {
   overallStatus: string
   countStudies: number
 }
 
-export interface CountByFacilityInterface {
+
+export interface StudiesCountByFacilityInterface {
   facilityCanonical: FacilityCanonicalInterface
   countStudies: number
 }
 
-export interface CountByFacilityMeshTermInterface {
+
+export interface StudiesCountByFacilityMeshTermInterface {
   facilityCanonical: FacilityCanonicalInterface
   meshTerm: MeshTermInterface
   countStudies: number
@@ -34,8 +37,8 @@ export interface SearchInterface {
   studies?: StudyInterface[]
   studiesFiltered?: StudyInterface[]
   studiesStats: {
-    byCountry?: CountByCountryInterface[]
-    byOverallStatus?: CountByOverallStatusInterface[]
-    byFacility?: CountByFacilityInterface[]
+    byCountry?: StudiesCountByCountryInterface[]
+    byOverallStatus?: StudiesCountByOverallStatusInterface[]
+    byFacility?: StudiesCountByFacilityInterface[]
   }
 }
