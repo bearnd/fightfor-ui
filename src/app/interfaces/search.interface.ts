@@ -1,5 +1,6 @@
 import { MeshDescriptorInterface } from './mesh-descriptor.interface';
 import { FacilityCanonicalInterface, MeshTermInterface, StudyInterface } from './study.interface';
+import { AffiliationCanonicalInterface } from './citation.interface';
 
 
 
@@ -26,6 +27,19 @@ export interface StudiesCountByFacilityMeshTermInterface {
   meshTerm: MeshTermInterface
   countStudies: number
 }
+
+
+export interface CitationsCountByCountryInterface {
+  country: string
+  countCitations: number
+}
+
+
+export interface CitationsCountByAffiliationInterface {
+  affiliationCanonical: AffiliationCanonicalInterface
+  countCitations: number
+}
+
 
 export interface SearchInterface {
   searchId?: number
