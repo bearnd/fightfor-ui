@@ -118,14 +118,14 @@ export class CitationStatsRetrieverService {
   }
 
   /**
-   * Retrieve the count of citations by facility for given citations.
+   * Retrieve the count of citations by affiliation for given citations.
    * @param {CitationInterface[]} citations The citations which will be grouped
    * and counted by affiliation.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of citations).
    * @returns {Observable<CitationsCountByAffiliationInterface[]>}
    */
-  getCountStudiesByFacility(
+  getCountCitationsByAffiliation(
     citations: CitationInterface[],
     limit: number = null,
   ): Observable<CitationsCountByAffiliationInterface[]> {
