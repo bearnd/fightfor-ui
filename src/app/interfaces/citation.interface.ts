@@ -22,11 +22,11 @@ export interface AffiliationCanonicalInterface {
   phoneNumber?: string
   coordinates?: string
   country?: string
-  administrativeLevel1?: string
-  administrativeLevel2?: string
-  administrativeLevel3?: string
-  administrativeLevel4?: string
-  administrativeLevel5?: string
+  administrativeAreaLevel1?: string
+  administrativeAreaLevel2?: string
+  administrativeAreaLevel3?: string
+  administrativeAreaLevel4?: string
+  administrativeAreaLevel5?: string
   locality?: string
   sublocality?: string
   sublocalityLevel1?: string
@@ -49,7 +49,7 @@ export interface AffiliationCanonicalInterface {
   route?: string
   streetAddress?: string
   streetNumber?: string
-  articles: ArticleInterface[]
+  articles?: ArticleInterface[]
 }
 
 export interface JournalInterface {
