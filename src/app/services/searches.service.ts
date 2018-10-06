@@ -56,6 +56,7 @@ export class SearchesService {
       yearBeg: yearBeg || null,
       yearEnd: yearEnd || null,
       studiesStats: {},
+      citationsStats: {},
     };
 
     // Add the new search under its UUID in the `this.searches` object.
