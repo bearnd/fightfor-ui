@@ -38,17 +38,18 @@ declare var $: any;
 })
 export class SearchResultsSummaryComponent implements OnInit {
 
-  @ViewChild('cardLocations') cardLocations: ElementRef;
+  @ViewChild('cardLocations') cardStudiesLocations: ElementRef;
 
-  public locationMapHeight: number;
-  public locationMapWidth: number;
+  public studiesLocationMapHeight: number;
+  public studiesLocationMapWidth: number;
 
-  // Number of top locations to display.
-  numLocationsDisplay = 5;
-  // Location columns to display.
-  displayedColumnsLocations = ['rank', 'country', 'countStudies'];
-  // Locations table data-source.
-  dataSourceLocations: MatTableDataSource<StudiesCountByCountryInterface>;
+  // Number of top studies locations to display.
+  numStudiesLocationsDisplay = 5;
+  // Studies location columns to display.
+  displayedColumnsStudiesLocations = ['rank', 'country', 'countStudies'];
+  // Studies locations table data-source.
+  dataSourceStudiesLocations:
+    MatTableDataSource<StudiesCountByCountryInterface>;
 
   // Number of top facilities to display.
   numFacilitiesDisplay = 5;
@@ -92,7 +93,8 @@ export class SearchResultsSummaryComponent implements OnInit {
   // The search the component will display results for.
   public search: SearchInterface;
 
-  countStudiesOverStatus = {
+  // Placeholder for the count of studies by overall-status group.
+  countStudiesByOverallStatusGroup = {
     recruiting: null,
     completed: null,
     active: null,
@@ -127,10 +129,10 @@ export class SearchResultsSummaryComponent implements OnInit {
    * @param {Event} event The resizing event.
    */
   onResize(event: Event) {
-    this.locationMapHeight = 0.8 * this
-      .cardLocations.nativeElement.clientHeight;
-    this.locationMapWidth = 0.45 * this
-      .cardLocations.nativeElement.clientWidth;
+    this.studiesLocationMapHeight = 0.8 * this
+      .cardStudiesLocations.nativeElement.clientHeight;
+    this.studiesLocationMapWidth = 0.45 * this
+      .cardStudiesLocations.nativeElement.clientWidth;
   }
 
   toggleSaved() {
@@ -195,14 +197,14 @@ export class SearchResultsSummaryComponent implements OnInit {
         this.search.yearEnd || null,
       )
       .subscribe(
-        (studies) => {
+        (studies: StudyInterface[]) => {
           // Assign the retrieved studies to the search.
           this.search.studies = studies;
 
           // Trigger an update the study-statistics via the corresponding
           // methods.
           this.getCountStudiesByOverallStatus();
-          this.getCountStudiesByCountry(this.numLocationsDisplay);
+          this.getCountStudiesByCountry(this.numStudiesLocationsDisplay);
           this.getCountStudiesByFacility(this.numFacilitiesDisplay);
 
           // Indicate that `searchStudies` is complete for this search.
@@ -231,12 +233,12 @@ export class SearchResultsSummaryComponent implements OnInit {
           this.search.studiesStats.byCountry = response;
 
           // Instantiate the data-source for the locations table.
-          this.dataSourceLocations = new MatTableDataSource
+          this.dataSourceStudiesLocations = new MatTableDataSource
             <StudiesCountByCountryInterface>(
               this.search.studiesStats.byCountry.slice(0, limit)
             );
 
-          this.configureLocationsMap(response);
+          this.configureStudiesLocationsMap(response);
 
           // Indicate that `getCountStudiesByCountry` is complete for this
           // search.
@@ -268,22 +270,22 @@ export class SearchResultsSummaryComponent implements OnInit {
 
           // Calculate the number of studies by grouped overall status so they
           // can be rendered in the template.
-          this.countStudiesOverStatus.recruiting =
+          this.countStudiesByOverallStatusGroup.recruiting =
             this.getCountStudiesOverallStatus(
               overallStatusGroups.recruiting,
             );
 
-          this.countStudiesOverStatus.active =
+          this.countStudiesByOverallStatusGroup.active =
             this.getCountStudiesOverallStatus(
               overallStatusGroups.active,
             );
 
-          this.countStudiesOverStatus.completed =
+          this.countStudiesByOverallStatusGroup.completed =
             this.getCountStudiesOverallStatus(
               overallStatusGroups.completed,
             );
 
-          this.countStudiesOverStatus.all =
+          this.countStudiesByOverallStatusGroup.all =
             this.getCountStudiesOverallStatus(
               overallStatusGroups.all,
             );

@@ -53,7 +53,7 @@
               class="nav-link"
               pageScroll
               [pageScrollDuration]="500"
-              href="#locations"
+              href="#studiesLocations"
               [ngClass]="{active: isNavPillActive(3)}"
             >
               <i class="material-icons">account_balance</i> Institutions
@@ -149,7 +149,7 @@
                       </div>
                       <p class="card-category">Recruiting</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.recruiting }}
+                        {{ countStudiesByOverallStatusGroup.recruiting }}
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -172,7 +172,7 @@
                       </div>
                       <p class="card-category">Active</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.active }}
+                        {{ countStudiesByOverallStatusGroup.active }}
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -195,7 +195,7 @@
                       </div>
                       <p class="card-category">Completed</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.completed }}
+                        {{ countStudiesByOverallStatusGroup.completed }}
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -218,7 +218,7 @@
                       </div>
                       <p class="card-category">All</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.all }}
+                        {{ countStudiesByOverallStatusGroup.all }}
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -251,7 +251,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4 class="card-title">
-                    {{ 'Locations' | uppercase }}
+                    {{ 'Locations (Trials)' | uppercase }}
                   </h4>
                 </div>
               </div>
@@ -275,17 +275,17 @@
                     <table
                       mat-table
                       #tableLocations
-                      [dataSource]="dataSourceLocations"
+                      [dataSource]="dataSourceStudiesLocations"
                       class="table table-hover"
                       width="100%"
                     >
                       <!--Header.-->
                       <mat-header-row
-                        *matHeaderRowDef="displayedColumnsLocations"
+                        *matHeaderRowDef="displayedColumnsStudiesLocations"
                       ></mat-header-row>
                       <mat-row
                         *matRowDef="let row;
-                        columns: displayedColumnsLocations;"
+                        columns: displayedColumnsStudiesLocations;"
                       ></mat-row>
 
                       <!-- Rank Column -->
@@ -326,8 +326,8 @@
                   <div
                     id="worldMap"
                     class="map map-big"
-                    [style.height.px]="locationMapHeight"
-                    [style.width.px]="locationMapWidth"
+                    [style.height.px]="studiesLocationMapHeight"
+                    [style.width.px]="studiesLocationMapWidth"
                   >
                   </div>
                 </div>
