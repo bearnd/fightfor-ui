@@ -31,6 +31,12 @@ import {
 import { GeolocationService } from './services/geolocation.service';
 
 import { environment } from '../environments/environment';
+import {
+  CitationRetrieverService
+} from './services/citation-retriever.service';
+import {
+  CitationStatsRetrieverService
+} from './services/citation-stats-retriever.service';
 
 
 @NgModule({
@@ -57,6 +63,8 @@ import { environment } from '../environments/environment';
     MeshDescriptorRetrieverService,
     StudyStatsRetrieverService,
     GeolocationService,
+    CitationRetrieverService,
+    CitationStatsRetrieverService,
   ],
   bootstrap: [AppComponent],
   exports: [
