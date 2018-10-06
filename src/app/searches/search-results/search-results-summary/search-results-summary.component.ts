@@ -486,4 +486,90 @@ export class SearchResultsSummaryComponent implements OnInit {
       },
     });
   }
+
+  /**
+   * Configures and initializes the citations locations map based on the results
+   * of the citations-by-country aggregation.
+   * @param {CitationsCountByCountryInterface[]} citationsByCountry The results
+   * of the citations-by-country aggregation.
+   */
+  configureCitationsLocationsMap(
+    citationsByCountry: CitationsCountByCountryInterface[],
+  ) {
+
+    // Set the starting color of the scale.
+    const startColor = [200, 238, 255];
+    // Set the ending color of the scale.
+    const endColor = [0, 100, 145];
+    const colors = {};
+
+    const mapValues: {[key: string]: number} = {};
+
+    // Iterate over the `citationsByCountry` results, retrieve the ISO Alpha2
+    // code for each country and assemble a code:citation-count object.
+    for (const entry of citationsByCountry) {
+      const code = getCountryCode(entry.country);
+      if (code) {
+        mapValues[
+          getCountryCode(entry.country).toLowerCase()
+          ] = entry.countCitations;
+      }
+    }
+
+    // Calculate the maximum and minimum values of study-count.
+    const mapMax: number = Math.max(...Object.values(mapValues));
+    const mapMin: number = Math.min(...Object.values(mapValues));
+
+    // Calculate a color per region based on the citation-count and the
+    // color-scale defined prior.
+    for (const key in mapValues) {
+      if (mapValues[key] > 0) {
+        colors[key] = '#';
+        for (let i = 0; i < 3; i++) {
+          let hex = Math.round(startColor[i]
+            + (endColor[i]
+              - startColor[i])
+            * (mapValues[key] / (mapMax - mapMin))).toString(16);
+
+          if (hex.length === 1) {
+            hex = '0' + hex;
+          }
+
+          colors[key] += (hex.length === 1 ? '0' : '') + hex;
+        }
+      }
+    }
+
+    // Initialize and configure the map.
+    $('#worldMapCitations').vectorMap({
+      map: 'world_en',
+      backgroundColor: 'transparent',
+      borderColor: '#818181',
+      borderOpacity: 0.25,
+      borderWidth: 1,
+      colors: colors,
+      hoverColor: '#eee',
+      hoverOpacity: null,
+      normalizeFunction: 'linear',
+      selectedColor: '#c9dfaf',
+      selectedRegions: null,
+      showTooltip: true,
+      series: {
+        regions: [{
+          values: mapValues,
+        }]
+      },
+      // Defines the tooltip label per region.
+      onLabelShow: function (event, label, code) {
+
+        let value = 0;
+        if (mapValues.hasOwnProperty(code)) {
+          value = mapValues[code]
+        }
+
+        label[0].innerHTML =
+          label[0].innerHTML + ': ' + value + ' Articles';
+      },
+    });
+  }
 }
