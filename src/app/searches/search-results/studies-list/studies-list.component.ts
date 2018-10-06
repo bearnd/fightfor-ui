@@ -815,8 +815,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
-      const meshTermType = castMeshTermType(studyMeshTerm.meshTermType);
-      if (meshTermType === MeshTermType.INTERVENTION) {
+      if (studyMeshTerm.meshTermType.valueOf() === 'INTERVENTION') {
         meshTerms.push(studyMeshTerm.meshTerm);
       }
     }
@@ -836,8 +835,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
-      const meshTermType = castMeshTermType(studyMeshTerm.meshTermType);
-      if (meshTermType === MeshTermType.CONDITION) {
+      if (studyMeshTerm.meshTermType.valueOf() === 'CONDITION') {
         meshTerms.push(studyMeshTerm.meshTerm);
       }
     }
@@ -870,7 +868,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   castOverallStatus(status: string): StudyOverallStatus {
-    return castOverallStatus(status);
+    return StudyOverallStatus[status];
   }
 
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {
