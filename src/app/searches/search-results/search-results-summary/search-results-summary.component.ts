@@ -404,12 +404,14 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
-   * Configures and initializes the locations map based on the results of the
-   * studies-by-country aggregation.
-   * @param {StudiesCountByCountryInterface[]} studiesByCountry The results of the
-   * studies-by-country aggregation.
+   * Configures and initializes the studies locations map based on the results
+   * of the studies-by-country aggregation.
+   * @param {StudiesCountByCountryInterface[]} studiesByCountry The results of
+   * the studies-by-country aggregation.
    */
-  configureLocationsMap(studiesByCountry: StudiesCountByCountryInterface[]) {
+  configureStudiesLocationsMap(
+    studiesByCountry: StudiesCountByCountryInterface[],
+  ) {
 
     // Set the starting color of the scale.
     const startColor = [200, 238, 255];
