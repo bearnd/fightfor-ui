@@ -638,7 +638,8 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     this.router.navigate(
       [
-        '/searches',
+        '/app',
+        'searches',
         searchUuid,
         'trials',
         overallStatusGroupName,

@@ -20,6 +20,10 @@ import {
 
 export const AdminLayoutRoutes: Routes = [
   {
+    path: '',
+    redirectTo: 'dashboard',
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     data: {
