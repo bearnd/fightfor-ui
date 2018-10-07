@@ -161,7 +161,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     );
 
     // Navigate to the `SearchResultsComponent` with the new search.
-    this.router.navigate(['/searches', search.searchUuid]);
+    this.router.navigate(['/app', 'searches', search.searchUuid]);
   }
 
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {

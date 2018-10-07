@@ -37,6 +37,7 @@ import {
 import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    AuthLayoutComponent,
   ],
   providers: [
     SearchesService,
