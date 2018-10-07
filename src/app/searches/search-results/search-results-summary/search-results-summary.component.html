@@ -41,10 +41,10 @@
               class="nav-link"
               pageScroll
               [pageScrollDuration]="500"
-              href="#locations"
+              href="#articles"
               [ngClass]="{active: isNavPillActive(2)}"
             >
-              <i class="material-icons">location_on</i> Locations
+              <i class="material-icons">description</i> Articles
             </a>
           </li>
 
@@ -56,7 +56,43 @@
               href="#studiesLocations"
               [ngClass]="{active: isNavPillActive(3)}"
             >
-              <i class="material-icons">account_balance</i> Institutions
+              <i class="material-icons">location_on</i> Locations<br>(Trials)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#citationsLocations"
+              [ngClass]="{active: isNavPillActive(4)}"
+            >
+              <i class="material-icons">location_on</i> Locations<br>(Articles)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#institutions"
+              [ngClass]="{active: isNavPillActive(5)}"
+            >
+              <i class="material-icons">account_balance</i> Institutions<br>(Trials)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#affiliations"
+              [ngClass]="{active: isNavPillActive(6)}"
+            >
+              <i class="material-icons">account_balance</i> Affiliations<br>(Articles)
             </a>
           </li>
 
