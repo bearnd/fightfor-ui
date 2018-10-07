@@ -146,7 +146,7 @@
 
             <div class="card-body">
 
-              <div class="row" *ngIf="!(isLoadingGetCountStudiesByOverallStatus | async)">
+              <div class="row">
                 <div class="col-md-3">
                   <div class="card card-stats" style="background-color: white">
                     <div class="card-header card-header-danger card-header-icon">
@@ -156,6 +156,11 @@
                       <p class="card-category">Recruiting</p>
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.recruiting }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -179,6 +184,11 @@
                       <p class="card-category">Active</p>
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.active }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -202,6 +212,11 @@
                       <p class="card-category">Completed</p>
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.completed }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -225,6 +240,11 @@
                       <p class="card-category">All</p>
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.all }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
