@@ -32,7 +32,6 @@ import { SearchInterface } from '../../../interfaces/search.interface';
 import {
   FacilityCanonicalInterface,
   MeshTermInterface,
-  MeshTermType,
   OrderType,
   StudyInterface,
   StudyOverallStatus,
@@ -45,8 +44,6 @@ import {
 } from '../../../services/study-retriever.service';
 import {
   castEnumToArray,
-  castMeshTermType,
-  castOverallStatus,
   orderStringArray,
 } from '../../../shared/utils';
 import {
