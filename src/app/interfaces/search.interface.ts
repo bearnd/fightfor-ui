@@ -1,6 +1,13 @@
 import { MeshDescriptorInterface } from './mesh-descriptor.interface';
-import { FacilityCanonicalInterface, MeshTermInterface, StudyInterface } from './study.interface';
-import { AffiliationCanonicalInterface } from './citation.interface';
+import {
+  FacilityCanonicalInterface,
+  MeshTermInterface,
+  StudyInterface,
+} from './study.interface';
+import {
+  AffiliationCanonicalInterface,
+  CitationInterface, PubMedQualifierInterface,
+} from './citation.interface';
 
 
 
@@ -41,6 +48,12 @@ export interface CitationsCountByAffiliationInterface {
 }
 
 
+export interface CitationsCountByQualifierInterface {
+  qualifier: PubMedQualifierInterface
+  countCitations: number
+}
+
+
 export interface SearchInterface {
   searchId?: number
   searchUuid: string
@@ -49,10 +62,15 @@ export interface SearchInterface {
   yearBeg?: number
   yearEnd?: number
   studies?: StudyInterface[]
-  studiesFiltered?: StudyInterface[]
+  citations?: CitationInterface[]
   studiesStats: {
     byCountry?: StudiesCountByCountryInterface[]
     byOverallStatus?: StudiesCountByOverallStatusInterface[]
     byFacility?: StudiesCountByFacilityInterface[]
+  }
+  citationsStats: {
+    byCountry?: CitationsCountByCountryInterface[]
+    byAffiliation?: CitationsCountByAffiliationInterface[]
+    byQualifier?: CitationsCountByQualifierInterface[]
   }
 }

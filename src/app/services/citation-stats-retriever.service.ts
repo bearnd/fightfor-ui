@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import {
   CitationsCountByAffiliationInterface,
   CitationsCountByCountryInterface,
+  CitationsCountByQualifierInterface,
 } from '../interfaces/search.interface';
 import { CitationInterface } from '../interfaces/citation.interface';
 
@@ -33,6 +34,19 @@ interface VariablesGetCountCitationsByAffiliation {
 interface ResponseGetCountCitationsByAffiliation {
   citationsStats: {
     countCitationsByAffiliation: CitationsCountByAffiliationInterface[]
+  }
+}
+
+
+interface VariablesGetCountCitationsByQualifier {
+  citationIds: number[]
+  limit?: number
+}
+
+
+interface ResponseGetCountCitationsByQualifier {
+  citationsStats: {
+    countCitationsByQualifier: CitationsCountByQualifierInterface[]
   }
 }
 
@@ -81,6 +95,25 @@ export class CitationStatsRetrieverService {
     }
     `;
 
+  queryGetCountCitationsByQualifier = gql`
+    query getCountCitationsByQualifier(
+      $citationIds: [Int]!, 
+      $limit: Int
+    ) {
+      citationsStats {
+        countCitationsByQualifier(
+          citationIds: $citationIds,
+          limit: $limit
+        ) {
+          qualifier {
+            qualifier
+          }
+          countCitations
+        }
+      }
+    }
+    `;
+
   constructor(private apollo: Apollo) {}
 
   /**
@@ -91,7 +124,7 @@ export class CitationStatsRetrieverService {
    * descending number of citations).
    * @returns {Observable<CitationsCountByCountryInterface[]>}
    */
-  getCountStudiesByCountry(
+  getCountCitationsByCountry(
     citations: CitationInterface[],
     limit: number = null,
   ): Observable<CitationsCountByCountryInterface[]> {
@@ -118,14 +151,14 @@ export class CitationStatsRetrieverService {
   }
 
   /**
-   * Retrieve the count of citations by facility for given citations.
+   * Retrieve the count of citations by affiliation for given citations.
    * @param {CitationInterface[]} citations The citations which will be grouped
    * and counted by affiliation.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of citations).
    * @returns {Observable<CitationsCountByAffiliationInterface[]>}
    */
-  getCountStudiesByFacility(
+  getCountCitationsByAffiliation(
     citations: CitationInterface[],
     limit: number = null,
   ): Observable<CitationsCountByAffiliationInterface[]> {
@@ -148,6 +181,40 @@ export class CitationStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.citationsStats.countCitationsByAffiliation;
+      });
+  }
+
+  /**
+   * Retrieve the count of citations by qualifier for given citations.
+   * @param {CitationInterface[]} citations The citations which will be grouped
+   * and counted by qualifier.
+   * @param {number} limit The number of results to return (ordered by a
+   * descending number of citations).
+   * @returns {Observable<CitationsCountByQualifierInterface[]>}
+   */
+  getCountCitationsByQualifier(
+    citations: CitationInterface[],
+    limit: number = null,
+  ): Observable<CitationsCountByQualifierInterface[]> {
+
+    // Retrieve the IDs out of the provided citations.
+    const citationIds: number[] = citations.map(
+      function (d) {
+        return d.citationId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetCountCitationsByQualifier,
+        VariablesGetCountCitationsByQualifier>
+      ({
+        query: this.queryGetCountCitationsByQualifier,
+        variables: {
+          citationIds: citationIds,
+          limit: limit,
+        }
+      }).map((response) => {
+        return response.data.citationsStats.countCitationsByQualifier;
       });
   }
 }

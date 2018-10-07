@@ -4837,6 +4837,11777 @@ export let searchSample: SearchInterface = {
       nctId: 'NCT03330197',
 
     }
-  ]
+  ],
+  citations: [
+    {
+      'citationId': 11718344.0
+    },
+    {
+      'citationId': 11720753.0
+    },
+    {
+      'citationId': 11744295.0
+    },
+    {
+      'citationId': 11744489.0
+    },
+    {
+      'citationId': 11749796.0
+    },
+    {
+      'citationId': 11750570.0
+    },
+    {
+      'citationId': 11751279.0
+    },
+    {
+      'citationId': 11751631.0
+    },
+    {
+      'citationId': 11753972.0
+    },
+    {
+      'citationId': 11754542.0
+    },
+    {
+      'citationId': 11755344.0
+    },
+    {
+      'citationId': 11759081.0
+    },
+    {
+      'citationId': 11759465.0
+    },
+    {
+      'citationId': 11759666.0
+    },
+    {
+      'citationId': 11760315.0
+    },
+    {
+      'citationId': 11761578.0
+    },
+    {
+      'citationId': 11764055.0
+    },
+    {
+      'citationId': 11764104.0
+    },
+    {
+      'citationId': 11765482.0
+    },
+    {
+      'citationId': 11772344.0
+    },
+    {
+      'citationId': 11772961.0
+    },
+    {
+      'citationId': 11773295.0
+    },
+    {
+      'citationId': 11774695.0
+    },
+    {
+      'citationId': 11775420.0
+    },
+    {
+      'citationId': 11776202.0
+    },
+    {
+      'citationId': 11776369.0
+    },
+    {
+      'citationId': 11776563.0
+    },
+    {
+      'citationId': 11776580.0
+    },
+    {
+      'citationId': 11777990.0
+    },
+    {
+      'citationId': 11778368.0
+    },
+    {
+      'citationId': 11778409.0
+    },
+    {
+      'citationId': 11778672.0
+    },
+    {
+      'citationId': 11778949.0
+    },
+    {
+      'citationId': 11780291.0
+    },
+    {
+      'citationId': 11780410.0
+    },
+    {
+      'citationId': 11781183.0
+    },
+    {
+      'citationId': 11781701.0
+    },
+    {
+      'citationId': 11783322.0
+    },
+    {
+      'citationId': 11785346.0
+    },
+    {
+      'citationId': 11785949.0
+    },
+    {
+      'citationId': 11786285.0
+    },
+    {
+      'citationId': 11786687.0
+    },
+    {
+      'citationId': 11787289.0
+    },
+    {
+      'citationId': 11787347.0
+    },
+    {
+      'citationId': 11787478.0
+    },
+    {
+      'citationId': 11788568.0
+    },
+    {
+      'citationId': 11788658.0
+    },
+    {
+      'citationId': 11788676.0
+    },
+    {
+      'citationId': 11788828.0
+    },
+    {
+      'citationId': 11788849.0
+    },
+    {
+      'citationId': 11789951.0
+    },
+    {
+      'citationId': 11789953.0
+    },
+    {
+      'citationId': 11791218.0
+    },
+    {
+      'citationId': 11791288.0
+    },
+    {
+      'citationId': 11791502.0
+    },
+    {
+      'citationId': 11792123.0
+    },
+    {
+      'citationId': 11792440.0
+    },
+    {
+      'citationId': 11792660.0
+    },
+    {
+      'citationId': 11792764.0
+    },
+    {
+      'citationId': 11792867.0
+    },
+    {
+      'citationId': 11793402.0
+    },
+    {
+      'citationId': 11793700.0
+    },
+    {
+      'citationId': 11794253.0
+    },
+    {
+      'citationId': 11794270.0
+    },
+    {
+      'citationId': 11794287.0
+    },
+    {
+      'citationId': 11794364.0
+    },
+    {
+      'citationId': 11794732.0
+    },
+    {
+      'citationId': 11794731.0
+    },
+    {
+      'citationId': 11795843.0
+    },
+    {
+      'citationId': 11796734.0
+    },
+    {
+      'citationId': 11796964.0
+    },
+    {
+      'citationId': 11797292.0
+    },
+    {
+      'citationId': 11797275.0
+    },
+    {
+      'citationId': 11797693.0
+    },
+    {
+      'citationId': 11797866.0
+    },
+    {
+      'citationId': 11798235.0
+    },
+    {
+      'citationId': 11798472.0
+    },
+    {
+      'citationId': 11799286.0
+    },
+    {
+      'citationId': 11801037.0
+    },
+    {
+      'citationId': 11803344.0
+    },
+    {
+      'citationId': 11805420.0
+    },
+    {
+      'citationId': 11806227.0
+    },
+    {
+      'citationId': 11806679.0
+    },
+    {
+      'citationId': 11806911.0
+    },
+    {
+      'citationId': 11807159.0
+    },
+    {
+      'citationId': 11808104.0
+    },
+    {
+      'citationId': 11808523.0
+    },
+    {
+      'citationId': 11808721.0
+    },
+    {
+      'citationId': 11808963.0
+    },
+    {
+      'citationId': 11809534.0
+    },
+    {
+      'citationId': 11809669.0
+    },
+    {
+      'citationId': 11809840.0
+    },
+    {
+      'citationId': 11810034.0
+    },
+    {
+      'citationId': 11810568.0
+    },
+    {
+      'citationId': 11812483.0
+    },
+    {
+      'citationId': 11812937.0
+    },
+    {
+      'citationId': 11813614.0
+    },
+    {
+      'citationId': 11814812.0
+    },
+    {
+      'citationId': 11815009.0
+    },
+    {
+      'citationId': 11815464.0
+    },
+    {
+      'citationId': 11816343.0
+    },
+    {
+      'citationId': 11818216.0
+    },
+    {
+      'citationId': 11818323.0
+    },
+    {
+      'citationId': 11818503.0
+    },
+    {
+      'citationId': 11819121.0
+    },
+    {
+      'citationId': 11819296.0
+    },
+    {
+      'citationId': 11819840.0
+    },
+    {
+      'citationId': 11819857.0
+    },
+    {
+      'citationId': 11821649.0
+    },
+    {
+      'citationId': 11822074.0
+    },
+    {
+      'citationId': 11822188.0
+    },
+    {
+      'citationId': 11822264.0
+    },
+    {
+      'citationId': 11822937.0
+    },
+    {
+      'citationId': 11822792.0
+    },
+    {
+      'citationId': 11823695.0
+    },
+    {
+      'citationId': 11824050.0
+    },
+    {
+      'citationId': 11824606.0
+    },
+    {
+      'citationId': 11824856.0
+    },
+    {
+      'citationId': 11824875.0
+    },
+    {
+      'citationId': 11824893.0
+    },
+    {
+      'citationId': 11824953.0
+    },
+    {
+      'citationId': 11824976.0
+    },
+    {
+      'citationId': 11825711.0
+    },
+    {
+      'citationId': 11826371.0
+    },
+    {
+      'citationId': 11826541.0
+    },
+    {
+      'citationId': 11827598.0
+    },
+    {
+      'citationId': 11827848.0
+    },
+    {
+      'citationId': 11827884.0
+    },
+    {
+      'citationId': 11828183.0
+    },
+    {
+      'citationId': 11828320.0
+    },
+    {
+      'citationId': 11828876.0
+    },
+    {
+      'citationId': 11829823.0
+    },
+    {
+      'citationId': 11829855.0
+    },
+    {
+      'citationId': 11830836.0
+    },
+    {
+      'citationId': 11830833.0
+    },
+    {
+      'citationId': 11832219.0
+    },
+    {
+      'citationId': 11833188.0
+    },
+    {
+      'citationId': 11833406.0
+    },
+    {
+      'citationId': 11833787.0
+    },
+    {
+      'citationId': 11834038.0
+    },
+    {
+      'citationId': 11834884.0
+    },
+    {
+      'citationId': 11835726.0
+    },
+    {
+      'citationId': 11836546.0
+    },
+    {
+      'citationId': 11836771.0
+    },
+    {
+      'citationId': 11837060.0
+    },
+    {
+      'citationId': 11837710.0
+    },
+    {
+      'citationId': 11838146.0
+    },
+    {
+      'citationId': 11838126.0
+    },
+    {
+      'citationId': 11838325.0
+    },
+    {
+      'citationId': 11838532.0
+    },
+    {
+      'citationId': 11840774.0
+    },
+    {
+      'citationId': 11841291.0
+    },
+    {
+      'citationId': 11841666.0
+    },
+    {
+      'citationId': 11841785.0
+    },
+    {
+      'citationId': 11842407.0
+    },
+    {
+      'citationId': 11842830.0
+    },
+    {
+      'citationId': 11843828.0
+    },
+    {
+      'citationId': 11845175.0
+    },
+    {
+      'citationId': 11846013.0
+    },
+    {
+      'citationId': 11846070.0
+    },
+    {
+      'citationId': 11847431.0
+    },
+    {
+      'citationId': 11847538.0
+    },
+    {
+      'citationId': 11847596.0
+    },
+    {
+      'citationId': 11848077.0
+    },
+    {
+      'citationId': 11848158.0
+    },
+    {
+      'citationId': 11850011.0
+    },
+    {
+      'citationId': 11852311.0
+    },
+    {
+      'citationId': 11852360.0
+    },
+    {
+      'citationId': 11853178.0
+    },
+    {
+      'citationId': 11853384.0
+    },
+    {
+      'citationId': 11853540.0
+    },
+    {
+      'citationId': 11854295.0
+    },
+    {
+      'citationId': 11854714.0
+    },
+    {
+      'citationId': 11857834.0
+    },
+    {
+      'citationId': 11858810.0
+    },
+    {
+      'citationId': 11858871.0
+    },
+    {
+      'citationId': 11859981.0
+    },
+    {
+      'citationId': 11860261.0
+    },
+    {
+      'citationId': 11860245.0
+    },
+    {
+      'citationId': 11860472.0
+    },
+    {
+      'citationId': 11864261.0
+    },
+    {
+      'citationId': 11864833.0
+    },
+    {
+      'citationId': 11865423.0
+    },
+    {
+      'citationId': 11865459.0
+    },
+    {
+      'citationId': 11867177.0
+    },
+    {
+      'citationId': 11867725.0
+    },
+    {
+      'citationId': 11868136.0
+    },
+    {
+      'citationId': 11868193.0
+    },
+    {
+      'citationId': 11868325.0
+    },
+    {
+      'citationId': 11868928.0
+    },
+    {
+      'citationId': 11869186.0
+    },
+    {
+      'citationId': 11870085.0
+    },
+    {
+      'citationId': 11870024.0
+    },
+    {
+      'citationId': 11870526.0
+    },
+    {
+      'citationId': 11870563.0
+    },
+    {
+      'citationId': 11873488.0
+    },
+    {
+      'citationId': 11875113.0
+    },
+    {
+      'citationId': 11875550.0
+    },
+    {
+      'citationId': 11875784.0
+    },
+    {
+      'citationId': 11875901.0
+    },
+    {
+      'citationId': 11876067.0
+    },
+    {
+      'citationId': 11876261.0
+    },
+    {
+      'citationId': 11876302.0
+    },
+    {
+      'citationId': 11877487.0
+    },
+    {
+      'citationId': 11876855.0
+    },
+    {
+      'citationId': 11877146.0
+    },
+    {
+      'citationId': 11877586.0
+    },
+    {
+      'citationId': 11878259.0
+    },
+    {
+      'citationId': 11877980.0
+    },
+    {
+      'citationId': 11878454.0
+    },
+    {
+      'citationId': 11878628.0
+    },
+    {
+      'citationId': 11878988.0
+    },
+    {
+      'citationId': 11878963.0
+    },
+    {
+      'citationId': 11879440.0
+    },
+    {
+      'citationId': 11879661.0
+    },
+    {
+      'citationId': 11880324.0
+    },
+    {
+      'citationId': 11880501.0
+    },
+    {
+      'citationId': 11880453.0
+    },
+    {
+      'citationId': 11881927.0
+    },
+    {
+      'citationId': 11882557.0
+    },
+    {
+      'citationId': 11883189.0
+    },
+    {
+      'citationId': 11885439.0
+    },
+    {
+      'citationId': 11885560.0
+    },
+    {
+      'citationId': 11886218.0
+    },
+    {
+      'citationId': 11886705.0
+    },
+    {
+      'citationId': 11886726.0
+    },
+    {
+      'citationId': 11886850.0
+    },
+    {
+      'citationId': 11889377.0
+    },
+    {
+      'citationId': 11889552.0
+    },
+    {
+      'citationId': 11890120.0
+    },
+    {
+      'citationId': 11893092.0
+    },
+    {
+      'citationId': 11893612.0
+    },
+    {
+      'citationId': 11893666.0
+    },
+    {
+      'citationId': 11894292.0
+    },
+    {
+      'citationId': 11894383.0
+    },
+    {
+      'citationId': 11895355.0
+    },
+    {
+      'citationId': 11895560.0
+    },
+    {
+      'citationId': 11895991.0
+    },
+    {
+      'citationId': 11895898.0
+    },
+    {
+      'citationId': 11896397.0
+    },
+    {
+      'citationId': 11896439.0
+    },
+    {
+      'citationId': 11896530.0
+    },
+    {
+      'citationId': 11897632.0
+    },
+    {
+      'citationId': 11899060.0
+    },
+    {
+      'citationId': 11900346.0
+    },
+    {
+      'citationId': 11901997.0
+    },
+    {
+      'citationId': 11903139.0
+    },
+    {
+      'citationId': 11906346.0
+    },
+    {
+      'citationId': 11907288.0
+    },
+    {
+      'citationId': 11907422.0
+    },
+    {
+      'citationId': 11910190.0
+    },
+    {
+      'citationId': 11913724.0
+    },
+    {
+      'citationId': 11915780.0
+    },
+    {
+      'citationId': 11920143.0
+    },
+    {
+      'citationId': 11923517.0
+    },
+    {
+      'citationId': 11925426.0
+    },
+    {
+      'citationId': 11750594.0
+    },
+    {
+      'citationId': 11751135.0
+    },
+    {
+      'citationId': 11756323.0
+    },
+    {
+      'citationId': 11759196.0
+    },
+    {
+      'citationId': 11759494.0
+    },
+    {
+      'citationId': 11760601.0
+    },
+    {
+      'citationId': 11760779.0
+    },
+    {
+      'citationId': 11761267.0
+    },
+    {
+      'citationId': 11762090.0
+    },
+    {
+      'citationId': 11763698.0
+    },
+    {
+      'citationId': 11764078.0
+    },
+    {
+      'citationId': 11764087.0
+    },
+    {
+      'citationId': 11765191.0
+    },
+    {
+      'citationId': 11765295.0
+    },
+    {
+      'citationId': 11766703.0
+    },
+    {
+      'citationId': 11767933.0
+    },
+    {
+      'citationId': 11770431.0
+    },
+    {
+      'citationId': 11771902.0
+    },
+    {
+      'citationId': 11772612.0
+    },
+    {
+      'citationId': 11773131.0
+    },
+    {
+      'citationId': 11773567.0
+    },
+    {
+      'citationId': 11774669.0
+    },
+    {
+      'citationId': 11776352.0
+    },
+    {
+      'citationId': 11776938.0
+    },
+    {
+      'citationId': 11777578.0
+    },
+    {
+      'citationId': 11778381.0
+    },
+    {
+      'citationId': 11778396.0
+    },
+    {
+      'citationId': 11779395.0
+    },
+    {
+      'citationId': 11780051.0
+    },
+    {
+      'citationId': 11781338.0
+    },
+    {
+      'citationId': 11781776.0
+    },
+    {
+      'citationId': 11782092.0
+    },
+    {
+      'citationId': 11783025.0
+    },
+    {
+      'citationId': 11783500.0
+    },
+    {
+      'citationId': 11784097.0
+    },
+    {
+      'citationId': 11784790.0
+    },
+    {
+      'citationId': 11785047.0
+    },
+    {
+      'citationId': 11785322.0
+    },
+    {
+      'citationId': 11785932.0
+    },
+    {
+      'citationId': 11786271.0
+    },
+    {
+      'citationId': 11786458.0
+    },
+    {
+      'citationId': 11786924.0
+    },
+    {
+      'citationId': 11787962.0
+    },
+    {
+      'citationId': 11788643.0
+    },
+    {
+      'citationId': 11788711.0
+    },
+    {
+      'citationId': 11791442.0
+    },
+    {
+      'citationId': 11791894.0
+    },
+    {
+      'citationId': 11791878.0
+    },
+    {
+      'citationId': 11791947.0
+    },
+    {
+      'citationId': 11792421.0
+    },
+    {
+      'citationId': 11792526.0
+    },
+    {
+      'citationId': 11792711.0
+    },
+    {
+      'citationId': 11793173.0
+    },
+    {
+      'citationId': 11793390.0
+    },
+    {
+      'citationId': 11794224.0
+    },
+    {
+      'citationId': 11794311.0
+    },
+    {
+      'citationId': 11794330.0
+    },
+    {
+      'citationId': 11794345.0
+    },
+    {
+      'citationId': 11794394.0
+    },
+    {
+      'citationId': 11794411.0
+    },
+    {
+      'citationId': 11794426.0
+    },
+    {
+      'citationId': 11794716.0
+    },
+    {
+      'citationId': 11794913.0
+    },
+    {
+      'citationId': 11794960.0
+    },
+    {
+      'citationId': 11795549.0
+    },
+    {
+      'citationId': 11797652.0
+    },
+    {
+      'citationId': 11797931.0
+    },
+    {
+      'citationId': 11799165.0
+    },
+    {
+      'citationId': 11799213.0
+    },
+    {
+      'citationId': 11799677.0
+    },
+    {
+      'citationId': 11799753.0
+    },
+    {
+      'citationId': 11800260.0
+    },
+    {
+      'citationId': 11801108.0
+    },
+    {
+      'citationId': 11801833.0
+    },
+    {
+      'citationId': 11802547.0
+    },
+    {
+      'citationId': 11804425.0
+    },
+    {
+      'citationId': 11805207.0
+    },
+    {
+      'citationId': 11805772.0
+    },
+    {
+      'citationId': 11805788.0
+    },
+    {
+      'citationId': 11805967.0
+    },
+    {
+      'citationId': 11806398.0
+    },
+    {
+      'citationId': 11806697.0
+    },
+    {
+      'citationId': 11806715.0
+    },
+    {
+      'citationId': 11807666.0
+    },
+    {
+      'citationId': 11807897.0
+    },
+    {
+      'citationId': 11808300.0
+    },
+    {
+      'citationId': 11808949.0
+    },
+    {
+      'citationId': 11809190.0
+    },
+    {
+      'citationId': 11809790.0
+    },
+    {
+      'citationId': 11810820.0
+    },
+    {
+      'citationId': 11811019.0
+    },
+    {
+      'citationId': 11811292.0
+    },
+    {
+      'citationId': 11811997.0
+    },
+    {
+      'citationId': 11812211.0
+    },
+    {
+      'citationId': 11812757.0
+    },
+    {
+      'citationId': 11812850.0
+    },
+    {
+      'citationId': 11813624.0
+    },
+    {
+      'citationId': 11813971.0
+    },
+    {
+      'citationId': 11813985.0
+    },
+    {
+      'citationId': 11814853.0
+    },
+    {
+      'citationId': 11815650.0
+    },
+    {
+      'citationId': 11815808.0
+    },
+    {
+      'citationId': 11815941.0
+    },
+    {
+      'citationId': 11816042.0
+    },
+    {
+      'citationId': 11818638.0
+    },
+    {
+      'citationId': 11819637.0
+    },
+    {
+      'citationId': 11819564.0
+    },
+    {
+      'citationId': 11819716.0
+    },
+    {
+      'citationId': 11819901.0
+    },
+    {
+      'citationId': 11819975.0
+    },
+    {
+      'citationId': 11820826.0
+    },
+    {
+      'citationId': 11821442.0
+    },
+    {
+      'citationId': 11821498.0
+    },
+    {
+      'citationId': 11821519.0
+    },
+    {
+      'citationId': 11821780.0
+    },
+    {
+      'citationId': 11821924.0
+    },
+    {
+      'citationId': 11822606.0
+    },
+    {
+      'citationId': 11822608.0
+    },
+    {
+      'citationId': 11823383.0
+    },
+    {
+      'citationId': 11824186.0
+    },
+    {
+      'citationId': 11824617.0
+    },
+    {
+      'citationId': 11824940.0
+    },
+    {
+      'citationId': 11824914.0
+    },
+    {
+      'citationId': 11824937.0
+    },
+    {
+      'citationId': 11825810.0
+    },
+    {
+      'citationId': 11825947.0
+    },
+    {
+      'citationId': 11826764.0
+    },
+    {
+      'citationId': 11828038.0
+    },
+    {
+      'citationId': 11828017.0
+    },
+    {
+      'citationId': 11832094.0
+    },
+    {
+      'citationId': 11832457.0
+    },
+    {
+      'citationId': 11832979.0
+    },
+    {
+      'citationId': 11833389.0
+    },
+    {
+      'citationId': 11834182.0
+    },
+    {
+      'citationId': 11834689.0
+    },
+    {
+      'citationId': 11834966.0
+    },
+    {
+      'citationId': 11835429.0
+    },
+    {
+      'citationId': 11836294.0
+    },
+    {
+      'citationId': 11836650.0
+    },
+    {
+      'citationId': 11837028.0
+    },
+    {
+      'citationId': 11840436.0
+    },
+    {
+      'citationId': 11837788.0
+    },
+    {
+      'citationId': 11838121.0
+    },
+    {
+      'citationId': 11838138.0
+    },
+    {
+      'citationId': 11838298.0
+    },
+    {
+      'citationId': 11838486.0
+    },
+    {
+      'citationId': 11839018.0
+    },
+    {
+      'citationId': 11839407.0
+    },
+    {
+      'citationId': 11842106.0
+    },
+    {
+      'citationId': 11843326.0
+    },
+    {
+      'citationId': 11843862.0
+    },
+    {
+      'citationId': 11843959.0
+    },
+    {
+      'citationId': 11844801.0
+    },
+    {
+      'citationId': 11845084.0
+    },
+    {
+      'citationId': 11846367.0
+    },
+    {
+      'citationId': 11846397.0
+    },
+    {
+      'citationId': 11847556.0
+    },
+    {
+      'citationId': 11847669.0
+    },
+    {
+      'citationId': 11848108.0
+    },
+    {
+      'citationId': 11848122.0
+    },
+    {
+      'citationId': 11848148.0
+    },
+    {
+      'citationId': 11848481.0
+    },
+    {
+      'citationId': 11848353.0
+    },
+    {
+      'citationId': 11849080.0
+    },
+    {
+      'citationId': 11849049.0
+    },
+    {
+      'citationId': 11849074.0
+    },
+    {
+      'citationId': 11849285.0
+    },
+    {
+      'citationId': 11851988.0
+    },
+    {
+      'citationId': 11852385.0
+    },
+    {
+      'citationId': 11852731.0
+    },
+    {
+      'citationId': 11853618.0
+    },
+    {
+      'citationId': 11854387.0
+    },
+    {
+      'citationId': 11854812.0
+    },
+    {
+      'citationId': 11855619.0
+    },
+    {
+      'citationId': 11855534.0
+    },
+    {
+      'citationId': 11856711.0
+    },
+    {
+      'citationId': 11857671.0
+    },
+    {
+      'citationId': 11858855.0
+    },
+    {
+      'citationId': 11858882.0
+    },
+    {
+      'citationId': 11859192.0
+    },
+    {
+      'citationId': 11859592.0
+    },
+    {
+      'citationId': 11859960.0
+    },
+    {
+      'citationId': 11860621.0
+    },
+    {
+      'citationId': 11861074.0
+    },
+    {
+      'citationId': 11861100.0
+    },
+    {
+      'citationId': 11861064.0
+    },
+    {
+      'citationId': 11861590.0
+    },
+    {
+      'citationId': 11861949.0
+    },
+    {
+      'citationId': 11862091.0
+    },
+    {
+      'citationId': 11862120.0
+    },
+    {
+      'citationId': 11862622.0
+    },
+    {
+      'citationId': 11864218.0
+    },
+    {
+      'citationId': 11865186.0
+    },
+    {
+      'citationId': 11867576.0
+    },
+    {
+      'citationId': 11867724.0
+    },
+    {
+      'citationId': 11867832.0
+    },
+    {
+      'citationId': 11868004.0
+    },
+    {
+      'citationId': 11868062.0
+    },
+    {
+      'citationId': 11868199.0
+    },
+    {
+      'citationId': 11868152.0
+    },
+    {
+      'citationId': 11868717.0
+    },
+    {
+      'citationId': 11869661.0
+    },
+    {
+      'citationId': 11869678.0
+    },
+    {
+      'citationId': 11870308.0
+    },
+    {
+      'citationId': 11870371.0
+    },
+    {
+      'citationId': 11870574.0
+    },
+    {
+      'citationId': 11870603.0
+    },
+    {
+      'citationId': 11871816.0
+    },
+    {
+      'citationId': 11871778.0
+    },
+    {
+      'citationId': 11872339.0
+    },
+    {
+      'citationId': 11872476.0
+    },
+    {
+      'citationId': 11875503.0
+    },
+    {
+      'citationId': 11875570.0
+    },
+    {
+      'citationId': 11875537.0
+    },
+    {
+      'citationId': 11875710.0
+    },
+    {
+      'citationId': 11875747.0
+    },
+    {
+      'citationId': 11875960.0
+    },
+    {
+      'citationId': 11875975.0
+    },
+    {
+      'citationId': 11876106.0
+    },
+    {
+      'citationId': 11876121.0
+    },
+    {
+      'citationId': 11876298.0
+    },
+    {
+      'citationId': 11876245.0
+    },
+    {
+      'citationId': 11877665.0
+    },
+    {
+      'citationId': 11877997.0
+    },
+    {
+      'citationId': 11879697.0
+    },
+    {
+      'citationId': 11880149.0
+    },
+    {
+      'citationId': 11881370.0
+    },
+    {
+      'citationId': 11883273.0
+    },
+    {
+      'citationId': 11883062.0
+    },
+    {
+      'citationId': 11885174.0
+    },
+    {
+      'citationId': 11883956.0
+    },
+    {
+      'citationId': 11885443.0
+    },
+    {
+      'citationId': 11885620.0
+    },
+    {
+      'citationId': 11886886.0
+    },
+    {
+      'citationId': 11888233.0
+    },
+    {
+      'citationId': 11888250.0
+    },
+    {
+      'citationId': 11888956.0
+    },
+    {
+      'citationId': 11888993.0
+    },
+    {
+      'citationId': 11889407.0
+    },
+    {
+      'citationId': 11889428.0
+    },
+    {
+      'citationId': 11889444.0
+    },
+    {
+      'citationId': 11889461.0
+    },
+    {
+      'citationId': 11890250.0
+    },
+    {
+      'citationId': 11889899.0
+    },
+    {
+      'citationId': 11890768.0
+    },
+    {
+      'citationId': 11891096.0
+    },
+    {
+      'citationId': 11891293.0
+    },
+    {
+      'citationId': 11892121.0
+    },
+    {
+      'citationId': 11893627.0
+    },
+    {
+      'citationId': 11893973.0
+    },
+    {
+      'citationId': 11894168.0
+    },
+    {
+      'citationId': 11894327.0
+    },
+    {
+      'citationId': 11895044.0
+    },
+    {
+      'citationId': 11896390.0
+    },
+    {
+      'citationId': 11896565.0
+    },
+    {
+      'citationId': 11897481.0
+    },
+    {
+      'citationId': 11897523.0
+    },
+    {
+      'citationId': 11901055.0
+    },
+    {
+      'citationId': 11903181.0
+    },
+    {
+      'citationId': 11903988.0
+    },
+    {
+      'citationId': 11912377.0
+    },
+    {
+      'citationId': 11916562.0
+    },
+    {
+      'citationId': 11917556.0
+    },
+    {
+      'citationId': 11923642.0
+    },
+    {
+      'citationId': 11923647.0
+    }
+  ],
+  citationsStats: {
+    byCountry: [
+      {
+        'country': 'United States',
+        'countCitations': 183
+      },
+      {
+        'country': 'China',
+        'countCitations': 81
+      },
+      {
+        'country': 'Germany',
+        'countCitations': 38
+      },
+      {
+        'country': 'Italy',
+        'countCitations': 35
+      },
+      {
+        'country': 'Canada',
+        'countCitations': 32
+      },
+      {
+        'country': 'Japan',
+        'countCitations': 30
+      },
+      {
+        'country': 'France',
+        'countCitations': 28
+      },
+      {
+        'country': 'United Kingdom',
+        'countCitations': 23
+      },
+      {
+        'country': 'South Korea',
+        'countCitations': 19
+      },
+      {
+        'country': 'India',
+        'countCitations': 13
+      },
+      {
+        'country': 'Spain',
+        'countCitations': 10
+      },
+      {
+        'country': 'Sweden',
+        'countCitations': 8
+      },
+      {
+        'country': 'Netherlands',
+        'countCitations': 8
+      },
+      {
+        'country': 'Taiwan',
+        'countCitations': 8
+      },
+      {
+        'country': 'Austria',
+        'countCitations': 7
+      },
+      {
+        'country': 'Turkey',
+        'countCitations': 6
+      },
+      {
+        'country': 'Switzerland',
+        'countCitations': 6
+      },
+      {
+        'country': 'Belgium',
+        'countCitations': 6
+      },
+      {
+        'country': 'Australia',
+        'countCitations': 5
+      },
+      {
+        'country': 'Czechia',
+        'countCitations': 4
+      },
+      {
+        'country': 'Israel',
+        'countCitations': 4
+      },
+      {
+        'country': 'Poland',
+        'countCitations': 4
+      },
+      {
+        'country': 'Vietnam',
+        'countCitations': 3
+      },
+      {
+        'country': 'Brazil',
+        'countCitations': 3
+      },
+      {
+        'country': 'Denmark',
+        'countCitations': 3
+      },
+      {
+        'country': 'Greece',
+        'countCitations': 3
+      },
+      {
+        'country': 'Norway',
+        'countCitations': 3
+      },
+      {
+        'country': 'Ireland',
+        'countCitations': 2
+      },
+      {
+        'country': 'Finland',
+        'countCitations': 2
+      },
+      {
+        'country': 'Serbia',
+        'countCitations': 2
+      },
+      {
+        'country': 'Hungary',
+        'countCitations': 2
+      },
+      {
+        'country': 'Qatar',
+        'countCitations': 2
+      },
+      {
+        'country': 'Morocco',
+        'countCitations': 2
+      },
+      {
+        'country': 'Algeria',
+        'countCitations': 1
+      },
+      {
+        'country': 'Hong Kong',
+        'countCitations': 1
+      },
+      {
+        'country': 'Thailand',
+        'countCitations': 1
+      },
+      {
+        'country': 'United Arab Emirates',
+        'countCitations': 1
+      },
+      {
+        'country': 'Egypt',
+        'countCitations': 1
+      },
+      {
+        'country': 'Argentina',
+        'countCitations': 1
+      },
+      {
+        'country': 'Iran',
+        'countCitations': 1
+      },
+      {
+        'country': 'Lebanon',
+        'countCitations': 1
+      },
+      {
+        'country': 'Portugal',
+        'countCitations': 1
+      },
+      {
+        'country': 'Singapore',
+        'countCitations': 1
+      },
+      {
+        'country': 'Slovenia',
+        'countCitations': 1
+      },
+      {
+        'country': 'Kuwait',
+        'countCitations': 1
+      }
+    ],
+    byAffiliation: [
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 461.0,
+          'name': 'The University of Texas MD Anderson Cancer Center',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 7
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1564.0,
+          'name': 'The Hospital for Sick Children',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 7
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4647.0,
+          'name': 'Henry Ford Hospital',
+          'locality': 'Detroit',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 5
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4510.0,
+          'name': 'St. Jude Children\'s Research Hospital',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 5
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21605.0,
+          'name': 'Seoul National University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 5
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11675.0,
+          'name': 'Asan Medical Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 5
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 437.0,
+          'name': 'UCSF Neurosurgery',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 26422.0,
+          'name': 'Mayo Clinic Hospital, Saint Marys Campus',
+          'locality': 'Rochester',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2295.0,
+          'name': 'Dana-Farber Cancer Institute',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4333.0,
+          'name': 'Taipei Medical University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taipei City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 634.0,
+          'name': 'The American University of Rome',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 67260.0,
+          'name': 'Beijing Tiantan Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 39370.0,
+          'name': 'CRLCC',
+          'locality': 'Rennes',
+          'administrativeAreaLevel1': 'Bretagne',
+          'country': 'France'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 39538.0,
+          'name': 'Winship Cancer Institute of Emory University',
+          'locality': 'Atlanta',
+          'administrativeAreaLevel1': 'Georgia',
+          'country': 'United States'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2710.0,
+          'name': 'University of Lübeck',
+          'locality': 'Lübeck',
+          'administrativeAreaLevel1': 'Schleswig-Holstein',
+          'country': 'Germany'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 41576.0,
+          'name': 'West China Medical School, West China Hospital, Sichuan University',
+          'locality': 'Chengdu Shi',
+          'administrativeAreaLevel1': 'Sichuan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3274.0,
+          'name': 'German Cancer Research Center',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 4
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 47614.0,
+          'name': 'Centre Oscar Lambret',
+          'locality': 'Lille',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 114128.0,
+          'name': 'Univ Tx MD Anderson Cancer Center: Lang Frederick F MD',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1455258.0,
+          'name': 'The First Hospital of Jilin University',
+          'locality': 'Changchun Shi',
+          'administrativeAreaLevel1': 'Jilin Sheng',
+          'country': 'China'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 372.0,
+          'name': 'The Johns Hopkins University School of Medicine',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2382.0,
+          'name': 'Princess Margaret Cancer Centre',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 331.0,
+          'name': 'McGill University : Faculty of Medicine',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1727.0,
+          'name': 'University Hospitals Pitié Salpêtrière - Charles Foix',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5452.0,
+          'name': 'Peking Union Medical College',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1196.0,
+          'name': 'University of Alberta',
+          'locality': 'Edmonton',
+          'administrativeAreaLevel1': 'Alberta',
+          'country': 'Canada'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1091380.0,
+          'name': 'Dr. Jonathan B. Ashman, MD',
+          'locality': 'Scottsdale',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5549.0,
+          'name': 'Medizinische Universität Innsbruck',
+          'locality': 'Innsbruck',
+          'administrativeAreaLevel1': 'Tirol',
+          'country': 'Austria'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1939.0,
+          'name': 'Thomas Jefferson University',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12125.0,
+          'name': 'Nanfang Hospital',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2054.0,
+          'name': 'Gustave Roussy',
+          'locality': 'Villejuif',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11185.0,
+          'name': 'Johns Hopkins Department of Radiology & Radiological Science',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 41575.0,
+          'name': 'The First Affiliated Hospital of Zhengzhou University',
+          'locality': 'Zhengzhou Shi',
+          'administrativeAreaLevel1': 'Henan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 54005.0,
+          'name': 'International healthcare center, Seoul National University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 85914.0,
+          'name': 'Dr. Deepak Agrawal',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 310.0,
+          'name': 'Ap-Hm',
+          'locality': 'Marseille 05, Provence-Alpes-Côte d’Azur, France',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13285.0,
+          'name': 'Department of Laboratory Medicine and Pathobiology',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4408.0,
+          'name': 'VUmc',
+          'locality': 'Amsterdam',
+          'administrativeAreaLevel1': 'Noord-Holland',
+          'country': 'Netherlands'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14029.0,
+          'name': 'Institut Curie Hospital',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1380374.0,
+          'name': 'Shandong University Qilu Hospital',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13204.0,
+          'name': 'Sunnybrook Health Sciences Centre -Odette Cancer Centre',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 757046.0,
+          'name': '삼성서울병원 Samsung Medical Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 3
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 523965.0,
+          'name': 'Bach Mai Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Hà Nội',
+          'country': 'Vietnam'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15743.0,
+          'name': 'Avicenne Hospital (AP-HP)',
+          'locality': 'Bobigny',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 591812.0,
+          'name': 'Nationwide Children\'s Hematology/Oncology & BMT',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15748.0,
+          'name': 'McGill University Health Centre- Emergency Care',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 90917.0,
+          'name': 'University Hospitals Seidman Cancer Center',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 57.0,
+          'name': 'Harvard Medical School',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8376.0,
+          'name': 'Duke University',
+          'locality': 'Durham',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 34002.0,
+          'name': 'UCSF Radiation Oncology at Parnassus',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 34644.0,
+          'name': 'Department of Neurological Surgery',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2099747.0,
+          'name': 'University Institute Cancer Toulouse Oncopole',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3089.0,
+          'name': 'UCSF Emergency Department',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5037.0,
+          'name': 'Massachusetts General Hospital Neurology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1393.0,
+          'name': 'University of Toronto, Department of Medical Imaging',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 97123.0,
+          'name': 'CancerCare Manitoba',
+          'locality': 'Winnipeg',
+          'administrativeAreaLevel1': 'Manitoba',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1001.0,
+          'name': 'University of California, Los Angeles',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 770194.0,
+          'name': 'U of U Health Clinical Neurosciences Center',
+          'locality': 'Salt Lake City',
+          'administrativeAreaLevel1': 'Utah',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 685.0,
+          'name': 'Nagoya University',
+          'locality': 'Nagoya',
+          'administrativeAreaLevel1': 'Aichi Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 104288.0,
+          'name': 'University of Milano-Bicocca',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 104861.0,
+          'name': 'First Affiliated Hospital of China Medical University',
+          'locality': 'Shenyang Shi',
+          'administrativeAreaLevel1': 'Liaoning',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8927.0,
+          'name': 'Faculty of Medicine Masaryk University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Jihomoravský kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5376.0,
+          'name': 'University Of Pennsylvania Department Of Neurology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 108340.0,
+          'name': 'ICM (Cancer Institute of Montpellier)',
+          'locality': 'Montpellier',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17310.0,
+          'name': 'Barrow Neurological Institute',
+          'locality': 'Phoenix',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1439.0,
+          'name': 'All India Institute Of Medical Sciences, New Delhi',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 726.0,
+          'name': 'Montreal Neurological Institute and Hospital',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3401.0,
+          'name': 'Children\'s Hospital of Philadelphia',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 120033.0,
+          'name': 'Ludwig Institute for Cancer Research',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2201.0,
+          'name': 'Ichilov',
+          'locality': 'Tel Aviv-Yafo',
+          'administrativeAreaLevel1': 'Tel Aviv District',
+          'country': 'Israel'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40328.0,
+          'name': 'The Clatterbridge Cancer Centre',
+          'locality': 'Birkenhead',
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2204.0,
+          'name': 'University of Palermo',
+          'locality': 'Palermo',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5600.0,
+          'name': 'UCL Institute of Neurology',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9716.0,
+          'name': 'Shanghai Jiaotong University School of Medicine West Area',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3434.0,
+          'name': 'CHU Sainte-Justine',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1524.0,
+          'name': 'Weill Cornell Medical College',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3489.0,
+          'name': 'NTNU',
+          'locality': null,
+          'administrativeAreaLevel1': 'Sør-Trøndelag',
+          'country': 'Norway'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1548.0,
+          'name': 'Boston Children\'s Hospital-Children\'s Hospital Adolescent Medicine',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 42294.0,
+          'name': 'Hôpital Roger Salengro',
+          'locality': 'Lille',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1054.0,
+          'name': 'National Institutes of Health',
+          'locality': 'Bethesda',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9858.0,
+          'name': 'Capital Medical University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1615.0,
+          'name': 'Inserm U1052 Research Center In Cancer De Lyon',
+          'locality': 'Lyon',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20395.0,
+          'name': 'Paul Strauss Center',
+          'locality': 'Strasbourg',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1621.0,
+          'name': 'France',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 45325.0,
+          'name': 'Centre Antoine Lacassagne',
+          'locality': 'Nice',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 168435.0,
+          'name': 'Freiburg University Hospital - Department of Neuroradiology',
+          'locality': 'Freiburg im Breisgau',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2381.0,
+          'name': 'Lariboisière Hospital AP-HP',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6217.0,
+          'name': 'Fujian Medical University',
+          'locality': 'Fuzhou Shi',
+          'administrativeAreaLevel1': 'Fujian Sheng',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 46508.0,
+          'name': '山东大学',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20664.0,
+          'name': 'Instytut Medycyny Doświadczalnej i Klinicznej im. M. Mossakowskiego PAN',
+          'locality': 'Warszawa',
+          'administrativeAreaLevel1': 'mazowieckie',
+          'country': 'Poland'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6266.0,
+          'name': 'Centre Léon Bérard',
+          'locality': 'Lyon',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 178921.0,
+          'name': 'IRCCS Galeazzi Orthopedic Institute',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 49229.0,
+          'name': 'Le Bonheur Children\'s Hospital',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3685.0,
+          'name': 'TOKUSHIMA UNIVERSITY',
+          'locality': '徳島市',
+          'administrativeAreaLevel1': '徳島県',
+          'country': 'Japan'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6453.0,
+          'name': 'Dalian Medical University',
+          'locality': 'Dalian Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1245383.0,
+          'name': 'Dr. William F. Regine, MD',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10396.0,
+          'name': 'Faculté de Médecine secteur Timone (Aix-Marseille Université)',
+          'locality': 'Marseille',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1630.0,
+          'name': 'Faculty Practice-Radiology: Margiotta Michael S MD',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21149.0,
+          'name': 'Hospital Gui De Chauliac',
+          'locality': 'Montpellier',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6477.0,
+          'name': 'Shanghai Jiaotong University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 52134.0,
+          'name': 'Institute Rotary Cancer Hospital',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6490.0,
+          'name': 'Hospital Hautepierre Hospitals Academics De Strasbourg',
+          'locality': 'Strasbourg',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2465.0,
+          'name': 'Hôpital Necker',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 204074.0,
+          'name': 'Ajou University',
+          'locality': 'Suwon',
+          'administrativeAreaLevel1': 'Gyeonggi-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 56890.0,
+          'name': 'The GW Medical Faculty Associates: Anthony Caputy, MD',
+          'locality': 'Washington',
+          'administrativeAreaLevel1': 'District of Columbia',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 57940.0,
+          'name': 'Department of Medical Biophysics',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 226786.0,
+          'name': 'Shandong University School of Medicine',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3820.0,
+          'name': 'Shanghai Medical College of Fudan University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2.0,
+          'name': 'Keck School of Medicine of USC',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1720.0,
+          'name': 'Rome',
+          'locality': 'Rome',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3911.0,
+          'name': 'Brigham and Women\'s Hospital',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 226.0,
+          'name': 'Paris',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1486479.0,
+          'name': 'CENTRE HOSPITALO-UNIVERSITAIRE MOHAMMED VI MARRAKECH',
+          'locality': 'Marrakech',
+          'administrativeAreaLevel1': 'Marrakesh-Safi',
+          'country': 'Morocco'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 231.0,
+          'name': 'Baylor College of Medicine',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 235.0,
+          'name': 'University of Milan',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 23428.0,
+          'name': 'Institute Cancer De Lorraine - Alexis Vautrin',
+          'locality': 'Vandœuvre-lès-Nancy',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 23923.0,
+          'name': 'Department of Radiation Oncology',
+          'locality': 'Ann Arbor',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12449.0,
+          'name': 'Children\'s National - Main Hospital',
+          'locality': 'Washington',
+          'administrativeAreaLevel1': 'District of Columbia',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4067.0,
+          'name': 'Universitätsklinikum Hamburg-Eppendorf',
+          'locality': 'Hamburg',
+          'administrativeAreaLevel1': 'Hamburg',
+          'country': 'Germany'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7320.0,
+          'name': 'Department of Pathology and Laboratory Medicine',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2648.0,
+          'name': 'Mount Sinai Hospital',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2652.0,
+          'name': 'St. Michael\'s Hospital',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 269327.0,
+          'name': 'Hanoi Medical University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Hà Nội',
+          'country': 'Vietnam'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 67264.0,
+          'name': 'Sun Yat-Sen University Cancer Center',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1159.0,
+          'name': 'Case Western Reserve University School of Medicine',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1797.0,
+          'name': 'Chuv University Hospital Vaudois',
+          'locality': 'Lausanne',
+          'administrativeAreaLevel1': 'Vaud',
+          'country': 'Switzerland'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24954.0,
+          'name': 'Sunnybrook Health Sciences Centre',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 71310.0,
+          'name': 'Xinhua Hospital Affiliated to Shanghai Jiaotong University School of Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 71507.0,
+          'name': 'Athinoula A. Martinos Center for Biomedical Imaging',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 783.0,
+          'name': 'University College London',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7662.0,
+          'name': 'The Walton Centre',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 324585.0,
+          'name': 'Kennedy Krieger Institute',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 26190.0,
+          'name': 'Govind Ballabh Pant Hospital',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 353555.0,
+          'name': 'Frederick National Laboratory for Cancer Research - Leidos Biomedical Research, Inc.',
+          'locality': 'Frederick',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 27563.0,
+          'name': 'Istituto Nazionale Tumori Regina Elena',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 67.0,
+          'name': 'Perelman School of Medicine at the University of Pennsylvania',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13955.0,
+          'name': 'Fondazione I.R.C.C.S. Istituto Neurologico Carlo Besta',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 191.0,
+          'name': 'Istituto Superiore di Sanita',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20.0,
+          'name': 'Memorial Sloan Kettering Cancer Center',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1919.0,
+          'name': 'University of Münster',
+          'locality': 'Münster',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8081.0,
+          'name': 'Johns Hopkins Hospital - Neurology',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 199.0,
+          'name': 'Lund University',
+          'locality': 'Lund',
+          'administrativeAreaLevel1': 'Skåne län',
+          'country': 'Sweden'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8106.0,
+          'name': 'University of Wisconsin-Madison: School of Pharmacy',
+          'locality': 'Madison',
+          'administrativeAreaLevel1': 'Wisconsin',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 31966.0,
+          'name': 'Brigham and Women\'s Hospital : Department of Neurology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 462000.0,
+          'name': 'Dr. David B. Dix',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15122.0,
+          'name': 'Università degli Studi di Messina',
+          'locality': 'Messina',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3062.0,
+          'name': 'University of Pittsburgh Department of Neurosurgery',
+          'locality': 'Pittsburgh',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2001.0,
+          'name': 'University of Regensburg',
+          'locality': 'Regensburg',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15384.0,
+          'name': 'Tianjin Medical University General Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Tianjin Shi',
+          'country': 'China'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4886.0,
+          'name': 'University of Washington',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 2
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3761.0,
+          'name': 'Indiana University School of Medicine',
+          'locality': 'Indianapolis',
+          'administrativeAreaLevel1': 'Indiana',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3767.0,
+          'name': 'Ryals Building - School of Public Health',
+          'locality': 'Birmingham',
+          'administrativeAreaLevel1': 'Alabama',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3783.0,
+          'name': 'Tufts Medical Center',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3813.0,
+          'name': 'Institute of Cell Biology and Neurobiology',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3853.0,
+          'name': 'Department of Pathology, University of Cambridge',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3910.0,
+          'name': 'University of Toronto - St. George Campus',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3955.0,
+          'name': 'Institute of Nuclear Medicine and Allied Sciences',
+          'locality': 'Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3968.0,
+          'name': 'Changhua Christian Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3979.0,
+          'name': 'North Dakota State University',
+          'locality': 'Fargo',
+          'administrativeAreaLevel1': 'North Dakota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4068.0,
+          'name': 'RWTH Aachen University',
+          'locality': 'Aachen',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4140.0,
+          'name': 'Kaiser Permanente Walnut Creek Medical Center',
+          'locality': 'Walnut Creek',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4175.0,
+          'name': 'Chu De Lille',
+          'locality': 'Lille',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4222.0,
+          'name': 'University of California Los Angeles Department of Molecular and Medical Pharmacology',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4223.0,
+          'name': 'University of Cambridge',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4470.0,
+          'name': 'Eberhard Karls University of Tübingen',
+          'locality': 'Tübingen',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4492.0,
+          'name': 'Department of Neurosurgery',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4499.0,
+          'name': 'Case Medical Center Neurology',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4552.0,
+          'name': 'Johns Hopkins University School of Medicine',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4594.0,
+          'name': 'Norfolk and Norwich University Hospitals NHS Foundation Trust',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4686.0,
+          'name': 'Osu Radiology LLC',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4711.0,
+          'name': 'Nanjing',
+          'locality': 'Nanjing',
+          'administrativeAreaLevel1': 'Jiangsu',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4740.0,
+          'name': 'Kaohsiung Chang Gung Memorial Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Kaohsiung City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4745.0,
+          'name': 'China Medical University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taichung City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4782.0,
+          'name': 'Mario Negri Institute for Pharmacological Research',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4830.0,
+          'name': 'Saint Vincent Hospital',
+          'locality': 'Worcester',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4867.0,
+          'name': 'Department of Surgery',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4882.0,
+          'name': 'Mount Vernon Cancer Centre',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4908.0,
+          'name': 'Tata Memorial Hospital',
+          'locality': 'Mumbai',
+          'administrativeAreaLevel1': 'Maharashtra',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4924.0,
+          'name': 'Universidad Nacional de Córdoba',
+          'locality': 'Córdoba',
+          'administrativeAreaLevel1': 'Córdoba',
+          'country': 'Argentina'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 4972.0,
+          'name': 'Universität zu Köln',
+          'locality': 'Köln',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5078.0,
+          'name': 'Yonsei University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5201.0,
+          'name': 'Taichung Veterans General Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taichung City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5296.0,
+          'name': 'Industry Ika University Hospital',
+          'locality': 'Kitakyūshū-shi',
+          'administrativeAreaLevel1': 'Fukuoka-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5327.0,
+          'name': 'Sapporo Medical University Hospital',
+          'locality': 'Sapporo-shi',
+          'administrativeAreaLevel1': 'Hokkaidō',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5370.0,
+          'name': 'Hospital La Paz-madrid',
+          'locality': 'Madrid',
+          'administrativeAreaLevel1': 'Comunidad de Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5377.0,
+          'name': 'Department of Pathology, Microbiology, and Immunology',
+          'locality': 'Nashville',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5380.0,
+          'name': 'Seoul National University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5383.0,
+          'name': 'Churchill Hospital',
+          'locality': 'Headington',
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5467.0,
+          'name': 'Faculty Of Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'Chang Wat Chiang Mai',
+          'country': 'Thailand'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5586.0,
+          'name': 'University of Würzburg Biocenter',
+          'locality': 'Würzburg',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5641.0,
+          'name': 'University of Michigan Department of Radiology',
+          'locality': 'Ann Arbor',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5667.0,
+          'name': 'Department of Biochemistry',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5782.0,
+          'name': 'Humanitas University',
+          'locality': 'Pieve Emanuele',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5866.0,
+          'name': 'Heidelberg University',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5899.0,
+          'name': 'University of Bonn',
+          'locality': 'Bonn',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5921.0,
+          'name': 'Saitama Prefectural Cancer Center',
+          'locality': 'Ina-machi',
+          'administrativeAreaLevel1': 'Saitama-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 5982.0,
+          'name': 'Massachusetts General Hospital',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6011.0,
+          'name': 'Beth Israel Deaconess Medical Center',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6170.0,
+          'name': 'Institute Oncology Veneto',
+          'locality': 'Padova',
+          'administrativeAreaLevel1': 'Veneto',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6208.0,
+          'name': 'Terrence Donnelly Centre for Cellular & Biomolecular Research',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6402.0,
+          'name': 'Ibn Sina Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Al Asimah Governate',
+          'country': 'Kuwait'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6423.0,
+          'name': 'Huashan Hospital Affiliated to Fudan University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6472.0,
+          'name': 'Hospital Civil - Hospitals Academics De Strasbourg',
+          'locality': 'Strasbourg',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6509.0,
+          'name': 'Brussels',
+          'locality': 'Brussels',
+          'administrativeAreaLevel1': 'Brussels',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6547.0,
+          'name': 'The Royal Marsden Hospital (Surrey)',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6679.0,
+          'name': 'Johns Hopkins Children\'s Center',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6701.0,
+          'name': 'Tenon Hospital AP-HP',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 6703.0,
+          'name': 'Hospital Rangueil',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7034.0,
+          'name': 'Fukuoka',
+          'locality': 'Fukuoka',
+          'administrativeAreaLevel1': 'Fukuoka Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7060.0,
+          'name': 'Toronto Western Hospital',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7105.0,
+          'name': 'Mayo Clinic Ophthalmology',
+          'locality': 'Rochester',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7117.0,
+          'name': 'St. Olavs hospital HF',
+          'locality': null,
+          'administrativeAreaLevel1': 'Sør-Trøndelag',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7129.0,
+          'name': 'Addenbrooke\'s Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7304.0,
+          'name': 'Boston University School of Medicine',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7322.0,
+          'name': 'VA Puget Sound Health Care System',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7331.0,
+          'name': 'Institute Paoli-Calmettes',
+          'locality': 'Marseille',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7382.0,
+          'name': 'Department of Pathology and Laboratory Medicine',
+          'locality': 'Chapel Hill',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7398.0,
+          'name': 'Department of Pathology and Cell Biology',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7475.0,
+          'name': 'Royal Orthopaedic Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7476.0,
+          'name': 'The Ohio State University',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7503.0,
+          'name': 'Kanazawadaigakufuzoku Hospital',
+          'locality': 'Kanazawa',
+          'administrativeAreaLevel1': 'Ishikawa Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7658.0,
+          'name': 'University Hospital Antwerp',
+          'locality': 'Edegem',
+          'administrativeAreaLevel1': 'Vlaanderen',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7659.0,
+          'name': 'UZ Brussel',
+          'locality': 'Jette',
+          'administrativeAreaLevel1': 'Bruxelles',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7682.0,
+          'name': 'The Netherlands Cancer Institute (NKI)',
+          'locality': 'Amsterdam',
+          'administrativeAreaLevel1': 'Noord-Holland',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7827.0,
+          'name': 'University Hospital Carl Gustav Carus Dresden',
+          'locality': 'Dresden',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7932.0,
+          'name': 'Department of Bioengineering',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7958.0,
+          'name': 'Universitätsklinikum Frankfurt',
+          'locality': 'Frankfurt am Main',
+          'administrativeAreaLevel1': 'Hessen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 7986.0,
+          'name': 'Kyoto',
+          'locality': 'Kyoto',
+          'administrativeAreaLevel1': 'Kyoto Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8000.0,
+          'name': 'Duke University Medical Center: Sporn Thomas A MD',
+          'locality': 'Durham',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8052.0,
+          'name': 'Cleveland Clinic - Lerner Research Institute',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8079.0,
+          'name': 'Division Of Pediatric Neurology | Washington University School Of Medicine',
+          'locality': 'St. Louis',
+          'administrativeAreaLevel1': 'Missouri',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8093.0,
+          'name': 'Department of Chemistry, University of Cambridge',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8100.0,
+          'name': 'Wake Forest Baptist Medical Center',
+          'locality': 'Winston-Salem',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8125.0,
+          'name': 'University of Guelph',
+          'locality': 'Guelph',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8237.0,
+          'name': 'UAB Clinical Genetics',
+          'locality': 'Birmingham',
+          'administrativeAreaLevel1': 'Alabama',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8286.0,
+          'name': 'Rechts der Isar Hospital',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8295.0,
+          'name': 'Institut de Cancérologie de l\'Ouest (ICO) - Site René Gauducheau',
+          'locality': 'Saint-Herblain',
+          'administrativeAreaLevel1': 'Pays de la Loire',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8298.0,
+          'name': 'Centre Jean Perrin',
+          'locality': 'Clermont-Ferrand',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8423.0,
+          'name': 'University Of Texas - Department of Diagnostic and Interventional Imaging',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8448.0,
+          'name': 'University of Innsbruck',
+          'locality': 'Innsbruck',
+          'administrativeAreaLevel1': 'Tirol',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8497.0,
+          'name': 'IRCCS Ospedale San Raffaele',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8569.0,
+          'name': 'Mass General Hospital Department of Radiation Oncology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8606.0,
+          'name': 'China Medical University Shenbei Campus',
+          'locality': 'Shenyang Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8646.0,
+          'name': 'Thomas Jefferson University Hospital: Department of Radiology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8736.0,
+          'name': 'Medicine and Paediatrics Out Patient Department',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8787.0,
+          'name': 'Virgin Health Hospital',
+          'locality': 'Toledo',
+          'administrativeAreaLevel1': 'Castilla-La Mancha',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 8944.0,
+          'name': 'Stanford University',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9044.0,
+          'name': 'Guy\'s Cancer Centre',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9123.0,
+          'name': 'Department of Radiology',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9151.0,
+          'name': 'Cleveland Clinic Lerner College of Medicine',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9363.0,
+          'name': 'Uludağ University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Bursa',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9380.0,
+          'name': 'Emory University Dept of Pediatrics',
+          'locality': 'Atlanta',
+          'administrativeAreaLevel1': 'Georgia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9571.0,
+          'name': 'Tampere University Hospital',
+          'locality': 'Tampere',
+          'administrativeAreaLevel1': null,
+          'country': 'Finland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9626.0,
+          'name': 'Associazione "Centro Dino Ferrari"',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9691.0,
+          'name': 'University of Wisconsin School of Medicine and Public Health Medical Physics',
+          'locality': 'Madison',
+          'administrativeAreaLevel1': 'Wisconsin',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9732.0,
+          'name': 'University of Bergen',
+          'locality': 'Bergen',
+          'administrativeAreaLevel1': 'Hordaland',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9796.0,
+          'name': 'Saitama School Of Medicine International Medical Center',
+          'locality': 'Hidaka',
+          'administrativeAreaLevel1': 'Saitama Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9806.0,
+          'name': 'Hospital Universitari i Politècnic La Fe',
+          'locality': 'València',
+          'administrativeAreaLevel1': 'Comunidad Valenciana',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9828.0,
+          'name': 'Albany College of Pharmacy and Health Sciences',
+          'locality': 'Albany',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9836.0,
+          'name': 'The Mount Sinai Hospital',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 9902.0,
+          'name': 'Baystate Medical Center',
+          'locality': 'Springfield',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10032.0,
+          'name': 'Toronto General Hospital',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10107.0,
+          'name': 'University of California San Diego: ASSOCIATION',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10153.0,
+          'name': 'Nantes University Hospital Hotel-Dieu',
+          'locality': 'Nantes',
+          'administrativeAreaLevel1': 'Pays de la Loire',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10173.0,
+          'name': 'Hospital Nord',
+          'locality': 'Marseille',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10192.0,
+          'name': 'Padua Hospital',
+          'locality': 'Padova',
+          'administrativeAreaLevel1': 'Veneto',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10230.0,
+          'name': 'CHUM',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10266.0,
+          'name': 'Beth Israel Neurology Associates',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10278.0,
+          'name': 'Laboratory of Cancer Biology',
+          'locality': 'Bethesda',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10298.0,
+          'name': 'Centers For Disease Control and Prevention',
+          'locality': 'Fort Collins',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10752.0,
+          'name': 'Hospital Pierre Wertheimer - Hcl',
+          'locality': 'Bron',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10753.0,
+          'name': 'Pitié Salpêtrière University Hospital Group -Le service de Neurologie 2',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 10939.0,
+          'name': 'Center for Neurology and Neurosurgery: Neurology',
+          'locality': 'Frankfurt am Main',
+          'administrativeAreaLevel1': 'Hessen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11138.0,
+          'name': 'University of North Carolina at Chapel Hill',
+          'locality': null,
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11200.0,
+          'name': 'St Mary\'s Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11201.0,
+          'name': 'Manchester Centre for Genomic Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11429.0,
+          'name': 'Shanghai Jiaotong University School of Medicine Affiliated Shanghai Children Medical Science Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11814.0,
+          'name': 'Department of Hematology and Medical Oncology',
+          'locality': 'Atlanta',
+          'administrativeAreaLevel1': 'Georgia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 11971.0,
+          'name': 'Rome Centre (CUA/ACU)',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12074.0,
+          'name': 'Klinikum der Goethe-Universität:Institut für Medizinische Mikrobiologie und Krankenhaushygiene',
+          'locality': 'Frankfurt am Main',
+          'administrativeAreaLevel1': 'Hessen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12312.0,
+          'name': '第二军医大学图书馆',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12340.0,
+          'name': 'Emory University Hospital :Department Of Pathology & Laboratory Medicine',
+          'locality': 'Atlanta',
+          'administrativeAreaLevel1': 'Georgia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12433.0,
+          'name': 'Masarykův onkologický ústav',
+          'locality': null,
+          'administrativeAreaLevel1': 'Jihomoravský kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12534.0,
+          'name': 'Jewish General Hospital :Lady Davis Institute for Medical Research',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12665.0,
+          'name': 'UNC Comprehensive Cancer Support Program',
+          'locality': 'Chapel Hill',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12788.0,
+          'name': 'UW Neurological Surgery\'s',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12804.0,
+          'name': 'Chu Amiens-Picardy Site Nord',
+          'locality': 'Amiens',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12913.0,
+          'name': 'Tianjin',
+          'locality': 'Tianjin',
+          'administrativeAreaLevel1': 'Tianjin',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 12915.0,
+          'name': 'Shanghai',
+          'locality': 'Shanghai',
+          'administrativeAreaLevel1': 'Shanghai',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13183.0,
+          'name': 'Memorial Sloan-Kettering Cancer Center - Pediatrics',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13262.0,
+          'name': 'Gregorio Marañón Hospital',
+          'locality': 'Madrid',
+          'administrativeAreaLevel1': 'Comunidad de Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13357.0,
+          'name': 'Nemours/Alfred I. duPont Hospital for Children',
+          'locality': 'Wilmington',
+          'administrativeAreaLevel1': 'Delaware',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13361.0,
+          'name': 'Ospedale Sacro Cuore Don Calabria',
+          'locality': 'Negrar',
+          'administrativeAreaLevel1': 'Veneto',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13404.0,
+          'name': 'University of Minnesota Health Masonic Cancer Clinic',
+          'locality': 'Minneapolis',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13496.0,
+          'name': 'Charles University Faculty of Medicine in Pilsen',
+          'locality': null,
+          'administrativeAreaLevel1': 'Plzeňský kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13634.0,
+          'name': 'Duke Department of Neurology',
+          'locality': 'Durham',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13647.0,
+          'name': 'UCLA Radiation Oncology',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 13901.0,
+          'name': 'Portuguese Institute of Oncology Francisco Gentil',
+          'locality': 'Lisboa',
+          'administrativeAreaLevel1': 'Lisboa',
+          'country': 'Portugal'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14099.0,
+          'name': 'Salford Royal NHS Foundation Trust',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14113.0,
+          'name': 'Azienda Ospedaliero-Universitaria Città della Salute e della Scienza di Torino',
+          'locality': 'Torino',
+          'administrativeAreaLevel1': 'Piemonte',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14132.0,
+          'name': 'North Shore University Hospital',
+          'locality': 'Manhasset',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14139.0,
+          'name': 'West German Proton Therapy Center (WPE)',
+          'locality': 'Essen',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14267.0,
+          'name': 'Leslie Dan Faculty of Pharmacy',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14604.0,
+          'name': 'University of Belgrade - Faculty of Medicine',
+          'locality': 'Београд',
+          'administrativeAreaLevel1': null,
+          'country': 'Serbia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14713.0,
+          'name': 'Central South University',
+          'locality': 'Changsha Shi',
+          'administrativeAreaLevel1': 'Hunan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14771.0,
+          'name': 'University of Utah-Department of Neurosurgery',
+          'locality': 'Salt Lake City',
+          'administrativeAreaLevel1': 'Utah',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14830.0,
+          'name': 'Children\'s Hospital Zurich - Eleonore Foundation',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 14984.0,
+          'name': 'Sissa (International School for Advanced Studies)',
+          'locality': 'Trieste',
+          'administrativeAreaLevel1': 'Friuli-Venezia Giulia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15123.0,
+          'name': 'UZ Gasthuisberg Campus',
+          'locality': 'Leuven',
+          'administrativeAreaLevel1': 'Vlaanderen',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15167.0,
+          'name': 'Maastricht University',
+          'locality': 'Maastricht',
+          'administrativeAreaLevel1': 'Limburg',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15711.0,
+          'name': 'Department of Epidemiology & Biostatistics (UCSF)',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15765.0,
+          'name': 'BC Cancer Research Center',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15789.0,
+          'name': 'Institut Curie Flag Trouillet-Rossignol',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16079.0,
+          'name': 'Cork University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'County Cork',
+          'country': 'Ireland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16156.0,
+          'name': 'Department of Molecular Physiology and Biophysics',
+          'locality': 'Iowa City',
+          'administrativeAreaLevel1': 'Iowa',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16255.0,
+          'name': 'NewYork-Presbyterian/Columbia Radiation Oncology Department',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16291.0,
+          'name': 'Department of Psychiatry',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16500.0,
+          'name': 'Brigham And Women\'s Plastic Surgery',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16561.0,
+          'name': 'Universitätsklinik Mannheim',
+          'locality': 'Mannheim',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 16674.0,
+          'name': 'Basingstoke and North Hampshire Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17033.0,
+          'name': 'Faculty of Medicine - University of Cologne',
+          'locality': 'Köln',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17168.0,
+          'name': 'UCSF Foundation',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17271.0,
+          'name': 'Department Of Biophysics , Panjab University',
+          'locality': 'Chandigarh',
+          'administrativeAreaLevel1': 'Chandigarh',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17669.0,
+          'name': 'University of Debrecen Medical School',
+          'locality': 'Debrecen',
+          'administrativeAreaLevel1': null,
+          'country': 'Hungary'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 17894.0,
+          'name': 'Stanford Medicine - Department of Neurology & Neurological Sciences',
+          'locality': 'Palo Alto',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18001.0,
+          'name': 'The Johns Hopkins Hospital Department of Radiology',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18333.0,
+          'name': 'BC Cancer Foundation',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18408.0,
+          'name': 'Kolling Institute of Medical Research',
+          'locality': 'St Leonards',
+          'administrativeAreaLevel1': 'New South Wales',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18610.0,
+          'name': 'Medizinische Hochschule Hannover (MHH)',
+          'locality': 'Hannover',
+          'administrativeAreaLevel1': 'Niedersachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18735.0,
+          'name': 'BC Cancer Agency',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18778.0,
+          'name': 'Thomas Jefferson University Division Nsg',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 18862.0,
+          'name': 'Department of Radiation Oncology',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 19046.0,
+          'name': 'Bron',
+          'locality': 'Bron',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 19164.0,
+          'name': 'White River Junction VA Medical Center',
+          'locality': 'Hartford',
+          'administrativeAreaLevel1': 'Vermont',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 19841.0,
+          'name': 'Indiana University School of Medicine - Pathology',
+          'locality': 'Indianapolis',
+          'administrativeAreaLevel1': 'Indiana',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20039.0,
+          'name': 'VA Greater Los Angeles Healthcare System',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20055.0,
+          'name': 'ISTITUTO PASTEUR ITALIA Fondazione Cenci Bolognetti',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20076.0,
+          'name': 'Jesse Brown V. A. Hospital',
+          'locality': 'Chicago',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20268.0,
+          'name': 'Penn Radiology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20320.0,
+          'name': 'Dartmouth-Hitchcock Medical Center',
+          'locality': 'Lebanon',
+          'administrativeAreaLevel1': 'New Hampshire',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20535.0,
+          'name': 'The Royal Children\'s Hospital, Melbourne : Anatomical Pathology',
+          'locality': 'Parkville',
+          'administrativeAreaLevel1': 'Victoria',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20546.0,
+          'name': 'KK Women\'s and Children\'s Hospital',
+          'locality': 'Singapore',
+          'administrativeAreaLevel1': null,
+          'country': 'Singapore'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20651.0,
+          'name': 'National University Health System',
+          'locality': 'Singapore',
+          'administrativeAreaLevel1': null,
+          'country': 'Singapore'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20654.0,
+          'name': 'Centrum Zdrowia Dziecka',
+          'locality': 'Warszawa',
+          'administrativeAreaLevel1': 'mazowieckie',
+          'country': 'Poland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20688.0,
+          'name': 'Skaggs School of Pharmacy and Pharmaceutical Sciences',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20696.0,
+          'name': 'Kyoto University Hospital',
+          'locality': 'Kyōto-shi',
+          'administrativeAreaLevel1': 'Kyōto-fu',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20751.0,
+          'name': 'Plastic Surgery Hospital Cams Pumc',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20924.0,
+          'name': 'Sanford Burnham Prebys Medical Discovery Institute',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 20959.0,
+          'name': 'Kantonsspital St.Gallen',
+          'locality': 'St. Gallen',
+          'administrativeAreaLevel1': 'Sankt Gallen',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21101.0,
+          'name': 'Institute of Polish Mother\'s Health Center',
+          'locality': 'Łódź',
+          'administrativeAreaLevel1': 'województwo łódzkie',
+          'country': 'Poland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21321.0,
+          'name': 'Department of Radiology: Finnegan Eileen C',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21385.0,
+          'name': 'Foundation Saint Lucia',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21542.0,
+          'name': 'Children\'s Hospital of Pittsburgh of UPMC: Child Neurology',
+          'locality': 'Pittsburgh',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21574.0,
+          'name': 'Ulm University Hospital Department of Neurosurgery',
+          'locality': 'Ulm',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21677.0,
+          'name': 'University of Udine - Scientific Pole Rizzi',
+          'locality': 'Udine',
+          'administrativeAreaLevel1': 'Friuli-Venezia Giulia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21738.0,
+          'name': 'Northwestern Medical Faculty Foundation — Department of Psychiatry & Behavioural Sciences',
+          'locality': 'Chicago',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21778.0,
+          'name': 'Groupe hospitalier Paris Saint-Joseph',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 21870.0,
+          'name': 'Aix-Marseille University',
+          'locality': 'Marseille',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 22059.0,
+          'name': 'Neurology (inside NewYork-Presbyterian: Weill Cornell)',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 22831.0,
+          'name': 'Department of Computer Science',
+          'locality': 'Detroit',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 22848.0,
+          'name': 'Division of Gynecologic Oncology Stanford University',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 22893.0,
+          'name': 'Shanghai Institutes for Biological Sciences, Chinese Academy of Sciences',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 23030.0,
+          'name': 'Essen University Hospital Department of Pediatrics',
+          'locality': 'Essen',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 23162.0,
+          'name': 'University of Colorado Department of Pediatrics',
+          'locality': 'Aurora',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 23270.0,
+          'name': 'Hospital Regional Universitario',
+          'locality': 'Málaga',
+          'administrativeAreaLevel1': 'Andalucía',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24095.0,
+          'name': 'University Pa Chemcal',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24141.0,
+          'name': '第三军医大学',
+          'locality': null,
+          'administrativeAreaLevel1': 'Chongqing Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24289.0,
+          'name': 'Saint Pölten',
+          'locality': 'Saint Pölten',
+          'administrativeAreaLevel1': 'Lower Austria',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24670.0,
+          'name': 'Alberta Children\'s Hospital',
+          'locality': 'Calgary',
+          'administrativeAreaLevel1': 'Alberta',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24680.0,
+          'name': 'The First Affiliated Hospital of Harbin Medical University',
+          'locality': 'Harbin',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24717.0,
+          'name': 'Hospital Center University Pontchaillou',
+          'locality': 'Rennes',
+          'administrativeAreaLevel1': 'Bretagne',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 24737.0,
+          'name': 'Northwestern Medicine Department of Dermatology',
+          'locality': 'Chicago',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25055.0,
+          'name': 'Martin-Luther-University Halle-Wittenberg',
+          'locality': 'Halle (Saale)',
+          'administrativeAreaLevel1': 'Sachsen-Anhalt',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25065.0,
+          'name': 'The General Hospital of Shenyang Military Region',
+          'locality': 'Shenyang Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25168.0,
+          'name': 'Saitama Medical Center',
+          'locality': 'Kawagoe-shi',
+          'administrativeAreaLevel1': 'Saitama-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25275.0,
+          'name': 'LTSI (Laboratoire Traitement du Signal et de l\'Image)',
+          'locality': 'Rennes',
+          'administrativeAreaLevel1': 'Bretagne',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25315.0,
+          'name': 'Tianjin Cancer Institute and Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Tianjin Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25341.0,
+          'name': 'Children\'s Hospital of Fudan University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25408.0,
+          'name': 'Rennes',
+          'locality': 'Rennes',
+          'administrativeAreaLevel1': 'Brittany',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 25531.0,
+          'name': 'Istituto Nazionale Tumori IRCCS Fondazione G. Pascale',
+          'locality': 'Napoli',
+          'administrativeAreaLevel1': 'Campania',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 26340.0,
+          'name': 'Catholic University of the Sacred Heart',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 27198.0,
+          'name': 'Institute Of Biology Valrose - iBV',
+          'locality': 'Nice',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 28003.0,
+          'name': 'Penn State Radiology - Fishburn Road',
+          'locality': 'Hershey',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 28141.0,
+          'name': 'Baylor College Medicine Neurosurgery',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 28332.0,
+          'name': 'Tohoku University Hospital',
+          'locality': 'Sendai-shi',
+          'administrativeAreaLevel1': 'Miyagi-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 28868.0,
+          'name': 'London Regional Cancer Program',
+          'locality': 'London',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 28978.0,
+          'name': 'Centre Hospitalier de Versailles',
+          'locality': 'Le Chesnay',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 29490.0,
+          'name': 'Materials Science and Engineering',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 29588.0,
+          'name': 'Istituto per le Applicazioni del Calcolo, Consiglio Nazionale delle Ricerche',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 30521.0,
+          'name': 'Columbia University Medical Center- Department of Neurological Surgery',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 30643.0,
+          'name': 'OSU Department of Internal Medicine',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 31342.0,
+          'name': 'ICM Institute for Brain and Spinal Cord',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 31411.0,
+          'name': 'Paul Scherrer Institute',
+          'locality': 'Villigen',
+          'administrativeAreaLevel1': 'Aargau',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 31534.0,
+          'name': 'Department of Biology',
+          'locality': 'Amherst',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 32131.0,
+          'name': 'Centre for Children\'s Health Research',
+          'locality': 'South Brisbane',
+          'administrativeAreaLevel1': 'Queensland',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 32664.0,
+          'name': 'Hospital Santa Maria della Misericordia in Perugia',
+          'locality': 'Perugia',
+          'administrativeAreaLevel1': 'Umbria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 32970.0,
+          'name': 'The Johns Hopkins Hospital-Department of Neurosurgery',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33073.0,
+          'name': 'Sylvester Comprehensive Cancer Center',
+          'locality': 'Miami',
+          'administrativeAreaLevel1': 'Florida',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33224.0,
+          'name': 'Capital Institute of Pediatrics Parking Lot',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33325.0,
+          'name': 'The Royal Melbourne Hospital -ED Radiology',
+          'locality': 'Parkville',
+          'administrativeAreaLevel1': 'Victoria',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33472.0,
+          'name': 'Danish Cancer Society Research Center',
+          'locality': 'København',
+          'administrativeAreaLevel1': null,
+          'country': 'Denmark'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33527.0,
+          'name': 'Shantou University Medical College （East Gate）',
+          'locality': 'Shantou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33717.0,
+          'name': 'The First Affiliated Hospital of Soochow University',
+          'locality': 'Suzhou Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 33999.0,
+          'name': 'University of South Carolina School of Medicine',
+          'locality': 'Columbia',
+          'administrativeAreaLevel1': 'South Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35068.0,
+          'name': 'University Hospital Göttingen - University Medical Center Göttingen',
+          'locality': 'Göttingen',
+          'administrativeAreaLevel1': 'Niedersachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35090.0,
+          'name': 'Fujian',
+          'locality': null,
+          'administrativeAreaLevel1': 'Fujian',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35719.0,
+          'name': 'Chu Caen',
+          'locality': 'Caen',
+          'administrativeAreaLevel1': 'Normandie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35729.0,
+          'name': 'Deakin University, Geelong Waterfront Campus',
+          'locality': 'Geelong',
+          'administrativeAreaLevel1': 'Victoria',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35886.0,
+          'name': 'Policlinico Universitario Agostino Gemelli',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 36062.0,
+          'name': 'OU Physicians Neurosurgery',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 36869.0,
+          'name': 'Neurological Institute Department of Neurology',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 36972.0,
+          'name': 'Massachusetts General Hospital Gastroenterology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 37072.0,
+          'name': 'Istituto Dermopatico dell\'Immacolata',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 37154.0,
+          'name': 'Jefferson Hospital Rehabilitation Medicine',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 37497.0,
+          'name': 'Shikoku Medical Center for Children and Adults',
+          'locality': 'Zentsūji-shi',
+          'administrativeAreaLevel1': 'Kagawa-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 37945.0,
+          'name': 'Arlin Alsace Hospitals Academics De Strasbourg',
+          'locality': 'Strasbourg',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 38611.0,
+          'name': 'Xi\'an Jiaotong University',
+          'locality': 'Xian Shi',
+          'administrativeAreaLevel1': 'Shaanxi Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 39353.0,
+          'name': 'University Hospital in Ostrava',
+          'locality': 'Ostrava-Poruba',
+          'administrativeAreaLevel1': 'Moravskoslezský kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 39807.0,
+          'name': 'University of Chicago Medicine : Cancer Risk Clinic',
+          'locality': 'Chicago',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40321.0,
+          'name': 'Northern Institute For Cancer Research',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40338.0,
+          'name': 'Department of Pathology and Anatomical Sciences',
+          'locality': 'Columbia',
+          'administrativeAreaLevel1': 'Missouri',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40350.0,
+          'name': 'National Neuroscience Institute',
+          'locality': 'Singapore',
+          'administrativeAreaLevel1': null,
+          'country': 'Singapore'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40457.0,
+          'name': 'Ernest Mario School of Pharmacy',
+          'locality': 'Piscataway Township',
+          'administrativeAreaLevel1': 'New Jersey',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 40477.0,
+          'name': 'Sozialmedizinisches Zentrum Süd - Kaiser-Franz-Josef-Spital',
+          'locality': 'Wien',
+          'administrativeAreaLevel1': 'Wien',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 41393.0,
+          'name': 'Crump Institute For Molecular Imaging',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 41571.0,
+          'name': 'Nanjing Medical University',
+          'locality': 'Nanjing Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 41632.0,
+          'name': 'Würzburg',
+          'locality': 'Würzburg',
+          'administrativeAreaLevel1': 'Bavaria',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 42183.0,
+          'name': 'Università degli Studi di Catanzaro "Magna Graecia"',
+          'locality': 'Catanzaro',
+          'administrativeAreaLevel1': 'Calabria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 42840.0,
+          'name': 'University of Freiburg - Department of Neurosurgery',
+          'locality': 'Freiburg im Breisgau',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 43342.0,
+          'name': 'UC San Diego Family Medicine and Public Health Student Affairs Office',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 43373.0,
+          'name': 'Brigham and Women\'s Hospital - Brigham And Women\'s General Surgery Residency',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 44134.0,
+          'name': 'OU Medical Center',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 44825.0,
+          'name': 'Foundation for Research and Technology - Hellas',
+          'locality': 'Iraklio',
+          'administrativeAreaLevel1': null,
+          'country': 'Greece'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 45028.0,
+          'name': 'McGill University Department of Biomedical Engineering',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 45223.0,
+          'name': 'Istituto C.S.S. Mendel',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 45949.0,
+          'name': 'Foundation Ophthalmic Adolphe De Rothschild',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 46144.0,
+          'name': 'Cancer Registry Norway',
+          'locality': null,
+          'administrativeAreaLevel1': 'Oslo',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 46639.0,
+          'name': 'Quinto Lotto',
+          'locality': 'Siena',
+          'administrativeAreaLevel1': 'Toscana',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 47205.0,
+          'name': 'Pathology Department',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 49628.0,
+          'name': 'The General Hospital of Chinese People\'s Liberation Army International Convention Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50170.0,
+          'name': 'Kobe',
+          'locality': 'Kobe',
+          'administrativeAreaLevel1': 'Hyōgo Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50574.0,
+          'name': 'Hanover',
+          'locality': 'Hanover',
+          'administrativeAreaLevel1': 'Lower Saxony',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50597.0,
+          'name': 'Universitätsklinikum Leipzig',
+          'locality': 'Leipzig',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50655.0,
+          'name': 'Zentrum für Neuropathologie und Prionforschung',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50781.0,
+          'name': 'Sunnybrook Health Sciences Centre -Nuclear Medicine',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 50872.0,
+          'name': 'CRNL - Center for Research in Neuroscience in Lyon',
+          'locality': 'Bron',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 52144.0,
+          'name': 'Erciyes University Faculty of Veterinary Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'Kayseri',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 52550.0,
+          'name': 'Pqr - Hospital Group Pellegrin Chu De Bordeaux',
+          'locality': 'Bordeaux',
+          'administrativeAreaLevel1': 'Nouvelle-Aquitaine',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 52717.0,
+          'name': 'College Of Medicine and Health Sciences',
+          'locality': 'Al Ain',
+          'administrativeAreaLevel1': 'Abu Dhabi',
+          'country': 'United Arab Emirates'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 55509.0,
+          'name': 'UCCH Universitäres Cancer Center Hamburg, UKE',
+          'locality': 'Hamburg',
+          'administrativeAreaLevel1': 'Hamburg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 56608.0,
+          'name': 'Orsay',
+          'locality': 'Orsay',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 57425.0,
+          'name': 'Department of Medical Genetics, Medical University of Warsaw',
+          'locality': 'Warszawa',
+          'administrativeAreaLevel1': 'mazowieckie',
+          'country': 'Poland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 58750.0,
+          'name': 'Penn State Neuroscience Institute',
+          'locality': 'Hershey',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 58792.0,
+          'name': 'Children\'s Hospital - Lucerne Cantonal Hospital',
+          'locality': 'Luzern 16',
+          'administrativeAreaLevel1': 'Luzern',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 60134.0,
+          'name': 'IUCT Oncopole',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 61834.0,
+          'name': 'Lille',
+          'locality': 'Lille',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 61943.0,
+          'name': 'Department of Obstetrics Hospital Bern',
+          'locality': 'Bern',
+          'administrativeAreaLevel1': 'Bern',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 62977.0,
+          'name': 'Thayer School of Engineering at Dartmouth',
+          'locality': 'Hanover',
+          'administrativeAreaLevel1': 'New Hampshire',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 63198.0,
+          'name': 'Hospital Santa Maria della Misericordia',
+          'locality': 'Udine',
+          'administrativeAreaLevel1': 'Friuli-Venezia Giulia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 63396.0,
+          'name': 'University of Trieste-Department of Physics',
+          'locality': 'Trieste',
+          'administrativeAreaLevel1': 'Friuli-Venezia Giulia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 63598.0,
+          'name': 'Liaocheng People\'s Hospital',
+          'locality': 'Liaocheng Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 65085.0,
+          'name': 'National Hospital Organization Yokohama Medical Center',
+          'locality': 'Yokohama-shi',
+          'administrativeAreaLevel1': 'Kanagawa-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 65224.0,
+          'name': 'Department of Psychology',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 65425.0,
+          'name': 'centre pierre et marie curie larbi tebessi',
+          'locality': 'Sidi M\'Hamed',
+          'administrativeAreaLevel1': 'Wilaya d\'Alger',
+          'country': 'Algeria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 65439.0,
+          'name': 'Centre de pathologie et biologie Est - HCL',
+          'locality': 'Bron',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 65680.0,
+          'name': 'Nachod',
+          'locality': 'Nachod',
+          'administrativeAreaLevel1': 'Hradec Králové Region',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 66747.0,
+          'name': 'Iran University of Medical Sciences',
+          'locality': 'Tehran',
+          'administrativeAreaLevel1': 'Tehran Province',
+          'country': 'Iran'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 67176.0,
+          'name': 'Dr. Aditya H. Gaur, MD',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 68837.0,
+          'name': 'TCD Institute of Population Health',
+          'locality': null,
+          'administrativeAreaLevel1': 'County Dublin',
+          'country': 'Ireland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 69784.0,
+          'name': 'Texas A&M Health Science Center',
+          'locality': 'Bryan',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 69919.0,
+          'name': 'Comprehensive Cancer Center Zürich',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 70163.0,
+          'name': 'Ioannina',
+          'locality': 'Ioannina',
+          'administrativeAreaLevel1': null,
+          'country': 'Greece'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 70267.0,
+          'name': 'Guiyang Medical University',
+          'locality': 'Guiyang Shi',
+          'administrativeAreaLevel1': 'Guizhou Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 70321.0,
+          'name': 'St. Joseph\'s Hospital and Medical Center - Emergency Room',
+          'locality': 'Phoenix',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 70323.0,
+          'name': 'North Manchester General Hospital',
+          'locality': 'Crumpsall',
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 71244.0,
+          'name': 'McKnight Brain Institute',
+          'locality': 'Gainesville',
+          'administrativeAreaLevel1': 'Florida',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 71835.0,
+          'name': 'Meander Medical Center',
+          'locality': 'Hoogland',
+          'administrativeAreaLevel1': 'Utrecht',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 73805.0,
+          'name': 'IE University - Brazil Office',
+          'locality': null,
+          'administrativeAreaLevel1': 'São Paulo',
+          'country': 'Brazil'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 74097.0,
+          'name': 'The First Affiliated Hospital of Wenzhou Medical College',
+          'locality': 'Wenzhou',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 75170.0,
+          'name': 'Denver Veterans Affairs Medical Center',
+          'locality': 'Denver',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 75291.0,
+          'name': 'Prof.Dr.med. Werner Paulus Universitätsklinikum Münster Institut f. Neuropathologie',
+          'locality': 'Münster',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 75863.0,
+          'name': 'United States',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 77096.0,
+          'name': 'Rutgers Robert Wood Johnson Medical Group',
+          'locality': 'New Brunswick',
+          'administrativeAreaLevel1': 'New Jersey',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 77677.0,
+          'name': 'Johns Hopkins Neurology',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 78091.0,
+          'name': 'Tangshan',
+          'locality': 'Tangshan',
+          'administrativeAreaLevel1': 'Hebei',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 78715.0,
+          'name': 'Faculty of Medicine - University of Catania',
+          'locality': 'Catania',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 79263.0,
+          'name': 'Siemens Healthineers',
+          'locality': 'Erlangen',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 79751.0,
+          'name': 'Kagoshima',
+          'locality': 'Kagoshima',
+          'administrativeAreaLevel1': 'Kagoshima Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 80084.0,
+          'name': 'Chinese People\'s Liberation Army Air Force General Hospital Health Screening Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 80296.0,
+          'name': 'Kepler University Hospital, Campus Neuromed',
+          'locality': 'Linz',
+          'administrativeAreaLevel1': 'Oberösterreich',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 81325.0,
+          'name': 'Institute Central Des Hôpitaux',
+          'locality': 'Sion',
+          'administrativeAreaLevel1': 'Valais',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 81349.0,
+          'name': 'Faculty of Mathematics and computer science',
+          'locality': 'Leipzig',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 81464.0,
+          'name': 'Massachusetts General Hospital Cancer Center',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 82218.0,
+          'name': 'Department of Chemistry, University of Catania',
+          'locality': 'Catania',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 82989.0,
+          'name': 'Sana Kliniken Duisburg',
+          'locality': 'Duisburg',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 83581.0,
+          'name': 'Seoul National University School of Dentistry',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 84634.0,
+          'name': 'University of Udine - Department of Food Science',
+          'locality': 'Udine',
+          'administrativeAreaLevel1': 'Friuli-Venezia Giulia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 85053.0,
+          'name': 'Chru Nancy',
+          'locality': 'Nancy',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 85622.0,
+          'name': 'Weston Park Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 86058.0,
+          'name': 'Harbin Medical University Affiliated 2nd Hospital',
+          'locality': 'Haerbin Shi',
+          'administrativeAreaLevel1': 'Heilongjiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 86251.0,
+          'name': 'GIGA - Research Center',
+          'locality': 'Liège',
+          'administrativeAreaLevel1': 'Wallonie',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 87303.0,
+          'name': 'Children\'s Hospital Colorado Anschutz Medical Campus, Aurora',
+          'locality': 'Aurora',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 87812.0,
+          'name': 'Seth Sukhlal Karnani Memorial Hospital',
+          'locality': 'Kolkata',
+          'administrativeAreaLevel1': 'West Bengal',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 89548.0,
+          'name': 'Statistics Norway',
+          'locality': null,
+          'administrativeAreaLevel1': 'Oslo',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 90521.0,
+          'name': 'Münster University Hospital Department of Ophthalmology',
+          'locality': 'Münster',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 91415.0,
+          'name': 'Massachusetts General Hospital-Pappas Center for Neuro-Oncology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 91871.0,
+          'name': '东南大学',
+          'locality': 'Nanjing Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 92437.0,
+          'name': 'Alexandroupoli',
+          'locality': 'Alexandroupoli',
+          'administrativeAreaLevel1': null,
+          'country': 'Greece'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 93283.0,
+          'name': 'Guangzhou Medical University',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 93449.0,
+          'name': 'UC Davis School Of Medicine',
+          'locality': 'Sacramento',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 94692.0,
+          'name': 'Seattle Children\'s Hospital',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 94828.0,
+          'name': 'First Affiliated Hospital of Dalian Medical University',
+          'locality': 'Dalian Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 96704.0,
+          'name': 'Don Gnocchi Foundation - IRCCS Centro S. Maria Nascente',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 97351.0,
+          'name': 'Sıhhiye',
+          'locality': null,
+          'administrativeAreaLevel1': 'Konya',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 98247.0,
+          'name': '中山大学附属第2医院',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 101879.0,
+          'name': 'Oxford Institute for Radiation Oncology',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 105815.0,
+          'name': 'Tokyo Dental College Ichikawa General Hospital',
+          'locality': 'Ichikawa-shi',
+          'administrativeAreaLevel1': 'Chiba-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 107502.0,
+          'name': 'Massachusetts General Hospital-Hematology Oncology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 107594.0,
+          'name': 'National Center for Tumor Diseases - NCT',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 109422.0,
+          'name': 'Cleveland Clinic - Fairview Hospital - Pediatric Neurology',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 112270.0,
+          'name': 'Sichuan Academy of Medical Sciences Sichuan People\'s Hospital',
+          'locality': 'Chengdu Shi',
+          'administrativeAreaLevel1': 'Sichuan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 112861.0,
+          'name': 'C.h.u. De Nancy',
+          'locality': 'Nancy',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 114996.0,
+          'name': 'University Fitness Center at Penn State Hershey Medical Center',
+          'locality': 'Hershey',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 116232.0,
+          'name': 'Division of Pharmaceutics and Pharmaceutical Chemistry',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 116566.0,
+          'name': 'Julian G. Rosenman, MD, PhD',
+          'locality': 'Chapel Hill',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 120879.0,
+          'name': 'Genentech',
+          'locality': 'South San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 121706.0,
+          'name': 'The Second Affiliated Hospital, Zhejiang University School of Medicine （East Gate 1）',
+          'locality': 'Hangzhou Shi',
+          'administrativeAreaLevel1': 'Zhejiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 123322.0,
+          'name': 'Institute of Pathology - Kantonsspital Luzern',
+          'locality': 'Luzern 16',
+          'administrativeAreaLevel1': 'Luzern',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 127657.0,
+          'name': 'University Hospital Münster Department of Periodontology',
+          'locality': 'Münster',
+          'administrativeAreaLevel1': 'Nordrhein-Westfalen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 129337.0,
+          'name': 'Department of Anatomy & Neurosciences',
+          'locality': 'Amsterdam',
+          'administrativeAreaLevel1': 'Noord-Holland',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 129506.0,
+          'name': 'VAST',
+          'locality': null,
+          'administrativeAreaLevel1': 'Hà Nội',
+          'country': 'Vietnam'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 132111.0,
+          'name': 'Department of Gastroenterology and Human Nutrition',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 132135.0,
+          'name': 'University Hospital St. Pölten',
+          'locality': 'St Pölten',
+          'administrativeAreaLevel1': 'Niederösterreich',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 133939.0,
+          'name': 'Hospital of the University of Pennsylvania - Cardiology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 134222.0,
+          'name': 'Institute of Chemical Technology (ICT)',
+          'locality': 'Mumbai',
+          'administrativeAreaLevel1': 'Maharashtra',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 137913.0,
+          'name': 'Zhejiang Chinese Medical University Affiliated Tumor Hospital',
+          'locality': 'Hangzhou Shi',
+          'administrativeAreaLevel1': 'Zhejiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 139098.0,
+          'name': 'The Mount Sinai Hospital - Neurosurgery',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 140601.0,
+          'name': 'Netherlands eScience Center',
+          'locality': 'Amsterdam',
+          'administrativeAreaLevel1': 'Noord-Holland',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 142682.0,
+          'name': 'Department of Neurosurgery',
+          'locality': 'Kiel',
+          'administrativeAreaLevel1': 'Schleswig-Holstein',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 143712.0,
+          'name': 'Department of Neurosurgery',
+          'locality': 'Palo Alto',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 146028.0,
+          'name': 'Uniklinik Freiburg - Institut für Neuropathologie',
+          'locality': 'Freiburg im Breisgau',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 146650.0,
+          'name': 'Southern Tohoku General Hospital',
+          'locality': 'Kōriyama-shi',
+          'administrativeAreaLevel1': 'Fukushima-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 150801.0,
+          'name': 'Children\'s of Alabama - Pediatric Cancer and Blood Disorders',
+          'locality': 'Birmingham',
+          'administrativeAreaLevel1': 'Alabama',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 155550.0,
+          'name': 'Michigan State University College of Human Medicine',
+          'locality': 'Grand Rapids',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 156147.0,
+          'name': 'Jülich Supercomputing Centre (JSC)',
+          'locality': 'Jülich',
+          'administrativeAreaLevel1': 'North Rhine-Westphalia',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 158959.0,
+          'name': 'Peking University School of Pharmaceutical Sciences',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 165836.0,
+          'name': 'Democritus University of Thrace',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Greece'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 168990.0,
+          'name': 'Lebanese American University',
+          'locality': 'Beirut',
+          'administrativeAreaLevel1': 'Beirut Governorate',
+          'country': 'Lebanon'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 173860.0,
+          'name': 'Radiology-U Va',
+          'locality': 'Charlottesville',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 174406.0,
+          'name': 'Crcina - Research Institute Health University De Nantes',
+          'locality': 'Nantes',
+          'administrativeAreaLevel1': 'Pays de la Loire',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 176233.0,
+          'name': 'Dresden University of Technology',
+          'locality': 'Dresden',
+          'administrativeAreaLevel1': 'Saxony',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 177554.0,
+          'name': 'Mercy Hospital',
+          'locality': 'Ars-Laquenexy',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 178609.0,
+          'name': 'CellNetix Pathology & Laboratories',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 182798.0,
+          'name': 'Shengjing Hospital of China Medical University',
+          'locality': 'Shenyang Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 183092.0,
+          'name': 'Universität Leipzig: Universitätsklinik für Kleintiere',
+          'locality': 'Leipzig',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 183593.0,
+          'name': 'UCSF Benioff Children\'s Hospital Oakland',
+          'locality': 'Oakland',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 184449.0,
+          'name': 'Sion Hospital',
+          'locality': 'Sion',
+          'administrativeAreaLevel1': 'Valais',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 191378.0,
+          'name': 'Francis Crick Institute',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 191849.0,
+          'name': 'London Health Sciences Centre',
+          'locality': 'London',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 194214.0,
+          'name': 'IRMB - Institute of Regenerative Medicine and Biotherapies',
+          'locality': 'Montpellier',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 194535.0,
+          'name': 'Department of Neurosurgery',
+          'locality': 'Lübeck',
+          'administrativeAreaLevel1': 'Schleswig-Holstein',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 194857.0,
+          'name': 'Materials Science and Engineering Building',
+          'locality': 'Urbana',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 197469.0,
+          'name': 'Dr Jackson Williams MD',
+          'locality': 'Springfield',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 197898.0,
+          'name': 'Rothschild Fondation Maison de Retraite et de Gériatrie',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 199520.0,
+          'name': 'University of Toyama University Hospital',
+          'locality': 'Toyama-shi',
+          'administrativeAreaLevel1': 'Toyama-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 213533.0,
+          'name': 'Endocrinology & Metabolism-UVA',
+          'locality': 'Charlottesville',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 214626.0,
+          'name': 'St James Institute of Oncology',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 218468.0,
+          'name': 'Cerco',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 218974.0,
+          'name': 'Groupement Hospitalier Est - HCL',
+          'locality': 'Bron',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 221352.0,
+          'name': 'NYU Langone Neurosurgery Adult Hydrocephalus Program',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 224817.0,
+          'name': 'UR - University of Regensburg Faculty of Medicine - Dean\'s Office',
+          'locality': 'Regensburg',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 231489.0,
+          'name': 'Biostatistics and Informatics Service',
+          'locality': 'Lyon',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 233382.0,
+          'name': 'Clinical & Chemical Pathology',
+          'locality': null,
+          'administrativeAreaLevel1': 'Giza Governorate',
+          'country': 'Egypt'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 234190.0,
+          'name': 'Washington University School of Medicine- Department of Radiation Oncology',
+          'locality': 'St. Louis',
+          'administrativeAreaLevel1': 'Missouri',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 234350.0,
+          'name': 'Center for Drug Delivery and Nanomedicine',
+          'locality': 'Omaha',
+          'administrativeAreaLevel1': 'Nebraska',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 245356.0,
+          'name': 'Dutch Connectome Lab',
+          'locality': 'Utrecht',
+          'administrativeAreaLevel1': 'Utrecht',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 247318.0,
+          'name': 'The First Affiliated Hospital of Guangxi Medical University （Northwest Gate）',
+          'locality': 'Nanning Shi',
+          'administrativeAreaLevel1': 'Guangxi Zhuangzuzizhiqu',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 247776.0,
+          'name': 'Kanazawa',
+          'locality': 'Kanazawa',
+          'administrativeAreaLevel1': 'Ishikawa Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 249037.0,
+          'name': 'Medizinische Onkologie - Luzerner Kantonsspital',
+          'locality': 'Luzern 16',
+          'administrativeAreaLevel1': 'Luzern',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 250098.0,
+          'name': 'Department of Psychology',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 257739.0,
+          'name': 'Abramson Family Cancer Research Institute',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 258783.0,
+          'name': 'Michael Garron Hospital',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 260359.0,
+          'name': 'Universitätsklinikum Heidelberg Neurologische Klinik: Neuroradiologie',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 262214.0,
+          'name': 'Department of Statistical Sciences',
+          'locality': 'Padova',
+          'administrativeAreaLevel1': 'Veneto',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 264238.0,
+          'name': 'The University of Tennessee Health Science Center',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 266833.0,
+          'name': 'CCC Comprehensive Cancer Center Mainfranken',
+          'locality': 'Würzburg',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 268571.0,
+          'name': 'Biotechnology Center of the TU Dresden',
+          'locality': 'Dresden',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 272520.0,
+          'name': 'Sidney Kimmel Comprehensive Cancer Center',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 274902.0,
+          'name': 'Medical Center Drive',
+          'locality': 'Nashville',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 276939.0,
+          'name': 'IBA',
+          'locality': 'Ottignies-Louvain-la-Neuve',
+          'administrativeAreaLevel1': 'Wallonie',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 287185.0,
+          'name': 'Mount Sinai School of Medicine Translational and Molecular Imaging Institute',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 287539.0,
+          'name': 'The Second Affiliated Hospital of Nanchang University',
+          'locality': 'Nanchang Shi',
+          'administrativeAreaLevel1': 'Jiangxi Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 300942.0,
+          'name': 'UP Health System - Marquette',
+          'locality': 'Marquette',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 302422.0,
+          'name': 'Olsztyn',
+          'locality': 'Olsztyn',
+          'administrativeAreaLevel1': 'Warmian-Masurian Voivodeship',
+          'country': 'Poland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 310009.0,
+          'name': 'Hospital Ramon Y Cajal',
+          'locality': 'Madrid',
+          'administrativeAreaLevel1': 'Comunidad de Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 310688.0,
+          'name': 'Penn Radiation Oncology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 311966.0,
+          'name': 'Sansum Clinic Urgent Care',
+          'locality': 'Santa Barbara',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 314117.0,
+          'name': 'Sungkyunkwan University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 315301.0,
+          'name': 'University Pennsylvania Med Ct: Lynch David MD',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 317912.0,
+          'name': 'Xinxiang Medical College',
+          'locality': 'Xinxiang Shi',
+          'administrativeAreaLevel1': 'Henan',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 318211.0,
+          'name': 'Northern Michigan University',
+          'locality': 'Marquette',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 319952.0,
+          'name': 'Ningbo No.1 Hospital （South Gate）',
+          'locality': 'Ningbo Shi',
+          'administrativeAreaLevel1': 'Zhejiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 326665.0,
+          'name': 'IRCCS NEUROMED - Mediterranean Neurological Institute',
+          'locality': 'Pozzilli',
+          'administrativeAreaLevel1': 'Molise',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 330937.0,
+          'name': 'Sun Yat-sen University Environmental Science and Engineering School Experiment Center',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 343310.0,
+          'name': 'University of California, San Francisco',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 356740.0,
+          'name': 'Instituto de Medicina y Biología Experimental de Cuyo (IMBECU)',
+          'locality': null,
+          'administrativeAreaLevel1': 'Mendoza',
+          'country': 'Argentina'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 366231.0,
+          'name': 'Rinkū General Medical Center',
+          'locality': 'Izumisano-shi',
+          'administrativeAreaLevel1': 'Ōsaka-fu',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 381065.0,
+          'name': 'Hospital General Universitario de Ciudad Real',
+          'locality': 'Ciudad Real',
+          'administrativeAreaLevel1': 'Castilla-La Mancha',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 384583.0,
+          'name': 'Department of Psychology',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 386694.0,
+          'name': 'Stephenson Cancer Center',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 390801.0,
+          'name': 'Department of Neurology University Hospital Frankfurt',
+          'locality': 'Frankfurt',
+          'administrativeAreaLevel1': 'Hesse',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 405750.0,
+          'name': 'Texas Children\'s Cancer Center',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 408178.0,
+          'name': 'P.S.I.T.E.C.',
+          'locality': 'Villeneuve-d\'Ascq',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 409519.0,
+          'name': 'Shaanxi Provincial People\'s Hospital Library',
+          'locality': 'Xian Shi',
+          'administrativeAreaLevel1': 'Shaanxi Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 413999.0,
+          'name': 'University of Maryland Medical System (UMMS)',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 426605.0,
+          'name': 'Gates Vascular Institute',
+          'locality': 'Buffalo',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 432980.0,
+          'name': 'STANFORD MRI',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 439948.0,
+          'name': 'Università degli Studi di Torino - Dipartimenti - Dip. Scienze Pediatriche e Dell\'Adolescenza',
+          'locality': 'Torino',
+          'administrativeAreaLevel1': 'Piemonte',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 441440.0,
+          'name': 'Medizinisch Radiologisches Institut (MRI) Bahnhofplatz',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 442967.0,
+          'name': 'Department of Psychiatry',
+          'locality': 'Dresden',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 469142.0,
+          'name': 'Children\'s Specialty Center - Hematology/Oncology Clinic',
+          'locality': 'Minneapolis',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 488584.0,
+          'name': 'Hospices Civils de Lyon - HCL',
+          'locality': 'Lyon',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 489273.0,
+          'name': 'School of Informatics, The University of Edinburgh',
+          'locality': null,
+          'administrativeAreaLevel1': 'Scotland',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 494660.0,
+          'name': 'Wuhan University',
+          'locality': 'Wuhan',
+          'administrativeAreaLevel1': 'Hubei',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 512990.0,
+          'name': 'CHOP\'s Department of Child and Adolescent Psychiatry and Behavioral Science',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 517148.0,
+          'name': 'Lormont Hospital Group Sud - Chu De Bordeaux',
+          'locality': 'Lormont',
+          'administrativeAreaLevel1': 'Nouvelle-Aquitaine',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 518075.0,
+          'name': 'Institute of Infection and Global Health, University of Liverpool',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 561539.0,
+          'name': 'Dr. Robert A. Solomon, MD',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 597140.0,
+          'name': 'Angie Fowler AYA Cancer Institute',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 655931.0,
+          'name': 'Turku PET Centre',
+          'locality': 'Turku',
+          'administrativeAreaLevel1': null,
+          'country': 'Finland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 658081.0,
+          'name': 'Songpa-gu',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 661874.0,
+          'name': 'UC San Diego - Division of Gastroenterology',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 683280.0,
+          'name': 'U.S. Department of Veterans Affairs',
+          'locality': 'Menlo Park',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 686535.0,
+          'name': 'Shanghai Hospital of Integrated Traditional Chinese with Western Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 694014.0,
+          'name': 'UNM Health Sciences Center Marketing and Communications',
+          'locality': 'Albuquerque',
+          'administrativeAreaLevel1': 'New Mexico',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 698968.0,
+          'name': 'GROW School for Oncology and Developmental Biology',
+          'locality': 'Maastricht',
+          'administrativeAreaLevel1': 'Limburg',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 705503.0,
+          'name': 'Nacionalni inštitut za Biologijo National institute Of Biology',
+          'locality': null,
+          'administrativeAreaLevel1': 'Ljubljana',
+          'country': 'Slovenia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 710421.0,
+          'name': 'Stich Radiation Center',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 720115.0,
+          'name': '國立交通大學光復校區',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 725916.0,
+          'name': 'LITA',
+          'locality': 'Segrate',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 760510.0,
+          'name': 'Sunnybrook Health Sciences Centre -Computed Tomography',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 772117.0,
+          'name': 'National Cancer Institute: Aplan Peter D MD',
+          'locality': 'Bethesda',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 780211.0,
+          'name': 'Penn Neurosurgery',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 783799.0,
+          'name': 'National Centre For Cell Science',
+          'locality': 'Pune',
+          'administrativeAreaLevel1': 'Maharashtra',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 790300.0,
+          'name': 'Department of Human Genetics',
+          'locality': 'Montreal',
+          'administrativeAreaLevel1': 'Quebec',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 808319.0,
+          'name': 'Sunil Krishnan, MD, FACP',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 819706.0,
+          'name': 'The Botnar Research Centre',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 822176.0,
+          'name': 'Dr. Ryan T Cleary MD',
+          'locality': 'St. Louis',
+          'administrativeAreaLevel1': 'Missouri',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 825787.0,
+          'name': 'INCLIVA Institut d\'Investigació Sanitària',
+          'locality': 'València',
+          'administrativeAreaLevel1': 'Comunidad Valenciana',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 832927.0,
+          'name': 'Canada\'s Michael Smith Genome Sciences Centre',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 835075.0,
+          'name': 'Nishikōbe Medical Center',
+          'locality': 'Kōbe-shi',
+          'administrativeAreaLevel1': 'Hyōgo-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 850754.0,
+          'name': 'University Carlos III de Madrid: Getafe Campus',
+          'locality': 'Getafe',
+          'administrativeAreaLevel1': 'Comunidad de Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 858952.0,
+          'name': 'Radiation oncology parking',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 884646.0,
+          'name': 'Division Of Plant Pathology',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 900356.0,
+          'name': 'Rutgers Cancer Institute of New Jersey',
+          'locality': 'New Brunswick',
+          'administrativeAreaLevel1': 'New Jersey',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 903850.0,
+          'name': 'SMG-SNU Boramae Medical Center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 907686.0,
+          'name': 'Department of Biological Regulation',
+          'locality': 'Rehovot',
+          'administrativeAreaLevel1': 'Center District',
+          'country': 'Israel'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 919711.0,
+          'name': 'Virginia Tech-Wake Forest University School of Biomedical Engineering and Sciences',
+          'locality': 'Blacksburg',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 945412.0,
+          'name': 'Inha University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Incheon',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 945939.0,
+          'name': 'Tzu Chi University',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 955848.0,
+          'name': 'ISNR',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 974531.0,
+          'name': 'Graduate Interdisciplinary Programs',
+          'locality': 'Tucson',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 979499.0,
+          'name': 'Indraprastha Apollo Hospital',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 998467.0,
+          'name': '73104',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1001196.0,
+          'name': 'Oficina Convenio Colectivo (Facultad Ciencias Médicas/UNC)',
+          'locality': 'Córdoba',
+          'administrativeAreaLevel1': 'Córdoba',
+          'country': 'Argentina'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1027764.0,
+          'name': '910-1193',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1029428.0,
+          'name': '59655',
+          'locality': 'Villeneuve-d\'Ascq',
+          'administrativeAreaLevel1': 'Hauts-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1033742.0,
+          'name': 'Istituto Clinico Humanitas',
+          'locality': 'Rozzano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1037167.0,
+          'name': 'Mount Auburn Hospital',
+          'locality': 'Cambridge',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1043850.0,
+          'name': 'Department of Oncology and Radiotherapy',
+          'locality': 'Hradec Králové',
+          'administrativeAreaLevel1': 'Královéhradecký kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1048230.0,
+          'name': 'BC Cancer Agency - Fraser Valley Centre',
+          'locality': 'Surrey',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1065607.0,
+          'name': 'Jiangnan University',
+          'locality': 'Wuxi Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1073411.0,
+          'name': 'Technische Universität Dresden, Institut für Leichtbau und Kunststofftechnik',
+          'locality': 'Dresden',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1100285.0,
+          'name': 'Department of Biomedical Engineering',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1111020.0,
+          'name': 'Stephen D. Hassenfeld Children\'s Center for Cancer & Blood Disorders',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1111028.0,
+          'name': 'Kanazawa University Fuzoku Hospital Restaurant',
+          'locality': 'Kanazawa-shi',
+          'administrativeAreaLevel1': 'Ishikawa-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1112213.0,
+          'name': 'Rodriguez Vilmarie MD',
+          'locality': 'Rochester',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1117189.0,
+          'name': 'Kims',
+          'locality': 'Al Kuwayt',
+          'administrativeAreaLevel1': 'Al Asimah Governate',
+          'country': 'Kuwait'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1125991.0,
+          'name': 'Gangneung-Wonju National University Gangneung Campus',
+          'locality': 'Gangneung',
+          'administrativeAreaLevel1': 'Gangwon-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1126823.0,
+          'name': 'Chiayi City',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1141704.0,
+          'name': 'T.C Sağlık Bakanlığı İzmir Katip Çelebi Üniversitesi',
+          'locality': null,
+          'administrativeAreaLevel1': 'İzmir',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1152900.0,
+          'name': 'CP&A Foggy Bottom - Children\'s National Health System',
+          'locality': 'Washington',
+          'administrativeAreaLevel1': 'District of Columbia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1197257.0,
+          'name': '903-0215',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1206117.0,
+          'name': 'L\'IRCCS A.O.U. San Martino - IST',
+          'locality': 'Genova',
+          'administrativeAreaLevel1': 'Liguria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1208478.0,
+          'name': '920-8641',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1212040.0,
+          'name': 'North Carolina Cancer Hospital',
+          'locality': 'Chapel Hill',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1213282.0,
+          'name': 'Analysis Group',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1223021.0,
+          'name': 'Instituto de Neurociencias de Castilla y León',
+          'locality': 'Salamanca',
+          'administrativeAreaLevel1': 'Castilla y León',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1237573.0,
+          'name': '520-2192',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1244173.0,
+          'name': 'Gustavianum - Uppsala University Museum',
+          'locality': null,
+          'administrativeAreaLevel1': 'Uppsala län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1245387.0,
+          'name': 'Biomedical Engineering',
+          'locality': 'Stony Brook',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1245513.0,
+          'name': '100050',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1252898.0,
+          'name': 'Pázmány Péter Catholic University Faculty of Information Technology and Bionics',
+          'locality': 'Budapest',
+          'administrativeAreaLevel1': null,
+          'country': 'Hungary'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1258591.0,
+          'name': 'OISE Psychology Clinic',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1296610.0,
+          'name': 'Zhongda Hospital, Southeast University',
+          'locality': 'Nanjing Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1316415.0,
+          'name': 'Van Andel Institute',
+          'locality': 'Grand Rapids',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1342825.0,
+          'name': 'Shiyan Taihe Hospital',
+          'locality': 'Shiyan Shi',
+          'administrativeAreaLevel1': 'Hubei',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1356561.0,
+          'name': 'Shandong Province Hospital of Traditional Chinese Medicine Convenience Store',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1359751.0,
+          'name': 'Department of Neuroscience',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1359839.0,
+          'name': 'Universita\' Degli Studi Policlinico Universitario',
+          'locality': 'Catania',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1370438.0,
+          'name': 'Taylor Sharon L',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1397589.0,
+          'name': 'Istanbul Education and Research Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'İstanbul',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1404876.0,
+          'name': 'Hospital of Xi\'an Jiaotong University',
+          'locality': 'Xian Shi',
+          'administrativeAreaLevel1': 'Shaanxi Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1405459.0,
+          'name': '250012',
+          'locality': 'Jinan',
+          'administrativeAreaLevel1': 'Shandong',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1409244.0,
+          'name': '350-1241',
+          'locality': 'Hidaka',
+          'administrativeAreaLevel1': 'Saitama Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1414476.0,
+          'name': 'Pediatric Neurosurgeons: Jeffrey P. Blount, MD',
+          'locality': 'Birmingham',
+          'administrativeAreaLevel1': 'Alabama',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1446449.0,
+          'name': '250021',
+          'locality': 'Jinan',
+          'administrativeAreaLevel1': 'Shandong',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1460509.0,
+          'name': '100088',
+          'locality': null,
+          'administrativeAreaLevel1': 'Beijing',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1465679.0,
+          'name': 'National Cancer Center',
+          'locality': 'Goyang-si',
+          'administrativeAreaLevel1': null,
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1466522.0,
+          'name': 'Huzhou Central Hospital',
+          'locality': 'Huzhou Shi',
+          'administrativeAreaLevel1': 'Zhejiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1472712.0,
+          'name': 'College of Public Health and Nutrition',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taipei City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1481445.0,
+          'name': 'Philips Healthcare',
+          'locality': 'Highland Heights',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1481956.0,
+          'name': '173-8606',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1488372.0,
+          'name': 'Broad Institute',
+          'locality': 'Cambridge',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1495575.0,
+          'name': 'University of Manitoba Bookstore',
+          'locality': 'Winnipeg',
+          'administrativeAreaLevel1': 'Manitoba',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1517962.0,
+          'name': 'Fraunhofer-Institut für Zelltherapie und Immunologie IZI',
+          'locality': 'Leipzig',
+          'administrativeAreaLevel1': 'Sachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1587322.0,
+          'name': 'Affibody AB',
+          'locality': null,
+          'administrativeAreaLevel1': 'Stockholms län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1590664.0,
+          'name': 'Institute of Mathematics and Statistics',
+          'locality': null,
+          'administrativeAreaLevel1': 'São Paulo',
+          'country': 'Brazil'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1591614.0,
+          'name': '韩山师范学院',
+          'locality': 'Chaozhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1594949.0,
+          'name': 'Xi\'an University of Architecture and Technology',
+          'locality': 'Xi\'an',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1619485.0,
+          'name': '567-0085',
+          'locality': 'Ibaraki',
+          'administrativeAreaLevel1': 'Osaka Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1625708.0,
+          'name': 'UST │University of Science and Technology',
+          'locality': null,
+          'administrativeAreaLevel1': 'Daejeon',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1659127.0,
+          'name': 'Sorrento Therapeutics Inc',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1661446.0,
+          'name': 'Woncheon-dong',
+          'locality': 'Suwon-si',
+          'administrativeAreaLevel1': 'Gyeonggi-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1672485.0,
+          'name': 'Presidio Ospedaliero Gaspare Rodolico',
+          'locality': 'Catania',
+          'administrativeAreaLevel1': 'Sicilia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1682134.0,
+          'name': 'Zhujiang Hospital of Southern Medical University',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1695391.0,
+          'name': 'Public Tannan Hospital',
+          'locality': 'Sabae-shi',
+          'administrativeAreaLevel1': 'Fukui-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1699120.0,
+          'name': 'Institute of Physics',
+          'locality': 'Bhubaneswar',
+          'administrativeAreaLevel1': 'Odisha',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1700852.0,
+          'name': '415 Fengyang Rd',
+          'locality': null,
+          'administrativeAreaLevel1': 'Shanghai Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1701408.0,
+          'name': 'School of Materials Science and Engineering Tianjin University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Tianjin Shi',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1709827.0,
+          'name': 'California Center for Pituitary Disorders at UCSF',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1738183.0,
+          'name': 'Park Clinic',
+          'locality': 'Kolkata',
+          'administrativeAreaLevel1': 'West Bengal',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1739070.0,
+          'name': 'Luzhou Medical College Affiliated Hospital of Traditional Chinese Medicine Chengbei New Branch （West Gate）',
+          'locality': 'Luzhou Shi',
+          'administrativeAreaLevel1': 'Sichuan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1740533.0,
+          'name': 'CHA의과학대학교 분당캠퍼스',
+          'locality': 'Seongnam-si',
+          'administrativeAreaLevel1': 'Gyeonggi-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1775306.0,
+          'name': 'Texas Children\'s Hospital: Bonin Liza A PHD',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1783209.0,
+          'name': 'Universitätsmedizin Rostock - Oscar Langendorff Institut für Physiologie',
+          'locality': 'Rostock',
+          'administrativeAreaLevel1': 'Mecklenburg-Vorpommern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1787354.0,
+          'name': 'VIP Breast Imaging',
+          'locality': 'Toronto',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1800450.0,
+          'name': '雙和醫院附設產後護理之家',
+          'locality': null,
+          'administrativeAreaLevel1': 'New Taipei City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1817120.0,
+          'name': 'ASCIRES CETIR Esplugues',
+          'locality': 'Esplugues de Llobregat',
+          'administrativeAreaLevel1': 'Catalunya',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1823361.0,
+          'name': 'ICTEAM',
+          'locality': 'Ottignies-Louvain-la-Neuve',
+          'administrativeAreaLevel1': 'Wallonie',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1842554.0,
+          'name': 'The Pennine Acute HOSPITAL',
+          'locality': 'Manchester',
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1847683.0,
+          'name': 'Beihua University',
+          'locality': 'Jilin',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1862210.0,
+          'name': 'Korea Institute of Industrial Technology, Gangwon Regional Headquarters',
+          'locality': 'Gangneung',
+          'administrativeAreaLevel1': 'Gangwon-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1868345.0,
+          'name': 'Pioneer Valley Life Sciences',
+          'locality': 'Springfield',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1869069.0,
+          'name': 'Siksha \'O\' Anusandhan',
+          'locality': 'Bhubaneswar',
+          'administrativeAreaLevel1': 'Odisha',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1874533.0,
+          'name': 'Management School, University of Electronic Science and Technology of China MBA Education Center',
+          'locality': 'Chengdu Shi',
+          'administrativeAreaLevel1': 'Sichuan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1879613.0,
+          'name': 'Liaoning University of Traditional Chinese Medicine',
+          'locality': 'Dalian Shi',
+          'administrativeAreaLevel1': 'Liaoning Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1887010.0,
+          'name': 'Ben and Catherine Ivy Center for Advanced Brain Tumor Treatment',
+          'locality': 'Seattle',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1919028.0,
+          'name': 'UCSF Pediatric Neurology',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1919453.0,
+          'name': 'E.ON Energie Germany',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1934831.0,
+          'name': 'Norton Neuroscience Institute',
+          'locality': 'Louisville',
+          'administrativeAreaLevel1': 'Kentucky',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1952599.0,
+          'name': 'Hospital General Universitario Santa Lucía',
+          'locality': 'Cartagena',
+          'administrativeAreaLevel1': 'Región de Murcia',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1968630.0,
+          'name': 'Huai\'an No.1 People\'s Hospital',
+          'locality': 'Huaian Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1973228.0,
+          'name': '528415',
+          'locality': 'Zhongshan',
+          'administrativeAreaLevel1': 'Guangdong',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1978302.0,
+          'name': 'Zaozhuang Municipal Hospital',
+          'locality': 'Zaozhuang Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1978303.0,
+          'name': 'Linyi People\'s Hospital',
+          'locality': 'Linyi Shi',
+          'administrativeAreaLevel1': 'Shandong',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1991839.0,
+          'name': 'Chinavasion Wholesale Gadgets',
+          'locality': null,
+          'administrativeAreaLevel1': 'Kowloon',
+          'country': 'Hong Kong'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1992286.0,
+          'name': 'Medicon Village AB',
+          'locality': null,
+          'administrativeAreaLevel1': 'Skåne län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1995227.0,
+          'name': 'Levine Cancer Institute',
+          'locality': 'Charlotte',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1995733.0,
+          'name': 'Worldwide Express Mail Service',
+          'locality': 'Lanzhou Shi',
+          'administrativeAreaLevel1': 'Gansu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2001789.0,
+          'name': 'HackSpark',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2017007.0,
+          'name': 'Elak Electronics',
+          'locality': 'Bruxelles',
+          'administrativeAreaLevel1': 'Bruxelles',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2019396.0,
+          'name': 'Henan University Huaihe Hospital',
+          'locality': 'Kaifeng',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2033940.0,
+          'name': '埼玉医科大学病院 南館',
+          'locality': 'Moroyama-machi',
+          'administrativeAreaLevel1': 'Saitama-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2040899.0,
+          'name': 'International St. Mary\'s Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Incheon',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2041678.0,
+          'name': 'Southern Medical University Public Health and Tropical Medicine College',
+          'locality': 'Guangzhou Shi',
+          'administrativeAreaLevel1': 'Guangdong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2048044.0,
+          'name': 'LAC+USC Healthcare Network: Michael D Katz, MD',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2066794.0,
+          'name': 'Jinan Youtuo Mechanical & Electrical Equipment Co., Ltd.',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2068429.0,
+          'name': 'Servicruz',
+          'locality': 'Esplugues de Llobregat',
+          'administrativeAreaLevel1': 'Catalunya',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2078444.0,
+          'name': 'Upstate Infectious Diseases Associate',
+          'locality': 'Albany',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2091302.0,
+          'name': 'Arizona Oncology Services',
+          'locality': 'Scottsdale',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2091305.0,
+          'name': 'GCE Solutions, Inc.',
+          'locality': 'Bloomington',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2091306.0,
+          'name': 'The Ohio State University - Hematology-Oncology',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2092721.0,
+          'name': 'Saga It Mall',
+          'locality': 'Xian Shi',
+          'administrativeAreaLevel1': 'Shaanxi Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2094091.0,
+          'name': 'Takis s.r.l.',
+          'locality': 'Castel Romano',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2102833.0,
+          'name': 'Jining No.1 People\'s Hospital Emergency Medical Service',
+          'locality': 'Jining Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2103545.0,
+          'name': 'Michael C. Brodsky, M.D.',
+          'locality': 'Rochester',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2106404.0,
+          'name': 'Best Buy',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2111893.0,
+          'name': 'biomedical center',
+          'locality': null,
+          'administrativeAreaLevel1': 'Plzeňský kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2112362.0,
+          'name': 'Hospiscare',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2118015.0,
+          'name': 'M. Sean Grady, M.D.',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2140531.0,
+          'name': 'Dr. Samuel H. Cheshier, MD',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2140769.0,
+          'name': 'Hartford HealthCare Medical Group - Vascular Surgery',
+          'locality': 'Hartford',
+          'administrativeAreaLevel1': 'Connecticut',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2141290.0,
+          'name': 'Dong\'e People\'s Hospital',
+          'locality': 'Liaocheng Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2141882.0,
+          'name': 'Taizhou',
+          'locality': 'Taizhou',
+          'administrativeAreaLevel1': 'Jiangsu',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2147128.0,
+          'name': 'Theatre Cedar Rapids',
+          'locality': 'Cedar Rapids',
+          'administrativeAreaLevel1': 'Iowa',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2150819.0,
+          'name': 'Unieuro',
+          'locality': 'Catanzaro Lido',
+          'administrativeAreaLevel1': 'Calabria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2152333.0,
+          'name': 'St. Jude 305 Building',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2152480.0,
+          'name': 'NCCCR Hospital',
+          'locality': 'Doha',
+          'administrativeAreaLevel1': 'Doha',
+          'country': 'Qatar'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2154686.0,
+          'name': 'Dr. Lawrence D. Recht, MD',
+          'locality': 'Palo Alto',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2165387.0,
+          'name': 'DoMore!, Oslo University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Oslo',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2166427.0,
+          'name': 'The First Affiliated Hospital of Henan University of Science and Technology Library',
+          'locality': 'Luoyang Shi',
+          'administrativeAreaLevel1': 'Henan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2169948.0,
+          'name': 'Ou Health Sciences Neurosurgy',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2169963.0,
+          'name': 'Kogan Mikhail MD',
+          'locality': 'Washington',
+          'administrativeAreaLevel1': 'District of Columbia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2174829.0,
+          'name': 'Regulus Therapeutics LLC',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2177040.0,
+          'name': 'Phoenix Childrens Hospital Radiology',
+          'locality': 'Phoenix',
+          'administrativeAreaLevel1': 'Arizona',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2192988.0,
+          'name': 'Xinxiang Medical University No.1 Affiliated Hospital',
+          'locality': 'Xinxiang Shi',
+          'administrativeAreaLevel1': 'Henan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2193430.0,
+          'name': '2200',
+          'locality': 'København',
+          'administrativeAreaLevel1': null,
+          'country': 'Denmark'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2199068.0,
+          'name': 'Media Markt',
+          'locality': 'Hamburg',
+          'administrativeAreaLevel1': 'Hamburg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2199816.0,
+          'name': 'Baystate Reference Laboratories',
+          'locality': 'Amherst',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2201388.0,
+          'name': 'Okinawa Christian University',
+          'locality': 'Nishihara-chō',
+          'administrativeAreaLevel1': 'Okinawa-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2217930.0,
+          'name': 'e-tec electronic GmbH - Branch Innsbruck',
+          'locality': 'Innsbruck',
+          'administrativeAreaLevel1': 'Tirol',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2223944.0,
+          'name': 'Neurological group practice in Bienenkorbhaus',
+          'locality': 'Frankfurt am Main',
+          'administrativeAreaLevel1': 'Hessen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2224189.0,
+          'name': 'Norton Cancer Institute Radiation Center',
+          'locality': 'Louisville',
+          'administrativeAreaLevel1': 'Kentucky',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2225103.0,
+          'name': 'Schroeder Health & Education Complex',
+          'locality': 'Milwaukee',
+          'administrativeAreaLevel1': 'Wisconsin',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2225482.0,
+          'name': 'Tengzhou Workers\' Hospital',
+          'locality': 'Zaozhuang Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2227083.0,
+          'name': 'Medical Imaging Centre Claude Bernard',
+          'locality': 'Metz',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2231378.0,
+          'name': 'Huashan Hospital',
+          'locality': 'Jinan Shi',
+          'administrativeAreaLevel1': 'Shandong Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2231809.0,
+          'name': 'Boehringer Ingelheim France',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2232949.0,
+          'name': 'Mr. Dr. Yan Guex-Crosier Ophtalmologue (oculiste)',
+          'locality': 'Lausanne',
+          'administrativeAreaLevel1': 'Vaud',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2240355.0,
+          'name': 'Spine and Brain India',
+          'locality': 'New Delhi',
+          'administrativeAreaLevel1': 'Delhi',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2240815.0,
+          'name': 'Dartmouth Library',
+          'locality': 'Hanover',
+          'administrativeAreaLevel1': 'New Hampshire',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2244748.0,
+          'name': '00198',
+          'locality': 'Rome',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2247817.0,
+          'name': 'Oblastní nemocnice Náchod: Dětské a novorozenecké oddělení',
+          'locality': 'Náchod',
+          'administrativeAreaLevel1': 'Královéhradecký kraj',
+          'country': 'Czechia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2247820.0,
+          'name': 'AB Science',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2250978.0,
+          'name': '5018',
+          'locality': null,
+          'administrativeAreaLevel1': 'Hordaland',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2253264.0,
+          'name': 'NMU Seaborg Center',
+          'locality': 'Marquette',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2253875.0,
+          'name': 'Severance Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2253881.0,
+          'name': 'Boehringer Ingelheim France',
+          'locality': 'Reims',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2255964.0,
+          'name': 'SOLVO Biotechnology',
+          'locality': 'Budaörs',
+          'administrativeAreaLevel1': null,
+          'country': 'Hungary'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2258564.0,
+          'name': 'Parking garage P18 BG RCI',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2267452.0,
+          'name': 'Hugo H. Cuellar-Saenz, MD, PhD',
+          'locality': 'Shreveport',
+          'administrativeAreaLevel1': 'Louisiana',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2268614.0,
+          'name': 'Hwasun-gun',
+          'locality': 'Hwasun-gun',
+          'administrativeAreaLevel1': 'Jeollanam-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2277039.0,
+          'name': 'Hunan Ningxiang People\'s Hospital',
+          'locality': 'Changsha Shi',
+          'administrativeAreaLevel1': 'Hunan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2278857.0,
+          'name': 'Radiation Therapy',
+          'locality': 'Minneapolis',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2279428.0,
+          'name': 'Department of Industrial and Systems Engineering',
+          'locality': 'Minneapolis',
+          'administrativeAreaLevel1': 'Minnesota',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2286675.0,
+          'name': 'The Fifth People\'s Hospital of Anyang',
+          'locality': 'Anyang',
+          'administrativeAreaLevel1': null,
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2286676.0,
+          'name': 'Shangqiu',
+          'locality': 'Shangqiu',
+          'administrativeAreaLevel1': 'Henan',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2286677.0,
+          'name': 'General Hospital of Tianjin Medical University Shenjing Surgery Branch',
+          'locality': 'Hebi Shi',
+          'administrativeAreaLevel1': 'Henan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2288929.0,
+          'name': 'Dr. Andrew E. Sloan, MD',
+          'locality': 'Cleveland',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2288930.0,
+          'name': 'Cleveland Bio Labs Inc',
+          'locality': 'Buffalo',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2289521.0,
+          'name': 'Changwon, Gyeongsang National University Hospital',
+          'locality': '창원시',
+          'administrativeAreaLevel1': 'Gyeongsangnam-do',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2302188.0,
+          'name': 'Macquarie Neurosurgery',
+          'locality': 'Macquarie Park',
+          'administrativeAreaLevel1': 'New South Wales',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2303117.0,
+          'name': 'Pediatric Pathology Associates: Boue Daniel R MD',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2303151.0,
+          'name': 'Huai\'an No.2 People\'s Hospital',
+          'locality': 'Huaian Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2314120.0,
+          'name': 'Mark Proctor, MD',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2317656.0,
+          'name': 'Ltd. Korea Phillips',
+          'locality': null,
+          'administrativeAreaLevel1': 'Seoul',
+          'country': 'South Korea'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2319305.0,
+          'name': 'Stanford Interventional Neuroradiology Program',
+          'locality': 'Palo Alto',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2319679.0,
+          'name': 'Radia Inc',
+          'locality': 'Everett',
+          'administrativeAreaLevel1': 'Washington',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2324461.0,
+          'name': 'Deacon House Wuxi',
+          'locality': 'Wuxi Shi',
+          'administrativeAreaLevel1': 'Jiangsu Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2327830.0,
+          'name': 'Asada Piano Lessons',
+          'locality': 'Kōriyama-shi',
+          'administrativeAreaLevel1': 'Fukushima-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2331456.0,
+          'name': 'Dr. James R. Downing, MD',
+          'locality': 'Memphis',
+          'administrativeAreaLevel1': 'Tennessee',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2336951.0,
+          'name': 'General Foundation of the University of Málaga',
+          'locality': 'Málaga',
+          'administrativeAreaLevel1': 'Andalucía',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2336954.0,
+          'name': 'Via Laura Mantegazza, 8',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2353091.0,
+          'name': 'Sichuan University West China Hospital Car Team',
+          'locality': 'Chengdu Shi',
+          'administrativeAreaLevel1': 'Sichuan Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2362746.0,
+          'name': 'New Hope Medical Centre',
+          'locality': 'Chennai',
+          'administrativeAreaLevel1': 'Tamil Nadu',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2362747.0,
+          'name': 'Northwestern Medicine Chicago Proton Center',
+          'locality': 'Warrenville',
+          'administrativeAreaLevel1': 'Illinois',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2367286.0,
+          'name': 'Biomedical Research Center (BRC)',
+          'locality': 'Doha',
+          'administrativeAreaLevel1': 'Doha',
+          'country': 'Qatar'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2373466.0,
+          'name': 'Klinikum Oldenburg AöR',
+          'locality': 'Oldenburg',
+          'administrativeAreaLevel1': 'Niedersachsen',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2378581.0,
+          'name': 'StemGen S.p.A',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2378585.0,
+          'name': 'Istituto Di Medicina Rigenerativa - Isbremit',
+          'locality': 'San Giovanni Rotondo',
+          'administrativeAreaLevel1': 'Puglia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2387362.0,
+          'name': 'Dr. Glenn M. Mills, MD',
+          'locality': 'Shreveport',
+          'administrativeAreaLevel1': 'Louisiana',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2416366.0,
+          'name': 'Plateforme protéomique 3P5-Cochin',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 15.0,
+          'name': 'Johns Hopkins University',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 29.0,
+          'name': 'Icahn School of Medicine at Mount Sinai',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 35.0,
+          'name': 'University of Melbourne',
+          'locality': 'Parkville',
+          'administrativeAreaLevel1': 'Victoria',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 46.0,
+          'name': 'University of Pittsburgh School of Medicine',
+          'locality': 'Pittsburgh',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 52.0,
+          'name': 'Evelina London Children\'s Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 79.0,
+          'name': 'Sapienza University of Rome',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 92.0,
+          'name': 'Goethe University Frankfurt',
+          'locality': 'Frankfurt',
+          'administrativeAreaLevel1': 'Hesse',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 93.0,
+          'name': 'Universitätsklinikum Heidelberg',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 95.0,
+          'name': 'The University of Cambridge School of Clinical Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 97.0,
+          'name': 'King\'s College Hospital NHS Foundation Trust',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 99.0,
+          'name': 'St James\'s University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 109.0,
+          'name': 'St Bartholomew\'s Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 141.0,
+          'name': 'Claude Bernard University Lyon 1',
+          'locality': 'Villeurbanne',
+          'administrativeAreaLevel1': 'Auvergne-Rhône-Alpes',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 147.0,
+          'name': 'University of Colorado Denver',
+          'locality': 'Denver',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 151.0,
+          'name': 'The University Of Oklahoma Health Sciences Center',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 178.0,
+          'name': 'University of Miami, Miller School of Med.',
+          'locality': 'Miami',
+          'administrativeAreaLevel1': 'Florida',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 189.0,
+          'name': 'Hospital Saint-Antoine',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 193.0,
+          'name': 'University of Rochester School of Medicine and Dentistry',
+          'locality': 'Rochester',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 205.0,
+          'name': 'Ulm University',
+          'locality': 'Ulm',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 238.0,
+          'name': 'Université Toulouse Paul Sabatier',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 260.0,
+          'name': 'Rigshospitalet',
+          'locality': 'København',
+          'administrativeAreaLevel1': null,
+          'country': 'Denmark'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 271.0,
+          'name': 'Umeå University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Västerbottens län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 285.0,
+          'name': 'Monash Medical Centre',
+          'locality': 'Clayton',
+          'administrativeAreaLevel1': 'Victoria',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 292.0,
+          'name': 'Kyoto University',
+          'locality': 'Kyoto',
+          'administrativeAreaLevel1': 'Kyoto Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 332.0,
+          'name': 'Duke University Department of Surgery',
+          'locality': 'Durham',
+          'administrativeAreaLevel1': 'North Carolina',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 334.0,
+          'name': 'Yale School of Medicine',
+          'locality': 'New Haven',
+          'administrativeAreaLevel1': 'Connecticut',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 346.0,
+          'name': 'Roswell Park Comprehensive Cancer Center',
+          'locality': 'Buffalo',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 391.0,
+          'name': 'Medical College of Wisconsin',
+          'locality': 'Milwaukee',
+          'administrativeAreaLevel1': 'Wisconsin',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 401.0,
+          'name': 'The University of British Columbia',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 407.0,
+          'name': 'University of Utah School of Medicine',
+          'locality': 'Salt Lake City',
+          'administrativeAreaLevel1': 'Utah',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 408.0,
+          'name': 'Gothenburg University',
+          'locality': null,
+          'administrativeAreaLevel1': 'Västra Götaland County',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 441.0,
+          'name': 'Jack P Rock, MD',
+          'locality': 'Detroit',
+          'administrativeAreaLevel1': 'Michigan',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 455.0,
+          'name': 'University of Cincinnati College of Medicine',
+          'locality': 'Cincinnati',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 542.0,
+          'name': 'Hospital Beaujon Ap-Hp',
+          'locality': 'Clichy',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 557.0,
+          'name': 'National Institutes of Health',
+          'locality': 'Bethesda',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 565.0,
+          'name': 'Ospedale Maggiore',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 571.0,
+          'name': 'Japanese Foundation for Cancer Research',
+          'locality': 'Kōtō-ku',
+          'administrativeAreaLevel1': 'Tōkyō-to',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 615.0,
+          'name': 'National Cancer Institute -- Main Campus',
+          'locality': 'Bethesda',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 628.0,
+          'name': 'Washington University School of Medicine',
+          'locality': 'St. Louis',
+          'administrativeAreaLevel1': 'Missouri',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 649.0,
+          'name': 'Julius-Maximilian\'s University',
+          'locality': 'Würzburg',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 651.0,
+          'name': 'Cincinnati Children\'s Hospital Burnet Campus',
+          'locality': 'Cincinnati',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 652.0,
+          'name': 'University of Liège',
+          'locality': 'Liège',
+          'administrativeAreaLevel1': 'Wallonie',
+          'country': 'Belgium'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 658.0,
+          'name': 'Iwate Medical University',
+          'locality': 'Morioka',
+          'administrativeAreaLevel1': 'Iwate Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 671.0,
+          'name': 'University of Turku',
+          'locality': 'Turku',
+          'administrativeAreaLevel1': null,
+          'country': 'Finland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 719.0,
+          'name': 'Emory University',
+          'locality': 'Atlanta',
+          'administrativeAreaLevel1': 'Georgia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 742.0,
+          'name': 'Hospital Purpan',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 745.0,
+          'name': 'University of Colorado School of Medicine',
+          'locality': 'Aurora',
+          'administrativeAreaLevel1': 'Colorado',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 747.0,
+          'name': 'The Ohio State University College of Medicine',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 769.0,
+          'name': 'The University of Manchester',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 779.0,
+          'name': 'Technion Faculty of Biology',
+          'locality': 'חיפה',
+          'administrativeAreaLevel1': 'מחוז חיפה',
+          'country': 'Israel'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 821.0,
+          'name': 'Ludwig-Maximilians-Universität München',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 829.0,
+          'name': 'University of New England',
+          'locality': 'Armidale',
+          'administrativeAreaLevel1': 'New South Wales',
+          'country': 'Australia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 856.0,
+          'name': 'Tohoku University',
+          'locality': 'Sendai-shi',
+          'administrativeAreaLevel1': 'Miyagi-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 891.0,
+          'name': 'Strasbourg University - Medical Campus',
+          'locality': 'Strasbourg',
+          'administrativeAreaLevel1': 'Grand Est',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 903.0,
+          'name': 'Universitetet i Oslo Det medisinske fakultet',
+          'locality': null,
+          'administrativeAreaLevel1': 'Oslo',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 947.0,
+          'name': 'Japan',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 959.0,
+          'name': 'Wistar Institute',
+          'locality': 'Philadelphia',
+          'administrativeAreaLevel1': 'Pennsylvania',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 964.0,
+          'name': 'Osaka University',
+          'locality': 'Suita-shi',
+          'administrativeAreaLevel1': 'Ōsaka-fu',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1013.0,
+          'name': 'David Geffen School of Medicine',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1041.0,
+          'name': 'Oregon Health & Science University',
+          'locality': 'Portland',
+          'administrativeAreaLevel1': 'Oregon',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1053.0,
+          'name': 'The MRC Weatherall Institute of Molecular Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1057.0,
+          'name': 'Klinik Max-Planck Institut für Psychiatrie',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1063.0,
+          'name': 'University of California - Department of Neurology',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1103.0,
+          'name': 'Medical University of Graz',
+          'locality': 'Graz',
+          'administrativeAreaLevel1': 'Steiermark',
+          'country': 'Austria'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1144.0,
+          'name': 'National Cancer Center Hospital',
+          'locality': 'Chūō-ku',
+          'administrativeAreaLevel1': 'Tōkyō-to',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1148.0,
+          'name': 'UCLA Pathology',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1178.0,
+          'name': 'National Tumor Institute',
+          'locality': 'Milano',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1241.0,
+          'name': 'University Virginia Neurosurgry',
+          'locality': 'Charlottesville',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1264.0,
+          'name': 'University of Helsinki',
+          'locality': 'Helsinki',
+          'administrativeAreaLevel1': null,
+          'country': 'Finland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1315.0,
+          'name': 'University of Alabama at Birmingham',
+          'locality': 'Birmingham',
+          'administrativeAreaLevel1': 'Alabama',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1328.0,
+          'name': 'ETH Zürich',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1365.0,
+          'name': 'UCLA Department of Biological Chemistry',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1378.0,
+          'name': 'Centre de Recherche des Cordeliers',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1381.0,
+          'name': 'University of Wisconsin-Madison',
+          'locality': 'Madison',
+          'administrativeAreaLevel1': 'Wisconsin',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1389.0,
+          'name': 'Karolinska University Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Stockholms län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1404.0,
+          'name': 'The University of Copenhagen, Faculty of Health and Medical Sciences',
+          'locality': 'København',
+          'administrativeAreaLevel1': null,
+          'country': 'Denmark'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1422.0,
+          'name': 'University of Genoa',
+          'locality': 'Genova',
+          'administrativeAreaLevel1': 'Liguria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1433.0,
+          'name': 'Azienda Ospedaliera Ospedali Riuniti di Bergamo',
+          'locality': 'Bergamo',
+          'administrativeAreaLevel1': 'Lombardia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1441.0,
+          'name': 'McGill University',
+          'locality': 'Montréal',
+          'administrativeAreaLevel1': 'Québec',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1557.0,
+          'name': 'The Ohio State University Comprehensive Cancer Center',
+          'locality': 'Columbus',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1657.0,
+          'name': 'Stanford Medical School',
+          'locality': 'Stanford',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1718.0,
+          'name': 'University of Tsukuba Tsukuba Campus',
+          'locality': 'Tsukuba-shi',
+          'administrativeAreaLevel1': 'Ibaraki-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1741.0,
+          'name': 'Universitätsklinikum Freiburg',
+          'locality': 'Freiburg im Breisgau',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1745.0,
+          'name': 'Azienda Ospedaliera S. Croce e Carle Cuneo',
+          'locality': 'Cuneo',
+          'administrativeAreaLevel1': 'Piemonte',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1746.0,
+          'name': 'Tokyo Medical and Dental University',
+          'locality': 'Bunkyō-ku',
+          'administrativeAreaLevel1': 'Tōkyō-to',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1789.0,
+          'name': 'University Hospital 12 de Octubre',
+          'locality': 'Madrid',
+          'administrativeAreaLevel1': 'Comunidad de Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1839.0,
+          'name': 'National Taiwan University College of Medicine',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taipei City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1842.0,
+          'name': 'Ospedale Casa Sollievo della Sofferenza',
+          'locality': 'San Giovanni Rotondo',
+          'administrativeAreaLevel1': 'Puglia',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1867.0,
+          'name': 'Ankara',
+          'locality': 'Ankara',
+          'administrativeAreaLevel1': 'Ankara',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1869.0,
+          'name': 'Post Graduate Institute of Medical Education & Research, Chandigarh',
+          'locality': 'Chandigarh',
+          'administrativeAreaLevel1': 'Chandigarh',
+          'country': 'India'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1874.0,
+          'name': 'Germany',
+          'locality': null,
+          'administrativeAreaLevel1': null,
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1889.0,
+          'name': 'Tokyo Metropolitan Geriatrics Hospital',
+          'locality': '板橋区',
+          'administrativeAreaLevel1': '東京都',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1913.0,
+          'name': 'McMaster University',
+          'locality': 'Hamilton',
+          'administrativeAreaLevel1': 'Ontario',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1928.0,
+          'name': 'University Medical Center Utrecht',
+          'locality': 'Utrecht',
+          'administrativeAreaLevel1': 'Utrecht',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 1953.0,
+          'name': 'University of Modena and Reggio Emilia',
+          'locality': 'Modena',
+          'administrativeAreaLevel1': 'Emilia-Romagna',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2020.0,
+          'name': 'Oslo universitetssykehus',
+          'locality': null,
+          'administrativeAreaLevel1': 'Oslo',
+          'country': 'Norway'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2065.0,
+          'name': 'Faculdade de Medicina de Ribeirão Preto da Universidade de São Paulo (FMRP-USP)',
+          'locality': null,
+          'administrativeAreaLevel1': 'São Paulo',
+          'country': 'Brazil'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2121.0,
+          'name': 'Massachusetts General Hospital Cardiology',
+          'locality': 'Boston',
+          'administrativeAreaLevel1': 'Massachusetts',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2151.0,
+          'name': 'Saint-Louis Hospital',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2165.0,
+          'name': 'FMUSP',
+          'locality': null,
+          'administrativeAreaLevel1': 'São Paulo',
+          'country': 'Brazil'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2166.0,
+          'name': 'Paris Diderot University',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2180.0,
+          'name': 'Madrid',
+          'locality': 'Madrid',
+          'administrativeAreaLevel1': 'Community of Madrid',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2213.0,
+          'name': 'UCLA School of Dentistry',
+          'locality': 'Los Angeles',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2214.0,
+          'name': 'UCSF School of Dentistry',
+          'locality': 'San Francisco',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2248.0,
+          'name': 'University Medical Center Groningen',
+          'locality': 'Groningen',
+          'administrativeAreaLevel1': 'Groningen',
+          'country': 'Netherlands'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2263.0,
+          'name': 'University of Stockholm',
+          'locality': null,
+          'administrativeAreaLevel1': 'Stockholms län',
+          'country': 'Sweden'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2283.0,
+          'name': 'Inserm U558/Ups',
+          'locality': 'Toulouse',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2314.0,
+          'name': 'Klinikum der Universität München Chirurgische Klinik und Poliklinik - Großhadern',
+          'locality': 'München',
+          'administrativeAreaLevel1': 'Bayern',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2427.0,
+          'name': 'Hospital Arnaud-De-Villeneuve',
+          'locality': 'Montpellier',
+          'administrativeAreaLevel1': 'Occitanie',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2502.0,
+          'name': 'Institute Cochin',
+          'locality': 'Paris',
+          'administrativeAreaLevel1': 'Île-de-France',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2516.0,
+          'name': 'The Skaggs Institute (Molecular Biology)',
+          'locality': 'San Diego',
+          'administrativeAreaLevel1': 'California',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2527.0,
+          'name': 'Oklahoma Medical Research Foundation',
+          'locality': 'Oklahoma City',
+          'administrativeAreaLevel1': 'Oklahoma',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2539.0,
+          'name': 'Ospedale Bambino Gesù, Pronto Soccorso',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2541.0,
+          'name': 'Istituto Giannina Gaslini',
+          'locality': 'Genova',
+          'administrativeAreaLevel1': 'Liguria',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2639.0,
+          'name': 'Hospital de Santa Maria',
+          'locality': 'Lisboa',
+          'administrativeAreaLevel1': 'Lisboa',
+          'country': 'Portugal'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2646.0,
+          'name': 'The University of Edinburgh',
+          'locality': null,
+          'administrativeAreaLevel1': 'Scotland',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2688.0,
+          'name': 'Milan',
+          'locality': 'Milan',
+          'administrativeAreaLevel1': 'Lombardy',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2696.0,
+          'name': 'Virginia-Maryland College of Veterinary Medicine',
+          'locality': 'Blacksburg',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2795.0,
+          'name': 'UniversitätsSpital Zürich',
+          'locality': 'Zürich',
+          'administrativeAreaLevel1': 'Zürich',
+          'country': 'Switzerland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2800.0,
+          'name': 'University of Kiel',
+          'locality': 'Kiel',
+          'administrativeAreaLevel1': 'Schleswig-Holstein',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2820.0,
+          'name': 'CHU de Rennes',
+          'locality': 'Rennes',
+          'administrativeAreaLevel1': 'Bretagne',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2828.0,
+          'name': '埼玉医科大学',
+          'locality': 'Moroyama-machi',
+          'administrativeAreaLevel1': 'Saitama-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2832.0,
+          'name': 'Western General Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Scotland',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2950.0,
+          'name': 'University of St. Thomas - Bernardi Campus',
+          'locality': 'Roma',
+          'administrativeAreaLevel1': 'Lazio',
+          'country': 'Italy'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2969.0,
+          'name': 'Chru Hôpitaux De Tours, Hospital Bretonneau',
+          'locality': 'Tours',
+          'administrativeAreaLevel1': 'Centre-Val de Loire',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 2985.0,
+          'name': 'Louisiana State University Health Sciences Center Shreveport',
+          'locality': 'Shreveport',
+          'administrativeAreaLevel1': 'Louisiana',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3002.0,
+          'name': 'Geisel School of Medicine',
+          'locality': 'Hanover',
+          'administrativeAreaLevel1': 'New Hampshire',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3026.0,
+          'name': 'Eastern Virginia Medical School',
+          'locality': 'Norfolk',
+          'administrativeAreaLevel1': 'Virginia',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3058.0,
+          'name': 'Maebashi',
+          'locality': 'Maebashi',
+          'administrativeAreaLevel1': 'Gunma Prefecture',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3064.0,
+          'name': 'Linkou Chang Gung Memorial Hospital',
+          'locality': null,
+          'administrativeAreaLevel1': 'Taoyuan City',
+          'country': 'Taiwan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3076.0,
+          'name': 'Nara Medical University',
+          'locality': 'Kashihara-shi',
+          'administrativeAreaLevel1': 'Nara-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3103.0,
+          'name': 'Hospital Universitari Vall d\'Hebron',
+          'locality': 'Barcelona',
+          'administrativeAreaLevel1': 'Catalunya',
+          'country': 'Spain'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3111.0,
+          'name': 'Tokyo Women’s Medical University',
+          'locality': 'Shinjuku',
+          'administrativeAreaLevel1': 'Tokyo',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3313.0,
+          'name': 'Akron Children\'s Hospital',
+          'locality': 'Akron',
+          'administrativeAreaLevel1': 'Ohio',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3318.0,
+          'name': 'Johns Hopkins Hospital :Pathology',
+          'locality': 'Baltimore',
+          'administrativeAreaLevel1': 'Maryland',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3322.0,
+          'name': 'Univ-Texas MD Anderson Cancer: Follen Michele MD',
+          'locality': 'Houston',
+          'administrativeAreaLevel1': 'Texas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3326.0,
+          'name': 'UAMS College of Medicine',
+          'locality': 'Little Rock',
+          'administrativeAreaLevel1': 'Arkansas',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3353.0,
+          'name': 'Clinical Centre of Serbia',
+          'locality': 'Beograd',
+          'administrativeAreaLevel1': null,
+          'country': 'Serbia'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3413.0,
+          'name': 'Faculty of Medicine Basic Sciences Building',
+          'locality': null,
+          'administrativeAreaLevel1': 'İstanbul',
+          'country': 'Turkey'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3426.0,
+          'name': 'BC Children\'s Hospital MRI Research Facility',
+          'locality': 'Vancouver',
+          'administrativeAreaLevel1': 'British Columbia',
+          'country': 'Canada'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3463.0,
+          'name': 'Heidelberg University Biochemistry Center BZH',
+          'locality': 'Heidelberg',
+          'administrativeAreaLevel1': 'Baden-Württemberg',
+          'country': 'Germany'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3498.0,
+          'name': 'Sapporo Medical University',
+          'locality': '札幌市',
+          'administrativeAreaLevel1': '北海道',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3513.0,
+          'name': 'Kitasato University School of Medicine',
+          'locality': 'Sagamihara-shi',
+          'administrativeAreaLevel1': 'Kanagawa-ken',
+          'country': 'Japan'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3540.0,
+          'name': 'Newcastle Freeman Hospital',
+          'locality': 'High Heaton',
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3607.0,
+          'name': 'Pasteur 2 Teaching Hospital',
+          'locality': 'Nice',
+          'administrativeAreaLevel1': 'Provence-Alpes-Côte d\'Azur',
+          'country': 'France'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3610.0,
+          'name': 'Medical University of Lodz',
+          'locality': 'Łódź',
+          'administrativeAreaLevel1': 'województwo łódzkie',
+          'country': 'Poland'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3623.0,
+          'name': 'Women\'s Hospital, School of Medicine, Zhejiang University',
+          'locality': 'Hangzhou Shi',
+          'administrativeAreaLevel1': 'Zhejiang Sheng',
+          'country': 'China'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3684.0,
+          'name': 'King\'s College Dental Institute',
+          'locality': null,
+          'administrativeAreaLevel1': 'England',
+          'country': 'United Kingdom'
+        },
+        'countCitations': 1
+      },
+      {
+        'affiliationCanonical': {
+          'affiliationCanonicalId': 3692.0,
+          'name': 'Columbia University College of Dental Medicine',
+          'locality': 'New York',
+          'administrativeAreaLevel1': 'New York',
+          'country': 'United States'
+        },
+        'countCitations': 1
+      }
+    ]
+  }
 };
 

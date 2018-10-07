@@ -41,10 +41,10 @@
               class="nav-link"
               pageScroll
               [pageScrollDuration]="500"
-              href="#locations"
+              href="#articles"
               [ngClass]="{active: isNavPillActive(2)}"
             >
-              <i class="material-icons">location_on</i> Locations
+              <i class="material-icons">description</i> Articles
             </a>
           </li>
 
@@ -53,10 +53,46 @@
               class="nav-link"
               pageScroll
               [pageScrollDuration]="500"
-              href="#locations"
+              href="#studiesLocations"
               [ngClass]="{active: isNavPillActive(3)}"
             >
-              <i class="material-icons">account_balance</i> Institutions
+              <i class="material-icons">location_on</i> Locations<br>(Trials)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#citationsLocations"
+              [ngClass]="{active: isNavPillActive(4)}"
+            >
+              <i class="material-icons">location_on</i> Locations<br>(Articles)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#institutions"
+              [ngClass]="{active: isNavPillActive(5)}"
+            >
+              <i class="material-icons">account_balance</i> Institutions<br>(Trials)
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#affiliations"
+              [ngClass]="{active: isNavPillActive(6)}"
+            >
+              <i class="material-icons">account_balance</i> Affiliations<br>(Articles)
             </a>
           </li>
 
@@ -68,7 +104,10 @@
         <div class="row" id="overview">
           <div class="card">
             <!--Set a scroll-tracker on the card header.-->
-            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 0)">
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 0)"
+            >
               <div class="card-icon">
                 <i class="material-icons">find_in_page</i>
               </div>
@@ -124,7 +163,10 @@
         <div class="row" id="trials">
           <div class="card" style="background-color: transparent">
             <!--Set a scroll-tracker on the card header.-->
-            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 1)">
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 1)"
+            >
               <div class="card-icon">
                 <i class="material-icons">local_pharmacy</i>
               </div>
@@ -140,7 +182,7 @@
 
             <div class="card-body">
 
-              <div class="row" *ngIf="!(isLoadingGetCountStudiesByOverallStatus | async)">
+              <div class="row">
                 <div class="col-md-3">
                   <div class="card card-stats" style="background-color: white">
                     <div class="card-header card-header-danger card-header-icon">
@@ -149,7 +191,12 @@
                       </div>
                       <p class="card-category">Recruiting</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.recruiting }}
+                        {{ countStudiesByOverallStatusGroup.recruiting }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -172,7 +219,12 @@
                       </div>
                       <p class="card-category">Active</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.active }}
+                        {{ countStudiesByOverallStatusGroup.active }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -195,7 +247,12 @@
                       </div>
                       <p class="card-category">Completed</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.completed }}
+                        {{ countStudiesByOverallStatusGroup.completed }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -218,7 +275,12 @@
                       </div>
                       <p class="card-category">All</p>
                       <h3 class="card-title">
-                        {{ countStudiesOverStatus.all }}
+                        {{ countStudiesByOverallStatusGroup.all }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                        >refresh</mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -240,10 +302,155 @@
           </div>
         </div>
 
-        <div class="row" id="locations">
+        <div class="row" id="articles">
+          <div class="card" style="background-color: transparent">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 2)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">description</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Articles' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row" >
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">camera_enhance</i>
+                      </div>
+                      <p class="card-category">Therapy</p>
+                      <h3 class="card-title">
+                        {{ countCitationsByQualifierGroup.therapy }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountCitationsByQualifier | async"
+                        >refresh</mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'recruiting')"
+                          style="cursor: pointer"
+                        >View therapy articles</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">accessibility</i>
+                      </div>
+                      <p class="card-category">Physiology</p>
+                      <h3 class="card-title">
+                        {{ countCitationsByQualifierGroup.physiology }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountCitationsByQualifier | async"
+                        >refresh</mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'active')"
+                          style="cursor: pointer"
+                        >View physiology articles</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">bar_chart</i>
+                      </div>
+                      <p class="card-category">Statistics</p>
+                      <h3 class="card-title">
+                        {{ countCitationsByQualifierGroup.statistics }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountCitationsByQualifier | async"
+                        >refresh</mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'completed')"
+                          style="cursor: pointer"
+                        >View statistics articles</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="card card-stats" style="background-color: white">
+                    <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">donut_small</i>
+                      </div>
+                      <p class="card-category">All</p>
+                      <h3 class="card-title">
+                        {{ countCitationsByQualifierGroup.all }}
+                        <mat-icon
+                          class="fa-spin"
+                          [color]="'primary'"
+                          *ngIf="isLoadingGetCountCitationsByQualifier | async"
+                        >refresh</mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'all')"
+                          style="cursor: pointer"
+                        >View all articles</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="studiesLocations">
           <div class="card">
             <!--Set a scroll-tracker on the card header.-->
-            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 2)">
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 3)"
+            >
               <div class="card-icon">
                 <i class="material-icons">location_on</i>
               </div>
@@ -251,7 +458,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4 class="card-title">
-                    {{ 'Locations' | uppercase }}
+                    {{ 'Locations (Trials)' | uppercase }}
                   </h4>
                 </div>
               </div>
@@ -268,6 +475,10 @@
                 <div class="col-md-6">
 
                   <!--Locations table.-->
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                  ></mat-spinner>
                   <div
                     class="content table-responsive"
                     *ngIf="!(isLoadingGetCountStudiesByCountry | async)"
@@ -275,17 +486,17 @@
                     <table
                       mat-table
                       #tableLocations
-                      [dataSource]="dataSourceLocations"
+                      [dataSource]="dataSourceStudiesLocations"
                       class="table table-hover"
                       width="100%"
                     >
                       <!--Header.-->
                       <mat-header-row
-                        *matHeaderRowDef="displayedColumnsLocations"
+                        *matHeaderRowDef="displayedColumnsStudiesLocations"
                       ></mat-header-row>
                       <mat-row
                         *matRowDef="let row;
-                        columns: displayedColumnsLocations;"
+                        columns: displayedColumnsStudiesLocations;"
                       ></mat-row>
 
                       <!-- Rank Column -->
@@ -323,11 +534,123 @@
                 </div>
 
                 <div class="col-md-6">
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                  ></mat-spinner>
                   <div
                     id="worldMap"
                     class="map map-big"
-                    [style.height.px]="locationMapHeight"
-                    [style.width.px]="locationMapWidth"
+                    [style.height.px]="studiesLocationMapHeight"
+                    [style.width.px]="studiesLocationMapWidth"
+                  >
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="citationsLocations">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 4)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Locations (Articles)' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="card-body"
+              #cardCitationsLocations
+            >
+
+              <div class="row">
+
+                <div class="col-md-6">
+
+                  <!--Locations table.-->
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountCitationsByCountry | async"
+                  ></mat-spinner>
+                  <div
+                    class="content table-responsive"
+                    *ngIf="!(isLoadingGetCountCitationsByCountry | async)"
+                  >
+                    <table
+                      mat-table
+                      #tableLocations
+                      [dataSource]="dataSourceCitationsLocations"
+                      class="table table-hover"
+                      width="100%"
+                    >
+                      <!--Header.-->
+                      <mat-header-row
+                        *matHeaderRowDef="displayedColumnsCitationsLocations"
+                      ></mat-header-row>
+                      <mat-row
+                        *matRowDef="let row;
+                        columns: displayedColumnsCitationsLocations;"
+                      ></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>
+                          Rank
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">
+                          {{ idx + 1 }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>
+                          Country
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let entry">
+                          {{ entry.country }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Articles Column -->
+                      <ng-container matColumnDef="countCitations">
+                        <mat-header-cell *matHeaderCellDef>
+                          Trials
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let entry">
+                          {{ entry.countCitations }}
+                        </mat-cell>
+                      </ng-container>
+                    </table>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6">
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountCitationsByCountry | async"
+                  ></mat-spinner>
+                  <div
+                    id="worldMapCitations"
+                    class="map map-big"
+                    [style.height.px]="studiesLocationMapHeight"
+                    [style.width.px]="studiesLocationMapWidth"
                   >
                   </div>
                 </div>
@@ -341,7 +664,10 @@
         <div class="row" id="institutions">
           <div class="card">
             <!--Set a scroll-tracker on the card header.-->
-            <div class="card-header card-header-icon card-header-rose" (ngx-scroll-tracker)="onScroll($event, 3)">
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 5)"
+            >
               <div class="card-icon">
                 <i class="material-icons">account_balance</i>
               </div>
@@ -349,7 +675,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4 class="card-title">
-                    {{ 'Institutions' | uppercase }}
+                    {{ 'Institutions (Trials)' | uppercase }}
                   </h4>
                 </div>
               </div>
@@ -359,6 +685,10 @@
 
               <div class="row">
 
+                <mat-spinner
+                  style="position:relative;top:50%;left:50%"
+                  *ngIf="isLoadingGetCountStudiesByFacility | async"
+                ></mat-spinner>
                 <div
                   class="col-md-12"
                   *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
@@ -466,6 +796,129 @@
               </div>
 
             </div>
+
+          </div>
+        </div>
+
+        <div class="row" id="affiliations">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 6)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">account_balance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Affiliations (Articles)' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <mat-spinner
+                  style="position:relative;top:50%;left:50%"
+                  *ngIf="isLoadingGetCountCitationsByAffiliation | async"
+                ></mat-spinner>
+                <div
+                  class="col-md-12"
+                  *ngIf="!(isLoadingGetCountCitationsByAffiliation | async)"
+                >
+                  <!--Citation affiliations table.-->
+                  <div class="content table-responsive">
+                    <table
+                      mat-table
+                      #tableCitationAffiliations
+                      [dataSource]="dataSourceCitationAffiliations"
+                      width="100%"
+                    >
+                      <!--Header.-->
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumnsCitationAffiliations"
+                      >
+                      </tr>
+                      <tr
+                        mat-row
+                        *matRowDef="let row;
+                        columns: displayedColumnsCitationAffiliations;"
+                      >
+                      </tr>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <th mat-header-cell *matHeaderCellDef>Rank</th>
+                        <td mat-cell *matCellDef="let idx = index">
+                          {{ idx + 1 }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.affiliationCanonical.name }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <th mat-header-cell *matHeaderCellDef>Country</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.affiliationCanonical.country }}
+                        </td>
+                      </ng-container>
+
+                      <!-- City Column -->
+                      <ng-container matColumnDef="locality">
+                        <th mat-header-cell *matHeaderCellDef>City</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.affiliationCanonical.locality }}
+                        </td>
+                      </ng-container>
+
+                      <!-- State Column -->
+                      <ng-container matColumnDef="administrativeAreaLevel1">
+                        <th mat-header-cell *matHeaderCellDef>State</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{
+                            entry.affiliationCanonical.administrativeAreaLevel1
+                          }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Zip Code Column -->
+                      <ng-container matColumnDef="postalCode">
+                        <th mat-header-cell *matHeaderCellDef>Zip Code</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.affiliationCanonical.postalCode }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Articles Column -->
+                      <ng-container matColumnDef="countCitations">
+                        <th mat-header-cell *matHeaderCellDef>Articles</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.countCitations }}
+                        </td>
+                      </ng-container>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
         </div>
 
