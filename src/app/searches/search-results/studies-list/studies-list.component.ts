@@ -817,13 +817,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    let result: string = null;
     if (meshTerms.length === 1) {
-      return meshTerms[0].term;
+      result = meshTerms[0].term;
     } else if (meshTerms.length > 1) {
-      return 'Multiple';
-    } else {
-      return null;
+      result = meshTerms[0].term +
+        ' (+' +
+        String(meshTerms.length - 1) +
+        ' more)';
     }
+
+    return result;
   }
 
   getStudyConditionMeshTerms(
@@ -837,13 +841,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    let result: string = null;
     if (meshTerms.length === 1) {
-      return meshTerms[0].term;
+      result = meshTerms[0].term;
     } else if (meshTerms.length > 1) {
-      return 'Multiple';
-    } else {
-      return null;
+      result = meshTerms[0].term +
+        ' (+' +
+        String(meshTerms.length - 1) +
+        ' more)';
     }
+
+    return result;
   }
 
   getStudyLocation(
