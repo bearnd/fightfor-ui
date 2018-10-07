@@ -297,6 +297,10 @@
                 <div class="col-md-6">
 
                   <!--Locations table.-->
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                  ></mat-spinner>
                   <div
                     class="content table-responsive"
                     *ngIf="!(isLoadingGetCountStudiesByCountry | async)"
@@ -352,6 +356,10 @@
                 </div>
 
                 <div class="col-md-6">
+                  <mat-spinner
+                    style="position:relative;top:50%;left:50%"
+                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                  ></mat-spinner>
                   <div
                     id="worldMap"
                     class="map map-big"
@@ -381,7 +389,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <h4 class="card-title">
-                    {{ 'Institutions' | uppercase }}
+                    {{ 'Institutions (Trials)' | uppercase }}
                   </h4>
                 </div>
               </div>
@@ -391,6 +399,10 @@
 
               <div class="row">
 
+                <mat-spinner
+                  style="position:relative;top:50%;left:50%"
+                  *ngIf="isLoadingGetCountStudiesByFacility | async"
+                ></mat-spinner>
                 <div
                   class="col-md-12"
                   *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
