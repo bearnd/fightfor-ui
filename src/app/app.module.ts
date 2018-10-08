@@ -38,6 +38,7 @@ import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { MatIconModule, MatMenuModule } from '@angular/material';
 
 
 @NgModule({
@@ -52,6 +53,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
     HttpLinkModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   declarations: [
     AppComponent,

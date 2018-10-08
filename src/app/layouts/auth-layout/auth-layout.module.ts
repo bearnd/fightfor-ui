@@ -8,7 +8,6 @@ import {
   MatRippleModule,
   MatTooltipModule,
   MatChipsModule,
-  MatIconModule,
   MatProgressSpinnerModule,
 } from '@angular/material';
 
@@ -26,7 +25,6 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
     MatInputModule,
     MatTooltipModule,
     MatChipsModule,
-    MatIconModule,
     MatProgressSpinnerModule,
   ],
   declarations: [
