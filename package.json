@@ -37,6 +37,7 @@
     "apollo-cache-inmemory": "^1.2.1",
     "apollo-client": "^2.3.1",
     "arrive": "2.3.1",
+    "auth0-js": "^9.8.0",
     "bootstrap": "4.1.0",
     "bootstrap-material-design": "4.1.1",
     "bootstrap-notify": "3.1.3",
