@@ -19,5 +19,12 @@ export const environment = {
   mapbox: {
     uri: 'https://api.mapbox.com',
     apiKey: 'pk.eyJ1IjoiYmVhcm5kIiwiYSI6ImNqbGU4emhhczBqYjczd3BjMHFsZDJsZHYifQ.fo5-TxZxgIPFNqT8sJzchw',
+  },
+  auth0: {
+    clientID: 'owOhMvKuo0cEjsuObyBfxk4y6F0jP8P1',
+    domain: 'bearnd.auth0.com',
+    responseType: 'token id_token',
+    redirectUri: 'https://localhost:4200/callback',
+    scope: 'openid profile email'
   }
 };
