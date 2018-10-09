@@ -13,6 +13,7 @@ import {
 
 import { HomeComponent } from '../../home/home.component';
 import { AuthLayoutRoutes } from './auth-layout.routing';
+import { CallbackComponent } from '../../callback/callback.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
     MatProgressSpinnerModule,
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    CallbackComponent,
   ],
   providers: [],
   entryComponents: [],
