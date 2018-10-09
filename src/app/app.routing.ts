@@ -9,6 +9,8 @@ import {
 import {
   AuthLayoutComponent
 } from './layouts/auth-layout/auth-layout.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
+
 
 const routes: Routes = [
   {
@@ -24,6 +26,8 @@ const routes: Routes = [
   {
     path: 'app',
     component: AdminLayoutComponent,
+    canActivate: [AuthenticationGuard],
+    canActivateChild: [AuthenticationGuard],
     children: [
       {
         path: '',

@@ -40,6 +40,7 @@ import {
 import { AuthService } from './services/auth.service';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MatIconModule, MatMenuModule } from '@angular/material';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { MatIconModule, MatMenuModule } from '@angular/material';
     CitationRetrieverService,
     CitationStatsRetrieverService,
     AuthService,
+    AuthenticationGuard,
   ],
   bootstrap: [AppComponent],
   exports: [
