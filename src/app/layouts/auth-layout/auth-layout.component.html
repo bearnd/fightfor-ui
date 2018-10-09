@@ -21,15 +21,49 @@
             <i class="material-icons">dashboard</i> Pricing
           </a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          *ngIf="authService.isAuthenticated()"
+        >
           <a class="nav-link" [routerLink]="['/app']">
             <i class="material-icons">dashboard</i> Go to app
           </a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          *ngIf="!(authService.isAuthenticated())"
+        >
           <a class="nav-link" href="#" (click)="onLoginRegister()">
             <i class="material-icons">fingerprint</i> Login/Register
           </a>
+        </li>
+        <li
+          class="nav-item"
+          routerLinkActive="active"
+          *ngIf="authService.isAuthenticated()"
+        >
+          <a
+            class="nav-link"
+            href="#"
+            [matMenuTriggerFor]="menu"
+          >
+            <img
+              [src]="userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+              class="avatar"
+            > {{ userProfile?.nickname || userProfile?.name || userProfile?.email }}
+          </a>
+          <mat-menu
+            #menu="matMenu"
+            [overlapTrigger]="false"
+            yPosition="below"
+          >
+            <button mat-menu-item (click)="onLogout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
         </li>
       </ul>
     </div>

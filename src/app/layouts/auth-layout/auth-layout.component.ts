@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Auth0UserProfileInterface, AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-layout',
@@ -8,14 +8,33 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthLayoutComponent implements OnInit {
 
+  public userProfile: Auth0UserProfileInterface;
+
   constructor(
-    private router: Router,
-    private authService: AuthService
+    public authService: AuthService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.authService.userProfile) {
+      this.userProfile = this.authService.userProfile;
+    } else {
+      this.authService.getProfile((err, profile) => {
+        this.userProfile = profile;
+      });
+    }
+  }
 
+  /**
+   * Redirects the user to log in or register via Auth0.
+   */
   onLoginRegister() {
     this.authService.login();
+  }
+
+  /**
+   * Logs out the currently logged in user.
+   */
+  onLogout() {
+    this.authService.logout();
   }
 }
