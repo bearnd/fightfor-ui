@@ -37,7 +37,10 @@ import {
 import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
+import { AuthService } from './services/auth.service';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { MatIconModule, MatMenuModule } from '@angular/material';
+import { AuthenticationGuard } from './guards/authentication.guard';
 
 
 @NgModule({
@@ -52,6 +55,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     McBreadcrumbsModule.forRoot(),
     ApolloModule,
     HttpLinkModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   declarations: [
     AppComponent,
@@ -67,6 +72,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     GeolocationService,
     CitationRetrieverService,
     CitationStatsRetrieverService,
+    AuthService,
+    AuthenticationGuard,
   ],
   bootstrap: [AppComponent],
   exports: [
