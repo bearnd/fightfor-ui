@@ -37,6 +37,7 @@ import {
 import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
+import { AuthService } from './services/auth.service';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { MatIconModule, MatMenuModule } from '@angular/material';
 
@@ -70,6 +71,7 @@ import { MatIconModule, MatMenuModule } from '@angular/material';
     GeolocationService,
     CitationRetrieverService,
     CitationStatsRetrieverService,
+    AuthService,
   ],
   bootstrap: [AppComponent],
   exports: [
