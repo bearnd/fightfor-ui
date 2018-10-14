@@ -9,7 +9,10 @@ import {
   MatTooltipModule,
   MatChipsModule,
   MatProgressSpinnerModule,
+  MatIconModule,
 } from '@angular/material';
+
+import { NgxBraintreeModule } from 'ngx-braintree';
 
 import { HomeComponent } from '../../home/home.component';
 import { AuthLayoutRoutes } from './auth-layout.routing';
@@ -27,6 +30,8 @@ import { CallbackComponent } from '../../callback/callback.component';
     MatTooltipModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    NgxBraintreeModule,
   ],
   declarations: [
     HomeComponent,
