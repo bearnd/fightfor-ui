@@ -26,5 +26,9 @@ export const environment = {
     responseType: 'token id_token',
     redirectUri: 'https://localhost:4200/callback',
     scope: 'openid profile email'
-  }
+  },
+  braintreeGateway: {
+    uri: 'http://localhost:8888',
+    planId: 'fightfor_premium_monthly'
+  },
 };
