@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
-import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { environment } from '../../environments/environment';
 
@@ -53,6 +53,11 @@ export class AuthService {
 
   // The Auth0 user-profile for the currently logged-in user.
   public userProfile: Auth0UserProfileInterface;
+
+  private loadingUser: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isLoadingUser: Observable<boolean>
+    = this.loadingUser.asObservable();
 
   // Access-token renewal subscription.
   private refreshSubscription: any;
@@ -243,4 +248,27 @@ export class AuthService {
     }
   }
 
+  /**
+   * Triggers the loading of the user-profile appropriately setting the
+   * `loadingUser` subject to indicate whether its loading or not.
+   */
+  public getUserProfile() {
+
+    // Indicate that the user-profile is loading.
+    this.loadingUser.next(true);
+
+    if (!this.userProfile) {
+      // Use the `getProfile` to retrieve the user-profile.
+      this.getProfile((err, profile) => {
+        // Set the retrieved profile to the class member.
+        this.userProfile = profile;
+        // Indicate that the user-profile is no longer loading.
+        this.loadingUser.next(false);
+      });
+    } else {
+      // Indicate that the user-profile is no longer loading.
+      this.loadingUser.next(false);
+    }
   }
+
+}
