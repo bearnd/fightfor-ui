@@ -35,7 +35,11 @@
           routerLinkActive="active"
           *ngIf="!(authService.isAuthenticated())"
         >
-          <a class="nav-link" href="#" (click)="onLoginRegister()">
+          <a
+            class="nav-link"
+            style="cursor: pointer;"
+            (click)="onLoginRegister()"
+          >
             <i class="material-icons">fingerprint</i> Login/Register
           </a>
         </li>
@@ -46,7 +50,7 @@
         >
           <a
             class="nav-link"
-            href="#"
+            style="cursor: pointer;"
             [matMenuTriggerFor]="menu"
           >
             <img

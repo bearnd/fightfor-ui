@@ -1,4 +1,6 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule
+} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -38,8 +40,15 @@ import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
 import { AuthService } from './services/auth.service';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { MatIconModule, MatMenuModule } from '@angular/material';
+import {
+  AuthLayoutComponent
+} from './layouts/auth-layout/auth-layout.component';
+import {
+  MatDialogModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { AuthenticationGuard } from './guards/authentication.guard';
 
 
@@ -57,6 +66,8 @@ import { AuthenticationGuard } from './guards/authentication.guard';
     HttpLinkModule,
     MatMenuModule,
     MatIconModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     AppComponent,

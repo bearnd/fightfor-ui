@@ -1,8 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { Auth0UserProfileInterface, AuthService } from '../../services/auth.service';
+import {
+  Auth0UserProfileInterface,
+  AuthService,
+} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',

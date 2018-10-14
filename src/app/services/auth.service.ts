@@ -18,7 +18,6 @@ export interface Auth0UserProfileInterface {
   updated_at?: Date
   name?: string
   picture?: string
-  user_id?: string
   nickname?: string
   created_at?: Date
   sub?: string
@@ -40,12 +39,11 @@ export interface Auth0AuthResultInterface {
 }
 
 
-
 @Injectable()
 export class AuthService {
 
   // Auth0 client.
-  auth0 = new auth0.WebAuth({
+  private auth0 = new auth0.WebAuth({
     clientID: environment.auth0.clientID,
     domain: environment.auth0.domain,
     responseType: environment.auth0.responseType,
@@ -53,11 +51,11 @@ export class AuthService {
     scope: environment.auth0.scope,
   });
 
-  // User-profile for the currently logged-in user.
-  userProfile: Auth0UserProfileInterface;
+  // The Auth0 user-profile for the currently logged-in user.
+  public userProfile: Auth0UserProfileInterface;
 
   // Access-token renewal subscription.
-  refreshSubscription: any;
+  private refreshSubscription: any;
 
   constructor(public router: Router) {
   }
@@ -85,7 +83,7 @@ export class AuthService {
         this.setSession(authResult);
         const res = this.router.navigate(['/']);
         res.finally()
-      // If authentication fails log the error and navigate to the home-page.
+        // If authentication fails log the error and navigate to the home-page.
       } else if (err) {
         this.router.navigate(['/']);
         // todo: replace with a more elegant error for the user.
@@ -164,7 +162,7 @@ export class AuthService {
     // Retrieve the access-token stored in local-storage.
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
-      throw new Error('Access token must exist to fetch profile');
+      return;
     }
 
     // Use the `userInfo` method to retrieve the profile and call the provided
