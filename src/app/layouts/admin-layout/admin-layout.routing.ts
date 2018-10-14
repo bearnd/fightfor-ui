@@ -17,6 +17,8 @@ import {
 import {
   StudiesListComponent
 } from '../../searches/search-results/studies-list/studies-list.component';
+import { PaymentGuard } from '../../guards/payment.guard';
+
 
 export const AdminLayoutRoutes: Routes = [
   {
@@ -76,6 +78,8 @@ export const AdminLayoutRoutes: Routes = [
             }
           },
           {
+            canActivate: [PaymentGuard],
+            canActivateChild: [PaymentGuard],
             path: 'trials/:overallStatus',
             component: StudiesListComponent,
             data: {
