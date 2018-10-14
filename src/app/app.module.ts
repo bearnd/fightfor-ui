@@ -53,6 +53,9 @@ import {
 } from '@angular/material';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { BraintreeGatewayService } from './services/braintree-gateway.service';
+import {
+  PaymentDialogComponent
+} from './pricing/payment-dialog/payment-dialog.component';
 import { PaymentService } from './services/payment.service';
 import { PaymentGuard } from './guards/payment.guard';
 
@@ -84,6 +87,7 @@ import { PaymentGuard } from './guards/payment.guard';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    PaymentDialogComponent,
   ],
   providers: [
     SearchesService,
@@ -104,7 +108,8 @@ import { PaymentGuard } from './guards/payment.guard';
   exports: [
     McBreadcrumbsModule,
     McBreadcrumbsComponent,
-  ]
+  ],
+  entryComponents: [PaymentDialogComponent],
 })
 export class AppModule {
   constructor(

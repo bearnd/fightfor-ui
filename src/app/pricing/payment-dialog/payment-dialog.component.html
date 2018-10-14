@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-12">
+    <ngx-braintree
+      [chargeAmount]="10.0"
+      (paymentStatus)="onPaymentStatus($event)"
+      buttonText="Subscribe"
+      [allowChoose]="true"
+      [showCardholderName]="false"
+      [enablePaypalCheckout]="false"
+      currency="USD"
+      locale="en"
+      [getClientToken]="getClientToken.bind(this)"
+      [createPurchase]="createPurchase.bind(this)"
+    >
+    </ngx-braintree>
+  </div>
+</div>

@@ -17,6 +17,7 @@ import { NgxBraintreeModule } from 'ngx-braintree';
 import { HomeComponent } from '../../home/home.component';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 import { CallbackComponent } from '../../callback/callback.component';
+import { PricingComponent } from '../../pricing/pricing.component';
 
 @NgModule({
   imports: [
@@ -36,6 +37,7 @@ import { CallbackComponent } from '../../callback/callback.component';
   declarations: [
     HomeComponent,
     CallbackComponent,
+    PricingComponent,
   ],
   providers: [],
   entryComponents: [],
