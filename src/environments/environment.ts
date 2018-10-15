@@ -14,7 +14,7 @@ export const environment = {
     messagingSenderId: '1062613303831'
   },
   graphql: {
-    uri: 'http://localhost:5555/graphql',
+    uri: 'http://192.168.0.12:5555/graphql',
   },
   mapbox: {
     uri: 'https://api.mapbox.com',
@@ -28,7 +28,7 @@ export const environment = {
     scope: 'openid profile email'
   },
   braintreeGateway: {
-    uri: 'http://localhost:8888',
+    uri: 'http://192.168.0.12:8080',
     planId: 'fightfor_premium_monthly'
   },
 };
