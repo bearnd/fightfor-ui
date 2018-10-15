@@ -1,4 +1,6 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule
+} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,6 +15,8 @@ import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { NgxBraintreeModule } from 'ngx-braintree';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -38,9 +42,22 @@ import {
   CitationStatsRetrieverService
 } from './services/citation-stats-retriever.service';
 import { AuthService } from './services/auth.service';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { MatIconModule, MatMenuModule } from '@angular/material';
+import {
+  AuthLayoutComponent
+} from './layouts/auth-layout/auth-layout.component';
+import {
+  MatDialogModule,
+  MatIconModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { AuthenticationGuard } from './guards/authentication.guard';
+import { BraintreeGatewayService } from './services/braintree-gateway.service';
+import {
+  PaymentDialogComponent
+} from './pricing/payment-dialog/payment-dialog.component';
+import { PaymentService } from './services/payment.service';
+import { PaymentGuard } from './guards/payment.guard';
 
 
 @NgModule({
@@ -57,11 +74,20 @@ import { AuthenticationGuard } from './guards/authentication.guard';
     HttpLinkModule,
     MatMenuModule,
     MatIconModule,
+    MatDialogModule,
+    NgxBraintreeModule,
+    MatProgressSpinnerModule,
+    SweetAlert2Module.forRoot({
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-rose',
+      cancelButtonClass: 'btn btn-danger'
+    })
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
+    PaymentDialogComponent,
   ],
   providers: [
     SearchesService,
@@ -74,12 +100,16 @@ import { AuthenticationGuard } from './guards/authentication.guard';
     CitationStatsRetrieverService,
     AuthService,
     AuthenticationGuard,
+    PaymentGuard,
+    BraintreeGatewayService,
+    PaymentService,
   ],
   bootstrap: [AppComponent],
   exports: [
     McBreadcrumbsModule,
     McBreadcrumbsComponent,
-  ]
+  ],
+  entryComponents: [PaymentDialogComponent],
 })
 export class AppModule {
   constructor(

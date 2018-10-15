@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
-import { Observable } from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { environment } from '../../environments/environment';
 
@@ -18,7 +18,6 @@ export interface Auth0UserProfileInterface {
   updated_at?: Date
   name?: string
   picture?: string
-  user_id?: string
   nickname?: string
   created_at?: Date
   sub?: string
@@ -40,12 +39,11 @@ export interface Auth0AuthResultInterface {
 }
 
 
-
 @Injectable()
 export class AuthService {
 
   // Auth0 client.
-  auth0 = new auth0.WebAuth({
+  private auth0 = new auth0.WebAuth({
     clientID: environment.auth0.clientID,
     domain: environment.auth0.domain,
     responseType: environment.auth0.responseType,
@@ -53,11 +51,16 @@ export class AuthService {
     scope: environment.auth0.scope,
   });
 
-  // User-profile for the currently logged-in user.
-  userProfile: Auth0UserProfileInterface;
+  // The Auth0 user-profile for the currently logged-in user.
+  public userProfile: Auth0UserProfileInterface;
+
+  private loadingUser: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isLoadingUser: Observable<boolean>
+    = this.loadingUser.asObservable();
 
   // Access-token renewal subscription.
-  refreshSubscription: any;
+  private refreshSubscription: any;
 
   constructor(public router: Router) {
   }
@@ -85,7 +88,7 @@ export class AuthService {
         this.setSession(authResult);
         const res = this.router.navigate(['/']);
         res.finally()
-      // If authentication fails log the error and navigate to the home-page.
+        // If authentication fails log the error and navigate to the home-page.
       } else if (err) {
         this.router.navigate(['/']);
         // todo: replace with a more elegant error for the user.
@@ -164,7 +167,7 @@ export class AuthService {
     // Retrieve the access-token stored in local-storage.
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
-      throw new Error('Access token must exist to fetch profile');
+      return;
     }
 
     // Use the `userInfo` method to retrieve the profile and call the provided
@@ -245,4 +248,27 @@ export class AuthService {
     }
   }
 
+  /**
+   * Triggers the loading of the user-profile appropriately setting the
+   * `loadingUser` subject to indicate whether its loading or not.
+   */
+  public getUserProfile() {
+
+    // Indicate that the user-profile is loading.
+    this.loadingUser.next(true);
+
+    if (!this.userProfile) {
+      // Use the `getProfile` to retrieve the user-profile.
+      this.getProfile((err, profile) => {
+        // Set the retrieved profile to the class member.
+        this.userProfile = profile;
+        // Indicate that the user-profile is no longer loading.
+        this.loadingUser.next(false);
+      });
+    } else {
+      // Indicate that the user-profile is no longer loading.
+      this.loadingUser.next(false);
+    }
   }
+
+}
