@@ -24,8 +24,9 @@ export const environment = {
     clientID: 'owOhMvKuo0cEjsuObyBfxk4y6F0jP8P1',
     domain: 'bearnd.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'https://localhost:4200/callback',
-    scope: 'openid profile email'
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid profile email',
+    audience: 'fightfor-backend-dev',
   },
   braintreeGateway: {
     uri: 'http://192.168.0.12:8080',

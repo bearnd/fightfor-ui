@@ -49,6 +49,7 @@ export class AuthService {
     responseType: environment.auth0.responseType,
     redirectUri: environment.auth0.redirectUri,
     scope: environment.auth0.scope,
+    audience: environment.auth0.audience,
   });
 
   // The Auth0 user-profile for the currently logged-in user.
