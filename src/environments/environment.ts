@@ -14,6 +14,7 @@ export const environment = {
     messagingSenderId: '1062613303831'
   },
   graphql: {
+    domain: '192.168.0.12:5555',
     uri: 'http://192.168.0.12:5555/graphql',
   },
   mapbox: {
@@ -24,10 +25,12 @@ export const environment = {
     clientID: 'owOhMvKuo0cEjsuObyBfxk4y6F0jP8P1',
     domain: 'bearnd.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'https://localhost:4200/callback',
-    scope: 'openid profile email'
+    redirectUri: 'http://localhost:4200/callback',
+    scope: 'openid profile email',
+    audience: 'fightfor-backend-dev',
   },
   braintreeGateway: {
+    domain: '192.168.0.12:8080',
     uri: 'http://192.168.0.12:8080',
     planId: 'fightfor_premium_monthly'
   },

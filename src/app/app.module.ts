@@ -17,6 +17,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { NgxBraintreeModule } from 'ngx-braintree';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -81,7 +82,21 @@ import { PaymentGuard } from './guards/payment.guard';
       buttonsStyling: false,
       confirmButtonClass: 'btn btn-rose',
       cancelButtonClass: 'btn btn-danger'
-    })
+    }),
+    // This module will intercept HTTP requests to whitelisted domains and add
+    // an `Authorization` header to the request with the access-token retrieved
+    // during authentication.
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access_token');
+        },
+        whitelistedDomains: [
+          environment.braintreeGateway.domain,
+          environment.graphql.domain,
+        ],
+      }
+    }),
   ],
   declarations: [
     AppComponent,
