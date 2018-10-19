@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "6.1.9",
     "@angular/platform-server": "6.1.9",
     "@angular/router": "6.1.9",
+    "@auth0/angular-jwt": "^2.0.0",
     "@ngx-loading-bar/http-client": "2.2.0",
     "@nicky-lenaers/ngx-scroll-tracker": "0.2.2",
     "@toverux/ngx-sweetalert2": "^4.0.0",
