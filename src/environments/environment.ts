@@ -14,6 +14,7 @@ export const environment = {
     messagingSenderId: '1062613303831'
   },
   graphql: {
+    domain: '192.168.0.12:5555',
     uri: 'http://192.168.0.12:5555/graphql',
   },
   mapbox: {
@@ -29,6 +30,7 @@ export const environment = {
     audience: 'fightfor-backend-dev',
   },
   braintreeGateway: {
+    domain: '192.168.0.12:8080',
     uri: 'http://192.168.0.12:8080',
     planId: 'fightfor_premium_monthly'
   },
