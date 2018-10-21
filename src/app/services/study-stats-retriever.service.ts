@@ -222,7 +222,7 @@ export class StudyStatsRetrieverService {
 
   queryGetEligibilityAgeRange = gql`
     query getAgeRange(
-      $studyIds: [Int]!,
+      $studyIds: [Int],
     ) {
       studiesStats {
         getAgeRange(
@@ -539,15 +539,18 @@ export class StudyStatsRetrieverService {
    * @returns {Observable<AgeRange>} The eligibility age-range.
    */
   getEligibilityAgeRange(
-    studies: StudyInterface[],
+    studies?: StudyInterface[],
   ): Observable<AgeRange> {
 
     // Retrieve the IDs out of the provided studies.
-    const studyIds: number[] = studies.map(
-      function (d) {
-        return d.studyId;
-      }
-    );
+    let studyIds: number[] = [];
+    if (studies) {
+      studyIds = studies.map(
+        function (d) {
+          return d.studyId;
+        }
+      );
+    }
 
     return this.apollo
       .query<ResponseGetEligibilityAgeRange,
