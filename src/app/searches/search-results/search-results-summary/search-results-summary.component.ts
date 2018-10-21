@@ -256,8 +256,11 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.studyRetrieverService
       .searchStudies(
         this.search.descriptors,
+        this.search.patientGender || null,
         this.search.yearBeg || null,
         this.search.yearEnd || null,
+        this.search.ageBeg || null,
+        this.search.ageEnd || null,
       )
       .subscribe(
         (studies: StudyInterface[]) => {

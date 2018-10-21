@@ -19,8 +19,11 @@ import {
 
 interface VariablesSearchStudies {
   meshDescriptorIds: number[]
+  gender?: string
   yearBeg?: number
   yearEnd?: number
+  ageBeg?: number
+  ageEnd?: number
   doIncludeChildren?: boolean
 }
 
@@ -106,19 +109,25 @@ export class StudyRetrieverService {
   querySearchStudies = gql`
     query searchStudies(
       $meshDescriptorIds: [Int]!,
+      $gender: GenderType,
       $yearBeg: Int,
       $yearEnd: Int,
+      $ageBeg: Int,
+      $ageEnd: Int,
       $doIncludeChildren: Boolean,
     ) {
       studies {
         search(
           meshDescriptorIds: $meshDescriptorIds,
+          gender: $gender,
           yearBeg: $yearBeg,
           yearEnd: $yearEnd,
+          ageBeg: $ageBeg,
+          ageEnd: $ageEnd,
           doIncludeChildren: $doIncludeChildren,
         ) {
-          studyId,
-          nctId,
+            studyId,
+            nctId,
         }
       }
     }
@@ -266,15 +275,24 @@ export class StudyRetrieverService {
    * studies are associated with.
    * @param {MeshDescriptorInterface[]} descriptors Array of MeSH descriptors
    * for which the search is performed
+   * @param {string} patientGender The patient gender studies will be limited
+   * to for this search.
    * @param {number} yearBeg The beginning of the year-range studies will be
    * limited to for this search.
+   * @param {number} ageBeg The beginning of the eligibility age-range studies
+   * will be limited to for this search.
+   * @param {number} ageEnd The end of the eligibility age-range studies will
+   * be limited to for this search.
    * @param {number} yearEnd The end of the year-range studies will be limited
    * to for this search.
    */
   searchStudies(
     descriptors: MeshDescriptorInterface[],
+    patientGender?: string,
     yearBeg?: number,
     yearEnd?: number,
+    ageBeg?: number,
+    ageEnd?: number,
   ) {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingSearchStudies.next(true);
@@ -291,8 +309,11 @@ export class StudyRetrieverService {
         query: this.querySearchStudies,
         variables: {
           meshDescriptorIds: descriptorIds,
+          gender: patientGender || null,
           yearBeg: yearBeg || null,
           yearEnd: yearEnd || null,
+          ageBeg: yearBeg || null,
+          ageEnd: yearEnd || null,
           doIncludeChildren: true,
         }
       }).map((response) => {

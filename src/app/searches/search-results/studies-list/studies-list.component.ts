@@ -22,10 +22,6 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
-import {
-  IonRangeSliderCallback,
-  IonRangeSliderComponent,
-} from 'ng2-ion-range-slider';
 
 import { SearchesService } from '../../../services/searches.service';
 import { SearchInterface } from '../../../interfaces/search.interface';
@@ -49,12 +45,7 @@ import {
 import {
   StudyStatsRetrieverService,
 } from '../../../services/study-stats-retriever.service';
-import {
-  AgeRange,
-  DateRange,
-  YearRange,
-  overallStatusGroups,
-} from '../../../shared/common.interface';
+import { overallStatusGroups } from '../../../shared/common.interface';
 import {
   StudyPreviewDialogComponent
 } from './study-preview-dialog/study-preview-dialog.component';
@@ -92,8 +83,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
   @ViewChild('selectStudyState') selectStudyState: MatSelect;
   @ViewChild('selectStudyCity') selectStudyCity: MatSelect;
-  @ViewChild('sliderYearRange') sliderYearRange: IonRangeSliderComponent;
-  @ViewChild('sliderAgeRange') sliderAgeRange: IonRangeSliderComponent;
 
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
@@ -110,23 +99,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyStates: StudyLocationInterface[] = [];
   // Possible city values (to be populated in `ngOnInit`).
   private studyCities: StudyLocationInterface[] = [];
-  // Possible start-date year values (to be populated in `ngOnInit`).
-  public studyStartDateRangeAll: DateRange = {
-    dateBeg: new Date('1900-01-01'),
-    dateEnd: new Date('2100-12-31'),
-  };
-  // Selected start-date year values (to be populated in `ngOnInit`).
-  public studyStartYearRangeSelected: YearRange = {
-    yearBeg: null,
-    yearEnd: null,
-  };
-  // Possible eligibility age-range values in years (to be populated in
-  // `ngOnInit`).
-  public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
-  public studyEligibilityAgeRangeSelected: AgeRange = {
-    ageBeg: null,
-    ageEnd: null,
-  };
   // Current position defined either through auto-detection or provided via a
   // location search.
   private currentPosition: {longitude: number, latitude: number} = null;
@@ -250,10 +222,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // Filter for study-city.
       filterStudyCity: new FormControl(null),
       // Radio buttons for patient-sex.
-      radioStudySex: new FormControl(null),
-      // Input box that holds the current location name, either population
-      // through auto-detection and reverse geocoding or by auto-completing
-      // after a manually typed query.
       currentLocation: new FormControl(null),
       // Select for the maximum distance from the current location.
       selectDistanceMax: new FormControl(null),
@@ -403,29 +371,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(() => {
         this.filterStudyCities();
       });
-
-    // Query out the date-range of this search's studies to populate the slider
-    // range.
-    this.studyStatsRetrieverService.getStartDateRange(
-      this.search.studies
-    ).subscribe(
-      (range: DateRange) => {
-        this.studyStartDateRangeAll = range;
-      }
-    );
-
-    // Query out the eligibility age-range of this search's studies to populate
-    // the slider range.
-    this.studyStatsRetrieverService.getEligibilityAgeRange(
-      this.search.studies
-    ).subscribe(
-      (range: AgeRange) => {
-        this.studyEligibilityAgeRangeAll = {
-          ageBeg: Math.floor(range.ageBeg / 31536000.0),
-          ageEnd: Math.ceil(range.ageEnd / 31536000.0),
-        };
-      }
-    );
 
     // Subscribe to the `valueChanges` observable of the location input control
     // and perform a search for matching locations with a 400ms debounce so
@@ -772,10 +717,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       null,
       phases || null,
       studyTypes || null,
-      this.studyStartYearRangeSelected.yearBeg || null,
-      this.studyStartYearRangeSelected.yearEnd || null,
-      this.studyEligibilityAgeRangeSelected.ageBeg || null,
-      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      null,
+      null,
+      null,
+      null,
       this.sort.active || 'nctId',
       OrderType[this.sort.direction.toUpperCase()] || null,
       this.paginator.pageSize || this.studiesPageSizeOptions[0],
@@ -795,10 +740,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       null,
       phases || null,
       studyTypes || null,
-      this.studyStartYearRangeSelected.yearBeg || null,
-      this.studyStartYearRangeSelected.yearEnd || null,
-      this.studyEligibilityAgeRangeSelected.ageBeg || null,
-      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      null,
+      null,
+      null,
+      null,
     ).subscribe(
       (studiesCount: number) => {
         this.studiesCount = studiesCount;
@@ -876,16 +821,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return StudyOverallStatus[status];
   }
 
-  onSliderYearRangeFinish(event: IonRangeSliderCallback) {
-    this.studyStartYearRangeSelected.yearBeg = event.from || null;
-    this.studyStartYearRangeSelected.yearEnd = event.to || null;
-  }
-
-  onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
-    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
-    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
-  }
-
   /**
    * Resets all filters to their default values and reloads studies.
    */
@@ -895,14 +830,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Reset the form to its initial values.
     this.formFilters.reset();
-    // Reset the year-range to its initial values.
-    this.sliderYearRange.reset();
-    this.studyStartYearRangeSelected.yearBeg = null;
-    this.studyStartYearRangeSelected.yearEnd = null;
-    // Reset the year-range to its initial values.
-    this.sliderAgeRange.reset();
-    this.studyEligibilityAgeRangeSelected.ageBeg = null;
-    this.studyEligibilityAgeRangeSelected.ageEnd = null;
 
     // Refresh the studies to reflect the reset filters.
     this.getStudiesPage();
