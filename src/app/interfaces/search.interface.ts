@@ -61,6 +61,9 @@ export interface SearchInterface {
   descriptors: MeshDescriptorInterface[]
   yearBeg?: number
   yearEnd?: number
+  ageBeg?: number
+  ageEnd?: number
+  patientGender?: string
   studies?: StudyInterface[]
   citations?: CitationInterface[]
   studiesStats: {
