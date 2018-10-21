@@ -43,7 +43,7 @@
                       [selectable]="false"
                       [selected]="true"
                       [removable]="true"
-                      (remove)="onRemoveDescriptor(descriptor)"
+                      (removed)="onRemoveDescriptor(descriptor)"
                     >
                       {{ descriptor.name }}
                       <mat-icon matChipRemove>cancel</mat-icon>
@@ -73,21 +73,66 @@
                 </mat-form-field>
               </div>
 
-              <div class="form-group">
-                <label for="sliderYearRange">Year-Range</label>
-                <ion-range-slider
-                  id="sliderYearRange"
-                  #sliderYearRange
-                  type="double"
-                  [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
-                  [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
-                  [from]="studyStartYearRangeSelected.yearBeg"
-                  [to]="studyStartYearRangeSelected.yearEnd"
-                  style="width: 300px;"
-                  [prettify_enabled]="false"
-                  (onFinish)="onSliderYearRangeFinish($event)"
-                >
-                </ion-range-slider>
+              <div class="row">
+
+                <div class="col-md-4">
+                  <label for="sliderYearRange">Year-Range</label>
+                  <ion-range-slider
+                    id="sliderYearRange"
+                    #sliderYearRange
+                    type="double"
+                    [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
+                    [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
+                    [from]="studyStartYearRangeSelected.yearBeg"
+                    [to]="studyStartYearRangeSelected.yearEnd"
+                    style="width: 300px;"
+                    [prettify_enabled]="false"
+                    (onFinish)="onSliderYearRangeFinish($event)"
+                  >
+                  </ion-range-slider>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="row" style="margin-left: 0">
+                    <label for="studySex">Patient Sex</label>
+                  </div>
+                  <div class="row" style="margin-left: 0">
+                    <mat-radio-group
+                      style="padding-top: 20px"
+                      id="studySex"
+                      type="radio"
+                      formControlName="radioPatientGender"
+                    >
+                      <mat-radio-button value="MALE">
+                        Male&nbsp;&nbsp;
+                      </mat-radio-button>
+                      <mat-radio-button value="FEMALE">
+                        Female&nbsp;&nbsp;
+                      </mat-radio-button>
+                      <mat-radio-button value="ALL" [checked]="true">
+                        All&nbsp;&nbsp;
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="sliderAgeRange">Age-Range</label>
+                  <ion-range-slider
+                    id="sliderAgeRange"
+                    #sliderAgeRange
+                    type="double"
+                    [min]="studyEligibilityAgeRangeAll.ageBeg"
+                    [max]="studyEligibilityAgeRangeAll.ageEnd"
+                    [from]="studyEligibilityAgeRangeSelected.ageBeg"
+                    [to]="studyEligibilityAgeRangeSelected.ageEnd"
+                    style="width: 300px;"
+                    [prettify_enabled]="false"
+                    (onFinish)="onSliderAgeRangeFinish($event)"
+                  >
+                  </ion-range-slider>
+                </div>
+
               </div>
 
               <div class="form-group">

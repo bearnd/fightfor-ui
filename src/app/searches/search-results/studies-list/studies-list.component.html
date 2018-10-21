@@ -250,58 +250,6 @@
                   </div>
 
                   <div class="row">
-
-                    <div class="col-md-4">
-                        <label for="sliderYearRange">Year-Range</label>
-                        <ion-range-slider
-                          id="sliderYearRange"
-                          #sliderYearRange
-                          type="double"
-                          [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
-                          [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
-                          style="width: 300px;"
-                          [prettify_enabled]="false"
-                          (onFinish)="onSliderYearRangeFinish($event)"
-                        >
-                        </ion-range-slider>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="row" style="margin-left: 0px">
-                        <label for="studySex">Patient Sex</label>
-                      </div>
-                      <div class="row" style="margin-left: 0px">
-                        <mat-radio-group
-                          style="padding-top: 20px"
-                          id="studySex"
-                          type="radio"
-                          formControlName="radioStudySex"
-                        >
-                          <mat-radio-button value="1">Male</mat-radio-button>
-                          <mat-radio-button value="2">Female</mat-radio-button>
-                          <mat-radio-button value="3">All</mat-radio-button>
-                        </mat-radio-group>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="sliderAgeRange">Age-Range</label>
-                        <ion-range-slider
-                          id="sliderAgeRange"
-                          #sliderAgeRange
-                          type="double"
-                          [min]="studyEligibilityAgeRangeAll.ageBeg"
-                          [max]="studyEligibilityAgeRangeAll.ageEnd"
-                          style="width: 300px;"
-                          [prettify_enabled]="false"
-                          (onFinish)="onSliderAgeRangeFinish($event)"
-                        >
-                        </ion-range-slider>
-                    </div>
-
-                  </div>
-
-                  <div class="row">
                     <div class="col-md-12" style="padding-top: 20px">
                       <button
                         mat-raised-button

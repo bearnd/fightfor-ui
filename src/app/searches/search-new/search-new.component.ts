@@ -12,6 +12,10 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Subscription';
 import { debounceTime } from 'rxjs/operators/debounceTime';
+import {
+  IonRangeSliderCallback,
+  IonRangeSliderComponent
+} from 'ng2-ion-range-slider';
 
 import {
   MeshDescriptorInterface
@@ -21,11 +25,10 @@ import {
 } from '../../services/mesh-descriptor-retriever.service';
 import { SearchesService } from '../../services/searches.service';
 import { SearchInterface } from '../../interfaces/search.interface';
-import { DateRange, YearRange } from '../../shared/common.interface';
+import { AgeRange, DateRange, YearRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
-import { IonRangeSliderCallback } from 'ng2-ion-range-slider';
 
 
 @Component({
@@ -37,6 +40,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   // Reference to the input-field element.
   @ViewChild('inputDescriptors') inputDescriptors: ElementRef;
+  @ViewChild('sliderYearRange') sliderYearRange: IonRangeSliderComponent;
+  @ViewChild('sliderAgeRange') sliderAgeRange: IonRangeSliderComponent;
 
   // Subscription to the observable returned by `getMeshDescriptorsBySynonym`.
   subscriptionDescriptors: Subscription;
@@ -49,17 +54,22 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   // Arrays to hold the available and selected descriptors.
   descriptorsAll: MeshDescriptorInterface[] = [];
   descriptorsSelected: MeshDescriptorInterface[] = [];
-
   // Possible start-date year values (to be populated in `ngOnInit`).
   public studyStartDateRangeAll: DateRange = {
     dateBeg: new Date('1900-01-01'),
     dateEnd: new Date('2100-12-31'),
   };
-  // Selected start-date year values (defaulting to +-5 years around the
-  // current year).
+  // Selected start-date year values (to be populated in `ngOnInit`).
   public studyStartYearRangeSelected: YearRange = {
     yearBeg: (new Date).getFullYear() - 5,
     yearEnd: (new Date).getFullYear() + 5,
+  };
+  // Possible eligibility age-range values in years (to be populated in
+  // `ngOnInit`).
+  public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
+  public studyEligibilityAgeRangeSelected: AgeRange = {
+    ageBeg: null,
+    ageEnd: null,
   };
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
@@ -80,6 +90,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         null,
         [Validators.required]
       ),
+      // Radio buttons for patient-sex.
+      radioPatientGender: new FormControl(null),
     });
 
     // Query out the date-range of all studies to populate the slider range.
@@ -87,6 +99,18 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       .subscribe(
       (range: DateRange) => {
         this.studyStartDateRangeAll = range;
+      }
+    );
+
+    // Query out the eligibility age-range of this search's studies to populate
+    // the slider range.
+    this.studyStatsRetrieverService.getEligibilityAgeRange()
+      .subscribe(
+      (range: AgeRange) => {
+        this.studyEligibilityAgeRangeAll = {
+          ageBeg: Math.floor(range.ageBeg / 31536000.0),
+          ageEnd: Math.ceil(range.ageEnd / 31536000.0),
+        };
       }
     );
 
@@ -153,11 +177,22 @@ export class SearchNewComponent implements OnInit, OnDestroy {
    * results-summary page where the search is performed.
    */
   onSubmit() {
+
+    let patientGender: string = null;
+
+    // Retrieve the selected patient-gender (if any).
+    if (this.form.get('radioPatientGender').value) {
+      patientGender = this.form.get('radioPatientGender').value;
+    }
+
     // Create a new search with the selected descriptors.
     const search: SearchInterface = this.searches.createSearch(
       this.descriptorsSelected,
-      this.studyStartYearRangeSelected.yearBeg,
-      this.studyStartYearRangeSelected.yearEnd,
+      patientGender || null,
+      this.studyStartYearRangeSelected.yearBeg || null,
+      this.studyStartYearRangeSelected.yearEnd || null,
+      this.studyEligibilityAgeRangeAll.ageBeg || null,
+      this.studyEligibilityAgeRangeAll.ageEnd || null,
     );
 
     // Navigate to the `SearchResultsComponent` with the new search.
@@ -167,6 +202,11 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {
     this.studyStartYearRangeSelected.yearBeg = event.from || null;
     this.studyStartYearRangeSelected.yearEnd = event.to || null;
+  }
+
+  onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
+    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
+    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
   }
 
   ngOnDestroy() {
