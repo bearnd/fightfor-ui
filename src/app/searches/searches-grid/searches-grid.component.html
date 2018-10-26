@@ -33,6 +33,15 @@
             <h4 class="card-title">{{ search.title }}</h4>
           </div>
           <div class="card-body">
+            <p class="text-center">
+              <mat-icon
+                matTooltip="Delete Search"
+                [matTooltipPosition]="'below'"
+                style="cursor:pointer; color: #999; font-size: 16px"
+                (click)="onDeleteSearch(search.searchUuid)"
+              >delete
+              </mat-icon>
+            </p>
             <h4 class="card-title">Website Views</h4>
             <p class="card-category">Last Campaign Performance</p>
             <button
