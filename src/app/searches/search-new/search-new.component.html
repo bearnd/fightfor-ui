@@ -13,6 +13,18 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
               <div class="form-group">
+                <mat-form-field
+                  [hintLabel]="'Set the search title (will be populated with the first selected descriptor if left blank)'"
+                >
+                  <input
+                    matInput
+                    type="text"
+                    id="title"
+                    formControlName="title"
+                    placeholder="Search Title"
+                  />
+                </mat-form-field>
+
                 <!--MeSH descriptors chip-input with autocomplete.-->
                 <mat-form-field
                   class="term-list-input"
