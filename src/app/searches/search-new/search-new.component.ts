@@ -51,8 +51,6 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   // `FormGroup` to encompass the form controls.
   form: FormGroup;
 
-  isSaved = false;
-
   // Arrays to hold the available and selected descriptors.
   descriptorsAll: MeshDescriptorInterface[] = [];
   descriptorsSelected: MeshDescriptorInterface[] = [];
@@ -139,14 +137,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         }
       }
     );
-  }
 
-  isLoading() {
-    return false;
-  }
-
-  toggleSaved() {
-    this.isSaved = !this.isSaved;
   }
 
   /**
