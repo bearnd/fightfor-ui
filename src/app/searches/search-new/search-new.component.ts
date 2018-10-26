@@ -195,18 +195,30 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       gender = this.form.get('radioGender').value;
     }
 
-    // Create a new search with the selected descriptors.
-    const search: SearchInterface = this.searches.createSearch(
-      this.descriptorsSelected,
-      patientGender || null,
+    // Create a new UUID for the new search.
+    this.newSearchUuid = UUID.UUID();
+
+    // Set the search title based on the value of the form field or set it to
+    // the name of the first selected descriptor if the field is left blank.
+    let searchTitle: string = null;
+    if (this.form.get('title').value) {
+      searchTitle = this.form.get('title').value;
+    } else {
+      searchTitle = this.descriptorsSelected[0].name;
+    }
+
+    // Create a new search with the selected parameters.
+    this.userConfigService.upsertSearch(
+      this.authService.userProfile,
+      this.newSearchUuid,
+      searchTitle,
+      gender,
       this.studyStartYearRangeSelected.yearBeg || null,
       this.studyStartYearRangeSelected.yearEnd || null,
-      this.studyEligibilityAgeRangeAll.ageBeg || null,
-      this.studyEligibilityAgeRangeAll.ageEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      this.descriptorsSelected,
     );
-
-    // Navigate to the `SearchResultsComponent` with the new search.
-    this.router.navigate(['/app', 'searches', search.searchUuid]);
   }
 
   /**
