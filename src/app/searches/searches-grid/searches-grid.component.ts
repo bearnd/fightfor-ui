@@ -35,6 +35,16 @@ export class SearchesGridComponent implements OnInit {
     );
     result.finally();
   }
+
+  /**
+   * Deletes a given search via its UUID and the `UserConfigService`.
+   * @param {string} searchUuid The UUID of the search to be deleted.
+   */
+  onDeleteSearch(searchUuid: string) {
+    this.userConfigService.deleteSearch(
+      this.authService.userProfile,
+      searchUuid,
+    );
   }
 
   /**
