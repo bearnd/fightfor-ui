@@ -30,7 +30,6 @@ import {
 } from '../../services/study-stats-retriever.service';
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
-import { SearchInterface } from '../../interfaces/user-config.interface';
 
 
 @Component({
@@ -86,7 +85,6 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     // Initialize the form controls.
     this.form = new FormGroup({
       title: new FormControl(null),
@@ -186,8 +184,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Creates a new search with the selected descriptors and navigates to the
-   * results-summary page where the search is performed.
+   * Creates a new search with the selected parameters via the
+   * `UserConfigService`.
    */
   onSubmit() {
 
@@ -211,14 +209,28 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     this.router.navigate(['/app', 'searches', search.searchUuid]);
   }
 
+  /**
+   * Updates the selected year-range based on the slider.
+   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * slider is done being updated.
+   */
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {
-    this.studyStartYearRangeSelected.yearBeg = event.from || null;
-    this.studyStartYearRangeSelected.yearEnd = event.to || null;
+    this.studyStartYearRangeSelected.yearBeg
+      = event.from || this.studyStartDateRangeAll.dateBeg.getFullYear();
+    this.studyStartYearRangeSelected.yearEnd
+      = event.to || this.studyStartDateRangeAll.dateEnd.getFullYear();
   }
 
+  /**
+   * Updates the selected age-range based on the slider.
+   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * slider is done being updated.
+   */
   onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
-    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
-    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
+    this.studyEligibilityAgeRangeSelected.ageBeg
+      = event.from || this.studyEligibilityAgeRangeAll.ageBeg;
+    this.studyEligibilityAgeRangeSelected.ageEnd
+      = event.to || this.studyEligibilityAgeRangeAll.ageEnd;
   }
 
   ngOnDestroy() {
