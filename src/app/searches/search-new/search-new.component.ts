@@ -16,6 +16,7 @@ import {
   IonRangeSliderCallback,
   IonRangeSliderComponent
 } from 'ng2-ion-range-slider';
+import { UUID } from 'angular2-uuid';
 
 import {
   MeshDescriptorInterface
@@ -23,12 +24,13 @@ import {
 import {
   MeshDescriptorRetrieverService
 } from '../../services/mesh-descriptor-retriever.service';
-import { SearchesService } from '../../services/searches.service';
-import { SearchInterface } from '../../interfaces/search.interface';
 import { AgeRange, DateRange, YearRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
+import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
+import { SearchInterface } from '../../interfaces/user-config.interface';
 
 
 @Component({
@@ -76,8 +78,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   constructor(
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
-    private searches: SearchesService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
+    private authService: AuthService,
+    private userConfigService: UserConfigService,
     private router: Router,
   ) {
   }
@@ -91,7 +94,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         [Validators.required]
       ),
       // Radio buttons for patient-sex.
-      radioPatientGender: new FormControl(null),
+      radioGender: new FormControl(null),
     });
 
     // Query out the date-range of all studies to populate the slider range.
@@ -178,11 +181,11 @@ export class SearchNewComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
 
-    let patientGender: string = null;
+    let gender: string = null;
 
     // Retrieve the selected patient-gender (if any).
-    if (this.form.get('radioPatientGender').value) {
-      patientGender = this.form.get('radioPatientGender').value;
+    if (this.form.get('radioGender').value) {
+      gender = this.form.get('radioGender').value;
     }
 
     // Create a new search with the selected descriptors.
