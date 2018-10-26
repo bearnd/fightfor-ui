@@ -24,12 +24,27 @@ export class SearchesGridComponent implements OnInit {
     this.searches = this.searchesService.getSearches();
   }
 
+  /**
+   * Redirects the user to the new-search page.
+   */
   onNewSearch() {
-    this.router.navigate(['/app', 'searches', 'new']);
+    const result = this.router.navigate(
+      ['/app', 'searches', 'new']
+    );
+    result.finally();
+  }
   }
 
-  onSeeMore(searchUuid: string) {
-    this.router.navigate(['/app', 'searches', searchUuid]);
+  /**
+   * Redirects the user to the results summary of a given search.
+   * @param {string} searchUuid The search for which the user-results will be
+   * displayed.
+   */
+  onSeeResults(searchUuid: string) {
+    const result = this.router.navigate(
+      ['/app', 'searches', searchUuid]
+    );
+    result.finally();
   }
 
 }
