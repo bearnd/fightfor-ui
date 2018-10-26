@@ -16,6 +16,7 @@ import {
   IonRangeSliderCallback,
   IonRangeSliderComponent
 } from 'ng2-ion-range-slider';
+import { UUID } from 'angular2-uuid';
 
 import {
   MeshDescriptorInterface
@@ -23,12 +24,12 @@ import {
 import {
   MeshDescriptorRetrieverService
 } from '../../services/mesh-descriptor-retriever.service';
-import { SearchesService } from '../../services/searches.service';
-import { SearchInterface } from '../../interfaces/search.interface';
 import { AgeRange, DateRange, YearRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
+import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -48,8 +49,6 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   // `FormGroup` to encompass the form controls.
   form: FormGroup;
-
-  isSaved = false;
 
   // Arrays to hold the available and selected descriptors.
   descriptorsAll: MeshDescriptorInterface[] = [];
@@ -74,24 +73,27 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
+  newSearchUuid: string = null;
+
   constructor(
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
-    private searches: SearchesService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
+    private authService: AuthService,
+    private userConfigService: UserConfigService,
     private router: Router,
   ) {
   }
 
   ngOnInit() {
-
     // Initialize the form controls.
     this.form = new FormGroup({
+      title: new FormControl(null),
       descriptors: new FormControl(
         null,
         [Validators.required]
       ),
       // Radio buttons for patient-sex.
-      radioPatientGender: new FormControl(null),
+      radioGender: new FormControl('ALL'),
     });
 
     // Query out the date-range of all studies to populate the slider range.
@@ -136,14 +138,23 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         }
       }
     );
-  }
 
-  isLoading() {
-    return false;
-  }
-
-  toggleSaved() {
-    this.isSaved = !this.isSaved;
+    // Subscribe to the `userConfigService.isCreatingNewSearch` observable.
+    this.userConfigService.isCreatingNewSearch.subscribe(
+      (isCreating: boolean) => {
+        // If the new search UUID has been set (which happens in the `onSubmit`
+        // method) and the new search is finished being created then navigate
+        // the result summary page for this new search.
+        if (!isCreating && this.newSearchUuid !== null) {
+          if (this.userConfigService.getUserSearch(this.newSearchUuid)) {
+            const result = this.router.navigate(
+              ['/app', 'searches', this.newSearchUuid]
+            );
+            result.finally();
+          }
+        }
+      }
+    )
   }
 
   /**
@@ -173,40 +184,65 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Creates a new search with the selected descriptors and navigates to the
-   * results-summary page where the search is performed.
+   * Creates a new search with the selected parameters via the
+   * `UserConfigService`.
    */
   onSubmit() {
 
-    let patientGender: string = null;
-
     // Retrieve the selected patient-gender (if any).
-    if (this.form.get('radioPatientGender').value) {
-      patientGender = this.form.get('radioPatientGender').value;
+    let gender: string = null;
+    if (this.form.get('radioGender').value) {
+      gender = this.form.get('radioGender').value;
     }
 
-    // Create a new search with the selected descriptors.
-    const search: SearchInterface = this.searches.createSearch(
-      this.descriptorsSelected,
-      patientGender || null,
+    // Create a new UUID for the new search.
+    this.newSearchUuid = UUID.UUID();
+
+    // Set the search title based on the value of the form field or set it to
+    // the name of the first selected descriptor if the field is left blank.
+    let searchTitle: string = null;
+    if (this.form.get('title').value) {
+      searchTitle = this.form.get('title').value;
+    } else {
+      searchTitle = this.descriptorsSelected[0].name;
+    }
+
+    // Create a new search with the selected parameters.
+    this.userConfigService.upsertSearch(
+      this.authService.userProfile,
+      this.newSearchUuid,
+      searchTitle,
+      gender,
       this.studyStartYearRangeSelected.yearBeg || null,
       this.studyStartYearRangeSelected.yearEnd || null,
-      this.studyEligibilityAgeRangeAll.ageBeg || null,
-      this.studyEligibilityAgeRangeAll.ageEnd || null,
+      this.studyEligibilityAgeRangeSelected.ageBeg || null,
+      this.studyEligibilityAgeRangeSelected.ageEnd || null,
+      this.descriptorsSelected,
     );
-
-    // Navigate to the `SearchResultsComponent` with the new search.
-    this.router.navigate(['/app', 'searches', search.searchUuid]);
   }
 
+  /**
+   * Updates the selected year-range based on the slider.
+   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * slider is done being updated.
+   */
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {
-    this.studyStartYearRangeSelected.yearBeg = event.from || null;
-    this.studyStartYearRangeSelected.yearEnd = event.to || null;
+    this.studyStartYearRangeSelected.yearBeg
+      = event.from || this.studyStartDateRangeAll.dateBeg.getFullYear();
+    this.studyStartYearRangeSelected.yearEnd
+      = event.to || this.studyStartDateRangeAll.dateEnd.getFullYear();
   }
 
+  /**
+   * Updates the selected age-range based on the slider.
+   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * slider is done being updated.
+   */
   onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
-    this.studyEligibilityAgeRangeSelected.ageBeg = event.from || null;
-    this.studyEligibilityAgeRangeSelected.ageEnd = event.to || null;
+    this.studyEligibilityAgeRangeSelected.ageBeg
+      = event.from || this.studyEligibilityAgeRangeAll.ageBeg;
+    this.studyEligibilityAgeRangeSelected.ageEnd
+      = event.to || this.studyEligibilityAgeRangeAll.ageEnd;
   }
 
   ngOnDestroy() {

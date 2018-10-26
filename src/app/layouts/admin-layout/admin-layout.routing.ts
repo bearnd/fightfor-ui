@@ -41,15 +41,7 @@ export const AdminLayoutRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'grid',
-        pathMatch: 'full',
-      },
-      {
-        path: 'grid',
         component: SearchesGridComponent,
-        data: {
-          breadcrumbs: 'Grid'
-        }
       },
       {
         path: 'new',

@@ -275,8 +275,8 @@ export class StudyRetrieverService {
    * studies are associated with.
    * @param {MeshDescriptorInterface[]} descriptors Array of MeSH descriptors
    * for which the search is performed
-   * @param {string} patientGender The patient gender studies will be limited
-   * to for this search.
+   * @param {string} gender The patient gender studies will be limited to for
+   * this search.
    * @param {number} yearBeg The beginning of the year-range studies will be
    * limited to for this search.
    * @param {number} ageBeg The beginning of the eligibility age-range studies
@@ -288,7 +288,7 @@ export class StudyRetrieverService {
    */
   searchStudies(
     descriptors: MeshDescriptorInterface[],
-    patientGender?: string,
+    gender?: string,
     yearBeg?: number,
     yearEnd?: number,
     ageBeg?: number,
@@ -309,7 +309,7 @@ export class StudyRetrieverService {
         query: this.querySearchStudies,
         variables: {
           meshDescriptorIds: descriptorIds,
-          gender: patientGender || null,
+          gender: gender || null,
           yearBeg: yearBeg || null,
           yearEnd: yearEnd || null,
           ageBeg: yearBeg || null,

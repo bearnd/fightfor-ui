@@ -23,11 +23,6 @@
             </button>
 
           </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons"></i>&nbsp;
-            </div>
-          </div>
         </div>
 
       </div>
@@ -36,18 +31,26 @@
         <div class="card search-card">
           <div class="card-header card-header-rose">
             <h4 class="card-title">{{ search.title }}</h4>
-            <p class="card-category">Description</p>
           </div>
           <div class="card-body">
+            <p class="text-center">
+              <mat-icon
+                matTooltip="Delete Search"
+                [matTooltipPosition]="'below'"
+                style="cursor:pointer; color: #999; font-size: 16px"
+                (click)="onDeleteSearch(search.searchUuid)"
+              >delete
+              </mat-icon>
+            </p>
             <h4 class="card-title">Website Views</h4>
             <p class="card-category">Last Campaign Performance</p>
             <button
               mat-raised-button
               class="btn btn-rose mat-raised-button pull-right"
               routerLink="results"
-              (click)="onSeeMore(search.searchUuid)"
+              (click)="onSeeResults(search.searchUuid)"
             >
-              <span class="mat-button-wrapper">See More</span>
+              <span class="mat-button-wrapper">See Results</span>
             </button>
           </div>
         </div>

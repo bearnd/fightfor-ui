@@ -25,7 +25,6 @@ import { AppComponent } from './app.component';
 import {
   AdminLayoutComponent
 } from './layouts/admin-layout/admin-layout.component';
-import { SearchesService } from './services/searches.service';
 import { StudyRetrieverService } from './services/study-retriever.service';
 import {
   MeshDescriptorRetrieverService
@@ -59,6 +58,7 @@ import {
 } from './pricing/payment-dialog/payment-dialog.component';
 import { PaymentService } from './services/payment.service';
 import { PaymentGuard } from './guards/payment.guard';
+import { UserConfigService } from './services/user-config.service';
 
 
 @NgModule({
@@ -105,7 +105,6 @@ import { PaymentGuard } from './guards/payment.guard';
     PaymentDialogComponent,
   ],
   providers: [
-    SearchesService,
     McBreadcrumbsService,
     StudyRetrieverService,
     MeshDescriptorRetrieverService,
@@ -118,6 +117,7 @@ import { PaymentGuard } from './guards/payment.guard';
     PaymentGuard,
     BraintreeGatewayService,
     PaymentService,
+    UserConfigService,
   ],
   bootstrap: [AppComponent],
   exports: [

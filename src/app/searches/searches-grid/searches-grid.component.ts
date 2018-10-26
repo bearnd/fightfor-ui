@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchesService } from '../../services/searches.service';
-import { SearchInterface } from '../../interfaces/search.interface';
+import { SearchInterface } from '../../interfaces/user-config.interface';
+import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -15,21 +16,59 @@ export class SearchesGridComponent implements OnInit {
   searches: SearchInterface[];
 
   constructor(
-    private searchesService: SearchesService,
+    private authService: AuthService,
+    private userConfigService: UserConfigService,
     private router: Router,
   ) {}
 
   ngOnInit() {
 
-    this.searches = this.searchesService.getSearches();
+    this.searches = Object.values(this.userConfigService.userSearches);
+
+    // Subscribe to the `UserConfigService.searchesLatest` observable. Each
+    // time the searches are updated retrieve them and set them under
+    // `this.seaches` (in reverse order so that the latest searches appear
+    // first).
+    this.userConfigService.searchesLatest.subscribe(
+      (searches: SearchInterface[]) => {
+        if (searches) {
+          this.searches = Object.values(searches).reverse();
+        }
+      }
+    );
   }
 
+  /**
+   * Redirects the user to the new-search page.
+   */
   onNewSearch() {
-    this.router.navigate(['/app', 'searches', 'new']);
+    const result = this.router.navigate(
+      ['/app', 'searches', 'new']
+    );
+    result.finally();
   }
 
-  onSeeMore(searchUuid: string) {
-    this.router.navigate(['/app', 'searches', searchUuid]);
+  /**
+   * Deletes a given search via its UUID and the `UserConfigService`.
+   * @param {string} searchUuid The UUID of the search to be deleted.
+   */
+  onDeleteSearch(searchUuid: string) {
+    this.userConfigService.deleteSearch(
+      this.authService.userProfile,
+      searchUuid,
+    );
+  }
+
+  /**
+   * Redirects the user to the results summary of a given search.
+   * @param {string} searchUuid The search for which the user-results will be
+   * displayed.
+   */
+  onSeeResults(searchUuid: string) {
+    const result = this.router.navigate(
+      ['/app', 'searches', searchUuid]
+    );
+    result.finally();
   }
 
 }

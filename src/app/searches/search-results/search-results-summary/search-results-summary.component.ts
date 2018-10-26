@@ -7,14 +7,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 
-import { SearchesService } from '../../../services/searches.service';
 import {
   StudiesCountByCountryInterface,
   StudiesCountByFacilityInterface,
   SearchInterface,
   CitationsCountByCountryInterface,
   CitationsCountByAffiliationInterface,
-} from '../../../interfaces/search.interface';
+} from '../../../interfaces/user-config.interface';
 import {
   MeshTermInterface,
   MeshTermType,
@@ -41,6 +40,7 @@ import {
   meshQualifierGroups,
   MeshQualifiers
 } from '../../../shared/mesh-qualifiers.enum';
+import { UserConfigService } from '../../../services/user-config.service';
 
 declare var $: any;
 
@@ -164,7 +164,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   isEditable = false;
 
   constructor(
-    public searchesService: SearchesService,
+    public userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private citationRetrieverService: CitationRetrieverService,
@@ -178,7 +178,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     // Retrieve the referenced search UUID.
     const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
     // Retrieve the referenced search.
-    this.search = this.searchesService.getSearch(searchUuid);
+    this.search = this.userConfigService.getUserSearch(searchUuid);
 
     // Perform the search.
     this.performSearch();
@@ -256,7 +256,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.studyRetrieverService
       .searchStudies(
         this.search.descriptors,
-        this.search.patientGender || null,
+        this.search.gender || null,
         this.search.yearBeg || null,
         this.search.yearEnd || null,
         this.search.ageBeg || null,

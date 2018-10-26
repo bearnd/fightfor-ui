@@ -8,7 +8,7 @@ import {
   CitationsCountByAffiliationInterface,
   CitationsCountByCountryInterface,
   CitationsCountByQualifierInterface,
-} from '../interfaces/search.interface';
+} from '../interfaces/user-config.interface';
 import { CitationInterface } from '../interfaces/citation.interface';
 
 

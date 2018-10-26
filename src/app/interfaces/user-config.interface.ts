@@ -1,14 +1,16 @@
-import { MeshDescriptorInterface } from './mesh-descriptor.interface';
+import {
+  MeshDescriptorInterface
+} from './mesh-descriptor.interface';
 import {
   FacilityCanonicalInterface,
   MeshTermInterface,
-  StudyInterface,
+  StudyInterface
 } from './study.interface';
 import {
   AffiliationCanonicalInterface,
-  CitationInterface, PubMedQualifierInterface,
+  CitationInterface,
+  PubMedQualifierInterface
 } from './citation.interface';
-
 
 
 export interface StudiesCountByCountryInterface {
@@ -58,12 +60,12 @@ export interface SearchInterface {
   searchId?: number
   searchUuid: string
   title?: string
-  descriptors: MeshDescriptorInterface[]
+  gender?: string
   yearBeg?: number
   yearEnd?: number
   ageBeg?: number
   ageEnd?: number
-  patientGender?: string
+  descriptors: MeshDescriptorInterface[]
   studies?: StudyInterface[]
   citations?: CitationInterface[]
   studiesStats: {
@@ -76,4 +78,11 @@ export interface SearchInterface {
     byAffiliation?: CitationsCountByAffiliationInterface[]
     byQualifier?: CitationsCountByQualifierInterface[]
   }
+}
+
+export interface UserInterface {
+  userId?: number
+  auth0UserId: string
+  email?: string
+  searches?: SearchInterface[]
 }

@@ -1,38 +1,31 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row" *ngIf="!isLoading()">
+    <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-icon card-header-rose">
             <div class="card-icon">
               <i class="material-icons">add_circle</i>
             </div>
-            <div class="row">
-              <div class="col-md-8">
-                <h4 class="card-title">
-                  Search
-                </h4>
-              </div>
-
-              <div class="col-md-4">
-                <button
-                  mat-raised-button mat-min-fab
-                  class="btn btn-rose btn-link btn-round btn-fab pull-right"
-                  (click)="toggleSaved()"
-                  [disableRipple]="true"
-                  matTooltip="Save this search"
-                  [matTooltipPosition]="'before'"
-                >
-                  <i class="material-icons">{{ isSaved ? "favorite" : "favorite_border" }}</i>
-                </button>
-              </div>
-            </div>
+            <h4 class="card-title">Search</h4>
           </div>
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
               <div class="form-group">
-                <!--Conditions chip-input with autocomplete.-->
+                <mat-form-field
+                  [hintLabel]="'Set the search title (will be populated with the first selected descriptor if left blank)'"
+                >
+                  <input
+                    matInput
+                    type="text"
+                    id="title"
+                    formControlName="title"
+                    placeholder="Search Title"
+                  />
+                </mat-form-field>
+
+                <!--MeSH descriptors chip-input with autocomplete.-->
                 <mat-form-field
                   class="term-list-input"
                   [hintLabel]="descriptorsSelected.length ? null: 'Enter terms you would like to search for and select the corresponding descriptors'"
@@ -101,7 +94,7 @@
                       style="padding-top: 20px"
                       id="studySex"
                       type="radio"
-                      formControlName="radioPatientGender"
+                      formControlName="radioGender"
                     >
                       <mat-radio-button value="MALE">
                         Male&nbsp;&nbsp;
@@ -109,7 +102,7 @@
                       <mat-radio-button value="FEMALE">
                         Female&nbsp;&nbsp;
                       </mat-radio-button>
-                      <mat-radio-button value="ALL" [checked]="true">
+                      <mat-radio-button value="ALL">
                         All&nbsp;&nbsp;
                       </mat-radio-button>
                     </mat-radio-group>
