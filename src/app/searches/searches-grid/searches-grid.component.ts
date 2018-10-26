@@ -23,7 +23,19 @@ export class SearchesGridComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searches = this.searchesService.getSearches();
+    this.searches = Object.values(this.userConfigService.userSearches);
+
+    // Subscribe to the `UserConfigService.searchesLatest` observable. Each
+    // time the searches are updated retrieve them and set them under
+    // `this.seaches` (in reverse order so that the latest searches appear
+    // first).
+    this.userConfigService.searchesLatest.subscribe(
+      (searches: SearchInterface[]) => {
+        if (searches) {
+          this.searches = Object.values(searches).reverse();
+        }
+      }
+    );
   }
 
   /**
