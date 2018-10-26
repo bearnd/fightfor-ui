@@ -87,6 +87,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
     // Initialize the form controls.
     this.form = new FormGroup({
+      title: new FormControl(null),
       descriptors: new FormControl(
         null,
         [Validators.required]
