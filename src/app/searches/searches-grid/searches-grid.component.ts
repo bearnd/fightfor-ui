@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { SearchesService } from '../../services/searches.service';
-import { SearchInterface } from '../../interfaces/search.interface';
+import { SearchInterface } from '../../interfaces/user-config.interface';
+import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class SearchesGridComponent implements OnInit {
   searches: SearchInterface[];
 
   constructor(
-    private searchesService: SearchesService,
+    private authService: AuthService,
+    private userConfigService: UserConfigService,
     private router: Router,
   ) {}
 
