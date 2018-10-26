@@ -95,7 +95,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
         [Validators.required]
       ),
       // Radio buttons for patient-sex.
-      radioGender: new FormControl(null),
+      radioGender: new FormControl('ALL'),
     });
 
     // Query out the date-range of all studies to populate the slider range.
@@ -191,9 +191,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
    */
   onSubmit() {
 
-    let gender: string = null;
-
     // Retrieve the selected patient-gender (if any).
+    let gender: string = null;
     if (this.form.get('radioGender').value) {
       gender = this.form.get('radioGender').value;
     }
