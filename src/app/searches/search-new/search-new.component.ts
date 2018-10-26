@@ -74,6 +74,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   separatorKeysCodes = [ENTER, COMMA, TAB];
 
+  newSearchUuid: string = null;
+
   constructor(
     private meshDescriptorRetriever: MeshDescriptorRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
@@ -139,6 +141,22 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       }
     );
 
+    // Subscribe to the `userConfigService.isCreatingNewSearch` observable.
+    this.userConfigService.isCreatingNewSearch.subscribe(
+      (isCreating: boolean) => {
+        // If the new search UUID has been set (which happens in the `onSubmit`
+        // method) and the new search is finished being created then navigate
+        // the result summary page for this new search.
+        if (!isCreating && this.newSearchUuid !== null) {
+          if (this.userConfigService.getUserSearch(this.newSearchUuid)) {
+            const result = this.router.navigate(
+              ['/app', 'searches', this.newSearchUuid]
+            );
+            result.finally();
+          }
+        }
+      }
+    )
   }
 
   /**
