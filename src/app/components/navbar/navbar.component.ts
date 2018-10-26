@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs/Rx';
 import { PaymentService } from '../../services/payment.service';
+import { UserConfigService } from '../../services/user-config.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     public paymentService: PaymentService,
+    private userConfigService: UserConfigService,
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -86,6 +88,22 @@ export class NavbarComponent implements OnInit {
               }
             }
           );
+        }
+      }
+    );
+
+    // Subscribe to the `isLoadingUser` observable of the `AuthService`.
+    this.authService.isLoadingUser.subscribe(
+      // If the Auth0 user-profile isn't loading but has been populated then
+      // load the DB user profiles through the
+      // `UserConfigService.getUserProfile` method.
+      (isLoadingUser: boolean) => {
+        if (
+          !isLoadingUser &&
+          !this.userConfigService.userConfig &&
+          this.authService.userProfile
+        ) {
+          this.userConfigService.getUserConfig(this.authService.userProfile);
         }
       }
     );
