@@ -23,8 +23,7 @@ import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
-import { SearchesService } from '../../../services/searches.service';
-import { SearchInterface } from '../../../interfaces/search.interface';
+import { SearchInterface } from '../../../interfaces/user-config.interface';
 import {
   FacilityCanonicalInterface,
   MeshTermInterface,
@@ -54,6 +53,7 @@ import {
   MapBoxFeature,
   MapBoxGeocodeResponse
 } from '../../../services/geolocation.service';
+import { UserConfigService } from '../../../services/user-config.service';
 
 
 interface EnumInterface {
@@ -154,7 +154,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public search: SearchInterface;
 
   constructor(
-    private searchesService: SearchesService,
+    private userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
@@ -170,7 +170,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Retrieve the referenced search UUID.
     const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
     // Retrieve the referenced search.
-    this.search = this.searchesService.getSearch(searchUuid);
+    this.search = this.userConfigService.getUserSearch(searchUuid);
 
     // Retrieve the referenced overall-status.
     const overallStatusGroup = this.route.snapshot.params['overallStatus'];

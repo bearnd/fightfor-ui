@@ -10,7 +10,7 @@ import {
   StudiesCountByFacilityInterface,
   StudiesCountByOverallStatusInterface,
   StudiesCountByFacilityMeshTermInterface,
-} from '../interfaces/search.interface';
+} from '../interfaces/user-config.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
 
 
