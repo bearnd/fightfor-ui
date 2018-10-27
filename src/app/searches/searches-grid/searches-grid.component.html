@@ -1,5 +1,11 @@
 <div class="main-content">
-  <div class="container-fluid">
+
+  <mat-spinner
+    *ngIf="userConfigService.isLoadingUser | async"
+    style="position:relative;top:50%;left:50%"
+  ></mat-spinner>
+
+  <div class="container-fluid" *ngIf="!(userConfigService.isLoadingUser | async)">
 
     <div class="row">
       <h3>Recent Searches</h3>
