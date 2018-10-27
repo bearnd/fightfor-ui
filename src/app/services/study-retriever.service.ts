@@ -186,6 +186,7 @@ export class StudyRetrieverService {
           limit: $limit,
           offset: $offset,
         ) {
+          nctId,
           studyId,
           briefTitle,
           facilitiesCanonical {
@@ -253,7 +254,7 @@ export class StudyRetrieverService {
    * Retrieve a clinical-trials study through its NCT ID.
    * @param {string} nctId The NCT ID of the study to be retrieved.
    */
-  getTrialByNctId(nctId: string) {
+  getStudyByNctId(nctId: string) {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingGetStudyByNctId.next(true);
 
