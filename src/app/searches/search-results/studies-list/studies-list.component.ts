@@ -46,9 +46,6 @@ import {
 } from '../../../services/study-stats-retriever.service';
 import { overallStatusGroups } from '../../../shared/common.interface';
 import {
-  StudyPreviewDialogComponent
-} from './study-preview-dialog/study-preview-dialog.component';
-import {
   GeolocationService,
   MapBoxFeature,
   MapBoxGeocodeResponse
@@ -846,31 +843,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getStudiesPage();
   }
 
-  onOpenStudyPreviewDialog(study: StudyInterface) {
 
-    const dialogConfig: MatDialogConfig = new MatDialogConfig();
-
-    // Automatically focus on the dialog elements.
-    dialogConfig.autoFocus = true;
-    // Allow the user from closing the dialog by clicking outside.
-    dialogConfig.disableClose = false;
-    // Make the dialog cast a shadow on the rest of the UI behind it and
-    // preclude the user from interacting with it.
-    dialogConfig.hasBackdrop = true;
-    // Make the dialog auto-close if the user navigates away from it.
-    dialogConfig.closeOnNavigation = true;
-    // Set the dialog dimensions to 60% of the window dimensions.
-    dialogConfig.width = '60%';
-    dialogConfig.height = '60%';
-    // Set a custom CSS class to the dialog container.
-    dialogConfig.panelClass = 'preview-dialog-container';
-
-    // Pass the currently selected study ID to the dialog.
-    dialogConfig.data = {
-      studyId: study.studyId
-    };
-
-    this.dialog.open(StudyPreviewDialogComponent, dialogConfig);
   }
 
   /**

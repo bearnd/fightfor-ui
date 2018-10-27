@@ -294,12 +294,12 @@
                       mat-header-row
                       *matHeaderRowDef="displayedColumns"
                     ></tr>
-                    <!--Clicking any row will open a preview-dialog for that
+                    <!--Clicking any row will redirect to the component for that
                     study.-->
                     <tr
                       mat-row
                       *matRowDef="let row; columns: displayedColumns;"
-                      (click)="onOpenStudyPreviewDialog(row)"
+                      (click)="onNavigateToStudy(row)"
                       style="cursor: pointer"
                     ></tr>
 
