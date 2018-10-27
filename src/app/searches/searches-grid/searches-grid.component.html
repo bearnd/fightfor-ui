@@ -1,29 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-4">
-
-        <!--New search card.-->
-        <div class="card search-card">
-          <div class="card-header card-header-rose">
-            <h4 class="card-title">New Search</h4>
-            <p class="card-category">Create a new Search</p>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Website Views</h4>
-            <p class="card-category">Last Campaign Performance</p>
-
-            <!--New search button.-->
-            <button
-              mat-raised-button
-              class="btn btn-rose mat-raised-button pull-right"
-              (click)="onNewSearch()"
-            >
-              <span class="mat-button-wrapper">New Search</span>
-            </button>
-
-          </div>
-        </div>
 
       </div>
 
@@ -56,6 +33,21 @@
         </div>
       </div>
 
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          mat-raised-button
+          mat-fab
+          class="btn btn-rose btn-primary btn-round pull-right btn-fab btn-fab-corner"
+          [ngClass]="searches.length ? 'btn-fab-corner' : 'btn-fab-center'"
+          matTooltip="Create new search"
+          (click)="onNewSearch()"
+        >
+          <i class="material-icons">add</i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
