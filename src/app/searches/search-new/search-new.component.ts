@@ -67,8 +67,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   // `ngOnInit`).
   public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
   public studyEligibilityAgeRangeSelected: AgeRange = {
-    ageBeg: null,
-    ageEnd: null,
+    ageBeg: 0,
+    ageEnd: 150,
   };
 
   separatorKeysCodes = [ENTER, COMMA, TAB];

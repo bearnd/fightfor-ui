@@ -111,36 +111,7 @@
               <div class="card-icon">
                 <i class="material-icons">find_in_page</i>
               </div>
-
-              <div class="row">
-                <div class="col-md-8">
-                  <h4 class="card-title">
-                    {{ 'Overview' | uppercase }}
-                  </h4>
-                </div>
-
-                <div class="col-md-4">
-                  <button
-                    mat-raised-button mat-min-fab
-                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
-                    (click)="toggleEditable()"
-                    [disableRipple]="true"
-                    matTooltip="Edit this search" [matTooltipPosition]="'above'"
-                  >
-                    <i class="material-icons">{{ isEditable ? "create" : "create_outline" }}</i>
-                  </button>
-                  <button
-                    mat-raised-button mat-min-fab
-                    class="btn btn-rose btn-link btn-round btn-fab pull-right"
-                    (click)="toggleSaved()"
-                    [disableRipple]="true"
-                    matTooltip="Save this search" [matTooltipPosition]="'above'"
-                  >
-                    <i class="material-icons">{{ isSaved ? "favorite" : "favorite_outline" }}</i>
-                  </button>
-                </div>
-              </div>
-
+              <h4 class="card-title">{{ 'Overview' | uppercase }}</h4>
             </div>
             <div class="card-body">
               <h5>MeSH Descriptors</h5>

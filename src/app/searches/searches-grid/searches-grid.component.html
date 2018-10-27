@@ -1,49 +1,45 @@
 <div class="main-content">
   <div class="container-fluid">
+
     <div class="row">
-      <div class="col-md-4">
-
-        <!--New search card.-->
-        <div class="card search-card">
-          <div class="card-header card-header-rose">
-            <h4 class="card-title">New Search</h4>
-            <p class="card-category">Create a new Search</p>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Website Views</h4>
-            <p class="card-category">Last Campaign Performance</p>
-
-            <!--New search button.-->
-            <button
-              mat-raised-button
-              class="btn btn-rose mat-raised-button pull-right"
-              (click)="onNewSearch()"
-            >
-              <span class="mat-button-wrapper">New Search</span>
-            </button>
-
-          </div>
-        </div>
-
-      </div>
+      <h3>Recent Searches</h3>
+    </div>
+    <div class="row">
 
       <div class="col-md-4" *ngFor="let search of searches">
+
         <div class="card search-card">
           <div class="card-header card-header-rose">
             <h4 class="card-title">{{ search.title }}</h4>
           </div>
           <div class="card-body">
-            <p class="text-center">
+            <h4 class="card-title">
+              Search Parameters
               <mat-icon
+                class="pull-right"
                 matTooltip="Delete Search"
                 [matTooltipPosition]="'below'"
-                style="cursor:pointer; color: #999; font-size: 16px"
+                style="cursor:pointer; color: #999"
                 (click)="onDeleteSearch(search.searchUuid)"
               >delete
               </mat-icon>
+            </h4>
+
+            <mat-chip-list>
+              <mat-chip
+                class="mat-standard-chip"
+                style="font-size: 12px;"
+                *ngFor="let descriptor of search.descriptors"
+              >
+                {{ descriptor.name }}
+              </mat-chip>
+            </mat-chip-list>
+
+            <br>
+            <p class="card-description">
+              Year-Range: {{ search.yearBeg + " - " + search.yearEnd }}
             </p>
-            <h4 class="card-title">Website Views</h4>
-            <p class="card-category">Last Campaign Performance</p>
+
             <button
               mat-raised-button
               class="btn btn-rose mat-raised-button pull-right"
@@ -52,10 +48,26 @@
             >
               <span class="mat-button-wrapper">See Results</span>
             </button>
+
           </div>
         </div>
       </div>
 
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <button
+          mat-raised-button
+          mat-fab
+          class="btn btn-rose btn-primary btn-round pull-right btn-fab btn-fab-corner"
+          [ngClass]="searches.length ? 'btn-fab-corner' : 'btn-fab-center'"
+          matTooltip="Create new search"
+          (click)="onNewSearch()"
+        >
+          <i class="material-icons">add</i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
