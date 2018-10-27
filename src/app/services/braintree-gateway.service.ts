@@ -110,11 +110,13 @@ export class BraintreeGatewayService {
     customerId: string,
     planId: string,
   ) {
-    
+
     // Assemble the URL.
     const url = urljoin(
       environment.braintreeGateway.uri,
-      'subscription'
+      'customer',
+      customerId,
+      'subscription',
     );
 
     return this.httpClient
