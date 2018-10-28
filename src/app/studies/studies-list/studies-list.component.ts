@@ -14,7 +14,7 @@ import {
   MatDialogConfig,
   MatAutocompleteSelectedEvent,
 } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
@@ -154,9 +154,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     private userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
-    private route: ActivatedRoute,
     private dialog: MatDialog,
     private geolocationService: GeolocationService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
   }
 
@@ -843,7 +844,27 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getStudiesPage();
   }
 
+  onNavigateToStudy(study: StudyInterface) {
 
+    const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
+
+    // Retrieve the referenced overall-status.
+    const overallStatusGroup = this.route.snapshot.params['overallStatus'];
+
+    console.log(study.nctId);
+    const result = this.router.navigate(
+      [
+        '/app',
+        'searches',
+        searchUuid,
+        'trials',
+        overallStatusGroup,
+        'trial',
+        study.nctId,
+      ],
+    );
+    console.log(result);
+    result.finally();
   }
 
   /**
