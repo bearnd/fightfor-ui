@@ -11,7 +11,6 @@ import {
   MatPaginator,
   MatSort,
   MatDialog,
-  MatDialogConfig,
   MatAutocompleteSelectedEvent,
 } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,7 +22,7 @@ import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
-import { SearchInterface } from '../../../interfaces/user-config.interface';
+import { SearchInterface } from '../../interfaces/user-config.interface';
 import {
   FacilityCanonicalInterface,
   MeshTermInterface,
@@ -32,25 +31,25 @@ import {
   StudyOverallStatus,
   StudyPhase,
   StudyType,
-} from '../../../interfaces/study.interface';
+} from '../../interfaces/study.interface';
 import { StudiesDataSource } from './studies.datasource';
 import {
   StudyRetrieverService
-} from '../../../services/study-retriever.service';
+} from '../../services/study-retriever.service';
 import {
   castEnumToArray,
   orderStringArray,
-} from '../../../shared/utils';
+} from '../../shared/utils';
 import {
   StudyStatsRetrieverService,
-} from '../../../services/study-stats-retriever.service';
-import { overallStatusGroups } from '../../../shared/common.interface';
+} from '../../services/study-stats-retriever.service';
+import { overallStatusGroups } from '../../shared/common.interface';
 import {
   GeolocationService,
   MapBoxFeature,
   MapBoxGeocodeResponse
-} from '../../../services/geolocation.service';
-import { UserConfigService } from '../../../services/user-config.service';
+} from '../../services/geolocation.service';
+import { UserConfigService } from '../../services/user-config.service';
 
 
 interface EnumInterface {
@@ -166,9 +165,16 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.locationsAll.next([]);
 
     // Retrieve the referenced search UUID.
-    const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
+    const searchUuid: string
+      = this.route.parent.parent.snapshot.params['searchUuid'];
+
     // Retrieve the referenced search.
     this.search = this.userConfigService.getUserSearch(searchUuid);
+
+    if (!this.search) {
+      const result = this.router.navigate(['/app', 'searches']);
+      result.finally();
+    }
 
     // Retrieve the referenced overall-status.
     const overallStatusGroup = this.route.snapshot.params['overallStatus'];
@@ -846,10 +852,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onNavigateToStudy(study: StudyInterface) {
 
-    const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
-
-    // Retrieve the referenced overall-status.
-    const overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    // Retrieve the referenced search UUID.
+    const searchUuid: string
+      = this.route.parent.parent.snapshot.params['searchUuid'];
 
     console.log(study.nctId);
     const result = this.router.navigate(
@@ -857,13 +862,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         '/app',
         'searches',
         searchUuid,
-        'trials',
-        overallStatusGroup,
         'trial',
         study.nctId,
       ],
     );
-    console.log(result);
     result.finally();
   }
 
