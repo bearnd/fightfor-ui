@@ -76,6 +76,12 @@ export enum MeshTermType {
   INTERVENTION = 'Intervention',
 }
 
+export enum ActualType {
+  ACTUAL = 'Actual',
+  ANTICIPATED = 'Anticipated',
+  ESTIMATE = 'Estimate',
+}
+
 export interface InterventionInterface {
   interventionId: number
   interventionType?: InterventionType
@@ -153,6 +159,24 @@ export interface LocationInterface {
   studies?: StudyInterface[]
 }
 
+export interface EnrollmentInterface {
+  enrollmentId?: number
+  enrollmentType?: ActualType
+  value: number
+}
+
+export interface StudyDesignInfoInterface {
+  studyDesignInfoId?: number
+  allocation?: string
+  interventionModel?: string
+  interventionModelDescription?: string
+  primaryPurpose?: string
+  observationalModel?: string
+  timePerspective?: string
+  masking?: string
+  maskingDescription?: string
+}
+
 export interface StudyInterface {
   studyId?: number
   orgStudyId?: string
@@ -179,4 +203,6 @@ export interface StudyInterface {
   locations?: LocationInterface[]
   facilities?: FacilityInterface[]
   facilitiesCanonical?: FacilityCanonicalInterface[]
+  enrollment?: EnrollmentInterface
+  studyDesignInfo?: StudyDesignInfoInterface
 }
