@@ -16,7 +16,7 @@ import {
 } from '../../searches/search-results/search-results-summary/search-results-summary.component';
 import {
   StudiesListComponent
-} from '../../searches/search-results/studies-list/studies-list.component';
+} from '../../studies/studies-list/studies-list.component';
 import { PaymentGuard } from '../../guards/payment.guard';
 
 
