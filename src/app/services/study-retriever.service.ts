@@ -86,12 +86,14 @@ interface ResponseCountStudies {
   }
 }
 
-interface ResponseGetStudyByNctId {
-  getStudyByNctId: StudyInterface
+interface ResponseGetStudiesByNctIds {
+  studies: {
+    byNctId: StudyInterface[]
+  }
 }
 
-interface VariablesGetStudyByNctId {
-  nctId: string
+interface VariablesGetStudiesByNctIds {
+  nctIds: string[]
 }
 
 @Injectable()
@@ -142,11 +144,28 @@ export class StudyRetrieverService {
     }
   `;
 
-  queryGetStudyByNctId = gql`
-    query($nctId: String!) {
-       getStudyByNctId(nctId: $nctId) {
-        studyId,
-        nctId,
+  queryGetStudiesByNctIds = gql`
+    query getStudiesByNctId($nctIds: [String]!) {
+      studies {
+        byNctId(nctIds: $nctIds) {
+          nctId,
+          briefTitle,
+          startDate,
+          completionDate,
+          enrollment {
+            value,
+          },
+          overallStatus,
+          studyDesignInfo {
+            primaryPurpose,
+          },
+          eligibility {
+            gender,
+            criteria,
+            minimumAge,
+            maximumAge,
+          }
+        }
       }
     }
   `;
@@ -260,23 +279,23 @@ export class StudyRetrieverService {
   }
 
   /**
-   * Retrieve a clinical-trials study through its NCT ID.
-   * @param {string} nctId The NCT ID of the study to be retrieved.
+   * Retrieve clinical-trials studies through their NCT IDs.
+   * @param {string[]} nctIds The NCT IDs of the studies to be retrieved.
    */
-  getStudyByNctId(nctId: string) {
+  getStudiesByNctIds(nctIds: string[]): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
-    this.loadingGetStudyByNctId.next(true);
+    this.loadingGetStudiesByNctId.next(true);
 
     return this.apollo
-      .query<ResponseGetStudyByNctId, VariablesGetStudyByNctId>({
-        query: this.queryGetStudyByNctId,
+      .query<ResponseGetStudiesByNctIds, VariablesGetStudiesByNctIds>({
+        query: this.queryGetStudiesByNctIds,
         variables: {
-          nctId: nctId
+          nctIds: nctIds
         }
       }).map((response) => {
         // Update the 'loading' observable to indicate that loading is complete.
-        this.loadingGetStudyByNctId.next(false);
-        return response.data.getStudyByNctId;
+        this.loadingGetStudiesByNctId.next(false);
+        return response.data.studies.byNctId;
       });
   }
 
