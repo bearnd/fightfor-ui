@@ -82,6 +82,17 @@ export enum ActualType {
   ESTIMATE = 'Estimate',
 }
 
+export enum GenderType {
+  MALE = 'Male',
+  FEMALE = 'Female',
+  ALL = 'All',
+}
+
+export enum SamplingMethod {
+  PROBABILITY = 'Probability Sample',
+  NON_PROBABILITY = 'Non-Probability Sample',
+}
+
 export interface InterventionInterface {
   interventionId: number
   interventionType?: InterventionType
@@ -177,6 +188,19 @@ export interface StudyDesignInfoInterface {
   maskingDescription?: string
 }
 
+export interface EligibilityInterface {
+  eligibilityId: number
+  studyPop: string
+  samplingMethod: SamplingMethod
+  criteria: string
+  genderBased: boolean
+  genderDescription: string
+  minimumAge: string
+  maximumAge: string
+  healthyVolunteers: string
+  gender: GenderType
+}
+
 export interface StudyInterface {
   studyId?: number
   orgStudyId?: string
@@ -205,4 +229,5 @@ export interface StudyInterface {
   facilitiesCanonical?: FacilityCanonicalInterface[]
   enrollment?: EnrollmentInterface
   studyDesignInfo?: StudyDesignInfoInterface
+  eligibility?: EligibilityInterface
 }
