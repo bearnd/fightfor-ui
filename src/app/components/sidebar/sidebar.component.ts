@@ -21,6 +21,12 @@ export const ROUTES: RouteInfo[] = [
     icon: 'search',
     class: ''
   },
+  {
+    path: '/app/trials',
+    title: 'Trials',
+    icon: 'local_pharmacy',
+    class: ''
+  },
 ];
 
 @Component({
