@@ -43,6 +43,7 @@ import {
 import {
   StudiesListComponent
 } from '../../studies/studies-list/studies-list.component';
+import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
 
 
@@ -81,6 +82,7 @@ import { StudiesComponent } from '../../studies/studies.component';
     SearchesGridComponent,
     StudiesListComponent,
     StudiesComponent,
+    StudyComponent,
   ],
   providers: [PageScrollService],
 })

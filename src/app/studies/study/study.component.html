@@ -1,0 +1,498 @@
+<div class="main-content">
+
+  <mat-spinner
+    *ngIf="studyRetrieverService.isLoadingGetStudiesByNctId | async"
+    style="position:relative;top:50%;left:50%"
+  ></mat-spinner>
+
+  <div
+    class="container-fluid"
+    *ngIf="!(studyRetrieverService.isLoadingGetStudiesByNctId | async)"
+  >
+    <div class="row">
+
+      <div class="col-md-2">
+        <ul class=
+          "
+            nav
+            nav-pills
+            nav-pills-rose
+            nav-pills-icons
+            nav-pills-fixed
+            flex-column
+          "
+        >
+
+          <li class="nav-item pill-small">
+            <!--The nav-pill links are used to smoothly scroll to the
+            corresponding card. In addition their `active` state is defined via
+            the `isNavPillActive` method which uses the current scroll location
+            of the page to automatically activate the nav-pill corresponding to
+            the currently viewed card.-->
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#overview"
+              [ngClass]="{active: isNavPillActive(0)}"
+            >
+              <i class="material-icons">info</i> Overview
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#eligibility"
+              [ngClass]="{active: isNavPillActive(1)}"
+            >
+              <i class="material-icons">tune</i> Eligibility
+            </a>
+          </li>
+
+
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <div class="row" id="overview">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 0)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">info</i>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">{{ study.briefTitle | uppercase }}</h4>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    mat-raised-button
+                    type="button"
+                    class="btn btn-rose btn-round btn-just-icon btn-link mat-raised-button btn-fab pull-right"
+                    (click)="onToggleSavedStudy()"
+                    [disableRipple]="true"
+                    matTooltip="Save this trial"
+                    [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">
+                      {{ isStudySaved ? "favorite" : "favorite_outline" }}
+                    </i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-body">
+
+              <h4 class="card-title">Trial Status</h4>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <p>
+                        Start Date: {{ study.startDate | date:'fullDate' }}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <p>
+                        End Date: {{ study.completionDate ? (study.completionDate | date:'fullDate') : 'N/A' }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <div class="row text-right">
+                      <p class="pull-right">
+                        Total participants to be recruited
+                      </p>
+                    </div>
+                    <div class="row">
+                      <h4 class="pull-right text-rose">
+                        {{
+                          study.enrollment.value ?
+                          study.enrollment.value :
+                          "Not specified"
+                        }}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyStatusLevel === 0"
+                  >
+                    <h3
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      Trial Status: {{ getStatusDescription(study.overallStatus) }}
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <ul class="timeline-horizontal timeline-horizontal-simple">
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 1 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 1 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Not yet recruiting
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 2 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 2 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Recruiting
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 3 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 3 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Active
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge outline"
+                        [ngClass]="studyStatusLevel >= 4 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 4 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Completed
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyStatusMessage"
+                  >
+                    <h5
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      {{ studyStatusMessage }}
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <button
+                      mat-raised-button
+                      type="button"
+                      class="btn btn-rose mat-raised-button pull-center"
+                      [disabled]="!studyCanContact"
+                      (click)="onOverviewContract()"
+                    >
+                      <span class="mat-button-wrapper">Contact</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              <h4 class="card-title">Trial Primary Purpose</h4>
+              <div class="col-md-12">
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyPurposeIndex === 0"
+                  >
+                    <h3
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      Trial Primary Purpose Not Specified
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 1 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">favorite</i>
+                      <!--<p>Rarara</p>-->
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 1 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Support & Prevention
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 2 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">warning</i>
+                      <!--<p>Rarara</p>-->
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 2 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Screening & Diagnostic
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 3 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">local_hospital</i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 3 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Treatment
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 4 ? 'rose' : 'outline'"
+                    >
+                      <i class="fa fa-lg fa-flask"></i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 4 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Research or other
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyPurposeMessage"
+                  >
+                    <h5
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      {{ studyPurposeMessage }}
+                    </h5>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+              <!--<h4 class="card-title">Trial's Primary Purpose</h4>-->
+              <!--<div class="col-md-12">-->
+                <!--<div class="row"></div>-->
+              <!--</div>-->
+
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="eligibility">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 1)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">tune</i>
+              </div>
+              <h4 class="card-title">{{ 'Eligibility' | uppercase }}</h4>
+            </div>
+
+            <div class="card-body">
+
+              <h4 class="card-title">Patient Details</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="patientGender">Patient Gender</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-radio-group
+                        id="patientGender"
+                        type="radio"
+                      >
+                        <mat-radio-button
+                          value="MALE"
+                          [checked]="study.eligibility.gender === 'MALE'"
+                        >
+                          Male&nbsp;&nbsp;
+                        </mat-radio-button>
+                        <mat-radio-button
+                          value="FEMALE"
+                          [checked]="study.eligibility.gender === 'FEMALE'"
+                        >
+                          Female&nbsp;&nbsp;
+                        </mat-radio-button>
+                        <mat-radio-button
+                          value="ALL"
+                          [checked]="
+                        !study.eligibility.gender ||
+                        study.eligibility.gender === 'ALL'
+                      "
+                        >
+                          All&nbsp;&nbsp;
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="sliderAgeRange">Age-Range</label>
+                  <ion-range-slider
+                    id="sliderAgeRange"
+                    #sliderAgeRange
+                    type="double"
+                    [disable]="true"
+                    [min]="studyEligibilityAgeRangeAll.ageBeg"
+                    [max]="studyEligibilityAgeRangeAll.ageEnd"
+                    [from]="
+                      studyEligibilityAgeRange.ageBeg ||
+                      studyEligibilityAgeRangeAll.ageBeg
+                    "
+                    [to]="
+                      studyEligibilityAgeRange.ageEnd ||
+                      studyEligibilityAgeRangeAll.ageEnd
+                    "
+                    style="width: 200px;"
+                    [prettify_enabled]="false"
+                  >
+                  </ion-range-slider>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                  <div
+                    class="card"
+                    style="border: 1px solid; border-color: #e91e63"
+                  >
+                    <div class="card-header card-header-rose card-header-text">
+                      <div class="card-text">
+                        <h4 class="card-title">Criteria</h4>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="card-description">
+                        <p>{{ study.eligibility.criteria }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1"></div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
