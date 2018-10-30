@@ -96,15 +96,23 @@ interface VariablesGetStudyByNctId {
 @Injectable()
 export class StudyRetrieverService {
 
-  private loadingSearchStudies = new BehaviorSubject<boolean>(false);
-  private loadingGetStudyByNctId = new BehaviorSubject<boolean>(false);
-  private loadingFilterStudies = new BehaviorSubject<boolean>(false);
-  private loadingCountStudies = new BehaviorSubject<boolean>(false);
+  private loadingSearchStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingGetStudiesByNctId: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingFilterStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingCountStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
 
-  public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
-  public isLoadingGetStudyByNctId = this.loadingGetStudyByNctId.asObservable();
-  public isLoadingFilterStudies = this.loadingFilterStudies.asObservable();
-  public isLoadingCountStudies = this.loadingCountStudies.asObservable();
+  public isLoadingSearchStudies: Observable<boolean>
+    = this.loadingSearchStudies.asObservable();
+  public isLoadingGetStudiesByNctId: Observable<boolean>
+    = this.loadingGetStudiesByNctId.asObservable();
+  public isLoadingFilterStudies: Observable<boolean>
+    = this.loadingFilterStudies.asObservable();
+  public isLoadingCountStudies: Observable<boolean>
+    = this.loadingCountStudies.asObservable();
 
   querySearchStudies = gql`
     query searchStudies(
@@ -294,7 +302,7 @@ export class StudyRetrieverService {
     yearEnd?: number,
     ageBeg?: number,
     ageEnd?: number,
-  ) {
+  ): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingSearchStudies.next(true);
 
@@ -380,7 +388,7 @@ export class StudyRetrieverService {
     order?: OrderType,
     limit?: number,
     offset?: number,
-  ) {
+  ): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingFilterStudies.next(true);
 
@@ -470,7 +478,7 @@ export class StudyRetrieverService {
     yearEnd?: number,
     ageBeg?: number,
     ageEnd?: number,
-  ) {
+  ): Observable<number> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingCountStudies.next(true);
 
@@ -508,5 +516,4 @@ export class StudyRetrieverService {
         return response.data.studies.count;
       });
   }
-
 }
