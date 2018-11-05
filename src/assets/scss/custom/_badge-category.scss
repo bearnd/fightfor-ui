@@ -17,6 +17,15 @@
     color: white;
   }
 
+  p {
+    font-size: 48px;
+    border-radius: 50%;
+    line-height: 80px;
+    color: white;
+    margin-bottom: 0;
+  }
+
+
   &.primary {
     background-color: $brand-primary;
   }
@@ -46,6 +55,14 @@
     margin-top: 10px;
     width: 150px;
     transform: translateX(-35px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  > .badge-category-title-short {
+    margin-top: 10px;
+    width: 100px;
+    transform: translateX(-10px);
     margin-left: auto;
     margin-right: auto;
   }
