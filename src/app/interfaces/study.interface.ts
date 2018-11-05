@@ -93,11 +93,24 @@ export enum SamplingMethod {
   NON_PROBABILITY = 'Non-Probability Sample',
 }
 
+export enum OutcomeType {
+  PRIMARY = 'Primary',
+  SECONDARY = 'Secondary',
+  POST_HOC = 'Post-Hoc',
+  OTHER = 'Other Pre-specified',
+}
+
+export enum ReferenceType {
+  STANDARD = 'Standard',
+  RESULTS = 'Results',
+}
+
 export interface InterventionInterface {
   interventionId: number
   interventionType?: InterventionType
   name?: string
   description?: string
+  armGroups: ArmGroupInterface[]
 }
 
 export interface MeshTermInterface {
@@ -120,11 +133,15 @@ export interface FacilityInterface {
   state?: string
   zipCode?: string
   country?: string
+  facilityCanonical?: FacilityCanonicalInterface
 }
 
 export interface FacilityCanonicalInterface {
   facilityCanonicalId?: number
   name?: string
+  address?: string
+  phoneNumber?: string
+  url?: string
   locality?: string
   administrativeAreaLevel1?: string
   country?: string
@@ -201,6 +218,47 @@ export interface EligibilityInterface {
   gender: GenderType
 }
 
+export interface ProtocolOutcomeInterface {
+  protocolOutcomeId: number
+  measure: string
+  timeFrame: string
+  description: string
+}
+
+export interface StudyOutcomeInterface {
+  studyPrimaryOutcomeId: number
+  studyId: number
+  protocolOutcomeId: number
+  outcomeType: OutcomeType,
+  study: StudyInterface,
+  protocolOutcome: ProtocolOutcomeInterface
+}
+
+export interface ReferenceInterface {
+  referenceId: number
+  citation: string
+  pmid: number
+  studies: StudyInterface[]
+  studyReferences: StudyReferenceInterface[]
+}
+
+export interface StudyReferenceInterface {
+  studyReferenceId: number
+  studyId: number
+  referenceId: number
+  referenceType: ReferenceType
+  study: StudyInterface
+  reference: ReferenceInterface
+}
+
+export interface ArmGroupInterface {
+  armGroupId: number
+  armGroupType: string
+  label: string
+  description: string
+  interventions: InterventionInterface[]
+}
+
 export interface StudyInterface {
   studyId?: number
   orgStudyId?: string
@@ -230,4 +288,10 @@ export interface StudyInterface {
   enrollment?: EnrollmentInterface
   studyDesignInfo?: StudyDesignInfoInterface
   eligibility?: EligibilityInterface
+  investigators?: InvestigatorInterface[]
+  studyOutcomes?: StudyOutcomeInterface[]
+  outcomes?: ProtocolOutcomeInterface[]
+  studyReferences?: StudyReferenceInterface[]
+  references?: ReferenceInterface[]
+  armGroups?: ArmGroupInterface[]
 }
