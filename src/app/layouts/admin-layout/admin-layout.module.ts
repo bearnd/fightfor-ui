@@ -17,6 +17,7 @@ import {
   MatSelectModule,
   MatRadioModule,
   MatDialogModule,
+  MatExpansionModule,
 } from '@angular/material';
 
 import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
@@ -67,6 +68,7 @@ import { StudiesComponent } from '../../studies/studies.component';
     MatSelectModule,
     MatRadioModule,
     MatDialogModule,
+    MatExpansionModule,
     Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
     TruncateModule,
