@@ -148,22 +148,103 @@ export class StudyRetrieverService {
     query getStudiesByNctId($nctIds: [String]!) {
       studies {
         byNctId(nctIds: $nctIds) {
+          studyId,
           nctId,
           briefTitle,
+          briefSummary,
+          detailedDescription,
           startDate,
           completionDate,
+          studyType,
+          phase,
+          studyOutcomes {
+            outcomeType
+            protocolOutcome {
+              measure,
+              timeFrame,
+              description,
+            }
+          },
+          studyReferences {
+            referenceType,
+            reference {
+              citation,
+              pmid,
+            },
+          },
           enrollment {
             value,
           },
           overallStatus,
           studyDesignInfo {
             primaryPurpose,
+            allocation,
+            interventionModel,
           },
+          armGroups {
+            armGroupType,
+            label,
+            description,,
+            interventions {
+              interventionType,
+              name,
+              description,
+            },
+          },
+          studyMeshTerms {
+            meshTermType,
+            meshTerm {
+              term
+            }
+          }
           eligibility {
             gender,
             criteria,
             minimumAge,
             maximumAge,
+          },
+          locations {
+            status,
+            contactPrimary {
+              phone,
+              phoneExt,
+              email,
+              person {
+                nameFirst,
+                nameMiddle,
+                nameLast,
+                degrees,
+              },
+            },
+            contactBackup {
+              phone,
+              phoneExt,
+              email,
+              person {
+                nameFirst,
+                nameMiddle,
+                nameLast,
+                degrees,
+              },
+            },
+            facility {
+              facilityCanonical {
+                name,
+                address,
+                phoneNumber,
+                url,
+              }
+            }
+          },
+          investigators {
+            role,
+            affiliation,
+            person {
+              nameFirst,
+              nameMiddle,
+              nameLast,
+              degrees,
+            },
           }
         }
       }
