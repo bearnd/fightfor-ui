@@ -3,6 +3,8 @@ import {
   StudyOverallStatus,
 } from '../interfaces/study.interface';
 
+import * as momentParser from 'moment-parser';
+import * as moment from 'moment';
 
 /**
  * Casts a fully-qualified overall-status enum string coming from GraphQL,
@@ -83,4 +85,46 @@ export function orderStringArray(entries: string[]): string[] {
   );
 
   return entriesSorted
+}
+
+
+/**
+ * Converts an interval string to a number of seconds.
+ * @param {string} interval The interval to be converted.
+ * @returns {number | null} The corresponding number of seconds the interval
+ * was converted to or `null` if parsing was not possible.
+ */
+export function intervalToSec(interval: string): number | null {
+  if (interval) {
+    // As the `moment-parser` library doesn't support the plural forms of units
+    // replace any such occurences with their plural form.
+    interval = interval.replace('Years', 'year');
+    interval = interval.replace('Months', 'month');
+    interval = interval.replace('Weeks', 'week');
+    interval = interval.replace('Days', 'day');
+    interval = interval.replace('Hours', 'hour');
+    interval = interval.replace('Minutes', 'minute');
+    interval = interval.replace('Seconds', 'second');
+
+    // Parse the interval string into an object that can be used to construct
+    // a `moment.Duration` object.
+    const intervalParsed = momentParser.parse(interval);
+
+    if (!intervalParsed) {
+      return null;
+    }
+
+    // Construct a `moment.Duration` object based on the value and unit of the
+    // parsed interval.
+    const duration = moment.duration(
+      intervalParsed.value,
+      intervalParsed.unit,
+    );
+
+    // Return the total number of seconds the duration represents.
+    return duration.asSeconds();
+  } else {
+    return null;
+  }
+
 }

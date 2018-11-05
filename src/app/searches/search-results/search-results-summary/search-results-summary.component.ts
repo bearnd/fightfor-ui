@@ -160,9 +160,6 @@ export class SearchResultsSummaryComponent implements OnInit {
     all: null,
   };
 
-  isSaved = false;
-  isEditable = false;
-
   constructor(
     public userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
@@ -194,14 +191,6 @@ export class SearchResultsSummaryComponent implements OnInit {
       .cardStudiesLocations.nativeElement.clientHeight;
     this.studiesLocationMapWidth = 0.45 * this
       .cardStudiesLocations.nativeElement.clientWidth;
-  }
-
-  toggleSaved() {
-    this.isSaved = !this.isSaved;
-  }
-
-  toggleEditable() {
-    this.isEditable = !this.isEditable;
   }
 
   /**
@@ -639,7 +628,7 @@ export class SearchResultsSummaryComponent implements OnInit {
    */
   onNavigateToList(searchUuid: string, overallStatusGroupName: string) {
 
-    this.router.navigate(
+    const result = this.router.navigate(
       [
         '/app',
         'searches',
@@ -648,6 +637,7 @@ export class SearchResultsSummaryComponent implements OnInit {
         overallStatusGroupName,
       ],
     );
+    result.finally();
   }
 
   /**

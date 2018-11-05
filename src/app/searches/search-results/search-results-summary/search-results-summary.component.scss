@@ -1,3 +1,6 @@
-.nav-pills-fixed {
-  position: fixed;
+.sticky-scrollable {
+  top: 0;
+  position: sticky;
+  height: 100%;
+  overflow: auto;
 }

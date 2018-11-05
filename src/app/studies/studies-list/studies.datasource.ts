@@ -5,10 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { catchError, finalize } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
-import { OrderType, StudyInterface } from '../../../interfaces/study.interface';
+import { OrderType, StudyInterface } from '../../interfaces/study.interface';
 import {
   StudyRetrieverService
-} from '../../../services/study-retriever.service';
+} from '../../services/study-retriever.service';
 
 
 

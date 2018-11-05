@@ -1,0 +1,1616 @@
+<div class="main-content">
+
+  <mat-spinner
+    *ngIf="studyRetrieverService.isLoadingGetStudiesByNctId | async"
+    style="position:relative;top:50%;left:50%"
+  ></mat-spinner>
+
+  <div
+    class="container-fluid"
+    *ngIf="!(studyRetrieverService.isLoadingGetStudiesByNctId | async)"
+  >
+    <div class="row">
+
+      <div class="col-md-2 sticky-scrollable">
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column">
+
+          <!--Overview Pill-->
+          <li class="nav-item pill-small">
+            <!--The nav-pill links are used to smoothly scroll to the
+            corresponding card. In addition their `active` state is defined via
+            the `isNavPillActive` method which uses the current scroll location
+            of the page to automatically activate the nav-pill corresponding to
+            the currently viewed card.-->
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#overview"
+              [ngClass]="{active: isNavPillActive(0)}"
+            >
+              <i class="material-icons">info</i> Overview
+            </a>
+          </li>
+
+          <!--Treatments Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#treatments"
+              [ngClass]="{active: isNavPillActive(1)}"
+            >
+              <i class="material-icons">healing</i> Treatments
+            </a>
+          </li>
+
+          <!--Eligibility Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#eligibility"
+              [ngClass]="{active: isNavPillActive(2)}"
+            >
+              <i class="material-icons">tune</i> Eligibility
+            </a>
+          </li>
+
+          <!--Contact Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#contact"
+              [ngClass]="{active: isNavPillActive(3)}"
+            >
+              <i class="material-icons">person_pin_circle</i> Contact
+            </a>
+          </li>
+
+          <!--Investigators Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#investigators"
+              [ngClass]="{active: isNavPillActive(4)}"
+            >
+              <i class="material-icons">local_library</i> Investigators
+            </a>
+          </li>
+
+          <!--Summary Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#summary"
+              [ngClass]="{active: isNavPillActive(5)}"
+            >
+              <i class="material-icons">subject</i> Summary
+            </a>
+          </li>
+
+          <!--Outcomes Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#outcomes"
+              [ngClass]="{active: isNavPillActive(6)}"
+            >
+              <i class="material-icons">insert_chart</i> Outcomes
+            </a>
+          </li>
+
+          <!--References Pill-->
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#references"
+              [ngClass]="{active: isNavPillActive(7)}"
+            >
+              <i class="material-icons">library_books</i> References
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <!--Overview Card-->
+        <div class="row" id="overview">
+          <div class="card">
+
+            <!--Overview Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 0)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">info</i>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">{{ study.briefTitle | uppercase }}</h4>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    mat-raised-button
+                    type="button"
+                    class="btn btn-rose btn-round btn-just-icon btn-link mat-raised-button btn-fab pull-right"
+                    (click)="onToggleSavedStudy()"
+                    [disableRipple]="true"
+                    matTooltip="Save this trial"
+                    [matTooltipPosition]="'above'"
+                  >
+                    <i class="material-icons">
+                      {{ isStudySaved ? "favorite" : "favorite_outline" }}
+                    </i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--END: Overview Card: Header-->
+
+            <!--Overview Card: Body-->
+            <div class="card-body">
+
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <p>
+                        Start Date: {{ study.startDate | date:'fullDate' }}
+                      </p>
+                    </div>
+                    <div class="row">
+                      <p>
+                        End Date: {{ study.completionDate ? (study.completionDate | date:'fullDate') : 'N/A' }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 text-right">
+                    <div class="row text-right">
+                      <p class="pull-right">
+                        Total participants to be recruited
+                      </p>
+                    </div>
+                    <div class="row">
+                      <h4 class="pull-right text-rose">
+                        {{
+                          study.enrollment.value ?
+                          study.enrollment.value :
+                          "Not specified"
+                        }}
+                      </h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--Study Conditions: Heading-->
+              <div class="row" *ngIf="studyConditionMeshTerms.length">
+                <div class="col-md-12">
+                  <h4 class="card-title">Conditions</h4>
+                </div>
+              </div>
+              <!--Study Conditions: Heading: END-->
+
+              <!--Study Conditions: Chips-->
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-chip-list>
+                    <mat-chip
+                      *ngFor="let meshTerm of studyConditionMeshTerms"
+                      [selectable]="false"
+                      [selected]="false"
+                      [removable]="false"
+                      style="margin-top: 15px; margin-bottom: 15px"
+                    >
+                      {{ meshTerm.term }}
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+              </div>
+              <!--Study Conditions: Chips: END-->
+
+              <!--Study Interventions: Heading-->
+              <div class="row" *ngIf="studyInterventionMeshTerms.length">
+                <div class="col-md-12">
+                  <h4 class="card-title">Interventions</h4>
+                </div>
+              </div>
+              <!--Study Interventions: Heading: END-->
+
+              <!--Study Interventions: Chips-->
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-chip-list>
+                    <mat-chip
+                      *ngFor="let meshTerm of studyInterventionMeshTerms"
+                      [selectable]="false"
+                      [selected]="false"
+                      [removable]="false"
+                      style="margin-top: 15px; margin-bottom: 15px"
+                    >
+                      {{ meshTerm.term }}
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+              </div>
+              <!--Study Interventions: Chips: END-->
+
+              <h4 class="card-title">Trial Type</h4>
+              <!--Study Type Widget-->
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyTypeIndex === 1 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">remove_red_eye</i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyTypeIndex === 1 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Observational
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyTypeIndex === 2 ? 'rose' : 'outline'"
+                    >
+                      <i class="fa fa-lg fa-syringe"></i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyTypeIndex === 2 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Interventional
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyTypeIndex === 3 ? 'rose' : 'outline'"
+                    >
+                      <i class="fa fa-lg fa-lock-open"></i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyTypeIndex === 3 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Expanded Access
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyTypeIndex === 4 ? 'rose' : 'outline'"
+                    >
+                      <i class="fa fa-lg fa-question"></i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyTypeIndex === 4 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Not Specified
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyTypeMessage"
+                  >
+                    <h5 class="text-rose" style="text-align: center">
+                      {{ studyTypeMessage }}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <!--Study Type Widget: End-->
+
+              <h4 class="card-title">Trial Phase</h4>
+
+              <div class="row">
+                <div
+                  class="col-md-12 text-center"
+                  *ngIf="!studyPhaseMessage"
+                >
+                  <h5
+                    class="text-rose"
+                    style="text-align: center"
+                  >
+                    Phases are not applicable to this trial
+                  </h5>
+                </div>
+              </div>
+
+              <!--Study Phase Widget-->
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-2">
+                    <div
+                      class="badge-category"
+                      [ngClass]="isStudyPhase1Early ? 'rose' : 'outline'"
+                    >
+                      <p>0</p>
+                      <div
+                        class="badge badge-category-title-short"
+                        [ngClass]="
+                          isStudyPhase1Early ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Phase 1 (early)
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div
+                      class="badge-category"
+                      [ngClass]="isStudyPhase1 ? 'rose' : 'outline'"
+                    >
+                      <p>1</p>
+                      <div
+                        class="badge badge-category-title-short"
+                        [ngClass]="
+                          isStudyPhase1 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Phase 1
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div
+                      class="badge-category"
+                      [ngClass]="isStudyPhase2 ? 'rose' : 'outline'"
+                    >
+                      <p>2</p>
+                      <div
+                        class="badge badge-category-title-short"
+                        [ngClass]="
+                          isStudyPhase2 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Phase 2
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div
+                      class="badge-category"
+                      [ngClass]="isStudyPhase3 ? 'rose' : 'outline'"
+                    >
+                      <p>3</p>
+                      <div
+                        class="badge badge-category-title-short"
+                        [ngClass]="
+                          isStudyPhase3 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Phase 3
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div
+                      class="badge-category"
+                      [ngClass]="isStudyPhase4 ? 'rose' : 'outline'"
+                    >
+                      <p>4</p>
+                      <div
+                        class="badge badge-category-title-short"
+                        [ngClass]="
+                          isStudyPhase4 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Phase 4
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyPhaseMessage"
+                  >
+                    <h5 class="text-rose" style="text-align: center">
+                      {{ studyPhaseMessage }}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <!--Study Phase Widget: End-->
+
+              <h4 class="card-title">Trial Status</h4>
+              <!--Study Status Widget-->
+              <div class="col-md-12">
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyStatusLevel === 0"
+                  >
+                    <h3
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      Trial Status: {{ getStatusDescription(study.overallStatus) }}
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <ul class="timeline-horizontal timeline-horizontal-simple">
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 1 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 1 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Not yet recruiting
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 2 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 2 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Recruiting
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge"
+                        [ngClass]="studyStatusLevel >= 3 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 3 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Active
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="timeline-horizontal-badge outline"
+                        [ngClass]="studyStatusLevel >= 4 ? 'rose' : 'outline'"
+                      >
+                        <i class="material-icons">check</i>
+                        <div class="timeline-horizontal-heading">
+                          <span
+                            class="badge"
+                            [ngClass]="
+                              studyStatusLevel >= 4 ?
+                              'badge-rose' :
+                              'badge-outline'
+                            "
+                          >
+                            Completed
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyStatusMessage"
+                  >
+                    <h5
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      {{ studyStatusMessage }}
+                    </h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <button
+                      mat-raised-button
+                      type="button"
+                      class="btn btn-rose mat-raised-button pull-center"
+                      [disabled]="!studyCanContact"
+                      (click)="onOverviewContract()"
+                    >
+                      <span class="mat-button-wrapper">Contact</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!--Study Status Widget: End-->
+
+              <h4 class="card-title">Trial Primary Purpose</h4>
+              <!--Study Purpose Widget-->
+              <div class="col-md-12">
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyPurposeIndex === 0"
+                  >
+                    <h3
+                      class="text-rose"
+                      style="text-align: center"
+                    >
+                      Trial Primary Purpose Not Specified
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 1 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">favorite</i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 1 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Support & Prevention
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 2 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">warning</i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 2 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Screening & Diagnostic
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 3 ? 'rose' : 'outline'"
+                    >
+                      <i class="material-icons">local_hospital</i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 3 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Treatment
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div
+                      class="badge-category"
+                      [ngClass]="studyPurposeIndex === 4 ? 'rose' : 'outline'"
+                    >
+                      <i class="fa fa-lg fa-flask"></i>
+                      <div
+                        class="badge badge-category-title"
+                        [ngClass]="
+                          studyPurposeIndex === 4 ?
+                          'badge-rose' :
+                          'badge-outline'
+                        "
+                      >
+                        Research or other
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div
+                    class="col-md-12 text-center"
+                    *ngIf="studyPurposeMessage"
+                  >
+                    <h5 class="text-rose" style="text-align: center">
+                      {{ studyPurposeMessage }}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <!--Study Purpose Widget: End-->
+            </div>
+            <!--END: Overview Card: Body-->
+          </div>
+        </div>
+        <!--END: Overview Card-->
+
+        <!--Treatments Card-->
+        <div class="row" id="treatments">
+          <div class="card">
+
+            <!--Treatments Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 1)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">healing</i>
+              </div>
+              <h4 class="card-title">{{ 'Treatments' | uppercase }}</h4>
+            </div>
+            <!--END: Treatments Card: Header-->
+
+            <!--Treatments Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Treatments & Interventions</h4>
+              <div class="row">
+                <div class="col-md-12">
+                  <div
+                    *ngIf="isStudyRandomized()"
+                    class="alert alert-rose alert-with-icon"
+                    data-notify="container"
+                  >
+                    <i class="material-icons" data-notify="icon">notifications</i>
+                    <button
+                      mat-button
+                      type="button"
+                      class="close"
+                      data-dismiss="alert"
+                      aria-label="Close"
+                    >
+                      <i class="material-icons">close</i>
+                    </button>
+                    <span data-notify="message">
+                    This trial splits participants into
+                    {{ study.armGroups?.length }} groups who may receive very
+                    different treatment. If you participate in this study you
+                    will be randomly allocated to one or more of the below
+                    groups and will not have a choice in which treatment you
+                    receive.
+                  </span>
+                  </div>
+                </div>
+              </div>
+
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel
+                  *ngFor="let armGroup of study.armGroups; let idx = index"
+                  [expanded]="true"
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Group {{ idx + 1 }}: {{ armGroup.armGroupType }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{ armGroup.label }}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p class="card-description">
+                    {{ armGroup.description }}
+                  </p>
+                  <div
+                    class="row"
+                    *ngFor="let intervention of armGroup.interventions; let idx = index"
+                  >
+                    <div class="col-md-12">
+                      <h5 class="card-title">
+                        Treatment/Intervention {{ idx + 1}}: {{ intervention.name }}
+                      </h5>
+                      <ul class="intervention-types">
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 1 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-user"
+                              matTooltip="Behavioural"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 1"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 1"
+                              class="label"
+                            >
+                                Behavioural
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 2 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-microscope"
+                              matTooltip="Biological"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 2"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 2"
+                              class="label"
+                            >
+                                Biological
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 3 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-code-branch"
+                              matTooltip="Combination"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 3"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 3"
+                              class="label"
+                            >
+                                Combination
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 4 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-heartbeat"
+                              matTooltip="Device"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 4"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 4"
+                              class="label"
+                            >
+                                Device
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 5 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-exclamation-triangle"
+                              matTooltip="Diagnostic"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 5"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 5"
+                              class="label"
+                            >
+                                Diagnostic
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 6 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-apple-alt"
+                              matTooltip="Dietary"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 6"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 6"
+                              class="label"
+                            >
+                                Dietary
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 7 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-capsules"
+                              matTooltip="Drug"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 7"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 7"
+                              class="label"
+                            >
+                                Drug
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 8 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-dna"
+                              matTooltip="Genetic"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 8"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 8"
+                              class="label"
+                            >
+                                Genetic
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 9 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-user-md"
+                              matTooltip="Procedure"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 9"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 9"
+                              class="label"
+                            >
+                                Procedure
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 10 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-atom"
+                              matTooltip="Radiation"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 10"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 10"
+                              class="label"
+                            >
+                                Radiation
+                              </span>
+                          </div>
+                        </li>
+                        <li
+                          [ngClass]="
+                              getInterventionTypeIndex(intervention) === 11 ?
+                              'active' :
+                              null
+                            "
+                        >
+                          <div class="text-center">
+                            <i
+                              class="fa fa-band-aid"
+                              matTooltip="Other"
+                              [matTooltipDisabled]
+                                ="getInterventionTypeIndex(intervention) === 11"
+                            ></i>
+                            <span
+                              *ngIf="getInterventionTypeIndex(intervention) === 11"
+                              class="label"
+                            >
+                                Other
+                              </span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-md-12">
+                      <p class="card-description">
+                        {{ intervention.description }}
+                      </p>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+              <h4 class="card-title">Group Allocation</h4>
+              <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
+                  <div
+                    class="badge-category"
+                    [ngClass]="isStudyRandomized() ? 'rose' : 'outline'"
+                  >
+                    <i class="material-icons">shuffle</i>
+                    <div
+                      class="badge badge-category-title"
+                      [ngClass]=
+                        "isStudyRandomized() ? 'badge-rose' : 'badge-outline'"
+                    >
+                      Random
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div
+                    class="badge-category"
+                    [ngClass]="!isStudyRandomized() ? 'rose' : 'outline'"
+                  >
+                    <i class="material-icons">repeat</i>
+                    <div
+                      class="badge badge-category-title"
+                      [ngClass]=
+                        "!isStudyRandomized() ? 'badge-rose' : 'badge-outline'"
+                    >
+                      Non-Random
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                </div>
+              </div>
+
+              <div class="row" *ngIf="isStudyRandomized()">
+                <div class="col-md-12 text-center">
+                  <h5
+                    class="text-rose"
+                    style="text-align: center"
+                  >
+                    'Participants could be assigned to any group'
+                  </h5>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!--END: Treatments Card-->
+
+        <!--Eligibility Card-->
+        <div class="row" id="eligibility">
+          <div class="card">
+
+            <!--Eligibility Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 2)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">tune</i>
+              </div>
+              <h4 class="card-title">{{ 'Eligibility' | uppercase }}</h4>
+            </div>
+            <!--END: Eligibility Card: Header-->
+
+            <!--Eligibility Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Patient Details</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="patientGender">Patient Gender</label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-radio-group
+                        id="patientGender"
+                        type="radio"
+                      >
+                        <mat-radio-button
+                          value="MALE"
+                          [checked]="study.eligibility.gender === 'MALE'"
+                        >
+                          Male&nbsp;&nbsp;
+                        </mat-radio-button>
+                        <mat-radio-button
+                          value="FEMALE"
+                          [checked]="study.eligibility.gender === 'FEMALE'"
+                        >
+                          Female&nbsp;&nbsp;
+                        </mat-radio-button>
+                        <mat-radio-button
+                          value="ALL"
+                          [checked]="
+                        !study.eligibility.gender ||
+                        study.eligibility.gender === 'ALL'
+                      "
+                        >
+                          All&nbsp;&nbsp;
+                        </mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="sliderAgeRange">Age-Range</label>
+                  <ion-range-slider
+                    id="sliderAgeRange"
+                    #sliderAgeRange
+                    type="double"
+                    [disable]="true"
+                    [min]="studyEligibilityAgeRangeAll.ageBeg"
+                    [max]="studyEligibilityAgeRangeAll.ageEnd"
+                    [from]="
+                      studyEligibilityAgeRange.ageBeg ||
+                      studyEligibilityAgeRangeAll.ageBeg
+                    "
+                    [to]="
+                      studyEligibilityAgeRange.ageEnd ||
+                      studyEligibilityAgeRangeAll.ageEnd
+                    "
+                    style="width: 200px;"
+                    [prettify_enabled]="false"
+                  >
+                  </ion-range-slider>
+                </div>
+              </div>
+
+              <mat-accordion>
+                <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Criteria
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      The patient inclusion criteria for this trial
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <p class="card-description">
+                    {{ study.eligibility.criteria }}
+                  </p>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <!--END: Eligibility Card: Body-->
+          </div>
+        </div>
+        <!--END: Eligibility Card-->
+
+        <!--Contact Card-->
+        <div class="row" id="contact">
+          <div class="card">
+
+            <!--Contact Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 3)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">person_pin_circle</i>
+              </div>
+              <h4 class="card-title">{{ 'Contact' | uppercase }}</h4>
+            </div>
+            <!--END: Contact Card: Header-->
+
+            <!--Contact Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Locations & Contacts</h4>
+
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel
+                  *ngFor="let location of study.locations; let idx = index"
+                  [expanded]="
+                    (idx === 0 && study.locations.length > 5) ||
+                    (study.locations.length <= 5)
+                  "
+                >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ location.facility.facilityCanonical.name }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{ getLocationStatusMessage(location.status) }}
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div
+                    class="row"
+                    *ngIf="location.facility.facilityCanonical.address"
+                  >
+                    <div class="col-md-1 card-description">
+                      <i class="material-icons">location_on</i>
+                    </div>
+                    <div class="col-md-11">
+                      <p class="card-description">
+                        {{ location.facility.facilityCanonical.address }}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="location.facility.facilityCanonical.phoneNumber"
+                  >
+                    <div class="col-md-1 card-description">
+                      <i class="material-icons">phone</i>
+                    </div>
+                    <div class="col-md-11">
+                      <p class="card-description">
+                        {{ location.facility.facilityCanonical.phoneNumber }}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="row"
+                    *ngIf="location.facility.facilityCanonical.url"
+                  >
+                    <div class="col-md-1 card-description">
+                      <i class="material-icons">public</i>
+                    </div>
+                    <div class="col-md-11">
+                      <a
+                        class="card-description"
+                        href="{{ location.facility.facilityCanonical.url }}"
+                      >
+                        {{ location.facility.facilityCanonical.url }}
+                      </a>
+                    </div>
+                  </div>
+                  <div
+                    class="row"
+                    *ngFor="let contact of getLocationContacts(location)"
+                  >
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-1">
+                          <i
+                            class="material-icons card-description icon-center"
+                          >
+                            contact_mail
+                          </i>
+                        </div>
+                        <div class="col-md-11">
+                          <p class="card-description">
+                            Name: {{ getPersonName(contact.person) }}
+                          </p>
+                          <p
+                            class="card-description"
+                            *ngIf="contact.phone"
+                          >
+                            Phone: {{ contact.phone }}
+                          </p>
+                          <p
+                            class="card-description"
+                            *ngIf="contact.email"
+                          >
+                            Email:
+                            <a
+                              href="mailto:{{ contact.email }}"
+                            >
+                              {{ contact.email }}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <!--END: Contact Card: Body-->
+          </div>
+        </div>
+        <!--END: Contact Card-->
+
+        <!--Investigators Card-->
+        <div class="row" id="investigators">
+          <div class="card">
+
+            <!--Investigators Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 4)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">local_library</i>
+              </div>
+              <h4 class="card-title">{{ 'Investigators' | uppercase }}</h4>
+            </div>
+            <!--END: Investigators Card: Header-->
+
+            <!--Investigators Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Investigators & Affiliations</h4>
+              <mat-accordion [multi]="true">
+                <div
+                  *ngFor="let investigatorRole of studyGroupsInvestigatorsRoles"
+                >
+                  <mat-expansion-panel
+                    *ngIf="studyGroupsInvestigators[investigatorRole].length"
+                    [expanded]="investigatorRole === 'Principal Investigator'"
+                  >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ investigatorRole + 's' }}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="row"
+                         *ngFor="
+                          let investigator of
+                          studyGroupsInvestigators[investigatorRole]
+                         "
+                    >
+                      <div class="col-md-1">
+                        <i
+                          class="material-icons card-description icon-center"
+                        >
+                          contact_mail
+                        </i>
+                      </div>
+                      <div class="col-md-5">
+                        <p class="card-description">
+                          Name: {{ getPersonName(investigator.person) }}
+                        </p>
+                      </div>
+                      <div class="col-md-6">
+                        <p
+                          class="card-description"
+                          *ngIf="investigator.affiliation"
+                        >
+                          {{ investigator.affiliation }}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </mat-accordion>
+            </div>
+            <!--END: Investigators Card: Body-->
+
+          </div>
+        </div>
+        <!--END: Investigators Card-->
+
+        <!--Summary Card-->
+        <div class="row" id="summary">
+          <div class="card">
+
+            <!--Summary Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 5)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">subject</i>
+              </div>
+              <h4 class="card-title">{{ 'Summary' | uppercase }}</h4>
+            </div>
+            <!--END: Summary Card: Header-->
+
+            <!--Summary Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Summary & Description</h4>
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Brief Summary
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p class="card-description">{{ study.briefSummary }}</p>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [expanded]="false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Detailed Description
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <p class="card-description">
+                    {{ study.detailedDescription }}
+                  </p>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+            <!--END: Summary Card: Body-->
+          </div>
+        </div>
+        <!--END: Summary Card-->
+
+        <!--Outcomes Card-->
+        <div class="row" id="outcomes">
+          <div class="card">
+            <!--Outcomes Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 6)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">insert_chart</i>
+              </div>
+              <h4 class="card-title">{{ 'Outcomes' | uppercase }}</h4>
+            </div>
+            <!--END: Outcomes Card: Header-->
+
+            <!--Outcomes Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Trial Outcomes</h4>
+              <mat-accordion [multi]="true">
+                <div
+                  *ngFor="let outcomeType of studyGroupsOutcomesTypes"
+                >
+                  <mat-expansion-panel
+                    *ngIf="studyGroupsOutcomes[outcomeType].length"
+                    [expanded]="outcomeType === 'Primary'"
+                  >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ outcomeType + ' Outcomes' }}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        {{ getOutcomeTypeMessage(outcomeType) }}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div
+                      class="row"
+                      *ngFor="let outcome of studyGroupsOutcomes[outcomeType]"
+                    >
+                      <div class="col-md-3">
+                        <i class="material-icons card-description">
+                          access_time
+                        </i>
+                        <h5><small>Time Frame</small></h5>
+                        <p class="card-description">
+                          {{ outcome.timeFrame ? outcome.timeFrame : 'N/A' }}
+                        </p>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="row">
+                          <h5><small>Measure</small></h5>
+                        </div>
+                        <div class="row">
+                          <p class="card-description">
+                            {{ outcome.measure }}
+                          </p>
+                        </div>
+                        <div class="row" *ngIf="outcome.description">
+                          <h5>
+                            <small>
+                              Description of how this outcome will be measured
+                            </small>
+                          </h5>
+                        </div>
+                        <div class="row">
+                          <p class="card-description">
+                            {{ outcome.description }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </mat-accordion>
+            </div>
+            <!--END: Outcomes Card: Body-->
+          </div>
+        </div>
+        <!--Outcomes Card-->
+
+        <!--References Card-->
+        <div class="row" id="references">
+          <div class="card">
+            <!--References Card: Header-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 7)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">library_books</i>
+              </div>
+              <h4 class="card-title">{{ 'References' | uppercase }}</h4>
+            </div>
+            <!--END: References Card: Header-->
+
+            <!--References Card: Body-->
+            <div class="card-body">
+              <h4 class="card-title">Study References</h4>
+              <mat-accordion [multi]="true">
+                <div
+                  *ngFor="let referenceType of studyGroupsReferencesTypes"
+                >
+                  <mat-expansion-panel
+                    *ngIf="studyGroupsReferences[referenceType].length"
+                    [expanded]="referenceType === 'Standard'"
+                  >
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ referenceType + ' References' }}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        {{ getReferenceTypeMessage(referenceType) }}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div
+                      class="row"
+                      *ngFor="let reference of studyGroupsReferences[referenceType]"
+                    >
+                      <div class="col-md-3">
+                        <button
+                          *ngIf="reference.pmid"
+                          mat-raised-button
+                          class="btn btn-rose mat-raised-button"
+                          type="button"
+                          (click)="onSeeCitation(reference.pmid)"
+                        >
+                          <span class="mat-button-wrapper">See Paper</span>
+                        </button>
+                      </div>
+                      <div class="col-md-9">
+                        <p class="card-description">
+                          {{ reference.citation }}
+                        </p>
+                      </div>
+                    </div>
+                  </mat-expansion-panel>
+                </div>
+              </mat-accordion>
+            </div>
+            <!--END: References Card: Body-->
+
+          </div>
+        </div>
+        <!--References Card-->
+
+        <p class="card-description"><small>
+          The information included in this trial summary has been taken from
+          clinicaltrials.gov - trial identifier {{ study.nctId }}. The
+          information has been modified to be more easily interpretable by
+          persons unfamiliar with medical and/or clinical trial-specific terms
+          and in some cases has been simplified. More information on this trial
+          is available at
+          <a
+            href="https://clinicaltrials.gov/ct2/show/{{ study.nctId }}"
+          >
+            https://clinicaltrials.gov/ct2/show/{{ study.nctId }}
+          </a>
+        </small></p>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Rx';
 
 import {
   InterventionType,
@@ -85,26 +86,36 @@ interface ResponseCountStudies {
   }
 }
 
-interface ResponseGetStudyByNctId {
-  getStudyByNctId: StudyInterface
+interface ResponseGetStudiesByNctIds {
+  studies: {
+    byNctId: StudyInterface[]
+  }
 }
 
-interface VariablesGetStudyByNctId {
-  nctId: string
+interface VariablesGetStudiesByNctIds {
+  nctIds: string[]
 }
 
 @Injectable()
 export class StudyRetrieverService {
 
-  private loadingSearchStudies = new BehaviorSubject<boolean>(false);
-  private loadingGetStudyByNctId = new BehaviorSubject<boolean>(false);
-  private loadingFilterStudies = new BehaviorSubject<boolean>(false);
-  private loadingCountStudies = new BehaviorSubject<boolean>(false);
+  private loadingSearchStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingGetStudiesByNctId: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingFilterStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  private loadingCountStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
 
-  public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
-  public isLoadingGetStudyByNctId = this.loadingGetStudyByNctId.asObservable();
-  public isLoadingFilterStudies = this.loadingFilterStudies.asObservable();
-  public isLoadingCountStudies = this.loadingCountStudies.asObservable();
+  public isLoadingSearchStudies: Observable<boolean>
+    = this.loadingSearchStudies.asObservable();
+  public isLoadingGetStudiesByNctId: Observable<boolean>
+    = this.loadingGetStudiesByNctId.asObservable();
+  public isLoadingFilterStudies: Observable<boolean>
+    = this.loadingFilterStudies.asObservable();
+  public isLoadingCountStudies: Observable<boolean>
+    = this.loadingCountStudies.asObservable();
 
   querySearchStudies = gql`
     query searchStudies(
@@ -133,11 +144,109 @@ export class StudyRetrieverService {
     }
   `;
 
-  queryGetStudyByNctId = gql`
-    query($nctId: String!) {
-       getStudyByNctId(nctId: $nctId) {
-        studyId,
-        nctId,
+  queryGetStudiesByNctIds = gql`
+    query getStudiesByNctId($nctIds: [String]!) {
+      studies {
+        byNctId(nctIds: $nctIds) {
+          studyId,
+          nctId,
+          briefTitle,
+          briefSummary,
+          detailedDescription,
+          startDate,
+          completionDate,
+          studyType,
+          phase,
+          studyOutcomes {
+            outcomeType
+            protocolOutcome {
+              measure,
+              timeFrame,
+              description,
+            }
+          },
+          studyReferences {
+            referenceType,
+            reference {
+              citation,
+              pmid,
+            },
+          },
+          enrollment {
+            value,
+          },
+          overallStatus,
+          studyDesignInfo {
+            primaryPurpose,
+            allocation,
+            interventionModel,
+          },
+          armGroups {
+            armGroupType,
+            label,
+            description,,
+            interventions {
+              interventionType,
+              name,
+              description,
+            },
+          },
+          studyMeshTerms {
+            meshTermType,
+            meshTerm {
+              term
+            }
+          }
+          eligibility {
+            gender,
+            criteria,
+            minimumAge,
+            maximumAge,
+          },
+          locations {
+            status,
+            contactPrimary {
+              phone,
+              phoneExt,
+              email,
+              person {
+                nameFirst,
+                nameMiddle,
+                nameLast,
+                degrees,
+              },
+            },
+            contactBackup {
+              phone,
+              phoneExt,
+              email,
+              person {
+                nameFirst,
+                nameMiddle,
+                nameLast,
+                degrees,
+              },
+            },
+            facility {
+              facilityCanonical {
+                name,
+                address,
+                phoneNumber,
+                url,
+              }
+            }
+          },
+          investigators {
+            role,
+            affiliation,
+            person {
+              nameFirst,
+              nameMiddle,
+              nameLast,
+              degrees,
+            },
+          }
+        }
       }
     }
   `;
@@ -186,6 +295,7 @@ export class StudyRetrieverService {
           limit: $limit,
           offset: $offset,
         ) {
+          nctId,
           studyId,
           briefTitle,
           facilitiesCanonical {
@@ -250,23 +360,23 @@ export class StudyRetrieverService {
   }
 
   /**
-   * Retrieve a clinical-trials study through its NCT ID.
-   * @param {string} nctId The NCT ID of the study to be retrieved.
+   * Retrieve clinical-trials studies through their NCT IDs.
+   * @param {string[]} nctIds The NCT IDs of the studies to be retrieved.
    */
-  getTrialByNctId(nctId: string) {
+  getStudiesByNctIds(nctIds: string[]): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
-    this.loadingGetStudyByNctId.next(true);
+    this.loadingGetStudiesByNctId.next(true);
 
     return this.apollo
-      .query<ResponseGetStudyByNctId, VariablesGetStudyByNctId>({
-        query: this.queryGetStudyByNctId,
+      .query<ResponseGetStudiesByNctIds, VariablesGetStudiesByNctIds>({
+        query: this.queryGetStudiesByNctIds,
         variables: {
-          nctId: nctId
+          nctIds: nctIds
         }
       }).map((response) => {
         // Update the 'loading' observable to indicate that loading is complete.
-        this.loadingGetStudyByNctId.next(false);
-        return response.data.getStudyByNctId;
+        this.loadingGetStudiesByNctId.next(false);
+        return response.data.studies.byNctId;
       });
   }
 
@@ -293,7 +403,7 @@ export class StudyRetrieverService {
     yearEnd?: number,
     ageBeg?: number,
     ageEnd?: number,
-  ) {
+  ): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingSearchStudies.next(true);
 
@@ -379,7 +489,7 @@ export class StudyRetrieverService {
     order?: OrderType,
     limit?: number,
     offset?: number,
-  ) {
+  ): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingFilterStudies.next(true);
 
@@ -469,7 +579,7 @@ export class StudyRetrieverService {
     yearEnd?: number,
     ageBeg?: number,
     ageEnd?: number,
-  ) {
+  ): Observable<number> {
     // Update the 'loading' observable to indicate that loading is in progress.
     this.loadingCountStudies.next(true);
 
@@ -507,5 +617,4 @@ export class StudyRetrieverService {
         return response.data.studies.count;
       });
   }
-
 }

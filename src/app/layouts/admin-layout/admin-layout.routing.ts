@@ -16,8 +16,10 @@ import {
 } from '../../searches/search-results/search-results-summary/search-results-summary.component';
 import {
   StudiesListComponent
-} from '../../searches/search-results/studies-list/studies-list.component';
+} from '../../studies/studies-list/studies-list.component';
 import { PaymentGuard } from '../../guards/payment.guard';
+import { StudyComponent } from '../../studies/study/study.component';
+import { StudiesComponent } from '../../studies/studies.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -70,16 +72,55 @@ export const AdminLayoutRoutes: Routes = [
             }
           },
           {
+            path: 'trials',
+            component: StudiesComponent,
             canActivate: [PaymentGuard],
             canActivateChild: [PaymentGuard],
-            path: 'trials/:overallStatus',
-            component: StudiesListComponent,
             data: {
               breadcrumbs: 'Trials'
             },
+            children: [
+              {
+                path: ':overallStatus',
+                component: StudiesListComponent
+              },
+            ]
           },
+          {
+            path: 'trial',
+            component: StudiesComponent,
+            canActivate: [PaymentGuard],
+            canActivateChild: [PaymentGuard],
+            data: {
+              breadcrumbs: 'Trial'
+            },
+            children: [
+              {
+                path: ':studyNctId',
+                component: StudyComponent,
+                data: {
+                  breadcrumbs: 'Trial'
+                }
+              },
+            ]
+          }
         ],
       },
     ],
   },
+  {
+    path: 'trials',
+    component: StudiesComponent,
+    canActivate: [PaymentGuard],
+    canActivateChild: [PaymentGuard],
+    data: {
+      breadcrumbs: 'Trials'
+    },
+    children: [
+      {
+        path: ':studyNctId',
+        component: StudyComponent,
+      },
+    ],
+  }
 ];
