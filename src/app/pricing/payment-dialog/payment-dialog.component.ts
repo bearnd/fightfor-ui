@@ -58,7 +58,7 @@ export class PaymentDialogComponent implements OnInit {
         title: 'Thank you!',
         text: 'Your 7-day trial has started (you can cancel anytime).',
         buttonsStyling: false,
-        confirmButtonClass: 'btn btn-success',
+        confirmButtonClass: 'btn btn-rose',
         type: 'success'
       }).catch(swal.noop);
       // Trigger the loading of the profiles to retrieve the updated versions.
@@ -69,7 +69,7 @@ export class PaymentDialogComponent implements OnInit {
         text: 'An error occured while establishing a subscription.',
         footer: '<p>Email <a href="mailto:support@bearnd.io">support@bearnd.io</a></p>',
         buttonsStyling: false,
-        confirmButtonClass: 'btn btn-info',
+        confirmButtonClass: 'btn btn-rose',
         type: 'error'
       }).catch(swal.noop);
     }

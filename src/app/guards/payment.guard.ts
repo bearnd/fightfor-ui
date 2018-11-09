@@ -70,7 +70,7 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
         showCancelButton: true,
         showConfirmButton: true,
         buttonsStyling: false,
-        confirmButtonClass: 'btn btn-success',
+        confirmButtonClass: 'btn btn-rose',
         cancelButtonClass: 'btn btn-danger',
         confirmButtonText: 'Go to pricing',
         cancelButtonText: 'No thanks',
