@@ -10,13 +10,11 @@ import {
   MatTable,
   MatPaginator,
   MatSort,
-  MatDialog,
   MatAutocompleteSelectedEvent,
 } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
@@ -153,7 +151,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     private userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
-    private dialog: MatDialog,
     private geolocationService: GeolocationService,
     private router: Router,
     private route: ActivatedRoute,
