@@ -48,6 +48,7 @@ import {
   MapBoxGeocodeResponse
 } from '../../services/geolocation.service';
 import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
 
 
 interface EnumInterface {
@@ -58,6 +59,11 @@ interface EnumInterface {
 interface StudyLocationInterface {
   id: number
   name: string
+}
+
+enum Mode {
+  SEARCH = 'Search',
+  SAVED = 'Saved',
 }
 
 
@@ -140,14 +146,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   studiesPageSizeOptions = [10, 25, 50];
   // Total number of studies used in the studies-table paginator.
   studiesCount: number;
-  // An observable indicating whether the total number of studies populating
-  // `studiesCount` which is used in the paginator is being loaded.
-  isLoadingStudiesCount: Observable<boolean>;
 
-  // The search the component will display results for.
-  public search: SearchInterface;
+  // The mode in which the component is displayed which can either be
+  // displaying the studies a user has saved or the study results pertaining to
+  // a search.
+  private mode: Mode = null;
+
+  // The studies the component will display.
+  public studies: StudyInterface[];
 
   constructor(
+    private authService: AuthService,
     private userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
@@ -166,15 +175,34 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       = this.route.parent.parent.snapshot.params['searchUuid'];
 
     // Retrieve the referenced search.
-    this.search = this.userConfigService.getUserSearch(searchUuid);
+    const search: SearchInterface
+      = this.userConfigService.getUserSearch(searchUuid);
 
-    if (!this.search) {
-      const result = this.router.navigate(['/app', 'searches']);
-      result.finally();
+    // If the component was called with a search UUID defined in the path but
+    // the search cannot be found in the `userConfigService` then redirect the
+    // user to the `SearchesGridComponent`.
+    if (searchUuid) {
+      if (search) {
+        this.studies = search.studies;
+        this.mode = Mode.SEARCH;
+      } else {
+        const result = this.router.navigate(['/app', 'searches']);
+        result.finally();
+      }
+      // If the component was called without a search UUID defined in the path
+      // then the user's saved studies are retrieved instead and displayed.
+    } else {
+      this.studies = this.userConfigService.userStudies;
+      this.mode = Mode.SAVED;
     }
 
-    // Retrieve the referenced overall-status.
-    const overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    // Retrieve the referenced overall-status and fallback to `all` if
+    // undefined.
+    let overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    if (!overallStatusGroup) {
+      overallStatusGroup = 'all';
+    }
+
     // Convert the referenced overall-status enum members and convert them to
     // an array of `{id: key, name: value}` objects which can be used in the
     // filter element.
@@ -190,11 +218,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
-
-    // Retrieve a reference to the observable defining whether the total number
-    // of studies is being loaded.
-    this.isLoadingStudiesCount =
-      this.studyRetrieverService.isLoadingCountStudies;
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
@@ -228,6 +251,21 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       selectDistanceMax: new FormControl(null),
     });
 
+    if (this.mode === Mode.SAVED) {
+      this.userConfigService.isUpdatingUserStudies.subscribe(
+        (isUpdatingUserStudies: boolean) => {
+          console.log('isUpdatingUserStudies: ' + isUpdatingUserStudies);
+          if (!isUpdatingUserStudies) {
+            this.studies = this.userConfigService.userStudies;
+            this.getStudiesPage();
+            console.log(this.studies);
+          }
+        }
+      );
+
+      this.userConfigService.getUserConfig(this.authService.userProfile);
+    }
+
     // Retrieve the initial set of studies.
     this.getStudiesPage();
 
@@ -240,7 +278,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique countries for this search's studies.
     this.studyStatsRetrieverService.getUniqueCountries(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned countries alphabetically.
       (uniqueCountries: string[]) => {
@@ -270,7 +308,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique states/regions for this search's studies.
     this.studyStatsRetrieverService.getUniqueStates(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned states alphabetically.
       (uniqueStates: string[]) => {
@@ -300,7 +338,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique cities for this search's studies.
     this.studyStatsRetrieverService.getUniqueCities(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned cities alphabetically.
       (uniqueCities: string[]) => {
@@ -707,7 +745,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve studies using the selected filters.
     this.dataSourceStudies.filterStudies(
-      this.search.studies,
+      this.studies,
       countries || null,
       states || null,
       cities || null,
@@ -730,7 +768,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the number of studies matching the current filters.
     this.studyRetrieverService.countStudies(
-      this.search.studies,
+      this.studies,
       countries || null,
       states || null,
       cities || null,
