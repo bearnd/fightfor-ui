@@ -752,9 +752,18 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  /**
+   * Retrieves the intervention MeSH terms for a given study. If there is only
+   * one such MeSH term it returns the name of that term. Should there be more
+   * than one term it returns the name of the first term and includes a suffix
+   * denoting how many additional terms exist.
+   * @param {StudyInterface} study The study for which the intervention MeSH
+   * terms will be returned.
+   * @returns {string | null} The MeSH term string result.
+   */
   getStudyInterventionMeshTerms(
     study: StudyInterface,
-  ): MeshTermInterface[] | string | null {
+  ): string | null {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
@@ -763,6 +772,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    // If there is only one such MeSH term it returns the name of that term.
+    // Should there be more than one term it returns the name of the first term
+    // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
       result = meshTerms[0].term;
@@ -776,6 +788,15 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return result;
   }
 
+  /**
+   * Retrieves the condition MeSH terms for a given study. If there is only
+   * one such MeSH term it returns the name of that term. Should there be more
+   * than one term it returns the name of the first term and includes a suffix
+   * denoting how many additional terms exist.
+   * @param {StudyInterface} study The study for which the condition MeSH
+   * terms will be returned.
+   * @returns {string | null} The MeSH term string result.
+   */
   getStudyConditionMeshTerms(
     study: StudyInterface,
   ): MeshTermInterface[] | string | null {
@@ -787,6 +808,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    // If there is only one such MeSH term it returns the name of that term.
+    // Should there be more than one term it returns the name of the first term
+    // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
       result = meshTerms[0].term;
