@@ -19,6 +19,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import swal from 'sweetalert2';
 
 import { SearchInterface } from '../../interfaces/user-config.interface';
 import {
@@ -449,6 +450,25 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe();
 
     this.setInitialValue();
+
+    // If there are no studies and the component is in 'saved' mode then show
+    // an alert.
+    if (!this.studies.length && this.mode === Mode.SEARCH) {
+      swal({
+        title: 'You have not followed any trials!',
+        html: '<p>Please follow trials you are interested in by ' +
+          'clicking the <i class="material-icons btn-rose" style=' +
+          '"color: #e91e63">favorite_outline</i> button when viewing' +
+          ' trials via a search.',
+        showCancelButton: false,
+        showConfirmButton: true,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-rose',
+        confirmButtonText: 'Got it',
+        type: 'info'
+      }).catch(swal.noop);
+    }
+
   }
 
   ngOnDestroy() {
