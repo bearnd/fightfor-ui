@@ -27,7 +27,7 @@ export class SearchesGridComponent implements OnInit {
 
     // Subscribe to the `UserConfigService.searchesLatest` observable. Each
     // time the searches are updated retrieve them and set them under
-    // `this.seaches` (in reverse order so that the latest searches appear
+    // `this.searches` (in reverse order so that the latest searches appear
     // first).
     this.userConfigService.searchesLatest.subscribe(
       (searches: SearchInterface[]) => {

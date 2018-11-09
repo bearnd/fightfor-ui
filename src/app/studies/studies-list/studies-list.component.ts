@@ -10,17 +10,16 @@ import {
   MatTable,
   MatPaginator,
   MatSort,
-  MatDialog,
   MatAutocompleteSelectedEvent,
 } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import swal from 'sweetalert2';
 
 import { SearchInterface } from '../../interfaces/user-config.interface';
 import {
@@ -50,6 +49,8 @@ import {
   MapBoxGeocodeResponse
 } from '../../services/geolocation.service';
 import { UserConfigService } from '../../services/user-config.service';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs/Rx';
 
 
 interface EnumInterface {
@@ -60,6 +61,11 @@ interface EnumInterface {
 interface StudyLocationInterface {
   id: number
   name: string
+}
+
+enum Mode {
+  SEARCH = 'Search',
+  SAVED = 'Saved',
 }
 
 
@@ -130,6 +136,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Studies columns to display.
   displayedColumns: string[] = [
+    'actions',
     'briefTitle',
     'overallStatus',
     'conditions',
@@ -142,18 +149,21 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   studiesPageSizeOptions = [10, 25, 50];
   // Total number of studies used in the studies-table paginator.
   studiesCount: number;
-  // An observable indicating whether the total number of studies populating
-  // `studiesCount` which is used in the paginator is being loaded.
-  isLoadingStudiesCount: Observable<boolean>;
 
-  // The search the component will display results for.
-  public search: SearchInterface;
+  // The mode in which the component is displayed which can either be
+  // displaying the studies a user has saved or the study results pertaining to
+  // a search.
+  private mode: Mode = null;
+
+  // The studies the component will display.
+  public studies: StudyInterface[];
+  private subscriptionIsUpdatingUserStudies: Subscription = null;
 
   constructor(
+    private authService: AuthService,
     private userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
-    private dialog: MatDialog,
     private geolocationService: GeolocationService,
     private router: Router,
     private route: ActivatedRoute,
@@ -169,15 +179,34 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       = this.route.parent.parent.snapshot.params['searchUuid'];
 
     // Retrieve the referenced search.
-    this.search = this.userConfigService.getUserSearch(searchUuid);
+    const search: SearchInterface
+      = this.userConfigService.getUserSearch(searchUuid);
 
-    if (!this.search) {
-      const result = this.router.navigate(['/app', 'searches']);
-      result.finally();
+    // If the component was called with a search UUID defined in the path but
+    // the search cannot be found in the `userConfigService` then redirect the
+    // user to the `SearchesGridComponent`.
+    if (searchUuid) {
+      if (search) {
+        this.studies = search.studies;
+        this.mode = Mode.SEARCH;
+      } else {
+        const result = this.router.navigate(['/app', 'searches']);
+        result.finally();
+      }
+      // If the component was called without a search UUID defined in the path
+      // then the user's saved studies are retrieved instead and displayed.
+    } else {
+      this.studies = this.userConfigService.userStudies;
+      this.mode = Mode.SAVED;
     }
 
-    // Retrieve the referenced overall-status.
-    const overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    // Retrieve the referenced overall-status and fallback to `all` if
+    // undefined.
+    let overallStatusGroup = this.route.snapshot.params['overallStatus'];
+    if (!overallStatusGroup) {
+      overallStatusGroup = 'all';
+    }
+
     // Convert the referenced overall-status enum members and convert them to
     // an array of `{id: key, name: value}` objects which can be used in the
     // filter element.
@@ -193,11 +222,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
-
-    // Retrieve a reference to the observable defining whether the total number
-    // of studies is being loaded.
-    this.isLoadingStudiesCount =
-      this.studyRetrieverService.isLoadingCountStudies;
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
@@ -231,6 +255,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       selectDistanceMax: new FormControl(null),
     });
 
+    if (this.mode === Mode.SAVED) {
+      this.subscriptionIsUpdatingUserStudies
+        = this.userConfigService.isUpdatingUserStudies.subscribe(
+        (isUpdatingUserStudies: boolean) => {
+          console.log('isUpdatingUserStudies: ' + isUpdatingUserStudies);
+          if (!isUpdatingUserStudies) {
+            this.studies = this.userConfigService.userStudies;
+            this.getStudiesPage();
+            console.log(this.studies);
+          }
+        }
+      );
+    }
+
     // Retrieve the initial set of studies.
     this.getStudiesPage();
 
@@ -243,7 +281,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique countries for this search's studies.
     this.studyStatsRetrieverService.getUniqueCountries(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned countries alphabetically.
       (uniqueCountries: string[]) => {
@@ -273,7 +311,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique states/regions for this search's studies.
     this.studyStatsRetrieverService.getUniqueStates(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned states alphabetically.
       (uniqueStates: string[]) => {
@@ -303,7 +341,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique cities for this search's studies.
     this.studyStatsRetrieverService.getUniqueCities(
-      this.search.studies,
+      this.studies,
     ).map(
       // Sort returned cities alphabetically.
       (uniqueCities: string[]) => {
@@ -413,11 +451,34 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe();
 
     this.setInitialValue();
+
+    // If there are no studies and the component is in 'saved' mode then show
+    // an alert.
+    if (!this.studies.length && this.mode === Mode.SEARCH) {
+      swal({
+        title: 'You have not followed any trials!',
+        html: '<p>Please follow trials you are interested in by ' +
+          'clicking the <i class="material-icons btn-rose" style=' +
+          '"color: #e91e63">favorite_outline</i> button when viewing' +
+          ' trials via a search.',
+        showCancelButton: false,
+        showConfirmButton: true,
+        buttonsStyling: false,
+        confirmButtonClass: 'btn btn-rose',
+        confirmButtonText: 'Got it',
+        type: 'info'
+      }).catch(swal.noop);
+    }
+
   }
 
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
+
+    if (this.subscriptionIsUpdatingUserStudies) {
+      this.subscriptionIsUpdatingUserStudies.unsubscribe();
+    }
   }
 
   /**
@@ -710,7 +771,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve studies using the selected filters.
     this.dataSourceStudies.filterStudies(
-      this.search.studies,
+      this.studies,
       countries || null,
       states || null,
       cities || null,
@@ -733,7 +794,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the number of studies matching the current filters.
     this.studyRetrieverService.countStudies(
-      this.search.studies,
+      this.studies,
       countries || null,
       states || null,
       cities || null,
@@ -755,9 +816,18 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  /**
+   * Retrieves the intervention MeSH terms for a given study. If there is only
+   * one such MeSH term it returns the name of that term. Should there be more
+   * than one term it returns the name of the first term and includes a suffix
+   * denoting how many additional terms exist.
+   * @param {StudyInterface} study The study for which the intervention MeSH
+   * terms will be returned.
+   * @returns {string | null} The MeSH term string result.
+   */
   getStudyInterventionMeshTerms(
     study: StudyInterface,
-  ): MeshTermInterface[] | string | null {
+  ): string | null {
     const meshTerms: MeshTermInterface[] = [];
 
     for (const studyMeshTerm of study.studyMeshTerms) {
@@ -766,6 +836,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    // If there is only one such MeSH term it returns the name of that term.
+    // Should there be more than one term it returns the name of the first term
+    // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
       result = meshTerms[0].term;
@@ -779,6 +852,15 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     return result;
   }
 
+  /**
+   * Retrieves the condition MeSH terms for a given study. If there is only
+   * one such MeSH term it returns the name of that term. Should there be more
+   * than one term it returns the name of the first term and includes a suffix
+   * denoting how many additional terms exist.
+   * @param {StudyInterface} study The study for which the condition MeSH
+   * terms will be returned.
+   * @returns {string | null} The MeSH term string result.
+   */
   getStudyConditionMeshTerms(
     study: StudyInterface,
   ): MeshTermInterface[] | string | null {
@@ -790,6 +872,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
 
+    // If there is only one such MeSH term it returns the name of that term.
+    // Should there be more than one term it returns the name of the first term
+    // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
       result = meshTerms[0].term;
@@ -850,23 +935,39 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getStudiesPage();
   }
 
+  /**
+   * Navigates to the details of a given study. Uses a different route
+   * depending on whether this component is viewed to see the studies of a
+   * search or the user's saved studies.
+   * @param {StudyInterface} study The study to which to navigate.
+   */
   onNavigateToStudy(study: StudyInterface) {
 
-    // Retrieve the referenced search UUID.
-    const searchUuid: string
-      = this.route.parent.parent.snapshot.params['searchUuid'];
+    if (this.mode === Mode.SEARCH) {
+      // Retrieve the referenced search UUID.
+      const searchUuid: string
+        = this.route.parent.parent.snapshot.params['searchUuid'];
 
-    console.log(study.nctId);
-    const result = this.router.navigate(
-      [
-        '/app',
-        'searches',
-        searchUuid,
-        'trial',
-        study.nctId,
-      ],
-    );
-    result.finally();
+      const result = this.router.navigate(
+        [
+          '/app',
+          'searches',
+          searchUuid,
+          'trial',
+          study.nctId,
+        ],
+      );
+      result.finally();
+    } else if (this.mode === Mode.SAVED) {
+      const result = this.router.navigate(
+        [
+          '/app',
+          'trials',
+          study.nctId,
+        ],
+      );
+      result.finally();
+    }
   }
 
   /**
@@ -923,5 +1024,29 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       longitude: location.center[0],
       latitude: location.center[1],
     };
+  }
+
+  /**
+   * Returns a boolean indicating whether a given study is followed by the user.
+   * @param {string} nctId The NCT ID of the study for which the check is
+   * performed.
+   * @returns {boolean} Whether the given study is followed by the user.
+   */
+  isStudyFollowed(nctId: string): boolean {
+    return this.userConfigService.getUserStudy(nctId) !== null;
+  }
+
+  /**
+   * Toggles the followed state of a given study for the current user through
+   * the `followStudy` and `unfollowStudy` methods of the `UserConfigService`.
+   * @param {string} nctId The NCT ID of the study for which the followed state
+   * will be toggled.
+   */
+  onToggleFollowStudy(nctId: string): void {
+    if (this.isStudyFollowed(nctId)) {
+      this.userConfigService.unfollowStudy(this.authService.userProfile, nctId);
+    } else {
+      this.userConfigService.followStudy(this.authService.userProfile, nctId);
+    }
   }
 }

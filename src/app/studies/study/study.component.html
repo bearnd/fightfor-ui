@@ -141,21 +141,44 @@
                 <i class="material-icons">info</i>
               </div>
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-11">
                   <h4 class="card-title">{{ study.briefTitle | uppercase }}</h4>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-1">
                   <button
                     mat-raised-button
                     type="button"
-                    class="btn btn-rose btn-round btn-just-icon btn-link mat-raised-button btn-fab pull-right"
-                    (click)="onToggleSavedStudy()"
+                    class="
+                      btn
+                      btn-rose
+                      btn-round
+                      btn-just-icon
+                      btn-link
+                      mat-raised-button
+                      btn-fab
+                    "
+                    (click)="onToggleFollowStudy()"
                     [disableRipple]="true"
-                    matTooltip="Save this trial"
+                    [matTooltip]="
+                      isStudyFollowed() ?
+                      'Unfollow this trial' :
+                      'Follow this trial'
+                    "
                     [matTooltipPosition]="'above'"
                   >
-                    <i class="material-icons">
-                      {{ isStudySaved ? "favorite" : "favorite_outline" }}
+                    <i
+                      class="fa fa-spinner fa-spin"
+                      *ngIf="userConfigService.isUpdatingUserStudies | async"
+                    ></i>
+                    <i
+                      class="material-icons"
+                      *ngIf="!(userConfigService.isUpdatingUserStudies | async)"
+                    >
+                      {{
+                        isStudyFollowed() ?
+                        "favorite" :
+                        "favorite_outline"
+                      }}
                     </i>
                   </button>
                 </div>

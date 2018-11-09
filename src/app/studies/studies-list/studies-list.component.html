@@ -303,6 +303,55 @@
                       style="cursor: pointer"
                     ></tr>
 
+                    <!-- Actions column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef>
+
+                      </th>
+                      <td
+                        mat-cell
+                        *matCellDef="let study"
+                        (click)="$event.stopPropagation()"
+                      >
+                        <button
+                          mat-raised-button
+                          type="button"
+                          class="
+                            btn
+                            btn-rose
+                            btn-round
+                            btn-just-icon
+                            btn-link
+                            mat-raised-button
+                            btn-fab
+                          "
+                          (click)="onToggleFollowStudy(study.nctId)"
+                          [disableRipple]="true"
+                          [matTooltip]="
+                            isStudyFollowed(study.nctId) ?
+                            'Unfollow this trial' :
+                            'Follow this trial'
+                          "
+                          [matTooltipPosition]="'left'"
+                        >
+                          <i
+                            class="fa fa-spinner fa-spin"
+                            *ngIf="userConfigService.isUpdatingUserStudies | async"
+                          ></i>
+                          <i
+                            class="material-icons"
+                            *ngIf="!(userConfigService.isUpdatingUserStudies | async)"
+                          >
+                            {{
+                              isStudyFollowed(study.nctId) ?
+                              "favorite" :
+                              "favorite_outline"
+                            }}
+                          </i>
+                        </button>
+                      </td>
+                    </ng-container>
+
                     <!-- NCT ID column -->
                     <ng-container matColumnDef="nctId">
                       <th mat-header-cell
@@ -315,7 +364,7 @@
                         mat-cell
                         *matCellDef="let study"
                       >
-                        {{study.nctId}}
+                        {{ study.nctId }}
                       </td>
                     </ng-container>
 

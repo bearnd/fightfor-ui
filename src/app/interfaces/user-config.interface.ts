@@ -85,4 +85,6 @@ export interface UserInterface {
   auth0UserId: string
   email?: string
   searches?: SearchInterface[]
+  studies?: StudyInterface[]
+  citations?: CitationInterface[]
 }

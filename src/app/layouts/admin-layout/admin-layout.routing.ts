@@ -118,6 +118,18 @@ export const AdminLayoutRoutes: Routes = [
     },
     children: [
       {
+        path: '',
+        redirectTo: 'saved',
+        pathMatch: 'full',
+      },
+      {
+        path: 'saved',
+        component: StudiesListComponent,
+        data: {
+          breadcrumbs: 'Saved'
+        },
+      },
+      {
         path: ':studyNctId',
         component: StudyComponent,
       },

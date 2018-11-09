@@ -31,6 +31,7 @@ import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
 import { intervalToSec } from '../../shared/utils';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-study',
@@ -99,6 +100,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   private subscriptionGetStudyByNctId: Subscription = null;
 
   constructor(
+    public authService: AuthService,
     public userConfigService: UserConfigService,
     public studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
@@ -770,6 +772,34 @@ export class StudyComponent implements OnInit, OnDestroy {
   public isNavPillActive(navPillIndex: number) {
     // Check whether the defined nav-pill is supposed to be active or not.
     return navPillIndex === this.navPillIndexActive;
+  }
+
+  /**
+   * Returns a boolean indicating whether the displayed study is followed by
+   * the user.
+   * @returns {boolean} Whether the displayed study is followed by the user.
+   */
+  isStudyFollowed(): boolean {
+    return this.userConfigService.getUserStudy(this.study.nctId) !== null;
+  }
+
+  /**
+   * Toggles the followed state of the displayed study for the current user
+   * through the `followStudy` and `unfollowStudy` methods of the
+   * `UserConfigService`.
+   */
+  onToggleFollowStudy(): void {
+    if (this.isStudyFollowed()) {
+      this.userConfigService.unfollowStudy(
+        this.authService.userProfile,
+        this.study.nctId,
+      );
+    } else {
+      this.userConfigService.followStudy(
+        this.authService.userProfile,
+        this.study.nctId,
+      );
+    }
   }
 
 }
