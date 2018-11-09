@@ -5,15 +5,16 @@ import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { cloneDeep } from 'lodash';
 
+import { ApolloQueryResult } from 'apollo-client';
+import { GraphQLError } from 'graphql';
+import { Observable, Subject } from 'rxjs/Rx';
+
 import {
   UserInterface,
   SearchInterface,
 } from '../interfaces/user-config.interface';
 import { Auth0UserProfileInterface } from './auth.service';
-import { ApolloQueryResult } from 'apollo-client';
-import { GraphQLError } from 'graphql';
 import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
-import { Observable, Subject } from 'rxjs/Rx';
 
 
 interface VariablesGetUser {
