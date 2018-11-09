@@ -134,6 +134,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // Studies columns to display.
   displayedColumns: string[] = [
+    'actions',
     'briefTitle',
     'overallStatus',
     'conditions',
