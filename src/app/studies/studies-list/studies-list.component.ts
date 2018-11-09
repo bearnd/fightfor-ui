@@ -909,23 +909,39 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getStudiesPage();
   }
 
+  /**
+   * Navigates to the details of a given study. Uses a different route
+   * depending on whether this component is viewed to see the studies of a
+   * search or the user's saved studies.
+   * @param {StudyInterface} study The study to which to navigate.
+   */
   onNavigateToStudy(study: StudyInterface) {
 
-    // Retrieve the referenced search UUID.
-    const searchUuid: string
-      = this.route.parent.parent.snapshot.params['searchUuid'];
+    if (this.mode === Mode.SEARCH) {
+      // Retrieve the referenced search UUID.
+      const searchUuid: string
+        = this.route.parent.parent.snapshot.params['searchUuid'];
 
-    console.log(study.nctId);
-    const result = this.router.navigate(
-      [
-        '/app',
-        'searches',
-        searchUuid,
-        'trial',
-        study.nctId,
-      ],
-    );
-    result.finally();
+      const result = this.router.navigate(
+        [
+          '/app',
+          'searches',
+          searchUuid,
+          'trial',
+          study.nctId,
+        ],
+      );
+      result.finally();
+    } else if (this.mode === Mode.SAVED) {
+      const result = this.router.navigate(
+        [
+          '/app',
+          'trials',
+          study.nctId,
+        ],
+      );
+      result.finally();
+    }
   }
 
   /**
