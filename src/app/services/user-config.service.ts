@@ -557,7 +557,8 @@ export class UserConfigService {
     ).subscribe(
       (response: ApolloQueryResult<ResponseUpsertUserStudy>) => {
 
-        this.userStudies = response.data.upsertUserStudy.user.studies;
+        this.userStudies
+          = cloneDeep(response.data.upsertUserStudy.user.studies);
 
         // Update the subject.
         this.updatingUserStudies.next(false);
@@ -593,7 +594,8 @@ export class UserConfigService {
     ).subscribe(
       (response: ApolloQueryResult<ResponseDeleteUserStudy>) => {
 
-        this.userStudies = response.data.deleteUserStudy.user.studies;
+        this.userStudies
+          = cloneDeep(response.data.deleteUserStudy.user.studies);
 
         // Update the subject.
         this.updatingUserStudies.next(false);
