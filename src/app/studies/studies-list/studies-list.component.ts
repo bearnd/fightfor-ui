@@ -50,6 +50,7 @@ import {
 } from '../../services/geolocation.service';
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs/Rx';
 
 
 interface EnumInterface {
