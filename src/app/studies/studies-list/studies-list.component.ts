@@ -267,8 +267,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       );
-
-      this.userConfigService.getUserConfig(this.authService.userProfile);
     }
 
     // Retrieve the initial set of studies.
