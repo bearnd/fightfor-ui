@@ -15,6 +15,7 @@ import {
 } from '../interfaces/user-config.interface';
 import { Auth0UserProfileInterface } from './auth.service';
 import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
+import { StudyInterface } from '../interfaces/study.interface';
 
 
 interface VariablesGetUser {
@@ -43,6 +44,10 @@ interface VariablesDeleteSearch {
   searchUuid: string
 }
 
+interface VariablesUpsertDeleteUserStudy {
+  auth0UserId: string
+  nctId: string
+}
 
 interface ResponseGetUser {
   users: {
@@ -68,6 +73,18 @@ interface ResponseDeleteSearch {
   }
 }
 
+interface ResponseUpsertUserStudy {
+  upsertUserStudy: {
+    user: UserInterface
+  }
+}
+
+interface ResponseDeleteUserStudy {
+  deleteUserStudy: {
+    user: UserInterface
+  }
+}
+
 
 @Injectable()
 export class UserConfigService {
@@ -76,6 +93,13 @@ export class UserConfigService {
   private loadingUser: BehaviorSubject<boolean>
     = new BehaviorSubject<boolean>(false);
   public isLoadingUser: Observable<boolean> = this.loadingUser.asObservable();
+
+  // Private subject and public observable to indicate when a user's saved
+  // studies are updating.
+  private updatingUserStudies: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isUpdatingUserStudies: Observable<boolean>
+    = this.updatingUserStudies.asObservable();
 
   // Private subject and public observable to indicate when a new search is
   // being created.
@@ -96,6 +120,8 @@ export class UserConfigService {
 
   // Array of user-searches.
   public userSearches: SearchInterface[] = [];
+  // Array of user-studies.
+  public userStudies: StudyInterface[] = [];
 
   queryGetUser = gql`
     query getUser(
@@ -120,7 +146,11 @@ export class UserConfigService {
               ui,
               name,
             },
-          }
+          },
+          studies {
+            studyId,
+            nctId,
+          },
         }
       }
     }
@@ -216,6 +246,44 @@ export class UserConfigService {
     }
   `;
 
+  mutationUpsertUserStudy = gql`
+    mutation upsertUserStudy(
+      $auth0UserId: String!,
+      $nctId: String!,
+    ) {
+      upsertUserStudy(userStudy: {
+        auth0UserId: $auth0UserId,
+        nctId: $nctId,
+      }) {
+        user {
+          studies {
+            studyId,
+            nctId,
+          }
+        }
+      }
+    }
+  `;
+
+  mutationDeleteUserStudy = gql`
+    mutation deleteUserStudy(
+      $auth0UserId: String!,
+      $nctId: String!,
+    ) {
+      deleteUserStudy(userStudy: {
+        auth0UserId: $auth0UserId,
+        nctId: $nctId,
+      }) {
+        user {
+          studies {
+            studyId,
+            nctId,
+          }
+        }
+      }
+    }
+  `;
+
   constructor(private apollo: Apollo) {}
 
   /**
@@ -287,6 +355,7 @@ export class UserConfigService {
       (response: ApolloQueryResult<ResponseGetUser>) => {
         this.userConfig = response.data.users.byAuth0Id;
         this.copySearches(this.userConfig.searches);
+        this.userStudies = cloneDeep(this.userConfig.studies);
         this.loadingUser.next(false);
       },
       (error: GraphQLError) => {
@@ -301,6 +370,7 @@ export class UserConfigService {
             (response: ApolloQueryResult<ResponseUpsertUser>) => {
               this.userConfig = response.data.upsertUser.user;
               this.copySearches(this.userConfig.searches);
+              this.userStudies = cloneDeep(this.userConfig.studies);
               this.loadingUser.next(false);
             }
           )
@@ -436,7 +506,7 @@ export class UserConfigService {
    * @returns {SearchInterface | null} The retrieved search or null if no search
    * matching the given UUID was found.
    */
-  getUserSearch(searchUuid: string): SearchInterface | null  {
+  getUserSearch(searchUuid: string): SearchInterface | null {
 
     // Iterate over the user searches and return the one matching the provided
     // UUID or null if no matching search is found.
@@ -446,6 +516,89 @@ export class UserConfigService {
       }
     }
     return null;
+  }
+
+  getUserStudy(nctId: string): StudyInterface | null {
+    // Iterate over the user studies and return the one matching the provided
+    // NCT ID or null if no matching search is found.
+    for (const study of this.userStudies) {
+      if (study.nctId === nctId) {
+        return study;
+      }
+    }
+    return null;
+  }
+
+  followStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
+    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
+    // user ID.
+    const auth0UserId = userProfile.sub
+      .replace('auth0|', '');
+
+    // If the given study is already followed by the user the return.
+    if (this.getUserStudy(nctId)) {
+      return null;
+    }
+
+    this.updatingUserStudies.next(true);
+
+    // Add the defined user study in the database and add it to the
+    // `this.userStudies` and update the corresponding subject.
+    this.apollo.mutate<
+      ResponseUpsertUserStudy,
+      VariablesUpsertDeleteUserStudy
+      >({
+        mutation: this.mutationUpsertUserStudy,
+        variables: {
+          auth0UserId: auth0UserId,
+          nctId: nctId,
+        }
+      }
+    ).subscribe(
+      (response: ApolloQueryResult<ResponseUpsertUserStudy>) => {
+
+        this.userStudies = response.data.upsertUserStudy.user.studies;
+
+        // Update the subject.
+        this.updatingUserStudies.next(false);
+      }
+    )
+  }
+
+  unfollowStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
+    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
+    // user ID.
+    const auth0UserId = userProfile.sub
+      .replace('auth0|', '');
+
+    // If the given study is not already followed by the user the return.
+    if (!this.getUserStudy(nctId)) {
+      return null;
+    }
+
+    this.updatingUserStudies.next(true);
+
+    // Delete the defined user study in the database and remove it from the
+    // `this.userStudies` and update the corresponding subject.
+    this.apollo.mutate<
+      ResponseDeleteUserStudy,
+      VariablesUpsertDeleteUserStudy
+      >({
+        mutation: this.mutationDeleteUserStudy,
+        variables: {
+          auth0UserId: auth0UserId,
+          nctId: nctId,
+        }
+      }
+    ).subscribe(
+      (response: ApolloQueryResult<ResponseDeleteUserStudy>) => {
+
+        this.userStudies = response.data.deleteUserStudy.user.studies;
+
+        // Update the subject.
+        this.updatingUserStudies.next(false);
+      }
+    )
   }
 
 }
