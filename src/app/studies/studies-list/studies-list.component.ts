@@ -945,4 +945,28 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       latitude: location.center[1],
     };
   }
+
+  /**
+   * Returns a boolean indicating whether a given study is followed by the user.
+   * @param {string} nctId The NCT ID of the study for which the check is
+   * performed.
+   * @returns {boolean} Whether the given study is followed by the user.
+   */
+  isStudyFollowed(nctId: string): boolean {
+    return this.userConfigService.getUserStudy(nctId) !== null;
+  }
+
+  /**
+   * Toggles the followed state of a given study for the current user through
+   * the `followStudy` and `unfollowStudy` methods of the `UserConfigService`.
+   * @param {string} nctId The NCT ID of the study for which the followed state
+   * will be toggled.
+   */
+  onToggleFollowStudy(nctId: string): void {
+    if (this.isStudyFollowed(nctId)) {
+      this.userConfigService.unfollowStudy(this.authService.userProfile, nctId);
+    } else {
+      this.userConfigService.followStudy(this.authService.userProfile, nctId);
+    }
+  }
 }
