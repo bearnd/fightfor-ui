@@ -156,6 +156,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // The studies the component will display.
   public studies: StudyInterface[];
+  private subscriptionIsUpdatingUserStudies: Subscription = null;
 
   constructor(
     private authService: AuthService,
@@ -254,7 +255,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     if (this.mode === Mode.SAVED) {
-      this.userConfigService.isUpdatingUserStudies.subscribe(
+      this.subscriptionIsUpdatingUserStudies
+        = this.userConfigService.isUpdatingUserStudies.subscribe(
         (isUpdatingUserStudies: boolean) => {
           console.log('isUpdatingUserStudies: ' + isUpdatingUserStudies);
           if (!isUpdatingUserStudies) {
@@ -474,6 +476,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     this._onDestroy.next();
     this._onDestroy.complete();
+
+    if (this.subscriptionIsUpdatingUserStudies) {
+      this.subscriptionIsUpdatingUserStudies.unsubscribe();
+    }
   }
 
   /**
