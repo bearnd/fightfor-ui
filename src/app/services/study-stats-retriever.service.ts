@@ -9,7 +9,7 @@ import {
   StudiesCountByCountryInterface,
   StudiesCountByFacilityInterface,
   StudiesCountByOverallStatusInterface,
-  StudiesCountByFacilityMeshTermInterface,
+  StudiesCountByFacilityDescriptorInterface,
 } from '../interfaces/user-config.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
 
@@ -44,16 +44,16 @@ interface ResponseGetCountStudiesByFacility {
   }
 }
 
-interface VariablesGetCountStudiesByFacilityMeshTerm {
+interface VariablesGetCountStudiesByFacilityDescriptor {
   studyIds: number[]
   facilityCanonicalIds?: number[]
   meshTermType?: string
   limit?: number
 }
 
-interface ResponseGetCountStudiesByFacilityMeshTerm {
+interface ResponseGetCountStudiesByFacilityDescriptor {
   studiesStats: {
-    countStudiesByFacilityMeshTerm: StudiesCountByFacilityMeshTermInterface[]
+    countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[]
   }
 }
 
@@ -235,7 +235,7 @@ export class StudyStatsRetrieverService {
     }
   `;
 
-  queryGetCountStudiesByFacilityMeshTerm = gql`
+  queryGetCountStudiesByFacilityDescriptor = gql`
     query getCountStudiesByFacility(
       $studyIds: [Int]!, 
       $facilityCanonicalIds: [Int],
@@ -243,7 +243,7 @@ export class StudyStatsRetrieverService {
       $limit: Int
     ) {
       studiesStats {
-        countStudiesByFacilityMeshTerm(
+        countStudiesByFacilityDescriptor(
           studyIds: $studyIds,
           facilityCanonicalIds: $facilityCanonicalIds,
           meshTermType: $meshTermType,
@@ -253,7 +253,7 @@ export class StudyStatsRetrieverService {
             facilityCanonicalId,
           },
           meshTerm {
-            term,
+            name,
           },
           countStudies
         }
@@ -378,14 +378,14 @@ export class StudyStatsRetrieverService {
    * the aggregation to.
    * @param {number} limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<StudiesCountByFacilityMeshTermInterface[]>}
+   * @returns {Observable<StudiesCountByFacilityDescriptorInterface[]>}
    */
-  getCountStudiesByFacilityMeshTerm(
+  getCountStudiesByFacilityDescriptor(
     studies: StudyInterface[],
     facilityCanonicalIds: number[],
     meshTermType?: MeshTermType,
     limit: number = null,
-  ): Observable<StudiesCountByFacilityMeshTermInterface[]> {
+  ): Observable<StudiesCountByFacilityDescriptorInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
@@ -398,10 +398,10 @@ export class StudyStatsRetrieverService {
               .find(key => MeshTermType[key] === meshTermType);
 
     return this.apollo
-      .query<ResponseGetCountStudiesByFacilityMeshTerm,
-        VariablesGetCountStudiesByFacilityMeshTerm>
+      .query<ResponseGetCountStudiesByFacilityDescriptor,
+        VariablesGetCountStudiesByFacilityDescriptor>
       ({
-        query: this.queryGetCountStudiesByFacilityMeshTerm,
+        query: this.queryGetCountStudiesByFacilityDescriptor,
         variables: {
           studyIds: studyIds,
           facilityCanonicalIds: facilityCanonicalIds,
@@ -409,7 +409,7 @@ export class StudyStatsRetrieverService {
           limit: limit,
         }
       }).map((response) => {
-        return response.data.studiesStats.countStudiesByFacilityMeshTerm;
+        return response.data.studiesStats.countStudiesByFacilityDescriptor;
       });
   }
 

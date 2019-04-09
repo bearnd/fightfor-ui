@@ -13,9 +13,7 @@ import {
   StudyPhase,
   StudyType
 } from '../interfaces/study.interface';
-import {
-  MeshDescriptorInterface
-} from '../interfaces/mesh-descriptor.interface';
+import { DescriptorInterface } from '../interfaces/descriptor.interface';
 
 
 interface VariablesSearchStudies {
@@ -383,7 +381,7 @@ export class StudyRetrieverService {
   /**
    * Search for clinical-trial studies based on an array of MeSH descriptors
    * studies are associated with.
-   * @param {MeshDescriptorInterface[]} descriptors Array of MeSH descriptors
+   * @param {DescriptorInterface[]} descriptors Array of MeSH descriptors
    * for which the search is performed
    * @param {string} gender The patient gender studies will be limited to for
    * this search.
@@ -397,7 +395,7 @@ export class StudyRetrieverService {
    * to for this search.
    */
   searchStudies(
-    descriptors: MeshDescriptorInterface[],
+    descriptors: DescriptorInterface[],
     gender?: string,
     yearBeg?: number,
     yearEnd?: number,

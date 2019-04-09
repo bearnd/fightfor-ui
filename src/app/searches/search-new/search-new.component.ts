@@ -19,8 +19,8 @@ import {
 import { UUID } from 'angular2-uuid';
 
 import {
-  MeshDescriptorInterface
-} from '../../interfaces/mesh-descriptor.interface';
+  DescriptorInterface
+} from '../../interfaces/descriptor.interface';
 import {
   MeshDescriptorRetrieverService
 } from '../../services/mesh-descriptor-retriever.service';
@@ -51,8 +51,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   // Arrays to hold the available and selected descriptors.
-  descriptorsAll: MeshDescriptorInterface[] = [];
-  descriptorsSelected: MeshDescriptorInterface[] = [];
+  descriptorsAll: DescriptorInterface[] = [];
+  descriptorsSelected: DescriptorInterface[] = [];
   // Possible start-date year values (to be populated in `ngOnInit`).
   public studyStartDateRangeAll: DateRange = {
     dateBeg: new Date('1900-01-01'),
@@ -159,9 +159,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   /**
    * Removes a descriptor from the selected descriptors.
-   * @param {MeshDescriptorInterface} descriptor The descriptor to be removed.
+   * @param {DescriptorInterface} descriptor The descriptor to be removed.
    */
-  onRemoveDescriptor(descriptor: MeshDescriptorInterface): void {
+  onRemoveDescriptor(descriptor: DescriptorInterface): void {
     const index = this.descriptorsSelected.indexOf(descriptor);
 
     if (index >= 0) {

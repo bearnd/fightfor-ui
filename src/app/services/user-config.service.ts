@@ -14,7 +14,7 @@ import {
   SearchInterface,
 } from '../interfaces/user-config.interface';
 import { Auth0UserProfileInterface } from './auth.service';
-import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
+import { DescriptorInterface } from '../interfaces/descriptor.interface';
 import { StudyInterface } from '../interfaces/study.interface';
 
 
@@ -396,7 +396,7 @@ export class UserConfigService {
    * will be limited to for this search.
    * @param {number} ageEnd The end of the eligibility age-range studies will
    * be limited to for this search.
-   * @param {MeshDescriptorInterface[]} descriptors The MeSH descriptors
+   * @param {DescriptorInterface[]} descriptors The MeSH descriptors
    * selected for this search.
    */
   upsertSearch(
@@ -408,7 +408,7 @@ export class UserConfigService {
     yearEnd: number,
     ageBeg: number,
     ageEnd: number,
-    descriptors: MeshDescriptorInterface[],
+    descriptors: DescriptorInterface[],
   ) {
 
     // Update the 'loading' subject to indicate that creating a new search is

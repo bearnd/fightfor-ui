@@ -15,7 +15,6 @@ import {
   CitationsCountByAffiliationInterface,
 } from '../../../interfaces/user-config.interface';
 import {
-  MeshTermInterface,
   MeshTermType,
   StudyInterface,
   StudyOverallStatus,
@@ -41,6 +40,9 @@ import {
   MeshQualifiers
 } from '../../../shared/mesh-qualifiers.enum';
 import { UserConfigService } from '../../../services/user-config.service';
+import {
+  DescriptorInterface
+} from '../../../interfaces/descriptor.interface';
 
 declare var $: any;
 
@@ -90,7 +92,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   dataSourceFacilities: MatTableDataSource<StudiesCountByFacilityInterface>;
   // The top MeSH intervention descriptors by facility.
   public topFacilityMeshTerms: {
-    [key: string]: MeshTermInterface[]
+    [key: string]: DescriptorInterface[]
   } = {};
 
   // Number of top citation affiliations to display.

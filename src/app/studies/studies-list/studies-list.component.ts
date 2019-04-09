@@ -51,6 +51,7 @@ import {
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Rx';
+import { DescriptorInterface } from '../../interfaces/descriptor.interface';
 
 
 interface EnumInterface {
@@ -259,11 +260,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.subscriptionIsUpdatingUserStudies
         = this.userConfigService.isUpdatingUserStudies.subscribe(
         (isUpdatingUserStudies: boolean) => {
-          console.log('isUpdatingUserStudies: ' + isUpdatingUserStudies);
           if (!isUpdatingUserStudies) {
             this.studies = this.userConfigService.userStudies;
             this.getStudiesPage();
-            console.log(this.studies);
           }
         }
       );
@@ -828,11 +827,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   getStudyInterventionMeshTerms(
     study: StudyInterface,
   ): string | null {
-    const meshTerms: MeshTermInterface[] = [];
+    const meshTerms: DescriptorInterface[] = [];
 
-    for (const studyMeshTerm of study.studyMeshTerms) {
-      if (studyMeshTerm.meshTermType.valueOf() === 'INTERVENTION') {
-        meshTerms.push(studyMeshTerm.meshTerm);
+    for (const studyMeshTerm of study.studyDescriptors) {
+      if (studyMeshTerm.studyDescriptorType.valueOf() === 'INTERVENTION') {
+        meshTerms.push(studyMeshTerm.descriptor);
       }
     }
 
@@ -841,9 +840,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
-      result = meshTerms[0].term;
+      result = meshTerms[0].name;
     } else if (meshTerms.length > 1) {
-      result = meshTerms[0].term +
+      result = meshTerms[0].name +
         ' (+' +
         String(meshTerms.length - 1) +
         ' more)';
@@ -864,11 +863,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   getStudyConditionMeshTerms(
     study: StudyInterface,
   ): MeshTermInterface[] | string | null {
-    const meshTerms: MeshTermInterface[] = [];
+    const meshTerms: DescriptorInterface[] = [];
 
-    for (const studyMeshTerm of study.studyMeshTerms) {
-      if (studyMeshTerm.meshTermType.valueOf() === 'CONDITION') {
-        meshTerms.push(studyMeshTerm.meshTerm);
+    for (const studyMeshTerm of study.studyDescriptors) {
+      if (studyMeshTerm.studyDescriptorType.valueOf() === 'CONDITION') {
+        meshTerms.push(studyMeshTerm.descriptor);
       }
     }
 
@@ -877,9 +876,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // and includes a suffix denoting how many additional terms exist.
     let result: string = null;
     if (meshTerms.length === 1) {
-      result = meshTerms[0].term;
+      result = meshTerms[0].name;
     } else if (meshTerms.length > 1) {
-      result = meshTerms[0].term +
+      result = meshTerms[0].name +
         ' (+' +
         String(meshTerms.length - 1) +
         ' more)';

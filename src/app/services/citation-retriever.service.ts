@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CitationInterface } from '../interfaces/citation.interface';
-import { MeshDescriptorInterface } from '../interfaces/mesh-descriptor.interface';
+import { DescriptorInterface } from '../interfaces/descriptor.interface';
 
 
 interface VariablesSearchCitations {
@@ -56,7 +56,7 @@ export class CitationRetrieverService {
   /**
    * Search for PubMed citations based on an array of MeSH descriptors
    * citations are associated with.
-   * @param {MeshDescriptorInterface[]} descriptors Array of MeSH descriptors
+   * @param {DescriptorInterface[]} descriptors Array of MeSH descriptors
    * for which the search is performed.
    * @param {number} yearBeg The beginning of the year-range citations will be
    * limited to for this search.
@@ -64,7 +64,7 @@ export class CitationRetrieverService {
    * limited to for this search.
    */
   searchCitations(
-    descriptors: MeshDescriptorInterface[],
+    descriptors: DescriptorInterface[],
     yearBeg?: number,
     yearEnd?: number,
   ) {

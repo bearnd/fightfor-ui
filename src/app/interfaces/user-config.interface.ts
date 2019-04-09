@@ -1,9 +1,8 @@
 import {
-  MeshDescriptorInterface
-} from './mesh-descriptor.interface';
+  DescriptorInterface
+} from './descriptor.interface';
 import {
   FacilityCanonicalInterface,
-  MeshTermInterface,
   StudyInterface
 } from './study.interface';
 import {
@@ -31,9 +30,9 @@ export interface StudiesCountByFacilityInterface {
 }
 
 
-export interface StudiesCountByFacilityMeshTermInterface {
+export interface StudiesCountByFacilityDescriptorInterface {
   facilityCanonical: FacilityCanonicalInterface
-  meshTerm: MeshTermInterface
+  meshTerm: DescriptorInterface
   countStudies: number
 }
 
@@ -65,7 +64,7 @@ export interface SearchInterface {
   yearEnd?: number
   ageBeg?: number
   ageEnd?: number
-  descriptors: MeshDescriptorInterface[]
+  descriptors: DescriptorInterface[]
   studies?: StudyInterface[]
   citations?: CitationInterface[]
   studiesStats: {

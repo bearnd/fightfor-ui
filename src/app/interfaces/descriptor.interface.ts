@@ -5,7 +5,7 @@ enum MeshDescriptorClass {
   FOUR = 4,
 }
 
-export interface MeshDescriptorInterface {
+export interface DescriptorInterface {
   descriptorId?: number
   class?: MeshDescriptorClass
   ui: string

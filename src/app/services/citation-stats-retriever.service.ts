@@ -106,7 +106,7 @@ export class CitationStatsRetrieverService {
           limit: $limit
         ) {
           qualifier {
-            qualifier
+            name
           }
           countCitations
         }

@@ -11,7 +11,6 @@ import {
   InterventionType,
   InvestigatorInterface,
   LocationInterface,
-  MeshTermInterface,
   MeshTermType,
   OutcomeType,
   PersonInterface,
@@ -32,6 +31,9 @@ import {
 } from '../../services/study-stats-retriever.service';
 import { intervalToSec } from '../../shared/utils';
 import { AuthService } from '../../services/auth.service';
+import {
+  DescriptorInterface
+} from '../../interfaces/descriptor.interface';
 
 @Component({
   selector: 'app-study',
@@ -79,9 +81,9 @@ export class StudyComponent implements OnInit, OnDestroy {
   public studyGroupsReferencesTypes: string[] = null;
 
   // Placeholder for the study condition MeSH terms.
-  public studyConditionMeshTerms: MeshTermInterface[] = null;
+  public studyConditionMeshTerms: DescriptorInterface[] = null;
   // Placeholder for the study intervention MeSH terms.
-  public studyInterventionMeshTerms: MeshTermInterface[] = null;
+  public studyInterventionMeshTerms: DescriptorInterface[] = null;
   // Placeholder for the study type index.
   public studyTypeIndex: number = null;
   // Placeholder for the study type message.
@@ -516,15 +518,15 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns all of the currently displayed study's condition MeSH terms.
-   * @returns {MeshTermInterface[]} The study's condition MeSH terms.
+   * @returns {DescriptorInterface[]} The study's condition MeSH terms.
    */
-  getStudyConditionMeshTerms(): MeshTermInterface[] {
+  getStudyConditionMeshTerms(): DescriptorInterface[] {
 
-    const conditionMeshTerms: MeshTermInterface[] = [];
+    const conditionMeshTerms: DescriptorInterface[] = [];
 
-    for (const studyMeshTerm of this.study.studyMeshTerms) {
-      if (MeshTermType[studyMeshTerm.meshTermType] === MeshTermType.CONDITION) {
-        conditionMeshTerms.push(studyMeshTerm.meshTerm)
+    for (const studyMeshTerm of this.study.studyDescriptors) {
+      if (MeshTermType[studyMeshTerm.studyDescriptorType] === MeshTermType.CONDITION) {
+        conditionMeshTerms.push(studyMeshTerm.descriptor)
       }
     }
 
@@ -533,15 +535,15 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns all of the currently displayed study's intervention MeSH terms.
-   * @returns {MeshTermInterface[]} The study's intervention MeSH terms.
+   * @returns {DescriptorInterface[]} The study's intervention MeSH terms.
    */
-  getStudyInterventionMeshTerms(): MeshTermInterface[] {
+  getStudyInterventionMeshTerms(): DescriptorInterface[] {
 
-    const interventionMeshTerms: MeshTermInterface[] = [];
+    const interventionMeshTerms: DescriptorInterface[] = [];
 
-    for (const studyMeshTerm of this.study.studyMeshTerms) {
-      if (MeshTermType[studyMeshTerm.meshTermType] === MeshTermType.INTERVENTION) {
-        interventionMeshTerms.push(studyMeshTerm.meshTerm)
+    for (const studyMeshTerm of this.study.studyDescriptors) {
+      if (MeshTermType[studyMeshTerm.studyDescriptorType] === MeshTermType.INTERVENTION) {
+        interventionMeshTerms.push(studyMeshTerm.descriptor)
       }
     }
 
