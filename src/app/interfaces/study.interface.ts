@@ -1,3 +1,5 @@
+import { DescriptorInterface } from './descriptor.interface';
+
 export enum StudyOverallStatus {
   ACTIVE_NOT = 'Active, not recruiting',
   COMPLETED = 'Completed',
@@ -118,12 +120,12 @@ export interface MeshTermInterface {
   term?: string
 }
 
-export interface StudyMeshTermInterface {
-  studyMeshTermId?: number
+export interface StudyDescriptorInterface {
+  studyDescriptorId?: number
   studyId?: number
-  meshTermId?: number
-  meshTermType?: MeshTermType
-  meshTerm?: MeshTermInterface
+  descriptorId?: number
+  studyDescriptorType?: MeshTermType
+  descriptor?: DescriptorInterface
 }
 
 export interface FacilityInterface {
@@ -281,7 +283,7 @@ export interface StudyInterface {
   studyType?: StudyType
   targetDuration?: string
   interventions?: InterventionInterface[]
-  studyMeshTerms?: StudyMeshTermInterface[]
+  studyDescriptors?: StudyDescriptorInterface[]
   locations?: LocationInterface[]
   facilities?: FacilityInterface[]
   facilitiesCanonical?: FacilityCanonicalInterface[]

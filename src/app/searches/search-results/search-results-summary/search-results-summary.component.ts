@@ -492,7 +492,7 @@ export class SearchResultsSummaryComponent implements OnInit {
           // intervention MeSH descriptors per facility.
           for (const result of response) {
             this.studyStatsRetrieverService
-            .getCountStudiesByFacilityMeshTerm(
+            .getCountStudiesByFacilityDescriptor(
               this.search.studies,
               [result.facilityCanonical.facilityCanonicalId],
               MeshTermType.INTERVENTION,

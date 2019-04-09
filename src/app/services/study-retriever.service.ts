@@ -189,10 +189,10 @@ export class StudyRetrieverService {
               description,
             },
           },
-          studyMeshTerms {
-            meshTermType,
-            meshTerm {
-              term
+          studyDescriptors {
+            studyDescriptorType,
+            descriptor {
+              name
             }
           }
           eligibility {
@@ -303,10 +303,10 @@ export class StudyRetrieverService {
             country,
           },
           overallStatus,
-          studyMeshTerms {
-            meshTermType,
-            meshTerm {
-              term,
+          studyDescriptors {
+            studyDescriptorType,
+            descriptor {
+              name,
             },
           }
         }
