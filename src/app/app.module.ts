@@ -35,12 +35,6 @@ import {
 import { GeolocationService } from './services/geolocation.service';
 
 import { environment } from '../environments/environment';
-import {
-  CitationRetrieverService
-} from './services/citation-retriever.service';
-import {
-  CitationStatsRetrieverService
-} from './services/citation-stats-retriever.service';
 import { AuthService } from './services/auth.service';
 import {
   AuthLayoutComponent
@@ -110,8 +104,6 @@ import { UserConfigService } from './services/user-config.service';
     MeshDescriptorRetrieverService,
     StudyStatsRetrieverService,
     GeolocationService,
-    CitationRetrieverService,
-    CitationStatsRetrieverService,
     AuthService,
     AuthenticationGuard,
     PaymentGuard,
