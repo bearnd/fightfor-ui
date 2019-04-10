@@ -118,7 +118,6 @@ export class StudyComponent implements OnInit, OnDestroy {
       .getStudiesByNctIds([studyNctId]).subscribe(
         (studies: StudyInterface[]) => {
           this.study = studies[0];
-          console.log(this.study);
           this.populateConstants();
         }
       );

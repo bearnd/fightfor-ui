@@ -1,4 +1,4 @@
-enum MeshDescriptorClass {
+enum DescriptorClass {
   ONE = 1,
   TWO = 2,
   THREE = 3,
@@ -7,7 +7,7 @@ enum MeshDescriptorClass {
 
 export interface DescriptorInterface {
   descriptorId?: number
-  class?: MeshDescriptorClass
+  class?: DescriptorClass
   ui: string
   name?: string
   created?: Date

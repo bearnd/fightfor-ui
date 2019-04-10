@@ -115,11 +115,6 @@ export interface InterventionInterface {
   armGroups: ArmGroupInterface[]
 }
 
-export interface MeshTermInterface {
-  meshTermId?: number
-  term?: string
-}
-
 export interface StudyDescriptorInterface {
   studyDescriptorId?: number
   studyId?: number

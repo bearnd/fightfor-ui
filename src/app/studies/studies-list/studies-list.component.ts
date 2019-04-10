@@ -24,7 +24,6 @@ import swal from 'sweetalert2';
 import { SearchInterface } from '../../interfaces/user-config.interface';
 import {
   FacilityCanonicalInterface,
-  MeshTermInterface,
   OrderType,
   StudyInterface,
   StudyOverallStatus,
@@ -858,11 +857,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * denoting how many additional terms exist.
    * @param {StudyInterface} study The study for which the condition MeSH
    * terms will be returned.
-   * @returns {string | null} The MeSH term string result.
+   * @returns {DescriptorInterface[] | string | null} The MeSH term string
+   * result.
    */
   getStudyConditionMeshTerms(
     study: StudyInterface,
-  ): MeshTermInterface[] | string | null {
+  ): DescriptorInterface[] | string | null {
     const meshTerms: DescriptorInterface[] = [];
 
     for (const studyMeshTerm of study.studyDescriptors) {
