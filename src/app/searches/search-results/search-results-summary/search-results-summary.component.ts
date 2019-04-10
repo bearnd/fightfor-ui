@@ -11,8 +11,6 @@ import {
   StudiesCountByCountryInterface,
   StudiesCountByFacilityInterface,
   SearchInterface,
-  CitationsCountByCountryInterface,
-  CitationsCountByAffiliationInterface,
 } from '../../../interfaces/user-config.interface';
 import {
   MeshTermType,
@@ -28,17 +26,6 @@ import {
 } from '../../../services/study-stats-retriever.service';
 import { overallStatusGroups } from '../../../shared/common.interface';
 import { getCountryCode } from '../../../shared/countries';
-import {
-  CitationRetrieverService
-} from '../../../services/citation-retriever.service';
-import {
-  CitationStatsRetrieverService
-} from '../../../services/citation-stats-retriever.service';
-import { CitationInterface } from '../../../interfaces/citation.interface';
-import {
-  meshQualifierGroups,
-  MeshQualifiers
-} from '../../../shared/mesh-qualifiers.enum';
 import { UserConfigService } from '../../../services/user-config.service';
 import {
   DescriptorInterface
@@ -67,14 +54,6 @@ export class SearchResultsSummaryComponent implements OnInit {
   dataSourceStudiesLocations:
     MatTableDataSource<StudiesCountByCountryInterface>;
 
-  // Number of top citations locations to display.
-  numCitationsLocationsDisplay = 5;
-  // Citations location columns to display.
-  displayedColumnsCitationsLocations = ['rank', 'country', 'countCitations'];
-  // Citations locations table data-source.
-  dataSourceCitationsLocations:
-    MatTableDataSource<CitationsCountByCountryInterface>;
-
   // Number of top facilities to display.
   numFacilitiesDisplay = 5;
   // Facility columns to display.
@@ -95,50 +74,21 @@ export class SearchResultsSummaryComponent implements OnInit {
     [key: string]: DescriptorInterface[]
   } = {};
 
-  // Number of top citation affiliations to display.
-  numCitationAffiliationsDisplay = 5;
-  // Citation affiliation columns to display.
-  displayedColumnsCitationAffiliations = [
-    'rank',
-    'name',
-    'country',
-    'locality',
-    'administrativeAreaLevel1',
-    'postalCode',
-    'countCitations',
-  ];
-  // Citation affiliations table data-source.
-  dataSourceCitationAffiliations:
-    MatTableDataSource<CitationsCountByAffiliationInterface>;
-
   private loadingSearchStudies = new BehaviorSubject<boolean>(false);
-  private loadingSearchCitations = new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByCountry =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByOverallStatus =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByFacility =
     new BehaviorSubject<boolean>(false);
-  private loadingGetCountCitationsByCountry =
-    new BehaviorSubject<boolean>(false);
-  private loadingGetCountCitationsByAffiliation =
-    new BehaviorSubject<boolean>(false);
-  private loadingGetCountCitationsByQualifier =
-    new BehaviorSubject<boolean>(false);
 
   public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
   public isLoadingGetCountStudiesByCountry =
     this.loadingGetCountStudiesByCountry.asObservable();
-  public isLoadingGetCountCitationsByCountry =
-    this.loadingGetCountCitationsByCountry.asObservable();
   public isLoadingGetCountStudiesByOverallStatus =
     this.loadingGetCountStudiesByOverallStatus.asObservable();
   public isLoadingGetCountStudiesByFacility =
     this.loadingGetCountStudiesByFacility.asObservable();
-  public isLoadingGetCountCitationsByAffiliation =
-    this.loadingGetCountCitationsByAffiliation.asObservable();
-  public isLoadingGetCountCitationsByQualifier =
-    this.loadingGetCountCitationsByQualifier.asObservable();
 
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
@@ -154,20 +104,10 @@ export class SearchResultsSummaryComponent implements OnInit {
     all: null,
   };
 
-  // Placeholder for the count of citations by qualifier group.
-  countCitationsByQualifierGroup = {
-    therapy: null,
-    physiology: null,
-    statistics: null,
-    all: null,
-  };
-
   constructor(
     public userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
-    private citationRetrieverService: CitationRetrieverService,
-    private citationStatsRetrieverService: CitationStatsRetrieverService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -239,8 +179,6 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Indicate that `searchStudies` is ongoing for this search.
     this.loadingSearchStudies.next(true);
-    // Indicate that `searchCitations` is ongoing for this search.
-    this.loadingSearchCitations.next(true);
 
     // Perform the search retrieving the clinical-trial studies and setting
     // them under the search object.
@@ -266,31 +204,6 @@ export class SearchResultsSummaryComponent implements OnInit {
 
           // Indicate that `searchStudies` is complete for this search.
           this.loadingSearchStudies.next(false);
-        }
-      );
-
-    // Perform the search retrieving the articles and setting them under the
-    // search object.
-    this.citationRetrieverService
-      .searchCitations(
-        this.search.descriptors,
-        this.search.yearBeg || null,
-        this.search.yearEnd || null,
-      )
-      .subscribe(
-        (citations: CitationInterface[]) => {
-          // Assign the retrieved citations to the search.
-          this.search.citations = citations;
-
-          // Trigger an update the citation-statistics via the corresponding
-          // methods.
-          this.getCountCitationsByQualifier();
-          this.getCountCitationsByCountry(this.numCitationsLocationsDisplay);
-          this.getCountCitationsByAffiliation(
-            this.numCitationAffiliationsDisplay
-          );
-          // Indicate that `searchCitations` is complete for this search.
-          this.loadingSearchCitations.next(false);
         }
       );
   }
@@ -325,41 +238,6 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Indicate that `getCountStudiesByCountry` is complete for this
           // search.
           this.loadingGetCountStudiesByCountry.next(false);
-        }
-      );
-  }
-
-    /**
-   * Retrieve the count of citations by country for the citations previously
-   * attributed to the search. The search is performed via the
-   * `CitationStatsRetrieverService`.
-   *
-   * This function assumes that the `searchCitations` function has been
-   * previously run for the given search and that its `studies` property is
-   * populated.
-   */
-  getCountCitationsByCountry(limit?: number) {
-    // Indicate that `getCountCitationsByCountry` is ongoing for this search.
-    this.loadingGetCountCitationsByCountry.next(true);
-
-    this.citationStatsRetrieverService
-      .getCountCitationsByCountry(this.search.citations)
-      .subscribe(
-        (response) => {
-          // Assign the retrieved stats to the search.
-          this.search.citationsStats.byCountry = response;
-
-          // Instantiate the data-source for the citations locations table.
-          this.dataSourceCitationsLocations = new MatTableDataSource
-            <CitationsCountByCountryInterface>(
-              this.search.citationsStats.byCountry.slice(0, limit)
-            );
-
-          this.configureCitationsLocationsMap(response);
-
-          // Indicate that `getCountCitationsByCountry` is complete for this
-          // search.
-          this.loadingGetCountCitationsByCountry.next(false);
         }
       );
   }
@@ -410,58 +288,6 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Indicate that `getCountStudiesByOverallStatus` is complete for
           // this search.
           this.loadingGetCountStudiesByOverallStatus.next(false);
-        }
-      );
-  }
-
-  /**
-   * Retrieve the count of citations by qualifier for the citations previously
-   * attributed to the search. The search is performed via the
-   * `CitationStatsRetrieverService`.
-   *
-   * This function assumes that the `searchCitations` function has been
-   * previously run for the given search and that its `citations` property is
-   * populated.
-   */
-  getCountCitationsByQualifier() {
-    // Indicate that `getCountStudiesByOverallStatus` is ongoing for this
-    // search.
-    this.loadingGetCountCitationsByQualifier.next(true);
-
-    // Perform the search.
-    this.citationStatsRetrieverService
-      .getCountCitationsByQualifier(this.search.citations)
-      .subscribe(
-        (response) => {
-          // Assign the retrieved stats to the search.
-          this.search.citationsStats.byQualifier = response;
-
-          // Calculate the number of citations by grouped qualifier so they
-          // can be rendered in the template.
-
-          this.countCitationsByQualifierGroup.therapy =
-            this.getCountCitationsMeshQualifier(
-              meshQualifierGroups.therapy,
-            );
-
-          this.countCitationsByQualifierGroup.physiology =
-            this.getCountCitationsMeshQualifier(
-              meshQualifierGroups.physiology,
-            );
-
-          this.countCitationsByQualifierGroup.statistics =
-            this.getCountCitationsMeshQualifier(
-              meshQualifierGroups.statistics,
-            );
-
-          this.countCitationsByQualifierGroup.all =
-            this.getCountCitationsMeshQualifier(
-              meshQualifierGroups.all,
-            );
-
-          // Indicate that `getCountCitationsByQualifier` is complete for
-          // this search.
-          this.loadingGetCountCitationsByQualifier.next(false);
         }
       );
   }
@@ -524,40 +350,6 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
-   * Retrieve the count of citations by affiliation for the affiliations
-   * previously attributed to a given search. The search is performed via the
-   * `CitationStatsRetrieverService`.
-   *
-   * This function assumes that the `searchCitations` function has been
-   * previously run for the given search and that its `citations` property is
-   * populated.
-   */
-  getCountCitationsByAffiliation(limit?: number) {
-    // Indicate that `getCountCitationsByAffiliation` is ongoing for this search.
-    this.loadingGetCountCitationsByAffiliation.next(true);
-
-    // Perform the search.
-    this.citationStatsRetrieverService
-      .getCountCitationsByAffiliation(this.search.citations, limit)
-      .subscribe(
-        (response) => {
-          // Assign the retrieved stats to the search.
-          this.search.citationsStats.byAffiliation = response;
-
-          // Instantiate the data-source for the affiliations table.
-          this.dataSourceCitationAffiliations = new MatTableDataSource
-            <CitationsCountByAffiliationInterface>(
-              this.search.citationsStats.byAffiliation
-            );
-
-          // Indicate that `getCountStudiesByFacility` is complete for this
-          // search.
-          this.loadingGetCountCitationsByAffiliation.next(false);
-        }
-      );
-  }
-
-  /**
    * Count the number of studies whose `overallStatus` has one of the values
    * defined under `overallStatusValues`.
    * @param {StudyOverallStatus[]} overallStatusMembers The possible overall
@@ -583,38 +375,6 @@ export class SearchResultsSummaryComponent implements OnInit {
     for (const entry of this.search.studiesStats.byOverallStatus) {
       if (overallStatusValues.indexOf(entry.overallStatus) !== -1) {
         count += entry.countStudies;
-      }
-    }
-
-    return count;
-  }
-
-  /**
-   * Count the number of citations whose `qualifiers` has one of the values
-   * defined under `meshQualifierMembers`.
-   * @param {MeshQualifiers[]} meshQualifierMembers The possible MeSH
-   * qualifiers for which citations will be counted.
-   * @returns {number} The number of citations whose MeSH qualifiers match one
-   * of the qualifiers under `meshQualifierMembers`.
-   */
-  getCountCitationsMeshQualifier(
-    meshQualifierMembers: MeshQualifiers[],
-  ): number {
-
-    // Initialize the count.
-    let count = 0;
-
-    // Create an array of the defined MeSH qualifier member values.
-    const meshQualifierValues = meshQualifierMembers.map(
-      (member) => {return member.valueOf()}
-      );
-
-    // Iterate over the count of citations by MeSH qualifier and add the number
-    // of citations if their qualifier is one of those defined under
-    // `meshQualifierValues`.
-    for (const entry of this.search.citationsStats.byQualifier) {
-      if (meshQualifierValues.indexOf(entry.qualifier.qualifier) !== -1) {
-        count += entry.countCitations;
       }
     }
 
@@ -724,92 +484,6 @@ export class SearchResultsSummaryComponent implements OnInit {
 
         label[0].innerHTML =
           label[0].innerHTML + ': ' + value + ' Trials';
-      },
-    });
-  }
-
-  /**
-   * Configures and initializes the citations locations map based on the results
-   * of the citations-by-country aggregation.
-   * @param {CitationsCountByCountryInterface[]} citationsByCountry The results
-   * of the citations-by-country aggregation.
-   */
-  configureCitationsLocationsMap(
-    citationsByCountry: CitationsCountByCountryInterface[],
-  ) {
-
-    // Set the starting color of the scale.
-    const startColor = [200, 238, 255];
-    // Set the ending color of the scale.
-    const endColor = [0, 100, 145];
-    const colors = {};
-
-    const mapValues: {[key: string]: number} = {};
-
-    // Iterate over the `citationsByCountry` results, retrieve the ISO Alpha2
-    // code for each country and assemble a code:citation-count object.
-    for (const entry of citationsByCountry) {
-      const code = getCountryCode(entry.country);
-      if (code) {
-        mapValues[
-          getCountryCode(entry.country).toLowerCase()
-          ] = entry.countCitations;
-      }
-    }
-
-    // Calculate the maximum and minimum values of study-count.
-    const mapMax: number = Math.max(...Object.values(mapValues));
-    const mapMin: number = Math.min(...Object.values(mapValues));
-
-    // Calculate a color per region based on the citation-count and the
-    // color-scale defined prior.
-    for (const key in mapValues) {
-      if (mapValues[key] > 0) {
-        colors[key] = '#';
-        for (let i = 0; i < 3; i++) {
-          let hex = Math.round(startColor[i]
-            + (endColor[i]
-              - startColor[i])
-            * (mapValues[key] / (mapMax - mapMin))).toString(16);
-
-          if (hex.length === 1) {
-            hex = '0' + hex;
-          }
-
-          colors[key] += (hex.length === 1 ? '0' : '') + hex;
-        }
-      }
-    }
-
-    // Initialize and configure the map.
-    $('#worldMapCitations').vectorMap({
-      map: 'world_en',
-      backgroundColor: 'transparent',
-      borderColor: '#818181',
-      borderOpacity: 0.25,
-      borderWidth: 1,
-      colors: colors,
-      hoverColor: '#eee',
-      hoverOpacity: null,
-      normalizeFunction: 'linear',
-      selectedColor: '#c9dfaf',
-      selectedRegions: null,
-      showTooltip: true,
-      series: {
-        regions: [{
-          values: mapValues,
-        }]
-      },
-      // Defines the tooltip label per region.
-      onLabelShow: function (event, label, code) {
-
-        let value = 0;
-        if (mapValues.hasOwnProperty(code)) {
-          value = mapValues[code]
-        }
-
-        label[0].innerHTML =
-          label[0].innerHTML + ': ' + value + ' Articles';
       },
     });
   }
