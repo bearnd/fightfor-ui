@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,9 +8,16 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(public auth: AuthService) {
+export class AppComponent implements OnInit {
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+  ) {
     auth.handleAuthentication();
     auth.scheduleRenewal();
+  }
+
+  ngOnInit() {
+    this.router.navigate([''])
   }
 }
