@@ -919,19 +919,32 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Return the array above joined by commas.
     return components.join(', ');
   }
+
+  /**
+   * Creates a single location string out of the facilities of a
+   * `StudyInterface` object. Should the study only have a single facility this
+   * method returns its string representation based on the
+   * `flattenFacilityCanonical` method. If there are more it suffixes the
+   * flattened representation of the first facility with the number of
+   * additional facilities.
+   * @param study {StudyInterface} The study for which the location string will
+   * be created.
+   * @returns {string | null} The location string or null.
+   */
   getStudyLocation(
     study: StudyInterface,
   ): string | null {
+
     if (study.facilitiesCanonical.length === 1) {
-      const facility: FacilityCanonicalInterface = study.facilitiesCanonical[0];
-      const components: string[] = [
-        facility.locality,
-        facility.administrativeAreaLevel1,
-        facility.country,
-      ];
-      return components.join(', ');
+      return this.flattenFacilityCanonical(study.facilitiesCanonical[0]);
     } else if (study.facilitiesCanonical.length > 1) {
-      return 'Multiple';
+      const flattened = this.flattenFacilityCanonical(
+        study.facilitiesCanonical[0]
+      );
+      return flattened +
+        ' (+' +
+        String(study.facilitiesCanonical.length - 1) +
+        ' more)';
     } else {
       return null;
     }
