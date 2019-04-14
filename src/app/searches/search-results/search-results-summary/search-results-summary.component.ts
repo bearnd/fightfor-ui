@@ -30,6 +30,7 @@ import { UserConfigService } from '../../../services/user-config.service';
 import {
   DescriptorInterface
 } from '../../../interfaces/descriptor.interface';
+import swal from "sweetalert2";
 
 declare var $: any;
 
@@ -193,6 +194,34 @@ export class SearchResultsSummaryComponent implements OnInit {
       )
       .subscribe(
         (studies: StudyInterface[]) => {
+
+          // If no studies were found for the given search show an alert
+          // precluding the user from dismissing the alert and redirecting then
+          // to the new-search screen if they press OK.
+          if (!studies.length) {
+            swal({
+              title: 'No results found!',
+              text: 'No trials were found for your selected parameters. ' +
+                    'Please try a different search',
+              footer: '<p>Email <a href="mailto:support' +
+                      '@bearnd.io">support@bearnd.io</a></p>',
+              showCancelButton: false,
+              showConfirmButton: true,
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-rose',
+              confirmButtonText: 'OK',
+              type: 'warning',
+              allowOutsideClick: false,
+            }).then(result => {
+              if (result.value) {
+                const res = this.router.navigate(
+                  ['/app', 'searches', 'new'],
+                );
+                res.finally();
+              }
+            }).catch(swal.noop);
+          }
+
           // Assign the retrieved studies to the search.
           this.search.studies = studies;
 
