@@ -1,7 +1,8 @@
+import { BrowserModule } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule
 } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -53,10 +54,12 @@ import {
 import { PaymentService } from './services/payment.service';
 import { PaymentGuard } from './guards/payment.guard';
 import { UserConfigService } from './services/user-config.service';
+import { SentryErrorHandler } from './utils/sentryerrorhandler';
 
 
 @NgModule({
   imports: [
+    BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
@@ -110,6 +113,10 @@ import { UserConfigService } from './services/user-config.service';
     BraintreeGatewayService,
     PaymentService,
     UserConfigService,
+    {
+      provide: ErrorHandler,
+      useClass: SentryErrorHandler
+    },
   ],
   bootstrap: [AppComponent],
   exports: [
