@@ -26,4 +26,7 @@ export const environment = {
     uri: 'http://192.168.0.12:8080',
     planId: 'fightfor_premium_monthly'
   },
+  sentry: {
+    dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
+  },
 };
