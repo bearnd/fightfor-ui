@@ -5,14 +5,6 @@
 
 export const environment = {
   production: false,
-  firebase: {
-    apiKey: 'AIzaSyCWFGBz_92C4FWFsyZUmWV44y8A3P0v5dk',
-    authDomain: 'fightfor-ui-dev.firebaseapp.com',
-    databaseURL: 'https://fightfor-ui-dev.firebaseio.com',
-    projectId: 'fightfor-ui-dev',
-    storageBucket: 'fightfor-ui-dev.appspot.com',
-    messagingSenderId: '1062613303831'
-  },
   graphql: {
     domain: '192.168.0.12:5555',
     uri: 'http://192.168.0.12:5555/graphql',
@@ -33,5 +25,8 @@ export const environment = {
     domain: '192.168.0.12:8080',
     uri: 'http://192.168.0.12:8080',
     planId: 'fightfor_premium_monthly'
+  },
+  sentry: {
+    dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
   },
 };
