@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import {
   SearchInterface,
   StudiesCountByCountryInterface,
+  StudiesCountByDescriptorInterface,
   StudiesCountByFacilityInterface,
 } from '../../../interfaces/user-config.interface';
 import {
@@ -74,12 +75,26 @@ export class SearchResultsSummaryComponent implements OnInit {
     [key: string]: DescriptorInterface[]
   } = {};
 
+  // Number of top intervention descriptors to display.
+  numInterventionDescriptorsDisplay = 5;
+  // Intervention descriptors columns to display.
+  displayedColumnsInterventionDescriptors = [
+    'rank',
+    'name',
+    'countStudies',
+  ];
+  // Intervention descriptors table data-source.
+  dataSourceInterventionDescriptors:
+    MatTableDataSource<StudiesCountByDescriptorInterface>;
+
   private loadingSearchStudies = new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByCountry =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByOverallStatus =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByFacility =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetCountStudiesByDescriptor =
     new BehaviorSubject<boolean>(false);
 
   public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
@@ -89,6 +104,8 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.loadingGetCountStudiesByOverallStatus.asObservable();
   public isLoadingGetCountStudiesByFacility =
     this.loadingGetCountStudiesByFacility.asObservable();
+  public isLoadingGetCountStudiesByDescriptor =
+    this.loadingGetCountStudiesByDescriptor.asObservable();
 
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
@@ -229,6 +246,9 @@ export class SearchResultsSummaryComponent implements OnInit {
           this.getCountStudiesByOverallStatus();
           this.getCountStudiesByCountry(this.numStudiesLocationsDisplay);
           this.getCountStudiesByFacility(this.numFacilitiesDisplay);
+          this.getCountStudiesByDescriptor(
+            this.numInterventionDescriptorsDisplay,
+          );
 
           // Indicate that `searchStudies` is complete for this search.
           this.loadingSearchStudies.next(false);
@@ -407,6 +427,43 @@ export class SearchResultsSummaryComponent implements OnInit {
     }
 
     return count;
+  }
+
+  /**
+   * Retrieve the count of clinical-trial studies by MeSH desriptor for the
+   * studies previously attributed to a given search. The search is performed
+   * via the `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getCountStudiesByDescriptor(limit?: number) {
+    // Indicate that `getCountStudiesByDescriptor` is ongoing for this search.
+    this.loadingGetCountStudiesByDescriptor.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getCountStudiesByDescriptor(
+        this.search.studies,
+        MeshTermType.INTERVENTION,
+        limit,
+      )
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.byDescriptor = response;
+
+          // Instantiate the data-source for the studies-by-descriptors table.
+          this.dataSourceInterventionDescriptors = new MatTableDataSource
+            <StudiesCountByDescriptorInterface>(
+              this.search.studiesStats.byDescriptor
+            );
+
+          // Indicate that `getCountStudiesByDescriptor` is complete for this
+          // search.
+          this.loadingGetCountStudiesByDescriptor.next(false);
+        }
+      );
   }
 
   /**
