@@ -8,6 +8,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 import swal from 'sweetalert2';
+import * as moment from 'moment';
 
 import {
   SearchInterface,
@@ -513,5 +514,19 @@ export class SearchResultsSummaryComponent implements OnInit {
           label[0].innerHTML + ': ' + value + ' Trials';
       },
     });
+  }
+
+  /**
+   * Converts a date to a humanized version of the duration between the current
+   * date and the provided one.
+   *
+   * It is assumed that `date` is a past date.
+   *
+   * @param {Date} date The past date for which the humanized duration will be
+   * created.
+   * @returns {string} The humanized duration.
+   */
+  humanizeDate(date: Date): string {
+    return moment.duration(moment().diff(date)).humanize();
   }
 }
