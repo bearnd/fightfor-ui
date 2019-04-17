@@ -37,6 +37,18 @@ export interface StudiesCountByFacilityDescriptorInterface {
 }
 
 
+export interface StudiesCountByDescriptorInterface {
+  meshTerm: DescriptorInterface
+  countStudies: number
+}
+
+
+export interface LatestDescriptorInterface {
+  meshTerm: DescriptorInterface
+  date: Date
+}
+
+
 export interface CitationsCountByCountryInterface {
   country: string
   countCitations: number
@@ -71,6 +83,8 @@ export interface SearchInterface {
     byCountry?: StudiesCountByCountryInterface[]
     byOverallStatus?: StudiesCountByOverallStatusInterface[]
     byFacility?: StudiesCountByFacilityInterface[]
+    byDescriptor?: StudiesCountByDescriptorInterface[]
+    latestDescriptors?: LatestDescriptorInterface[]
   }
   citationsStats: {
     byCountry?: CitationsCountByCountryInterface[]

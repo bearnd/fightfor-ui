@@ -1,23 +1,27 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
+import swal from 'sweetalert2';
+import * as moment from 'moment';
 
 import {
-  StudiesCountByCountryInterface,
-  StudiesCountByFacilityInterface,
+  LatestDescriptorInterface,
   SearchInterface,
+  StudiesCountByCountryInterface,
+  StudiesCountByDescriptorInterface,
+  StudiesCountByFacilityInterface,
 } from '../../../interfaces/user-config.interface';
 import {
   MeshTermType,
   StudyInterface,
-  StudyOverallStatus,
+  StudyOverallStatus
 } from '../../../interfaces/study.interface';
-import { MatTableDataSource } from '@angular/material';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
@@ -27,10 +31,7 @@ import {
 import { overallStatusGroups } from '../../../shared/common.interface';
 import { getCountryCode } from '../../../shared/countries';
 import { UserConfigService } from '../../../services/user-config.service';
-import {
-  DescriptorInterface
-} from '../../../interfaces/descriptor.interface';
-import swal from "sweetalert2";
+import { DescriptorInterface } from '../../../interfaces/descriptor.interface';
 
 declare var $: any;
 
@@ -75,12 +76,40 @@ export class SearchResultsSummaryComponent implements OnInit {
     [key: string]: DescriptorInterface[]
   } = {};
 
+  // Number of top intervention descriptors to display.
+  numInterventionDescriptorsDisplay = 5;
+  // Intervention descriptors columns to display.
+  displayedColumnsInterventionDescriptors = [
+    'rank',
+    'name',
+    'countStudies',
+  ];
+  // Intervention descriptors table data-source.
+  dataSourceInterventionDescriptors:
+    MatTableDataSource<StudiesCountByDescriptorInterface>;
+
+  // Number of latest intervention descriptors to display.
+  numLatestDescriptorsDisplay = 5;
+  // Latest descriptors columns to display.
+  displayedColumnsLatestDescriptors = [
+    'rank',
+    'name',
+    'date',
+  ];
+  // Latest descriptors table data-source.
+  dataSourceLatestDescriptors:
+    MatTableDataSource<LatestDescriptorInterface>;
+
   private loadingSearchStudies = new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByCountry =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByOverallStatus =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByFacility =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetCountStudiesByDescriptor =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetLatestDescriptors =
     new BehaviorSubject<boolean>(false);
 
   public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
@@ -90,6 +119,10 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.loadingGetCountStudiesByOverallStatus.asObservable();
   public isLoadingGetCountStudiesByFacility =
     this.loadingGetCountStudiesByFacility.asObservable();
+  public isLoadingGetCountStudiesByDescriptor =
+    this.loadingGetCountStudiesByDescriptor.asObservable();
+  public isLoadingGetLatestDescriptors =
+    this.loadingGetLatestDescriptors.asObservable();
 
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
@@ -230,6 +263,10 @@ export class SearchResultsSummaryComponent implements OnInit {
           this.getCountStudiesByOverallStatus();
           this.getCountStudiesByCountry(this.numStudiesLocationsDisplay);
           this.getCountStudiesByFacility(this.numFacilitiesDisplay);
+          this.getCountStudiesByDescriptor(
+            this.numInterventionDescriptorsDisplay,
+          );
+          this.getLatestDescriptors(this.numLatestDescriptorsDisplay);
 
           // Indicate that `searchStudies` is complete for this search.
           this.loadingSearchStudies.next(false);
@@ -411,6 +448,80 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
+   * Retrieve the count of clinical-trial studies by MeSH desriptor for the
+   * studies previously attributed to a given search. The search is performed
+   * via the `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getCountStudiesByDescriptor(limit?: number) {
+    // Indicate that `getCountStudiesByDescriptor` is ongoing for this search.
+    this.loadingGetCountStudiesByDescriptor.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getCountStudiesByDescriptor(
+        this.search.studies,
+        MeshTermType.INTERVENTION,
+        limit,
+      )
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.byDescriptor = response;
+
+          // Instantiate the data-source for the studies-by-descriptors table.
+          this.dataSourceInterventionDescriptors = new MatTableDataSource
+            <StudiesCountByDescriptorInterface>(
+              this.search.studiesStats.byDescriptor
+            );
+
+          // Indicate that `getCountStudiesByDescriptor` is complete for this
+          // search.
+          this.loadingGetCountStudiesByDescriptor.next(false);
+        }
+      );
+  }
+
+  /**
+   * Retrieve the latest MeSH descriptors for the studies previously attributed
+   * to a given search. The search is performed via the
+   * `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getLatestDescriptors(limit?: number) {
+    // Indicate that `getLatestDescriptors` is ongoing for this search.
+    this.loadingGetLatestDescriptors.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getLatestDescriptors(
+        this.search.studies,
+        MeshTermType.INTERVENTION,
+        limit,
+      )
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.latestDescriptors = response;
+
+          // Instantiate the data-source for the latest-descriptors table.
+          this.dataSourceLatestDescriptors = new MatTableDataSource
+            <LatestDescriptorInterface>(
+              this.search.studiesStats.latestDescriptors
+            );
+
+          // Indicate that `getLatestDescriptors` is complete for this
+          // search.
+          this.loadingGetLatestDescriptors.next(false);
+        }
+      );
+  }
+
+  /**
    * Navigate to the `StudiesListComponent` passing the search UUID and
    * overall-status group to be used in filtering studies.
    * @param searchUuid The search UUID for which to display studies.
@@ -515,5 +626,19 @@ export class SearchResultsSummaryComponent implements OnInit {
           label[0].innerHTML + ': ' + value + ' Trials';
       },
     });
+  }
+
+  /**
+   * Converts a date to a humanized version of the duration between the current
+   * date and the provided one.
+   *
+   * It is assumed that `date` is a past date.
+   *
+   * @param {Date} date The past date for which the humanized duration will be
+   * created.
+   * @returns {string} The humanized duration.
+   */
+  humanizeDate(date: Date): string {
+    return moment.duration(moment().diff(date)).humanize();
   }
 }
