@@ -1,23 +1,24 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
+import swal from 'sweetalert2';
 
 import {
+  SearchInterface,
   StudiesCountByCountryInterface,
   StudiesCountByFacilityInterface,
-  SearchInterface,
 } from '../../../interfaces/user-config.interface';
 import {
   MeshTermType,
   StudyInterface,
-  StudyOverallStatus,
+  StudyOverallStatus
 } from '../../../interfaces/study.interface';
-import { MatTableDataSource } from '@angular/material';
 import {
   StudyRetrieverService
 } from '../../../services/study-retriever.service';
@@ -27,10 +28,7 @@ import {
 import { overallStatusGroups } from '../../../shared/common.interface';
 import { getCountryCode } from '../../../shared/countries';
 import { UserConfigService } from '../../../services/user-config.service';
-import {
-  DescriptorInterface
-} from '../../../interfaces/descriptor.interface';
-import swal from "sweetalert2";
+import { DescriptorInterface } from '../../../interfaces/descriptor.interface';
 
 declare var $: any;
 
