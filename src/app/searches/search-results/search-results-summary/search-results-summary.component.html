@@ -59,6 +59,18 @@
             </a>
           </li>
 
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#therapies"
+              [ngClass]="{active: isNavPillActive(4)}"
+            >
+              <i class="material-icons">camera_enhance</i> Therapies
+            </a>
+          </li>
+
         </ul>
       </div>
 
@@ -477,6 +489,169 @@
 
                 </div>
 
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="row" id="therapies">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 3)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">camera_enhance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Therapies' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h5>Top Therapies</h5>
+                  <div class="row">
+
+                    <mat-spinner
+                      style="position:relative;top:50%;left:50%"
+                      *ngIf="isLoadingGetCountStudiesByDescriptor | async"
+                    ></mat-spinner>
+                    <div
+                      class="col-md-12"
+                      *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
+                    >
+                      <!--Studies-by-descriptors table.-->
+                      <div class="content table-responsive">
+                        <table
+                          mat-table
+                          #tableStudiesByDescriptor
+                          [dataSource]="dataSourceInterventionDescriptors"
+                          width="100%"
+                        >
+                          <!--Header.-->
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumnsInterventionDescriptors"
+                          >
+                          </tr>
+                          <tr
+                            mat-row
+                            *matRowDef="let row;
+                        columns: displayedColumnsInterventionDescriptors;"
+                          >
+                          </tr>
+
+                          <!-- Rank Column -->
+                          <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let idx = index">
+                              {{ idx + 1 }}
+                            </td>
+                          </ng-container>
+
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let entry">
+                              <mat-chip>
+                                {{ entry.meshTerm.name }}
+                              </mat-chip>
+                            </td>
+                          </ng-container>
+
+                          <!-- Trials Column -->
+                          <ng-container matColumnDef="countStudies">
+                            <th mat-header-cell *matHeaderCellDef>Trials</th>
+                            <td mat-cell *matCellDef="let entry">
+                              {{ entry.countStudies }}
+                            </td>
+                          </ng-container>
+
+                        </table>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h5>Latest Therapies</h5>
+                  <div class="row">
+
+                    <mat-spinner
+                      style="position:relative;top:50%;left:50%"
+                      *ngIf="isLoadingGetLatestDescriptors | async"
+                    ></mat-spinner>
+                    <div
+                      class="col-md-12"
+                      *ngIf="!(isLoadingGetLatestDescriptors | async)"
+                    >
+                      <!--Latest descriptors table.-->
+                      <div class="content table-responsive">
+                        <table
+                          mat-table
+                          #tableLatestDescriptors
+                          [dataSource]="dataSourceLatestDescriptors"
+                          width="100%"
+                        >
+                          <!--Header.-->
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumnsLatestDescriptors"
+                          >
+                          </tr>
+                          <tr
+                            mat-row
+                            *matRowDef="let row;
+                        columns: displayedColumnsLatestDescriptors;"
+                          >
+                          </tr>
+
+                          <!-- Rank Column -->
+                          <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let idx = index">
+                              {{ idx + 1 }}
+                            </td>
+                          </ng-container>
+
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let entry">
+                              <mat-chip>
+                                {{ entry.meshTerm.name }}
+                              </mat-chip>
+                            </td>
+                          </ng-container>
+
+                          <!-- Date Column -->
+                          <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef>First Appeared</th>
+                            <td mat-cell *matCellDef="let entry">
+                              {{ humanizeDate(entry.date) + ' ago' }}
+                            </td>
+                          </ng-container>
+
+                        </table>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
               </div>
 
             </div>
