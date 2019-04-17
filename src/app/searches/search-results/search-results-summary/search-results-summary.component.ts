@@ -11,6 +11,7 @@ import swal from 'sweetalert2';
 import * as moment from 'moment';
 
 import {
+  LatestDescriptorInterface,
   SearchInterface,
   StudiesCountByCountryInterface,
   StudiesCountByDescriptorInterface,
@@ -87,6 +88,18 @@ export class SearchResultsSummaryComponent implements OnInit {
   dataSourceInterventionDescriptors:
     MatTableDataSource<StudiesCountByDescriptorInterface>;
 
+  // Number of latest intervention descriptors to display.
+  numLatestDescriptorsDisplay = 5;
+  // Latest descriptors columns to display.
+  displayedColumnsLatestDescriptors = [
+    'rank',
+    'name',
+    'date',
+  ];
+  // Latest descriptors table data-source.
+  dataSourceLatestDescriptors:
+    MatTableDataSource<LatestDescriptorInterface>;
+
   private loadingSearchStudies = new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByCountry =
     new BehaviorSubject<boolean>(false);
@@ -95,6 +108,8 @@ export class SearchResultsSummaryComponent implements OnInit {
   private loadingGetCountStudiesByFacility =
     new BehaviorSubject<boolean>(false);
   private loadingGetCountStudiesByDescriptor =
+    new BehaviorSubject<boolean>(false);
+  private loadingGetLatestDescriptors =
     new BehaviorSubject<boolean>(false);
 
   public isLoadingSearchStudies = this.loadingSearchStudies.asObservable();
@@ -106,6 +121,8 @@ export class SearchResultsSummaryComponent implements OnInit {
     this.loadingGetCountStudiesByFacility.asObservable();
   public isLoadingGetCountStudiesByDescriptor =
     this.loadingGetCountStudiesByDescriptor.asObservable();
+  public isLoadingGetLatestDescriptors =
+    this.loadingGetLatestDescriptors.asObservable();
 
   // Index of the navigation pill that's initially active.
   private navPillIndexActive = 0;
@@ -249,6 +266,7 @@ export class SearchResultsSummaryComponent implements OnInit {
           this.getCountStudiesByDescriptor(
             this.numInterventionDescriptorsDisplay,
           );
+          this.getLatestDescriptors(this.numLatestDescriptorsDisplay);
 
           // Indicate that `searchStudies` is complete for this search.
           this.loadingSearchStudies.next(false);
@@ -462,6 +480,43 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Indicate that `getCountStudiesByDescriptor` is complete for this
           // search.
           this.loadingGetCountStudiesByDescriptor.next(false);
+        }
+      );
+  }
+
+  /**
+   * Retrieve the latest MeSH descriptors for the studies previously attributed
+   * to a given search. The search is performed via the
+   * `StudyStatsRetrieverService`.
+   *
+   * This function assumes that the `searchStudies` function has been previously
+   * run for the given search and that its `studies` property is populated.
+   */
+  getLatestDescriptors(limit?: number) {
+    // Indicate that `getLatestDescriptors` is ongoing for this search.
+    this.loadingGetLatestDescriptors.next(true);
+
+    // Perform the search.
+    this.studyStatsRetrieverService
+      .getLatestDescriptors(
+        this.search.studies,
+        MeshTermType.INTERVENTION,
+        limit,
+      )
+      .subscribe(
+        (response) => {
+          // Assign the retrieved stats to the search.
+          this.search.studiesStats.latestDescriptors = response;
+
+          // Instantiate the data-source for the latest-descriptors table.
+          this.dataSourceLatestDescriptors = new MatTableDataSource
+            <LatestDescriptorInterface>(
+              this.search.studiesStats.latestDescriptors
+            );
+
+          // Indicate that `getLatestDescriptors` is complete for this
+          // search.
+          this.loadingGetLatestDescriptors.next(false);
         }
       );
   }
