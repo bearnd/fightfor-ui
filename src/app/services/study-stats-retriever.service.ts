@@ -11,6 +11,7 @@ import {
   StudiesCountByOverallStatusInterface,
   StudiesCountByFacilityDescriptorInterface,
   StudiesCountByDescriptorInterface,
+  LatestDescriptorInterface,
 } from '../interfaces/user-config.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
 
@@ -58,6 +59,12 @@ interface VariablesGetCountStudiesByDescriptor {
   limit?: number
 }
 
+interface VariablesGetLatestDescriptors {
+  studyIds: number[]
+  meshTermType?: string
+  limit?: number
+}
+
 interface ResponseGetCountStudiesByFacilityDescriptor {
   studiesStats: {
     countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[]
@@ -67,6 +74,12 @@ interface ResponseGetCountStudiesByFacilityDescriptor {
 interface ResponseGetCountStudiesByDescriptor {
   studiesStats: {
     countStudiesByDescriptor: StudiesCountByDescriptorInterface[]
+  }
+}
+
+interface ResponseGetLatestDescriptors {
+  studiesStats: {
+    getLatestDescriptors: LatestDescriptorInterface[]
   }
 }
 
@@ -295,6 +308,27 @@ export class StudyStatsRetrieverService {
     }
   `;
 
+  queryGetLatestDescriptors = gql`
+    query getLatestDescriptors(
+      $studyIds: [Int]!, 
+      $meshTermType: MeshTermType,
+      $limit: Int
+    ) {
+      studiesStats {
+        getLatestDescriptors(
+          studyIds: $studyIds,
+          meshTermType: $meshTermType,
+          limit: $limit
+        ) {
+          meshTerm {
+            name,
+          },
+          date
+        }
+      }
+    }
+  `;
+
   constructor(private apollo: Apollo) {
   }
 
@@ -486,6 +520,47 @@ export class StudyStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.studiesStats.countStudiesByDescriptor;
+      });
+  }
+
+   /**
+   * Retrieve the latest MeSH descriptors for given studies.
+   * @param {StudyInterface[]} studies The studies which will be grouped and
+   * counted by facility.
+   * @param {MeshTermType} meshTermType The type of MeSH descriptor to limit
+   * the aggregation to.
+   * @param {number} limit The number of results to return (ordered by a
+   * descending number of studies).
+   * @returns {Observable<LatestDescriptorInterface[]>}
+   */
+  getLatestDescriptors(
+    studies: StudyInterface[],
+    meshTermType?: MeshTermType,
+    limit: number = null,
+  ): Observable<LatestDescriptorInterface[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    const meshTermTypeKey = Object.keys(MeshTermType)
+              .find(key => MeshTermType[key] === meshTermType);
+
+    return this.apollo
+      .query<ResponseGetLatestDescriptors,
+        VariablesGetLatestDescriptors>
+      ({
+        query: this.queryGetLatestDescriptors,
+        variables: {
+          studyIds: studyIds,
+          meshTermType: meshTermTypeKey,
+          limit: limit,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.getLatestDescriptors;
       });
   }
 
