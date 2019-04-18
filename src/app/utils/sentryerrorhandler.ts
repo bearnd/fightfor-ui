@@ -1,16 +1,29 @@
-import { ErrorHandler, Injectable } from '@angular/core';
-import * as Sentry from '@sentry/browser';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { environment } from '../../environments/environment';
+
+import * as Sentry from '@sentry/browser';
+
+import { AuthService } from '../services/auth.service';
+
 
 Sentry.init({
   dsn: environment.sentry.dsn,
   environment: environment.production ? 'production' : 'development',
 });
 
+
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
 
-  constructor() {}
+  private authService: AuthService;
+
+  constructor(private injector: Injector) {
+    setTimeout(
+      () => {
+        this.authService = injector.get(AuthService);
+      }
+    );
+  }
 
   /**
    * Handles any error not explicitly caught and sends information regarding
@@ -21,25 +34,37 @@ export class SentryErrorHandler implements ErrorHandler {
   handleError(error: any) {
     const eventId = Sentry.captureException(error.originalError || error);
 
-    // Set basic placeholder info.
-    const userEmail = 'Your email (so we can contact you once the ' +
-                    'issue is resolved)';
-    const userName = 'Your name (feel free to write "N/A")';
-
     // Log the error in the console as long as we're not running in production.
     if (!environment.production) {
       console.error(error);
     }
 
-    // Show a feedback dialog to allow the user to provide feedback regarding
-    // the error.
-    Sentry.showReportDialog(
-      {
+    if (this.authService.userProfile) {
+      Sentry.showReportDialog({
         eventId: eventId,
+        dsn: environment.sentry.dsn,
         user: {
-          email: userEmail,
-          name: userName,
-        }
+          name: this.authService.userProfile.name,
+          email: this.authService.userProfile.email,
+        },
+        title: 'Oops seems you encountered an error!',
+        subtitle: 'Feel free to leave some feedback as to what you were ' +
+                  'doing or to just yell at us.',
+        labelComments: 'Your feedback'
       });
+    } else {
+      Sentry.showReportDialog({
+        eventId: eventId,
+        dsn: environment.sentry.dsn,
+        user: {
+          name: this.authService.userProfile.name,
+          email: this.authService.userProfile.email,
+        },
+        title: 'Oops seems you encountered an error!',
+        subtitle: 'Feel free to leave some feedback as to what you were ' +
+                  'doing or to just yell at us.',
+        labelComments: 'Your feedback'
+      });
+    }
   }
 }
