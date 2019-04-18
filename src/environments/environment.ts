@@ -28,5 +28,9 @@ export const environment = {
   },
   sentry: {
     dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
+    organization: 'bearnd',
+    project: 'fightfor-ui',
+    feedbackUrl: 'https://sentry.io/api/0/projects/bearnd/fightfor-ui/user-feedback/',
+    apiKey: '2501958a147f48d5bb95a03fa9cf035ee8284f0dfa614ea986b2a1e7de45a002',
   },
 };
