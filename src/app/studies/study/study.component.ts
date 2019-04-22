@@ -803,4 +803,41 @@ export class StudyComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Creates a `mailto` link that will formulate an email to the given contact
+   * with a subject denoting the clinical-trial ID and title, a BCC to the
+   * user's email, and a basic email body.
+   * @param {ContactInterface} contact The contact for which the `mailto` link
+   * will be created
+   * @returns {string} The created `mailto` link.
+   */
+  createMailTo(contact: ContactInterface): string {
+
+    // Define the new-line character recognised by email clients.
+    const newline = '%0d%0a';
+
+    // Retrieve the person's name and use `Sir/Madam` is unavailable.
+    let personName = this.getPersonName(contact.person);
+    if (!personName) {
+      personName = 'Sir/Madam';
+    }
+
+    // Assemble the email subject.
+    const subject = this.study.nctId + ': ' + this.study.briefTitle;
+
+    // Assemble the email body.
+    const body = 'Dear ' + personName + ',' + newline + newline +
+      'I would like to enquire about the clinical-trial with ID ' +
+      this.study.nctId +
+      ' entitled ' + '"' + this.study.briefTitle + '"' +
+      ' detailed under https://clinicaltrials.gov/ct2/show/' +
+      this.study.nctId + '.' + newline + newline +
+      'Best regards,' + newline + this.authService.userProfile.name;
+
+    return 'mailto:' + contact.email +
+      '?subject=' + subject +
+      '&bcc=' + this.authService.userProfile.email +
+      '&body=' + body ;
+  }
+
 }
