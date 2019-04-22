@@ -14,6 +14,9 @@ import { Auth0UserProfileInterface } from './auth.service';
 @Injectable()
 export class PaymentService {
 
+  // The Auth0 user-profile for the current logged-in user.
+  private userProfile: Auth0UserProfileInterface;
+
   // The Braintree customer-profile for the currently logged-in user.
   public customerProfile: BraintreeCustomerInterface;
 
@@ -35,9 +38,12 @@ export class PaymentService {
     // Indicate that the customer-profile is loading.
     this.loadingCustomer.next(true);
 
+    // Store the Auth0 user-profile.
+    this.userProfile = userProfile;
+
     // Retrieve the customer ID by removing the `auth0|` prefix from the Auth0
     // user ID.
-    const customerId = userProfile.sub
+    const customerId = this.userProfile.sub
       .replace('auth0|', '');
 
     // Retrieve the Braintree customer for the given ID.
@@ -74,6 +80,22 @@ export class PaymentService {
    * current pricing plan.
    */
   public isPaid(planId: string): boolean {
+
+    // Payment bypass. If a user has been added to either the `Administrators`
+    // or `Testers` group via the Auth0 Authorization extension then these users
+    // don't need to have an active subscription to be considered 'paid' and
+    // use the premium features.
+    if (this.userProfile['https://bearnd:auth0:com/app_metadata']) {
+      const userAppMetadata = this
+        .userProfile['https://bearnd:auth0:com/app_metadata'];
+      const userGroups = userAppMetadata.authorization.groups;
+      if (
+        userGroups.includes('Administrators') ||
+        userGroups.includes('Testers')
+      ) {
+        return true;
+      }
+    }
 
     for (const creditCard of this.customerProfile.credit_cards) {
       for (const subscription of creditCard.subscriptions) {
