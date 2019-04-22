@@ -1341,7 +1341,7 @@
                           >
                             Email:
                             <a
-                              href="mailto:{{ contact.email }}"
+                              href="{{ createMailTo(contact) }}"
                             >
                               {{ contact.email }}
                             </a>
