@@ -3,8 +3,16 @@
 }
 
 .container-features {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 20%;
+  margin-bottom: 20%;
+  background-color: white;
+
+}
+
+.wrapper-white {
+  background-color: white;
+}
+
 .icon-social {
   color: #F65C50;
   font-size: xx-large
