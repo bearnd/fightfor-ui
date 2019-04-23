@@ -209,7 +209,7 @@
     &.bg-rose,
     &.card-rotate.bg-rose .front,
     &.card-rotate.bg-rose .back{
-      background: linear-gradient(60deg, $pink-400, $pink-600);
+      background: linear-gradient(60deg, $pink-ff, $gradient-pink-ff);
     }
 
     .card-header-primary .card-icon,
