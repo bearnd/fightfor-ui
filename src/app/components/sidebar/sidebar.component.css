@@ -1,0 +1,7 @@
+.indent{
+  text-indent: 5%;
+}
+
+.simple-text {
+  text-transform: lowercase !important;
+}
