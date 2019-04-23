@@ -452,7 +452,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // If there are no studies and the component is in 'saved' mode then show
     // an alert.
-    if (!this.studies.length && this.mode === Mode.SEARCH) {
+    if (!this.studies.length && this.mode === Mode.SAVED) {
       swal({
         title: 'You have not followed any trials!',
         html: '<p>Please follow trials you are interested in by ' +
