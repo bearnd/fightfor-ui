@@ -16,6 +16,11 @@
     <div class="row">
 
       <div class="col-md-4" *ngFor="let search of searches">
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card new-search-card" (click)="onNewSearch()">
+          <i class="material-icons">add</i>
+        </div>
+      </div>
 
         <div class="card search-card">
           <div class="card-header card-header-rose">
@@ -64,19 +69,5 @@
 
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <button
-          mat-raised-button
-          mat-fab
-          class="btn btn-rose btn-primary btn-round pull-right btn-fab btn-fab-corner"
-          [ngClass]="searches.length ? 'btn-fab-corner' : 'btn-fab-center'"
-          matTooltip="Create new search"
-          (click)="onNewSearch()"
-        >
-          <i class="material-icons">add</i>
-        </button>
-      </div>
-    </div>
   </div>
 </div>
