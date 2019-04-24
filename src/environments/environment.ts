@@ -18,7 +18,6 @@ export const environment = {
     domain: 'bearnd.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid profile email',
     scope: 'openid profile email user_metadata app_metadata',
     audience: 'fightfor-backend-dev',
   },
