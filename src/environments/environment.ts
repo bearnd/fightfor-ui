@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   graphql: {
-    domain: '192.168.0.12:5555',
-    uri: 'http://192.168.0.12:5555/graphql',
+    domain: '192.168.0.168:5555',
+    uri: 'http://192.168.0.168:5555/graphql',
   },
   mapbox: {
     uri: 'https://api.mapbox.com',
@@ -22,8 +22,8 @@ export const environment = {
     audience: 'fightfor-backend-dev',
   },
   braintreeGateway: {
-    domain: '192.168.0.12:8080',
-    uri: 'http://192.168.0.12:8080',
+    domain: '192.168.0.168:8080',
+    uri: 'http://192.168.0.168:8080',
     planId: 'fightfor_premium_monthly'
   },
   sentry: {
