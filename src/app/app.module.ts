@@ -35,9 +35,7 @@ import { GeolocationService } from './services/geolocation.service';
 
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
-import {
-  AuthLayoutComponent
-} from './layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import {
   MatDialogModule,
   MatIconModule,
