@@ -76,7 +76,7 @@
             [data-toggle="collapse"] ~ div > ul > li > a{
                 span{
                     display: inline-block;
-                    @extend .animation-transition-general;
+                    // @extend .animation-transition-general;
                 }
 
                 .sidebar-normal{
@@ -193,7 +193,7 @@
             display: block;
             height: auto;
             white-space: nowrap;
-            @extend .animation-transition-general;
+            // @extend .animation-transition-general;
         }
 
         i{

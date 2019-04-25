@@ -3,12 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import {
-  AdminLayoutComponent
-} from './layouts/admin-layout/admin-layout.component';
-import {
-  AuthLayoutComponent
-} from './layouts/auth-layout/auth-layout.component';
+import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 
 
@@ -19,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
+        loadChildren: './layouts/auth/auth-layout.module#AuthLayoutModule'
       }
     ]
   },
@@ -31,7 +27,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: './layouts/admin/admin-layout.module#AdminLayoutModule'
       }
     ]
   },

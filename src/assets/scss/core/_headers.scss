@@ -56,8 +56,11 @@
     }
 
     .container{
-        z-index: 2;
+        z-index: 3;
         position: relative;
+    }
+    .footer .container{
+        z-index: 2;
     }
 }
 .clear-filter::before {
