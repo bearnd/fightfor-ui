@@ -30,8 +30,12 @@
     color: rgba(0,0,0,.54);
 }
 //
+.mat-select-panel{
+  .mat-pseudo-checkbox{
+      border: none !important;
+    }
+}
 .mat-pseudo-checkbox{
-    border: none !important;
     margin-top: 2px;
     float: right;
 }

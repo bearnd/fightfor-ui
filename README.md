@@ -1,61 +1,102 @@
-# [Material Dashboard Angular - Free Bootstrap Material Design Admin](https://www.creative-tim.com/product/material-dashboard-angular2)[![version][version-badge]][CHANGELOG]
+# [Material Dashboard PRO Angular](https://demos.creative-tim.com/material-dashboard-pro-angular2/)
 
-![alt text](http://s3.amazonaws.com/creativetim_bucket/products/53/original/opt_md_angular_thumbnail.jpg "Material Dashboard Angular Free")
+![version](https://img.shields.io/badge/version-2.2.0-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/ct-material-dashboard-pro-angular.svg?maxAge=2592000)](https://github.com/creativetimofficial/ct-material-dashboard-pro-angular/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/ct-material-dashboard-pro-angular.svg?maxAge=2592000)](https://github.com/creativetimofficial/ct-material-dashboard-pro-angular/issues?q=is%3Aissue+is%3Aclosed)
 
-**[Material Dashboard Angular](https://www.creative-tim.com/product/material-dashboard-angular2/)** is a free Material Bootstrap Admin with a fresh, new design inspired by Google's Material Design. We are very excited to introduce our take on the material concepts through an easy to use and beautiful set of components. Material Dashboard was built over the popular Bootstrap framework and it comes with a couple of third-party plugins redesigned to fit in with the rest of the elements.
+![Product Gif](https://media.giphy.com/media/fVelPn4iBLS9c3bvCt/giphy.gif)
 
-Material Dashboard makes use of light, surface and movement. The general layout resembles sheets of paper following multiple different layers, so that the depth and order is obvious. The navigation stays mainly on the left sidebar and the content is on the right inside the main panel.
+Material Dashboard PRO Angular is a Premium Material Bootstrap 4 Admin with a fresh, new design inspired by Google's Material Design. It is based on the popular Bootstrap 4 framework and comes packed with multiple third-party plugins. All components are built to fit perfectly with each other, while aligning to the material concepts.
 
-This product came as a result of users asking for a material dashboard after we released our successful [Material Kit](http://www.creative-tim.com/product/material-kit). We developed it based on your feedback and it is a powerful bootstrap admin dashboard, which allows you to build products like admin panels, content managements systems and CRMs.
+Material Dashboard PRO Angular makes use of light, surface and movement. The general layout resembles sheets of paper following multiple layers, so that the depth and order is obvious. Inside the archive you will find multiple example pages on how to use all components. And, of course, every element is documented.
 
-Material Dashboard comes with 5 color filter choices for both the sidebar and the card headers (blue, green, orange, red and purple) and an option to have a background image on the sidebar.
+This dashboard is the bigger version for the [Material Dashboard Angular](https://www.creative-tim.com/product/material-dashboard-angular2), which is available for free download. We have created the PRO version based on the feedback we received from people using the demo. We tried to keep it as lean as possible, but provide all the necessary tools for developing a complex product. The result is a powerful dashboard that can easily help you build admin panels, CRMs or content management systems.
 
-Material Dashboard uses a framework built by our friend [Federico - Bootstrap Material Design](http://fezvrasta.github.io/bootstrap-material-design/), who did an amazing job creating the backbone for the material effects, animations, ripples and transitions. Big thanks to his team for the effort and forward thinking they put into it.
 
-Special thanks go to:
-[Robert McIntosh](https://github.com/mouse0270/bootstrap-notify) for the notification system.
-[Chartist](https://gionkunz.github.io/chartist-js/) for the wonderful charts.
-We are very excited to share this dashboard with you and we look forward to hearing your feedback!
+Material Dashboard PRO Angular has the same line of design as the Material Kit PRO, so they go together quite good. If you think you will need more landing and example pages, be sure to check it out. If you love material design, you'll probably enjoy using these products!
 
 You can find the Github Repo here.
 
-## Links:
+#### Special thanks
+During the development of this dashboard, we have used many existing resources from awesome developers. We want to thank them for providing their tools open source:
+- [Robert McIntosh](https://github.com/mouse0270/bootstrap-notify) for the notification system.
+- [Chartist](https://gionkunz.github.io/chartist-js/) for the wonderful charts
+- [Tristan Edwards](https://twitter.com/t4t5) for the [Sweet Alert2](https://sweetalert2.github.io/)
+- [Eonasdan](https://github.com/Eonasdan) for the - [DateTimPicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
+- Kirill Lebedev for [jVector Maps](http://jvectormap.com/)
+- [Vincent Gabriel](https://twitter.com/gabrielva) for the - [Bootstrap Wizard](http://vinceg.github.io/twitter-bootstrap-wizard/)
 
-+ [Live Preview](https://www.creative-tim.com/product/material-dashboard-angular2)
-+ [Material Kit - For Front End Development](http://www.creative-tim.com/product/material-kit?ref=github-md-angular)
+
+Let us know your thoughts below. And good luck with development!
+
+## Table of Contents
+
+* [Versions](#versions)
+* [Demo](#demo)
+* [Quick Start](#quick-start)
+* [Documentation](#documentation)
+* [File Structure](#file-structure)
+* [Browser Support](#browser-support)
+* [Resources](#resources)
+* [Reporting Issues](#reporting-issues)
+* [Technical Support or Questions](#technical-support-or-questions)
+* [Licensing](#licensing)
+* [Useful Links](#useful-links)
+
+## Versions
+
+[<img src="https://s3.amazonaws.com/creativetim_bucket/github/html.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-pro)
+[<img src="https://s3.amazonaws.com/creativetim_bucket/github/react.svg" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-pro-react)
+[<img src="https://s3.amazonaws.com/creativetim_bucket/github/vuejs.png" width="60" height="60" />](https://www.creative-tim.com/product/vue-material-dashboard-pro)
+[<img src="https://s3.amazonaws.com/creativetim_bucket/github/angular.png" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-pro-angular2)
+
+
+| HTML | React | Angular |
+| --- | --- | --- |
+| [![Material Dashboard Pro HTML](https://s3.amazonaws.com/creativetim_bucket/products/51/thumb/opt_mdp_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-pro) | [![Material Dashboard Pro React](https://s3.amazonaws.com/creativetim_bucket/products/80/thumb/opt_mdp_react_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-pro-react)  | [![Material Dashboard Pro Angular](https://s3.amazonaws.com/creativetim_bucket/products/55/thumb/opt_mdp_angular_thumbnail.jpg)](https://www.creative-tim.com/product/material-dashboard-pro-angular2)
+
+## Demo
+
+- [Start page](https://demos.creative-tim.com/material-dashboard-pro-angular2/dashboard)
+- [User profile page](https://demos.creative-tim.com/material-dashboard-pro-angular2/pages/user)
+- [Tables page ](https://demos.creative-tim.com/material-dashboard-pro-angular2/tables/extended)
+- [Maps Page](https://demos.creative-tim.com/material-dashboard-pro-angular2/maps/google)
+- [Notifications page](https://demos.creative-tim.com/material-dashboard-pro-angular2/components/notifications)
+
+[View More](https://demos.creative-tim.com/material-dashboard-pro-angular2/).
+
+
 
 ## Quick start
 
 Quick start options:
 
-- [Download from Github](https://github.com/tiniestory/material-dashboard-angular/archive/master.zip).
-- [Download from Creative Tim](http://www.creative-tim.com/product/material-dashboard-angular2).
-- Clone the repo: `git clone https://github.com/tiniestory/material-dashboard-angular.git`.
+- Buy from [Creative Tim](https://www.creative-tim.com/product/material-dashboard-pro-angular2).
 
 ## Terminal Commands
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0 and angular 4.x.
 
 1. Install NodeJs from [NodeJs Official Page](https://nodejs.org/en).
 2. Open Terminal
 3. Go to your file project
-4. Make sure you have installed [Angular CLI](https://github.com/angular/angular-cli) already. If not, please install.
-5. Run in terminal: ```npm install```
-6. Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+4. Run in terminal: ```npm install -g @angular/cli```
+5. Then: ```npm install```
+6. And: ```npm start```
+7. Navigate to [localhost:4200](localhost:4200)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Documentation
+The documentation for the Material Dashboard Pro Angular is hosted at our [website](https://demos.creative-tim.com/material-dashboard-pro-angular2/documentation/tutorial).
 
 ### What's included
 
 Within the download you'll find the following directories and files:
 
 ```
-md-free-angular-cli
+material-dashboard-pro-angular
 ├── CHANGELOG.md
-├── LICENSE.md
+├── ISSUE_TEMPLATE.md
 ├── README.md
-├── angular-cli.json
+├── angular.json
 ├── documentation
+│   ├── css
+│   └── tutorial-components.html
 ├── e2e
 ├── karma.conf.js
 ├── package-lock.json
@@ -63,83 +104,167 @@ md-free-angular-cli
 ├── protractor.conf.js
 ├── src
 │   ├── app
-│   │   ├── app.component.css
 │   │   ├── app.component.html
-│   │   ├── app.component.spec.ts
 │   │   ├── app.component.ts
 │   │   ├── app.module.ts
 │   │   ├── app.routing.ts
+│   │   ├── calendar
+│   │   │   ├── calendar.component.html
+│   │   │   ├── calendar.component.ts
+│   │   │   ├── calendar.module.ts
+│   │   │   └── calendar.routing.ts
+│   │   ├── charts
+│   │   │   ├── charts.component.html
+│   │   │   ├── charts.component.ts
+│   │   │   ├── charts.module.ts
+│   │   │   └── charts.routing.ts
 │   │   ├── components
+│   │   │   ├── buttons
+│   │   │   │   ├── buttons.component.html
+│   │   │   │   └── buttons.component.ts
 │   │   │   ├── components.module.ts
-│   │   │   ├── footer
-│   │   │   │   ├── footer.component.css
-│   │   │   │   ├── footer.component.html
-│   │   │   │   ├── footer.component.spec.ts
-│   │   │   │   └── footer.component.ts
-│   │   │   ├── navbar
-│   │   │   │   ├── navbar.component.css
-│   │   │   │   ├── navbar.component.html
-│   │   │   │   ├── navbar.component.spec.ts
-│   │   │   │   └── navbar.component.ts
-│   │   │   └── sidebar
-│   │   │       ├── sidebar.component.css
-│   │   │       ├── sidebar.component.html
-│   │   │       ├── sidebar.component.spec.ts
-│   │   │       └── sidebar.component.ts
+│   │   │   ├── components.routing.ts
+│   │   │   ├── grid
+│   │   │   │   ├── grid.component.html
+│   │   │   │   └── grid.component.ts
+│   │   │   ├── icons
+│   │   │   │   ├── icons.component.html
+│   │   │   │   └── icons.component.ts
+│   │   │   ├── notifications
+│   │   │   │   ├── notifications.component.html
+│   │   │   │   └── notifications.component.ts
+│   │   │   ├── panels
+│   │   │   │   ├── panels.component.html
+│   │   │   │   └── panels.component.ts
+│   │   │   ├── sweetalert
+│   │   │   │   ├── sweetalert.component.html
+│   │   │   │   └── sweetalert.component.ts
+│   │   │   └── typography
+│   │   │       ├── typography.component.html
+│   │   │       └── typography.component.ts
 │   │   ├── dashboard
-│   │   │   ├── dashboard.component.css
 │   │   │   ├── dashboard.component.html
-│   │   │   ├── dashboard.component.spec.ts
-│   │   │   └── dashboard.component.ts
-│   │   ├── icons
-│   │   │   ├── icons.component.css
-│   │   │   ├── icons.component.html
-│   │   │   ├── icons.component.spec.ts
-│   │   │   └── icons.component.ts
+│   │   │   ├── dashboard.component.ts
+│   │   │   ├── dashboard.module.ts
+│   │   │   └── dashboard.routing.ts
+│   │   ├── forms
+│   │   │   ├── extendedforms
+│   │   │   │   ├── extendedforms.component.html
+│   │   │   │   └── extendedforms.component.ts
+│   │   │   ├── forms.module.ts
+│   │   │   ├── forms.routing.ts
+│   │   │   ├── regularforms
+│   │   │   │   ├── regularforms.component.html
+│   │   │   │   └── regularforms.component.ts
+│   │   │   ├── validationforms
+│   │   │   │   ├── field-error-display
+│   │   │   │   │   ├── field-error-display.component.css
+│   │   │   │   │   ├── field-error-display.component.html
+│   │   │   │   │   └── field-error-display.component.ts
+│   │   │   │   ├── password-validator.component.ts
+│   │   │   │   ├── validationforms.component.html
+│   │   │   │   └── validationforms.component.ts
+│   │   │   └── wizard
+│   │   │       ├── wizard.component.css
+│   │   │       ├── wizard.component.html
+│   │   │       └── wizard.component.ts
 │   │   ├── layouts
-│   │   │   └── admin-layout
-│   │   │       ├── admin-layout.component.html
-│   │   │       ├── admin-layout.component.scss
-│   │   │       ├── admin-layout.component.spec.ts
-│   │   │       ├── admin-layout.component.ts
-│   │   │       ├── admin-layout.module.ts
-│   │   │       └── admin-layout.routing.ts
+│   │   │   ├── admin
+│   │   │   │   ├── admin-layout.component.html
+│   │   │   │   └── admin-layout.component.ts
+│   │   │   └── auth
+│   │   │       ├── auth-layout.component.html
+│   │   │       └── auth-layout.component.ts
+│   │   ├── main.ts
 │   │   ├── maps
-│   │   │   ├── maps.component.css
-│   │   │   ├── maps.component.html
-│   │   │   ├── maps.component.spec.ts
-│   │   │   └── maps.component.ts
-│   │   ├── notifications
-│   │   │   ├── notifications.component.css
-│   │   │   ├── notifications.component.html
-│   │   │   ├── notifications.component.spec.ts
-│   │   │   └── notifications.component.ts
-│   │   ├── table-list
-│   │   │   ├── table-list.component.css
-│   │   │   ├── table-list.component.html
-│   │   │   ├── table-list.component.spec.ts
-│   │   │   └── table-list.component.ts
-│   │   ├── typography
-│   │   │   ├── typography.component.css
-│   │   │   ├── typography.component.html
-│   │   │   ├── typography.component.spec.ts
-│   │   │   └── typography.component.ts
-│   │   ├── upgrade
-│   │   │   ├── upgrade.component.css
-│   │   │   ├── upgrade.component.html
-│   │   │   ├── upgrade.component.spec.ts
-│   │   │   └── upgrade.component.ts
-│   │   └── user-profile
-│   │       ├── user-profile.component.css
-│   │       ├── user-profile.component.html
-│   │       ├── user-profile.component.spec.ts
-│   │       └── user-profile.component.ts
+│   │   │   ├── fullscreenmap
+│   │   │   │   ├── fullscreenmap.component.html
+│   │   │   │   └── fullscreenmap.component.ts
+│   │   │   ├── googlemaps
+│   │   │   │   ├── googlemaps.component.html
+│   │   │   │   └── googlemaps.component.ts
+│   │   │   ├── maps.module.ts
+│   │   │   ├── maps.routing.ts
+│   │   │   └── vectormaps
+│   │   │       ├── vectormaps.component.html
+│   │   │       └── vectormaps.component.ts
+│   │   ├── md
+│   │   │   ├── md-chart
+│   │   │   │   ├── md-chart.component.css
+│   │   │   │   ├── md-chart.component.html
+│   │   │   │   ├── md-chart.component.spec.ts
+│   │   │   │   └── md-chart.component.ts
+│   │   │   ├── md-table
+│   │   │   │   ├── md-table.component.html
+│   │   │   │   └── md-table.component.ts
+│   │   │   └── md.module.ts
+│   │   ├── pages
+│   │   │   ├── lock
+│   │   │   │   ├── lock.component.html
+│   │   │   │   └── lock.component.ts
+│   │   │   ├── login
+│   │   │   │   ├── login.component.html
+│   │   │   │   └── login.component.ts
+│   │   │   ├── pages.module.ts
+│   │   │   ├── pages.routing.ts
+│   │   │   ├── pricing
+│   │   │   │   ├── pricing.component.html
+│   │   │   │   └── pricing.component.ts
+│   │   │   └── register
+│   │   │       ├── register.component.html
+│   │   │       └── register.component.ts
+│   │   ├── shared
+│   │   │   ├── fixedplugin
+│   │   │   │   ├── fixedplugin.component.css
+│   │   │   │   ├── fixedplugin.component.html
+│   │   │   │   ├── fixedplugin.component.spec.ts
+│   │   │   │   ├── fixedplugin.component.ts
+│   │   │   │   └── fixedplugin.module.ts
+│   │   │   ├── footer
+│   │   │   │   ├── footer.component.html
+│   │   │   │   ├── footer.component.ts
+│   │   │   │   └── footer.module.ts
+│   │   │   └── navbar
+│   │   │       ├── navbar.component.html
+│   │   │       ├── navbar.component.ts
+│   │   │       └── navbar.module.ts
+│   │   ├── sidebar
+│   │   │   ├── sidebar.component.html
+│   │   │   ├── sidebar.component.ts
+│   │   │   └── sidebar.module.ts
+│   │   ├── tables
+│   │   │   ├── datatable.net
+│   │   │   │   ├── datatable.component.html
+│   │   │   │   └── datatable.component.ts
+│   │   │   ├── extendedtable
+│   │   │   │   ├── extendedtable.component.html
+│   │   │   │   └── extendedtable.component.ts
+│   │   │   ├── regulartable
+│   │   │   │   ├── regulartable.component.html
+│   │   │   │   └── regulartable.component.ts
+│   │   │   ├── tables.module.ts
+│   │   │   └── tables.routing.ts
+│   │   ├── timeline
+│   │   │   ├── timeline.component.html
+│   │   │   ├── timeline.component.ts
+│   │   │   ├── timeline.module.ts
+│   │   │   └── timeline.routing.ts
+│   │   ├── userpage
+│   │   │   ├── user.component.html
+│   │   │   ├── user.component.ts
+│   │   │   ├── user.module.ts
+│   │   │   └── user.routing.ts
+│   │   └── widgets
+│   │       ├── widgets.component.html
+│   │       ├── widgets.component.ts
+│   │       ├── widgets.module.ts
+│   │       └── widgets.routing.ts
 │   ├── assets
-│   │   ├── css
-│   │   │   └── demo.css
 │   │   ├── img
 │   │   └── scss
 │   │       ├── core
+│   │       ├── dashboard
+│   │       ├── plugins
 │   │       └── material-dashboard.scss
 │   ├── environments
 │   ├── favicon.ico
@@ -153,21 +278,54 @@ md-free-angular-cli
 │   └── typings.d.ts
 ├── tsconfig.json
 ├── tslint.json
-└── typings
-
+├── typings
+└── typings.json
 ```
+
+## Browser Support
+
+At present, we officially aim to support the last two versions of the following browsers:
+
+<img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/chrome.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/firefox.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/edge.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/safari.png" width="64" height="64"> <img src="https://s3.amazonaws.com/creativetim_bucket/github/browser/opera.png" width="64" height="64">
+
+
+## Resources
+- [Live Preview](https://demos.creative-tim.com/material-dashboard-pro-angular2/)
+- Buy Page: https://www.creative-tim.com/product/material-dashboard-pro-angular2
+- Documentation is [here](https://demos.creative-tim.com/material-dashboard-pro-angular2/documentation/tutorial)
+- License Agreement: https://www.creative-tim.com/license
+- Support: https://www.creative-tim.com/contact-us
+- Issues: [Github Issues Page](https://github.com/creativetimofficial/ct-material-dashboard-pro-angular/issues)
+- Material Dashboard Angular - [demo](https://www.creative-tim.com/product/material-dashboard-angular2?ref=github-mda-pro)
+- For Front End Development - [Material Kit Pro ](https://www.creative-tim.com/product/material-kit-pro?ref=github-mda-pro)
+
+## Reporting Issues
+We use GitHub Issues as the official bug tracker for the Material Dashboard Pro Angular. Here are some advices for our users that want to report an issue:
+
+1. Make sure that you are using the latest version of the Material Dashboard Pro Angular. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/).
+2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
+3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+
+## Technical Support or Questions
+
+If you have questions or need help integrating the product please [contact us](https://www.creative-tim.com/contact-us) instead of opening an issue.
+
+## Licensing
+
+- Copyright 2018 Creative Tim (https://www.creative-tim.com)
+- Creative Tim [license](https://www.creative-tim.com/license)
 
 ## Useful Links
 
-More products from Creative Tim: <http://www.creative-tim.com/bootstrap-themes>
+- [More products](https://www.creative-tim.com/bootstrap-themes/angular-themes) from Creative Tim
 
-Tutorials: <https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w>
+- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
 
-Freebies: <http://www.creative-tim.com/products>
+- [Freebies](https://www.creative-tim.com/bootstrap-themes/free) from Creative Tim
 
-Affiliate Program (earn money): <http://www.creative-tim.com/affiliates/new>
+- [Affiliate Program](https://www.creative-tim.com/affiliates/new) (earn money)
 
-Social Media:
+##### Social Media
 
 Twitter: <https://twitter.com/CreativeTim>
 
@@ -178,7 +336,3 @@ Dribbble: <https://dribbble.com/creativetim>
 Google+: <https://plus.google.com/+CreativetimPage>
 
 Instagram: <https://instagram.com/creativetimofficial>
-
-[CHANGELOG]: ./CHANGELOG.md
-
-[version-badge]: https://img.shields.io/badge/version-2.1.0-blue.svg
