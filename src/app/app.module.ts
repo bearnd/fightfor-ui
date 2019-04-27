@@ -6,6 +6,9 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import {
   McBreadcrumbsComponent,
@@ -90,6 +93,9 @@ import { SentryErrorHandler } from './utils/sentryerrorhandler';
         ],
       }
     }),
+    FlexLayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ],
   declarations: [
     AppComponent,
