@@ -27,7 +27,7 @@
         <a [routerLink]="['/app']">Go to app</a>
       </span>
       <span class="toolbar-item" *ngIf="!(authService.isAuthenticated())">
-        <a (click)="onLoginRegister()">
+        <a (click)="onLoginRegister()" style="cursor: pointer;">
           <i class="material-icons">fingerprint</i> Login/Register
         </a>
       </span>
