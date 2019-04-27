@@ -823,7 +823,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * returned.
    * @returns The MeSH term string result.
    */
-  static getStudyInterventionMeshTerms(
+  getStudyInterventionMeshTerms(
     study: StudyInterface,
   ): string | null {
     const meshTerms: DescriptorInterface[] = [];
