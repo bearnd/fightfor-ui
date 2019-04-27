@@ -154,12 +154,12 @@ export class SearchNewComponent implements OnInit, OnDestroy {
           }
         }
       }
-    )
+    );
   }
 
   /**
    * Removes a descriptor from the selected descriptors.
-   * @param {DescriptorInterface} descriptor The descriptor to be removed.
+   * @param descriptor The descriptor to be removed.
    */
   onRemoveDescriptor(descriptor: DescriptorInterface): void {
     const index = this.descriptorsSelected.indexOf(descriptor);
@@ -171,7 +171,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   /**
    * Adds a selected descriptor to the selected descriptors.
-   * @param {MatAutocompleteSelectedEvent} event The selection event.
+   * @param event The selection event.
    */
   onDescriptorSelected(event: MatAutocompleteSelectedEvent): void {
     // Retrieve the selected descriptor.
@@ -223,7 +223,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   /**
    * Updates the selected year-range based on the slider.
-   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * @param event The slider event passed when the
    * slider is done being updated.
    */
   onSliderYearRangeFinish(event: IonRangeSliderCallback) {
@@ -235,7 +235,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   /**
    * Updates the selected age-range based on the slider.
-   * @param {IonRangeSliderCallback} event The slider event passed when the
+   * @param event The slider event passed when the
    * slider is done being updated.
    */
   onSliderAgeRangeFinish(event: IonRangeSliderCallback) {
