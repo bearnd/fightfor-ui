@@ -250,7 +250,7 @@ export class SearchResultsSummaryComponent implements OnInit {
                 const res = this.router.navigate(
                   ['/app', 'searches', 'new'],
                 );
-                res.finally();
+                res.then();
               }
             }).catch(swal.noop);
           }
@@ -539,7 +539,7 @@ export class SearchResultsSummaryComponent implements OnInit {
         overallStatusGroupName,
       ],
     );
-    result.finally();
+    result.then();
   }
 
   /**

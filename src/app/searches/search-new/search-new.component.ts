@@ -150,7 +150,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
             const result = this.router.navigate(
               ['/app', 'searches', this.newSearchUuid]
             );
-            result.finally();
+            result.then();
           }
         }
       }

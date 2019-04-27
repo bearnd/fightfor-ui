@@ -45,7 +45,7 @@ export class SearchesGridComponent implements OnInit {
     const result = this.router.navigate(
       ['/app', 'searches', 'new']
     );
-    result.finally();
+    result.then();
   }
 
   /**
@@ -68,7 +68,7 @@ export class SearchesGridComponent implements OnInit {
     const result = this.router.navigate(
       ['/app', 'searches', searchUuid]
     );
-    result.finally();
+    result.then();
   }
 
 }

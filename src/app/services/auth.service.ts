@@ -88,12 +88,11 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         const res = this.router.navigate(['/']);
-        res.finally()
+        res.then();
         // If authentication fails log the error and navigate to the home-page.
       } else if (err) {
-        this.router.navigate(['/']);
-        // todo: replace with a more elegant error for the user.
-        console.log(err);
+        const result = this.router.navigate(['/']);
+        result.then();
       }
     });
   }

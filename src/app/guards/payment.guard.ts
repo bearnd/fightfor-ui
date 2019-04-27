@@ -78,7 +78,7 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
       }).then(result => {
         if (result.value) {
           const res = this.router.navigate(['/pricing']);
-          res.finally();
+          res.then();
         } else {
           return false;
         }
