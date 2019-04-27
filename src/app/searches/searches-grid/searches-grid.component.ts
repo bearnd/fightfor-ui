@@ -22,8 +22,8 @@ export class SearchesGridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-    this.searches = Object.values(this.userConfigService.userSearches);
+    this.searches = Object.keys(this.userConfigService.userSearches)
+      .map(key => this.userConfigService.userSearches[key]);
 
     // Subscribe to the `UserConfigService.searchesLatest` observable. Each
     // time the searches are updated retrieve them and set them under
@@ -32,7 +32,8 @@ export class SearchesGridComponent implements OnInit {
     this.userConfigService.searchesLatest.subscribe(
       (searches: SearchInterface[]) => {
         if (searches) {
-          this.searches = Object.values(searches).reverse();
+          this.searches = Object.keys(searches)
+            .map(key => searches[key]).reverse();
         }
       }
     );

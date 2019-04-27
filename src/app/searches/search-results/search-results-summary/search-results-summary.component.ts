@@ -572,8 +572,10 @@ export class SearchResultsSummaryComponent implements OnInit {
     }
 
     // Calculate the maximum and minimum values of study-count.
-    const mapMax: number = Math.max(...Object.values(mapValues));
-    const mapMin: number = Math.min(...Object.values(mapValues));
+    const mapMax: number = Math
+      .max(...Object.keys(mapValues).map(key => mapValues[key]));
+    const mapMin: number = Math
+      .min(...Object.keys(mapValues).map(key => mapValues[key]));
 
     // Calculate a color per region based on the study-count and the
     // color-scale defined prior.

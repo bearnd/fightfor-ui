@@ -30,5 +30,6 @@ export const overallStatusGroups = {
   active: [
     StudyOverallStatus.ACTIVE_NOT,
   ],
-  all: Object.values(StudyOverallStatus),
+  all: Object.keys(StudyOverallStatus)
+    .map(key => StudyOverallStatus[key]),
 };

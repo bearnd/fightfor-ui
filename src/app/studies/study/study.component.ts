@@ -399,7 +399,8 @@ export class StudyComponent implements OnInit, OnDestroy {
    * investigators grouped by their role.
    */
   groupStudyInvestigators(): {[key: string]: InvestigatorInterface[]} {
-    const roleTypes = Object.values(RoleType);
+    const roleTypes = Object.keys(RoleType).map(key => RoleType[key]);
+
 
     const groupsInvestigators: {[key: string]: InvestigatorInterface[]} = {};
 
@@ -423,7 +424,8 @@ export class StudyComponent implements OnInit, OnDestroy {
    * outcomes grouped by their type.
    */
   groupStudyOutcomes(): {[key: string]: ProtocolOutcomeInterface[]} {
-    const outcomeTypes = Object.values(OutcomeType);
+    const outcomeTypes = Object.keys(OutcomeType)
+      .map(key => OutcomeType[key]);
 
     const groupsOutcomes: {[key: string]: ProtocolOutcomeInterface[]} = {};
 
@@ -447,7 +449,8 @@ export class StudyComponent implements OnInit, OnDestroy {
    * grouped by their type.
    */
   groupStudyReferences(): {[key: string]: ReferenceInterface[]} {
-    const referenceTypes = Object.values(ReferenceType);
+    const referenceTypes = Object.keys(ReferenceType)
+      .map(key => ReferenceType[key]);
 
     const groupsReferences: {[key: string]: ReferenceInterface[]} = {};
 
