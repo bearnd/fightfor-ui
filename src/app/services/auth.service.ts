@@ -132,7 +132,8 @@ export class AuthService {
     this.unscheduleRenewal();
 
     // Redirect user to home-page.
-    this.router.navigate(['/']);
+    const result = this.router.navigate(['/']);
+    result.then();
   }
 
   /**
