@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { SearchesComponent } from '../../searches/searches.component';
 import {
   SearchResultsComponent
@@ -25,14 +24,8 @@ import { StudiesComponent } from '../../studies/studies.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    data: {
-      breadcrumbs: 'Dashboard'
-    }
+    redirectTo: 'searches',
+    pathMatch: 'full',
   },
   {
     path: 'searches',
@@ -50,7 +43,7 @@ export const AdminLayoutRoutes: Routes = [
         component: SearchNewComponent,
         data: {
           breadcrumbs: 'New'
-        }
+        },
       },
       {
         path: ':searchUuid',

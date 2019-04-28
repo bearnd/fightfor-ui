@@ -27,7 +27,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { IonRangeSliderModule } from 'ng2-ion-range-slider';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { SearchesComponent } from '../../searches/searches.component';
 import {
   SearchResultsComponent
@@ -76,7 +75,6 @@ import { StudiesComponent } from '../../studies/studies.component';
     IonRangeSliderModule,
   ],
   declarations: [
-    DashboardComponent,
     SearchesComponent,
     SearchResultsComponent,
     SearchResultsSummaryComponent,
