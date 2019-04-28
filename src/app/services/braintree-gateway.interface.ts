@@ -1,5 +1,5 @@
 export interface BraintreeGatewayToken {
-  token: string
+  token: string;
 }
 
 export enum BraintreeCreditCardTypeEnum {
@@ -35,37 +35,37 @@ export enum BraintreeSubscriptionTrialDurationUnitEnum {
 
 
 export interface BraintreeGatewaySubscriptionInterface {
-  id: string
-  status: BraintreeSubscriptionStatusEnum
-  plan_id: string
-  price: string
-  balance: string
-  payment_method_token: string
-  billing_day_of_month: number
-  current_billing_cycle: number
-  trial_period: boolean
-  trial_duration: number
-  trial_duration_unit: BraintreeSubscriptionTrialDurationUnitEnum
-  created_at: Date,
-  updated_at: Date,
+  id: string;
+  status: BraintreeSubscriptionStatusEnum;
+  plan_id: string;
+  price: string;
+  balance: string;
+  payment_method_token: string;
+  billing_day_of_month: number;
+  current_billing_cycle: number;
+  trial_period: boolean;
+  trial_duration: number;
+  trial_duration_unit: BraintreeSubscriptionTrialDurationUnitEnum;
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface BraintreeCreditCardInterface {
-  expiration_month: string
-  token: string
-  card_type: BraintreeCreditCardTypeEnum,
-  subscriptions?: BraintreeGatewaySubscriptionInterface[]
-  created_at: Date,
-  updated_at: Date,
+  expiration_month: string;
+  token: string;
+  card_type: BraintreeCreditCardTypeEnum;
+  subscriptions?: BraintreeGatewaySubscriptionInterface[];
+  created_at: Date;
+  updated_at: Date;
 }
 
 export interface BraintreeCustomerInterface {
-  id: string
-  first_name: string
-  last_name: string
-  email: string
-  phone: string
-  credit_cards?: BraintreeCreditCardInterface[]
-  created_at: Date,
-  updated_at: Date,
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  credit_cards?: BraintreeCreditCardInterface[];
+  created_at: Date;
+  updated_at: Date;
 }

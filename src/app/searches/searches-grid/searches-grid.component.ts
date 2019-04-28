@@ -51,7 +51,7 @@ export class SearchesGridComponent implements OnInit {
 
   /**
    * Deletes a given search via its UUID and the `UserConfigService`.
-   * @param {string} searchUuid The UUID of the search to be deleted.
+   * @param searchUuid The UUID of the search to be deleted.
    */
   onDeleteSearch(searchUuid: string) {
     this.userConfigService.deleteSearch(
@@ -62,8 +62,7 @@ export class SearchesGridComponent implements OnInit {
 
   /**
    * Redirects the user to the results summary of a given search.
-   * @param {string} searchUuid The search for which the user-results will be
-   * displayed.
+   * @param searchUuid The search for which the user-results will be displayed.
    */
   onSeeResults(searchUuid: string) {
     const result = this.router.navigate(

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 import {
   BraintreeCustomerInterface,
@@ -30,8 +31,8 @@ export class PaymentService {
   /**
    * Retrieves the Braintree customer for the current Auth0 user. If a
    * Braintree customer does not exist a new one is created.
-   * @param {Auth0UserProfileInterface} userProfile The Auth0 user-profile for
-   * which a Braintree will be retrieved.
+   * @param userProfile The Auth0 user-profile for which a Braintree will be
+   * retrieved.
    */
   public getCustomerProfile(userProfile: Auth0UserProfileInterface) {
 
@@ -65,7 +66,7 @@ export class PaymentService {
                 this.customerProfile = customer;
                 this.loadingCustomer.next(false);
               }
-            )
+            );
           }
         }
       );
@@ -74,10 +75,9 @@ export class PaymentService {
   /**
    * Iterates over the current customer's subscriptions and checks whether the
    * customer has an active subscription to a given pricing plan.
-   * @param {string} planId The ID of the pricing plan for which the search is
-   * performed.
-   * @returns {boolean} Whether the customer has an active subscription to the
-   * current pricing plan.
+   * @param planId The ID of the pricing plan for which the search is performed.
+   * @returns Whether the customer has an active subscription to the current
+   * pricing plan.
    */
   public isPaid(planId: string): boolean {
 
@@ -107,11 +107,9 @@ export class PaymentService {
         if (subscription.status !== BraintreeSubscriptionStatusEnum.ACTIVE) {
           continue;
         }
-
         return true;
       }
     }
-
     return false;
   }
 

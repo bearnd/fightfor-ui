@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import {
   InterventionType,
@@ -17,81 +17,81 @@ import { DescriptorInterface } from '../interfaces/descriptor.interface';
 
 
 interface VariablesSearchStudies {
-  meshDescriptorIds: number[]
-  gender?: string
-  yearBeg?: number
-  yearEnd?: number
-  ageBeg?: number
-  ageEnd?: number
-  doIncludeChildren?: boolean
+  meshDescriptorIds: number[];
+  gender?: string;
+  yearBeg?: number;
+  yearEnd?: number;
+  ageBeg?: number;
+  ageEnd?: number;
+  doIncludeChildren?: boolean;
 }
 
 interface VariablesFilterStudies {
-  studyIds: number[]
-  countries?: string[]
-  states?: string[]
-  cities?: string[]
-  currentLocationLongitude?: number
-  currentLocationLatitude?: number
-  distanceMaxKm?: number
-  overallStatuses?: string[]
-  interventionTypes?: string[]
-  phases?: string[]
-  studyTypes?: string[]
-  yearBeg?: number
-  yearEnd?: number
-  ageBeg?: number
-  ageEnd?: number
-  orderBy?: string
-  order?: OrderType
-  limit?: number
-  offset?: number
+  studyIds: number[];
+  countries?: string[];
+  states?: string[];
+  cities?: string[];
+  currentLocationLongitude?: number;
+  currentLocationLatitude?: number;
+  distanceMaxKm?: number;
+  overallStatuses?: string[];
+  interventionTypes?: string[];
+  phases?: string[];
+  studyTypes?: string[];
+  yearBeg?: number;
+  yearEnd?: number;
+  ageBeg?: number;
+  ageEnd?: number;
+  orderBy?: string;
+  order?: OrderType;
+  limit?: number;
+  offset?: number;
 }
 
 interface VariablesCountStudies {
-  studyIds: number[]
-  countries?: string[]
-  states?: string[]
-  cities?: string[]
-  currentLocationLongitude?: number
-  currentLocationLatitude?: number
-  distanceMaxKm?: number
-  overallStatuses?: string[]
-  interventionTypes?: string[]
-  phases?: string[]
-  studyTypes?: string[]
-  yearBeg?: number
-  yearEnd?: number
-  ageBeg?: number
-  ageEnd?: number
+  studyIds: number[];
+  countries?: string[];
+  states?: string[];
+  cities?: string[];
+  currentLocationLongitude?: number;
+  currentLocationLatitude?: number;
+  distanceMaxKm?: number;
+  overallStatuses?: string[];
+  interventionTypes?: string[];
+  phases?: string[];
+  studyTypes?: string[];
+  yearBeg?: number;
+  yearEnd?: number;
+  ageBeg?: number;
+  ageEnd?: number;
 }
 
 interface ResponseSearchStudies {
   studies: {
-    search: StudyInterface[]
-  }
+    search: StudyInterface[];
+  };
 }
 
 interface ResponseFilterStudies {
   studies: {
-    filter: StudyInterface[]
-  }
+    filter: StudyInterface[];
+  };
 }
 
 interface ResponseCountStudies {
   studies: {
-    count: number
-  }
+    count: number;
+  };
 }
 
 interface ResponseGetStudiesByNctIds {
   studies: {
-    byNctId: StudyInterface[]
-  }
+    byNctId: StudyInterface[];
+  };
 }
 
 interface VariablesGetStudiesByNctIds {
-  nctIds: string[]
+  nctIds: string[];
 }
 
 @Injectable()

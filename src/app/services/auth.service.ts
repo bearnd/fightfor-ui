@@ -13,14 +13,14 @@ import { environment } from '../../environments/environment';
  * Interface to the Auth0 user-profile object.
  */
 export interface Auth0UserProfileInterface {
-  email_verified?: boolean
-  email?: string
-  updated_at?: Date
-  name?: string
-  picture?: string
-  nickname?: string
-  created_at?: Date
-  sub?: string
+  email_verified?: boolean;
+  email?: string;
+  updated_at?: Date;
+  name?: string;
+  picture?: string;
+  nickname?: string;
+  created_at?: Date;
+  sub?: string;
 }
 
 
@@ -28,14 +28,14 @@ export interface Auth0UserProfileInterface {
  * Interface to the Auth0 authentication result object.
  */
 export interface Auth0AuthResultInterface {
-  accessToken: string
-  appState: null
-  expiresIn: number
-  idToken: string
-  refreshToken: string
-  scope: string
-  state: string
-  tokenType: string
+  accessToken: string;
+  appState: null;
+  expiresIn: number;
+  idToken: string;
+  refreshToken: string;
+  scope: string;
+  state: string;
+  tokenType: string;
 }
 
 
@@ -100,7 +100,7 @@ export class AuthService {
   /**
    * Stores the contents of the authentication result in the local storage and
    * schedules the access-token renewal.
-   * @param {Auth0AuthResultInterface} authResult The authentication result.
+   * @param authResult The authentication result.
    */
   private setSession(authResult: Auth0AuthResultInterface): void {
 
@@ -138,7 +138,7 @@ export class AuthService {
 
   /**
    * Checks whether the user is logged in and remains authenticated.
-   * @returns {boolean} Whether the user remains authenticated or not,
+   * @returns Whether the user remains authenticated or not.
    */
   public isAuthenticated(): boolean {
 
@@ -160,8 +160,7 @@ export class AuthService {
    * with the retrieved profile data or any error that may have occurred. The
    * retrieved profile data is cached within the class for quick subsequent
    * retrieval.
-   * @param {Function} callback The function to call upon retrieval of the user
-   * profile.
+   * @param callback The function to call upon retrieval of the user profile.
    */
   public getProfile(callback: Function): void {
 

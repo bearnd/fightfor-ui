@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
 import { AuthService } from '../services/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {
   PaymentDialogComponent
 } from './payment-dialog/payment-dialog.component';
 import { PaymentService } from '../services/payment.service';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
 
 
@@ -88,8 +90,7 @@ export class PricingComponent implements OnInit {
    * Checks if the current user has been authenticated and if they have checks
    * whether the current user has already purchased the premium plan via the
    * `PaymentService`.
-   * @returns {boolean} Whether the current user has authenticated and paid or
-   * not.
+   * @returns Whether the current user has authenticated and paid or not.
    */
   public isPaid(): boolean {
 

@@ -29,10 +29,11 @@ export class SentryErrorHandler implements ErrorHandler {
    * Handles any error not explicitly caught and sends information regarding
    * that error to Sentry. In addition it displays a feedback dialog allowing
    * the user to provide information regarding the error.
-   * @param {any} error The error that occurred.
+   * @param error The error that occurred.
    */
   handleError(error: any) {
-    const eventId = Sentry.captureException(error.originalError || error);
+    const eventId = Sentry
+      .captureException(error.originalError || error);
 
     // Log the error in the console as long as we're not running in production.
     if (!environment.production) {

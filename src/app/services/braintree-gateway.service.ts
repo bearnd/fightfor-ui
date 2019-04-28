@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import * as urljoin from 'url-join';
 
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { ErrorObservable } from 'rxjs-compat/observable/ErrorObservable';
 import {
@@ -22,10 +22,9 @@ export class BraintreeGatewayService {
   /**
    * Retrieves a Braintree customer for a given customer ID through a GET
    * request against the `braintree-gateway` API.
-   * @param {string} customerId The Braintree customer ID for which retrieval
-   * is performed.
-   * @returns {Observable<BraintreeCustomerInterface>} The HTTP request
-   * observable.
+   * @param customerId The Braintree customer ID for which retrieval is
+   * performed.
+   * @returns The HTTP request observable.
    */
   getCustomer(customerId: string): Observable<BraintreeCustomerInterface> {
 
@@ -42,10 +41,9 @@ export class BraintreeGatewayService {
   /**
    * Creates a new Braintree customer with a given ID and email through a POST
    * request against the `braintree-gateway` API.
-   * @param {string} customer_id The ID to be assigned to the new customer.
-   * @param {string} email The customer's email.
-   * @returns {Observable<BraintreeCustomerInterface>} The HTTP request
-   * observable.
+   * @param customer_id The ID to be assigned to the new customer.
+   * @param email The customer's email.
+   * @returns The HTTP request observable.
    */
   createCustomer(
     customer_id: string,
@@ -71,8 +69,9 @@ export class BraintreeGatewayService {
   /**
    * Creates a new client-token for a given customer through a GET request
    * against the `braintree-gateway` API.
-   * @param {string} customerId The Braintree customer ID for which the
-   * client-token is created.
+   * @param customerId The Braintree customer ID for which the client-token is
+   * created.
+   * @returns The HTTP request observable.
    */
   getClientToken(customerId: string): Observable<string> {
 
@@ -86,7 +85,7 @@ export class BraintreeGatewayService {
     return this.httpClient
       .get<BraintreeGatewayToken>(url).map(
         (result: BraintreeGatewayToken) => {
-          return result.token
+          return result.token;
         }
       ).catch(
         (error) => {
@@ -98,12 +97,11 @@ export class BraintreeGatewayService {
   /**
    * Creates a new subscription for a given plan under a given customer through
    * a POST request against the `braintree-gateway` API.
-   * @param {string} paymentMethodNonce The payment-method nonce representing
-   * a payment-method stored in Braintree.
-   * @param {string} customerId The Braintree customer ID for which the
-   * subscription is created.
-   * @param {string} planId The Braintree plan ID for which the subscription
-   * is created.
+   * @param paymentMethodNonce The payment-method nonce representing a
+   * payment-method stored in Braintree.
+   * @param customerId The Braintree customer ID for which the subscription is
+   * created.
+   * @param planId The Braintree plan ID for which the subscription is created.
    */
   createSubscription(
     paymentMethodNonce: string,

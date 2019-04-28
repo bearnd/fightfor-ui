@@ -160,7 +160,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Trigger when resizing and calculate the map dimensions as 80% height and
    * 45% of the card it is included in.
-   * @param {Event} event The resizing event.
+   * @param event The resizing event.
    */
   onResize(event: Event) {
     this.studiesLocationMapHeight = 0.8 * this
@@ -172,9 +172,9 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Checks whether a nav-pill should receive the `active` class depending on
    * the current scroll position relative to the result cards.
-   * @param {ScrollTrackerEventData} event The scroll event containing
-   * information regarding the current scroll position.
-   * @param {number} navPillIndex The index of the nav-pill that triggered this
+   * @param event The scroll event containing information regarding the current
+   * scroll position.
+   * @param navPillIndex The index of the nav-pill that triggered this
    * event/function and will be evaluated for 'activation'.
    */
   public onScroll(event: ScrollTrackerEventData, navPillIndex: number) {
@@ -195,9 +195,8 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Checks whether a nav-pill with a given index is supposed to be active or
    * not.
-   * @param {number} navPillIndex The index of the nav-pill to be checked.
-   * @returns {boolean} Whether the defined nav-pill is supposed to be active or
-   * not.
+   * @param navPillIndex The index of the nav-pill to be checked.
+   * @returns Whether the defined nav-pill is supposed to be active or not.
    */
   public isNavPillActive(navPillIndex: number) {
     // Check whether the defined nav-pill is supposed to be active or not.
@@ -395,11 +394,11 @@ export class SearchResultsSummaryComponent implements OnInit {
                   result.facilityCanonical.facilityCanonicalId
                   ] = response_sub.map(
                   function (entry) {
-                    return entry.meshTerm
+                    return entry.meshTerm;
                   }
                 );
               }
-            )
+            );
           }
 
           // Instantiate the data-source for the facilities table.
@@ -418,10 +417,10 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Count the number of studies whose `overallStatus` has one of the values
    * defined under `overallStatusValues`.
-   * @param {StudyOverallStatus[]} overallStatusMembers The possible overall
-   * status values for which studies will be counted.
-   * @returns {number} The number of studies whose overall status matches one of
-   * the values under `overallStatusValues`.
+   * @param overallStatusMembers The possible overall status values for which
+   * studies will be counted.
+   * @returns The number of studies whose overall status matches one of the
+   * values under `overallStatusValues`.
    */
   getCountStudiesOverallStatus(
     overallStatusMembers: StudyOverallStatus[],
@@ -545,8 +544,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   /**
    * Configures and initializes the studies locations map based on the results
    * of the studies-by-country aggregation.
-   * @param {StudiesCountByCountryInterface[]} studiesByCountry The results of
-   * the studies-by-country aggregation.
+   * @param studiesByCountry The results of the studies-by-country aggregation.
    */
   configureStudiesLocationsMap(
     studiesByCountry: StudiesCountByCountryInterface[],
@@ -621,7 +619,7 @@ export class SearchResultsSummaryComponent implements OnInit {
 
         let value = 0;
         if (mapValues.hasOwnProperty(code)) {
-          value = mapValues[code]
+          value = mapValues[code];
         }
 
         label[0].innerHTML =
@@ -636,9 +634,8 @@ export class SearchResultsSummaryComponent implements OnInit {
    *
    * It is assumed that `date` is a past date.
    *
-   * @param {Date} date The past date for which the humanized duration will be
-   * created.
-   * @returns {string} The humanized duration.
+   * @param date The past date for which the humanized duration will be created.
+   * @returns The humanized duration.
    */
   humanizeDate(date: Date): string {
     return moment.duration(moment().diff(date)).humanize();
