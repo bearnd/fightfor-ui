@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
+import { Subscription } from 'rxjs/Subscription';
 
 import { UserConfigService } from '../../services/user-config.service';
 import { StudyRetrieverService } from '../../services/study-retriever.service';
@@ -24,7 +25,6 @@ import {
   StudyPhase,
   StudyType,
 } from '../../interfaces/study.interface';
-import { Subscription } from 'rxjs/Rx';
 import { AgeRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
@@ -200,8 +200,8 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Retrieves the value of a `StudyOverallStatus` member.
-   * @param {StudyOverallStatus} status The enumeration member.
-   * @returns {string} The enumeration member value.
+   * @param status The enumeration member.
+   * @returns The enumeration member value.
    */
   getStatusDescription(status: StudyOverallStatus): string {
     return StudyOverallStatus[status];
@@ -211,13 +211,12 @@ export class StudyComponent implements OnInit, OnDestroy {
    * Returns a numerical value indicative of the current study's overall status
    * in order appropriately indicate the status of the study in the status
    * timeline.
-   * @returns {number} The numerical valud indicative of the study's overall
-   * status.
+   * @returns The numerical valud indicative of the study's overall status.
    */
-  getStatusLevel() {
+  getStatusLevel(): number {
 
     const overallStatus = StudyOverallStatus[this.study.overallStatus];
-    
+
     if (overallStatus === StudyOverallStatus.NOT_YET) {
       return 1;
     } else if (
@@ -240,8 +239,8 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Returns a message explaining the overall status of the currently displayed
    * study depending on the value of its `overallStatus` property.
-   * @returns {string | null} The message explaining the overall status of the
-   * currently displayed study.
+   * @returns The message explaining the overall status of the currently
+   * displayed study.
    */
   getStatusMessage(): string | null {
 
@@ -272,7 +271,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Evaluates whether the study officials can be contacted based on the
    * currently displayed study's `overallStudy` property.
-   * @returns {boolean} Whether the study officials can be contacted.
+   * @returns Whether the study officials can be contacted.
    */
   getCanContact(): boolean {
     const overallStatus = StudyOverallStatus[this.study.overallStatus];
@@ -288,7 +287,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Returns a numerical value indicative of the current study's purpose
    * in order to appropriately indicate.
-   * @returns {number} The numerical valud indicative of the study's purpose.
+   * @returns The numerical valud indicative of the study's purpose.
    */
   getPurposeIndex() {
     const purpose = this.study.studyDesignInfo.primaryPurpose;
@@ -320,9 +319,8 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a message explaining the status of a given location.
-   * @param {RecruitmentStatusType} status The location status.
-   * @returns {string | null} The message explaining the status of a given
-   * location
+   * @param status The location status.
+   * @returns The message explaining the status of a given location.
    */
   getLocationStatusMessage(status: RecruitmentStatusType): string | null {
 
@@ -349,8 +347,8 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Returns a joined version of a person's full name accounting for null
    * values.
-   * @param {PersonInterface} person The person.
-   * @returns {string} The person's full name.
+   * @param person The person.
+   * @returns The person's full name.
    */
   getPersonName(person: PersonInterface): string | null {
 
@@ -375,8 +373,8 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a locations contacts accounting for null values.
-   * @param {LocationInterface} location The location.
-   * @returns {ContactInterface[]} The location's contacts.
+   * @param location The location.
+   * @returns The location's contacts.
    */
   getLocationContacts(location: LocationInterface): ContactInterface[] {
 
@@ -395,8 +393,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Groups the currently displayed study's investigators by their role.
-   * @returns {{[key: string]: InvestigatorInterface[]}} The study's
-   * investigators grouped by their role.
+   * @returns The study's investigators grouped by their role.
    */
   groupStudyInvestigators(): {[key: string]: InvestigatorInterface[]} {
     const roleTypes = Object.keys(RoleType).map(key => RoleType[key]);
@@ -420,8 +417,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Groups the currently displayed study's outcomes by their type.
-   * @returns {{[key: string]: ProtocolOutcomeInterface[]}} The study's
-   * outcomes grouped by their type.
+   * @returns The study's outcomes grouped by their type.
    */
   groupStudyOutcomes(): {[key: string]: ProtocolOutcomeInterface[]} {
     const outcomeTypes = Object.keys(OutcomeType)
@@ -445,8 +441,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Groups the currently displayed study's references by their type.
-   * @returns {{[key: string]: ReferenceInterface[]}} The study's references
-   * grouped by their type.
+   * @returns The study's references grouped by their type.
    */
   groupStudyReferences(): {[key: string]: ReferenceInterface[]} {
     const referenceTypes = Object.keys(ReferenceType)
@@ -470,20 +465,19 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a message explaining the type of a given outcome.
-   * @param {string} outcomeTypeValue The outcome type value.
-   * @returns {string | null} The message explaining the type of the given
-   * outcome.
+   * @param outcomeTypeValue The outcome type value.
+   * @returns The message explaining the type of the given outcome.
    */
   getOutcomeTypeMessage(outcomeTypeValue: string): string {
     let message: string = null;
     if (outcomeTypeValue === OutcomeType.PRIMARY.valueOf()) {
-      message = 'These are the most important outcomes from the trial'
+      message = 'These are the most important outcomes from the trial';
     } else if (outcomeTypeValue === OutcomeType.SECONDARY.valueOf()) {
-      message = 'These are less important than the primary outcomes'
+      message = 'These are less important than the primary outcomes';
     } else if (outcomeTypeValue === OutcomeType.POST_HOC.valueOf()) {
-      message = 'These outcomes are evaluated after the trial'
+      message = 'These outcomes are evaluated after the trial';
     } else if (outcomeTypeValue === OutcomeType.OTHER.valueOf()) {
-      message = 'These are other pre-specified outcomes'
+      message = 'These are other pre-specified outcomes';
     }
 
     return message;
@@ -491,16 +485,15 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a message explaining the type of a given reference.
-   * @param {string} referenceTypeValue The reference type value.
-   * @returns {string | null} The message explaining the type of the given
-   * outcome.
+   * @param referenceTypeValue The reference type value.
+   * @returns The message explaining the type of the given outcome.
    */
   getReferenceTypeMessage(referenceTypeValue: string): string {
     let message: string = null;
     if (referenceTypeValue === ReferenceType.STANDARD.valueOf()) {
-      message = 'Papers about the study design'
+      message = 'Papers about the study design';
     } else if (referenceTypeValue === ReferenceType.RESULTS.valueOf()) {
-      message = 'Papers about the study results'
+      message = 'Papers about the study results';
     }
 
     return message;
@@ -509,7 +502,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Returns a boolean denoting whether the currently displayed study is
    * randomized.
-   * @returns {boolean} whether the currently displayed study is randomized.
+   * @returns whether the currently displayed study is randomized.
    */
   isStudyRandomized(): boolean {
     return (
@@ -520,7 +513,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns all of the currently displayed study's condition MeSH terms.
-   * @returns {DescriptorInterface[]} The study's condition MeSH terms.
+   * @returns The study's condition MeSH terms.
    */
   getStudyConditionMeshTerms(): DescriptorInterface[] {
 
@@ -528,7 +521,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
     for (const studyMeshTerm of this.study.studyDescriptors) {
       if (MeshTermType[studyMeshTerm.studyDescriptorType] === MeshTermType.CONDITION) {
-        conditionMeshTerms.push(studyMeshTerm.descriptor)
+        conditionMeshTerms.push(studyMeshTerm.descriptor);
       }
     }
 
@@ -537,7 +530,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns all of the currently displayed study's intervention MeSH terms.
-   * @returns {DescriptorInterface[]} The study's intervention MeSH terms.
+   * @returns The study's intervention MeSH terms.
    */
   getStudyInterventionMeshTerms(): DescriptorInterface[] {
 
@@ -545,7 +538,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
     for (const studyMeshTerm of this.study.studyDescriptors) {
       if (MeshTermType[studyMeshTerm.studyDescriptorType] === MeshTermType.INTERVENTION) {
-        interventionMeshTerms.push(studyMeshTerm.descriptor)
+        interventionMeshTerms.push(studyMeshTerm.descriptor);
       }
     }
 
@@ -554,7 +547,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a numerical value indicative of the current study's type.
-   * @returns {number} The numerical valud indicative of the study's type.
+   * @returns The numerical valud indicative of the study's type.
    */
   getStudyTypeIndex() {
     const type = StudyType[this.study.studyType];
@@ -695,8 +688,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   /**
    * Returns a numerical value indicative of a given intervention's type.
-   * @returns {number} The numerical valud indicative of a given intervention's
-   * type.
+   * @returns The numerical valud indicative of a given intervention's type.
    */
   getInterventionTypeIndex(intervention: InterventionInterface): number {
     const interventionType = InterventionType[intervention.interventionType];
@@ -746,9 +738,9 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Checks whether a nav-pill should receive the `active` class depending on
    * the current scroll position relative to the result cards.
-   * @param {ScrollTrackerEventData} event The scroll event containing
-   * information regarding the current scroll position.
-   * @param {number} navPillIndex The index of the nav-pill that triggered this
+   * @param event The scroll event containing information regarding the current
+   * scroll position.
+   * @param navPillIndex The index of the nav-pill that triggered this
    * event/function and will be evaluated for 'activation'.
    */
   public onScroll(event: ScrollTrackerEventData, navPillIndex: number) {
@@ -769,9 +761,8 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Checks whether a nav-pill with a given index is supposed to be active or
    * not.
-   * @param {number} navPillIndex The index of the nav-pill to be checked.
-   * @returns {boolean} Whether the defined nav-pill is supposed to be active or
-   * not.
+   * @param navPillIndex The index of the nav-pill to be checked.
+   * @returns Whether the defined nav-pill is supposed to be active or not.
    */
   public isNavPillActive(navPillIndex: number) {
     // Check whether the defined nav-pill is supposed to be active or not.
@@ -781,7 +772,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   /**
    * Returns a boolean indicating whether the displayed study is followed by
    * the user.
-   * @returns {boolean} Whether the displayed study is followed by the user.
+   * @returns Whether the displayed study is followed by the user.
    */
   isStudyFollowed(): boolean {
     return this.userConfigService.getUserStudy(this.study.nctId) !== null;
@@ -810,9 +801,8 @@ export class StudyComponent implements OnInit, OnDestroy {
    * Creates a `mailto` link that will formulate an email to the given contact
    * with a subject denoting the clinical-trial ID and title, a BCC to the
    * user's email, and a basic email body.
-   * @param {ContactInterface} contact The contact for which the `mailto` link
-   * will be created
-   * @returns {string} The created `mailto` link.
+   * @param contact The contact for which the `mailto` link will be created.
+   * @returns The created `mailto` link.
    */
   createMailTo(contact: ContactInterface): string {
 

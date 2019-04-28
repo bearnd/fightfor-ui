@@ -17,120 +17,120 @@ import { AgeRange, DateRange } from '../shared/common.interface';
 
 
 interface VariablesGetCountStudiesByCountry {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetCountStudiesByCountry {
   studiesStats: {
-    countStudiesByCountry: StudiesCountByCountryInterface[]
-  }
+    countStudiesByCountry: StudiesCountByCountryInterface[];
+  };
 }
 
 interface VariablesGetCountStudiesByOverallStatus {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetCountStudiesByOverallStatus {
   studiesStats: {
-    countStudiesByOverallStatus: StudiesCountByOverallStatusInterface[]
-  }
+    countStudiesByOverallStatus: StudiesCountByOverallStatusInterface[];
+  };
 }
 
 interface VariablesGetCountStudiesByFacility {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetCountStudiesByFacility {
   studiesStats: {
-    countStudiesByFacility: StudiesCountByFacilityInterface[]
-  }
+    countStudiesByFacility: StudiesCountByFacilityInterface[];
+  };
 }
 
 interface VariablesGetCountStudiesByFacilityDescriptor {
-  studyIds: number[]
-  facilityCanonicalIds?: number[]
-  meshTermType?: string
-  limit?: number
+  studyIds: number[];
+  facilityCanonicalIds?: number[];
+  meshTermType?: string;
+  limit?: number;
 }
 
 interface VariablesGetCountStudiesByDescriptor {
-  studyIds: number[]
-  meshTermType?: string
-  limit?: number
+  studyIds: number[];
+  meshTermType?: string;
+  limit?: number;
 }
 
 interface VariablesGetLatestDescriptors {
-  studyIds: number[]
-  meshTermType?: string
-  limit?: number
+  studyIds: number[];
+  meshTermType?: string;
+  limit?: number;
 }
 
 interface ResponseGetCountStudiesByFacilityDescriptor {
   studiesStats: {
-    countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[]
-  }
+    countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[];
+  };
 }
 
 interface ResponseGetCountStudiesByDescriptor {
   studiesStats: {
-    countStudiesByDescriptor: StudiesCountByDescriptorInterface[]
-  }
+    countStudiesByDescriptor: StudiesCountByDescriptorInterface[];
+  };
 }
 
 interface ResponseGetLatestDescriptors {
   studiesStats: {
-    getLatestDescriptors: LatestDescriptorInterface[]
-  }
+    getLatestDescriptors: LatestDescriptorInterface[];
+  };
 }
 
 interface VariablesGetUniqueCities {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetUniqueCities {
   studiesStats: {
-    getUniqueCities: string[]
-  }
+    getUniqueCities: string[];
+  };
 }
 
 interface VariablesGetUniqueStates {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetUniqueStates {
   studiesStats: {
-    getUniqueStates: string[]
-  }
+    getUniqueStates: string[];
+  };
 }
 
 interface VariablesGetUniqueCountries {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetUniqueCountries {
   studiesStats: {
-    getUniqueCountries: string[]
-  }
+    getUniqueCountries: string[];
+  };
 }
 
 interface VariablesGetStartDateRange {
-  studyIds?: number[]
+  studyIds?: number[];
 }
 
 interface ResponseGetStartDateRange {
   studiesStats: {
-    getDateRange: DateRange
-  }
+    getDateRange: DateRange;
+  };
 }
 
 interface VariablesGetEligibilityAgeRange {
-  studyIds: number[]
+  studyIds: number[];
 }
 
 interface ResponseGetEligibilityAgeRange {
   studiesStats: {
-    getAgeRange: AgeRange
-  }
+    getAgeRange: AgeRange;
+  };
 }
 
 
@@ -139,7 +139,7 @@ export class StudyStatsRetrieverService {
 
   queryGetCountStudiesByCountry = gql`
     query getCountStudiesByCountry(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $limit: Int
     ) {
       studiesStats {
@@ -156,7 +156,7 @@ export class StudyStatsRetrieverService {
 
   queryGetCountStudiesByOverallStatus = gql`
     query getCountStudiesByOverallStatus(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $limit: Int
     ) {
       studiesStats {
@@ -173,12 +173,12 @@ export class StudyStatsRetrieverService {
 
   queryGetCountStudiesByFacility = gql`
     query getCountStudiesByFacility(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $limit: Int
     ) {
       studiesStats {
         countStudiesByFacility(
-          studyIds: $studyIds, 
+          studyIds: $studyIds,
           limit: $limit
         ) {
           facilityCanonical {
@@ -263,7 +263,7 @@ export class StudyStatsRetrieverService {
 
   queryGetCountStudiesByFacilityDescriptor = gql`
     query getCountStudiesByFacility(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $facilityCanonicalIds: [Int],
       $meshTermType: MeshTermType,
       $limit: Int
@@ -289,7 +289,7 @@ export class StudyStatsRetrieverService {
 
   queryGetCountStudiesByDescriptor = gql`
     query getCountStudiesByDescriptor(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $meshTermType: MeshTermType,
       $limit: Int
     ) {
@@ -310,7 +310,7 @@ export class StudyStatsRetrieverService {
 
   queryGetLatestDescriptors = gql`
     query getLatestDescriptors(
-      $studyIds: [Int]!, 
+      $studyIds: [Int]!,
       $meshTermType: MeshTermType,
       $limit: Int
     ) {
@@ -334,11 +334,9 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the count of clinical-trial studies by country for given studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
-   * counted by country.
-   * @param {number} limit The number of results to return (ordered by a
-   * descending number of studies).
-   * @returns {Observable<StudiesCountByCountryInterface[]>}
+   * @param studies The studies which will be grouped and counted by country.
+   * @param limit The number of results to return (ordered by a descending
+   * number of studies).
    */
   getCountStudiesByCountry(
     studies: StudyInterface[],
@@ -369,11 +367,10 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the count of clinical-trial studies by overall status for given
    * studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
+   * @param studies The studies which will be grouped and
    * counted by overall status.
-   * @param {number} limit The number of results to return (ordered by a
+   * @param limit The number of results to return (ordered by a
    * descending number of studies).
-   * @returns {Observable<StudiesCountByOverallStatusInterface[]>}
    */
   getCountStudiesByOverallStatus(
     studies: StudyInterface[],
@@ -403,11 +400,9 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the count of clinical-trial studies by facility for given studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
-   * counted by facility.
-   * @param {number} limit The number of results to return (ordered by a
-   * descending number of studies).
-   * @returns {Observable<StudiesCountByFacilityInterface[]>}
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param limit The number of results to return (ordered by a descending
+   * number of studies).
    */
   getCountStudiesByFacility(
     studies: StudyInterface[],
@@ -438,15 +433,12 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the count of clinical-trial studies by facility and MeSH
    * descriptor for given studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
-   * counted by facility.
-   * @param {number[]} facilityCanonicalIds The IDs of the canonical facilities
-   * to limit the aggregation to.
-   * @param {MeshTermType} meshTermType The type of MeSH descriptor to limit
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param facilityCanonicalIds The IDs of the canonical facilities to limit
    * the aggregation to.
-   * @param {number} limit The number of results to return (ordered by a
-   * descending number of studies).
-   * @returns {Observable<StudiesCountByFacilityDescriptorInterface[]>}
+   * @param meshTermType The type of MeSH descriptor to limit the aggregation to.
+   * @param limit The number of results to return (ordered by a descending
+   * number of studies).
    */
   getCountStudiesByFacilityDescriptor(
     studies: StudyInterface[],
@@ -484,13 +476,11 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the count of clinical-trial studies by MeSH descriptor for given
    * studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
-   * counted by facility.
-   * @param {MeshTermType} meshTermType The type of MeSH descriptor to limit
-   * the aggregation to.
-   * @param {number} limit The number of results to return (ordered by a
-   * descending number of studies).
-   * @returns {Observable<StudiesCountByDescriptorInterface[]>}
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param meshTermType The type of MeSH descriptor to limit the aggregation
+   * to.
+   * @param limit The number of results to return (ordered by a descending
+   * number of studies).
    */
   getCountStudiesByDescriptor(
     studies: StudyInterface[],
@@ -525,13 +515,11 @@ export class StudyStatsRetrieverService {
 
    /**
    * Retrieve the latest MeSH descriptors for given studies.
-   * @param {StudyInterface[]} studies The studies which will be grouped and
-   * counted by facility.
-   * @param {MeshTermType} meshTermType The type of MeSH descriptor to limit
-   * the aggregation to.
-   * @param {number} limit The number of results to return (ordered by a
-   * descending number of studies).
-   * @returns {Observable<LatestDescriptorInterface[]>}
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param meshTermType The type of MeSH descriptor to limit the aggregation
+   * to.
+   * @param limit The number of results to return (ordered by a descending
+   * number of studies).
    */
   getLatestDescriptors(
     studies: StudyInterface[],
@@ -566,9 +554,7 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the unique cities for given studies.
-   * @param {StudyInterface[]} studies The studies for which the unique cities
-   * will be retrieved.
-   * @returns {Observable<string[]>} The unique cities.
+   * @param studies The studies for which the unique cities will be retrieved.
    */
   getUniqueCities(
     studies: StudyInterface[],
@@ -594,9 +580,7 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the unique states for given studies.
-   * @param {StudyInterface[]} studies The studies for which the unique states
-   * will be retrieved.
-   * @returns {Observable<string[]>} The unique states.
+   * @param studies The studies for which the unique states will be retrieved.
    */
   getUniqueStates(
     studies: StudyInterface[],
@@ -622,9 +606,8 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the unique countries for given studies.
-   * @param {StudyInterface[]} studies The studies for which the unique
-   * countries will be retrieved.
-   * @returns {Observable<string[]>} The unique countries.
+   * @param studies The studies for which the unique countries will be
+   * retrieved.
    */
   getUniqueCountries(
     studies: StudyInterface[],
@@ -650,9 +633,8 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the start-date date-range for given studies.
-   * @param {StudyInterface[]} studies The studies for which the start-date
-   * date-range will be retrieved.
-   * @returns {Observable<DateRange>} The start-date date-range.
+   * @param studies The studies for which the start-date date-range will be
+   * retrieved.
    */
   getStartDateRange(
     studies?: StudyInterface[],
@@ -685,9 +667,8 @@ export class StudyStatsRetrieverService {
 
   /**
    * Retrieve the eligibility age-range for given studies.
-   * @param {StudyInterface[]} studies The studies for which the eligibility
-   * age-range will be retrieved.
-   * @returns {Observable<AgeRange>} The eligibility age-range.
+   * @param studies The studies for which the eligibility age-range will be
+   * retrieved.
    */
   getEligibilityAgeRange(
     studies?: StudyInterface[],

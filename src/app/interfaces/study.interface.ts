@@ -108,187 +108,187 @@ export enum ReferenceType {
 }
 
 export interface InterventionInterface {
-  interventionId: number
-  interventionType?: InterventionType
-  name?: string
-  description?: string
-  armGroups: ArmGroupInterface[]
+  interventionId: number;
+  interventionType?: InterventionType;
+  name?: string;
+  description?: string;
+  armGroups: ArmGroupInterface[];
 }
 
 export interface StudyDescriptorInterface {
-  studyDescriptorId?: number
-  studyId?: number
-  descriptorId?: number
-  studyDescriptorType?: MeshTermType
-  descriptor?: DescriptorInterface
+  studyDescriptorId?: number;
+  studyId?: number;
+  descriptorId?: number;
+  studyDescriptorType?: MeshTermType;
+  descriptor?: DescriptorInterface;
 }
 
 export interface FacilityInterface {
-  facilityId?: number
-  name?: string
-  city?: string
-  state?: string
-  zipCode?: string
-  country?: string
-  facilityCanonical?: FacilityCanonicalInterface
+  facilityId?: number;
+  name?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+  facilityCanonical?: FacilityCanonicalInterface;
 }
 
 export interface FacilityCanonicalInterface {
-  facilityCanonicalId?: number
-  name?: string
-  address?: string
-  phoneNumber?: string
-  url?: string
-  locality?: string
-  administrativeAreaLevel1?: string
-  country?: string
-  postalCode?: string
+  facilityCanonicalId?: number;
+  name?: string;
+  address?: string;
+  phoneNumber?: string;
+  url?: string;
+  locality?: string;
+  administrativeAreaLevel1?: string;
+  country?: string;
+  postalCode?: string;
 }
 
 export interface PersonInterface {
-  personId?: number
-  nameFirst?: string
-  nameMiddle?: string
-  nameLast?: string
-  degrees?: string
+  personId?: number;
+  nameFirst?: string;
+  nameMiddle?: string;
+  nameLast?: string;
+  degrees?: string;
 }
 
 export interface ContactInterface {
-  contactId?: number
-  personId?: number
-  phone?: string
-  phoneExt?: string
-  email?: string
-  person?: PersonInterface
+  contactId?: number;
+  personId?: number;
+  phone?: string;
+  phoneExt?: string;
+  email?: string;
+  person?: PersonInterface;
 }
 
 export interface InvestigatorInterface {
-  investigatorId?: number
-  personId?: number
-  role?: RoleType
-  affiliation?: string
-  person?: PersonInterface
-  locations?: LocationInterface[]
+  investigatorId?: number;
+  personId?: number;
+  role?: RoleType;
+  affiliation?: string;
+  person?: PersonInterface;
+  locations?: LocationInterface[];
 }
 
 export interface LocationInterface {
-  locationId?: number
-  facilityId?: number
-  status?: RecruitmentStatusType
-  contactPrimaryId?: number
-  contactBackupId?: number
-  facility?: FacilityInterface
-  contactPrimary?: ContactInterface
-  contactBackup?: ContactInterface
-  investigators?: InvestigatorInterface[]
-  studies?: StudyInterface[]
+  locationId?: number;
+  facilityId?: number;
+  status?: RecruitmentStatusType;
+  contactPrimaryId?: number;
+  contactBackupId?: number;
+  facility?: FacilityInterface;
+  contactPrimary?: ContactInterface;
+  contactBackup?: ContactInterface;
+  investigators?: InvestigatorInterface[];
+  studies?: StudyInterface[];
 }
 
 export interface EnrollmentInterface {
-  enrollmentId?: number
-  enrollmentType?: ActualType
-  value: number
+  enrollmentId?: number;
+  enrollmentType?: ActualType;
+  value: number;
 }
 
 export interface StudyDesignInfoInterface {
-  studyDesignInfoId?: number
-  allocation?: string
-  interventionModel?: string
-  interventionModelDescription?: string
-  primaryPurpose?: string
-  observationalModel?: string
-  timePerspective?: string
-  masking?: string
-  maskingDescription?: string
+  studyDesignInfoId?: number;
+  allocation?: string;
+  interventionModel?: string;
+  interventionModelDescription?: string;
+  primaryPurpose?: string;
+  observationalModel?: string;
+  timePerspective?: string;
+  masking?: string;
+  maskingDescription?: string;
 }
 
 export interface EligibilityInterface {
-  eligibilityId: number
-  studyPop: string
-  samplingMethod: SamplingMethod
-  criteria: string
-  genderBased: boolean
-  genderDescription: string
-  minimumAge: string
-  maximumAge: string
-  healthyVolunteers: string
-  gender: GenderType
+  eligibilityId: number;
+  studyPop: string;
+  samplingMethod: SamplingMethod;
+  criteria: string;
+  genderBased: boolean;
+  genderDescription: string;
+  minimumAge: string;
+  maximumAge: string;
+  healthyVolunteers: string;
+  gender: GenderType;
 }
 
 export interface ProtocolOutcomeInterface {
-  protocolOutcomeId: number
-  measure: string
-  timeFrame: string
-  description: string
+  protocolOutcomeId: number;
+  measure: string;
+  timeFrame: string;
+  description: string;
 }
 
 export interface StudyOutcomeInterface {
-  studyPrimaryOutcomeId: number
-  studyId: number
-  protocolOutcomeId: number
-  outcomeType: OutcomeType,
-  study: StudyInterface,
-  protocolOutcome: ProtocolOutcomeInterface
+  studyPrimaryOutcomeId: number;
+  studyId: number;
+  protocolOutcomeId: number;
+  outcomeType: OutcomeType;
+  study: StudyInterface;
+  protocolOutcome: ProtocolOutcomeInterface;
 }
 
 export interface ReferenceInterface {
-  referenceId: number
-  citation: string
-  pmid: number
-  studies: StudyInterface[]
-  studyReferences: StudyReferenceInterface[]
+  referenceId: number;
+  citation: string;
+  pmid: number;
+  studies: StudyInterface[];
+  studyReferences: StudyReferenceInterface[];
 }
 
 export interface StudyReferenceInterface {
-  studyReferenceId: number
-  studyId: number
-  referenceId: number
-  referenceType: ReferenceType
-  study: StudyInterface
-  reference: ReferenceInterface
+  studyReferenceId: number;
+  studyId: number;
+  referenceId: number;
+  referenceType: ReferenceType;
+  study: StudyInterface;
+  reference: ReferenceInterface;
 }
 
 export interface ArmGroupInterface {
-  armGroupId: number
-  armGroupType: string
-  label: string
-  description: string
-  interventions: InterventionInterface[]
+  armGroupId: number;
+  armGroupType: string;
+  label: string;
+  description: string;
+  interventions: InterventionInterface[];
 }
 
 export interface StudyInterface {
-  studyId?: number
-  orgStudyId?: string
-  secondaryId?: string
-  nctId?: string
-  briefTitle?: string
-  acronym?: string
-  officialTitle?: string
-  source?: string
-  briefSummary?: string
-  detailedDescription?: string
-  overallStatus?: StudyOverallStatus
-  lastKnownStatus?: StudyOverallStatus
-  whyStopped?: string
-  startDate?: Date
-  completionDate?: Date
-  primaryCompletionDate?: Date
-  verificationDate?: Date
-  phase?: StudyPhase
-  studyType?: StudyType
-  targetDuration?: string
-  interventions?: InterventionInterface[]
-  studyDescriptors?: StudyDescriptorInterface[]
-  locations?: LocationInterface[]
-  facilities?: FacilityInterface[]
-  facilitiesCanonical?: FacilityCanonicalInterface[]
-  enrollment?: EnrollmentInterface
-  studyDesignInfo?: StudyDesignInfoInterface
-  eligibility?: EligibilityInterface
-  investigators?: InvestigatorInterface[]
-  studyOutcomes?: StudyOutcomeInterface[]
-  outcomes?: ProtocolOutcomeInterface[]
-  studyReferences?: StudyReferenceInterface[]
-  references?: ReferenceInterface[]
-  armGroups?: ArmGroupInterface[]
+  studyId?: number;
+  orgStudyId?: string;
+  secondaryId?: string;
+  nctId?: string;
+  briefTitle?: string;
+  acronym?: string;
+  officialTitle?: string;
+  source?: string;
+  briefSummary?: string;
+  detailedDescription?: string;
+  overallStatus?: StudyOverallStatus;
+  lastKnownStatus?: StudyOverallStatus;
+  whyStopped?: string;
+  startDate?: Date;
+  completionDate?: Date;
+  primaryCompletionDate?: Date;
+  verificationDate?: Date;
+  phase?: StudyPhase;
+  studyType?: StudyType;
+  targetDuration?: string;
+  interventions?: InterventionInterface[];
+  studyDescriptors?: StudyDescriptorInterface[];
+  locations?: LocationInterface[];
+  facilities?: FacilityInterface[];
+  facilitiesCanonical?: FacilityCanonicalInterface[];
+  enrollment?: EnrollmentInterface;
+  studyDesignInfo?: StudyDesignInfoInterface;
+  eligibility?: EligibilityInterface;
+  investigators?: InvestigatorInterface[];
+  studyOutcomes?: StudyOutcomeInterface[];
+  outcomes?: ProtocolOutcomeInterface[];
+  studyReferences?: StudyReferenceInterface[];
+  references?: ReferenceInterface[];
+  armGroups?: ArmGroupInterface[];
 }
