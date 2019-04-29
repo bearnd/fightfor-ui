@@ -42,6 +42,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import {
   MatDialogModule,
   MatIconModule,
+  MatListModule,
   MatMenuModule,
   MatProgressSpinnerModule
 } from '@angular/material';
@@ -96,6 +97,7 @@ import { SentryErrorHandler } from './utils/sentryerrorhandler';
     FlexLayoutModule,
     MatToolbarModule,
     MatSidenavModule,
+    MatListModule,
   ],
   declarations: [
     AppComponent,
