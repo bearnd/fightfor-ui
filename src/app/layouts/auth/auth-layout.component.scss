@@ -10,9 +10,25 @@
 
 mat-nav-list.list-horizontal {
   padding: 0;
+
   .mat-list-item {
     display: inline-block;
     height: auto;
     width: auto;
+    align-content: end;
+    vertical-align: middle;
+    color: #F65C50;
   }
+}
+
+mat-sidenav {
+  width: 200px;
+
+  .mat-list-item {
+    color: #F65C50;
+  }
+}
+
+.navbar-toggler {
+  color: #F65C50;
 }
