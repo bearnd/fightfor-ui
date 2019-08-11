@@ -114,5 +114,5 @@ export const meshQualifierGroups = {
     MeshQualifiers.STATISTICS_NUMERICAL_DATA,
     MeshQualifiers.STANDARDS,
   ],
-  all: Object.values(MeshQualifiers),
+  all: Object.keys(MeshQualifiers).map(key => MeshQualifiers[key]),
 };

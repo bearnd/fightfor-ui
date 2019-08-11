@@ -1,51 +1,13 @@
-import {
-  MeshTermType,
-  StudyOverallStatus,
-} from '../interfaces/study.interface';
-
 import * as momentParser from 'moment-parser';
 import * as moment from 'moment';
-
-/**
- * Casts a fully-qualified overall-status enum string coming from GraphQL,
- * e.g. `OverallStatusType.COMPLETED` to the enum value as defined under the
- * the `StudyOverallStatus` enum.
- * @param {string} status The fully-qualified overall-status enum string.
- * @returns {string} The corresponding `StudyOverallStatus` value.
- */
-export function castOverallStatus(status: string): StudyOverallStatus {
-  // Split the string on `.` and keep the second part of the string with the
-  // enum member name.
-  const status_value = status.split('.')[1];
-
-  // Get corresponding `StudyOverallStatus` member.
-  return StudyOverallStatus[status_value];
-}
-
-/**
- * Casts a fully-qualified mesh-term-type enum string coming from GraphQL,
- * e.g. `MeshTermType.CONDITION` to the enum value as defined under the
- * the `MeshTermType` enum.
- * @param {string} type The fully-qualified mesh-term-type enum string.
- * @returns {string} The corresponding `MeshTermType` value.
- */
-export function castMeshTermType(type: string): MeshTermType {
-  // Split the string on `.` and keep the second part of the string with the
-  // enum member name.
-  const type_value = type.split('.')[1];
-
-  // Get corresponding `MeshTermType` member.
-  return MeshTermType[type_value];
-}
 
 /**
  * Casts an enumeration into an array of objects with and `id` property holding
  * the enumeration member and a `name` property holding the enumeration value.
  * @param enumeration The enumeration to cast.
- * @returns {{id: string, name: string}[]} The enumeration casted to an array
- * of objects.
+ * @returns The enumeration casted to an array of objects.
  */
-export function castEnumToArray(enumeration) {
+export function castEnumToArray(enumeration): {id: string, name: string}[] {
   // Initialize an empty array to be populated with the casted enumeration.
   const arr: { id: string, name: string }[] = [];
 
@@ -58,7 +20,7 @@ export function castEnumToArray(enumeration) {
     }
   }
 
-  return arr
+  return arr;
 }
 
 /**
@@ -84,15 +46,15 @@ export function orderStringArray(entries: string[]): string[] {
     }
   );
 
-  return entriesSorted
+  return entriesSorted;
 }
 
 
 /**
  * Converts an interval string to a number of seconds.
- * @param {string} interval The interval to be converted.
- * @returns {number | null} The corresponding number of seconds the interval
- * was converted to or `null` if parsing was not possible.
+ * @param interval The interval to be converted.
+ * @returns The corresponding number of seconds the interval was converted to or
+ * `null` if parsing was not possible.
  */
 export function intervalToSec(interval: string): number | null {
   if (interval) {

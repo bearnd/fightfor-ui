@@ -22,8 +22,8 @@ export class SearchesGridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-    this.searches = Object.values(this.userConfigService.userSearches);
+    this.searches = Object.keys(this.userConfigService.userSearches)
+      .map(key => this.userConfigService.userSearches[key]);
 
     // Subscribe to the `UserConfigService.searchesLatest` observable. Each
     // time the searches are updated retrieve them and set them under
@@ -32,7 +32,8 @@ export class SearchesGridComponent implements OnInit {
     this.userConfigService.searchesLatest.subscribe(
       (searches: SearchInterface[]) => {
         if (searches) {
-          this.searches = Object.values(searches).reverse();
+          this.searches = Object.keys(searches)
+            .map(key => searches[key]).reverse();
         }
       }
     );
@@ -45,12 +46,12 @@ export class SearchesGridComponent implements OnInit {
     const result = this.router.navigate(
       ['/app', 'searches', 'new']
     );
-    result.finally();
+    result.then();
   }
 
   /**
    * Deletes a given search via its UUID and the `UserConfigService`.
-   * @param {string} searchUuid The UUID of the search to be deleted.
+   * @param searchUuid The UUID of the search to be deleted.
    */
   onDeleteSearch(searchUuid: string) {
     this.userConfigService.deleteSearch(
@@ -61,14 +62,13 @@ export class SearchesGridComponent implements OnInit {
 
   /**
    * Redirects the user to the results summary of a given search.
-   * @param {string} searchUuid The search for which the user-results will be
-   * displayed.
+   * @param searchUuid The search for which the user-results will be displayed.
    */
   onSeeResults(searchUuid: string) {
     const result = this.router.navigate(
       ['/app', 'searches', searchUuid]
     );
-    result.finally();
+    result.then();
   }
 
 }

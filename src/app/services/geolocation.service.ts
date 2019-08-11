@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,16 +8,16 @@ import { environment } from '../../environments/environment';
 
 
 export interface MapBoxFeature {
-  id: string
-  type: string
-  place_type: string[]
-  place_name: string
-  center: number[]
+  id: string;
+  type: string;
+  place_type: string[];
+  place_name: string;
+  center: number[];
 }
 
 export interface MapBoxGeocodeResponse {
-  type: string
-  features: MapBoxFeature[]
+  type: string;
+  features: MapBoxFeature[];
 }
 
 
@@ -38,8 +38,8 @@ export class GeolocationService {
   /**
    * Obtains the geographic position, in terms of latitude and longitude
    * coordinates, of the device.
-   * @param {Object} [opts] An object literal to specify one or more of the
-   * following attributes and desired values:
+   * @param opts An object literal to specify one or more of the following
+   * attributes and desired values:
    *   - enableHighAccuracy: Specify true to obtain the most accurate position
    *   possible, or false to optimize in favor of performance and power
    *   consumption.
@@ -56,8 +56,8 @@ export class GeolocationService {
    *   is Infinity, any cached position is used, regardless of its age, and
    *   watchPosition only tries to obtain an updated position if no cached
    *   position data exists.
-   * @returns {Observable} An observable sequence with the geographical
-   * location of the device running the client.
+   * @returns An observable sequence with the geographical location of the
+   * device running the client.
    */
   getCurrentPositionBrowser(opts): Observable<any> {
     return Observable.create(observer => {
@@ -92,9 +92,9 @@ export class GeolocationService {
   /**
    * Performs a reverse geocoding request against the MapBox API converting
    * geocoordinates into candidate places.
-   * @param {number} longitude The longitude.
-   * @param {number} latitude The latitude.
-   * @returns {Observable<MapBoxGeocodeResponse>} The request observable.
+   * @param longitude The longitude.
+   * @param latitude The latitude.
+   * @returns The request observable.
    */
   geocodeReverse(
     longitude: number,
@@ -117,8 +117,8 @@ export class GeolocationService {
   /**
    * Performs a forward geocoding request against the MapBox API converting
    * a place name into candidate places.
-   * @param {string} query The place name to perform a search for.
-   * @returns {Observable<MapBoxGeocodeResponse>} The request observable.
+   * @param query The place name to perform a search for.
+   * @returns The request observable.
    */
   geocodeForward(query: string): Observable<MapBoxGeocodeResponse> {
     // Assemble the request URL including the query and MapBox API key.

@@ -6,17 +6,17 @@ enum DescriptorClass {
 }
 
 export interface DescriptorInterface {
-  descriptorId?: number
-  class?: DescriptorClass
-  ui: string
-  name?: string
-  created?: Date
-  revised?: Date
-  established?: Date
-  annotation?: string
-  historyNote?: string
-  nlmClassificationNumber?: string
-  onlineNote?: string
-  publicMeshNote?: string
-  considerAlso?: string
+  descriptorId?: number;
+  class?: DescriptorClass;
+  ui: string;
+  name?: string;
+  created?: Date;
+  revised?: Date;
+  established?: Date;
+  annotation?: string;
+  historyNote?: string;
+  nlmClassificationNumber?: string;
+  onlineNote?: string;
+  publicMeshNote?: string;
+  considerAlso?: string;
 }

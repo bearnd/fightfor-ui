@@ -25,9 +25,9 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
    * Uses the `checkPayment` method to check whether the user has an active
    * subscription to the premium plan and whether to permit navigation to
    * guarded routes.
-   * @param {ActivatedRouteSnapshot} route The activated route.
-   * @param {RouterStateSnapshot} state The router state snapshot.
-   * @returns {boolean} The result of the `checkPayment` method.
+   * @param route The activated route.
+   * @param state The router state snapshot.
+   * @returns The result of the `checkPayment` method.
    */
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -40,9 +40,9 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
    * Uses the `checkPayment` method to check whether the user has an active
    * subscription to the premium plan and whether to permit navigation to
    * guarded children routes.
-   * @param {ActivatedRouteSnapshot} route The activated route.
-   * @param {RouterStateSnapshot} state The router state snapshot.
-   * @returns {boolean} The result of the `checkPayment` method.
+   * @param route The activated route.
+   * @param state The router state snapshot.
+   * @returns The result of the `checkPayment` method.
    */
   canActivateChild(
     route: ActivatedRouteSnapshot,
@@ -55,8 +55,7 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
    * Checks whether the user has an active subscription to the premium plan
    * returning a boolean denoting the result and triggering an alert if the
    * user has not paid.
-   * @returns {boolean} Whether the user has an active subscription to the
-   * premium plan.
+   * @returns Whether the user has an active subscription to the premium plan.
    */
   private checkPayment() {
     if (this.paymentService.isPaid(environment.braintreeGateway.planId)) {
@@ -78,7 +77,7 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
       }).then(result => {
         if (result.value) {
           const res = this.router.navigate(['/pricing']);
-          res.finally();
+          res.then();
         } else {
           return false;
         }

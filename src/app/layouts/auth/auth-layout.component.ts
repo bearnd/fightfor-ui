@@ -4,11 +4,13 @@ import { Auth0UserProfileInterface, AuthService } from '../../services/auth.serv
 
 @Component({
   selector: 'app-layout',
-  templateUrl: './auth-layout.component.html'
+  templateUrl: './auth-layout.component.html',
+  styleUrls: ['./auth-layout.component.scss']
 })
 export class AuthLayoutComponent implements OnInit {
 
   public userProfile: Auth0UserProfileInterface;
+  public showSidebar = false;
 
   constructor(
     public authService: AuthService
@@ -36,5 +38,9 @@ export class AuthLayoutComponent implements OnInit {
    */
   onLogout() {
     this.authService.logout();
+  }
+
+  toggleSidebar() {
+    this.showSidebar = !this.showSidebar;
   }
 }

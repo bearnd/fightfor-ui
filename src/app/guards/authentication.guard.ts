@@ -17,9 +17,9 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
   /**
    * Uses the `checkLogin` method to check whether the user is authenticated
    * and whether to permit navigation to guarded routes.
-   * @param {ActivatedRouteSnapshot} route The activated route.
-   * @param {RouterStateSnapshot} state The router state snapshot.
-   * @returns {boolean} The result of the `checkLogin` method.
+   * @param route The activated route.
+   * @param state The router state snapshot.
+   * @returns The result of the `checkLogin` method.
    */
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -31,9 +31,9 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
   /**
    * Uses the `checkLogin` method to check whether the user is authenticated
    * and whether to permit navigation to guarded children routes.
-   * @param {ActivatedRouteSnapshot} route The activated route.
-   * @param {RouterStateSnapshot} state The router state snapshot.
-   * @returns {boolean} The result of the `checkLogin` method.
+   * @param route The activated route.
+   * @param state The router state snapshot.
+   * @returns The result of the `checkLogin` method.
    */
   canActivateChild(
     route: ActivatedRouteSnapshot,
@@ -45,9 +45,9 @@ export class AuthenticationGuard implements CanActivate, CanActivateChild {
   /**
    * Checks whether the user has been authenticated returning a boolean
    * denoting the result and triggers a login if the user is not authenticated.
-   * @returns {boolean} Whether the user has been authenticated.
+   * @returns Whether the user has been authenticated.
    */
-  private checkLogin() {
+  private checkLogin(): boolean {
     if (this.authService.isAuthenticated()) {
       return true;
     } else {

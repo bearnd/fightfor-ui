@@ -4,10 +4,10 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { cloneDeep } from 'lodash';
-
 import { ApolloQueryResult } from 'apollo-client';
 import { GraphQLError } from 'graphql';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 import {
   UserInterface,
@@ -19,70 +19,70 @@ import { StudyInterface } from '../interfaces/study.interface';
 
 
 interface VariablesGetUser {
-  auth0UserId: string
+  auth0UserId: string;
 }
 
 interface VariablesUpsertUser {
-  auth0UserId: string
-  email: string
+  auth0UserId: string;
+  email: string;
 }
 
 interface VariablesUpsertSearch {
-  auth0UserId: string
-  searchUuid: string
-  title: string
-  gender: string
-  yearBeg: number
-  yearEnd: number
-  ageBeg: number
-  ageEnd: number
-  meshDescriptorIds: number[]
+  auth0UserId: string;
+  searchUuid: string;
+  title: string;
+  gender: string;
+  yearBeg: number;
+  yearEnd: number;
+  ageBeg: number;
+  ageEnd: number;
+  meshDescriptorIds: number[];
 }
 
 interface VariablesDeleteSearch {
-  auth0UserId: string
-  searchUuid: string
+  auth0UserId: string;
+  searchUuid: string;
 }
 
 interface VariablesUpsertDeleteUserStudy {
-  auth0UserId: string
-  nctId: string
+  auth0UserId: string;
+  nctId: string;
 }
 
 interface ResponseGetUser {
   users: {
-    byAuth0Id: UserInterface
-  }
+    byAuth0Id: UserInterface;
+  };
 }
 
 interface ResponseUpsertUser {
   upsertUser: {
-    user: UserInterface
-  }
+    user: UserInterface;
+  };
 }
 
 interface ResponseUpsertSearch {
   upsertSearch: {
-    search: SearchInterface
-  }
+    search: SearchInterface;
+  };
 }
 
 interface ResponseDeleteSearch {
   deleteSearch: {
-    search: SearchInterface
-  }
+    search: SearchInterface;
+  };
 }
 
 interface ResponseUpsertUserStudy {
   upsertUserStudy: {
-    user: UserInterface
-  }
+    user: UserInterface;
+  };
 }
 
 interface ResponseDeleteUserStudy {
   deleteUserStudy: {
-    user: UserInterface
-  }
+    user: UserInterface;
+  };
 }
 
 
@@ -290,7 +290,7 @@ export class UserConfigService {
    * Deep-copies a search object and adds property placeholders populated when
    * the search is performed. This is needed cause search objects coming off
    * Apollo are immutable.
-   * @param {SearchInterface} search The search to be copied.
+   * @param search The search to be copied.
    */
   cloneSearch(search: SearchInterface) {
 
@@ -309,7 +309,7 @@ export class UserConfigService {
   /**
    * Deep-copies an array of searches into `this.userSearches` using the
    * `cloneSearch` method and updates the `this.subSearchesLatest` subject.
-   * @param {SearchInterface[]} searches The array of searches to deep-copy.
+   * @param searches The array of searches to deep-copy.
    */
   copySearches(searches: SearchInterface[]) {
 
@@ -329,8 +329,7 @@ export class UserConfigService {
   /**
    * Retrieve the DB user for the current Auth0 user. If a DB user does not
    * exist a new one is created.
-   * @param {Auth0UserProfileInterface} userProfile The Auth0 user-profile for
-   * which a DB will be retrieved.
+   * @param userProfile The Auth0 user-profile for which a DB will be retrieved.
    */
   getUserConfig(userProfile: Auth0UserProfileInterface) {
 
@@ -373,7 +372,7 @@ export class UserConfigService {
               this.userStudies = cloneDeep(this.userConfig.studies);
               this.loadingUser.next(false);
             }
-          )
+          );
         }
       }
     );
@@ -382,22 +381,21 @@ export class UserConfigService {
   /**
    * Create a new search updating the `this.userSearches` and the
    * `creatingNewSearch` subject.
-   * @param {Auth0UserProfileInterface} userProfile The Auth0 profile for the
-   * user under which the search will be created.
-   * @param {string} searchUuid The UUID of the new search.
-   * @param {string} title The title of the new search.
-   * @param {string} gender The patient gender studies will be limited to for
+   * @param userProfile The Auth0 profile for the user under which the search
+   * will be created.
+   * @param searchUuid The UUID of the new search.
+   * @param title The title of the new search.
+   * @param gender The patient gender studies will be limited to for this
+   * search.
+   * @param yearBeg The beginning of the year-range studies will be limited to
+   * for this search.
+   * @param yearEnd The end of the year-range studies will be limited to for
    * this search.
-   * @param {number} yearBeg The beginning of the year-range studies will be
+   * @param ageBeg The beginning of the eligibility age-range studies will be
    * limited to for this search.
-   * @param {number} yearEnd The end of the year-range studies will be limited
+   * @param ageEnd The end of the eligibility age-range studies will be limited
    * to for this search.
-   * @param {number} ageBeg The beginning of the eligibility age-range studies
-   * will be limited to for this search.
-   * @param {number} ageEnd The end of the eligibility age-range studies will
-   * be limited to for this search.
-   * @param {DescriptorInterface[]} descriptors The MeSH descriptors
-   * selected for this search.
+   * @param descriptors The MeSH descriptors selected for this search.
    */
   upsertSearch(
     userProfile: Auth0UserProfileInterface,
@@ -449,15 +447,15 @@ export class UserConfigService {
         );
         this.creatingNewSearch.next(false);
       }
-    )
+    );
 
   }
 
   /**
    * Deletes a search through its UUID.
-   * @param {Auth0UserProfileInterface} userProfile The profile of the user for
-   * which the search deletion will be performed.
-   * @param {string} searchUuid The UUID of the search to be deleted.
+   * @param userProfile The profile of the user for which the search deletion
+   * will be performed.
+   * @param searchUuid The UUID of the search to be deleted.
    */
   deleteSearch(
     userProfile: Auth0UserProfileInterface,
@@ -497,14 +495,14 @@ export class UserConfigService {
         // Update the subject.
         this.subSearchesLatest.next(this.userSearches);
       }
-    )
+    );
   }
 
   /**
    * Retrieve a user-search through its UUID.
-   * @param {string} searchUuid The UUID of the search to be retrieved.
-   * @returns {SearchInterface | null} The retrieved search or null if no search
-   * matching the given UUID was found.
+   * @param searchUuid The UUID of the search to be retrieved.
+   * @returns The retrieved search or null if no search matching the given UUID
+   * was found.
    */
   getUserSearch(searchUuid: string): SearchInterface | null {
 
@@ -563,7 +561,7 @@ export class UserConfigService {
         // Update the subject.
         this.updatingUserStudies.next(false);
       }
-    )
+    );
   }
 
   unfollowStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
@@ -600,7 +598,7 @@ export class UserConfigService {
         // Update the subject.
         this.updatingUserStudies.next(false);
       }
-    )
+    );
   }
 
 }

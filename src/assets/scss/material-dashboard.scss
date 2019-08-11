@@ -75,8 +75,6 @@
  @import "plugins/plugin-datetime-picker";
  @import "plugins/fullcalendar";
  @import "plugins/wizard-card";
- @import "plugins/chartist";
- @import "~chartist/dist/scss/chartist";
  @import "plugins/select-bootstrap";
  @import "plugins/perfect-scrollbar";
  @import "plugins/plugin-tagsinput";
@@ -88,5 +86,6 @@
 @import "custom/timeline-horizontal";
 @import "custom/badge-category";
 @import "custom/radio-button";
+@import "custom/mat-spinner";
 
 @import "dashboard/responsive";

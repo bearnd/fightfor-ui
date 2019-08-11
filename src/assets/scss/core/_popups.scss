@@ -1,3 +1,6 @@
+@import 'variables/type';
+@import 'variables/bootstrap-material-design';
+
 .popover{
     font-size: $font-size-base;
     box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.2);
@@ -8,7 +11,7 @@
     &.bs-popover-top .arrow:before,
     &.bs-popover-left .arrow:before,
     &.bs-popover-right .arrow:before,
-    &.bs-popover-bottom .arrow:before,{
+    &.bs-popover-bottom .arrow:before{
         border-top-color: transparent;
         border-left-color: transparent;
         border-right-color: transparent;

@@ -1,50 +1,28 @@
 import { Injectable } from '@angular/core';
 
+import { Observable } from 'rxjs/Observable';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { DescriptorInterface } from '../interfaces/descriptor.interface';
-import { Observable } from 'rxjs/Observable';
 
-
-interface ResponseGetMeshDescriptorsByTreeNumberPrefix {
-  descriptors: {
-    byTreeNumberPrefix: DescriptorInterface[]
-  }
-}
-
-interface VariablesGetMeshDescriptorsByTreeNumberPrefix {
-  treeNumberPrefix: string
-}
 
 // Response interface for the `getMeshDescriptorsBySynonym` method.
 interface ResponseGetMeshDescriptorsBySynonym {
   descriptors: {
-    bySynonym: DescriptorInterface[]
-  }
+    bySynonym: DescriptorInterface[];
+  };
 }
 
 // Variables interface for the `getMeshDescriptorsBySynonym` method.
 interface VariablesGetMeshDescriptorsBySynonym {
-  synonym: string
-  limit: number
+  synonym: string;
+  limit: number;
 }
 
 
 @Injectable()
 export class MeshDescriptorRetrieverService {
-
-  queryGetMeshDescriptorsByTreeNumberPrefix = gql`
-    query getMeshDescriptorsByTreeNumberPrefix($treeNumberPrefix: String!){
-      descriptors {
-        byTreeNumberPrefix(treeNumberPrefix: $treeNumberPrefix) {
-          descriptorId,
-          ui,
-          name
-        }
-      }
-    }
-  `;
 
   // GraphQL query used in the `getMeshDescriptorsBySynonym` method.
   queryGetMeshDescriptorsBySynonym = gql`
@@ -62,23 +40,12 @@ export class MeshDescriptorRetrieverService {
   constructor(private apollo: Apollo) {
   }
 
-  getMeshDescriptorsByTreeNumberPrefix(treeNumberPrefix: string) {
-    return this.apollo.query<ResponseGetMeshDescriptorsByTreeNumberPrefix,
-      VariablesGetMeshDescriptorsByTreeNumberPrefix>({
-      query: this.queryGetMeshDescriptorsByTreeNumberPrefix,
-      variables: {
-        treeNumberPrefix: treeNumberPrefix
-      }
-    }).map((response) => {
-      return response.data.descriptors.byTreeNumberPrefix;
-    });
-  }
-
   /**
-   * Searches for MeSH descriptors by through synonym fuzzy-matching and returns a list of descriptors in order of descending relevance.
-   * @param {string} synonym The synonym query to be used in the fuzzy-search.
-   * @param {number} limit The maximum number of descriptors to be returned.
-   * @returns {Observable<DescriptorInterface[]>} The matching descriptors in order of descending relevance.
+   * Searches for MeSH descriptors by through synonym fuzzy-matching and returns
+   * a list of descriptors in order of descending relevance.
+   * @param synonym The synonym query to be used in the fuzzy-search.
+   * @param limit The maximum number of descriptors to be returned.
+   * @returns The matching descriptors in order of descending relevance.
    */
   getMeshDescriptorsBySynonym(synonym: string, limit: number): Observable<DescriptorInterface[]> {
     return this.apollo.query<ResponseGetMeshDescriptorsBySynonym,

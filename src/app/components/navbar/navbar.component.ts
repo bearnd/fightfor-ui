@@ -2,9 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
-import { ROUTES } from '../sidebar/sidebar.component';
 import { AuthService } from '../../services/auth.service';
 import { PaymentService } from '../../services/payment.service';
 import { UserConfigService } from '../../services/user-config.service';
@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
 
     const navbar: HTMLElement = this.element.nativeElement;
 
@@ -199,7 +198,7 @@ export class NavbarComponent implements OnInit {
 
     }
   }
-  
+
   /**
    * Logs out the current user.
    */

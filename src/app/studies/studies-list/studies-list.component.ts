@@ -49,7 +49,7 @@ import {
 } from '../../services/geolocation.service';
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
 
 
@@ -59,8 +59,8 @@ interface EnumInterface {
 }
 
 interface StudyLocationInterface {
-  id: number
-  name: string
+  id: number;
+  name: string;
 }
 
 enum Mode {
@@ -191,7 +191,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         this.mode = Mode.SEARCH;
       } else {
         const result = this.router.navigate(['/app', 'searches']);
-        result.finally();
+        result.then();
       }
       // If the component was called without a search UUID defined in the path
       // then the user's saved studies are retrieved instead and displayed.
@@ -217,7 +217,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
             id: Object.keys(StudyOverallStatus)
               .find(key => StudyOverallStatus[key] === member),
             name: member.valueOf(),
-          }
+          };
         }
       );
 
@@ -432,7 +432,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
             );
         }
       }
-    )
+    );
   }
 
   ngAfterViewInit() {
@@ -741,7 +741,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         .value.map((entry) => entry.id);
     } else {
       overallStatuses = this.overallStatuses
-        .map((entry) => entry.id)
+        .map((entry) => entry.id);
     }
 
     // Retrieve the selected study-phases (if any).
@@ -819,9 +819,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * one such MeSH term it returns the name of that term. Should there be more
    * than one term it returns the name of the first term and includes a suffix
    * denoting how many additional terms exist.
-   * @param {StudyInterface} study The study for which the intervention MeSH
-   * terms will be returned.
-   * @returns {string | null} The MeSH term string result.
+   * @param study The study for which the intervention MeSH terms will be
+   * returned.
+   * @returns The MeSH term string result.
    */
   getStudyInterventionMeshTerms(
     study: StudyInterface,
@@ -855,10 +855,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * one such MeSH term it returns the name of that term. Should there be more
    * than one term it returns the name of the first term and includes a suffix
    * denoting how many additional terms exist.
-   * @param {StudyInterface} study The study for which the condition MeSH
-   * terms will be returned.
-   * @returns {DescriptorInterface[] | string | null} The MeSH term string
-   * result.
+   * @param study The study for which the condition MeSH terms will be returned.
+   * @returns The MeSH term string result.
    */
   getStudyConditionMeshTerms(
     study: StudyInterface,
@@ -891,9 +889,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Flattens the contents of a `FacilityCanonicalInterface` object into a
    * `locality, administrativeAreaLevel1, country` string allowing for one or
    * mode of these components to be missing.
-   * @param facility {FacilityCanonicalInterface} The canonical facility object
-   * to be flattened.
-   * @returns {string | null} The flattened facility representation or null.
+   * @param facility The canonical facility object to be flattened.
+   * @returns The flattened facility representation or null.
    */
   flattenFacilityCanonical(
     facility: FacilityCanonicalInterface,
@@ -927,9 +924,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * `flattenFacilityCanonical` method. If there are more it suffixes the
    * flattened representation of the first facility with the number of
    * additional facilities.
-   * @param study {StudyInterface} The study for which the location string will
-   * be created.
-   * @returns {string | null} The location string or null.
+   * @param study The study for which the location string will be created.
+   * @returns The location string or null.
    */
   getStudyLocation(
     study: StudyInterface,
@@ -983,7 +979,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Navigates to the details of a given study. Uses a different route
    * depending on whether this component is viewed to see the studies of a
    * search or the user's saved studies.
-   * @param {StudyInterface} study The study to which to navigate.
+   * @param study The study to which to navigate.
    */
   onNavigateToStudy(study: StudyInterface) {
 
@@ -1001,7 +997,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
           study.nctId,
         ],
       );
-      result.finally();
+      result.then();
     } else if (this.mode === Mode.SAVED) {
       const result = this.router.navigate(
         [
@@ -1010,7 +1006,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
           study.nctId,
         ],
       );
-      result.finally();
+      result.then();
     }
   }
 
@@ -1056,8 +1052,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * Uses the selected location out of the location auto-complete, sets that
    * location's name as the input value and sets the location's center
    * coordinates to `currentPosition`.
-   * @param {MatAutocompleteSelectedEvent} event The event triggered when a
-   * location from the location auto-complete is selected.
+   * @param event The event triggered when a location from the location
+   * auto-complete is selected.
    */
   onLocationSelected(event: MatAutocompleteSelectedEvent): void {
     // Retrieve the selected location.
@@ -1072,9 +1068,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Returns a boolean indicating whether a given study is followed by the user.
-   * @param {string} nctId The NCT ID of the study for which the check is
-   * performed.
-   * @returns {boolean} Whether the given study is followed by the user.
+   * @param nctId The NCT ID of the study for which the check is performed.
+   * @returns Whether the given study is followed by the user.
    */
   isStudyFollowed(nctId: string): boolean {
     return this.userConfigService.getUserStudy(nctId) !== null;
@@ -1083,8 +1078,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Toggles the followed state of a given study for the current user through
    * the `followStudy` and `unfollowStudy` methods of the `UserConfigService`.
-   * @param {string} nctId The NCT ID of the study for which the followed state
-   * will be toggled.
+   * @param nctId The NCT ID of the study for which the followed state will be
+   * toggled.
    */
   onToggleFollowStudy(nctId: string): void {
     if (this.isStudyFollowed(nctId)) {

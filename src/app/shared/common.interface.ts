@@ -1,18 +1,18 @@
 import { StudyOverallStatus } from '../interfaces/study.interface';
 
 export interface DateRange {
-  dateBeg: Date
-  dateEnd: Date
+  dateBeg: Date;
+  dateEnd: Date;
 }
 
 export interface YearRange {
-  yearBeg: number
-  yearEnd: number
+  yearBeg: number;
+  yearEnd: number;
 }
 
 export interface AgeRange {
-  ageBeg: number
-  ageEnd: number
+  ageBeg: number;
+  ageEnd: number;
 }
 
 // Create a grouping of overall status values to match the template grouping.
@@ -30,5 +30,6 @@ export const overallStatusGroups = {
   active: [
     StudyOverallStatus.ACTIVE_NOT,
   ],
-  all: Object.values(StudyOverallStatus),
+  all: Object.keys(StudyOverallStatus)
+    .map(key => StudyOverallStatus[key]),
 };

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigate([''])
+    const result = this.router.navigate(['']);
+    result.then();
   }
 }
