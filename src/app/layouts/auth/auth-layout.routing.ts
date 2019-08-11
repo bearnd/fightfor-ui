@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from '../../home/home.component';
 import { CallbackComponent } from '../../callback/callback.component';
 import { PricingComponent } from '../../pricing/pricing.component';
+import { FaqComponent } from '../../faq/faq.component';
 
 
 export const AuthLayoutRoutes: Routes = [
@@ -17,5 +18,9 @@ export const AuthLayoutRoutes: Routes = [
   {
     path: 'pricing',
     component: PricingComponent,
+  },
+  {
+    path: 'faq',
+    component: FaqComponent,
   },
 ];
