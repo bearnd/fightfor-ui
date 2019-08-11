@@ -10,6 +10,7 @@ import {
   MatChipsModule,
   MatProgressSpinnerModule,
   MatIconModule,
+  MatExpansionModule,
 } from '@angular/material';
 
 import { NgxBraintreeModule } from 'ngx-braintree';
@@ -18,6 +19,7 @@ import { HomeComponent } from '../../home/home.component';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 import { CallbackComponent } from '../../callback/callback.component';
 import { PricingComponent } from '../../pricing/pricing.component';
+import { FaqComponent } from '../../faq/faq.component';
 
 @NgModule({
   imports: [
@@ -33,11 +35,13 @@ import { PricingComponent } from '../../pricing/pricing.component';
     MatProgressSpinnerModule,
     MatIconModule,
     NgxBraintreeModule,
+    MatExpansionModule,
   ],
   declarations: [
     HomeComponent,
     CallbackComponent,
     PricingComponent,
+    FaqComponent,
   ],
   providers: [],
   entryComponents: [],
