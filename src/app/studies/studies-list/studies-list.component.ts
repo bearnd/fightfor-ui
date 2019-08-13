@@ -248,7 +248,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       selectStudyCity: new FormControl(null),
       // Filter for study-city.
       filterStudyCity: new FormControl(null),
-      // Radio buttons for patient-sex.
+      // Current location input.
       currentLocation: new FormControl(null),
       // Select for the maximum distance from the current location.
       selectDistanceMax: new FormControl(null),
