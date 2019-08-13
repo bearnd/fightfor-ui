@@ -25,8 +25,8 @@ export function castEnumToArray(enumeration): {id: string, name: string}[] {
 
 /**
  * Returns a copy of an array of strings sorted alphabetically.
- * @param {string[]} entries The array of strings to be copied and sorted.
- * @returns {string[]} The sorted copy of the array.
+ * @param entries The array of strings to be copied and sorted.
+ * @returns The sorted copy of the array.
  */
 export function orderStringArray(entries: string[]): string[] {
 

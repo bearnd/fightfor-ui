@@ -515,11 +515,11 @@ export class StudyStatsRetrieverService {
 
    /**
    * Retrieve the latest MeSH descriptors for given studies.
-   * @param studies The studies which will be grouped and counted by facility.
-   * @param meshTermType The type of MeSH descriptor to limit the aggregation
+   * @param studies The studies through which the retrieval will be performed
+   * @param meshTermType The type of MeSH descriptor to limit the retrieval
    * to.
    * @param limit The number of results to return (ordered by a descending
-   * number of studies).
+   * order of descriptor appearance).
    */
   getLatestDescriptors(
     studies: StudyInterface[],
@@ -535,7 +535,7 @@ export class StudyStatsRetrieverService {
     );
 
     const meshTermTypeKey = Object.keys(MeshTermType)
-              .find(key => MeshTermType[key] === meshTermType);
+      .find(key => MeshTermType[key] === meshTermType);
 
     return this.apollo
       .query<ResponseGetLatestDescriptors,
