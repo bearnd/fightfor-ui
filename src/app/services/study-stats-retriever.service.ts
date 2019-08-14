@@ -102,6 +102,11 @@ interface VariablesGetLatestDescriptors {
   limit?: number;
 }
 
+interface VariablesGetUniqueDescriptors {
+  studyIds: number[];
+  meshTermType?: string;
+}
+
 interface ResponseGetCountStudiesByFacilityDescriptor {
   studiesStats: {
     countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[];
@@ -117,6 +122,12 @@ interface ResponseGetCountStudiesByDescriptor {
 interface ResponseGetLatestDescriptors {
   studiesStats: {
     getLatestDescriptors: LatestDescriptorInterface[];
+  };
+}
+
+interface ResponseGetUniqueDescriptors {
+  studiesStats: {
+    getUniqueDescriptors: DescriptorInterface[];
   };
 }
 
@@ -410,6 +421,23 @@ export class StudyStatsRetrieverService {
             name,
           },
           date
+        }
+      }
+    }
+  `;
+
+  queryGetUniqueDescriptors = gql`
+    query getUniqueDescriptors(
+      $studyIds: [Int]!,
+      $meshTermType: MeshTermType
+    ) {
+      studiesStats {
+        getUniqueDescriptors(
+          studyIds: $studyIds,
+          meshTermType: $meshTermType,
+        ) {
+            descriptorId,
+            name
         }
       }
     }
@@ -760,6 +788,40 @@ export class StudyStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.studiesStats.getLatestDescriptors;
+      });
+  }
+
+  /**
+   * Retrieve the unique MeSH descriptors for given studies.
+   * @param studies The studies through which the retrieval will be performed.
+   * @param meshTermType The type of MeSH descriptor to limit the retrieval to.
+   */
+  getUniqueDescriptors(
+    studies: StudyInterface[],
+    meshTermType?: MeshTermType,
+  ): Observable<DescriptorInterface[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    const meshTermTypeKey = Object.keys(MeshTermType)
+      .find(key => MeshTermType[key] === meshTermType);
+
+    return this.apollo
+      .query<ResponseGetUniqueDescriptors,
+        VariablesGetUniqueDescriptors>
+      ({
+        query: this.queryGetUniqueDescriptors,
+        variables: {
+          studyIds: studyIds,
+          meshTermType: meshTermTypeKey,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueDescriptors;
       });
   }
 
