@@ -914,4 +914,26 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
     };
   }
 
+  /**
+   * Opens the Google Maps URL for the given facility in a new tab.
+   * @param facilityCanonical The facility for which the Google Maps URL will
+   * be assembled and navigated to.
+   */
+  onNavigateGoogleMaps(facilityCanonical: FacilityCanonicalInterface): void {
+    // Escape clause.
+    if (!facilityCanonical.googlePlaceId) {
+      return;
+    }
+
+    // Assemble the Google Maps URL as per
+    // https://developers.google.com/maps/documentation/urls/guide#search-action
+    // and https://stackoverflow.com/a/44137931/403211.
+    const url = 'https://www.google.com/maps/search/' +
+      '?api=1&query=Google' +
+      '&query_place_id=' + facilityCanonical.googlePlaceId;
+
+    // Open in a new tab.
+    window.open(url, '_blank');
+  }
+
 }
