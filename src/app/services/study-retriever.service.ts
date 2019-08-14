@@ -359,7 +359,7 @@ export class StudyRetrieverService {
 
   /**
    * Retrieve clinical-trials studies through their NCT IDs.
-   * @param {string[]} nctIds The NCT IDs of the studies to be retrieved.
+   * @param nctIds The NCT IDs of the studies to be retrieved.
    */
   getStudiesByNctIds(nctIds: string[]): Observable<StudyInterface[]> {
     // Update the 'loading' observable to indicate that loading is in progress.
@@ -381,18 +381,17 @@ export class StudyRetrieverService {
   /**
    * Search for clinical-trial studies based on an array of MeSH descriptors
    * studies are associated with.
-   * @param {DescriptorInterface[]} descriptors Array of MeSH descriptors
-   * for which the search is performed
-   * @param {string} gender The patient gender studies will be limited to for
-   * this search.
-   * @param {number} yearBeg The beginning of the year-range studies will be
+   * @param descriptors Array of MeSH descriptors for which the search is
+   * performed
+   * @param gender The patient gender studies will be limited to for this search.
+   * @param yearBeg The beginning of the year-range studies will be limited to
+   * for this search.
+   * @param ageBeg The beginning of the eligibility age-range studies will be
    * limited to for this search.
-   * @param {number} ageBeg The beginning of the eligibility age-range studies
-   * will be limited to for this search.
-   * @param {number} ageEnd The end of the eligibility age-range studies will
-   * be limited to for this search.
-   * @param {number} yearEnd The end of the year-range studies will be limited
+   * @param ageEnd The end of the eligibility age-range studies will be limited
    * to for this search.
+   * @param yearEnd The end of the year-range studies will be limited to for
+   * this search.
    */
   searchStudies(
     descriptors: DescriptorInterface[],
@@ -434,38 +433,33 @@ export class StudyRetrieverService {
   /**
    * Filter clinical-trial studies with support for filtering, ordering, and
    * pagination.
-   * @param {StudyInterface[]} studies The studies on which filtering will be
-   * performed.
-   * @param {string[]} countries Array of country names to filter on.
-   * @param {string[]} states Array of state/region names to filter on.
-   * @param {string[]} cities Array of city names to filter on.
-   * @param {number} currentLocationLongitude The longitude of the current
-   * position from which only studies on facilities within a `distanceMaxKm`
-   * will be allowed.
-   * @param {number} currentLocationLatitude The latitude of the current
-   * position from which only studies on facilities within a `distanceMaxKm`
-   * will be allowed.
-   * @param {number} distanceMaxKm The maximum distance in kilometers from the
-   * current location coordinates within which study facilities will be allowed.
-   * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
-   * filter on.
-   * @param {InterventionType[]} interventionTypes Array of intervention-types
-   * to filter on.
-   * @param {StudyPhase[]} phases Array of study-phases to filter on.
-   * @param {StudyType[]} studyTypes Array of study-types to filter on.
-   * @param {number} yearBeg Earliest year (inclusive) a filtered study can
-   * start to be included.
-   * @param {number} yearEnd Latest year (inclusive) a filtered study can start
+   * @param studies The studies on which filtering will be performed.
+   * @param countries Array of country names to filter on.
+   * @param states Array of state/region names to filter on.
+   * @param cities Array of city names to filter on.
+   * @param currentLocationLongitude The longitude of the current position from
+   * which only studies on facilities within a `distanceMaxKm` will be allowed.
+   * @param currentLocationLatitude The latitude of the current position from
+   * which only studies on facilities within a `distanceMaxKm` will be allowed.
+   * @param distanceMaxKm The maximum distance in kilometers from the current
+   * location coordinates within which study facilities will be allowed.
+   * @param overallStatuses Array of overall-statuses to filter on.
+   * @param interventionTypes Array of intervention-types to filter on.
+   * @param phases Array of study-phases to filter on.
+   * @param studyTypes Array of study-types to filter on.
+   * @param yearBeg Earliest year (inclusive) a filtered study can start to be
+   * included.
+   * @param yearEnd Latest year (inclusive) a filtered study can start to be
+   * included.
+   * @param ageBeg Minimum eligibility age in seconds a filtered study may have
    * to be included.
-   * @param {number} ageBeg Minimum eligibility age in seconds a filtered
-   * study may have to be included.
-   * @param {number} ageEnd Maximum eligibility age in seconds a filtered
-   * study may have to be included.
-   * @param {string} orderBy Field to order the results by.
-   * @param {OrderType} order The ordering direction.
-   * @param {number} limit The number of studies to limit the results to (used
-   * in pagination).
-   * @param {number} offset The study offset (used in pagination).
+   * @param ageEnd Maximum eligibility age in seconds a filtered study may have
+   * to be included.
+   * @param orderBy Field to order the results by.
+   * @param order The ordering direction.
+   * @param limit The number of studies to limit the results to (used in
+   * pagination).
+   * @param offset The study offset (used in pagination).
    */
   filterStudies(
     studies: StudyInterface[],
@@ -533,33 +527,28 @@ export class StudyRetrieverService {
   /**
    * Count clinical-trial studies with support for filtering, ordering, and
    * pagination.
-   * @param {StudyInterface[]} studies The studies on which filtering will be
-   * performed.
-   * @param {string[]} countries Array of country names to filter on.
-   * @param {string[]} states Array of state/region names to filter on.
-   * @param {string[]} cities Array of city names to filter on.
-   * @param {number} currentLocationLongitude The longitude of the current
-   * position from which only studies on facilities within a `distanceMaxKm`
-   * will be allowed.
-   * @param {number} currentLocationLatitude The latitude of the current
-   * position from which only studies on facilities within a `distanceMaxKm`
-   * will be allowed.
-   * @param {number} distanceMaxKm The maximum distance in kilometers from the
-   * current location coordinates within which study facilities will be allowed.
-   * @param {StudyOverallStatus[]} overallStatuses Array of overall-statuses to
-   * filter on.
-   * @param {InterventionType[]} interventionTypes Array of intervention-types
-   * to filter on.
-   * @param {StudyPhase[]} phases Array of study-phases to filter on.
-   * @param {StudyType[]} studyTypes Array of study-types to filter on.
-   * @param {number} yearBeg Earliest year (inclusive) a filtered study can
-   * start to be included.
-   * @param {number} yearEnd Latest year (inclusive) a filtered study can start
+   * @param studies The studies on which filtering will be performed.
+   * @param countries Array of country names to filter on.
+   * @param states Array of state/region names to filter on.
+   * @param cities Array of city names to filter on.
+   * @param currentLocationLongitude The longitude of the current position from
+   * which only studies on facilities within a `distanceMaxKm` will be allowed.
+   * @param currentLocationLatitude The latitude of the current position from
+   * which only studies on facilities within a `distanceMaxKm` will be allowed.
+   * @param distanceMaxKm The maximum distance in kilometers from the current
+   * location coordinates within which study facilities will be allowed.
+   * @param overallStatuses Array of overall-statuses to filter on.
+   * @param interventionTypes Array of intervention-types to filter on.
+   * @param phases Array of study-phases to filter on.
+   * @param studyTypes Array of study-types to filter on.
+   * @param yearBeg Earliest year (inclusive) a filtered study can start to be
+   * included.
+   * @param yearEnd Latest year (inclusive) a filtered study can start to be
+   * included.
+   * @param ageBeg Minimum eligibility age in seconds a filtered study may have
    * to be included.
-   * @param {number} ageBeg Minimum eligibility age in seconds a filtered
-   * study may have to be included.
-   * @param {number} ageEnd Maximum eligibility age in seconds a filtered
-   * study may have to be included.
+   * @param ageEnd Maximum eligibility age in seconds a filtered study may have
+   * to be included.
    */
   countStudies(
     studies: StudyInterface[],

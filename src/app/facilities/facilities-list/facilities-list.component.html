@@ -10,11 +10,11 @@
           <div class="card-header card-header-icon card-header-rose">
             <!--Header icon.-->
             <div class="card-icon">
-              <i class="material-icons">local_pharmacy</i>
+              <i class="material-icons">account_balance</i>
             </div>
             <!--Header title.-->
             <h4 class="card-title">
-              {{ 'Trials' | uppercase }}
+              {{ 'Institutions' | uppercase }}
             </h4>
           </div>
 
@@ -60,25 +60,25 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-select
-                          id="selectPhase"
+                          id="selectIntervention"
                           type="select"
-                          formControlName="selectPhase"
-                          placeholder="Trial Phase"
+                          formControlName="selectIntervention"
+                          placeholder="Intervention"
                           [multiple]="true"
-                          #selectPhase
+                          #selectIntervention
                         >
                           <ngx-mat-select-search
                             type="select"
-                            formControlName="filterPhase"
+                            formControlName="filterIntervention"
                             placeholderLabel="Search"
-                            noEntriesFoundLabel="No such phase found"
+                            noEntriesFoundLabel="No such intervention found"
                           >
                           </ngx-mat-select-search>
                           <mat-option
-                            *ngFor="let phase of phasesFiltered | async"
-                            [value]="phase"
+                            *ngFor="let intervention of interventionsFiltered | async"
+                            [value]="intervention"
                           >
-                            {{ phase.name }}
+                            {{ intervention.name }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -87,25 +87,25 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-select
-                          id="selectStudyType"
+                          id="selectCondition"
                           type="select"
-                          formControlName="selectStudyType"
-                          placeholder="Study Type"
+                          formControlName="selectCondition"
+                          placeholder="Condition"
                           [multiple]="true"
-                          #selectStudyType
+                          #selectCondition
                         >
                           <ngx-mat-select-search
                             type="select"
-                            formControlName="filterStudyType"
-                            placeholderLabel="Search"
-                            noEntriesFoundLabel="No such study-type found"
+                            formControlName="filterCondition"
+                            placeholderLabel="Condition"
+                            noEntriesFoundLabel="No such condition found"
                           >
                           </ngx-mat-select-search>
                           <mat-option
-                            *ngFor="let studyType of studyTypesFiltered | async"
-                            [value]="studyType"
+                            *ngFor="let condition of conditionsFiltered | async"
+                            [value]="condition"
                           >
-                            {{ studyType.name }}
+                            {{ condition.name }}
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
@@ -169,22 +169,22 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-select
-                          id="selectStudyCountry"
+                          id="selectFacilityCountry"
                           type="select"
-                          formControlName="selectStudyCountry"
+                          formControlName="selectFacilityCountry"
                           placeholder="Country"
                           [multiple]="true"
-                          #selectStudyCountry
+                          #selectFacilityCountry
                         >
                           <ngx-mat-select-search
                             type="select"
-                            formControlName="filterStudyCountry"
+                            formControlName="filterFacilityCountry"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such country found"
                           >
                           </ngx-mat-select-search>
                           <mat-option
-                            *ngFor="let country of studyCountriesFiltered | async"
+                            *ngFor="let country of facilityCountriesFiltered | async"
                             [value]="country"
                           >
                             {{ country.name }}
@@ -196,22 +196,22 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-select
-                          id="selectStudyState"
+                          id="selectFacilityState"
                           type="select"
-                          formControlName="selectStudyState"
+                          formControlName="selectFacilityState"
                           placeholder="State/Region"
                           [multiple]="true"
-                          #selectStudyState
+                          #selectFacilityState
                         >
                           <ngx-mat-select-search
                             type="select"
-                            formControlName="filterStudyState"
+                            formControlName="filterFacilityState"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such state found"
                           >
                           </ngx-mat-select-search>
                           <mat-option
-                            *ngFor="let state of studyStatesFiltered | async"
+                            *ngFor="let state of facilityStatesFiltered | async"
                             [value]="state"
                           >
                             {{ state.name }}
@@ -223,22 +223,22 @@
                     <div class="col-md-4">
                       <mat-form-field>
                         <mat-select
-                          id="selectStudyCity"
+                          id="selectFacilityCity"
                           type="select"
-                          formControlName="selectStudyCity"
+                          formControlName="selectFacilityCity"
                           placeholder="City"
                           [multiple]="true"
-                          #selectStudyCity
+                          #selectFacilityCity
                         >
                           <ngx-mat-select-search
                             type="select"
-                            formControlName="filterStudyCity"
+                            formControlName="filterFacilityCity"
                             placeholderLabel="Search"
                             noEntriesFoundLabel="No such city found"
                           >
                           </ngx-mat-select-search>
                           <mat-option
-                            *ngFor="let city of studyCitiesFiltered | async"
+                            *ngFor="let city of facilityCitiesFiltered | async"
                             [value]="city"
                           >
                             {{ city.name }}
@@ -273,7 +273,7 @@
               </form>
 
               <hr>
-              <h5>Studies</h5>
+              <h5>Institutions</h5>
               <div class="row">
 
                 <div class="col-md-12">
@@ -281,9 +281,9 @@
                   <table
                     mat-table
                     #table
-                    [dataSource]="dataSourceStudies"
+                    [dataSource]="dataSourceFacilities"
                     matSort
-                    matSortActive="nctId"
+                    matSortActive="countStudies"
                     matSortDirection="asc"
                     matSortDisableClear
                     width="100%"
@@ -295,157 +295,114 @@
                       *matHeaderRowDef="displayedColumns"
                     ></tr>
                     <!--Clicking any row will redirect to the component for that
-                    study.-->
+                    facility.-->
                     <tr
                       mat-row
                       *matRowDef="let row; columns: displayedColumns;"
-                      (click)="onNavigateToStudy(row)"
+                      (click)="onNavigateToFacility(row)"
                       style="cursor: pointer"
                     ></tr>
 
-                    <!-- Actions column -->
-                    <ng-container matColumnDef="actions">
-                      <th mat-header-cell *matHeaderCellDef>
-
-                      </th>
-                      <td
-                        mat-cell
-                        *matCellDef="let study"
-                        (click)="$event.stopPropagation()"
-                      >
-                        <button
-                          mat-raised-button
-                          type="button"
-                          class="
-                            btn
-                            btn-rose
-                            btn-round
-                            btn-just-icon
-                            btn-link
-                            mat-raised-button
-                            btn-fab
-                          "
-                          (click)="onToggleFollowStudy(study.nctId)"
-                          [disableRipple]="true"
-                          [matTooltip]="
-                            isStudyFollowed(study.nctId) ?
-                            'Unfollow this trial' :
-                            'Follow this trial'
-                          "
-                          [matTooltipPosition]="'left'"
-                        >
-                          <i
-                            class="fa fa-spinner fa-spin"
-                            *ngIf="userConfigService.isUpdatingUserStudies | async"
-                          ></i>
-                          <i
-                            class="material-icons"
-                            *ngIf="!(userConfigService.isUpdatingUserStudies | async)"
-                          >
-                            {{
-                              isStudyFollowed(study.nctId) ?
-                              "favorite" :
-                              "favorite_outline"
-                            }}
-                          </i>
-                        </button>
-                      </td>
-                    </ng-container>
-
-                    <!-- NCT ID column -->
-                    <ng-container matColumnDef="nctId">
+                    <!-- Facility name column -->
+                    <ng-container matColumnDef="name">
                       <th mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
-                        NCT ID
+                        Name
                       </th>
                       <td
                         mat-cell
-                        *matCellDef="let study"
+                        *matCellDef="let entry"
                       >
-                        {{ study.nctId }}
+                        {{ entry.facilityCanonical.name }}
                       </td>
                     </ng-container>
 
-                    <!-- Overall status column -->
-                    <ng-container matColumnDef="overallStatus">
+                    <!-- Country column -->
+                    <ng-container matColumnDef="country">
                       <th
                         mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
-                        Status
+                        Country
                       </th>
-                      <td mat-cell *matCellDef="let study">
-                        {{castOverallStatus(study.overallStatus)}}
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.facilityCanonical.country }}
                       </td>
                     </ng-container>
 
-                    <!-- Brief title column -->
-                    <ng-container matColumnDef="briefTitle">
+                    <!-- City column -->
+                    <ng-container matColumnDef="locality">
                       <th
                         mat-header-cell
                         *matHeaderCellDef
                         mat-sort-header
                       >
-                        Title
+                        City
                       </th>
-                      <td mat-cell *matCellDef="let study">
-                        {{study.briefTitle | truncate:77}}
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.facilityCanonical.locality }}
                       </td>
                     </ng-container>
 
-                    <!-- Conditions column -->
-                    <ng-container matColumnDef="conditions">
-                      <th
-                        mat-header-cell
-                        *matHeaderCellDef
-                      >Conditions
+                    <!-- State Column -->
+                      <ng-container matColumnDef="administrativeAreaLevel1">
+                        <th mat-header-cell *matHeaderCellDef>State</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.administrativeAreaLevel1 }}
+                        </td>
+                      </ng-container>
+
+                    <!-- Trials Column -->
+                    <ng-container matColumnDef="countStudies">
+                      <th mat-header-cell
+                          *matHeaderCellDef
+                          mat-sort-header
+                      >
+                        Trials
                       </th>
-                      <td mat-cell *matCellDef="let study">
-                        {{ getStudyConditionMeshTerms(study) }}
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.countStudies }}
                       </td>
                     </ng-container>
 
-                    <!-- Interventions column -->
-                    <ng-container matColumnDef="interventions">
-                      <th
-                        mat-header-cell
-                        *matHeaderCellDef
-                      >Interventions
+                    <!-- Top Interventions column -->
+                    <ng-container matColumnDef="topInterventions">
+                      <th mat-header-cell *matHeaderCellDef>
+                        Top Interventions
                       </th>
-                      <td mat-cell *matCellDef="let study">
-                        {{ getStudyInterventionMeshTerms(study) }}
-                      </td>
-                    </ng-container>
-
-                    <!-- Locations column -->
-                    <ng-container matColumnDef="locations">
-                      <th
-                        mat-header-cell
-                        *matHeaderCellDef
-                      >Locations
-                      </th>
-                      <td mat-cell *matCellDef="let study">
-                        {{ getStudyLocation(study) }}
+                      <td mat-cell *matCellDef="let entry">
+                        <mat-chip-list>
+                          <mat-chip
+                            *ngFor="let term of
+                              topFacilityMeshTerms[
+                                entry.facilityCanonical.facilityCanonicalId
+                              ]"
+                          >
+                            {{ term.name }}
+                          </mat-chip>
+                        </mat-chip-list>
                       </td>
                     </ng-container>
 
                   </table>
 
                   <mat-paginator
-                    [length]="studiesCount"
+                    [length]="facilitiesCount"
                     [pageSize]="10"
-                    [pageSizeOptions]="studiesPageSizeOptions"
+                    [pageSizeOptions]="facilitiesPageSizeOptions"
                   ></mat-paginator>
 
                 </div>
 
               </div>
+
             </div>
 
           </div>
+
         </div>
 
       </div>

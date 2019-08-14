@@ -25,8 +25,8 @@ export function castEnumToArray(enumeration): {id: string, name: string}[] {
 
 /**
  * Returns a copy of an array of strings sorted alphabetically.
- * @param {string[]} entries The array of strings to be copied and sorted.
- * @returns {string[]} The sorted copy of the array.
+ * @param entries The array of strings to be copied and sorted.
+ * @returns The sorted copy of the array.
  */
 export function orderStringArray(entries: string[]): string[] {
 
@@ -40,6 +40,38 @@ export function orderStringArray(entries: string[]): string[] {
         return -1;
       }
       if (left > right) {
+        return 1;
+      }
+      return 0;
+    }
+  );
+
+  return entriesSorted;
+}
+
+
+/**
+ * Returns a copy of an array of objects sorted alphabetically based on the
+ * value of a given property.
+ * @param entries The array of objects to be copied and sorted.
+ * @param propertyName The name of the property to sort by.
+ * @returns The sorted copy of the array.
+ */
+export function orderObjectArray(
+  entries: object[],
+  propertyName: string,
+): object[] {
+
+  // Create a copy of the array.
+  const entriesSorted = entries.slice();
+
+  // Sort the array copy alphabetically.
+  entriesSorted.sort(
+    (left, right) => {
+      if (left[propertyName] < right[propertyName]) {
+        return -1;
+      }
+      if (left[propertyName] > right[propertyName]) {
         return 1;
       }
       return 0;

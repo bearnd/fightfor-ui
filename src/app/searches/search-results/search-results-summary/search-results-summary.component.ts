@@ -65,16 +65,13 @@ export class SearchResultsSummaryComponent implements OnInit {
     'country',
     'locality',
     'administrativeAreaLevel1',
-    'postalCode',
-    'countStudies',
     'topInterventions',
+    'countStudies',
   ];
   // Facilities table data-source.
   dataSourceFacilities: MatTableDataSource<StudiesCountByFacilityInterface>;
   // The top MeSH intervention descriptors by facility.
-  public topFacilityMeshTerms: {
-    [key: string]: DescriptorInterface[]
-  } = {};
+  public topFacilityMeshTerms: {[key: string]: DescriptorInterface[]} = {};
 
   // Number of top intervention descriptors to display.
   numInterventionDescriptorsDisplay = 5;
@@ -373,7 +370,21 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Perform the search.
     this.studyStatsRetrieverService
-      .getCountStudiesByFacility(this.search.studies, limit)
+      .getCountStudiesByFacility(
+        this.search.studies,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        limit,
+        null,
+      )
       .subscribe(
         (response) => {
           // Assign the retrieved stats to the search.
@@ -540,6 +551,25 @@ export class SearchResultsSummaryComponent implements OnInit {
     );
     result.then();
   }
+
+  /**
+   * Navigate to the `FacilitiesListComponent` passing the search UUID to be
+   * used in filtering facilities.
+   * @param searchUuid The search UUID for which to display studies.
+   */
+  onNavigateToFacilitiesList(searchUuid: string) {
+
+    const result = this.router.navigate(
+      [
+        '/app',
+        'searches',
+        searchUuid,
+        'institutions',
+      ],
+    );
+    result.then();
+  }
+
 
   /**
    * Configures and initializes the studies locations map based on the results

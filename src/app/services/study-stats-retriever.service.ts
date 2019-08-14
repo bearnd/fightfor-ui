@@ -4,7 +4,11 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
-import { MeshTermType, StudyInterface } from '../interfaces/study.interface';
+import {
+  MeshTermType,
+  OrderType,
+  StudyInterface
+} from '../interfaces/study.interface';
 import {
   StudiesCountByCountryInterface,
   StudiesCountByFacilityInterface,
@@ -14,10 +18,12 @@ import {
   LatestDescriptorInterface,
 } from '../interfaces/user-config.interface';
 import { AgeRange, DateRange } from '../shared/common.interface';
+import { DescriptorInterface } from '../interfaces/descriptor.interface';
 
 
 interface VariablesGetCountStudiesByCountry {
   studyIds: number[];
+  limit: number;
 }
 
 interface ResponseGetCountStudiesByCountry {
@@ -28,6 +34,7 @@ interface ResponseGetCountStudiesByCountry {
 
 interface VariablesGetCountStudiesByOverallStatus {
   studyIds: number[];
+  limit: number;
 }
 
 interface ResponseGetCountStudiesByOverallStatus {
@@ -38,11 +45,41 @@ interface ResponseGetCountStudiesByOverallStatus {
 
 interface VariablesGetCountStudiesByFacility {
   studyIds: number[];
+  meshDescriptorIds?: number[];
+  countries?: string[];
+  states?: string[];
+  cities?: string[];
+  currentLocationLongitude?: number;
+  currentLocationLatitude?: number;
+  distanceMaxKm?: number;
+  overallStatuses?: string[];
+  orderBy?: string;
+  order?: OrderType;
+  limit?: number;
+  offset?: number;
 }
 
 interface ResponseGetCountStudiesByFacility {
   studiesStats: {
     countStudiesByFacility: StudiesCountByFacilityInterface[];
+  };
+}
+
+interface VariablesCountFacilities {
+  studyIds: number[];
+  meshDescriptorIds?: number[];
+  countries?: string[];
+  states?: string[];
+  cities?: string[];
+  currentLocationLongitude?: number;
+  currentLocationLatitude?: number;
+  distanceMaxKm?: number;
+  overallStatuses?: string[];
+}
+
+interface ResponseCountFacilities {
+  studiesStats: {
+    countFacilities: number;
   };
 }
 
@@ -65,6 +102,11 @@ interface VariablesGetLatestDescriptors {
   limit?: number;
 }
 
+interface VariablesGetUniqueDescriptors {
+  studyIds: number[];
+  meshTermType?: string;
+}
+
 interface ResponseGetCountStudiesByFacilityDescriptor {
   studiesStats: {
     countStudiesByFacilityDescriptor: StudiesCountByFacilityDescriptorInterface[];
@@ -80,6 +122,12 @@ interface ResponseGetCountStudiesByDescriptor {
 interface ResponseGetLatestDescriptors {
   studiesStats: {
     getLatestDescriptors: LatestDescriptorInterface[];
+  };
+}
+
+interface ResponseGetUniqueDescriptors {
+  studiesStats: {
+    getUniqueDescriptors: DescriptorInterface[];
   };
 }
 
@@ -174,11 +222,33 @@ export class StudyStatsRetrieverService {
   queryGetCountStudiesByFacility = gql`
     query getCountStudiesByFacility(
       $studyIds: [Int]!,
+      $meshDescriptorIds: [Int],
+      $countries: [String],
+      $states: [String],
+      $cities: [String],
+      $currentLocationLongitude: Float,
+      $currentLocationLatitude: Float,
+      $distanceMaxKm: Int,
+      $overallStatuses: [OverallStatusType],
+      $orderBy: String,
+      $order: TypeEnumOrder,
+      $offset: Int,
       $limit: Int
     ) {
       studiesStats {
         countStudiesByFacility(
           studyIds: $studyIds,
+          meshDescriptorIds: $meshDescriptorIds,
+          countries: $countries,
+          states: $states,
+          cities: $cities,
+          currentLocationLongitude: $currentLocationLongitude,
+          currentLocationLatitude: $currentLocationLatitude,
+          distanceMaxKm: $distanceMaxKm,
+          overallStatuses: $overallStatuses,
+          orderBy: $orderBy,
+          order: $order,
+          offset: $offset,
           limit: $limit
         ) {
           facilityCanonical {
@@ -186,11 +256,38 @@ export class StudyStatsRetrieverService {
             name,
             locality,
             administrativeAreaLevel1,
-            postalCode,
             country,
-          }
+          },
           countStudies
         }
+      }
+    }
+  `;
+
+  queryCountFacilities = gql`
+    query countFacilities(
+      $studyIds: [Int]!,
+      $meshDescriptorIds: [Int],
+      $countries: [String],
+      $states: [String],
+      $cities: [String],
+      $currentLocationLongitude: Float,
+      $currentLocationLatitude: Float,
+      $distanceMaxKm: Int,
+      $overallStatuses: [OverallStatusType],
+    ) {
+      studiesStats {
+        countFacilities(
+          studyIds: $studyIds,
+          meshDescriptorIds: $meshDescriptorIds,
+          countries: $countries,
+          states: $states,
+          cities: $cities,
+          currentLocationLongitude: $currentLocationLongitude,
+          currentLocationLatitude: $currentLocationLatitude,
+          distanceMaxKm: $distanceMaxKm,
+          overallStatuses: $overallStatuses,
+        )
       }
     }
   `;
@@ -329,6 +426,23 @@ export class StudyStatsRetrieverService {
     }
   `;
 
+  queryGetUniqueDescriptors = gql`
+    query getUniqueDescriptors(
+      $studyIds: [Int]!,
+      $meshTermType: MeshTermType
+    ) {
+      studiesStats {
+        getUniqueDescriptors(
+          studyIds: $studyIds,
+          meshTermType: $meshTermType,
+        ) {
+            descriptorId,
+            name
+        }
+      }
+    }
+  `;
+
   constructor(private apollo: Apollo) {
   }
 
@@ -401,12 +515,41 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the count of clinical-trial studies by facility for given studies.
    * @param studies The studies which will be grouped and counted by facility.
-   * @param limit The number of results to return (ordered by a descending
-   * number of studies).
+   * @param descriptors Array of MeSH descriptors
+   * to filter on.
+   * @param countries Array of country names to filter on.
+   * @param states Array of state/region names to filter on.
+   * @param cities Array of city names to filter on.
+   * @param currentLocationLongitude The longitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param currentLocationLatitude The latitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param distanceMaxKm The maximum distance in kilometers from the
+   * current location coordinates within which study facilities will be allowed.
+   * @param overallStatuses Array of overall-statuses to
+   * filter on.
+   * @param orderBy Field to order the results by.
+   * @param order The ordering direction.
+   * @param limit The number of studies to limit the results to (used
+   * in pagination).
+   * @param offset The study offset (used in pagination).
    */
   getCountStudiesByFacility(
     studies: StudyInterface[],
-    limit: number = null,
+    descriptors: DescriptorInterface[],
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    currentLocationLongitude?: number,
+    currentLocationLatitude?: number,
+    distanceMaxKm?: number,
+    overallStatuses?: string[],
+    orderBy?: string,
+    order?: OrderType,
+    limit?: number,
+    offset?: number,
   ): Observable<StudiesCountByFacilityInterface[]> {
 
     // Retrieve the IDs out of the provided studies.
@@ -416,6 +559,16 @@ export class StudyStatsRetrieverService {
       }
     );
 
+    // Retrieve the IDs out of the provided MeSH descriptors.
+    let descriptorIds: number[] = null;
+    if (descriptors) {
+      descriptorIds = descriptors.map(
+        function (d) {
+          return d.descriptorId;
+        }
+      );
+    }
+
     return this.apollo
       .query<ResponseGetCountStudiesByFacility,
         VariablesGetCountStudiesByFacility>
@@ -423,11 +576,97 @@ export class StudyStatsRetrieverService {
         query: this.queryGetCountStudiesByFacility,
         variables: {
           studyIds: studyIds,
+          meshDescriptorIds: descriptorIds,
+          countries: countries,
+          states: states,
+          cities: cities,
+          currentLocationLongitude: currentLocationLongitude,
+          currentLocationLatitude: currentLocationLatitude,
+          distanceMaxKm: distanceMaxKm,
+          overallStatuses: overallStatuses,
+          orderBy: orderBy,
+          order: order,
           limit: limit,
+          offset: offset,
         }
       }).map((response) => {
         return response.data.studiesStats.countStudiesByFacility;
-      });
+      }).catch(
+        error => {
+          console.error(error);
+          return Observable.throwError(error);
+        }
+      );
+  }
+
+  /**
+   * Count the facilities for given facilities.
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param descriptors Array of MeSH descriptors
+   * to filter on.
+   * @param countries Array of country names to filter on.
+   * @param states Array of state/region names to filter on.
+   * @param cities Array of city names to filter on.
+   * @param currentLocationLongitude The longitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param currentLocationLatitude The latitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param distanceMaxKm The maximum distance in kilometers from the
+   * current location coordinates within which study facilities will be allowed.
+   * @param overallStatuses Array of overall-statuses to
+   * filter on.
+   */
+  countFacilities(
+    studies: StudyInterface[],
+    descriptors: DescriptorInterface[],
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    currentLocationLongitude?: number,
+    currentLocationLatitude?: number,
+    distanceMaxKm?: number,
+    overallStatuses?: string[],
+  ): Observable<number> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    // Retrieve the IDs out of the provided MeSH descriptors.
+    let descriptorIds: number[] = null;
+    if (descriptors) {
+      descriptorIds = descriptors.map(
+        function (d) {
+          return d.descriptorId;
+        }
+      );
+    }
+
+    return this.apollo
+      .query<ResponseCountFacilities, VariablesCountFacilities>
+      ({
+        query: this.queryCountFacilities,
+        variables: {
+          studyIds: studyIds,
+          meshDescriptorIds: descriptorIds,
+          countries: countries,
+          states: states,
+          cities: cities,
+          overallStatuses: overallStatuses,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.countFacilities;
+      }).catch(
+        error => {
+          console.error(error);
+          return Observable.throwError(error);
+        }
+      );
   }
 
   /**
@@ -515,11 +754,11 @@ export class StudyStatsRetrieverService {
 
    /**
    * Retrieve the latest MeSH descriptors for given studies.
-   * @param studies The studies which will be grouped and counted by facility.
-   * @param meshTermType The type of MeSH descriptor to limit the aggregation
+   * @param studies The studies through which the retrieval will be performed
+   * @param meshTermType The type of MeSH descriptor to limit the retrieval
    * to.
    * @param limit The number of results to return (ordered by a descending
-   * number of studies).
+   * order of descriptor appearance).
    */
   getLatestDescriptors(
     studies: StudyInterface[],
@@ -535,7 +774,7 @@ export class StudyStatsRetrieverService {
     );
 
     const meshTermTypeKey = Object.keys(MeshTermType)
-              .find(key => MeshTermType[key] === meshTermType);
+      .find(key => MeshTermType[key] === meshTermType);
 
     return this.apollo
       .query<ResponseGetLatestDescriptors,
@@ -549,6 +788,40 @@ export class StudyStatsRetrieverService {
         }
       }).map((response) => {
         return response.data.studiesStats.getLatestDescriptors;
+      });
+  }
+
+  /**
+   * Retrieve the unique MeSH descriptors for given studies.
+   * @param studies The studies through which the retrieval will be performed.
+   * @param meshTermType The type of MeSH descriptor to limit the retrieval to.
+   */
+  getUniqueDescriptors(
+    studies: StudyInterface[],
+    meshTermType?: MeshTermType,
+  ): Observable<DescriptorInterface[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    const meshTermTypeKey = Object.keys(MeshTermType)
+      .find(key => MeshTermType[key] === meshTermType);
+
+    return this.apollo
+      .query<ResponseGetUniqueDescriptors,
+        VariablesGetUniqueDescriptors>
+      ({
+        query: this.queryGetUniqueDescriptors,
+        variables: {
+          studyIds: studyIds,
+          meshTermType: meshTermTypeKey,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueDescriptors;
       });
   }
 
