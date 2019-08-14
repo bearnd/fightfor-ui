@@ -72,9 +72,7 @@ export class SearchResultsSummaryComponent implements OnInit {
   // Facilities table data-source.
   dataSourceFacilities: MatTableDataSource<StudiesCountByFacilityInterface>;
   // The top MeSH intervention descriptors by facility.
-  public topFacilityMeshTerms: {
-    [key: string]: DescriptorInterface[]
-  } = {};
+  public topFacilityMeshTerms: {[key: string]: DescriptorInterface[]} = {};
 
   // Number of top intervention descriptors to display.
   numInterventionDescriptorsDisplay = 5;
