@@ -1,0 +1,412 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="card">
+
+          <!--Card header.-->
+          <div class="card-header card-header-icon card-header-rose">
+            <!--Header icon.-->
+            <div class="card-icon">
+              <i class="material-icons">account_balance</i>
+            </div>
+            <!--Header title.-->
+            <h4 class="card-title">
+              {{ 'Institutions' | uppercase }}
+            </h4>
+          </div>
+
+          <!--Card body.-->
+          <div class="card-body">
+
+            <div class="col-md-12">
+
+              <h5>Filters</h5>
+
+              <form [formGroup]="formFilters" (ngSubmit)="onSubmitFilters()">
+                <div class="form-group">
+
+                  <div class="row">
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectOverallStatus"
+                          type="select"
+                          formControlName="selectOverallStatus"
+                          placeholder="Overall Status"
+                          [multiple]="true"
+                          #selectOverallStatus
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterOverallStatus"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such overall-status found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let status of overallStatusesFiltered | async"
+                            [value]="status"
+                          >
+                            {{ status.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectIntervention"
+                          type="select"
+                          formControlName="selectIntervention"
+                          placeholder="Intervention"
+                          [multiple]="true"
+                          #selectIntervention
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterIntervention"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such intervention found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let intervention of interventionsFiltered | async"
+                            [value]="intervention"
+                          >
+                            {{ intervention.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectCondition"
+                          type="select"
+                          formControlName="selectCondition"
+                          placeholder="Condition"
+                          [multiple]="true"
+                          #selectCondition
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterCondition"
+                            placeholderLabel="Condition"
+                            noEntriesFoundLabel="No such condition found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let condition of conditionsFiltered | async"
+                            [value]="condition"
+                          >
+                            {{ condition.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field>
+                        <input
+                          matInput
+                          type="text"
+                          id="currentLocation"
+                          formControlName="currentLocation"
+                          placeholder="Current Location"
+                          [matAutocomplete]="locationsAutocomplete"
+                        />
+                        <mat-autocomplete
+                          [autoActiveFirstOption]="true"
+                          #locationsAutocomplete="matAutocomplete"
+                          (optionSelected)="onLocationSelected($event)"
+                        >
+                          <mat-option *ngFor="let location of locationsAll | async" [value]="location">
+                            {{ location.place_name }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-2">
+                      <button
+                        mat-raised-button
+                        class="btn btn-rose mat-raised-button"
+                        type="button"
+                        (click)="onDetectLocation()"
+                      >
+                        <span class="mat-button-wrapper">Detect</span>
+                      </button>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectDistanceMax"
+                          type="select"
+                          formControlName="selectDistanceMax"
+                          placeholder="Maximum Distance"
+                          #selectDistanceMax
+                        >
+                          <mat-option *ngFor="let distanceMaxKm of distancesMaxKmAll" [value]="distanceMaxKm">
+                            {{ distanceMaxKm <= 10000 ? distanceMaxKm + "km" : "10000km+" }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectFacilityCountry"
+                          type="select"
+                          formControlName="selectFacilityCountry"
+                          placeholder="Country"
+                          [multiple]="true"
+                          #selectFacilityCountry
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterFacilityCountry"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such country found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let country of facilityCountriesFiltered | async"
+                            [value]="country"
+                          >
+                            {{ country.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectFacilityState"
+                          type="select"
+                          formControlName="selectFacilityState"
+                          placeholder="State/Region"
+                          [multiple]="true"
+                          #selectFacilityState
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterFacilityState"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such state found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let state of facilityStatesFiltered | async"
+                            [value]="state"
+                          >
+                            {{ state.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <mat-select
+                          id="selectFacilityCity"
+                          type="select"
+                          formControlName="selectFacilityCity"
+                          placeholder="City"
+                          [multiple]="true"
+                          #selectFacilityCity
+                        >
+                          <ngx-mat-select-search
+                            type="select"
+                            formControlName="filterFacilityCity"
+                            placeholderLabel="Search"
+                            noEntriesFoundLabel="No such city found"
+                          >
+                          </ngx-mat-select-search>
+                          <mat-option
+                            *ngFor="let city of facilityCitiesFiltered | async"
+                            [value]="city"
+                          >
+                            {{ city.name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12" style="padding-top: 20px">
+                      <button
+                        mat-raised-button
+                        type="button"
+                        class="btn btn-rose mat-raised-button"
+                        (click)="onResetFilters()"
+                      >
+                        <span class="mat-button-wrapper">Reset Filters</span>
+                      </button>
+                      <button
+                        mat-raised-button
+                        type="submit"
+                        class="btn btn-rose mat-raised-button pull-right"
+                      >
+                        <span class="mat-button-wrapper">Filter</span>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+
+              <hr>
+              <h5>Institutions</h5>
+              <div class="row">
+
+                <div class="col-md-12">
+
+                  <table
+                    mat-table
+                    #table
+                    [dataSource]="dataSourceFacilities"
+                    matSort
+                    matSortActive="countStudies"
+                    matSortDirection="asc"
+                    matSortDisableClear
+                    width="100%"
+                  >
+
+                    <!--Header.-->
+                    <tr
+                      mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></tr>
+                    <!--Clicking any row will redirect to the component for that
+                    facility.-->
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns;"
+                      (click)="onNavigateToFacility(row)"
+                      style="cursor: pointer"
+                    ></tr>
+
+                    <!-- Facility name column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Name
+                      </th>
+                      <td
+                        mat-cell
+                        *matCellDef="let entry"
+                      >
+                        {{ entry.facilityCanonical.name }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Country column -->
+                    <ng-container matColumnDef="country">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Country
+                      </th>
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.facilityCanonical.country }}
+                      </td>
+                    </ng-container>
+
+                    <!-- City column -->
+                    <ng-container matColumnDef="locality">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        City
+                      </th>
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.facilityCanonical.locality }}
+                      </td>
+                    </ng-container>
+
+                    <!-- State Column -->
+                      <ng-container matColumnDef="administrativeAreaLevel1">
+                        <th mat-header-cell *matHeaderCellDef>State</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.administrativeAreaLevel1 }}
+                        </td>
+                      </ng-container>
+
+                    <!-- Trials Column -->
+                    <ng-container matColumnDef="countStudies">
+                      <th mat-header-cell
+                          *matHeaderCellDef
+                          mat-sort-header
+                      >
+                        Trials
+                      </th>
+                      <td mat-cell *matCellDef="let entry">
+                        {{ entry.countStudies }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Top Interventions column -->
+                    <ng-container matColumnDef="topInterventions">
+                      <th mat-header-cell *matHeaderCellDef>
+                        Top Interventions
+                      </th>
+                      <td mat-cell *matCellDef="let entry">
+                        <mat-chip-list>
+                          <mat-chip
+                            *ngFor="let term of
+                              topFacilityMeshTerms[
+                                entry.facilityCanonical.facilityCanonicalId
+                              ]"
+                          >
+                            {{ term.name }}
+                          </mat-chip>
+                        </mat-chip-list>
+                      </td>
+                    </ng-container>
+
+                  </table>
+
+                  <mat-paginator
+                    [length]="facilitiesCount"
+                    [pageSize]="10"
+                    [pageSizeOptions]="facilitiesPageSizeOptions"
+                  ></mat-paginator>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
