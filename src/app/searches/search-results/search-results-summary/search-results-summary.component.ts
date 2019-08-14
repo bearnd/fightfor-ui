@@ -371,7 +371,21 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Perform the search.
     this.studyStatsRetrieverService
-      .getCountStudiesByFacility(this.search.studies, limit)
+      .getCountStudiesByFacility(
+        this.search.studies,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        limit,
+        null,
+      )
       .subscribe(
         (response) => {
           // Assign the retrieved stats to the search.
