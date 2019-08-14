@@ -104,6 +104,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
 
   // Studies columns to display.
   displayedColumns: string[] = [
+    'actions',
     'name',
     'country',
     'locality',
