@@ -450,22 +450,6 @@
                         </td>
                       </ng-container>
 
-                      <!-- Zip Code Column -->
-                      <ng-container matColumnDef="postalCode">
-                        <th mat-header-cell *matHeaderCellDef>Zip Code</th>
-                        <td mat-cell *matCellDef="let entry">
-                          {{ entry.facilityCanonical.postalCode }}
-                        </td>
-                      </ng-container>
-
-                      <!-- Trials Column -->
-                      <ng-container matColumnDef="countStudies">
-                        <th mat-header-cell *matHeaderCellDef>Trials</th>
-                        <td mat-cell *matCellDef="let entry">
-                          {{ entry.countStudies }}
-                        </td>
-                      </ng-container>
-
                       <!-- Top Interventions Column -->
                       <ng-container matColumnDef="topInterventions">
                         <th mat-header-cell *matHeaderCellDef>
@@ -482,6 +466,14 @@
                               {{ term.name }}
                             </mat-chip>
                           </mat-chip-list>
+                        </td>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <th mat-header-cell *matHeaderCellDef>Trials</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.countStudies }}
                         </td>
                       </ng-container>
                     </table>
