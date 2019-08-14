@@ -18,6 +18,7 @@ import { AgeRange, DateRange } from '../shared/common.interface';
 
 interface VariablesGetCountStudiesByCountry {
   studyIds: number[];
+  limit: number;
 }
 
 interface ResponseGetCountStudiesByCountry {
@@ -28,6 +29,7 @@ interface ResponseGetCountStudiesByCountry {
 
 interface VariablesGetCountStudiesByOverallStatus {
   studyIds: number[];
+  limit: number;
 }
 
 interface ResponseGetCountStudiesByOverallStatus {
@@ -186,9 +188,8 @@ export class StudyStatsRetrieverService {
             name,
             locality,
             administrativeAreaLevel1,
-            postalCode,
             country,
-          }
+          },
           countStudies
         }
       }
