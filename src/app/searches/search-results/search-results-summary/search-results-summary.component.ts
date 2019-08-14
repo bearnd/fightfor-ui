@@ -65,9 +65,8 @@ export class SearchResultsSummaryComponent implements OnInit {
     'country',
     'locality',
     'administrativeAreaLevel1',
-    'postalCode',
-    'countStudies',
     'topInterventions',
+    'countStudies',
   ];
   // Facilities table data-source.
   dataSourceFacilities: MatTableDataSource<StudiesCountByFacilityInterface>;
