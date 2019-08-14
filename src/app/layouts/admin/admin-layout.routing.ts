@@ -19,6 +19,8 @@ import {
 import { PaymentGuard } from '../../guards/payment.guard';
 import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
+import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
+import { FacilitiesComponent } from '../../facilities/facilities.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -96,6 +98,15 @@ export const AdminLayoutRoutes: Routes = [
                 }
               },
             ]
+          },
+          {
+            path: 'institutions',
+            component: FacilitiesListComponent,
+            canActivate: [PaymentGuard],
+            canActivateChild: [PaymentGuard],
+            data: {
+              breadcrumbs: 'Institutions'
+            },
           }
         ],
       },

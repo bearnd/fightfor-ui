@@ -45,6 +45,8 @@ import {
 } from '../../studies/studies-list/studies-list.component';
 import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
+import { FacilitiesComponent } from '../../facilities/facilities.component';
+import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import { StudiesComponent } from '../../studies/studies.component';
     StudiesListComponent,
     StudiesComponent,
     StudyComponent,
+    FacilitiesComponent,
+    FacilitiesListComponent,
   ],
   providers: [PageScrollService],
 })
