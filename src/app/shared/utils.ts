@@ -51,6 +51,38 @@ export function orderStringArray(entries: string[]): string[] {
 
 
 /**
+ * Returns a copy of an array of objects sorted alphabetically based on the
+ * value of a given property.
+ * @param entries The array of objects to be copied and sorted.
+ * @param propertyName The name of the property to sort by.
+ * @returns The sorted copy of the array.
+ */
+export function orderObjectArray(
+  entries: object[],
+  propertyName: string,
+): object[] {
+
+  // Create a copy of the array.
+  const entriesSorted = entries.slice();
+
+  // Sort the array copy alphabetically.
+  entriesSorted.sort(
+    (left, right) => {
+      if (left[propertyName] < right[propertyName]) {
+        return -1;
+      }
+      if (left[propertyName] > right[propertyName]) {
+        return 1;
+      }
+      return 0;
+    }
+  );
+
+  return entriesSorted;
+}
+
+
+/**
  * Converts an interval string to a number of seconds.
  * @param interval The interval to be converted.
  * @returns The corresponding number of seconds the interval was converted to or
