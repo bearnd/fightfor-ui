@@ -65,6 +65,24 @@ interface ResponseGetCountStudiesByFacility {
   };
 }
 
+interface VariablesCountFacilities {
+  studyIds: number[];
+  meshDescriptorIds?: number[];
+  countries?: string[];
+  states?: string[];
+  cities?: string[];
+  currentLocationLongitude?: number;
+  currentLocationLatitude?: number;
+  distanceMaxKm?: number;
+  overallStatuses?: string[];
+}
+
+interface ResponseCountFacilities {
+  studiesStats: {
+    countFacilities: number;
+  };
+}
+
 interface VariablesGetCountStudiesByFacilityDescriptor {
   studyIds: number[];
   facilityCanonicalIds?: number[];
@@ -231,6 +249,34 @@ export class StudyStatsRetrieverService {
           },
           countStudies
         }
+      }
+    }
+  `;
+
+  queryCountFacilities = gql`
+    query countFacilities(
+      $studyIds: [Int]!,
+      $meshDescriptorIds: [Int],
+      $countries: [String],
+      $states: [String],
+      $cities: [String],
+      $currentLocationLongitude: Float,
+      $currentLocationLatitude: Float,
+      $distanceMaxKm: Int,
+      $overallStatuses: [OverallStatusType],
+    ) {
+      studiesStats {
+        countFacilities(
+          studyIds: $studyIds,
+          meshDescriptorIds: $meshDescriptorIds,
+          countries: $countries,
+          states: $states,
+          cities: $cities,
+          currentLocationLongitude: $currentLocationLongitude,
+          currentLocationLatitude: $currentLocationLatitude,
+          distanceMaxKm: $distanceMaxKm,
+          overallStatuses: $overallStatuses,
+        )
       }
     }
   `;
@@ -524,6 +570,75 @@ export class StudyStatsRetrieverService {
         }
       );
   }
+
+  /**
+   * Count the facilities for given facilities.
+   * @param studies The studies which will be grouped and counted by facility.
+   * @param descriptors Array of MeSH descriptors
+   * to filter on.
+   * @param countries Array of country names to filter on.
+   * @param states Array of state/region names to filter on.
+   * @param cities Array of city names to filter on.
+   * @param currentLocationLongitude The longitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param currentLocationLatitude The latitude of the current
+   * position from which only studies on facilities within a `distanceMaxKm`
+   * will be allowed.
+   * @param distanceMaxKm The maximum distance in kilometers from the
+   * current location coordinates within which study facilities will be allowed.
+   * @param overallStatuses Array of overall-statuses to
+   * filter on.
+   */
+  countFacilities(
+    studies: StudyInterface[],
+    descriptors: DescriptorInterface[],
+    countries?: string[],
+    states?: string[],
+    cities?: string[],
+    currentLocationLongitude?: number,
+    currentLocationLatitude?: number,
+    distanceMaxKm?: number,
+    overallStatuses?: string[],
+  ): Observable<number> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    // Retrieve the IDs out of the provided MeSH descriptors.
+    let descriptorIds: number[] = null;
+    if (descriptors) {
+      descriptorIds = descriptors.map(
+        function (d) {
+          return d.descriptorId;
+        }
+      );
+    }
+
+    return this.apollo
+      .query<ResponseCountFacilities, VariablesCountFacilities>
+      ({
+        query: this.queryCountFacilities,
+        variables: {
+          studyIds: studyIds,
+          meshDescriptorIds: descriptorIds,
+          countries: countries,
+          states: states,
+          cities: cities,
+          overallStatuses: overallStatuses,
+        }
+      }).map((response) => {
+        return response.data.studiesStats.countFacilities;
+      }).catch(
+        error => {
+          console.error(error);
+          return Observable.throwError(error);
+        }
+      );
   }
 
   /**
