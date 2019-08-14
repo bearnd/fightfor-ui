@@ -135,6 +135,7 @@ export interface FacilityInterface {
 
 export interface FacilityCanonicalInterface {
   facilityCanonicalId?: number;
+  googlePlaceId?: string;
   name?: string;
   address?: string;
   phoneNumber?: string;
