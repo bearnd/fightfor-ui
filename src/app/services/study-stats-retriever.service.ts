@@ -253,6 +253,7 @@ export class StudyStatsRetrieverService {
         ) {
           facilityCanonical {
             facilityCanonicalId,
+            googlePlaceId,
             name,
             locality,
             administrativeAreaLevel1,

@@ -303,6 +303,37 @@
                       style="cursor: pointer"
                     ></tr>
 
+                    <!-- Actions column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef>
+
+                      </th>
+                      <td
+                        mat-cell
+                        *matCellDef="let entry"
+                        (click)="$event.stopPropagation()"
+                      >
+                        <button
+                          mat-raised-button
+                          type="button"
+                          class="
+                            btn
+                            btn-rose
+                            btn-round
+                            btn-just-icon
+                            btn-link
+                            mat-raised-button
+                            btn-fab
+                          "
+                          (click)="onNavigateGoogleMaps(entry.facilityCanonical)"
+                          matTooltip="Open on Google Maps"
+                          [matTooltipPosition]="'left'"
+                        >
+                          <i class="material-icons">public</i>
+                        </button>
+                      </td>
+                    </ng-container>
+
                     <!-- Facility name column -->
                     <ng-container matColumnDef="name">
                       <th mat-header-cell
