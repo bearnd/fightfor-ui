@@ -553,6 +553,25 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
+   * Navigate to the `FacilitiesListComponent` passing the search UUID to be
+   * used in filtering facilities.
+   * @param searchUuid The search UUID for which to display studies.
+   */
+  onNavigateToFacilitiesList(searchUuid: string) {
+
+    const result = this.router.navigate(
+      [
+        '/app',
+        'searches',
+        searchUuid,
+        'institutions',
+      ],
+    );
+    result.then();
+  }
+
+
+  /**
    * Configures and initializes the studies locations map based on the results
    * of the studies-by-country aggregation.
    * @param studiesByCountry The results of the studies-by-country aggregation.
