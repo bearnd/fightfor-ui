@@ -72,6 +72,7 @@ enum Mode {
 @Component({
   selector: 'app-studies-list',
   templateUrl: './studies-list.component.html',
+  styleUrls: ['./studies-list.component.scss'],
 })
 export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 

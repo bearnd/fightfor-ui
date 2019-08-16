@@ -40,7 +40,8 @@ interface UniqueDescriptor {
 
 @Component({
   selector: 'app-facilities-list',
-  templateUrl: './facilities-list.component.html'
+  templateUrl: './facilities-list.component.html',
+  styleUrls: ['./facilities-list.component.scss'],
 })
 export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
