@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import gql from 'graphql-tag';
 
 import {
+  FacilityCanonicalInterface,
   MeshTermType,
   OrderType,
   StudyInterface
@@ -178,6 +179,16 @@ interface VariablesGetEligibilityAgeRange {
 interface ResponseGetEligibilityAgeRange {
   studiesStats: {
     getAgeRange: AgeRange;
+  };
+}
+
+interface VariablesGetUniqueCanonicalFacilities {
+  studyIds: number[];
+}
+
+interface ResponseGetUniqueCanonicalFacilities {
+  studiesStats: {
+    getUniqueCanonicalFacilities: FacilityCanonicalInterface[];
   };
 }
 
@@ -439,6 +450,24 @@ export class StudyStatsRetrieverService {
         ) {
             descriptorId,
             name
+        }
+      }
+    }
+  `;
+
+  queryGetUniqueCanonicalFacilities = gql`
+    query getUniqueCanonicalFacilities(
+      $studyIds: [Int]!,
+    ) {
+      studiesStats {
+        getUniqueCanonicalFacilities(
+          studyIds: $studyIds,
+        ) {
+          facilityCanonicalId,
+          name,
+          locality,
+          administrativeAreaLevel1,
+          country,
         }
       }
     }
@@ -969,4 +998,30 @@ export class StudyStatsRetrieverService {
       });
   }
 
+  /**
+   * Retrieve the unique canonical facilities for given studies.
+   * @param studies The studies for which the unique canonical facilities will
+   * be retrieved.
+   */
+  getUniqueCanonicalFacilities(
+    studies: StudyInterface[],
+  ): Observable<FacilityCanonicalInterface[]> {
+
+    // Retrieve the IDs out of the provided studies.
+    const studyIds: number[] = studies.map(
+      function (d) {
+        return d.studyId;
+      }
+    );
+
+    return this.apollo
+      .query<ResponseGetUniqueCanonicalFacilities,
+        VariablesGetUniqueCanonicalFacilities>
+      ({
+        query: this.queryGetUniqueCanonicalFacilities,
+        variables: {studyIds: studyIds},
+      }).map((response) => {
+        return response.data.studiesStats.getUniqueCanonicalFacilities;
+      });
+  }
 }
