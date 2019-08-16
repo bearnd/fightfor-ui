@@ -36,6 +36,7 @@ import {
 } from '../../services/study-retriever.service';
 import {
   castEnumToArray,
+  orderObjectArray,
   orderStringArray,
 } from '../../shared/utils';
 import {
@@ -68,6 +69,12 @@ enum Mode {
   SAVED = 'Saved',
 }
 
+interface UniqueFacility {
+  id: number;
+  name: string;
+  facility: FacilityCanonicalInterface;
+}
+
 
 @Component({
   selector: 'app-studies-list',
@@ -85,6 +92,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('selectStudyCountry') selectStudyCountry: MatSelect;
   @ViewChild('selectStudyState') selectStudyState: MatSelect;
   @ViewChild('selectStudyCity') selectStudyCity: MatSelect;
+  @ViewChild('selectStudyFacility') selectStudyFacility: MatSelect;
 
   // `FormGroup` to encompass the filter form controls.
   formFilters: FormGroup;
@@ -111,6 +119,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public distancesMaxKmAll: number[] = [
     10, 25, 50, 100, 500, 1000, 5000, 1000000
   ];
+  // Possible facility  values (to be populated in `ngOnInit`).
+  private studyFacilities: FacilityCanonicalInterface[] = [];
 
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
@@ -130,6 +140,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Replay-subject storing the latest filtered study-cities.
   public studyCitiesFiltered: ReplaySubject<StudyLocationInterface[]> =
     new ReplaySubject<StudyLocationInterface[]>(1);
+  // Replay-subject storing the latest filtered study-facilities.
+  public studyFacilitiesFiltered: ReplaySubject<FacilityCanonicalInterface[]> =
+    new ReplaySubject<FacilityCanonicalInterface[]>(1);
 
   // Subject that emits when the component has been destroyed.
   private _onDestroy = new Subject<void>();
@@ -253,6 +266,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       currentLocation: new FormControl(null),
       // Select for the maximum distance from the current location.
       selectDistanceMax: new FormControl(null),
+      // Multi-select for study-facility.
+      selectStudyFacility: new FormControl(null),
+      // Filter for study-facility.
+      filterStudyFacility: new FormControl(null),
     });
 
     if (this.mode === Mode.SAVED) {
@@ -364,6 +381,38 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    // Retrieve the unique facilities for this search's studies.
+    this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
+      this.studies,
+    ).map(
+      // Sort returned cities alphabetically.
+      (uniqueFacilities: FacilityCanonicalInterface[]) => {
+        return orderObjectArray(
+          uniqueFacilities,
+          'facilityCanonicalId',
+        );
+      }
+    ).map(
+      // Cast returned facilities to an array of objects with `id`, `name` and
+      // `facility` properties that can be used in a multi-select component.
+      (uniqueFacilities: FacilityCanonicalInterface[]) => {
+        const _uniqueFacilities: UniqueFacility[] = [];
+        for (const facility of uniqueFacilities) {
+          _uniqueFacilities.push({
+            id: facility.facilityCanonicalId,
+            name: facility.name,
+            facility: facility,
+          });
+        }
+        return _uniqueFacilities;
+      }
+    ).subscribe(
+      (uniqueFacilities: FacilityCanonicalInterface[]) => {
+        this.studyFacilities = uniqueFacilities;
+        this.studyFacilitiesFiltered.next(uniqueFacilities);
+      }
+    );
+
     this.formFilters
       .get('filterOverallStatus')
       .valueChanges
@@ -410,6 +459,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
         this.filterStudyCities();
+      });
+
+    this.formFilters
+      .get('filterStudyFacility')
+      .valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterStudyFacilities();
       });
 
     // Subscribe to the `valueChanges` observable of the location input control
@@ -547,6 +604,17 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(take(1), takeUntil(this._onDestroy))
       .subscribe(() => {
         this.selectStudyCity.compareWith = (a, b) => {
+          if (a && b) {
+            return a.id === b.id;
+          }
+          return false;
+        };
+      });
+
+    this.studyFacilitiesFiltered
+      .pipe(take(1), takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.selectStudyFacility.compareWith = (a, b) => {
           if (a && b) {
             return a.id === b.id;
           }
@@ -705,11 +773,38 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  private filterStudyFacilities() {
+    if (!this.studyFacilities) {
+      return;
+    }
+    // Retrieve the search query.
+    let query = this.formFilters.get('filterStudyFacility').value;
+
+    // If no query was provided emit all possible study-facility values.
+    // Otherwise lowercase the query in preparation for filtering.
+    if (!query) {
+      this.studyFacilitiesFiltered.next(this.studyFacilities.slice());
+      return;
+    } else {
+      query = query.toLowerCase();
+    }
+
+    // Filter the possible study-facilities values based on the search query
+    // and emit the results.
+    this.studyFacilitiesFiltered.next(
+      this.studyFacilities.filter(
+        city => city.name.toLowerCase().indexOf(query) > -1
+      )
+    );
+  }
+
+
   getStudiesPage() {
 
     let countries: string[] = [];
     let states: string[] = [];
     let cities: string[] = [];
+    let facilityCanonicalIds: number[] = [];
     let overallStatuses: string[] = [];
     let phases: string[] = [];
     let studyTypes: string[] = [];
@@ -733,6 +828,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.formFilters.get('selectStudyCity').value) {
       cities = this.formFilters.get('selectStudyCity')
         .value.map((entry) => entry.name);
+    }
+
+    // Retrieve the IDs of the selected facilities (if any).
+    if (this.formFilters.get('selectStudyFacility').value) {
+      facilityCanonicalIds = this.formFilters.get('selectStudyFacility')
+        .value.map((entry) => entry.id);
     }
 
     // Retrieve the selected overall-statuses (if any).
@@ -773,6 +874,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       countries || null,
       states || null,
       cities || null,
+      facilityCanonicalIds || null,
       currentLocationLongitude || null,
       currentLocationLatitude || null,
       distanceMaxKm || null,
@@ -796,6 +898,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       countries || null,
       states || null,
       cities || null,
+      facilityCanonicalIds || null,
       currentLocationLongitude || null,
       currentLocationLatitude || null,
       distanceMaxKm || null,
