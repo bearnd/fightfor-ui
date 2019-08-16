@@ -846,7 +846,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
 
     // Retrieve the referenced search UUID.
     const searchUuid: string
-      = this.route.parent.parent.snapshot.params['searchUuid'];
+      = this.route.parent.snapshot.params['searchUuid'];
 
     const result = this.router.navigate(
       [
