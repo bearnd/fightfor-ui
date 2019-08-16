@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent, MatPaginator, MatSelect, MatSort, MatTable, } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -853,9 +853,10 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         '/app',
         'searches',
         searchUuid,
-        'institution',
-        facility.facilityCanonicalId,
+        'trials',
+        'all',
       ],
+      {state: {facilityCanonical: facility}}
     );
     result.then();
   }
