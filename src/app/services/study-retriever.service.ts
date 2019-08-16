@@ -31,6 +31,7 @@ interface VariablesFilterStudies {
   countries?: string[];
   states?: string[];
   cities?: string[];
+  facilityCanonicalIds?: number[];
   currentLocationLongitude?: number;
   currentLocationLatitude?: number;
   distanceMaxKm?: number;
@@ -53,6 +54,7 @@ interface VariablesCountStudies {
   countries?: string[];
   states?: string[];
   cities?: string[];
+  facilityCanonicalIds?: number[];
   currentLocationLongitude?: number;
   currentLocationLatitude?: number;
   distanceMaxKm?: number;
@@ -255,6 +257,7 @@ export class StudyRetrieverService {
       $countries: [String],
       $states: [String],
       $cities: [String],
+      $facilityCanonicalIds: [Int],
       $currentLocationLongitude: Float,
       $currentLocationLatitude: Float,
       $distanceMaxKm: Int,
@@ -277,6 +280,7 @@ export class StudyRetrieverService {
           countries: $countries,
           states: $states,
           cities: $cities,
+          facilityCanonicalIds: $facilityCanonicalIds
           currentLocationLongitude: $currentLocationLongitude,
           currentLocationLatitude: $currentLocationLatitude,
           distanceMaxKm: $distanceMaxKm,
@@ -320,6 +324,7 @@ export class StudyRetrieverService {
       $countries: [String],
       $states: [String],
       $cities: [String],
+      $facilityCanonicalIds: [Int],
       $currentLocationLongitude: Float,
       $currentLocationLatitude: Float,
       $distanceMaxKm: Int,
@@ -338,6 +343,7 @@ export class StudyRetrieverService {
           countries: $countries,
           states: $states,
           cities: $cities,
+          facilityCanonicalIds: $facilityCanonicalIds
           currentLocationLongitude: $currentLocationLongitude,
           currentLocationLatitude: $currentLocationLatitude,
           distanceMaxKm: $distanceMaxKm,
@@ -437,6 +443,7 @@ export class StudyRetrieverService {
    * @param countries Array of country names to filter on.
    * @param states Array of state/region names to filter on.
    * @param cities Array of city names to filter on.
+   * @param facilityCanonicalIds Array of canonical facility IDs to filter on.
    * @param currentLocationLongitude The longitude of the current position from
    * which only studies on facilities within a `distanceMaxKm` will be allowed.
    * @param currentLocationLatitude The latitude of the current position from
@@ -466,6 +473,7 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
+    facilityCanonicalIds?: number[],
     currentLocationLongitude?: number,
     currentLocationLatitude?: number,
     distanceMaxKm?: number,
@@ -500,6 +508,7 @@ export class StudyRetrieverService {
           countries: countries,
           states: states,
           cities: cities,
+          facilityCanonicalIds: facilityCanonicalIds,
           currentLocationLongitude: currentLocationLongitude,
           currentLocationLatitude: currentLocationLatitude,
           distanceMaxKm: distanceMaxKm,
@@ -531,6 +540,7 @@ export class StudyRetrieverService {
    * @param countries Array of country names to filter on.
    * @param states Array of state/region names to filter on.
    * @param cities Array of city names to filter on.
+   * @param facilityCanonicalIds Array of canonical facility IDs to filter on.
    * @param currentLocationLongitude The longitude of the current position from
    * which only studies on facilities within a `distanceMaxKm` will be allowed.
    * @param currentLocationLatitude The latitude of the current position from
@@ -555,6 +565,7 @@ export class StudyRetrieverService {
     countries?: string[],
     states?: string[],
     cities?: string[],
+    facilityCanonicalIds?: number[],
     currentLocationLongitude?: number,
     currentLocationLatitude?: number,
     distanceMaxKm?: number,
@@ -585,6 +596,7 @@ export class StudyRetrieverService {
           countries: countries,
           states: states,
           cities: cities,
+          facilityCanonicalIds: facilityCanonicalIds,
           currentLocationLongitude: currentLocationLongitude,
           currentLocationLatitude: currentLocationLatitude,
           distanceMaxKm: distanceMaxKm,
