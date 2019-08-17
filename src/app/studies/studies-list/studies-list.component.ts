@@ -69,6 +69,11 @@ enum Mode {
   SAVED = 'Saved',
 }
 
+interface UniqueGeo {
+  id: number;
+  name: string;
+}
+
 interface UniqueFacility {
   id: number;
   name: string;
@@ -120,7 +125,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     10, 25, 50, 100, 500, 1000, 5000, 1000000
   ];
   // Possible facility  values (to be populated in `ngOnInit`).
-  private studyFacilities: FacilityCanonicalInterface[] = [];
+  private studyFacilities: UniqueFacility[] = [];
 
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
@@ -141,8 +146,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public studyCitiesFiltered: ReplaySubject<StudyLocationInterface[]> =
     new ReplaySubject<StudyLocationInterface[]>(1);
   // Replay-subject storing the latest filtered study-facilities.
-  public studyFacilitiesFiltered: ReplaySubject<FacilityCanonicalInterface[]> =
-    new ReplaySubject<FacilityCanonicalInterface[]>(1);
+  public studyFacilitiesFiltered: ReplaySubject<UniqueFacility[]> =
+    new ReplaySubject<UniqueFacility[]>(1);
 
   // Subject that emits when the component has been destroyed.
   private _onDestroy = new Subject<void>();
@@ -284,6 +289,24 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
+    // If, prior to navigating to this component, an initial facility value was
+    // defined then set it as the only possible facility option in the form
+    // controls and disable the controls.
+    if (history.state.facilityCanonical) {
+      // Create a singleton array containing only the predefined facility.
+      this.studyFacilities = [{
+        id: history.state.facilityCanonical.facilityCanonicalId,
+        name: history.state.facilityCanonical.name,
+        facility: history.state.facilityCanonical,
+      }];
+      this.studyFacilitiesFiltered.next(this.studyFacilities);
+      // Set the single facility as the current value.
+      this.formFilters.get('selectStudyFacility').setValue(this.studyFacilities);
+      // Disable the facility filter controls.
+      this.formFilters.get('selectStudyFacility').disable();
+      this.formFilters.get('filterStudyFacility').disable();
+    }
+
     // Retrieve the initial set of studies.
     this.getStudiesPage();
 
@@ -307,7 +330,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueCountries: string[]) => {
         let counter = 1;
-        const uniqueCountriesMap: {id: number, name: string}[] = [];
+        const uniqueCountriesMap: UniqueGeo[] = [];
         for (const country of uniqueCountries) {
           if (!country) {
             continue;
@@ -318,7 +341,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueCountriesMap;
       }
     ).subscribe(
-      (uniqueCountriesMap: {id: number, name: string}[]) => {
+      (uniqueCountriesMap: UniqueGeo[]) => {
         this.studyCountries = uniqueCountriesMap;
         this.studyCountriesFiltered.next(uniqueCountriesMap);
       }
@@ -337,7 +360,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueStates: string[]) => {
         let counter = 1;
-        const uniqueStatesMap: {id: number, name: string}[] = [];
+        const uniqueStatesMap: UniqueGeo[] = [];
         for (const state of uniqueStates) {
           if (!state) {
             continue;
@@ -348,7 +371,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueStatesMap;
       }
     ).subscribe(
-      (uniqueStatesMap: {id: number, name: string}[]) => {
+      (uniqueStatesMap: UniqueGeo[]) => {
         this.studyStates = uniqueStatesMap;
         this.studyStatesFiltered.next(uniqueStatesMap);
       }
@@ -367,7 +390,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueCities: string[]) => {
         let counter = 1;
-        const uniqueCitiesMap: {id: number, name: string}[] = [];
+        const uniqueCitiesMap: UniqueGeo[] = [];
         for (const city of uniqueCities) {
           uniqueCitiesMap.push({id: counter, name: city});
           counter++;
@@ -375,43 +398,46 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueCitiesMap;
       }
     ).subscribe(
-      (uniqueCitiesMap: {id: number, name: string}[]) => {
+      (uniqueCitiesMap: UniqueGeo[]) => {
         this.studyCities = uniqueCitiesMap;
         this.studyCitiesFiltered.next(uniqueCitiesMap);
       }
     );
 
-    // Retrieve the unique facilities for this search's studies.
-    this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
-      this.studies,
-    ).map(
-      // Sort returned cities alphabetically.
-      (uniqueFacilities: FacilityCanonicalInterface[]) => {
-        return orderObjectArray(
-          uniqueFacilities,
-          'facilityCanonicalId',
-        );
-      }
-    ).map(
-      // Cast returned facilities to an array of objects with `id`, `name` and
-      // `facility` properties that can be used in a multi-select component.
-      (uniqueFacilities: FacilityCanonicalInterface[]) => {
-        const _uniqueFacilities: UniqueFacility[] = [];
-        for (const facility of uniqueFacilities) {
-          _uniqueFacilities.push({
-            id: facility.facilityCanonicalId,
-            name: facility.name,
-            facility: facility,
-          });
+    // Retrieve the unique facilities for this search's studies. If an initial
+    // facility was defined then skip this step.
+    if (!history.state.facilityCanonical) {
+      this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
+        this.studies,
+      ).map(
+        // Sort returned cities alphabetically.
+        (uniqueFacilities: FacilityCanonicalInterface[]) => {
+          return orderObjectArray(
+            uniqueFacilities,
+            'facilityCanonicalId',
+          );
         }
-        return _uniqueFacilities;
-      }
-    ).subscribe(
-      (uniqueFacilities: FacilityCanonicalInterface[]) => {
-        this.studyFacilities = uniqueFacilities;
-        this.studyFacilitiesFiltered.next(uniqueFacilities);
-      }
-    );
+      ).map(
+        // Cast returned facilities to an array of objects with `id`, `name` and
+        // `facility` properties that can be used in a multi-select component.
+        (uniqueFacilities: FacilityCanonicalInterface[]) => {
+          const _uniqueFacilities: UniqueFacility[] = [];
+          for (const facility of uniqueFacilities) {
+            _uniqueFacilities.push({
+              id: facility.facilityCanonicalId,
+              name: facility.name,
+              facility: facility,
+            });
+          }
+          return _uniqueFacilities;
+        }
+      ).subscribe(
+        (uniqueFacilities: UniqueFacility[]) => {
+          this.studyFacilities = uniqueFacilities;
+          this.studyFacilitiesFiltered.next(uniqueFacilities);
+        }
+      );
+    }
 
     this.formFilters
       .get('filterOverallStatus')
@@ -476,20 +502,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(debounceTime(400))
       .subscribe(
-      (query) => {
-        // If the incoming value is of type `string` then perform a synonym
-        // search through the `GeolocationService` and update the `locationsAll`
-        // subject with the results.
-        if (typeof query === 'string') {
-          this.geolocationService.geocodeForward(query)
-            .subscribe(
-              (response: MapBoxGeocodeResponse) => {
-                this.locationsAll.next(response.features);
-              }
-            );
+        (query) => {
+          // If the incoming value is of type `string` then perform a synonym
+          // search through the `GeolocationService` and update the `locationsAll`
+          // subject with the results.
+          if (typeof query === 'string') {
+            this.geolocationService.geocodeForward(query)
+              .subscribe(
+                (response: MapBoxGeocodeResponse) => {
+                  this.locationsAll.next(response.features);
+                }
+              );
+          }
         }
-      }
-    );
+      );
   }
 
   ngAfterViewInit() {
@@ -1060,8 +1086,27 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Reset the paginator.
     this.paginator.pageIndex = 0;
 
-    // Reset the form to its initial values.
-    this.formFilters.reset();
+    // Reset the form to its initial values. If an initial facility value was
+    // defined then don't reset the two related form-controls. Otherwise reset
+    // the entire form.
+    if (history.state.facilityCanonical) {
+      this.formFilters.get('selectOverallStatus').reset();
+      this.formFilters.get('filterOverallStatus').reset();
+      this.formFilters.get('selectPhase').reset();
+      this.formFilters.get('filterPhase').reset();
+      this.formFilters.get('selectStudyType').reset();
+      this.formFilters.get('filterStudyType').reset();
+      this.formFilters.get('selectStudyCountry').reset();
+      this.formFilters.get('filterStudyCountry').reset();
+      this.formFilters.get('selectStudyState').reset();
+      this.formFilters.get('filterStudyState').reset();
+      this.formFilters.get('selectStudyCity').reset();
+      this.formFilters.get('filterStudyCity').reset();
+      this.formFilters.get('currentLocation').reset();
+      this.formFilters.get('selectDistanceMax').reset();
+    } else {
+      this.formFilters.reset();
+    }
 
     // Refresh the studies to reflect the reset filters.
     this.getStudiesPage();

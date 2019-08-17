@@ -307,7 +307,7 @@
                     <tr
                       mat-row
                       *matRowDef="let row; columns: displayedColumns;"
-                      (click)="onNavigateToFacility(row)"
+                      (click)="onNavigateToFacility(row.facilityCanonical)"
                       style="cursor: pointer"
                     ></tr>
 

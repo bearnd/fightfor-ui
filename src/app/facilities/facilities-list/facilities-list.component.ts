@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatAutocompleteSelectedEvent, MatPaginator, MatSelect, MatSort, MatTable, } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -839,23 +839,25 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   /**
-   * Navigates to the details of a given facility.
-   * @param facility The facility to which to navigate.
+   * Navigates to the `StudiesListComponent` with a predefined facility so that
+   * only studies for the given facility are shown.
+   * @param facility The facility for which to navigate.
    */
   onNavigateToFacility(facility: FacilityCanonicalInterface) {
 
     // Retrieve the referenced search UUID.
     const searchUuid: string
-      = this.route.parent.parent.snapshot.params['searchUuid'];
+      = this.route.parent.snapshot.params['searchUuid'];
 
     const result = this.router.navigate(
       [
         '/app',
         'searches',
         searchUuid,
-        'institution',
-        facility.facilityCanonicalId,
+        'trials',
+        'all',
       ],
+      {state: {facilityCanonical: facility}}
     );
     result.then();
   }
