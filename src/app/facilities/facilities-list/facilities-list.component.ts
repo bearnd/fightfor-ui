@@ -1,6 +1,18 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatAutocompleteSelectedEvent, MatPaginator, MatSelect, MatSort, MatTable, } from '@angular/material';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  MatAutocompleteSelectedEvent,
+  MatPaginator,
+  MatSelect,
+  MatSort,
+  MatTable
+} from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
@@ -8,17 +20,35 @@ import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
-import { GeolocationService, MapBoxFeature, MapBoxGeocodeResponse } from '../../services/geolocation.service';
+import {
+  GeolocationService,
+  MapBoxFeature,
+  MapBoxGeocodeResponse
+} from '../../services/geolocation.service';
 import { FacilitiesDatasource } from './facilities.datasource';
-import { FacilityCanonicalInterface, MeshTermType, OrderType, StudyInterface, StudyOverallStatus } from '../../interfaces/study.interface';
+import {
+  FacilityCanonicalInterface,
+  MeshTermType,
+  OrderType,
+  StudyInterface,
+  StudyOverallStatus
+} from '../../interfaces/study.interface';
 import { AuthService } from '../../services/auth.service';
 import { UserConfigService } from '../../services/user-config.service';
 import { StudyRetrieverService } from '../../services/study-retriever.service';
-import { StudyStatsRetrieverService } from '../../services/study-stats-retriever.service';
-import { SearchInterface, StudiesCountByCountryInterface, StudiesCountByFacilityInterface } from '../../interfaces/user-config.interface';
+import {
+  StudyStatsRetrieverService
+} from '../../services/study-stats-retriever.service';
+import {
+  SearchInterface,
+  StudiesCountByFacilityInterface
+} from '../../interfaces/user-config.interface';
 import { overallStatusGroups } from '../../shared/common.interface';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
-import { orderObjectArray, orderStringArray } from '../../shared/utils';
+import {
+  orderObjectArray,
+  orderStringArray
+} from '../../shared/utils';
 
 
 interface EnumInterface {
