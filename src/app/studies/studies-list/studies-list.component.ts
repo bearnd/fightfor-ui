@@ -309,6 +309,20 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.formFilters.get('filterStudyFacility').disable();
     }
 
+    // If, prior to navigating to this component, an initial country value was
+    // defined then set it as the only possible country option in the form
+    // controls and disable the controls.
+    if (history.state.country) {
+      // Create a singleton array containing only the predefined country.
+      this.studyCountries = [{id: 0, name: history.state.country}];
+      this.studyCountriesFiltered.next(this.studyCountries);
+      // Set the single country as the current value.
+      this.formFilters.get('selectStudyCountry').setValue(this.studyCountries);
+      // Disable the country filter controls.
+      this.formFilters.get('selectStudyCountry').disable();
+      this.formFilters.get('filterStudyCountry').disable();
+    }
+
     // Retrieve the initial set of studies.
     this.getStudiesPage();
 
@@ -319,35 +333,38 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Set the initial list of study-types.
     this.studyTypesFiltered.next(this.studyTypes.slice());
 
-    // Retrieve the unique countries for this search's studies.
-    this.studyStatsRetrieverService.getUniqueCountries(
-      this.studies,
-    ).map(
-      // Sort returned countries alphabetically.
-      (uniqueCountries: string[]) => {
-        return orderStringArray(uniqueCountries);
-      }
-    ).map(
-      // Cast returned countries to an array of objects with `id` and `name`
-      // properties that can be used in a multi-select component.
-      (uniqueCountries: string[]) => {
-        let counter = 1;
-        const uniqueCountriesMap: UniqueGeo[] = [];
-        for (const country of uniqueCountries) {
-          if (!country) {
-            continue;
-          }
-          uniqueCountriesMap.push({id: counter, name: country});
-          counter++;
+    // Retrieve the unique countries for this search's studies. If an initial
+    // country was defined then skip this step.
+    if (!history.state.country) {
+      this.studyStatsRetrieverService.getUniqueCountries(
+        this.studies,
+      ).map(
+        // Sort returned countries alphabetically.
+        (uniqueCountries: string[]) => {
+          return orderStringArray(uniqueCountries);
         }
-        return uniqueCountriesMap;
-      }
-    ).subscribe(
-      (uniqueCountriesMap: UniqueGeo[]) => {
-        this.studyCountries = uniqueCountriesMap;
-        this.studyCountriesFiltered.next(uniqueCountriesMap);
-      }
-    );
+      ).map(
+        // Cast returned countries to an array of objects with `id` and `name`
+        // properties that can be used in a multi-select component.
+        (uniqueCountries: string[]) => {
+          let counter = 1;
+          const uniqueCountriesMap: UniqueGeo[] = [];
+          for (const country of uniqueCountries) {
+            if (!country) {
+              continue;
+            }
+            uniqueCountriesMap.push({id: counter, name: country});
+            counter++;
+          }
+          return uniqueCountriesMap;
+        }
+      ).subscribe(
+        (uniqueCountriesMap: UniqueGeo[]) => {
+          this.studyCountries = uniqueCountriesMap;
+          this.studyCountriesFiltered.next(uniqueCountriesMap);
+        }
+      );
+    }
 
     // Retrieve the unique states/regions for this search's studies.
     this.studyStatsRetrieverService.getUniqueStates(
@@ -915,26 +932,30 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Reset the paginator.
     this.paginator.pageIndex = 0;
 
-    // Reset the form to its initial values. If an initial facility value was
-    // defined then don't reset the two related form-controls. Otherwise reset
-    // the entire form.
-    if (history.state.facilityCanonical) {
-      this.formFilters.get('selectOverallStatus').reset();
-      this.formFilters.get('filterOverallStatus').reset();
-      this.formFilters.get('selectPhase').reset();
-      this.formFilters.get('filterPhase').reset();
-      this.formFilters.get('selectStudyType').reset();
-      this.formFilters.get('filterStudyType').reset();
+    // Reset the form to its initial values. If an initial facility or country
+    // value was defined then don't reset the two related form-controls.
+
+    this.formFilters.get('selectOverallStatus').reset();
+    this.formFilters.get('filterOverallStatus').reset();
+    this.formFilters.get('selectPhase').reset();
+    this.formFilters.get('filterPhase').reset();
+    this.formFilters.get('selectStudyType').reset();
+    this.formFilters.get('filterStudyType').reset();
+    this.formFilters.get('selectStudyState').reset();
+    this.formFilters.get('filterStudyState').reset();
+    this.formFilters.get('selectStudyCity').reset();
+    this.formFilters.get('filterStudyCity').reset();
+    this.formFilters.get('currentLocation').reset();
+    this.formFilters.get('selectDistanceMax').reset();
+
+    if (!history.state.facilityCanonical) {
+      this.formFilters.get('selectStudyFacility').reset();
+      this.formFilters.get('filterStudyFacility').reset();
+    }
+
+    if (!history.state.country) {
       this.formFilters.get('selectStudyCountry').reset();
       this.formFilters.get('filterStudyCountry').reset();
-      this.formFilters.get('selectStudyState').reset();
-      this.formFilters.get('filterStudyState').reset();
-      this.formFilters.get('selectStudyCity').reset();
-      this.formFilters.get('filterStudyCity').reset();
-      this.formFilters.get('currentLocation').reset();
-      this.formFilters.get('selectDistanceMax').reset();
-    } else {
-      this.formFilters.reset();
     }
 
     // Refresh the studies to reflect the reset filters.
