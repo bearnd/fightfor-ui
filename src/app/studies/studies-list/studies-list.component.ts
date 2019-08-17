@@ -179,6 +179,8 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public studies: StudyInterface[];
   private subscriptionIsUpdatingUserStudies: Subscription = null;
 
+  public overallStatusGroup = 'all';
+
   constructor(
     private authService: AuthService,
     private userConfigService: UserConfigService,
@@ -222,15 +224,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the referenced overall-status and fallback to `all` if
     // undefined.
-    let overallStatusGroup = this.route.snapshot.params['overallStatus'];
-    if (!overallStatusGroup) {
-      overallStatusGroup = 'all';
+    if (this.route.snapshot.params['overallStatus']) {
+      this.overallStatusGroup = this.route.snapshot.params['overallStatus'];
     }
 
     // Convert the referenced overall-status enum members and convert them to
     // an array of `{id: key, name: value}` objects which can be used in the
     // filter element.
-    this.overallStatuses = overallStatusGroups[overallStatusGroup]
+    this.overallStatuses = overallStatusGroups[this.overallStatusGroup]
       .map(
         (member) => {
           return {
