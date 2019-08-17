@@ -36,6 +36,7 @@ import {
 } from '../../services/study-retriever.service';
 import {
   castEnumToArray,
+  flattenFacilityCanonical,
   orderObjectArray,
   orderStringArray,
 } from '../../shared/utils';
@@ -1015,38 +1016,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
-   * Flattens the contents of a `FacilityCanonicalInterface` object into a
-   * `locality, administrativeAreaLevel1, country` string allowing for one or
-   * mode of these components to be missing.
-   * @param facility The canonical facility object to be flattened.
-   * @returns The flattened facility representation or null.
-   */
-  flattenFacilityCanonical(
-    facility: FacilityCanonicalInterface,
-  ): string | null {
-
-    // Return `null` if the facility is not defined.
-    if (!facility) {
-      return null;
-    }
-
-    // Collect the facility components in an array.
-    let components: string[] = [
-      facility.locality,
-      facility.administrativeAreaLevel1,
-      facility.country,
-    ];
-
-    // Filter out components that are undefined, null, or empty strings.
-    components = components.filter((x) => {
-      return typeof x !== 'undefined' && x;
-    });
-
-    // Return the array above joined by commas.
-    return components.join(', ');
-  }
-
-  /**
    * Creates a single location string out of the facilities of a
    * `StudyInterface` object. Should the study only have a single facility this
    * method returns its string representation based on the
@@ -1061,9 +1030,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   ): string | null {
 
     if (study.facilitiesCanonical.length === 1) {
-      return this.flattenFacilityCanonical(study.facilitiesCanonical[0]);
+      return flattenFacilityCanonical(study.facilitiesCanonical[0]);
     } else if (study.facilitiesCanonical.length > 1) {
-      const flattened = this.flattenFacilityCanonical(
+      const flattened = flattenFacilityCanonical(
         study.facilitiesCanonical[0]
       );
       return flattened +

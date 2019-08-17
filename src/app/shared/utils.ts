@@ -1,5 +1,6 @@
 import * as momentParser from 'moment-parser';
 import * as moment from 'moment';
+import { FacilityCanonicalInterface } from '../interfaces/study.interface';
 
 /**
  * Casts an enumeration into an array of objects with and `id` property holding
@@ -122,3 +123,35 @@ export function intervalToSec(interval: string): number | null {
   }
 
 }
+
+/**
+ * Flattens the contents of a `FacilityCanonicalInterface` object into a
+ * `locality, administrativeAreaLevel1, country` string allowing for one or
+ * mode of these components to be missing.
+ * @param facility The canonical facility object to be flattened.
+ * @returns The flattened facility representation or null.
+ */
+export function flattenFacilityCanonical(
+  facility: FacilityCanonicalInterface,
+): string | null {
+  // Return `null` if the facility is not defined.
+  if (!facility) {
+    return null;
+  }
+
+  // Collect the facility components in an array.
+  let components: string[] = [
+    facility.locality,
+    facility.administrativeAreaLevel1,
+    facility.country,
+  ];
+
+  // Filter out components that are undefined, null, or empty strings.
+  components = components.filter((x) => {
+    return typeof x !== 'undefined' && x;
+  });
+
+  // Return the array above joined by commas.
+  return components.join(', ');
+}
+
