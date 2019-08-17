@@ -92,12 +92,14 @@
               <h5>MeSH Descriptors</h5>
               <mat-chip-list>
                 <mat-chip
+                  class="mesh-term-chip"
                   *ngFor="let descriptor of search.descriptors"
                   [selectable]="false"
                   [selected]="false"
                   [removable]="false"
                 >
                   {{ descriptor.name }}
+                  <i class="material-icons">remove_red_eye</i>
                 </mat-chip>
               </mat-chip-list>
             </div>
@@ -301,6 +303,8 @@
                       <mat-row
                         *matRowDef="let row;
                         columns: displayedColumnsStudiesLocations;"
+                        (click)="onNavigateToCountry(row.country)"
+                        style="cursor: pointer"
                       ></mat-row>
 
                       <!-- Rank Column -->

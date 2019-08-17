@@ -672,4 +672,27 @@ export class SearchResultsSummaryComponent implements OnInit {
   humanizeDate(date: Date): string {
     return moment.duration(moment().diff(date)).humanize();
   }
+
+  /**
+   * Navigates to the `StudiesListComponent` with a predefined country so that
+   * only studies for the given country are shown.
+   * @param country The facility for which to navigate.
+   */
+  onNavigateToCountry(country: string) {
+
+    // Retrieve the referenced search UUID.
+    const searchUuid: string = this.route.parent.snapshot.params['searchUuid'];
+
+    const result = this.router.navigate(
+      [
+        '/app',
+        'searches',
+        searchUuid,
+        'trials',
+        'all',
+      ],
+      {state: {country: country}}
+    );
+    result.then();
+  }
 }
