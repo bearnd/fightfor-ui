@@ -69,6 +69,11 @@ enum Mode {
   SAVED = 'Saved',
 }
 
+interface UniqueGeo {
+  id: number;
+  name: string;
+}
+
 interface UniqueFacility {
   id: number;
   name: string;
@@ -307,7 +312,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueCountries: string[]) => {
         let counter = 1;
-        const uniqueCountriesMap: {id: number, name: string}[] = [];
+        const uniqueCountriesMap: UniqueGeo[] = [];
         for (const country of uniqueCountries) {
           if (!country) {
             continue;
@@ -318,7 +323,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueCountriesMap;
       }
     ).subscribe(
-      (uniqueCountriesMap: {id: number, name: string}[]) => {
+      (uniqueCountriesMap: UniqueGeo[]) => {
         this.studyCountries = uniqueCountriesMap;
         this.studyCountriesFiltered.next(uniqueCountriesMap);
       }
@@ -337,7 +342,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueStates: string[]) => {
         let counter = 1;
-        const uniqueStatesMap: {id: number, name: string}[] = [];
+        const uniqueStatesMap: UniqueGeo[] = [];
         for (const state of uniqueStates) {
           if (!state) {
             continue;
@@ -348,7 +353,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueStatesMap;
       }
     ).subscribe(
-      (uniqueStatesMap: {id: number, name: string}[]) => {
+      (uniqueStatesMap: UniqueGeo[]) => {
         this.studyStates = uniqueStatesMap;
         this.studyStatesFiltered.next(uniqueStatesMap);
       }
@@ -367,7 +372,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // properties that can be used in a multi-select component.
       (uniqueCities: string[]) => {
         let counter = 1;
-        const uniqueCitiesMap: {id: number, name: string}[] = [];
+        const uniqueCitiesMap: UniqueGeo[] = [];
         for (const city of uniqueCities) {
           uniqueCitiesMap.push({id: counter, name: city});
           counter++;
@@ -375,7 +380,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         return uniqueCitiesMap;
       }
     ).subscribe(
-      (uniqueCitiesMap: {id: number, name: string}[]) => {
+      (uniqueCitiesMap: UniqueGeo[]) => {
         this.studyCities = uniqueCitiesMap;
         this.studyCitiesFiltered.next(uniqueCitiesMap);
       }

@@ -839,8 +839,9 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   /**
-   * Navigates to the details of a given facility.
-   * @param facility The facility to which to navigate.
+   * Navigates to the `StudiesListComponent` with a predefined facility so that
+   * only studies for the given facility are shown.
+   * @param facility The facility for which to navigate.
    */
   onNavigateToFacility(facility: FacilityCanonicalInterface) {
 
