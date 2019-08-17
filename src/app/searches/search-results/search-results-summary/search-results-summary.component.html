@@ -309,7 +309,7 @@
                           Rank
                         </mat-header-cell>
                         <mat-cell *matCellDef="let idx = index">
-                          {{ idx + 1 }}
+                          {{ idx + paginator.pageIndex * paginator.pageSize + 1 }}
                         </mat-cell>
                       </ng-container>
 
@@ -334,6 +334,13 @@
                       </ng-container>
                     </table>
                   </div>
+                  <mat-paginator
+                    #paginatorStudiesLocation
+                    [length]="search.studiesStats.byCountry?.length"
+                    [pageSize]="numStudiesLocationsDisplay"
+                    showFirstLastButtons="true"
+                    hidePageSize="true"
+                  ></mat-paginator>
 
                 </div>
 

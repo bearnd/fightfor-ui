@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 import { ScrollTrackerEventData } from '@nicky-lenaers/ngx-scroll-tracker';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -44,6 +44,7 @@ declare var $: any;
 export class SearchResultsSummaryComponent implements OnInit {
 
   @ViewChild('cardLocations') cardStudiesLocations: ElementRef;
+  @ViewChild('paginatorStudiesLocation') paginator: MatPaginator;
 
   public studiesLocationMapHeight: number;
   public studiesLocationMapWidth: number;
@@ -257,7 +258,7 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Trigger an update the study-statistics via the corresponding
           // methods.
           this.getCountStudiesByOverallStatus();
-          this.getCountStudiesByCountry(this.numStudiesLocationsDisplay);
+          this.getCountStudiesByCountry();
           this.getCountStudiesByFacility(this.numFacilitiesDisplay);
           this.getCountStudiesByDescriptor(
             this.numInterventionDescriptorsDisplay,
@@ -278,7 +279,7 @@ export class SearchResultsSummaryComponent implements OnInit {
    * This function assumes that the `searchStudies` function has been previously
    * run for the given search and that its `studies` property is populated.
    */
-  getCountStudiesByCountry(limit?: number) {
+  getCountStudiesByCountry() {
     // Indicate that `getCountStudiesByCountry` is ongoing for this search.
     this.loadingGetCountStudiesByCountry.next(true);
 
@@ -292,8 +293,9 @@ export class SearchResultsSummaryComponent implements OnInit {
           // Instantiate the data-source for the locations table.
           this.dataSourceStudiesLocations = new MatTableDataSource
             <StudiesCountByCountryInterface>(
-              this.search.studiesStats.byCountry.slice(0, limit)
+              this.search.studiesStats.byCountry
             );
+          this.dataSourceStudiesLocations.paginator = this.paginator;
 
           this.configureStudiesLocationsMap(response);
 
