@@ -46,6 +46,7 @@ import {
 import { overallStatusGroups } from '../../shared/common.interface';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
 import {
+  filterValues,
   orderObjectArray,
   orderStringArray
 } from '../../shared/utils';
@@ -424,7 +425,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterOverallStatuses();
+        filterValues(
+          this.overallStatuses,
+          this.formFilters.get('filterOverallStatus').value,
+          this.overallStatusesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -432,7 +438,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterInterventions();
+        filterValues(
+          this.interventions,
+          this.formFilters.get('filterIntervention').value,
+          this.interventionsFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -440,7 +451,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterConditions();
+        filterValues(
+          this.conditions,
+          this.formFilters.get('filterCondition').value,
+          this.conditionsFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -448,7 +464,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterFacilityCountries();
+        filterValues(
+          this.facilityCountries,
+          this.formFilters.get('filterFacilityCountry').value,
+          this.facilityCountriesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -456,7 +477,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterFacilityStates();
+        filterValues(
+          this.facilityStates,
+          this.formFilters.get('filterFacilityState').value,
+          this.facilityStatesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -464,7 +490,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterFacilityCities();
+        filterValues(
+          this.facilityCities,
+          this.formFilters.get('filterFacilityCity').value,
+          this.facilityCitiesFiltered,
+          'name'
+        );
       });
 
     // Subscribe to the `valueChanges` observable of the location input control
@@ -585,156 +616,6 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
           return false;
         };
       });
-  }
-
-  private filterOverallStatuses() {
-    if (!this.overallStatuses) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterOverallStatus').value;
-
-    // If no query was provided emit all possible overall-status values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.overallStatusesFiltered.next(this.overallStatuses.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible overall-status values based on the search query
-    // and emit the results.
-    this.overallStatusesFiltered.next(
-      this.overallStatuses.filter(
-        status => status.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterInterventions() {
-    if (!this.interventions) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterIntervention').value;
-
-    // If no query was provided emit all possible intervention values. Otherwise
-    // lowercase the query in preparation for filtering.
-    if (!query) {
-      this.interventionsFiltered.next(this.interventions.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible intervention values based on the search query and
-    // emit the results.
-    this.interventionsFiltered.next(
-      this.interventions.filter(
-        type => type.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterConditions() {
-    if (!this.conditions) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterCondition').value;
-
-    // If no query was provided emit all possible condition values. Otherwise
-    // lowercase the query in preparation for filtering.
-    if (!query) {
-      this.conditionsFiltered.next(this.conditions.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible condition values based on the search query and emit
-    // the results.
-    this.conditionsFiltered.next(
-      this.conditions.filter(
-        type => type.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterFacilityCountries() {
-    if (!this.facilityCountries) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterFacilityCountry').value;
-
-    // If no query was provided emit all possible facility-country values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.facilityCountriesFiltered.next(this.facilityCountries.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible facility-countries values based on the search query
-    // and emit the results.
-    this.facilityCountriesFiltered.next(
-      this.facilityCountries.filter(
-        country => country.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterFacilityStates() {
-    if (!this.facilityStates) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterFacilityState').value;
-
-    // If no query was provided emit all possible facility-state values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.facilityStatesFiltered.next(this.facilityStates.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible facility-states values based on the search query and
-    // emit the results.
-    this.facilityStatesFiltered.next(
-      this.facilityStates.filter(
-        state => state.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterFacilityCities() {
-    if (!this.facilityCities) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterFacilityCity').value;
-
-    // If no query was provided emit all possible facility-city values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.facilityCitiesFiltered.next(this.facilityCities.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible facility-cities values based on the search query and
-    // emit the results.
-    this.facilityCitiesFiltered.next(
-      this.facilityCities.filter(
-        city => city.name.toLowerCase().indexOf(query) > -1
-      )
-    );
   }
 
   getFacilitiesPage() {

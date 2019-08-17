@@ -1,6 +1,7 @@
 import * as momentParser from 'moment-parser';
 import * as moment from 'moment';
 import { FacilityCanonicalInterface } from '../interfaces/study.interface';
+import { ReplaySubject } from 'rxjs/Rx';
 
 /**
  * Casts an enumeration into an array of objects with and `id` property holding
@@ -155,3 +156,30 @@ export function flattenFacilityCanonical(
   return components.join(', ');
 }
 
+export function filterValues(
+  values: any[],
+  query: any,
+  subjectFiltered: ReplaySubject<any>,
+  propertyName: string,
+) {
+  if (!values) {
+    return;
+  }
+
+  // If no query was provided emit all possible study-country values.
+  // Otherwise lowercase the query in preparation for filtering.
+  if (!query) {
+    subjectFiltered.next(values.slice());
+    return;
+  } else {
+    query = query.toLowerCase();
+  }
+
+  // Filter the possible study-countries values based on the search query and
+  // emit the results.
+  subjectFiltered.next(
+    values.filter(
+      entry => entry[propertyName].toLowerCase().indexOf(query) > -1
+    )
+  );
+}

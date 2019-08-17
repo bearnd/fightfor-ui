@@ -36,6 +36,7 @@ import {
 } from '../../services/study-retriever.service';
 import {
   castEnumToArray,
+  filterValues,
   flattenFacilityCanonical,
   orderObjectArray,
   orderStringArray,
@@ -445,7 +446,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterOverallStatuses();
+        filterValues(
+          this.overallStatuses,
+          this.formFilters.get('filterOverallStatus').value,
+          this.overallStatusesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -453,7 +459,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterPhases();
+        filterValues(
+          this.phases,
+          this.formFilters.get('filterPhase').value,
+          this.phasesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -461,7 +472,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterStudyTypes();
+        filterValues(
+          this.studyTypes,
+          this.formFilters.get('filterStudyType').value,
+          this.studyTypesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -469,7 +485,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterStudyCountries();
+        filterValues(
+          this.studyCountries,
+          this.formFilters.get('filterStudyCountry').value,
+          this.studyCountriesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -477,7 +498,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterStudyStates();
+        filterValues(
+          this.studyStates,
+          this.formFilters.get('filterStudyState').value,
+          this.studyStatesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -485,7 +511,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterStudyCities();
+        filterValues(
+          this.studyCities,
+          this.formFilters.get('filterStudyCity').value,
+          this.studyCitiesFiltered,
+          'name'
+        );
       });
 
     this.formFilters
@@ -493,7 +524,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       .valueChanges
       .pipe(takeUntil(this._onDestroy))
       .subscribe(() => {
-        this.filterStudyFacilities();
+        filterValues(
+          this.studyFacilities,
+          this.formFilters.get('filterStudyFacility').value,
+          this.studyFacilitiesFiltered,
+          'name'
+        );
       });
 
     // Subscribe to the `valueChanges` observable of the location input control
@@ -649,182 +685,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         };
       });
   }
-
-  private filterOverallStatuses() {
-    if (!this.overallStatuses) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterOverallStatus').value;
-
-    // If no query was provided emit all possible overall-status values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.overallStatusesFiltered.next(this.overallStatuses.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible overall-status values based on the search query
-    // and emit the results.
-    this.overallStatusesFiltered.next(
-      this.overallStatuses.filter(
-        status => status.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterPhases() {
-    if (!this.phases) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterPhase').value;
-
-    // If no query was provided emit all possible phase values. Otherwise
-    // lowercase the query in preparation for filtering.
-    if (!query) {
-      this.phasesFiltered.next(this.phases.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible overall-status values based on the search query
-    // and emit the results.
-    this.phasesFiltered.next(
-      this.phases.filter(
-        phase => phase.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterStudyTypes() {
-    if (!this.studyTypes) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterStudyType').value;
-
-    // If no query was provided emit all possible study-type values. Otherwise
-    // lowercase the query in preparation for filtering.
-    if (!query) {
-      this.studyTypesFiltered.next(this.studyTypes.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible study-types values based on the search query and emit
-    // the results.
-    this.studyTypesFiltered.next(
-      this.studyTypes.filter(
-        type => type.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterStudyCountries() {
-    if (!this.studyCountries) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterStudyCountry').value;
-
-    // If no query was provided emit all possible study-country values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.studyCountriesFiltered.next(this.studyCountries.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible study-countries values based on the search query and
-    // emit the results.
-    this.studyCountriesFiltered.next(
-      this.studyCountries.filter(
-        country => country.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterStudyStates() {
-    if (!this.studyStates) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterStudyState').value;
-
-    // If no query was provided emit all possible study-state values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.studyStatesFiltered.next(this.studyStates.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible study-states values based on the search query and
-    // emit the results.
-    this.studyStatesFiltered.next(
-      this.studyStates.filter(
-        state => state.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterStudyCities() {
-    if (!this.studyCities) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterStudyCity').value;
-
-    // If no query was provided emit all possible study-city values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.studyCitiesFiltered.next(this.studyCities.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible study-cities values based on the search query and
-    // emit the results.
-    this.studyCitiesFiltered.next(
-      this.studyCities.filter(
-        city => city.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
-  private filterStudyFacilities() {
-    if (!this.studyFacilities) {
-      return;
-    }
-    // Retrieve the search query.
-    let query = this.formFilters.get('filterStudyFacility').value;
-
-    // If no query was provided emit all possible study-facility values.
-    // Otherwise lowercase the query in preparation for filtering.
-    if (!query) {
-      this.studyFacilitiesFiltered.next(this.studyFacilities.slice());
-      return;
-    } else {
-      query = query.toLowerCase();
-    }
-
-    // Filter the possible study-facilities values based on the search query
-    // and emit the results.
-    this.studyFacilitiesFiltered.next(
-      this.studyFacilities.filter(
-        city => city.name.toLowerCase().indexOf(query) > -1
-      )
-    );
-  }
-
 
   getStudiesPage() {
 
