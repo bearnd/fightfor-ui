@@ -20,7 +20,12 @@ import { PaymentGuard } from '../../guards/payment.guard';
 import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
 import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
-import { FacilitiesComponent } from '../../facilities/facilities.component';
+import {
+  StudyBreadcrumbResolverService
+} from '../../components/navbar/breadcrumbs/resolvers/study-breadcrumb-resolver.service';
+import {
+  StudiesBreadcrumbResolverService
+} from '../../components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -71,32 +76,30 @@ export const AdminLayoutRoutes: Routes = [
             component: StudiesComponent,
             canActivate: [PaymentGuard],
             canActivateChild: [PaymentGuard],
-            data: {
-              breadcrumbs: 'Trials'
-            },
             children: [
               {
                 path: ':overallStatus',
-                component: StudiesListComponent
-              },
-            ]
-          },
-          {
-            path: 'trial',
-            component: StudiesComponent,
-            canActivate: [PaymentGuard],
-            canActivateChild: [PaymentGuard],
-            data: {
-              breadcrumbs: 'Trial'
-            },
-            children: [
-              {
-                path: ':studyNctId',
-                component: StudyComponent,
+                component: StudiesListComponent,
                 data: {
-                  breadcrumbs: 'Trial'
-                }
+                  breadcrumbs: StudiesBreadcrumbResolverService,
+                },
               },
+              {
+                path: ':overallStatus/trial',
+                component: StudiesComponent,
+                data: {
+                  breadcrumbs: StudiesBreadcrumbResolverService,
+                },
+                children: [
+                  {
+                    path: ':studyNctId',
+                    component: StudyComponent,
+                    data: {
+                      breadcrumbs: StudyBreadcrumbResolverService,
+                    },
+                  }
+                ]
+              }
             ]
           },
           {
@@ -136,6 +139,9 @@ export const AdminLayoutRoutes: Routes = [
       {
         path: ':studyNctId',
         component: StudyComponent,
+        data: {
+          breadcrumbs: StudyBreadcrumbResolverService,
+        },
       },
     ],
   }
