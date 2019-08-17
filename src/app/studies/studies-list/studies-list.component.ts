@@ -992,10 +992,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
           '/app',
           'searches',
           searchUuid,
+          'trials',
+          this.overallStatusGroup,
           'trial',
           study.nctId,
         ],
+        {relativeTo: this.route}
       );
+
       result.then();
     } else if (this.mode === Mode.SAVED) {
       const result = this.router.navigate(
