@@ -442,8 +442,8 @@ export class SearchResultsSummaryComponent implements OnInit {
 
     // Create an array of the defined overallStatus members.
     const overallStatusValues = overallStatusMembers.map(
-      (member) => {return member.valueOf()}
-      );
+      (member) => member.valueOf()
+    );
 
     // Iterate over the count of studies by overall status and add the number
     // of studies if their overall status is one of those defined under

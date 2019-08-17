@@ -55,7 +55,6 @@ import { PaymentService } from './services/payment.service';
 import { PaymentGuard } from './guards/payment.guard';
 import { UserConfigService } from './services/user-config.service';
 import { SentryErrorHandler } from './utils/sentryerrorhandler';
-import { FaqComponent } from './faq/faq.component';
 
 
 @NgModule({
