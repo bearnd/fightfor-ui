@@ -1222,7 +1222,7 @@
                       The patient inclusion criteria for this trial
                     </mat-panel-description>
                   </mat-expansion-panel-header>
-                  <p class="card-description">
+                  <p class="card-description text-block-original-format">
                     {{ study.eligibility.criteria }}
                   </p>
                 </mat-expansion-panel>
@@ -1454,7 +1454,9 @@
                       Brief Summary
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <p class="card-description">{{ study.briefSummary }}</p>
+                  <p class="card-description text-block-original-format">
+                    {{ study.briefSummary }}
+                  </p>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel [expanded]="false">
@@ -1463,7 +1465,7 @@
                       Detailed Description
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <p class="card-description">
+                  <p class="card-description text-block-original-format">
                     {{ study.detailedDescription }}
                   </p>
                 </mat-expansion-panel>
