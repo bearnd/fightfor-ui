@@ -41,13 +41,16 @@ export class MeshDescriptorRetrieverService {
   }
 
   /**
-   * Searches for MeSH descriptors by through synonym fuzzy-matching and returns
-   * a list of descriptors in order of descending relevance.
+   * Searches for MeSH descriptors through synonym fuzzy-matching and returns a
+   * list of descriptors in order of descending relevance.
    * @param synonym The synonym query to be used in the fuzzy-search.
    * @param limit The maximum number of descriptors to be returned.
    * @returns The matching descriptors in order of descending relevance.
    */
-  getMeshDescriptorsBySynonym(synonym: string, limit: number): Observable<DescriptorInterface[]> {
+  getMeshDescriptorsBySynonym(
+    synonym: string,
+    limit: number,
+  ): Observable<DescriptorInterface[]> {
     return this.apollo.query<ResponseGetMeshDescriptorsBySynonym,
       VariablesGetMeshDescriptorsBySynonym>({
       query: this.queryGetMeshDescriptorsBySynonym,
