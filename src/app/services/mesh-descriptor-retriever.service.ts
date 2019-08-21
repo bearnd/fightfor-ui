@@ -5,6 +5,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
 import { DescriptorInterface } from '../interfaces/descriptor.interface';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 // Response interface for the `getMeshDescriptorsBySynonym` method.
@@ -24,14 +25,18 @@ interface VariablesGetMeshDescriptorsBySynonym {
 @Injectable()
 export class MeshDescriptorRetrieverService {
 
+  private loadingGetMeshDescriptorsBySynonym: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isLoadingGetMeshDescriptorsBySynonym: Observable<boolean>
+    = this.loadingGetMeshDescriptorsBySynonym.asObservable();
   // GraphQL query used in the `getMeshDescriptorsBySynonym` method.
   queryGetMeshDescriptorsBySynonym = gql`
     query getMeshDescriptorsBySynonym($synonym: String!, $limit: Int!){
       descriptors {
         bySynonym(synonym: $synonym, limit: $limit) {
           descriptorId,
+          ui,
           name,
-          ui
         }
       }
     }
@@ -51,6 +56,9 @@ export class MeshDescriptorRetrieverService {
     synonym: string,
     limit: number,
   ): Observable<DescriptorInterface[]> {
+    // Update the 'loading' observable to indicate that loading is in progress.
+    this.loadingGetMeshDescriptorsBySynonym.next(true);
+
     return this.apollo.query<ResponseGetMeshDescriptorsBySynonym,
       VariablesGetMeshDescriptorsBySynonym>({
       query: this.queryGetMeshDescriptorsBySynonym,
@@ -59,6 +67,9 @@ export class MeshDescriptorRetrieverService {
         limit: limit,
       }
     }).map((response) => {
+      // Update the 'loading' observable to indicate that loading is complete.
+      this.loadingGetMeshDescriptorsBySynonym.next(false);
+
       return response.data.descriptors.bySynonym;
     });
   }
