@@ -194,7 +194,8 @@ export class StudyRetrieverService {
           studyDescriptors {
             studyDescriptorType,
             descriptor {
-              name
+              ui,
+              name,
             }
           }
           eligibility {
@@ -310,6 +311,7 @@ export class StudyRetrieverService {
           studyDescriptors {
             studyDescriptorType,
             descriptor {
+              ui,
               name,
             },
           }
@@ -355,7 +357,7 @@ export class StudyRetrieverService {
           yearEnd: $yearEnd,
           ageBeg: $ageBeg,
           ageEnd: $ageEnd,
-        ) 
+        )
       }
     }
   `;
