@@ -388,6 +388,7 @@ export class StudyStatsRetrieverService {
             facilityCanonicalId,
           },
           meshTerm {
+            ui,
             name,
           },
           countStudies
@@ -409,6 +410,7 @@ export class StudyStatsRetrieverService {
           limit: $limit
         ) {
           meshTerm {
+            ui,
             name,
           },
           countStudies
@@ -430,6 +432,7 @@ export class StudyStatsRetrieverService {
           limit: $limit
         ) {
           meshTerm {
+            ui,
             name,
           },
           date
@@ -449,7 +452,8 @@ export class StudyStatsRetrieverService {
           meshTermType: $meshTermType,
         ) {
             descriptorId,
-            name
+            ui,
+            name,
         }
       }
     }
