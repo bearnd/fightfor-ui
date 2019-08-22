@@ -55,8 +55,12 @@ import { PaymentService } from './services/payment.service';
 import { PaymentGuard } from './guards/payment.guard';
 import { UserConfigService } from './services/user-config.service';
 import { SentryErrorHandler } from './utils/sentryerrorhandler';
-import { StudyBreadcrumbResolverService } from './components/navbar/breadcrumbs/resolvers/study-breadcrumb-resolver.service';
-import { StudiesBreadcrumbResolverService } from './components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
+import {
+  StudyBreadcrumbResolverService
+} from './components/navbar/breadcrumbs/resolvers/study-breadcrumb-resolver.service';
+import {
+  StudiesBreadcrumbResolverService
+} from './components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
 
 
 @NgModule({
