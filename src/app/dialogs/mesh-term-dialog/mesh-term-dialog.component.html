@@ -1,0 +1,51 @@
+<mat-spinner
+  *ngIf="meshDescriptorRetrieverService.isLoadingGetMeshDescriptorByUi | async"
+  style="position:relative;top:50%;left:50% "
+></mat-spinner>
+<div
+  *ngIf="!(meshDescriptorRetrieverService.isLoadingGetMeshDescriptorByUi | async)"
+>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>{{ descriptor.name }}</h3>
+      <mat-icon
+        matTooltip="Create a new search on this term"
+        [matTooltipPosition]="'below'"
+        style="cursor:pointer; color: #999; position: relative"
+        (click)="onNavigateToNewSearch()"
+      >search
+      </mat-icon>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <i [class]="'fa fa-lg ' + getIconClass().iconClass"></i>
+      <h4>{{ getIconClass().category }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div [innerHTML]="concatenateDefinition(definitions[0])"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-accordion [multi]="false">
+        <mat-expansion-panel [expanded]="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Other definitions
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="card-description">
+            <div
+              *ngFor="let definition of definitions | slice:1"
+              [innerHTML]="concatenateDefinition(definition)"
+            >
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

@@ -47,6 +47,7 @@ import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
 import { FacilitiesComponent } from '../../facilities/facilities.component';
 import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
+import { MeshTermDialogComponent } from '../../dialogs/mesh-term-dialog/mesh-term-dialog.component';
 
 
 @NgModule({
@@ -87,8 +88,12 @@ import { FacilitiesListComponent } from '../../facilities/facilities-list/facili
     StudyComponent,
     FacilitiesComponent,
     FacilitiesListComponent,
+    MeshTermDialogComponent,
   ],
   providers: [PageScrollService],
+  entryComponents: [
+    MeshTermDialogComponent,
+  ],
 })
 
 export class AdminLayoutModule {}
