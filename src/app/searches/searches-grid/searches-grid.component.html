@@ -42,11 +42,12 @@
 
             <mat-chip-list>
               <mat-chip
-                class="mat-standard-chip"
-                style="font-size: 12px;"
+                class="mat-standard-chip mesh-term-chip"
+                (click)="onOpenMeshTermDialog(descriptor)"
                 *ngFor="let descriptor of search.descriptors"
               >
                 {{ descriptor.name }}
+                <i class="material-icons">remove_red_eye</i>
               </mat-chip>
             </mat-chip-list>
 
