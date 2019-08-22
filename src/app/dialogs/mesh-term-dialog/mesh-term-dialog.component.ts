@@ -4,7 +4,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import gql from 'graphql-tag';
 
-import { DescriptorDefinitionInterface, DescriptorInterface } from '../../interfaces/descriptor.interface';
+import {
+  DescriptorConceptInterface,
+  DescriptorDefinitionInterface,
+  DescriptorDefinitionSource,
+  DescriptorInterface
+} from '../../interfaces/descriptor.interface';
 import {
   MeshDescriptorRetrieverService
 } from '../../services/mesh-descriptor-retriever.service';
@@ -160,6 +165,7 @@ export class MeshTermDialogComponent implements OnInit {
     ).subscribe(
       (descriptor: DescriptorInterface) => {
         this.descriptor = descriptor;
+        this.padDefinitions();
         this.definitions = this.getDefinitions();
       }
     );
@@ -242,6 +248,32 @@ export class MeshTermDialogComponent implements OnInit {
         category: 'Geographicals',
       };
     }
+  }
+
+  /**
+   * Adds the descriptor's preferred concept's scope-note as a `MSH` definition
+   * should a definition sourced under `MSH` is not already defined.
+   */
+  padDefinitions() {
+    // Exit the function if a definition sourced under `MSH` is already defined
+    // for this descriptor.
+    if (this.descriptor.definitions.some(entry => entry.source === 'MSH')) {
+      return;
+    }
+
+    // Find the `DescriptorConceptInterface` entry with an `isPreferred`
+    // value of `true`. Exit the function if none could be found.
+    const descriptorConceptPreferred = this.descriptor.descriptorConcepts.find(
+entry => entry.isPreferred
+    );
+    if (!descriptorConceptPreferred) { return; }
+
+    // Add a new definition to the descriptor based on that descriptor's
+    // preferred concept's scope note.
+    this.descriptor.definitions.push({
+      source: DescriptorDefinitionSource.MSH,
+      definition: descriptorConceptPreferred.concept.scopeNote
+    });
   }
 
   /**

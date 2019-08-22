@@ -5,7 +5,7 @@ enum DescriptorClass {
   FOUR = 4,
 }
 
-enum DescriptorDefinitionSource {
+export enum DescriptorDefinitionSource {
     AIR = 'AIR',
     ALT = 'ALT',
     AOT = 'AOT',
