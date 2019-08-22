@@ -25,7 +25,8 @@ interface DescriptorDefinitionBundle {
 
 @Component({
   selector: 'app-mesh-term-dialog',
-  templateUrl: './mesh-term-dialog.component.html'
+  templateUrl: './mesh-term-dialog.component.html',
+  styleUrls: ['./mesh-term-dialog.component.scss']
 })
 export class MeshTermDialogComponent implements OnInit {
 
@@ -301,7 +302,7 @@ export class MeshTermDialogComponent implements OnInit {
    */
   concatenateDefinition(definition: DescriptorDefinitionBundle): string {
     return definition.definition.definition +
-      '(source: <a href="' +
+      ' (source: <a href="' +
       definition.sourceNameUrl.url +
       '">' +
       definition.sourceNameUrl.name +
@@ -318,5 +319,8 @@ export class MeshTermDialogComponent implements OnInit {
       {state: {descriptor: this.descriptor}}
     );
     result.then();
+
+    // Close the dialog.
+    this.dialogRef.close();
   }
 }

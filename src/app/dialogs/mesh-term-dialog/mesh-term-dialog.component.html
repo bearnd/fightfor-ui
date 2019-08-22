@@ -37,12 +37,11 @@
               Other definitions
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <div class="card-description">
+          <div class="card-description definitions">
             <div
               *ngFor="let definition of definitions | slice:1"
               [innerHTML]="concatenateDefinition(definition)"
-            >
-            </div>
+            ></div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
