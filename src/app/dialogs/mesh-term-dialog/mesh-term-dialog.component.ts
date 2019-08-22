@@ -122,6 +122,7 @@ export class MeshTermDialogComponent implements OnInit {
     query getMeshDescriptorByUi($ui: String!){
       descriptors {
         byUi(ui: $ui) {
+          descriptorId,
           name,
           treeNumbers {
             treeNumber
