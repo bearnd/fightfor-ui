@@ -89,12 +89,24 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       title: new FormControl(null),
       descriptors: new FormControl(
-        null,
+        // Set the initial state to include any pre-defined descriptors
+        // navigation to this page included.
+        [history.state.descriptor] || null,
         [Validators.required]
       ),
       // Radio buttons for patient-sex.
       radioGender: new FormControl('ALL'),
     });
+
+    // If a descriptor was pre-defined when navigating to this page then update
+    // `this.descriptorsSelected` and the form-control.
+    if (history.state.descriptor) {
+      // Add the descriptor to the selected condition-descriptors.
+      this.descriptorsSelected.push(history.state.descriptor);
+      // Clear the form input's value.
+      this.form.get('descriptors').setValue(null);
+      this.inputDescriptors.nativeElement.value = '';
+    }
 
     // Query out the date-range of all studies to populate the slider range.
     this.studyStatsRetrieverService.getStartDateRange()
@@ -188,7 +200,6 @@ export class SearchNewComponent implements OnInit, OnDestroy {
    * `UserConfigService`.
    */
   onSubmit() {
-
     // Retrieve the selected patient-gender (if any).
     let gender: string = null;
     if (this.form.get('radioGender').value) {
