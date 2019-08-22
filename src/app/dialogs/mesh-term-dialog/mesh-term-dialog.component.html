@@ -36,11 +36,22 @@
               Other definitions
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <div class="card-description definitions">
+          <div
+            class="card-description definitions"
+            *ngIf="definitions.length > 1"
+          >
             <div
               *ngFor="let definition of definitions | slice:1"
               [innerHTML]="concatenateDefinition(definition)"
             ></div>
+          </div>
+          <div
+            class="card-description definitions"
+            *ngIf="definitions.length === 1"
+          >
+            <div>
+              No additional definitions available.
+            </div>
           </div>
         </mat-expansion-panel>
       </mat-accordion>
