@@ -46,7 +46,9 @@ import {
 import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
 import { FacilitiesComponent } from '../../facilities/facilities.component';
-import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
+import {
+  FacilitiesListComponent
+} from '../../facilities/facilities-list/facilities-list.component';
 
 
 @NgModule({
