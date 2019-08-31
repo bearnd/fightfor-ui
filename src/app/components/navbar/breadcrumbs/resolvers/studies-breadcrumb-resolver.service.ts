@@ -12,8 +12,6 @@ export class StudiesBreadcrumbResolverService extends McBreadcrumbsResolver {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-
-    console.log(route);
     const overallStatus = route.params.overallStatus;
     const overallStatusCapitalized
       = overallStatus[0].toUpperCase() + overallStatus.substring(1);
