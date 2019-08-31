@@ -192,7 +192,7 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     this.descriptorsSelected.push(descriptor);
     // Clear the form input's value.
     this.form.get('descriptors').setValue(null);
-    this.inputDescriptors.nativeElement.value = '';
+    this.inputDescriptors.nativeElement.value = ' ';
   }
 
   /**

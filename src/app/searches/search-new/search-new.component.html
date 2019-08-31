@@ -31,16 +31,15 @@
                   [hintLabel]="descriptorsSelected.length ? null: 'Enter terms you would like to search for and select the corresponding descriptors'"
                 >
                   <mat-chip-list #descriptorsChipList>
-                    <mat-chip
+                    <app-mesh-term-chip
                       *ngFor="let descriptor of descriptorsSelected"
+                      [descriptor]="descriptor"
                       [selectable]="false"
-                      [selected]="true"
+                      [selected]="false"
                       [removable]="true"
+                      [removeIcon]="'cancel'"
                       (removed)="onRemoveDescriptor(descriptor)"
-                    >
-                      {{ descriptor.name }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
+                    ></app-mesh-term-chip>
                     <input
                       #inputDescriptors
                       type="text"
