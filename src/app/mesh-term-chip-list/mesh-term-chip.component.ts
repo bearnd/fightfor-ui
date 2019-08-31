@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { MatChipEvent, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DescriptorInterface } from '../interfaces/descriptor.interface';
 import { MeshTermDialogComponent } from '../dialogs/mesh-term-dialog/mesh-term-dialog.component';
 

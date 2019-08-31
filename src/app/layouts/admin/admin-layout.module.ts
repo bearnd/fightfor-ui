@@ -46,8 +46,15 @@ import {
 import { StudyComponent } from '../../studies/study/study.component';
 import { StudiesComponent } from '../../studies/studies.component';
 import { FacilitiesComponent } from '../../facilities/facilities.component';
-import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
-import { MeshTermDialogComponent } from '../../dialogs/mesh-term-dialog/mesh-term-dialog.component';
+import {
+  FacilitiesListComponent
+} from '../../facilities/facilities-list/facilities-list.component';
+import {
+  MeshTermDialogComponent
+} from '../../dialogs/mesh-term-dialog/mesh-term-dialog.component';
+import {
+  MeshTermChipListComponent
+} from '../../mesh-term-chip-list/mesh-term-chip-list.component';
 import {
   MeshTermChipComponent
 } from '../../mesh-term-chip-list/mesh-term-chip.component';
@@ -93,6 +100,7 @@ import {
     FacilitiesListComponent,
     MeshTermDialogComponent,
     MeshTermChipComponent,
+    MeshTermChipListComponent,
   ],
   providers: [PageScrollService],
   entryComponents: [
