@@ -3,66 +3,81 @@
   style="position:relative;top:50%;left:50% "
 ></mat-spinner>
 <div
+  class="card"
   *ngIf="!(meshDescriptorRetrieverService.isLoadingGetMeshDescriptorByUi | async)"
 >
-  <div class="row">
-    <div class="col-md-12">
-      <h3>{{ descriptor.name }}</h3>
-      <p>Create a new search on this term</p>
-      <mat-icon
-        style="cursor:pointer; color: #999; position: relative"
-        (click)="onNavigateToNewSearch()"
-      >search
-      </mat-icon>
+  <div class="card-header card-header-icon card-header-rose">
+    <div class="card-icon">
+        <i [class]="'fa fa-lg ' + getIconClass().iconClass"></i>
+      </div>
+    <div class="row">
+      <div class="col-md-11">
+        <h4 class="card-title">{{ getIconClass().category }}</h4>
+      </div>
+      <div class="col-md-1">
+        <button
+          mat-raised-button
+          type="button"
+          class="btn btn-rose btn-round btn-just-icon btn-link mat-raised-button btn-fab"
+          (click)="onNavigateToNewSearch()"
+          [disableRipple]="true"
+        >
+          <mat-icon
+            (click)="onNavigateToNewSearch()"
+            style="background-color: transparent"
+          >search
+          </mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12">
-      <i [class]="'fa fa-lg ' + getIconClass().iconClass"></i>
-      <h4>{{ getIconClass().category }}</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="card-title">{{ descriptor.name }}</h3>
+        <div [innerHTML]="concatenateDefinition(definitions[0])"></div>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div [innerHTML]="concatenateDefinition(definitions[0])"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <mat-accordion [multi]="false">
-        <mat-expansion-panel [expanded]="false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Other definitions
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div
-            class="card-description definitions"
-            *ngIf="definitions.length > 1"
-          >
+    <div class="row">
+      <div class="col-md-12">
+        <mat-accordion [multi]="false">
+          <mat-expansion-panel [expanded]="false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Other definitions
+              </mat-panel-title>
+            </mat-expansion-panel-header>
             <div
-              *ngFor="let definition of definitions | slice:1"
-              [innerHTML]="concatenateDefinition(definition)"
-            ></div>
-          </div>
-          <div
-            class="card-description definitions"
-            *ngIf="definitions.length === 1"
-          >
-            <div>
-              No additional definitions available.
+              class="card-description definitions"
+              *ngIf="definitions.length > 1"
+            >
+              <div
+                *ngFor="let definition of definitions | slice:1"
+                [innerHTML]="concatenateDefinition(definition)"
+              ></div>
             </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+            <div
+              class="card-description definitions"
+              *ngIf="definitions.length === 1"
+            >
+              <div>
+                No additional definitions available.
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-12">
+  <div class="card-footer">
+    <div class="stats">
       <p class="card-description"><small>
-        The information displayed here has been taken from <a href="https://meshb.nlm.nih.gov">meshb.nlm.nih.gov</a> - identifier {{ descriptorUi }}. More information is available at <a href="https://meshb.nlm.nih.gov/record/ui?ui={{ descriptorUi }}">https://meshb.nlm.nih.gov/record/ui?ui={{ descriptorUi }}</a> and <a href="https://www.nlm.nih.gov/research/umls/index.html">UMLS</a>.
-        </small></p>
+        The information displayed here has been taken from <a href="https://meshb.nlm.nih.gov">meshb.nlm.nih.gov</a> -
+        identifier {{ descriptorUi }}. More information is available at <a
+        href="https://meshb.nlm.nih.gov/record/ui?ui={{ descriptorUi }}">https://meshb.nlm.nih.gov/record/ui?ui={{ descriptorUi }}</a>
+        and <a href="https://www.nlm.nih.gov/research/umls/index.html">UMLS</a>.
+      </small></p>
     </div>
+
   </div>
 </div>
