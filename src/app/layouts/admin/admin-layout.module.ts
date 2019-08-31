@@ -48,6 +48,9 @@ import { StudiesComponent } from '../../studies/studies.component';
 import { FacilitiesComponent } from '../../facilities/facilities.component';
 import { FacilitiesListComponent } from '../../facilities/facilities-list/facilities-list.component';
 import { MeshTermDialogComponent } from '../../dialogs/mesh-term-dialog/mesh-term-dialog.component';
+import {
+  MeshTermChipComponent
+} from '../../mesh-term-chip-list/mesh-term-chip.component';
 
 
 @NgModule({
@@ -89,6 +92,7 @@ import { MeshTermDialogComponent } from '../../dialogs/mesh-term-dialog/mesh-ter
     FacilitiesComponent,
     FacilitiesListComponent,
     MeshTermDialogComponent,
+    MeshTermChipComponent,
   ],
   providers: [PageScrollService],
   entryComponents: [
