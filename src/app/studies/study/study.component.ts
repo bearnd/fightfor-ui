@@ -58,8 +58,6 @@ export class StudyComponent implements OnInit, OnDestroy {
   public studyPurposeIndex: number = null;
   // Placeholder for the study purpose message.
   public studyPurposeMessage: string = null;
-  // Placeholder to indicate whether the study has been saved by the user.
-  public isStudySaved: boolean = null;
   // Possible eligibility age-range values in years (to be populated in
   // `ngOnInit`).
   public studyEligibilityAgeRangeAll: AgeRange = {ageBeg: 0, ageEnd: 150};
@@ -720,20 +718,9 @@ export class StudyComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  onOverviewContract() {
-    // TODO: Scroll to contact.
-  }
-
-  onToggleSavedStudy() {
-    // TODO: Toggle saving the study under the user.
-  }
-
   onSeeCitation(pmid: number) {
     // TODO: Redirect to citation page.
   }
-
-
 
   /**
    * Checks whether a nav-pill should receive the `active` class depending on
