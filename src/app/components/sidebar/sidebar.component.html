@@ -9,6 +9,36 @@
   </a>
 </div>
 <div class="sidebar-wrapper">
+  <div class="user">
+    <div class="photo">
+      <img
+        [src]="authService.userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+        alt="avatar"
+      >
+    </div>
+    <div class="user-info">
+      <a data-toggle="collapse" href="#userMenu" class="collapsed">
+        <span>
+          {{
+            authService.userProfile?.nickname ||
+            authService.userProfile?.name ||
+            authService.userProfile?.email
+          }}
+          <b class="caret"></b>
+        </span>
+      </a>
+      <div class="collapse" id="userMenu">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="" class="nav-link" (click)="onLogout()">
+              <i class="material-icons user-menu-icon">exit_to_app</i>
+              <p>Logout</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <ul class="nav">
     <li routerLinkActive="active" class="nav-item">
       <a class="nav-link" routerLink="/app/searches">
