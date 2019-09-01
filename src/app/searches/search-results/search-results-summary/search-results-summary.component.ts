@@ -65,7 +65,7 @@ export class SearchResultsSummaryComponent implements OnInit {
     'name',
     'country',
     'locality',
-    'administrativeAreaLevel1',
+    // 'administrativeAreaLevel1',  // TODO: re-evaluate whether to remove
     'topInterventions',
     'countStudies',
   ];

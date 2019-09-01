@@ -1,0 +1,16 @@
+<mat-chip
+  class="mat-standard-chip mesh-term-chip"
+  (click)="onOpenMeshTermDialog(descriptor)"
+  [selectable]="selectable"
+  [selected]="selected"
+  [removable]="removable"
+  (removed)="onRemoved()"
+>
+  {{ descriptor.name }}
+  <mat-icon matChipTrailingIcon *ngIf="trailingIcon">
+    {{ trailingIcon }}
+  </mat-icon>
+  <mat-icon matChipRemove *ngIf="removeIcon">
+    {{ removeIcon }}
+  </mat-icon>
+</mat-chip>

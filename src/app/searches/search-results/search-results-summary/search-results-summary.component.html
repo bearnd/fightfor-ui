@@ -90,18 +90,9 @@
             </div>
             <div class="card-body">
               <h5>MeSH Descriptors</h5>
-              <mat-chip-list>
-                <mat-chip
-                  class="mesh-term-chip"
-                  *ngFor="let descriptor of search.descriptors"
-                  [selectable]="false"
-                  [selected]="false"
-                  [removable]="false"
-                >
-                  {{ descriptor.name }}
-                  <i class="material-icons">remove_red_eye</i>
-                </mat-chip>
-              </mat-chip-list>
+              <app-mesh-term-chip-list
+                [descriptors]="search.descriptors"
+              ></app-mesh-term-chip-list>
             </div>
             <div class="card-footer">
             </div>
@@ -467,16 +458,9 @@
                           Top Therapies (Interventions)
                         </th>
                         <td mat-cell *matCellDef="let entry">
-                          <mat-chip-list>
-                            <mat-chip
-                              *ngFor="let term of
-                              topFacilityMeshTerms[
-                                entry.facilityCanonical.facilityCanonicalId
-                              ]"
-                            >
-                              {{ term.name }}
-                            </mat-chip>
-                          </mat-chip-list>
+                          <app-mesh-term-chip-list
+                            [descriptors]="topFacilityMeshTerms[entry.facilityCanonical.facilityCanonicalId]"
+                          ></app-mesh-term-chip-list>
                         </td>
                       </ng-container>
 
@@ -578,9 +562,8 @@
                           <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef>Name</th>
                             <td mat-cell *matCellDef="let entry">
-                              <mat-chip>
-                                {{ entry.meshTerm.name }}
-                              </mat-chip>
+                              <app-mesh-term-chip [descriptor]="entry.meshTerm"
+                              ></app-mesh-term-chip>
                             </td>
                           </ng-container>
 
@@ -644,9 +627,8 @@
                           <ng-container matColumnDef="name">
                             <th mat-header-cell *matHeaderCellDef>Name</th>
                             <td mat-cell *matCellDef="let entry">
-                              <mat-chip>
-                                {{ entry.meshTerm.name }}
-                              </mat-chip>
+                              <app-mesh-term-chip [descriptor]="entry.meshTerm"
+                              ></app-mesh-term-chip>
                             </td>
                           </ng-container>
 

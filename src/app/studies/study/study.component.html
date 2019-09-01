@@ -233,17 +233,10 @@
               <!--Study Conditions: Chips-->
               <div class="row">
                 <div class="col-md-12">
-                  <mat-chip-list>
-                    <mat-chip
-                      *ngFor="let meshTerm of studyConditionMeshTerms"
-                      [selectable]="false"
-                      [selected]="false"
-                      [removable]="false"
-                      style="margin-top: 15px; margin-bottom: 15px"
-                    >
-                      {{ meshTerm.name }}
-                    </mat-chip>
-                  </mat-chip-list>
+                  <app-mesh-term-chip-list
+                    [descriptors]="studyConditionMeshTerms"
+                    style="margin-top: 15px; margin-bottom: 15px"
+                  ></app-mesh-term-chip-list>
                 </div>
               </div>
               <!--Study Conditions: Chips: END-->
@@ -259,17 +252,10 @@
               <!--Study Interventions: Chips-->
               <div class="row">
                 <div class="col-md-12">
-                  <mat-chip-list>
-                    <mat-chip
-                      *ngFor="let meshTerm of studyInterventionMeshTerms"
-                      [selectable]="false"
-                      [selected]="false"
-                      [removable]="false"
-                      style="margin-top: 15px; margin-bottom: 15px"
-                    >
-                      {{ meshTerm.name }}
-                    </mat-chip>
-                  </mat-chip-list>
+                  <app-mesh-term-chip-list
+                    [descriptors]="studyInterventionMeshTerms"
+                    style="margin-top: 15px; margin-bottom: 15px"
+                  ></app-mesh-term-chip-list>
                 </div>
               </div>
               <!--Study Interventions: Chips: END-->

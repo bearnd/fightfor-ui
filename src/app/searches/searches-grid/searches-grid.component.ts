@@ -4,6 +4,11 @@ import { Router } from '@angular/router';
 import { SearchInterface } from '../../interfaces/user-config.interface';
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import {
+  MeshTermDialogComponent
+} from '../../dialogs/mesh-term-dialog/mesh-term-dialog.component';
+import { DescriptorInterface } from '../../interfaces/descriptor.interface';
 
 
 @Component({
@@ -19,6 +24,7 @@ export class SearchesGridComponent implements OnInit {
     private authService: AuthService,
     private userConfigService: UserConfigService,
     private router: Router,
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -69,6 +75,35 @@ export class SearchesGridComponent implements OnInit {
       ['/app', 'searches', searchUuid]
     );
     result.then();
+  }
+
+  /**
+   * Opens a new dialog with the `MeshTermDialogComponent` which displays
+   * details for the clicked mesh-term.
+   */
+  onOpenMeshTermDialog(descriptor: DescriptorInterface) {
+
+    // Create a new dialog configuration object.
+    const dialogConfig: MatDialogConfig = new MatDialogConfig();
+
+    // Automatically focus on the dialog elements.
+    dialogConfig.autoFocus = true;
+    // Allow the user from closing the dialog by clicking outside.
+    dialogConfig.disableClose = false;
+    // Make the dialog cast a shadow on the rest of the UI behind it and
+    // preclude the user from interacting with it.
+    dialogConfig.hasBackdrop = true;
+    // Make the dialog auto-close if the user navigates away from it.
+    dialogConfig.closeOnNavigation = true;
+    // Set the dialog dimensions to 60% of the window dimensions.
+    dialogConfig.width = '60%';
+    dialogConfig.height = '60%';
+
+    // Inject the defined descriptor into the data passed to the dialog.
+    dialogConfig.data = { descriptor: descriptor };
+
+    // Open the dialog with the given configuration.
+    this.dialog.open(MeshTermDialogComponent, dialogConfig);
   }
 
 }

@@ -140,7 +140,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
     'name',
     'country',
     'locality',
-    'administrativeAreaLevel1',
+    // 'administrativeAreaLevel1',  // TODO: re-evaluate whether to remove
     'countStudies',
     'topInterventions',
   ];
