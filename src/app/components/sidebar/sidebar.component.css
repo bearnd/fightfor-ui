@@ -5,3 +5,8 @@
 .simple-text {
   text-transform: lowercase !important;
 }
+
+.user-menu-icon {
+  line-height: 30px !important;
+  font-size: 24px !important;;
+}
