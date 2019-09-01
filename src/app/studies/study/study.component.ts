@@ -718,10 +718,6 @@ export class StudyComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSeeCitation(pmid: number) {
-    // TODO: Redirect to citation page.
-  }
-
   /**
    * Checks whether a nav-pill should receive the `active` class depending on
    * the current scroll position relative to the result cards.

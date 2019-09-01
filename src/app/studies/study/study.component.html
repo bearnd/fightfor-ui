@@ -1586,18 +1586,7 @@
                       class="row"
                       *ngFor="let reference of studyGroupsReferences[referenceType]"
                     >
-                      <div class="col-md-3">
-                        <button
-                          *ngIf="reference.pmid"
-                          mat-raised-button
-                          class="btn btn-rose mat-raised-button"
-                          type="button"
-                          (click)="onSeeCitation(reference.pmid)"
-                        >
-                          <span class="mat-button-wrapper">See Paper</span>
-                        </button>
-                      </div>
-                      <div class="col-md-9">
+                      <div class="col-md-12">
                         <p class="card-description">
                           {{ reference.citation }}
                         </p>
