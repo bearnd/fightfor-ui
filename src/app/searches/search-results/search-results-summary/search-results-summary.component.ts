@@ -9,6 +9,8 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/finally';
 import swal from 'sweetalert2';
 import * as moment from 'moment';
+import * as Datamap from 'datamaps/dist/datamaps.world.min.js';
+import * as d3 from 'd3';
 
 import {
   LatestDescriptorInterface,
@@ -33,8 +35,6 @@ import { getCountryCode } from '../../../shared/countries';
 import { UserConfigService } from '../../../services/user-config.service';
 import { DescriptorInterface } from '../../../interfaces/descriptor.interface';
 
-declare var $: any;
-
 
 @Component({
   selector: 'app-search-results-summary',
@@ -43,11 +43,11 @@ declare var $: any;
 })
 export class SearchResultsSummaryComponent implements OnInit {
 
-  @ViewChild('cardLocations') cardStudiesLocations: ElementRef;
+  @ViewChild('worldMap') elementWorldMap: ElementRef;
   @ViewChild('paginatorStudiesLocation') paginator: MatPaginator;
 
-  public studiesLocationMapHeight: number;
-  public studiesLocationMapWidth: number;
+  public worldMapHeight: number;
+  public worldMapWidth: number;
 
   // Number of top studies locations to display.
   numStudiesLocationsDisplay = 5;
@@ -136,6 +136,8 @@ export class SearchResultsSummaryComponent implements OnInit {
     all: null,
   };
 
+  worldMap: Datamap = null;
+
   constructor(
     public userConfigService: UserConfigService,
     private studyRetrieverService: StudyRetrieverService,
@@ -156,15 +158,17 @@ export class SearchResultsSummaryComponent implements OnInit {
   }
 
   /**
-   * Trigger when resizing and calculate the map dimensions as 80% height and
-   * 45% of the card it is included in.
+   * Trigger when resizing and re-calculate the map dimensions.
    * @param event The resizing event.
    */
   onResize(event: Event) {
-    this.studiesLocationMapHeight = 0.8 * this
-      .cardStudiesLocations.nativeElement.clientHeight;
-    this.studiesLocationMapWidth = 0.45 * this
-      .cardStudiesLocations.nativeElement.clientWidth;
+    if (this.elementWorldMap) {
+      this.worldMapHeight = this.elementWorldMap.nativeElement.clientHeight;
+      this.worldMapWidth = this.elementWorldMap.nativeElement.clientWidth;
+      if (this.worldMap) {
+        this.worldMap.resize();
+      }
+    }
   }
 
   /**
@@ -581,82 +585,69 @@ export class SearchResultsSummaryComponent implements OnInit {
   configureStudiesLocationsMap(
     studiesByCountry: StudiesCountByCountryInterface[],
   ) {
+    // Calculate the maximum and minimum values of study-count.
+    const mapMax: number = studiesByCountry
+      .reduce(
+        (max, entry) => entry.countStudies > max ? entry.countStudies : max,
+        studiesByCountry[0].countStudies
+      );
+    const mapMin: number = studiesByCountry
+      .reduce(
+        (min, entry) => entry.countStudies < min ? entry.countStudies : min,
+        studiesByCountry[0].countStudies
+      );
 
-    // Set the starting color of the scale.
-    const startColor = [200, 238, 255];
-    // Set the ending color of the scale.
-    const endColor = [0, 100, 145];
-    const colors = {};
-
-    const mapValues: {[key: string]: number} = {};
-
-    // Iterate over the `studiesByCountry` results, retrieve the ISO Alpha2
-    // code for each country and assemble a code:study-count object.
+    // Populate two objects with the number of studies by countries and the
+    // color to be used by country based on that country's number of studies.
+    const data = {};
+    const fills = {
+      defaultFill: '#eee'
+    };
     for (const entry of studiesByCountry) {
       const code = getCountryCode(entry.country);
       if (code) {
-        mapValues[
-          getCountryCode(entry.country).toLowerCase()
-          ] = entry.countStudies;
+        // Calculate the fill-color value based on the number of studies making
+        // the minimum opacity 50%.
+        const alphaValue = (entry.countStudies - mapMin) / mapMax + 0.50;
+        // Populate objects.
+        data[code] = {numTrials: entry.countStudies, fillKey: code};
+        fills[code] = 'rgba(246, 92, 80,' + alphaValue + ' )';
       }
     }
 
-    // Calculate the maximum and minimum values of study-count.
-    const mapMax: number = Math
-      .max(...Object.keys(mapValues).map(key => mapValues[key]));
-    const mapMin: number = Math
-      .min(...Object.keys(mapValues).map(key => mapValues[key]));
+    // Instantiate the map.
+    this.worldMap = new Datamap({
+      element: document.getElementById('worldMap'),
+      scope: 'world',
+      projection: 'mercator',
+      setProjection: (element) => {
+        const projection = d3.geo.mercator()
+          .center([0, 40])
+          .rotate([0, 0, 0])
+          .scale(60)
+          .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+        const path = d3.geo.path()
+          .projection(projection);
 
-    // Calculate a color per region based on the study-count and the
-    // color-scale defined prior.
-    for (const key in mapValues) {
-      if (mapValues[key] > 0) {
-        colors[key] = '#';
-        for (let i = 0; i < 3; i++) {
-          let hex = Math.round(startColor[i]
-            + (endColor[i]
-              - startColor[i])
-            * (mapValues[key] / (mapMax - mapMin))).toString(16);
-
-          if (hex.length === 1) {
-            hex = '0' + hex;
-          }
-
-          colors[key] += (hex.length === 1 ? '0' : '') + hex;
-        }
-      }
-    }
-
-    // Initialize and configure the map.
-    $('#worldMap').vectorMap({
-      map: 'world_en',
-      backgroundColor: 'transparent',
-      borderColor: '#818181',
-      borderOpacity: 0.25,
-      borderWidth: 1,
-      colors: colors,
-      hoverColor: '#eee',
-      hoverOpacity: null,
-      normalizeFunction: 'linear',
-      selectedColor: '#c9dfaf',
-      selectedRegions: null,
-      showTooltip: true,
-      series: {
-        regions: [{
-          values: mapValues,
-        }]
+        return {path: path, projection: projection};
       },
-      // Defines the tooltip label per region.
-      onLabelShow: function (event, label, code) {
-
-        let value = 0;
-        if (mapValues.hasOwnProperty(code)) {
-          value = mapValues[code];
+      height: this.worldMapHeight,
+      width: this.worldMapWidth,
+      responsive: true,
+      geographyConfig: {
+        popupOnHover: true,
+        highlightOnHover: true,
+        borderColor: '#444',
+        borderWidth: 0.5,
+        popupTemplate: (geo, countryData) => {
+          return ['<div class="hoverinfo"><strong>',
+            'Number of trials in ' + geo.properties.name,
+            ': ' + countryData.numTrials,
+            '</strong></div>'].join('');
         }
-
-        label[0].innerHTML =
-          label[0].innerHTML + ': ' + value + ' Trials';
       },
+      fills: fills,
+      data: data,
     });
   }
 

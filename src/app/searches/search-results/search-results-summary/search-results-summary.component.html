@@ -261,11 +261,7 @@
               </div>
             </div>
 
-            <div
-              class="card-body"
-              #cardLocations
-              (window:resize)="onResize($event)"
-            >
+            <div class="card-body">
 
               <div class="row">
 
@@ -345,14 +341,14 @@
                     *ngIf="isLoadingGetCountStudiesByCountry | async"
                   ></mat-spinner>
                   <div
-                    id="worldMap"
-                    class="map map-big"
-                    [style.height.px]="studiesLocationMapHeight"
-                    [style.width.px]="studiesLocationMapWidth"
+                      #worldMap
+                      id="worldMap"
+                      [style.height]="worldMapHeight"
+                      [style.width]="worldMapWidth"
+                      (window:resize)="onResize($event)"
                   >
                   </div>
                 </div>
-
               </div>
 
             </div>
