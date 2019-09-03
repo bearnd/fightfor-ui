@@ -82,6 +82,9 @@
     &.rose-badge{
       @include badges-color($brand-rose);
     }
+    &.rose-white{
+      @include badges-color(white);
+    }
 }
 
 @mixin badge-color() {
@@ -102,8 +105,14 @@
     }
     &.badge-rose{
       background-color: $brand-rose;
+      vertical-align: middle;
     }
     &.badge-default{
         background-color: $gray-light;
     }
+    &.badge-white{
+      background-color: white;
+      color: $brand-inverse;
+      vertical-align: middle;
+  }
 }

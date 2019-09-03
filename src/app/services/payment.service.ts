@@ -81,6 +81,10 @@ export class PaymentService {
    */
   public isPaid(planId: string): boolean {
 
+    // TODO: Remove
+    // Temporary payment-check bypass.
+    return true;
+
     // Payment bypass. If a user has been added to either the `Administrators`
     // or `Testers` group via the Auth0 Authorization extension then these users
     // don't need to have an active subscription to be considered 'paid' and
