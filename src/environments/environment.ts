@@ -23,7 +23,7 @@ export const environment = {
   },
   braintreeGateway: {
     domain: '192.168.0.12:8080',
-    uri: 'http://192.12.0.168:8080',
+    uri: 'http://192.12.0.12:8080',
     planId: 'fightfor_premium_monthly'
   },
   sentry: {

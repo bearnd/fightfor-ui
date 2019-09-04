@@ -607,7 +607,8 @@
                     <a
                       pageScroll
                       [pageScrollDuration]="500"
-                      href="#contact"
+                      [class.disabled]="!studyCanContact"
+                      [href]="studyCanContact ? '#contact' : ''"
                     >
                       <button
                         mat-raised-button
