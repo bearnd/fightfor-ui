@@ -22,7 +22,6 @@
         <mat-list-item [routerLink]="['/features']">Features</mat-list-item>
         <mat-list-item [routerLink]="['/pricing']">Pricing</mat-list-item>
         <mat-list-item [routerLink]="['/faq']">FAQ</mat-list-item>
-        <mat-list-item [routerLink]="['/roadmap']">Roadmap</mat-list-item>
         <mat-list-item
           *ngIf="authService.isAuthenticated()"
           [routerLink]="['/app']"
@@ -81,7 +80,6 @@
           <a mat-list-item [routerLink]="['/features']">Features</a>
           <a mat-list-item [routerLink]="['/pricing']">Pricing</a>
           <a mat-list-item [routerLink]="['/faq']">FAQ</a>
-          <a mat-list-item [routerLink]="['/roadmap']">Roadmap</a>
           <a
             mat-list-item
             *ngIf="authService.isAuthenticated()"
