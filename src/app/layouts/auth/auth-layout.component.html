@@ -1,17 +1,12 @@
 <div style="height: 100vh;">
   <mat-toolbar style="background: white;">
     <span>
-      <a
-         style="color:#F65C50"
-         [routerLink]="['/']"
-      >
         <img
           src="../assets/img/fflogo_coral.svg"
           alt="Fight for logo"
           height="64px"
           width="64px"/>
         <span class="badge badge-rose">alpha</span>
-      </a>
     </span>
 
     <span class="spacer"></span>
@@ -120,28 +115,10 @@
     </mat-sidenav>
     <!--<mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>-->
     <mat-sidenav-content fxFlexFill>
-      <router-outlet></router-outlet>
+      <div style="flex: 1">
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-<footer class="footer ">
-  <div class="container">
-    <nav class="pull-left">
-      <ul>
-        <li>
-          <a href="https://creative-tim.com/about-us">
-            About Us
-          </a>
-        </li>
-        <li>
-          <a href="https://www.creative-tim.com/license">
-            Disclaimer
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="copyright pull-right">
-      &copy; 2018, bearnd
-    </div>
-  </div>
-</footer>
