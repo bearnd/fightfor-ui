@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "demo": {
+    "fightfor": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": "dist/fightfor",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,18 +68,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "fightfor:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "demo:build:production"
+              "browserTarget": "fightfor:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "fightfor:build"
           }
         },
         "test": {
@@ -131,7 +131,7 @@
         }
       }
     },
-    "demo-e2e": {
+    "fightfor-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -139,11 +139,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "demo:serve"
+            "devServerTarget": "fightfor:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "demo:serve:production"
+              "devServerTarget": "fightfor:serve:production"
             }
           }
         },
@@ -159,5 +159,5 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "fightfor"
 }
