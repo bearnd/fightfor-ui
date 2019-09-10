@@ -107,7 +107,6 @@ export class GeolocationService {
       environment.mapbox.uri,
       'geocoding/v5/mapbox.places',
       [longitude, latitude].join(',') + '.json',
-      '?access_token=' + environment.mapbox.apiKey,
     );
 
     // Return the request observable.
@@ -126,7 +125,6 @@ export class GeolocationService {
       environment.mapbox.uri,
       'geocoding/v5/mapbox.places',
       query + '.json',
-      '?access_token=' + environment.mapbox.apiKey,
     );
 
     // Return the request observable.

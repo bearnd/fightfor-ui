@@ -61,6 +61,7 @@ import {
 import {
   StudiesBreadcrumbResolverService
 } from './components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
+import { getAccessToken } from './shared/utils';
 
 
 @NgModule({
@@ -91,13 +92,8 @@ import {
     // during authentication.
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
-        whitelistedDomains: [
-          environment.braintreeGateway.domain,
-          environment.graphql.domain,
-        ],
+        tokenGetter: getAccessToken,
+        whitelistedDomains: [environment.apiGateway.domain],
       }
     }),
     FlexLayoutModule,
