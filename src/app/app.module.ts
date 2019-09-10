@@ -61,6 +61,7 @@ import {
 import {
   StudiesBreadcrumbResolverService
 } from './components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
+import { getAccessToken } from './shared/utils';
 
 
 @NgModule({
