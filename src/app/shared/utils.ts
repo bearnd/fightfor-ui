@@ -183,3 +183,11 @@ export function filterValues(
     )
   );
 }
+
+/**
+ * Retrieves the previously stored access-token.
+ * @returns The previously stored access-token.
+ */
+export function getAccessToken(): string {
+  return localStorage.getItem('access_token');
+}

@@ -91,13 +91,11 @@ import {
     // during authentication.
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
         whitelistedDomains: [
           environment.braintreeGateway.domain,
           environment.graphql.domain,
         ],
+        tokenGetter: getAccessToken,
       }
     }),
     FlexLayoutModule,
