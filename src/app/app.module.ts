@@ -92,11 +92,8 @@ import { getAccessToken } from './shared/utils';
     // during authentication.
     JwtModule.forRoot({
       config: {
-        whitelistedDomains: [
-          environment.braintreeGateway.domain,
-          environment.graphql.domain,
-        ],
         tokenGetter: getAccessToken,
+        whitelistedDomains: [environment.apiGateway.domain],
       }
     }),
     FlexLayoutModule,
