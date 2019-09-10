@@ -22,7 +22,7 @@ export class SearchesGridComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private userConfigService: UserConfigService,
+    public userConfigService: UserConfigService,
     private router: Router,
     private dialog: MatDialog,
   ) {}

@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
     = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     public paymentService: PaymentService,
     private userConfigService: UserConfigService,
   ) {
