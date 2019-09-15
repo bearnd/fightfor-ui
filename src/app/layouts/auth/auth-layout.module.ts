@@ -20,6 +20,8 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
 import { CallbackComponent } from '../../callback/callback.component';
 import { PricingComponent } from '../../pricing/pricing.component';
 import { FaqComponent } from '../../faq/faq.component';
+import { TosComponent } from '../../tos/tos.component';
+import { PrivacyComponent } from '../../privacy/privacy.component';
 
 @NgModule({
   imports: [
@@ -42,6 +44,8 @@ import { FaqComponent } from '../../faq/faq.component';
     CallbackComponent,
     PricingComponent,
     FaqComponent,
+    TosComponent,
+    PrivacyComponent,
   ],
   providers: [],
   entryComponents: [],
