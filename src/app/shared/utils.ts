@@ -1,7 +1,7 @@
 import * as momentParser from 'moment-parser';
 import * as moment from 'moment';
 import { FacilityCanonicalInterface } from '../interfaces/study.interface';
-import { ReplaySubject } from 'rxjs/Rx';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 /**
  * Casts an enumeration into an array of objects with and `id` property holding
