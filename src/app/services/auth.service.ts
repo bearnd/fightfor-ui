@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 
 import { mergeMap } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs-compat/add/observable/timer';
 
 import { environment } from '../../environments/environment';
 
