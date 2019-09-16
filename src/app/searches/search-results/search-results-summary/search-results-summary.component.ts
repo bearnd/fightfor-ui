@@ -585,6 +585,12 @@ export class SearchResultsSummaryComponent implements OnInit {
   configureStudiesLocationsMap(
     studiesByCountry: StudiesCountByCountryInterface[],
   ) {
+
+    // Return if no studies-by-country were found.
+    if (!studiesByCountry[0]) {
+      return;
+    }
+
     // Calculate the maximum and minimum values of study-count.
     const mapMax: number = studiesByCountry
       .reduce(
