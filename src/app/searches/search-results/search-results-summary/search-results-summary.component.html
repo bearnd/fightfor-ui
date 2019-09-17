@@ -122,20 +122,20 @@
             <div class="card-body">
 
               <div class="row">
-                <div class="col-md-3">
-                  <div class="card card-stats" style="background-color: white">
-                    <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
-                        <i class="material-icons">add_circle</i>
-                      </div>
-                      <p class="card-category">Recruiting</p>
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Recruiting</h4>
+                    </div>
+                    <div class="card-body">
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.recruiting }}
                         <mat-icon
                           class="fa-spin"
                           [color]="'primary'"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
-                        >refresh</mat-icon>
+                        >refresh
+                        </mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -144,26 +144,26 @@
                         <a
                           (click)="onNavigateToList(search.searchUuid, 'recruiting')"
                           style="cursor: pointer"
-                        >View recruiting trials</a>
+                        >View all</a>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="card card-stats" style="background-color: white">
-                    <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
-                        <i class="material-icons">slow_motion_video</i>
-                      </div>
-                      <p class="card-category">Active</p>
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Active</h4>
+                    </div>
+                    <div class="card-body">
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.active }}
                         <mat-icon
                           class="fa-spin"
                           [color]="'primary'"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
-                        >refresh</mat-icon>
+                        >refresh
+                        </mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -172,26 +172,26 @@
                         <a
                           (click)="onNavigateToList(search.searchUuid, 'active')"
                           style="cursor: pointer"
-                        >View active trials</a>
+                        >View all</a>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="card card-stats" style="background-color: white">
-                    <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
-                        <i class="material-icons">check_circle</i>
-                      </div>
-                      <p class="card-category">Completed</p>
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Completed</h4>
+                    </div>
+                    <div class="card-body">
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.completed }}
                         <mat-icon
                           class="fa-spin"
                           [color]="'primary'"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
-                        >refresh</mat-icon>
+                        >refresh
+                        </mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -200,26 +200,26 @@
                         <a
                           (click)="onNavigateToList(search.searchUuid, 'completed')"
                           style="cursor: pointer"
-                        >View completed trials</a>
+                        >View all</a>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-md-3">
-                  <div class="card card-stats" style="background-color: white">
-                    <div class="card-header card-header-danger card-header-icon">
-                      <div class="card-icon">
-                        <i class="material-icons">donut_small</i>
-                      </div>
-                      <p class="card-category">All</p>
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">All</h4>
+                    </div>
+                    <div class="card-body">
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.all }}
                         <mat-icon
                           class="fa-spin"
                           [color]="'primary'"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
-                        >refresh</mat-icon>
+                        >refresh
+                        </mat-icon>
                       </h3>
                     </div>
                     <div class="card-footer">
@@ -228,7 +228,7 @@
                         <a
                           (click)="onNavigateToList(search.searchUuid, 'all')"
                           style="cursor: pointer"
-                        >View all trials</a>
+                        >View all</a>
                       </div>
                     </div>
                   </div>
@@ -326,11 +326,11 @@
                     </table>
                   </div>
                   <mat-paginator
-                    #paginatorStudiesLocation
-                    [length]="search.studiesStats.byCountry?.length"
-                    [pageSize]="numStudiesLocationsDisplay"
-                    showFirstLastButtons="true"
-                    hidePageSize="true"
+                      #paginatorStudiesLocation
+                      [length]="search.studiesStats.byCountry?.length"
+                      [pageSize]="numStudiesLocationsDisplay"
+                      showFirstLastButtons="true"
+                      hidePageSize="true"
                   ></mat-paginator>
 
                 </div>
