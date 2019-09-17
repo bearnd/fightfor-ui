@@ -4,3 +4,15 @@
   height: 100%;
   overflow: auto;
 }
+
+.layout-row{
+  display: flex;
+  align-items: stretch;
+}
+
+.card-title-trunc{
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
