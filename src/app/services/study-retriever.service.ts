@@ -427,8 +427,8 @@ export class StudyRetrieverService {
           gender: gender || null,
           yearBeg: yearBeg || null,
           yearEnd: yearEnd || null,
-          ageBeg: yearBeg || null,
-          ageEnd: yearEnd || null,
+          ageBeg: ageBeg || null,
+          ageEnd: ageEnd || null,
           doIncludeChildren: true,
         }
       }).map((response) => {
