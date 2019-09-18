@@ -124,7 +124,7 @@ import { getAccessToken } from './shared/utils';
       useClass: SentryErrorHandler
     },
     StudyBreadcrumbResolverService,
-    StudiesBreadcrumbResolverService
+    StudiesBreadcrumbResolverService,
   ],
   bootstrap: [AppComponent],
   exports: [
