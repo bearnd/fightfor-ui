@@ -1,5 +1,13 @@
+
+
 .mbp-img {
   width: 100%;
+}
+
+.btn-dark-blue {
+  background-color: #1E365C !important;
+  border-color: #1E365C !important;
+  margin-right: 20px !important;
 }
 
 .container-features {
