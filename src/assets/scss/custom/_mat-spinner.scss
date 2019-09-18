@@ -3,4 +3,9 @@
 .mat-progress-spinner circle, .mat-spinner circle {
   stroke: $blue-gray-ff !important;
 }
+
+.mat-progress-spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
