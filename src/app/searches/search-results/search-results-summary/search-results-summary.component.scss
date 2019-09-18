@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/core/variables/colors";
+
 .sticky-scrollable {
   top: 0;
   position: sticky;
@@ -15,4 +17,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.card-icon-spinner {
+  color: $blue-gray-ff;
 }

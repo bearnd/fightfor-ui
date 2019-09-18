@@ -6,12 +6,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
 import {
-  InterventionType,
   OrderType,
   StudyInterface,
-  StudyOverallStatus,
-  StudyPhase,
-  StudyType
 } from '../interfaces/study.interface';
 import { DescriptorInterface } from '../interfaces/descriptor.interface';
 

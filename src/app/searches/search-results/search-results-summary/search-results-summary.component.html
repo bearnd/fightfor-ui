@@ -1,5 +1,13 @@
 <div class="main-content">
-  <div class="container-fluid">
+  <div class="mat-progress-spinner-container">
+    <mat-spinner
+      *ngIf="studyRetrieverService.isLoadingSearchStudies | async"
+    ></mat-spinner>
+  </div>
+  <div
+    *ngIf="!(studyRetrieverService.isLoadingSearchStudies | async)"
+    class="container-fluid"
+  >
     <div class="row">
 
       <div class="col-md-2 sticky-scrollable">
@@ -131,8 +139,7 @@
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.recruiting }}
                         <mat-icon
-                          class="fa-spin"
-                          [color]="'primary'"
+                          class="fa-spin card-icon-spinner"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
                         >refresh
                         </mat-icon>
@@ -159,8 +166,7 @@
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.active }}
                         <mat-icon
-                          class="fa-spin"
-                          [color]="'primary'"
+                          class="fa-spin card-icon-spinner"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
                         >refresh
                         </mat-icon>
@@ -187,8 +193,7 @@
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.completed }}
                         <mat-icon
-                          class="fa-spin"
-                          [color]="'primary'"
+                          class="fa-spin card-icon-spinner"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
                         >refresh
                         </mat-icon>
@@ -215,8 +220,7 @@
                       <h3 class="card-title">
                         {{ countStudiesByOverallStatusGroup.all }}
                         <mat-icon
-                          class="fa-spin"
-                          [color]="'primary'"
+                          class="fa-spin card-icon-spinner"
                           *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
                         >refresh
                         </mat-icon>
@@ -266,15 +270,15 @@
               <div class="row">
 
                 <div class="col-md-6">
-
                   <!--Locations table.-->
-                  <mat-spinner
-                    style="position:relative;top:50%;left:50%"
+                  <div
+                    class="mat-progress-spinner-container"
                     *ngIf="isLoadingGetCountStudiesByCountry | async"
-                  ></mat-spinner>
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
                   <div
                     class="content table-responsive"
-                    *ngIf="!(isLoadingGetCountStudiesByCountry | async)"
                   >
                     <table
                       mat-table
@@ -332,14 +336,15 @@
                       showFirstLastButtons="true"
                       hidePageSize="true"
                   ></mat-paginator>
-
                 </div>
 
                 <div class="col-md-6">
-                  <mat-spinner
-                    style="position:relative;top:50%;left:50%"
+                  <div
+                    class="mat-progress-spinner-container"
                     *ngIf="isLoadingGetCountStudiesByCountry | async"
-                  ></mat-spinner>
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
                   <div
                       #worldMap
                       id="worldMap"
@@ -379,10 +384,12 @@
 
               <div class="row">
 
-                <mat-spinner
-                  style="position:relative;top:50%;left:50%"
+                <div
+                  class="mat-progress-spinner-container"
                   *ngIf="isLoadingGetCountStudiesByFacility | async"
-                ></mat-spinner>
+                >
+                  <mat-spinner></mat-spinner>
+                </div>
                 <div
                   class="col-md-12"
                   *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
@@ -516,11 +523,12 @@
                 <div class="col-md-6">
                   <h5>Top Therapies</h5>
                   <div class="row">
-
-                    <mat-spinner
-                      style="position:relative;top:50%;left:50%"
+                    <div
+                      class="mat-progress-spinner-container"
                       *ngIf="isLoadingGetCountStudiesByDescriptor | async"
-                    ></mat-spinner>
+                    >
+                      <mat-spinner></mat-spinner>
+                    </div>
                     <div
                       class="col-md-12"
                       *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
@@ -581,11 +589,12 @@
                 <div class="col-md-6">
                   <h5>Latest Therapies</h5>
                   <div class="row">
-
-                    <mat-spinner
-                      style="position:relative;top:50%;left:50%"
+                    <div
+                      class="mat-progress-spinner-container"
                       *ngIf="isLoadingGetLatestDescriptors | async"
-                    ></mat-spinner>
+                    >
+                      <mat-spinner></mat-spinner>
+                    </div>
                     <div
                       class="col-md-12"
                       *ngIf="!(isLoadingGetLatestDescriptors | async)"
