@@ -20,11 +20,12 @@ import {
   MatExpansionModule,
 } from '@angular/material';
 
-import { Ng2PageScrollModule, PageScrollService} from 'ng2-page-scroll';
 import { ScrollTrackerModule } from '@nicky-lenaers/ngx-scroll-tracker';
 import { TruncateModule } from 'ng2-truncate';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { IonRangeSliderModule } from 'ng2-ion-range-slider';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { SearchesComponent } from '../../searches/searches.component';
@@ -81,11 +82,12 @@ import {
     MatRadioModule,
     MatDialogModule,
     MatExpansionModule,
-    Ng2PageScrollModule,
     ScrollTrackerModule.forRoot(),
     TruncateModule,
     NgxMatSelectSearchModule,
     IonRangeSliderModule,
+    NgxPageScrollCoreModule,
+    NgxPageScrollModule,
   ],
   declarations: [
     SearchesComponent,
@@ -102,7 +104,7 @@ import {
     MeshTermChipComponent,
     MeshTermChipListComponent,
   ],
-  providers: [PageScrollService],
+  providers: [],
   entryComponents: [
     MeshTermDialogComponent,
   ],
