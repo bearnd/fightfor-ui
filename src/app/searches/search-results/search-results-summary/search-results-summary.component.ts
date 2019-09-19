@@ -254,20 +254,20 @@ export class SearchResultsSummaryComponent implements OnInit {
                 res.then();
               }
             }).catch(swal.noop);
+          } else {
+            // Assign the retrieved studies to the search.
+            this.search.studies = studies;
+
+            // Trigger an update the study-statistics via the corresponding
+            // methods.
+            this.getCountStudiesByOverallStatus();
+            this.getCountStudiesByCountry();
+            this.getCountStudiesByFacility(this.numFacilitiesDisplay);
+            this.getCountStudiesByDescriptor(
+              this.numInterventionDescriptorsDisplay,
+            );
+            this.getLatestDescriptors(this.numLatestDescriptorsDisplay);
           }
-
-          // Assign the retrieved studies to the search.
-          this.search.studies = studies;
-
-          // Trigger an update the study-statistics via the corresponding
-          // methods.
-          this.getCountStudiesByOverallStatus();
-          this.getCountStudiesByCountry();
-          this.getCountStudiesByFacility(this.numFacilitiesDisplay);
-          this.getCountStudiesByDescriptor(
-            this.numInterventionDescriptorsDisplay,
-          );
-          this.getLatestDescriptors(this.numLatestDescriptorsDisplay);
 
           // Indicate that `searchStudies` is complete for this search.
           this.loadingSearchStudies.next(false);
