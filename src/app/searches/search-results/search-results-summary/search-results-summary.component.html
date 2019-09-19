@@ -1,13 +1,5 @@
 <div class="main-content">
-  <div class="mat-progress-spinner-container">
-    <mat-spinner
-      *ngIf="studyRetrieverService.isLoadingSearchStudies | async"
-    ></mat-spinner>
-  </div>
-  <div
-    *ngIf="!(studyRetrieverService.isLoadingSearchStudies | async)"
-    class="container-fluid"
-  >
+  <div class="container-fluid">
     <div class="row">
 
       <div class="col-md-2 sticky-scrollable">
@@ -140,7 +132,7 @@
                         {{ countStudiesByOverallStatusGroup.recruiting }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -167,7 +159,7 @@
                         {{ countStudiesByOverallStatusGroup.active }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -194,7 +186,7 @@
                         {{ countStudiesByOverallStatusGroup.completed }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -221,7 +213,7 @@
                         {{ countStudiesByOverallStatusGroup.all }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -273,7 +265,7 @@
                   <!--Locations table.-->
                   <div
                     class="mat-progress-spinner-container"
-                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
                   >
                     <mat-spinner></mat-spinner>
                   </div>
@@ -341,7 +333,7 @@
                 <div class="col-md-6">
                   <div
                     class="mat-progress-spinner-container"
-                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
                   >
                     <mat-spinner></mat-spinner>
                   </div>
@@ -384,18 +376,18 @@
 
               <div class="row">
 
-                <div
-                  class="mat-progress-spinner-container"
-                  *ngIf="isLoadingGetCountStudiesByFacility | async"
-                >
-                  <mat-spinner></mat-spinner>
-                </div>
-                <div
-                  class="col-md-12"
-                  *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
-                >
+                <div class="col-md-12">
+                  <div
+                    class="mat-progress-spinner-container"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByFacility | async)"
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
                   <!--Locations table.-->
-                  <div class="content table-responsive">
+                  <div
+                    class="content table-responsive"
+                    *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
+                  >
                     <table
                       mat-table
                       #tableFacilities
@@ -523,18 +515,18 @@
                 <div class="col-md-6">
                   <h5>Top Therapies</h5>
                   <div class="row">
-                    <div
-                      class="mat-progress-spinner-container"
-                      *ngIf="isLoadingGetCountStudiesByDescriptor | async"
-                    >
-                      <mat-spinner></mat-spinner>
-                    </div>
-                    <div
-                      class="col-md-12"
-                      *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
-                    >
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByDescriptor | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
                       <!--Studies-by-descriptors table.-->
-                      <div class="content table-responsive">
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
+                      >
                         <table
                           mat-table
                           #tableStudiesByDescriptor
@@ -589,18 +581,18 @@
                 <div class="col-md-6">
                   <h5>Latest Therapies</h5>
                   <div class="row">
-                    <div
-                      class="mat-progress-spinner-container"
-                      *ngIf="isLoadingGetLatestDescriptors | async"
-                    >
-                      <mat-spinner></mat-spinner>
-                    </div>
-                    <div
-                      class="col-md-12"
-                      *ngIf="!(isLoadingGetLatestDescriptors | async)"
-                    >
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetLatestDescriptors | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
                       <!--Latest descriptors table.-->
-                      <div class="content table-responsive">
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetLatestDescriptors | async)"
+                      >
                         <table
                           mat-table
                           #tableLatestDescriptors
