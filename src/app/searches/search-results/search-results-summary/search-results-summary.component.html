@@ -376,18 +376,18 @@
 
               <div class="row">
 
-                <div
-                  class="mat-progress-spinner-container"
-                  *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByFacility | async)"
-                >
-                  <mat-spinner></mat-spinner>
-                </div>
-                <div
-                  class="col-md-12"
-                  *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
-                >
+                <div class="col-md-12">
+                  <div
+                    class="mat-progress-spinner-container"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByFacility | async)"
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
                   <!--Locations table.-->
-                  <div class="content table-responsive">
+                  <div
+                    class="content table-responsive"
+                    *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
+                  >
                     <table
                       mat-table
                       #tableFacilities
@@ -515,18 +515,18 @@
                 <div class="col-md-6">
                   <h5>Top Therapies</h5>
                   <div class="row">
-                    <div
-                      class="mat-progress-spinner-container"
-                      *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByDescriptor | async)"
-                    >
-                      <mat-spinner></mat-spinner>
-                    </div>
-                    <div
-                      class="col-md-12"
-                      *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
-                    >
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByDescriptor | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
                       <!--Studies-by-descriptors table.-->
-                      <div class="content table-responsive">
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
+                      >
                         <table
                           mat-table
                           #tableStudiesByDescriptor
@@ -581,18 +581,18 @@
                 <div class="col-md-6">
                   <h5>Latest Therapies</h5>
                   <div class="row">
-                    <div
-                      class="mat-progress-spinner-container"
-                      *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetLatestDescriptors | async)"
-                    >
-                      <mat-spinner></mat-spinner>
-                    </div>
-                    <div
-                      class="col-md-12"
-                      *ngIf="!(isLoadingGetLatestDescriptors | async)"
-                    >
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetLatestDescriptors | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
                       <!--Latest descriptors table.-->
-                      <div class="content table-responsive">
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetLatestDescriptors | async)"
+                      >
                         <table
                           mat-table
                           #tableLatestDescriptors
