@@ -132,7 +132,7 @@
                         {{ countStudiesByOverallStatusGroup.recruiting }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -159,7 +159,7 @@
                         {{ countStudiesByOverallStatusGroup.active }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -186,7 +186,7 @@
                         {{ countStudiesByOverallStatusGroup.completed }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -213,7 +213,7 @@
                         {{ countStudiesByOverallStatusGroup.all }}
                         <mat-icon
                           class="fa-spin card-icon-spinner"
-                          *ngIf="isLoadingGetCountStudiesByOverallStatus | async"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
                         >refresh
                         </mat-icon>
                       </h3>
@@ -265,7 +265,7 @@
                   <!--Locations table.-->
                   <div
                     class="mat-progress-spinner-container"
-                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
                   >
                     <mat-spinner></mat-spinner>
                   </div>
@@ -333,7 +333,7 @@
                 <div class="col-md-6">
                   <div
                     class="mat-progress-spinner-container"
-                    *ngIf="isLoadingGetCountStudiesByCountry | async"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
                   >
                     <mat-spinner></mat-spinner>
                   </div>
@@ -378,7 +378,7 @@
 
                 <div
                   class="mat-progress-spinner-container"
-                  *ngIf="isLoadingGetCountStudiesByFacility | async"
+                  *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByFacility | async)"
                 >
                   <mat-spinner></mat-spinner>
                 </div>
@@ -517,7 +517,7 @@
                   <div class="row">
                     <div
                       class="mat-progress-spinner-container"
-                      *ngIf="isLoadingGetCountStudiesByDescriptor | async"
+                      *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByDescriptor | async)"
                     >
                       <mat-spinner></mat-spinner>
                     </div>
@@ -583,7 +583,7 @@
                   <div class="row">
                     <div
                       class="mat-progress-spinner-container"
-                      *ngIf="isLoadingGetLatestDescriptors | async"
+                      *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetLatestDescriptors | async)"
                     >
                       <mat-spinner></mat-spinner>
                     </div>
