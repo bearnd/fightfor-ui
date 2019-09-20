@@ -140,7 +140,7 @@ export class SearchResultsSummaryComponent implements OnInit {
 
   constructor(
     public userConfigService: UserConfigService,
-    private studyRetrieverService: StudyRetrieverService,
+    public studyRetrieverService: StudyRetrieverService,
     private studyStatsRetrieverService: StudyStatsRetrieverService,
     private route: ActivatedRoute,
     private router: Router,
