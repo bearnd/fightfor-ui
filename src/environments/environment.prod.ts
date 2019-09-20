@@ -4,10 +4,10 @@ export const environment = {
     domain: 'api.fightfor.app',
   },
   graphql: {
-    uri: 'http://api.fightfor.app/fightfor-graphql/graphql',
+    uri: 'https://api.fightfor.app/fightfor-graphql/graphql',
   },
   mapbox: {
-    uri: 'http://api.fightfor.app/mapbox',
+    uri: 'https://api.fightfor.app/mapbox',
   },
   auth0: {
     clientID: 'e8OIuAxekw31C33sllws23hPUGcxS80A',
@@ -18,7 +18,7 @@ export const environment = {
     audience: 'fightfor-backend',
   },
   braintreeGateway: {
-    uri: 'http://api.fightfor.app/braintree-gateway',
+    uri: 'https://api.fightfor.app/braintree-gateway',
     planId: 'fightfor_premium_monthly'
   },
   sentry: {
