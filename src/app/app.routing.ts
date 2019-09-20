@@ -3,24 +3,35 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AuthenticationGuard } from './guards/authentication.guard';
+
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
-    component: AdminLayoutComponent,
+    component: AuthLayoutComponent,
     children: [
       {
         path: '',
-        loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
+        loadChildren: './layouts/auth/auth-layout.module#AuthLayoutModule'
       }
     ]
-  }
+  },
+  {
+    path: 'app',
+    component: AdminLayoutComponent,
+    canActivate: [AuthenticationGuard],
+    canActivateChild: [AuthenticationGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: './layouts/admin/admin-layout.module#AdminLayoutModule'
+      }
+    ]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

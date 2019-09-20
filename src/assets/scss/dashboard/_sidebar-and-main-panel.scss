@@ -76,7 +76,7 @@
             [data-toggle="collapse"] ~ div > ul > li > a{
                 span{
                     display: inline-block;
-                    @extend .animation-transition-general;
+                    // @extend .animation-transition-general;
                 }
 
                 .sidebar-normal{
@@ -193,7 +193,7 @@
             display: block;
             height: auto;
             white-space: nowrap;
-            @extend .animation-transition-general;
+            // @extend .animation-transition-general;
         }
 
         i{
@@ -226,7 +226,7 @@
         top: 0;
         left: 0;
         background-size: cover;
-        background-position: center center;
+        background-position: 95% 30%;
 
         &:after{
             position: absolute;
@@ -241,7 +241,7 @@
     }
 
     .logo{
-        padding: 15px 0px;
+        padding: 20px 0px;
         margin: 0;
         display: block;
         position: relative;
@@ -256,6 +256,7 @@
             opacity: 1;
             float: left;
             width: 30px;
+            height: auto;
             text-align: center;
             margin-left: 23px;
             margin-right: 15px;

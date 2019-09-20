@@ -7,13 +7,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { McBreadcrumbsComponent, McBreadcrumbsModule } from 'ngx-breadcrumbs';
 import { BreadcrumbsComponent } from './navbar/breadcrumbs/breadcrumbs.component';
+import { MatIconModule, MatMenuModule } from '@angular/material';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    McBreadcrumbsModule.forRoot()
+    McBreadcrumbsModule.forRoot(),
+    MatMenuModule,
+    MatIconModule,
   ],
   declarations: [
     FooterComponent,

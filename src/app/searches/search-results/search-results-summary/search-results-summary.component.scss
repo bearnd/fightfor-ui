@@ -1,0 +1,24 @@
+@import "../../../../assets/scss/core/variables/colors";
+
+.sticky-scrollable {
+  top: 0;
+  position: sticky;
+  height: 100%;
+  overflow: auto;
+}
+
+.layout-row{
+  display: flex;
+  align-items: stretch;
+}
+
+.card-title-trunc{
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card-icon-spinner {
+  color: $blue-gray-ff;
+}

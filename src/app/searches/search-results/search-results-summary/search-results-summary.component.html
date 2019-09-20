@@ -1,0 +1,657 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-2 sticky-scrollable">
+        <!--Nav-pill fixed navigation menu.-->
+        <ul class="nav nav-pills nav-pills-rose nav-pills-icons flex-column">
+
+          <li class="nav-item pill-small">
+            <!--The nav-pill links are used to smoothly scroll to the
+            corresponding card. In addition their `active` state is defined via
+            the `isNavPillActive` method which uses the current scroll location
+            of the page to automatically activate the nav-pill corresponding to
+            the currently viewed card.-->
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#overview"
+              [ngClass]="{active: isNavPillActive(0)}"
+            >
+              <i class="material-icons">find_in_page</i> Overview
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#trials"
+              [ngClass]="{active: isNavPillActive(1)}"
+            >
+              <i class="material-icons">local_pharmacy</i> Trials
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#studiesLocations"
+              [ngClass]="{active: isNavPillActive(2)}"
+            >
+              <i class="material-icons">location_on</i> Locations
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#institutions"
+              [ngClass]="{active: isNavPillActive(3)}"
+            >
+              <i class="material-icons">account_balance</i> Institutions
+            </a>
+          </li>
+
+          <li class="nav-item pill-small">
+            <a
+              class="nav-link"
+              pageScroll
+              [pageScrollDuration]="500"
+              href="#therapies"
+              [ngClass]="{active: isNavPillActive(4)}"
+            >
+              <i class="material-icons">camera_enhance</i> Therapies
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <div class="row" id="overview">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 0)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">find_in_page</i>
+              </div>
+              <h4 class="card-title">{{ 'Overview' | uppercase }}</h4>
+            </div>
+            <div class="card-body">
+              <h5>MeSH Descriptors</h5>
+              <app-mesh-term-chip-list
+                [descriptors]="search.descriptors"
+              ></app-mesh-term-chip-list>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="trials">
+          <div class="card" style="background-color: transparent">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 1)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">local_pharmacy</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Clinical Trials' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Recruiting</h4>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        {{ countStudiesByOverallStatusGroup.recruiting }}
+                        <mat-icon
+                          class="fa-spin card-icon-spinner"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
+                        >refresh
+                        </mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'recruiting')"
+                          style="cursor: pointer"
+                        >View all</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Active</h4>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        {{ countStudiesByOverallStatusGroup.active }}
+                        <mat-icon
+                          class="fa-spin card-icon-spinner"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
+                        >refresh
+                        </mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'active')"
+                          style="cursor: pointer"
+                        >View all</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">Completed</h4>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        {{ countStudiesByOverallStatusGroup.completed }}
+                        <mat-icon
+                          class="fa-spin card-icon-spinner"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
+                        >refresh
+                        </mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'completed')"
+                          style="cursor: pointer"
+                        >View all</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-3 layout-row">
+                  <div class="card" style="background-color: white">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title card-title-trunc">All</h4>
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title">
+                        {{ countStudiesByOverallStatusGroup.all }}
+                        <mat-icon
+                          class="fa-spin card-icon-spinner"
+                          *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByOverallStatus | async)"
+                        >refresh
+                        </mat-icon>
+                      </h3>
+                    </div>
+                    <div class="card-footer">
+                      <div class="stats">
+                        <i class="material-icons text-primary">list_alt</i>
+                        <a
+                          (click)="onNavigateToList(search.searchUuid, 'all')"
+                          style="cursor: pointer"
+                        >View all</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="card-footer">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="studiesLocations">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 2)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">location_on</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Locations (Trials)' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-6">
+                  <!--Locations table.-->
+                  <div
+                    class="mat-progress-spinner-container"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
+                  <div
+                    class="content table-responsive"
+                  >
+                    <table
+                      mat-table
+                      #tableLocations
+                      [dataSource]="dataSourceStudiesLocations"
+                      class="table table-hover"
+                      width="100%"
+                    >
+                      <!--Header.-->
+                      <mat-header-row
+                        *matHeaderRowDef="displayedColumnsStudiesLocations"
+                      ></mat-header-row>
+                      <mat-row
+                        *matRowDef="let row;
+                        columns: displayedColumnsStudiesLocations;"
+                        (click)="onNavigateToCountry(row.country)"
+                        style="cursor: pointer"
+                      ></mat-row>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <mat-header-cell *matHeaderCellDef>
+                          Rank
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let idx = index">
+                          {{ idx + paginator.pageIndex * paginator.pageSize + 1 }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell *matHeaderCellDef>
+                          Country
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let entry">
+                          {{ entry.country }}
+                        </mat-cell>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <mat-header-cell *matHeaderCellDef>
+                          Trials
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let entry">
+                          {{ entry.countStudies }}
+                        </mat-cell>
+                      </ng-container>
+                    </table>
+                  </div>
+                  <mat-paginator
+                      #paginatorStudiesLocation
+                      [length]="search.studiesStats.byCountry?.length"
+                      [pageSize]="numStudiesLocationsDisplay"
+                      showFirstLastButtons="true"
+                      hidePageSize="true"
+                  ></mat-paginator>
+                </div>
+
+                <div class="col-md-6">
+                  <div
+                    class="mat-progress-spinner-container"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByCountry | async)"
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
+                  <div
+                      #worldMap
+                      id="worldMap"
+                      [style.height]="worldMapHeight"
+                      [style.width]="worldMapWidth"
+                      (window:resize)="onResize($event)"
+                  >
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="institutions">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 3)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">account_balance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Institutions' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-md-12">
+                  <div
+                    class="mat-progress-spinner-container"
+                    *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByFacility | async)"
+                  >
+                    <mat-spinner></mat-spinner>
+                  </div>
+                  <!--Locations table.-->
+                  <div
+                    class="content table-responsive"
+                    *ngIf="!(isLoadingGetCountStudiesByFacility | async)"
+                  >
+                    <table
+                      mat-table
+                      #tableFacilities
+                      [dataSource]="dataSourceFacilities"
+                      width="100%"
+                    >
+                      <!--Header.-->
+                      <tr
+                        mat-header-row
+                        *matHeaderRowDef="displayedColumnsFacilities"
+                      >
+                      </tr>
+                      <tr
+                        mat-row
+                        *matRowDef="let row;
+                        columns: displayedColumnsFacilities;"
+                      >
+                      </tr>
+
+                      <!-- Rank Column -->
+                      <ng-container matColumnDef="rank">
+                        <th mat-header-cell *matHeaderCellDef>Rank</th>
+                        <td mat-cell *matCellDef="let idx = index">
+                          {{ idx + 1 }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Name Column -->
+                      <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Name</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.name }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Country Column -->
+                      <ng-container matColumnDef="country">
+                        <th mat-header-cell *matHeaderCellDef>Country</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.country }}
+                        </td>
+                      </ng-container>
+
+                      <!-- City Column -->
+                      <ng-container matColumnDef="locality">
+                        <th mat-header-cell *matHeaderCellDef>City</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.locality }}
+                        </td>
+                      </ng-container>
+
+                      <!-- State Column -->
+                      <ng-container matColumnDef="administrativeAreaLevel1">
+                        <th mat-header-cell *matHeaderCellDef>State</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.facilityCanonical.administrativeAreaLevel1 }}
+                        </td>
+                      </ng-container>
+
+                      <!-- Top Interventions Column -->
+                      <ng-container matColumnDef="topInterventions">
+                        <th mat-header-cell *matHeaderCellDef>
+                          Top Therapies (Interventions)
+                        </th>
+                        <td mat-cell *matCellDef="let entry">
+                          <app-mesh-term-chip-list
+                            [descriptors]="topFacilityMeshTerms[entry.facilityCanonical.facilityCanonicalId]"
+                          ></app-mesh-term-chip-list>
+                        </td>
+                      </ng-container>
+
+                      <!-- Trials Column -->
+                      <ng-container matColumnDef="countStudies">
+                        <th mat-header-cell *matHeaderCellDef>Trials</th>
+                        <td mat-cell *matCellDef="let entry">
+                          {{ entry.countStudies }}
+                        </td>
+                      </ng-container>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="card-footer">
+              <div class="stats">
+                <i class="material-icons text-primary">list_alt</i>
+                <a
+                  (click)="onNavigateToFacilitiesList(search.searchUuid)"
+                  style="cursor: pointer"
+                >View all institutions</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="row" id="therapies">
+          <div class="card">
+            <!--Set a scroll-tracker on the card header.-->
+            <div
+              class="card-header card-header-icon card-header-rose"
+              (ngx-scroll-tracker)="onScroll($event, 3)"
+            >
+              <div class="card-icon">
+                <i class="material-icons">camera_enhance</i>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <h4 class="card-title">
+                    {{ 'Therapies (Interventions)' | uppercase }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <h5>Top Therapies</h5>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetCountStudiesByDescriptor | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
+                      <!--Studies-by-descriptors table.-->
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetCountStudiesByDescriptor | async)"
+                      >
+                        <table
+                          mat-table
+                          #tableStudiesByDescriptor
+                          [dataSource]="dataSourceInterventionDescriptors"
+                          width="100%"
+                        >
+                          <!--Header.-->
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumnsInterventionDescriptors"
+                          >
+                          </tr>
+                          <tr
+                            mat-row
+                            *matRowDef="let row;
+                        columns: displayedColumnsInterventionDescriptors;"
+                          >
+                          </tr>
+
+                          <!-- Rank Column -->
+                          <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let idx = index">
+                              {{ idx + 1 }}
+                            </td>
+                          </ng-container>
+
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let entry">
+                              <app-mesh-term-chip [descriptor]="entry.meshTerm"
+                              ></app-mesh-term-chip>
+                            </td>
+                          </ng-container>
+
+                          <!-- Trials Column -->
+                          <ng-container matColumnDef="countStudies">
+                            <th mat-header-cell *matHeaderCellDef>Trials</th>
+                            <td mat-cell *matCellDef="let entry">
+                              {{ entry.countStudies }}
+                            </td>
+                          </ng-container>
+
+                        </table>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <h5>Latest Therapies</h5>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div
+                        class="mat-progress-spinner-container"
+                        *ngIf="(studyRetrieverService.isLoadingSearchStudies | async) || (isLoadingGetLatestDescriptors | async)"
+                      >
+                        <mat-spinner></mat-spinner>
+                      </div>
+                      <!--Latest descriptors table.-->
+                      <div
+                        class="content table-responsive"
+                        *ngIf="!(isLoadingGetLatestDescriptors | async)"
+                      >
+                        <table
+                          mat-table
+                          #tableLatestDescriptors
+                          [dataSource]="dataSourceLatestDescriptors"
+                          width="100%"
+                        >
+                          <!--Header.-->
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="displayedColumnsLatestDescriptors"
+                          >
+                          </tr>
+                          <tr
+                            mat-row
+                            *matRowDef="let row;
+                        columns: displayedColumnsLatestDescriptors;"
+                          >
+                          </tr>
+
+                          <!-- Rank Column -->
+                          <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let idx = index">
+                              {{ idx + 1 }}
+                            </td>
+                          </ng-container>
+
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let entry">
+                              <app-mesh-term-chip [descriptor]="entry.meshTerm"
+                              ></app-mesh-term-chip>
+                            </td>
+                          </ng-container>
+
+                          <!-- Date Column -->
+                          <ng-container matColumnDef="date">
+                            <th mat-header-cell *matHeaderCellDef>First Appeared</th>
+                            <td mat-cell *matCellDef="let entry">
+                              {{ humanizeDate(entry.date) + ' ago' }}
+                            </td>
+                          </ng-container>
+
+                        </table>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

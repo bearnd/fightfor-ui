@@ -1,10 +1,10 @@
-import { MaterialDashboardAngularPage } from './app.po';
+import { MdProAngularCliPage } from './app.po';
 
-describe('material-dashboard-angular App', () => {
-  let page: MaterialDashboardAngularPage;
+describe('md-pro-angular-cli App', () => {
+  let page: MdProAngularCliPage;
 
   beforeEach(() => {
-    page = new MaterialDashboardAngularPage();
+    page = new MdProAngularCliPage();
   });
 
   it('should display message saying app works', () => {

@@ -1,6 +1,6 @@
 .card-pricing{
     &:after{
-        background-color: rgba(0, 0, 0, 0.7) !important;
+        background-color: rgba(0, 0, 0, 0) !important;
     }
 
     text-align: center;
@@ -88,4 +88,33 @@
     .card-footer{
         z-index: 2;
     }
+}
+
+
+div.card-pricing.free:after
+{
+  content:"FREE IN ALPHA";
+  position:absolute;
+  line-height: 100%;
+  top:110px;
+  left:50px;
+  z-index:1;
+  font-family:Roboto, "Helvetica Neue", sans-serif;
+  -webkit-transform: rotate(-40deg); /* Safari */
+  -moz-transform: rotate(-40deg); /* Firefox */
+  -ms-transform: rotate(-40deg); /* IE */
+  -o-transform: rotate(-40deg); /* Opera */
+  transform: rotate(-40deg);
+  font-size:60px;
+  color: $blue-gray-ff;
+  background:#fff;
+  border:none;
+  padding:5px;
+  border-radius:5px;
+  zoom:1;
+  filter:alpha(opacity=20);
+  opacity:0.6;
+  -webkit-text-shadow: 0 0 2px $blue-gray-ff;
+  text-shadow: 0 0 2px $blue-gray-ff;
+  box-shadow: 0 0 2px #fff;
 }

@@ -1,63 +1,62 @@
 <div class="main-content">
-  <div class="container-fluid">
+
+  <div
+    class="mat-progress-spinner-container"
+    *ngIf="userConfigService.isLoadingUser | async"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div
+    class="container-fluid"
+    *ngIf="!(userConfigService.isLoadingUser | async)"
+  >
+
     <div class="row">
-      <div class="col-md-4">
+      <h3>Recent Searches</h3>
+    </div>
+    <div class="row">
 
-        <!--New search card.-->
-        <div class="card search-card">
-          <div class="card-header card-header-rose">
-            <h4 class="card-title">New Search</h4>
-            <p class="card-category">Create a new Search</p>
-          </div>
-          <div class="card-body">
-            <h4 class="card-title">Website Views</h4>
-            <p class="card-category">Last Campaign Performance</p>
-
-            <!--New search button.-->
-            <button
-              mat-raised-button
-              class="btn btn-rose mat-raised-button pull-right"
-              (click)="onNewSearch()"
-            >
-              <span class="mat-button-wrapper">New Search</span>
-            </button>
-
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons"></i>&nbsp;
-            </div>
-          </div>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="card new-search-card" (click)="onNewSearch()">
+          <i class="material-icons">add</i>
         </div>
-
       </div>
 
-      <div class="col-md-4" *ngFor="let search of searches; let i=index">
+      <div class="col-lg-3 col-md-4 col-sm-6 layout-row" *ngFor="let search of searches">
+
         <div class="card search-card">
           <div class="card-header card-header-rose">
-            <h4 class="card-title">{{ search.title }}</h4>
-            <p class="card-category">{{ search.description }}</p>
+            <h4 class="card-title card-title-trunc">{{ search.title }}</h4>
           </div>
           <div class="card-body">
-            <h4 class="card-title">Website Views</h4>
-            <p class="card-category">Last Campaign Performance</p>
+            <h4 class="card-title">
+              Search Parameters
+            </h4>
+
+            <app-mesh-term-chip-list
+              [descriptors]="search.descriptors"
+            ></app-mesh-term-chip-list>
+
+            <br>
+            <p class="card-description">
+              Year-Range: {{ search.yearBeg + " - " + search.yearEnd }}
+            </p>
+
             <button
               mat-raised-button
               class="btn btn-rose mat-raised-button pull-right"
               routerLink="results"
-              (click)="onSeeMore(i)"
+              (click)="onSeeResults(search.searchUuid)"
             >
-              <span class="mat-button-wrapper">See More</span>
+              <span class="mat-button-wrapper">See Results</span>
             </button>
-          </div>
-          <div class="card-footer">
-            <div class="stats">
-              <i class="material-icons">access_time</i> last updated 2 days ago
-            </div>
+
           </div>
         </div>
       </div>
 
     </div>
+
   </div>
 </div>

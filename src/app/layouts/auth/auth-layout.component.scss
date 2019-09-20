@@ -1,0 +1,34 @@
+.spacer {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.mat-list-item-nested {
+  padding-left: 20px;
+}
+
+mat-nav-list.list-horizontal {
+  padding: 0;
+
+  .mat-list-item {
+    display: inline-block;
+    height: auto;
+    width: auto;
+    align-content: end;
+    vertical-align: middle;
+    color: #F65C50;
+  }
+}
+
+mat-sidenav {
+  width: 200px;
+
+  .mat-list-item {
+    color: #F65C50;
+  }
+}
+
+.navbar-toggler {
+  color: #F65C50;
+}

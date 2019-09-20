@@ -13,7 +13,7 @@
             display: inline-block;
 
             a{
-                color: inherit;
+                color: $pink-ff;
                 padding: $padding-general-x;
                 font-weight: $font-weight-bold;
                 font-size: $mdb-btn-font-size-base;
@@ -79,6 +79,7 @@
     }
     .copyright{
         padding: 15px 0;
+        color: $pink-ff;
         .material-icons{
             font-size: 18px;
             position: relative;
@@ -98,5 +99,6 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    left: 0;
   }
 }

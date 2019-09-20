@@ -1,0 +1,10 @@
+<mat-chip-list>
+  <app-mesh-term-chip
+    *ngFor="let descriptor of descriptors"
+    [descriptor]="descriptor"
+    [trailingIcon]="trailingIcon"
+    [removeIcon]="removeIcon"
+    [selectable]="selectable"
+    [removable]="removable"
+  ></app-mesh-term-chip>
+</mat-chip-list>

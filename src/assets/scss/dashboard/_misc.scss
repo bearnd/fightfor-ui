@@ -103,3 +103,8 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 .bootstrap-tagsinput [data-role="remove"] {
     @include transition-all($fast-transition-time, $transition-ease-in);
 }
+
+.disabled,[disabled] {
+  pointer-events: none;
+  cursor: not-allowed;
+}

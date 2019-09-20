@@ -1,50 +1,47 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row" *ngIf="!isLoading()">
+    <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-icon card-header-rose">
             <div class="card-icon">
               <i class="material-icons">add_circle</i>
             </div>
-            <div class="row">
-              <div class="col-md-8">
-                <h4 class="card-title">
-                  Search
-                </h4>
-              </div>
-
-              <div class="col-md-4">
-                <button
-                  mat-raised-button mat-min-fab
-                  class="btn btn-rose btn-link btn-round btn-fab pull-right"
-                  (click)="toggleSaved()"
-                  [disableRipple]="true"
-                  matTooltip="Save this search" [matTooltipPosition]="'left'"
-                >
-                  <i class="material-icons">{{ isSaved ? "favorite" : "favorite_border" }}</i>
-                </button>
-              </div>
-            </div>
+            <h4 class="card-title">Search</h4>
           </div>
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
               <div class="form-group">
-                <!--Conditions chip-input with autocomplete.-->
-                <mat-form-field class="term-list-input">
+                <mat-form-field
+                  [hintLabel]="'Set the search title (will be populated with the first selected descriptor if left blank)'"
+                >
+                  <input
+                    matInput
+                    type="text"
+                    id="title"
+                    formControlName="title"
+                    placeholder="Search Title"
+                  />
+                </mat-form-field>
+
+                <!--MeSH descriptors chip-input with autocomplete.-->
+                <mat-form-field
+                  class="term-list-input"
+                  [hintLabel]="descriptorsSelected.length ? null: 'Enter terms you would like to search for and select the corresponding descriptors'"
+                >
                   <mat-chip-list #descriptorsChipList>
-                    <mat-chip
+                    <app-mesh-term-chip
                       *ngFor="let descriptor of descriptorsSelected"
+                      [descriptor]="descriptor"
                       [selectable]="false"
-                      [selected]="true"
+                      [selected]="false"
                       [removable]="true"
-                      (remove)="onRemoveDescriptor(descriptor)"
-                    >
-                      {{ descriptor.name }}
-                      <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
+                      [removeIcon]="'cancel'"
+                      (removed)="onRemoveDescriptor(descriptor)"
+                    ></app-mesh-term-chip>
                     <input
+                      #inputDescriptors
                       type="text"
                       id="descriptors"
                       formControlName="descriptors"
@@ -53,6 +50,7 @@
                       [matChipInputFor]="descriptorsChipList"
                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     />
+                    <mat-error *ngIf="form.get('descriptors').touched && !descriptorsSelected.length">Please select at least one descriptor</mat-error>
                   </mat-chip-list>
                   <!--Autocomplete for conditions chip-input.-->
                   <mat-autocomplete
@@ -67,11 +65,74 @@
                 </mat-form-field>
               </div>
 
+              <div class="row">
+
+                <div class="col-md-4">
+                  <label for="sliderYearRange">Year-Range</label>
+                  <ion-range-slider
+                    id="sliderYearRange"
+                    #sliderYearRange
+                    type="double"
+                    [min]="studyStartDateRangeAll.dateBeg.getFullYear()"
+                    [max]="studyStartDateRangeAll.dateEnd.getFullYear()"
+                    [from]="studyStartYearRangeSelected.yearBeg"
+                    [to]="studyStartYearRangeSelected.yearEnd"
+                    style="width: 300px;"
+                    [prettify_enabled]="false"
+                    (onFinish)="onSliderYearRangeFinish($event)"
+                  >
+                  </ion-range-slider>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="row" style="margin-left: 0">
+                    <label for="studySex">Patient Sex</label>
+                  </div>
+                  <div class="row" style="margin-left: 0">
+                    <mat-radio-group
+                      style="padding-top: 20px"
+                      id="studySex"
+                      type="radio"
+                      formControlName="radioGender"
+                    >
+                      <mat-radio-button value="MALE">
+                        Male&nbsp;&nbsp;
+                      </mat-radio-button>
+                      <mat-radio-button value="FEMALE">
+                        Female&nbsp;&nbsp;
+                      </mat-radio-button>
+                      <mat-radio-button value="ALL">
+                        All&nbsp;&nbsp;
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="sliderAgeRange">Age-Range</label>
+                  <ion-range-slider
+                    id="sliderAgeRange"
+                    #sliderAgeRange
+                    type="double"
+                    [min]="studyEligibilityAgeRangeAll.ageBeg"
+                    [max]="studyEligibilityAgeRangeAll.ageEnd"
+                    [from]="studyEligibilityAgeRangeSelected.ageBeg"
+                    [to]="studyEligibilityAgeRangeSelected.ageEnd"
+                    style="width: 300px;"
+                    [prettify_enabled]="false"
+                    (onFinish)="onSliderAgeRangeFinish($event)"
+                  >
+                  </ion-range-slider>
+                </div>
+
+              </div>
+
               <div class="form-group">
                 <button
                   mat-raised-button
                   type="submit"
                   class="btn btn-rose mat-raised-button pull-right"
+                  [disabled]="!descriptorsSelected.length"
                 >
                   <span class="mat-button-wrapper">Search</span>
                 </button>

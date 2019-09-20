@@ -1,0 +1,127 @@
+<div style="height: 100vh;">
+  <mat-toolbar style="background: white;">
+    <span>
+      <a [routerLink]="['/features']">
+        <img
+          src="../../../assets/img/android-chrome-512x512.png"
+          alt="Fight for logo"
+          height="48px"
+          width="48px"
+          />
+      </a>
+        <span class="badge badge-rose">alpha</span>
+    </span>
+
+    <span class="spacer"></span>
+
+    <div fxShow="true" fxHide.lt-md="true">
+
+      <mat-nav-list class="list-horizontal">
+        <mat-list-item [routerLink]="['/features']">Features</mat-list-item>
+        <mat-list-item [routerLink]="['/pricing']">Pricing</mat-list-item>
+        <mat-list-item [routerLink]="['/faq']">FAQ</mat-list-item>
+        <mat-list-item
+          *ngIf="authService.isAuthenticated()"
+          [routerLink]="['/app']"
+        >Go to app
+        </mat-list-item>
+        <mat-list-item
+          *ngIf="!(authService.isAuthenticated())"
+          (click)="onLoginRegister()"
+        >
+          <i class="material-icons">fingerprint</i> Login/Register
+        </mat-list-item>
+        <mat-list-item
+          *ngIf="authService.isAuthenticated()"
+          [matMenuTriggerFor]="menu"
+        >
+          <img
+            matListAvatar
+            [src]="userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+            alt="avatar"
+          >
+          <span style="padding-left: 5px">
+              {{ userProfile?.nickname || userProfile?.name || userProfile?.email }}
+          </span>
+        </mat-list-item>
+        <mat-menu
+          #menu="matMenu"
+          [overlapTrigger]="false"
+          yPosition="below"
+        >
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </mat-nav-list>
+    </div>
+
+    <div fxShow="true" fxHide.gt-sm="true">
+      <!--<a href="#" (click)="toggleSidebar()">Show Side Menu</a>-->
+      <button mat-button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+        <mat-icon *ngIf="!showSidebar">reorder</mat-icon>
+        <mat-icon *ngIf="showSidebar">close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav
+      fxLayout="column"
+      [opened]="showSidebar"
+      position="end"
+      mode="over"
+    >
+      <div fxLayout="column">
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="['/features']">Features</a>
+          <a mat-list-item [routerLink]="['/pricing']">Pricing</a>
+          <a mat-list-item [routerLink]="['/faq']">FAQ</a>
+          <a
+            mat-list-item
+            *ngIf="authService.isAuthenticated()"
+            [routerLink]="['/app']"
+          >Go to app</a>
+          <a
+            mat-list-item
+            (click)="onLoginRegister()"
+            *ngIf="!(authService.isAuthenticated())"
+          >
+            <i class="material-icons">fingerprint</i> Login/Register
+          </a>
+          <mat-divider *ngIf="authService.isAuthenticated()"></mat-divider>
+          <a
+            mat-list-item
+            *ngIf="authService.isAuthenticated()"
+            disableRipple="true"
+          >
+            <img
+              matListAvatar
+              [src]="userProfile?.picture
+              || '../../../assets/img/placeholder.jpg'"
+            >
+            <span style="padding-left: 5px">
+              {{ userProfile?.nickname || userProfile?.name || userProfile?.email }}
+            </span>
+          </a>
+          <a
+            mat-list-item
+            *ngIf="authService.isAuthenticated()"
+            (click)="onLogout()"
+          >
+            <mat-icon class="mat-list-item-nested">exit_to_app</mat-icon>
+            <span class="mat-list-item-nested">Logout</span>
+          </a>
+        </mat-nav-list>
+      </div>
+    </mat-sidenav>
+    <!--<mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>-->
+    <mat-sidenav-content fxFlexFill>
+      <div style="flex: 1">
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

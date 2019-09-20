@@ -1,0 +1,28 @@
+
+.new-search-card {
+  cursor: pointer;
+  border-style: dashed;
+  background-color: rgba(1, 1, 1, 0.1);
+  border-width: 2px;
+  border-color: grey;
+  height: calc(100% - 60px);
+
+  > i {
+    font-size: 100px;
+    margin: auto;
+    color: rgba(1, 1, 1, 0.2);
+  }
+}
+
+.layout-row{
+
+  display: flex;
+  align-items: stretch;
+}
+
+.card-title-trunc{
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

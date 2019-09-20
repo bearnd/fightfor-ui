@@ -1,19 +1,53 @@
 <div class="logo">
-  <a class="simple-text logo-mini">
+  <a class="simple-text logo-mini" href="#" routerLink="/features">
     <div class="logo-img">
-      <img src="/assets/img/angular2-logo-red.png"/>
+      <img src="../../../assets/img/android-chrome-512x512-white.png"/>
     </div>
   </a>
-  <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-    Fight For Health
-  </a>
+  <span class="badge badge-white">alpha</span>
 </div>
 <div class="sidebar-wrapper">
+  <div class="user">
+    <div class="photo">
+      <img
+        [src]="authService.userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+        alt="avatar"
+      >
+    </div>
+    <div class="user-info">
+      <a data-toggle="collapse" href="#userMenu" class="collapsed">
+        <span>
+          {{
+            authService.userProfile?.nickname ||
+            authService.userProfile?.name ||
+            authService.userProfile?.email
+          }}
+          <b class="caret"></b>
+        </span>
+      </a>
+      <div class="collapse" id="userMenu">
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="" class="nav-link" (click)="onLogout()">
+              <i class="material-icons user-menu-icon">exit_to_app</i>
+              <p>Logout</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
   <ul class="nav">
-    <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-      <a class="nav-link" [routerLink]="[menuItem.path]">
-        <i class="material-icons">{{menuItem.icon}}</i>
-        <p>{{menuItem.title}}</p>
+    <li routerLinkActive="active" class="nav-item">
+      <a class="nav-link" routerLink="/app/searches">
+        <i class="material-icons">search</i>
+        <p>Searches</p>
+      </a>
+    </li>
+    <li routerLinkActive="active" class="nav-item">
+      <a class="nav-link" routerLink="/app/trials">
+        <i class="material-icons">local_pharmacy</i>
+        <p>Trials</p>
       </a>
     </li>
   </ul>

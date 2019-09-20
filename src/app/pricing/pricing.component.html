@@ -1,0 +1,94 @@
+<div class="wrapper wrapper-full-page wrapper-white">
+  <div class="page-header pricing-page header-filter" style="background-image: url('./assets/img/homepage_background.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 ml-auto mr-auto text-center">
+          <h2 class="title" style="color: black">Pick the best plan for you</h2>
+          <h5 class="description" style="color: black">You have Free Unlimited Updates and Premium Support on each package.</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card card-pricing">
+            <h6 class="card-category">Basic</h6>
+            <div class="card-body">
+              <div class="card-icon icon-rose">
+                <i class="material-icons">public</i>
+              </div>
+              <h3 class="card-title">Free</h3>
+              <p class="card-description">
+                Search results limited to high-level statistics.
+              </p>
+            </div>
+            <div class="card-footer justify-content-center ">
+              <button
+                mat-raised-button
+                type="button"
+                class="btn btn-round btn-rose mat-raised-button"
+                [disabled]="authService.isAuthenticated()"
+                (click)="authService.login()"
+              >
+                <span class="mat-button-wrapper">
+                  {{
+                    authService.isAuthenticated() ?
+                    "Enabled" :
+                    "Login/Register"
+                  }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card card-pricing">
+            <h6 class="card-category">Premium</h6>
+            <div class="card-body card-pricing free">
+              <div class="card-icon icon-rose ">
+                <i class="material-icons">laptop_mac</i>
+              </div>
+              <h3 class="card-title">$10 / month</h3>
+              <p class="card-description">
+                Unlimited searches and full access to all data (7 day trial).
+              </p>
+            </div>
+            <div class="card-footer justify-content-center ">
+              <!--Button with spinner shown while user and customer profiles-->
+              <!--are loading.-->
+              <button
+                *ngIf="isLoadingProfiles | async"
+                mat-raised-button
+                type="button"
+                class="btn btn-round btn-rose mat-raised-button"
+                [disabled]="true"
+              >
+                <span class="mat-button-wrapper">
+                  <i class="fa fa-spinner fa-spin"></i> Loading
+                </span>
+              </button>
+              <button
+                *ngIf="!(isLoadingProfiles | async)"
+                mat-raised-button
+                type="button"
+                class="btn btn-round btn-rose mat-raised-button"
+                [disabled]="isPaid()"
+                (click)="
+                  authService.isAuthenticated() ?
+                  onOpenPaymentDialog() :
+                  authService.login()
+                "
+              >
+                <span class="mat-button-wrapper">
+                  {{
+                    authService.isAuthenticated() ?
+                    (isPaid() ? "Subscribed" : "Start Free Trial") :
+                    "Login/Register"
+                  }}
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

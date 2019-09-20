@@ -1,0 +1,492 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-12">
+
+        <div class="card">
+
+          <!--Card header.-->
+          <div class="card-header card-header-icon card-header-rose">
+            <!--Header icon.-->
+            <div class="card-icon">
+              <i class="material-icons">local_pharmacy</i>
+            </div>
+            <!--Header title.-->
+            <h4 class="card-title">
+              {{ 'Trials' | uppercase }}
+            </h4>
+          </div>
+
+          <!--Card body.-->
+          <div class="card-body">
+
+            <div class="col-md-12">
+
+              <mat-accordion [multi]="false">
+                <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Filters
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Filter the displayed studies
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <form [formGroup]="formFilters" (ngSubmit)="onSubmitFilters()">
+                    <div class="form-group">
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectOverallStatus"
+                              type="select"
+                              formControlName="selectOverallStatus"
+                              placeholder="Overall Status"
+                              [multiple]="true"
+                              #selectOverallStatus
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterOverallStatus"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such overall-status found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let status of overallStatusesFiltered | async"
+                                [value]="status"
+                              >
+                                {{ status.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectPhase"
+                              type="select"
+                              formControlName="selectPhase"
+                              placeholder="Trial Phase"
+                              [multiple]="true"
+                              #selectPhase
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterPhase"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such phase found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let phase of phasesFiltered | async"
+                                [value]="phase"
+                              >
+                                {{ phase.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectStudyType"
+                              type="select"
+                              formControlName="selectStudyType"
+                              placeholder="Study Type"
+                              [multiple]="true"
+                              #selectStudyType
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterStudyType"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such study-type found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let studyType of studyTypesFiltered | async"
+                                [value]="studyType"
+                              >
+                                {{ studyType.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field>
+                            <input
+                              matInput
+                              type="text"
+                              id="currentLocation"
+                              formControlName="currentLocation"
+                              placeholder="Current Location"
+                              [matAutocomplete]="locationsAutocomplete"
+                            />
+                            <mat-autocomplete
+                              [autoActiveFirstOption]="true"
+                              #locationsAutocomplete="matAutocomplete"
+                              (optionSelected)="onLocationSelected($event)"
+                            >
+                              <mat-option *ngFor="let location of locationsAll | async" [value]="location">
+                                {{ location.place_name }}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-2">
+                          <button
+                            mat-raised-button
+                            class="btn btn-rose mat-raised-button"
+                            type="button"
+                            (click)="onDetectLocation()"
+                          >
+                            <span class="mat-button-wrapper">Detect</span>
+                          </button>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectDistanceMax"
+                              type="select"
+                              formControlName="selectDistanceMax"
+                              placeholder="Maximum Distance"
+                              #selectDistanceMax
+                            >
+                              <mat-option *ngFor="let distanceMaxKm of distancesMaxKmAll" [value]="distanceMaxKm">
+                                {{ distanceMaxKm <= 10000 ? distanceMaxKm + "km" : "10000km+" }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectStudyCountry"
+                              type="select"
+                              formControlName="selectStudyCountry"
+                              placeholder="Country"
+                              [multiple]="true"
+                              #selectStudyCountry
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterStudyCountry"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such country found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let country of studyCountriesFiltered | async"
+                                [value]="country"
+                              >
+                                {{ country.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectStudyState"
+                              type="select"
+                              formControlName="selectStudyState"
+                              placeholder="State/Region"
+                              [multiple]="true"
+                              #selectStudyState
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterStudyState"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such state found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let state of studyStatesFiltered | async"
+                                [value]="state"
+                              >
+                                {{ state.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectStudyCity"
+                              type="select"
+                              formControlName="selectStudyCity"
+                              placeholder="City"
+                              [multiple]="true"
+                              #selectStudyCity
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterStudyCity"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such city found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let city of studyCitiesFiltered | async"
+                                [value]="city"
+                              >
+                                {{ city.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <mat-form-field>
+                            <mat-select
+                              id="selectStudyFacility"
+                              type="select"
+                              formControlName="selectStudyFacility"
+                              placeholder="Facility"
+                              [multiple]="true"
+                              #selectStudyFacility
+                            >
+                              <ngx-mat-select-search
+                                type="select"
+                                formControlName="filterStudyFacility"
+                                placeholderLabel="Search"
+                                noEntriesFoundLabel="No such facility found"
+                              >
+                              </ngx-mat-select-search>
+                              <mat-option
+                                *ngFor="let facility of studyFacilitiesFiltered | async"
+                                [value]="facility"
+                              >
+                                {{ facility.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12" style="padding-top: 20px">
+                          <button
+                            mat-raised-button
+                            type="button"
+                            class="btn btn-rose mat-raised-button"
+                            (click)="onResetFilters()"
+                          >
+                            <span class="mat-button-wrapper">Reset Filters</span>
+                          </button>
+                          <button
+                            mat-raised-button
+                            type="submit"
+                            class="btn btn-rose mat-raised-button"
+                          >
+                            <span class="mat-button-wrapper">Filter</span>
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </form>
+                </mat-expansion-panel>
+              </mat-accordion>
+
+              <div class="row">
+
+                <div class="col-md-12">
+
+                  <table
+                    mat-table
+                    #table
+                    [dataSource]="dataSourceStudies"
+                    matSort
+                    matSortActive="nctId"
+                    matSortDirection="asc"
+                    matSortDisableClear
+                    width="100%"
+                  >
+
+                    <!--Header.-->
+                    <tr
+                      mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></tr>
+                    <!--Clicking any row will redirect to the component for that
+                    study.-->
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns;"
+                      (click)="onNavigateToStudy(row)"
+                      style="cursor: pointer"
+                    ></tr>
+
+                    <!-- Actions column -->
+                    <ng-container matColumnDef="actions">
+                      <th mat-header-cell *matHeaderCellDef>
+
+                      </th>
+                      <td
+                        mat-cell
+                        *matCellDef="let study"
+                        (click)="$event.stopPropagation()"
+                      >
+                        <button
+                          mat-raised-button
+                          type="button"
+                          class="
+                            btn
+                            btn-rose
+                            btn-round
+                            btn-just-icon
+                            btn-link
+                            mat-raised-button
+                            btn-fab
+                          "
+                          (click)="onToggleFollowStudy(study.nctId)"
+                          [disableRipple]="true"
+                          [matTooltip]="
+                            isStudyFollowed(study.nctId) ?
+                            'Unfollow this trial' :
+                            'Follow this trial'
+                          "
+                          [matTooltipPosition]="'left'"
+                        >
+                          <i
+                            class="fa fa-spinner fa-spin"
+                            *ngIf="userConfigService.isUpdatingUserStudies | async"
+                          ></i>
+                          <i
+                            class="material-icons"
+                            *ngIf="!(userConfigService.isUpdatingUserStudies | async)"
+                          >
+                            {{
+                              isStudyFollowed(study.nctId) ?
+                              "favorite" :
+                              "favorite_outline"
+                            }}
+                          </i>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <!-- NCT ID column -->
+                    <ng-container matColumnDef="nctId">
+                      <th mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        NCT ID
+                      </th>
+                      <td
+                        mat-cell
+                        *matCellDef="let study"
+                      >
+                        {{ study.nctId }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Overall status column -->
+                    <ng-container matColumnDef="overallStatus">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Status
+                      </th>
+                      <td mat-cell *matCellDef="let study">
+                        {{castOverallStatus(study.overallStatus)}}
+                      </td>
+                    </ng-container>
+
+                    <!-- Brief title column -->
+                    <ng-container matColumnDef="briefTitle">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                      >
+                        Title
+                      </th>
+                      <td mat-cell *matCellDef="let study">
+                        {{study.briefTitle | truncate:77}}
+                      </td>
+                    </ng-container>
+
+                    <!-- Conditions column -->
+                    <ng-container matColumnDef="conditions">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                      >Conditions
+                      </th>
+                      <td mat-cell *matCellDef="let study">
+                        {{ getStudyConditionMeshTerms(study) }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Interventions column -->
+                    <ng-container matColumnDef="interventions">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                      >Interventions
+                      </th>
+                      <td mat-cell *matCellDef="let study">
+                        {{ getStudyInterventionMeshTerms(study) }}
+                      </td>
+                    </ng-container>
+
+                    <!-- Locations column -->
+                    <ng-container matColumnDef="locations">
+                      <th
+                        mat-header-cell
+                        *matHeaderCellDef
+                      >Locations
+                      </th>
+                      <td mat-cell *matCellDef="let study">
+                        {{ getStudyLocation(study) }}
+                      </td>
+                    </ng-container>
+
+                  </table>
+
+                  <mat-paginator
+                    [length]="studiesCount"
+                    [pageSize]="10"
+                    [pageSizeOptions]="studiesPageSizeOptions"
+                  ></mat-paginator>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
