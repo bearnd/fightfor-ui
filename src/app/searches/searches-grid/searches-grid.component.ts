@@ -43,6 +43,7 @@ export class SearchesGridComponent implements OnInit {
    * Redirects the user to the new-search page.
    */
   onNewSearch() {
+    throw Error('this is a test');
     const result = this.router.navigate(
       ['/app', 'searches', 'new']
     );
