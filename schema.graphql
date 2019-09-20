@@ -1,0 +1,1588 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"GraphQL mutations."
+type Mutation {
+  deleteSearch(
+    #The Auth0 ID of the user against which this search is upserted.
+    auth0UserId: String!,
+    #The search to upsert.
+    searchUuid: UUID!
+  ): MutationSearchDelete
+  deleteUser(auth0UserId: String!): MutationUserDelete
+  deleteUserCitation(userCitation: InputUserCitation!): MutationUserCitationDelete
+  deleteUserStudy(userStudy: InputUserStudy!): MutationUserStudyDelete
+  upsertSearch(
+    #The Auth0 ID of the user against which this search is upserted.
+    auth0UserId: String!,
+    meshDescriptorIds: [Int],
+    #The search to upsert.
+    search: InputSearch!
+  ): MutationSearchUpsert
+  upsertUser(user: InputUser!): MutationUserUpsert
+  upsertUserCitation(userCitation: InputUserCitation!): MutationUserCitationUpsert
+  upsertUserStudy(userStudy: InputUserStudy!): MutationUserStudyUpsert
+}
+
+"""
+GraphQL mutation class permitting the deletion of `ModelSearch`
+records.
+"""
+type MutationSearchDelete {
+  search: TypeSearch
+}
+
+"""
+GraphQL mutation class permitting the upsert operation of `ModelSearch`
+records.
+"""
+type MutationSearchUpsert {
+  search: TypeSearch
+}
+
+"""
+GraphQL mutation class permitting the delete operation of
+`ModelUserCitation` records.
+"""
+type MutationUserCitationDelete {
+  user: TypeUser
+}
+
+"""
+GraphQL mutation class permitting the upsert operation of
+`ModelUserCitation` records.
+"""
+type MutationUserCitationUpsert {
+  user: TypeUser
+}
+
+"""
+GraphQL mutation class permitting the deletion of `ModelUser`
+records.
+"""
+type MutationUserDelete {
+  user: TypeUser
+}
+
+"""
+GraphQL mutation class permitting the delete operation of
+`ModelUserStudy` records.
+"""
+type MutationUserStudyDelete {
+  user: TypeUser
+}
+
+"""
+GraphQL mutation class permitting the upsert operation of
+`ModelUserStudy` records.
+"""
+type MutationUserStudyUpsert {
+  user: TypeUser
+}
+
+"""
+GraphQL mutation class permitting the upsert operation of `ModelUser`
+records.
+"""
+type MutationUserUpsert {
+  user: TypeUser
+}
+
+type Query {
+  "PubMed citations."
+  citations: TypeCitations
+  "PubMed citation-related statistics."
+  citationsStats: TypeCitationsStats
+  "MeSH descriptors."
+  descriptors: TypeDescriptors
+  "User searches."
+  searches: TypeSearches
+  "Clinical-trials studies."
+  studies: TypeStudies
+  "Clinical-trial study-related statistics."
+  studiesStats: TypeStudiesStats
+  "Application users."
+  users: TypeUsers
+}
+
+type TypeAffiliationCanonical {
+  address: String
+  administrativeAreaLevel1: String
+  administrativeAreaLevel2: String
+  administrativeAreaLevel3: String
+  administrativeAreaLevel4: String
+  administrativeAreaLevel5: String
+  affiliationCanonicalId: Float!
+  articles: [TypeArticle]
+  colloquialArea: String
+  coordinates: JSONString
+  country: String
+  floor: String
+  googlePlaceId: String!
+  googleUrl: String
+  intersection: String
+  locality: String
+  name: String
+  neighborhood: String
+  phoneNumber: String
+  postBox: String
+  postalCode: String
+  postalCodePrefix: String
+  postalCodeSuffix: String
+  postalTown: String
+  premise: String
+  room: String
+  route: String
+  streetAddress: String
+  streetNumber: String
+  sublocality: String
+  sublocalityLevel1: String
+  sublocalityLevel2: String
+  sublocalityLevel3: String
+  sublocalityLevel4: String
+  sublocalityLevel5: String
+  subpremise: String
+  url: String
+}
+
+"Graphene type representing an age-range in seconds."
+type TypeAgeRange {
+  "The beginning of the age-range."
+  ageBeg: Float
+  "The end of the age-range."
+  ageEnd: Float
+}
+
+type TypeArmGroup {
+  armGroupId: Float!
+  armGroupType: String
+  description: String
+  interventions: [TypeIntervention]
+  label: String!
+  studies: [TypeStudy]
+}
+
+type TypeArticle {
+  affiliationsCanonical: [TypeAffiliationCanonical]
+  articleId: Float!
+  datePublished: String
+  journal: TypeJournal
+  journalId: Float!
+  journalIssue: String
+  journalVolume: String
+  language: String
+  md5: JSONString
+  pagination: String
+  publicationDay: Int
+  publicationModel: articlepubmodel
+  publicationMonth: Int
+  publicationYear: Int!
+  title: String
+  titleVernacular: String
+}
+
+type TypeArticleAuthorAffiliation {
+  affiliationCanonicalId: Float
+  affiliationId: Float
+  articleAuthorAffiliationId: Float!
+  articleId: Float!
+  authorId: Float!
+  ordinance: Int!
+}
+
+type TypeCitation {
+  article: TypeArticle
+  articleId: Float!
+  chemicals: [TypeDescriptor]
+  citationId: Float!
+  dateCompletion: String
+  dateCreated: String
+  dateRevision: String
+  descriptors: [TypeDescriptor]
+  descriptorsQualifiers: [TypeCitationDescriptorQualifier]
+  journalInfo: TypeJournalInfo
+  journalInfoId: Float!
+  numReferences: Int
+  pmid: Int!
+  qualifiers: [TypeQualifier]
+}
+
+type TypeCitationDescriptorQualifier {
+  citationDescriptorQualifierId: Float!
+  citationId: Float!
+  descriptorId: Float!
+  isDescriptorMajor: Boolean!
+  isQualifierMajor: Boolean
+  qualifierId: Float
+}
+
+type TypeCitations {
+  "Retrieve PubMed citations through their IDs."
+  byId(citationIds: [Int]!): [TypeCitation]
+  "Retrieve PubMed citations through their PMIDs."
+  byPmid(pmids: [Int]!): [TypeCitation]
+  "Retrieve a list of PubMed citations matching several filters."
+  search(
+    #Whether to analyze the MeSH descriptor tree and include the descriptor children when performing thesearch.
+    doIncludeChildren: Boolean = true,
+    #MeSH descriptor primary-key IDs as they appear in the `mesh.descriptors` table.
+    meshDescriptorIds: [Int]!,
+    #The lower end of the year-range the citation article may have been published in.
+    yearBeg: Int,
+    #The upper end of the year-range the citation article may have been published in.
+    yearEnd: Int
+  ): [TypeCitation]
+}
+
+type TypeCitationsStats {
+  countCitationsByAffiliation(citationIds: [Int]!, limit: Int): [TypeCountCitationsAffiliation]
+  countCitationsByCountry(citationIds: [Int]!, limit: Int): [TypeCountCitationsCountry]
+  countCitationsByQualifier(citationIds: [Int]!, limit: Int): [TypeCountCitationsQualifier]
+}
+
+type TypeConcept {
+  casn1Name: String
+  conceptId: Float!
+  conceptRelatedRegistryNumbers: [TypeConceptRelatedRegistryNumber]
+  conceptTerms: [TypeConceptTerm]
+  descriptorConcepts: [TypeDescriptorConcept]
+  descriptors: [TypeDescriptor]
+  name: String!
+  qualifierConcepts: [TypeQualifierConcept]
+  qualifiers: [TypeQualifier]
+  registryNumber: String
+  relatedRegistryNumbers: [TypeRelatedRegistryNumber]
+  scopeNote: String
+  supplementalConcepts: [TypeSupplementalConcept]
+  supplementals: [TypeSupplemental]
+  terms: [TypeTerm]
+  translatorsEnglishScopeNote: String
+  translatorsScopeNote: String
+  ui: String!
+}
+
+type TypeConceptRelatedConcept {
+  conceptId: Float!
+  conceptRelatedConceptId: Float!
+  relatedConceptId: Float!
+  relationName: RelationNameType
+}
+
+type TypeConceptRelatedRegistryNumber {
+  concept: TypeConcept
+  conceptId: Float!
+  conceptRelatedRegistryNumberId: Float!
+  relatedRegistryNumber: TypeRelatedRegistryNumber
+  relatedRegistryNumberId: Float!
+}
+
+type TypeConceptTerm {
+  concept: TypeConcept
+  conceptId: Float!
+  conceptTermId: Float!
+  isConceptPreferredTerm: Boolean!
+  isPermutedTerm: Boolean!
+  isRecordPreferredTerm: Boolean!
+  lexicalTag: LexicalTagType
+  term: TypeTerm
+  termId: Float!
+}
+
+type TypeCondition {
+  condition: String!
+  conditionId: Float!
+  md5: JSONString!
+  studies: [TypeStudy]
+}
+
+type TypeContact {
+  contactId: Float!
+  email: String
+  md5: JSONString!
+  person: TypePerson
+  personId: Float!
+  phone: String
+  phoneExt: String
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of citations by canonical affiliation.
+"""
+type TypeCountCitationsAffiliation {
+  "The canonical affiliation to which the citations refer."
+  affiliationCanonical: TypeAffiliationCanonical
+  "The number of citations."
+  countCitations: Int
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of citations by country.
+"""
+type TypeCountCitationsCountry {
+  "The number of citations."
+  countCitations: Int
+  "The country in which the citation affiliations are located."
+  country: String
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of citations by MeSH qualifier.
+"""
+type TypeCountCitationsQualifier {
+  "The number of citations."
+  countCitations: Int
+  "The MeSH qualifier to which the citations refer."
+  qualifier: TypeQualifier
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of clinical-trial studies by country.
+"""
+type TypeCountStudiesCountry {
+  "The number of studies."
+  countStudies: Int
+  "The country in which the studies are performed."
+  country: String
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of clinical-trial studies by MeSH descriptor.
+"""
+type TypeCountStudiesDescriptor {
+  "The number of studies."
+  countStudies: Int
+  "The MeSH descriptor with which the studies are tagged."
+  meshTerm: TypeDescriptor
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of clinical-trial studies by canonical facility.
+"""
+type TypeCountStudiesFacility {
+  "The number of studies."
+  countStudies: Int
+  "The canonical facility in which the studies are performed."
+  facilityCanonical: TypeFacilityCanonical
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of clinical-trial studies canonical facility and
+MeSH descriptor.
+"""
+type TypeCountStudiesFacilityDescriptor {
+  "The number of studies."
+  countStudies: Int
+  "The canonical facility in which the studies are performed."
+  facilityCanonical: TypeFacilityCanonical
+  "The MeSH descriptor with which the studies are tagged."
+  meshTerm: TypeDescriptor
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the number of clinical-trial studies by overall-status.
+"""
+type TypeCountStudiesOverallStatus {
+  "The number of studies."
+  countStudies: Int
+  "The overall-status of the studies."
+  overallStatus: String
+}
+
+"Graphene type representing a date-range."
+type TypeDateRange {
+  "The beginning of the date-range."
+  dateBeg: Date
+  "The end of the date-range."
+  dateEnd: Date
+}
+
+type TypeDescriptor {
+  annotation: String
+  concepts: [TypeConcept]
+  considerAlso: String
+  created: String!
+  definitions: [TypeDescriptorDefinition]
+  descriptorAllowableQualifiers: [TypeDescriptorAllowableQualifier]
+  descriptorClass: DescriptorClassType
+  descriptorConcepts: [TypeDescriptorConcept]
+  descriptorEntryCombinations: [TypeDescriptorEntryCombination]
+  descriptorId: Float!
+  descriptorPreviousIndexings: [TypeDescriptorPreviousIndexing]
+  descriptorTreeNumbers: [TypeDescriptorTreeNumber]
+  entryCombinations: [TypeEntryCombination]
+  established: String
+  historyNote: String
+  name: String!
+  nlmClassificationNumber: String
+  onlineNote: String
+  previousIndexings: [TypePreviousIndexing]
+  publicMeshNote: String
+  qualifiers: [TypeQualifier]
+  revised: String
+  studies: [TypeStudy]
+  studyDescriptors: [TypeStudyDescriptor]
+  synonyms: [TypeDescriptorSynonym]
+  treeNumbers: [TypeTreeNumber]
+  ui: String!
+}
+
+type TypeDescriptorAllowableQualifier {
+  abbreviation: String!
+  descriptor: TypeDescriptor
+  descriptorAllowableQualifierId: Float!
+  descriptorId: Float!
+  qualifier: TypeQualifier
+  qualifierId: Float!
+}
+
+type TypeDescriptorConcept {
+  concept: TypeConcept
+  conceptId: Float!
+  descriptor: TypeDescriptor
+  descriptorConceptId: Float!
+  descriptorId: Float!
+  isPreferred: Boolean!
+}
+
+type TypeDescriptorDefinition {
+  definition: String!
+  descriptor: TypeDescriptor
+  descriptorDefinitionId: Float!
+  descriptorId: Float!
+  md5: JSONString!
+  source: DescriptorDefinitionSourceType
+}
+
+type TypeDescriptorEntryCombination {
+  descriptor: TypeDescriptor
+  descriptorEntryCombinationId: Float!
+  descriptorId: Float!
+  entryCombination: TypeEntryCombination
+  entryCombinationId: Float!
+}
+
+type TypeDescriptorPharmacologicalActionDescriptor {
+  descriptorId: Float!
+  descriptorPharmacologicalActionDescriptorId: Float!
+  pharmacologicalActionDescriptorId: Float!
+}
+
+type TypeDescriptorPreviousIndexing {
+  descriptor: TypeDescriptor
+  descriptorId: Float!
+  descriptorPreviousIndexingId: Float!
+  previousIndexing: TypePreviousIndexing
+  previousIndexingId: Float!
+}
+
+type TypeDescriptorRelatedDescriptor {
+  descriptorId: Float!
+  descriptorRelatedDescriptorId: Float!
+  relatedDescriptorId: Float!
+}
+
+type TypeDescriptorSynonym {
+  descriptor: TypeDescriptor
+  descriptorId: Float!
+  descriptorSynonymId: Float!
+  md5: JSONString!
+  synonym: String!
+}
+
+type TypeDescriptorTreeNumber {
+  descriptor: TypeDescriptor
+  descriptorId: Float!
+  descriptorTreeNumberId: Float!
+  treeNumber: TypeTreeNumber
+  treeNumberId: Float!
+}
+
+type TypeDescriptors {
+  "Retrieve a list of MeSH descriptors fuzzy-matching a synonym."
+  bySynonym(limit: Int, synonym: String!): [TypeDescriptor]
+  "Retrieve a list of MeSH descriptors matching a tree-number prefix."
+  byTreeNumberPrefix(treeNumberPrefix: String!): [TypeDescriptor]
+  "Retrieve a MeSH descriptor through its UI."
+  byUi(ui: String!): TypeDescriptor
+}
+
+type TypeEligibility {
+  criteria: String
+  eligibilityId: Float!
+  gender: GenderType
+  genderBased: Boolean
+  genderDescription: String
+  healthyVolunteers: String
+  maximumAge: String
+  minimumAge: String
+  samplingMethod: SamplingMethodType
+  study: TypeStudy
+  studyPop: String
+}
+
+type TypeEnrollment {
+  enrollmentId: Float!
+  enrollmentType: ActualType
+  study: TypeStudy
+  value: Int!
+}
+
+type TypeEntryCombination {
+  combinationType: EntryCombinationType
+  descriptorEntryCombinations: [TypeDescriptorEntryCombination]
+  descriptorId: Float!
+  descriptors: TypeDescriptor
+  entryCombinationId: Float!
+  qualifierId: Float
+}
+
+type TypeFacility {
+  city: String
+  country: String
+  facilityCanonical: TypeFacilityCanonical
+  facilityCanonicalId: Float
+  facilityId: Float!
+  locations: [TypeLocation]
+  md5: JSONString!
+  name: String
+  state: String
+  studies: [TypeStudy]
+  studyFacilities: [TypeStudyFacility]
+  zipCode: String
+}
+
+type TypeFacilityCanonical {
+  address: String
+  administrativeAreaLevel1: String
+  administrativeAreaLevel2: String
+  administrativeAreaLevel3: String
+  administrativeAreaLevel4: String
+  administrativeAreaLevel5: String
+  colloquialArea: String
+  coordinates: JSONString
+  country: String
+  facility: TypeFacility
+  facilityCanonicalId: Float!
+  floor: String
+  googlePlaceId: String!
+  googleUrl: String
+  intersection: String
+  locality: String
+  name: String
+  neighborhood: String
+  phoneNumber: String
+  postBox: String
+  postalCode: String
+  postalCodePrefix: String
+  postalCodeSuffix: String
+  postalTown: String
+  premise: String
+  room: String
+  route: String
+  streetAddress: String
+  streetNumber: String
+  studies: [TypeStudy]
+  studyFacilities: [TypeStudyFacility]
+  sublocality: String
+  sublocalityLevel1: String
+  sublocalityLevel2: String
+  sublocalityLevel3: String
+  sublocalityLevel4: String
+  sublocalityLevel5: String
+  subpremise: String
+  url: String
+}
+
+type TypeIntervention {
+  armGroups: [TypeArmGroup]
+  description: String
+  interventionId: Float!
+  interventionType: InterventionType
+  md5: JSONString!
+  name: String!
+  studies: [TypeStudy]
+  studyInterventions: [TypeStudyIntervention]
+}
+
+type TypeInterventionArmGroup {
+  armGroupId: Float!
+  interventionArmGroupId: Float!
+  interventionId: Float!
+}
+
+type TypeInvestigator {
+  affiliation: String
+  investigatorId: Float!
+  locations: [TypeLocation]
+  md5: JSONString!
+  person: TypePerson
+  personId: Float!
+  role: RoleType
+  studies: [TypeStudy]
+  studyInvestigators: [TypeStudyInvestigator]
+}
+
+type TypeJournal {
+  abbreviation: String
+  articles: [TypeArticle]
+  issn: String
+  issnType: journalissntype
+  journalId: Float!
+  md5: JSONString!
+  title: String
+}
+
+type TypeJournalInfo {
+  abbreviation: String
+  country: String
+  issn: String
+  journalInfoId: Float!
+  nlmid: String!
+}
+
+"""
+Graphene type representing a single result of an aggregation operation
+calculating the latest MeSH descriptor in a group of clinical-trial
+studies.
+"""
+type TypeLatestDescriptor {
+  "The earliest date the descriptor appears in a study."
+  date: Date
+  "The MeSH descriptor."
+  meshTerm: TypeDescriptor
+}
+
+type TypeLocation {
+  contactBackup: TypeContact
+  contactBackupId: Float
+  contactPrimary: TypeContact
+  contactPrimaryId: Float
+  facility: TypeFacility
+  facilityId: Float
+  investigators: [TypeInvestigator]
+  locationId: Float!
+  md5: JSONString!
+  status: RecruitmentStatusType
+  studies: [TypeStudy]
+}
+
+type TypePerson {
+  contacts: [TypeContact]
+  degrees: String
+  investigators: [TypeInvestigator]
+  md5: JSONString!
+  nameFirst: String
+  nameLast: String
+  nameMiddle: String
+  personId: Float!
+}
+
+type TypePreviousIndexing {
+  descriptorPreviousIndexings: [TypeDescriptorPreviousIndexing]
+  descriptors: [TypeDescriptor]
+  md5: JSONString!
+  previousIndexing: String!
+  previousIndexingId: Float!
+  supplementalPreviousIndexings: [TypeSupplementalPreviousIndexing]
+  supplementals: [TypeSupplemental]
+}
+
+type TypeProtocolOutcome {
+  description: String
+  measure: String!
+  protocolOutcomeId: Float!
+  studies: [TypeStudy]
+  studyOutcomes: [TypeStudyOutcome]
+  timeFrame: String
+}
+
+type TypeQualifier {
+  annotation: String
+  concepts: [TypeConcept]
+  created: String!
+  descriptorAllowableQualifiers: [TypeDescriptorAllowableQualifier]
+  descriptors: [TypeDescriptor]
+  established: String
+  historyNote: String
+  name: String!
+  onlineNote: String
+  qualifierConcepts: [TypeQualifierConcept]
+  qualifierId: Float!
+  qualifierTreeNumbers: [TypeQualifierTreeNumber]
+  revised: String
+  treeNumbers: [TypeTreeNumber]
+  ui: String!
+}
+
+type TypeQualifierConcept {
+  concept: TypeConcept
+  conceptId: Float!
+  isPreferred: Boolean!
+  qualifier: TypeQualifier
+  qualifierConceptId: Float!
+  qualifierId: Float!
+}
+
+type TypeQualifierTreeNumber {
+  qualifier: TypeQualifier
+  qualifierId: Float!
+  qualifierTreeNumberId: Float!
+  treeNumber: TypeTreeNumber
+  treeNumberId: Float!
+}
+
+type TypeReference {
+  citation: String
+  pmid: Int
+  referenceId: Float!
+  studies: [TypeStudy]
+  studyReferences: [TypeStudyReference]
+}
+
+type TypeRelatedRegistryNumber {
+  conceptRelatedRegistryNumbers: [TypeConceptRelatedRegistryNumber]
+  concepts: [TypeConcept]
+  md5: JSONString!
+  relatedRegistryNumber: String!
+  relatedRegistryNumberId: Float!
+}
+
+type TypeSearch {
+  ageBeg: Int
+  ageEnd: Int
+  descriptors: [TypeDescriptor]
+  gender: GenderType
+  searchId: ID!
+  searchUuid: String!
+  title: String!
+  user: TypeUser
+  yearBeg: Int
+  yearEnd: Int
+}
+
+type TypeSearchDescriptor {
+  descriptorId: Float!
+  searchDescriptorId: Float!
+  searchId: Int!
+}
+
+type TypeSearches {
+  "Retrieve a user search through its UUID."
+  bySearchUuid(
+    #The user Auth0 ID.
+    auth0UserId: String!,
+    #The search UUID.
+    searchUuid: UUID!
+  ): TypeSearch
+}
+
+type TypeSource {
+  md5: JSONString!
+  source: String!
+  sourceId: Float!
+  supplementals: [TypeSupplemental]
+}
+
+type TypeStudies {
+  "Retrieve clinical-trial studies through their IDs."
+  byId(studyIds: [Int]!): [TypeStudy]
+  "Retrieve clinical-trial studies through their NCT IDs."
+  byNctId(nctIds: [String]!): [TypeStudy]
+  "Retrieve a list of clinical-trial studies through dynamic filtering and sorting."
+  count(
+    ageBeg: Int,
+    ageEnd: Int,
+    #A list of cities to filter by.
+    cities: [String],
+    #A list of countries to filter by.
+    countries: [String],
+    #The latitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLatitude: Float,
+    #The longitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLongitude: Float,
+    #The maximum distance in kilometers from the current location coordinates within which study facilities will be allowed.
+    distanceMaxKm: Int,
+    #A list of canonical facility IDs to filter by.
+    facilityCanonicalIds: [Int],
+    #The patient-gender to filter by.
+    gender: GenderType,
+    #A list of intevention types to filter by.
+    interventionTypes: [InterventionType],
+    #A list of overall statuses to filter by.
+    overallStatuses: [OverallStatusType],
+    #A list of trial phases to filter by.
+    phases: [PhaseType],
+    #A list of states or regions to filter by.
+    states: [String],
+    studyIds: [Int]!,
+    #A list of study-types to filter by.
+    studyTypes: [StudyType],
+    yearBeg: Int,
+    yearEnd: Int
+  ): Int
+  "Retrieve a list of clinical-trial studies through dynamic filtering and sorting."
+  filter(
+    ageBeg: Int,
+    ageEnd: Int,
+    #A list of cities to filter by.
+    cities: [String],
+    #A list of countries to filter by.
+    countries: [String],
+    #The latitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLatitude: Float,
+    #The longitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLongitude: Float,
+    #The maximum distance in kilometers from the current location coordinates within which studiy facilities will be allowed.
+    distanceMaxKm: Int,
+    #A list of canonical facility IDs to filter by.
+    facilityCanonicalIds: [Int],
+    #The patient-gender to filter by.
+    gender: GenderType,
+    #A list of intevention types to filter by.
+    interventionTypes: [InterventionType],
+    limit: Int,
+    offset: Int,
+    order: TypeEnumOrder,
+    orderBy: String,
+    #A list of overall statuses to filter by.
+    overallStatuses: [OverallStatusType],
+    #A list of trial phases to filter by.
+    phases: [PhaseType],
+    #A list of states or regions to filter by.
+    states: [String],
+    studyIds: [Int]!,
+    #A list of study-types to filter by.
+    studyTypes: [StudyType],
+    yearBeg: Int,
+    yearEnd: Int
+  ): [TypeStudy]
+  "Retrieve a list of clinical-trial studies matching several filters."
+  search(
+    #The lower end of the eligibility age-range the study may include.
+    ageBeg: Int,
+    #The upper end of the eligibility age-range the study may include.
+    ageEnd: Int,
+    #Whether to analyze the MeSH descriptor tree and include the descriptor children when performing thesearch.
+    doIncludeChildren: Boolean = true,
+    #The patient-gender to search by.
+    gender: GenderType,
+    #MeSH descriptor primary-key IDs as they appear in the `mesh.descriptors` table.
+    meshDescriptorIds: [Int]!,
+    #The lower end of the year-range the study may start in.
+    yearBeg: Int,
+    #The upper end of the year-range the study may start in.
+    yearEnd: Int
+  ): [TypeStudy]
+}
+
+type TypeStudiesStats {
+  countFacilities(
+    #A list of cities to filter by.
+    cities: [String],
+    #A list of countries to filter by.
+    countries: [String],
+    #The latitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLatitude: Float,
+    #The longitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLongitude: Float,
+    #The maximum distance in kilometers from the current location coordinates within which study facilities will be allowed.
+    distanceMaxKm: Int,
+    #A list of MeSH descriptor primary-key IDs as they appear in the `mesh.descriptors` table to filter by.
+    meshDescriptorIds: [Int],
+    #A list of overall statuses to filter by.
+    overallStatuses: [OverallStatusType],
+    #A list of states or regions to filter by.
+    states: [String],
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): Int
+  countStudiesByCountry(limit: Int, studyIds: [Int]!): [TypeCountStudiesCountry]
+  countStudiesByDescriptor(
+    limit: Int,
+    meshTermType: MeshTermType,
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeCountStudiesDescriptor]
+  countStudiesByFacility(
+    #A list of cities to filter by.
+    cities: [String],
+    #A list of countries to filter by.
+    countries: [String],
+    #The latitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLatitude: Float,
+    #The longitude of the current position from which only studies on facilities within a `distance_max_km` will be allowed.
+    currentLocationLongitude: Float,
+    #The maximum distance in kilometers from the current location coordinates within which study facilities will be allowed.
+    distanceMaxKm: Int,
+    #The number of entries to return when paginating.
+    limit: Int,
+    #A list of MeSH descriptor primary-key IDs as they appear in the `mesh.descriptors` table to filter by.
+    meshDescriptorIds: [Int],
+    #The number of entries to skip when paginating.
+    offset: Int,
+    #The order (ascending or descending) in which the returned entries will be ordered.
+    order: TypeEnumOrder,
+    #The field to order the returned entries by.
+    orderBy: String,
+    #A list of overall statuses to filter by.
+    overallStatuses: [OverallStatusType],
+    #A list of states or regions to filter by.
+    states: [String],
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeCountStudiesFacility]
+  countStudiesByFacilityDescriptor(
+    facilityCanonicalIds: [Int],
+    limit: Int,
+    meshTermType: MeshTermType,
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeCountStudiesFacilityDescriptor]
+  countStudiesByOverallStatus(limit: Int, studyIds: [Int]!): [TypeCountStudiesOverallStatus]
+  "Retrieves the patient eligiblity age-range of the provided studies in seconds."
+  getAgeRange(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]
+  ): TypeAgeRange
+  "Retrieves the start-date date-range of the provided studies."
+  getDateRange(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]
+  ): TypeDateRange
+  "Retrieves the latest MeSH descriptors applied to a list ofclinical-trial studies."
+  getLatestDescriptors(
+    #The number of results to return.
+    limit: Int,
+    #The type of MeSH descriptor the operation will belimited to.
+    meshTermType: MeshTermType,
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeLatestDescriptor]
+  "Retrieves the unique canonical facilities pertaining to a list of clinical-trial studies."
+  getUniqueCanonicalFacilities(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeFacilityCanonical]
+  getUniqueCities(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [String]
+  getUniqueCountries(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [String]
+  "Retrieves the unique MeSH descriptors applied to a list ofclinical-trial studies."
+  getUniqueDescriptors(
+    #The type of MeSH descriptor the operation will belimited to.
+    meshTermType: MeshTermType,
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [TypeDescriptor]
+  getUniqueStates(
+    #A list of clinical-trial study PK IDs to perform theoperation within.
+    studyIds: [Int]!
+  ): [String]
+}
+
+type TypeStudy {
+  acronym: String
+  armGroups: [TypeArmGroup]
+  biospecDescription: String
+  biospecRetention: biospecretentiontype
+  briefSummary: String
+  briefTitle: String!
+  completionDate: String
+  conditions: [TypeCondition]
+  contactBackup: TypeContact
+  contactBackupId: Float
+  contactPrimary: TypeContact
+  contactPrimaryId: Float
+  descriptors: [TypeDescriptor]
+  detailedDescription: String
+  eligibility: TypeEligibility
+  eligibilityId: Float
+  enrollment: TypeEnrollment
+  enrollmentId: Float
+  expandedAccessInfoId: Float
+  facilities: [TypeFacility]
+  facilitiesCanonical: [TypeFacilityCanonical]
+  interventions: [TypeIntervention]
+  investigators: [TypeInvestigator]
+  lastKnownStatus: overallstatustype
+  locations: [TypeLocation]
+  nctId: String!
+  officialTitle: String
+  orgStudyId: String
+  outcomes: [TypeProtocolOutcome]
+  overallStatus: OverallStatusType
+  oversightInfoId: Float
+  patientDataId: Float
+  phase: PhaseType
+  primaryCompletionDate: String
+  references: [TypeReference]
+  responsiblePartyId: Float
+  source: String!
+  startDate: String
+  studyDatesId: Float!
+  studyDescriptors: [TypeStudyDescriptor]
+  studyDesignInfo: TypeStudyDesignInfo
+  studyDesignInfoId: Float
+  studyFacilities: [TypeStudyFacility]
+  studyId: Float!
+  studyInterventions: [TypeStudyIntervention]
+  studyInvestigators: [TypeStudyInvestigator]
+  studyOutcomes: [TypeStudyOutcome]
+  studyReferences: [TypeStudyReference]
+  studyType: StudyType
+  targetDuration: String
+  verificationDate: String
+  whyStopped: String
+}
+
+type TypeStudyDescriptor {
+  descriptor: TypeDescriptor
+  descriptorId: Float!
+  studies: TypeStudy
+  study: TypeStudy
+  studyDescriptorId: Float!
+  studyDescriptorType: MeshTermType
+  studyId: Float!
+}
+
+type TypeStudyDesignInfo {
+  allocation: String
+  interventionModel: String
+  interventionModelDescription: String
+  masking: String
+  maskingDescription: String
+  observationalModel: String
+  primaryPurpose: String
+  study: TypeStudy
+  studyDesignInfoId: Float!
+  timePerspective: String
+}
+
+type TypeStudyFacility {
+  facility: TypeFacility
+  facilityCanonical: TypeFacilityCanonical
+  facilityCanonicalId: Float
+  facilityId: Float!
+  study: TypeStudy
+  studyFacilityId: Float!
+  studyId: Float!
+}
+
+type TypeStudyIntervention {
+  intervention: TypeIntervention
+  interventionId: Float!
+  study: TypeStudy
+  studyId: Float!
+  studyInterventionId: Float!
+}
+
+type TypeStudyInvestigator {
+  investigator: TypeInvestigator
+  investigatorId: Float!
+  study: TypeStudy
+  studyId: Float!
+  studyInvestigatorId: Float!
+}
+
+type TypeStudyOutcome {
+  outcomeType: OutcomeType
+  protocolOutcome: TypeProtocolOutcome
+  protocolOutcomeId: Float!
+  study: TypeStudy
+  studyId: Float!
+  studyOutcomeId: Float!
+}
+
+type TypeStudyReference {
+  reference: TypeReference
+  referenceId: Float!
+  referenceType: ReferenceType
+  study: TypeStudy
+  studyId: Float!
+  studyReferenceId: Float!
+}
+
+type TypeSupplemental {
+  concepts: [TypeConcept]
+  created: String!
+  frequency: String
+  headingMappedTos: [TypeEntryCombination]
+  indexingInformations: [TypeEntryCombination]
+  name: String!
+  note: String
+  previousIndexings: [TypePreviousIndexing]
+  revised: String
+  sources: [TypeSource]
+  supplementalClass: SupplementalClassType
+  supplementalConcepts: [TypeSupplementalConcept]
+  supplementalId: Float!
+  supplementalPreviousIndexings: [TypeSupplementalPreviousIndexing]
+  ui: String!
+}
+
+type TypeSupplementalConcept {
+  concept: TypeConcept
+  conceptId: Float!
+  isPreferred: Boolean!
+  supplemental: TypeSupplemental
+  supplementalConceptId: Float!
+  supplementalId: Float!
+}
+
+type TypeSupplementalHeadingMappedTo {
+  entryCombinationId: Float!
+  supplementalHeadingMappedToId: Float!
+  supplementalId: Float!
+}
+
+type TypeSupplementalIndexingInformation {
+  entryCombinationId: Float!
+  supplementalId: Float!
+  supplementalIndexingInformationId: Float!
+}
+
+type TypeSupplementalPharmacologicalActionDescriptor {
+  pharmacologicalActionDescriptorId: Float!
+  supplementalId: Float!
+  supplementalPharmacologicalActionDescriptorId: Float!
+}
+
+type TypeSupplementalPreviousIndexing {
+  previousIndexing: TypePreviousIndexing
+  previousIndexingId: Float!
+  supplemental: TypeSupplemental
+  supplementalId: Float!
+  supplementalPreviousIndexingId: Float!
+}
+
+type TypeSupplementalSource {
+  sourceId: Float!
+  supplementalId: Float!
+  supplementalSourceId: Float!
+}
+
+type TypeTerm {
+  abbreviation: String
+  conceptTerms: [TypeConceptTerm]
+  concepts: [TypeConcept]
+  created: String
+  entryVersion: String
+  name: String!
+  note: String
+  sortVersion: String
+  termId: Float!
+  termThesaurusIds: [TypeTermThesaurusId]
+  thesaurusIds: [TypeThesaurusId]
+  ui: String!
+}
+
+type TypeTermThesaurusId {
+  term: TypeTerm
+  termId: Float!
+  termThesaurusIdId: Float!
+  thesaurusId: TypeThesaurusId
+  thesaurusIdId: Float!
+}
+
+type TypeThesaurusId {
+  md5: JSONString!
+  termThesaurusIds: [TypeTermThesaurusId]
+  terms: [TypeTerm]
+  thesaurusId: String!
+  thesaurusIdId: Float!
+}
+
+type TypeTreeNumber {
+  descriptorTreeNumbers: [TypeDescriptorTreeNumber]
+  descriptors: [TypeDescriptor]
+  md5: JSONString!
+  qualifierTreeNumbers: [TypeQualifierTreeNumber]
+  qualifiers: [TypeQualifier]
+  treeNumber: String!
+  treeNumberId: Float!
+}
+
+type TypeUser {
+  auth0UserId: String!
+  citations: [TypeCitation]
+  email: String!
+  searches: [TypeSearch]
+  studies: [TypeStudy]
+  userId: ID!
+}
+
+type TypeUserCitation {
+  citationId: Float!
+  userCitationId: ID!
+  userId: Int!
+}
+
+type TypeUserSearch {
+  searchId: Int!
+  userId: Int!
+  userSearchId: ID!
+}
+
+type TypeUserStudy {
+  studyId: Float!
+  userId: Int!
+  userStudyId: ID!
+}
+
+type TypeUsers {
+  "Retrieve an application user through their Auth0 ID."
+  byAuth0Id(
+    #The user Auth0 ID.
+    auth0UserId: String!
+  ): TypeUser
+}
+
+" Enumeration of the actual types."
+enum ActualType {
+  ACTUAL
+  ANTICIPATED
+  ESTIMATE
+}
+
+" Enumeration of the descriptor-class types."
+enum DescriptorClassType {
+  FOUR
+  ONE
+  THREE
+  TWO
+}
+
+" Enumeration of the descriptor definition source types."
+enum DescriptorDefinitionSourceType {
+  AIR
+  ALT
+  AOT
+  CCC
+  CHV
+  CSP
+  FMA
+  GO
+  HL7V30
+  HPO
+  ICF
+  ICF_CY
+  JABL
+  LNC
+  MCM
+  MDR
+  MDRCZE
+  MDRDUT
+  MDRFRE
+  MDRGER
+  MDRHUN
+  MDRITA
+  MDRJPN
+  MDRPOR
+  MDRSPA
+  MEDLINEPLUS
+  MSH
+  MSHCZE
+  MSHFRE
+  MSHNOR
+  MSHPOR
+  MSHSCR
+  MSHSPA
+  NANDA_I
+  NCI
+  NCI_BRIDG
+  NCI_BioC
+  NCI_CDISC
+  NCI_CRCH
+  NCI_CTCAE
+  NCI_CTEP_SDC
+  NCI_CareLex
+  NCI_DICOM
+  NCI_FDA
+  NCI_GAIA
+  NCI_KEGG
+  NCI_NCI_GLOSS
+  NCI_NICHD
+  NDFRT
+  NIC
+  NOC
+  NUCCPT
+  OMS
+  PDQ
+  PNDS
+  PSY
+  SCTSPA
+  SNOMEDCT_US
+  SOP
+  SPN
+  UMD
+  UWDA
+}
+
+" Enumeration of the entry-combination types."
+enum EntryCombinationType {
+  ECIN
+  ECOUT
+}
+
+" Enumeration of the gender types."
+enum GenderType {
+  ALL
+  FEMALE
+  MALE
+}
+
+" Enumeration of the intervention types."
+enum InterventionType {
+  BEHAVIORAL
+  BIOLOGICAL
+  COMBINATION
+  DEVICE
+  DIAGNOSTIC
+  DIETARY
+  DRUG
+  GENETIC
+  OTHER
+  PROCEDURE
+  RADIATION
+}
+
+"""
+Enumeration of the values of the `IssnType` attribute under the
+`<ISSN>` element.
+"""
+enum JournalIssnType {
+  ELECTRONIC
+  PRINT
+  UNDETERMINED
+}
+
+" Enumeration of the lexical-tag types."
+enum LexicalTagType {
+  ABB
+  ABX
+  ACR
+  ACX
+  EPO
+  Frelex
+  LAB
+  NAM
+  NON
+  TRD
+}
+
+" Enumeration of the mesh-term types."
+enum MeshTermType {
+  CONDITION
+  INTERVENTION
+}
+
+" Enumeration of the outcome types."
+enum OutcomeType {
+  OTHER
+  POST_HOC
+  PRIMARY
+  SECONDARY
+}
+
+" Enumeration of the overall-status types."
+enum OverallStatusType {
+  ACTIVE_NOT
+  APPROVED
+  AVAILABLE
+  COMPLETED
+  INVITATION
+  NOT_YET
+  RECRUITING
+  SUSPENDED
+  TEMP_UNAVAILABLE
+  TERMINATED
+  UNAVAILABLE
+  UNKNOWN
+  WITHDRAWN
+  WITHHELD
+}
+
+" Enumeration of the phase types."
+enum PhaseType {
+  NA
+  PHASE_1
+  PHASE_1_2
+  PHASE_1_EARLY
+  PHASE_2
+  PHASE_2_3
+  PHASE_3
+  PHASE_4
+}
+
+" Enumeration of the recruitment-status types/"
+enum RecruitmentStatusType {
+  ACTIVE_NOT
+  COMPLETED
+  INVITATION
+  NOT_YET
+  RECRUITING
+  SUSPENDED
+  TERMINATED
+  WITHDRAWN
+}
+
+" Enumeration of the reference types."
+enum ReferenceType {
+  RESULTS
+  STANDARD
+}
+
+" Enumeration of the relation-name types."
+enum RelationNameType {
+  BRD
+  NRW
+  REL
+}
+
+" Enumeration of the role types."
+enum RoleType {
+  CHAIR
+  DIRECTOR
+  PRINCIPAL
+  SUB
+}
+
+" Enumeration of the sampling-method types."
+enum SamplingMethodType {
+  NON_PROBABILITY
+  PROBABILITY
+}
+
+" Enumeration of the study types."
+enum StudyType {
+  EXPANDED
+  INTERVENTIONAL
+  NA
+  OBSERVATIONAL
+  OBSERVATIONAL_PR
+}
+
+" Enumeration of the supplemental-class types."
+enum SupplementalClassType {
+  FOUR
+  ONE
+  THREE
+  TWO
+}
+
+enum TypeEnumOrder {
+  ASC
+  DESC
+}
+
+"An enumeration."
+enum articlepubmodel {
+  ELECTRONIC
+  ELECTRONIC_ECOLLECTION
+  ELECTRONIC_PRINT
+  PRINT
+  PRINT_ELECTRONIC
+}
+
+"An enumeration."
+enum biospecretentiontype {
+  NONE
+  SAMPLES_WO_DNA
+  SAMPLES_W_DNA
+}
+
+"An enumeration."
+enum journalissntype {
+  ELECTRONIC
+  PRINT
+  UNDETERMINED
+}
+
+"An enumeration."
+enum overallstatustype {
+  ACTIVE_NOT
+  APPROVED
+  AVAILABLE
+  COMPLETED
+  INVITATION
+  NOT_YET
+  RECRUITING
+  SUSPENDED
+  TEMP_UNAVAILABLE
+  TERMINATED
+  UNAVAILABLE
+  UNKNOWN
+  WITHDRAWN
+  WITHHELD
+}
+
+"""
+Input-type class used to provide input via GraphQL when creating or
+updating a `Search` record.
+"""
+input InputSearch {
+  ageBeg: Int
+  ageEnd: Int
+  gender: GenderType
+  searchUuid: UUID!
+  title: String!
+  yearBeg: Int
+  yearEnd: Int
+}
+
+"""
+Input-type class used to provide input via GraphQL when creating or
+updating a `ModelUser` record.
+"""
+input InputUser {
+  auth0UserId: String!
+  email: String!
+}
+
+"""
+Input-type class used to provide input via GraphQL when creating or
+deleting a `ModelUserCitation` record.
+"""
+input InputUserCitation {
+  auth0UserId: String!
+  pmid: Int!
+}
+
+"""
+Input-type class used to provide input via GraphQL when creating or
+deleting a `ModelUserStudy` record.
+"""
+input InputUserStudy {
+  auth0UserId: String!
+  nctId: String!
+}
+
+
+"JSON String"
+scalar JSONString
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+"UUID"
+scalar UUID
