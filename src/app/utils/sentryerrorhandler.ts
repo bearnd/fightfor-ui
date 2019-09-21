@@ -57,10 +57,6 @@ export class SentryErrorHandler implements ErrorHandler {
       Sentry.showReportDialog({
         eventId: eventId,
         dsn: environment.sentry.dsn,
-        user: {
-          name: this.authService.userProfile.name,
-          email: this.authService.userProfile.email,
-        },
         title: 'Oops seems you encountered an error!',
         subtitle: 'Feel free to leave some feedback as to what you were ' +
                   'doing or to just yell at us.',
