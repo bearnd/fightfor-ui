@@ -119,12 +119,12 @@ import { getAccessToken } from './shared/utils';
     BraintreeGatewayService,
     PaymentService,
     UserConfigService,
+    StudyBreadcrumbResolverService,
+    StudiesBreadcrumbResolverService,
     {
       provide: ErrorHandler,
       useClass: SentryErrorHandler
     },
-    StudyBreadcrumbResolverService,
-    StudiesBreadcrumbResolverService,
   ],
   bootstrap: [AppComponent],
   exports: [
