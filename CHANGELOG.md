@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.3.0
+
+- Story No. 1263: TypeError: Cannot read property 'name' of undefined.
+- Story No. 1253: Sentry issues not sent in production.
+
 ### v0.2.0
 
 - Updated `.gitignore`.
