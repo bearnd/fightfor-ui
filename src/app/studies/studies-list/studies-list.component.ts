@@ -336,7 +336,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique countries for this search's studies. If an initial
     // country was defined then skip this step.
-    if (!history.state.country) {
+    if (!history.state.country && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCountries(
         this.studies,
       ).map(
@@ -368,65 +368,69 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     // Retrieve the unique states/regions for this search's studies.
-    this.studyStatsRetrieverService.getUniqueStates(
-      this.studies,
-    ).map(
-      // Sort returned states alphabetically.
-      (uniqueStates: string[]) => {
-        return orderStringArray(uniqueStates);
-      }
-    ).map(
-      // Cast returned states to an array of objects with `id` and `name`
-      // properties that can be used in a multi-select component.
-      (uniqueStates: string[]) => {
-        let counter = 1;
-        const uniqueStatesMap: UniqueGeo[] = [];
-        for (const state of uniqueStates) {
-          if (!state) {
-            continue;
-          }
-          uniqueStatesMap.push({id: counter, name: state});
-          counter++;
+    if (this.studies.length) {
+      this.studyStatsRetrieverService.getUniqueStates(
+        this.studies,
+      ).map(
+        // Sort returned states alphabetically.
+        (uniqueStates: string[]) => {
+          return orderStringArray(uniqueStates);
         }
-        return uniqueStatesMap;
-      }
-    ).subscribe(
-      (uniqueStatesMap: UniqueGeo[]) => {
-        this.studyStates = uniqueStatesMap;
-        this.studyStatesFiltered.next(uniqueStatesMap);
-      }
-    );
+      ).map(
+        // Cast returned states to an array of objects with `id` and `name`
+        // properties that can be used in a multi-select component.
+        (uniqueStates: string[]) => {
+          let counter = 1;
+          const uniqueStatesMap: UniqueGeo[] = [];
+          for (const state of uniqueStates) {
+            if (!state) {
+              continue;
+            }
+            uniqueStatesMap.push({id: counter, name: state});
+            counter++;
+          }
+          return uniqueStatesMap;
+        }
+      ).subscribe(
+        (uniqueStatesMap: UniqueGeo[]) => {
+          this.studyStates = uniqueStatesMap;
+          this.studyStatesFiltered.next(uniqueStatesMap);
+        }
+      );
+    }
 
     // Retrieve the unique cities for this search's studies.
-    this.studyStatsRetrieverService.getUniqueCities(
-      this.studies,
-    ).map(
-      // Sort returned cities alphabetically.
-      (uniqueCities: string[]) => {
-        return orderStringArray(uniqueCities);
-      }
-    ).map(
-      // Cast returned cities to an array of objects with `id` and `name`
-      // properties that can be used in a multi-select component.
-      (uniqueCities: string[]) => {
-        let counter = 1;
-        const uniqueCitiesMap: UniqueGeo[] = [];
-        for (const city of uniqueCities) {
-          uniqueCitiesMap.push({id: counter, name: city});
-          counter++;
+    if (this.studies.length) {
+      this.studyStatsRetrieverService.getUniqueCities(
+        this.studies,
+      ).map(
+        // Sort returned cities alphabetically.
+        (uniqueCities: string[]) => {
+          return orderStringArray(uniqueCities);
         }
-        return uniqueCitiesMap;
-      }
-    ).subscribe(
-      (uniqueCitiesMap: UniqueGeo[]) => {
-        this.studyCities = uniqueCitiesMap;
-        this.studyCitiesFiltered.next(uniqueCitiesMap);
-      }
-    );
+      ).map(
+        // Cast returned cities to an array of objects with `id` and `name`
+        // properties that can be used in a multi-select component.
+        (uniqueCities: string[]) => {
+          let counter = 1;
+          const uniqueCitiesMap: UniqueGeo[] = [];
+          for (const city of uniqueCities) {
+            uniqueCitiesMap.push({id: counter, name: city});
+            counter++;
+          }
+          return uniqueCitiesMap;
+        }
+      ).subscribe(
+        (uniqueCitiesMap: UniqueGeo[]) => {
+          this.studyCities = uniqueCitiesMap;
+          this.studyCitiesFiltered.next(uniqueCitiesMap);
+        }
+      );
+    }
 
     // Retrieve the unique facilities for this search's studies. If an initial
     // facility was defined then skip this step.
-    if (!history.state.facilityCanonical) {
+    if (!history.state.facilityCanonical && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
         this.studies,
       ).map(
@@ -705,6 +709,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getStudiesPage() {
+
+    if (!this.studies.length) {
+      return;
+    }
 
     let countries: string[] = [];
     let states: string[] = [];
