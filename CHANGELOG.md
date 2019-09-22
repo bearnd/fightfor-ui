@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.4.0
+
+- Story No. 1250: The `StudiesListComponent` in `saved mode` displays all studies when no studies were followed.
+
 ### v0.3.0
 
 - Story No. 1263: TypeError: Cannot read property 'name' of undefined.
