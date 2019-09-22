@@ -9,8 +9,8 @@
 }
 
 .container-features {
-  margin-top: 20%;
-  margin-bottom: 20%;
+  margin-top: 10%;
+  margin-bottom: 15%;
   background-color: white;
 
 }
@@ -188,4 +188,13 @@
   .rw-sentence {
     font-size: 9px;
   }
+}
+
+.gif_shadow{
+  box-shadow: 10px 10px 5px grey;
+  width: 120%;
+}
+
+text_middle{
+  text-align: center;
 }
