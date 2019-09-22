@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.5.0
+
+- Story No. 895: Complete homepage feature descriptions
+- Removed header text on pricing page
+
 ### v0.4.0
 
 - Story No. 1250: The `StudiesListComponent` in `saved mode` displays all studies when no studies were followed.
