@@ -1606,17 +1606,17 @@
         <!--References Card-->
 
         <p class="card-description"><small>
-          The information included in this trial summary has been taken from
-          clinicaltrials.gov - trial identifier {{ study.nctId }}. The
+          This page contains trial information extracted from the U.S. National Library of Medicine (NLM)
+          <a href="https://clinicaltrials.gov">clinicaltrials.gov</a> database - trial identifier {{ study.nctId }}. The
           information has been modified to be more easily interpretable by
           persons unfamiliar with medical and/or clinical trial-specific terms
-          and in some cases has been simplified. More information on this trial
-          is available at
+          and in some cases has been simplified. To see the original trial or for more information on this trial, please visit
           <a
             href="https://clinicaltrials.gov/ct2/show/{{ study.nctId }}"
           >
-            https://clinicaltrials.gov/ct2/show/{{ study.nctId }}
+            https://clinicaltrials.gov/ct2/show/{{ study.nctId }}.
           </a>
+          Please refer to our <a href="" [routerLink]="['/tos']">Terms of Service</a>.
         </small></p>
 
       </div>
