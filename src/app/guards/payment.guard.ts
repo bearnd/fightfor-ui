@@ -65,7 +65,7 @@ export class PaymentGuard implements CanActivate, CanActivateChild {
         title: 'Page not available to your plan!',
         text: 'The page you are trying to navigate to is only available to ' +
           'the premium plan. Would you like to start your 7-day free trial?',
-        footer: '<p>Email <a href="mailto:support@bearnd.io">support@bearnd.io</a></p>',
+        footer: '<p>Email <a href="mailto:support@fightfor.app">support@fightfor.app</a></p>',
         showCancelButton: true,
         showConfirmButton: true,
         buttonsStyling: false,
