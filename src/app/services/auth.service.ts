@@ -190,8 +190,7 @@ export class AuthService {
   public renewToken() {
     this.auth0.checkSession({}, (err, result) => {
       if (err) {
-        // todo: replace with a more elegant error for the user.
-        console.log(err);
+        throw Error(err);
       } else {
         this.setSession(result);
       }
