@@ -153,6 +153,9 @@ export class StudyRetrieverService {
           completionDate,
           studyType,
           phase,
+          studyDates {
+            lastUpdatePosted
+          },
           studyOutcomes {
             outcomeType
             protocolOutcome {
