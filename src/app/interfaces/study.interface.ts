@@ -309,4 +309,5 @@ export interface StudyInterface {
   studyReferences?: StudyReferenceInterface[];
   references?: ReferenceInterface[];
   armGroups?: ArmGroupInterface[];
+  studyDates?: StudyDates;
 }
