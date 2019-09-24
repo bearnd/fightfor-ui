@@ -8,7 +8,8 @@ import { AuthService } from '../services/auth.service';
 
 Sentry.init({
   dsn: environment.sentry.dsn,
-  environment: environment.production ? 'production' : 'development',
+  environment: environment.sentry.environment,
+  release: 'fightfor-ui@' + environment.version,
 });
 
 
