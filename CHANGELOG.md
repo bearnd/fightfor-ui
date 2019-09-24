@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.7.1
+
+- [ch1383]: Updated the `ngOnInit` method of the `StudiesListComponent` class to set `this.studies` to an empty array when undefined to avoid errors on conditions using `this.studies.length.
+
 ### v0.7.0
 
 - Story No. 1357: Configure Auth0 client for multi-domain deployment.
