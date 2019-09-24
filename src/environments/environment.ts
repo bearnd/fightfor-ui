@@ -5,7 +5,7 @@ const hostApiGateway = '192.168.0.12';
 export const environment = {
   production: false,
   protocol: protocol,
-  version: '0.6.0',
+  version: '0.7.0',
   apiGateway: {
     domain: hostApiGateway,
   },

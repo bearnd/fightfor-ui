@@ -1,5 +1,13 @@
 ## Changelog
 
+### v0.7.0
+
+- Story No. 1357: Configure Auth0 client for multi-domain deployment.
+- Story No. 1215: Look into producing a specific error when a user tries to use the app without authenticating their account.
+- Story No. 1354: Change all references to support@bearnd.io to support@fightfor.app.
+- Story No. 1347: TypeError: Cannot read property 'length' of undefined.
+- Story No. 914: Review licensing and provide attribution to data-sources across the UI.
+
 ### v0.6.0
 
 - Story No. 1337: TypeError: Cannot read property 'value' of null.
