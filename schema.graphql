@@ -1035,6 +1035,7 @@ type TypeStudy {
   responsiblePartyId: Float
   source: String!
   startDate: String
+  studyDates: TypeStudyDates
   studyDatesId: Float!
   studyDescriptors: [TypeStudyDescriptor]
   studyDesignInfo: TypeStudyDesignInfo
@@ -1049,6 +1050,23 @@ type TypeStudy {
   targetDuration: String
   verificationDate: String
   whyStopped: String
+}
+
+type TypeStudyDates {
+  dispositionFirstPosted: String
+  dispositionFirstSubmitted: String
+  dispositionFirstSubmittedQc: String
+  lastUpdatePosted: String
+  lastUpdateSubmitted: String
+  lastUpdateSubmittedQc: String
+  resultsFirstPosted: String
+  resultsFirstSubmitted: String
+  resultsFirstSubmittedQc: String
+  study: TypeStudy
+  studyDatesId: Float!
+  studyFirstPosted: String
+  studyFirstSubmitted: String
+  studyFirstSubmittedQc: String
 }
 
 type TypeStudyDescriptor {
