@@ -257,6 +257,23 @@ export interface ArmGroupInterface {
   interventions: InterventionInterface[];
 }
 
+export interface StudyDates {
+  studyDatesId: number;
+  dispositionFirstPosted: string;
+  dispositionFirstSubmitted: string;
+  dispositionFirstSubmittedQc: string;
+  lastUpdatePosted: string;
+  lastUpdateSubmitted: string;
+  lastUpdateSubmittedQc: string;
+  resultsFirstPosted: string;
+  resultsFirstSubmitted: string;
+  resultsFirstSubmittedQc: string;
+  studyFirstPosted: string;
+  studyFirstSubmitted: string;
+  studyFirstSubmittedQc: string;
+  study: StudyInterface;
+}
+
 export interface StudyInterface {
   studyId?: number;
   orgStudyId?: string;
