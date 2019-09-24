@@ -209,7 +209,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // user to the `SearchesGridComponent`.
     if (searchUuid) {
       if (search) {
-        this.studies = search.studies;
+        this.studies = search.studies || [];
         this.mode = Mode.SEARCH;
       } else {
         const result = this.router.navigate(['/app', 'searches']);
@@ -218,7 +218,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       // If the component was called without a search UUID defined in the path
       // then the user's saved studies are retrieved instead and displayed.
     } else {
-      this.studies = this.userConfigService.userStudies;
+      this.studies = this.userConfigService.userStudies || [];
       this.mode = Mode.SAVED;
     }
 
@@ -285,7 +285,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
         = this.userConfigService.isUpdatingUserStudies.subscribe(
         (isUpdatingUserStudies: boolean) => {
           if (!isUpdatingUserStudies) {
-            this.studies = this.userConfigService.userStudies;
+            this.studies = this.userConfigService.userStudies || [];
             this.getStudiesPage();
           }
         }
