@@ -67,7 +67,7 @@ export class PaymentDialogComponent implements OnInit {
       swal({
         title: 'Subscription unsuccessful!',
         text: 'An error occured while establishing a subscription.',
-        footer: '<p>Email <a href="mailto:support@bearnd.io">support@bearnd.io</a></p>',
+        footer: '<p>Email <a href="mailto:support@fightfor.app">support@fightfor.app</a></p>',
         buttonsStyling: false,
         confirmButtonClass: 'btn btn-rose',
         type: 'error'

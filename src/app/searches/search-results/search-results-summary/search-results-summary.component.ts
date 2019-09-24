@@ -238,7 +238,7 @@ export class SearchResultsSummaryComponent implements OnInit {
               text: 'No trials were found for your selected parameters. ' +
                     'Please try a different search',
               footer: '<p>Email <a href="mailto:support' +
-                      '@bearnd.io">support@bearnd.io</a></p>',
+                      '@fightfor.app">support@fightfor.app</a></p>',
               showCancelButton: false,
               showConfirmButton: true,
               buttonsStyling: false,

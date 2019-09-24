@@ -318,8 +318,10 @@ export class UserConfigService {
 
     // Iterate over the input array, and clone each search, pushing it into the
     // `this.userSearches` array.
-    for (const search of searches) {
-      this.userSearches.push(this.cloneSearch(search));
+    if (searches) {
+      for (const search of searches) {
+        this.userSearches.push(this.cloneSearch(search));
+      }
     }
 
     // Update the subject.

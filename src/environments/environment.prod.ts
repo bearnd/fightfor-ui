@@ -1,27 +1,34 @@
+const protocol = 'https';
+const host = window.location.host;
+const hostApiGateway = 'api.fightfor.app';
+
 export const environment = {
   production: true,
+  protocol: protocol,
+  version: '0.7.0',
   apiGateway: {
-    domain: 'api.fightfor.app',
+    domain: hostApiGateway,
   },
   graphql: {
-    uri: 'https://api.fightfor.app/fightfor-graphql/graphql',
+    uri: protocol + '://' + hostApiGateway + '/fightfor-graphql/graphql',
   },
   mapbox: {
-    uri: 'https://api.fightfor.app/mapbox',
+    uri: protocol + '://' + hostApiGateway + '/mapbox',
   },
   auth0: {
     clientID: 'e8OIuAxekw31C33sllws23hPUGcxS80A',
     domain: 'bearnd.auth0.com',
     responseType: 'token id_token',
-    redirectUri: 'https://fightfor.app/callback',
+    redirectUri: protocol + '://' + host + '/callback',
     scope: 'openid profile email user_metadata app_metadata',
     audience: 'fightfor-backend',
   },
   braintreeGateway: {
-    uri: 'https://api.fightfor.app/braintree-gateway',
+    uri: protocol + '://' + hostApiGateway + '/braintree-gateway',
     planId: 'fightfor_premium_monthly'
   },
   sentry: {
     dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
+    environment: host === 'fightfor.app' ? 'production' : 'staging',
   },
 };
