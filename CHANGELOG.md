@@ -1,13 +1,17 @@
 ## Changelog
 
+### v0.6.0
+
+- Story No. 1337: TypeError: Cannot read property 'value' of null.
+
 ### v0.5.0
 
-- Story No. 895: Complete homepage feature descriptions
-- Removed header text on pricing page
+- Story No. 895: Complete homepage feature descriptions.
+- Removed header text on pricing page.
 
 ### v0.4.0
 
-- Story No. 1250: The `StudiesListComponent` in `saved mode` displays all studies when no studies were followed.
+- Story No. 1250: The `StudiesListComponent` in `saved mode` displays all studies. when no studies were followed.
 
 ### v0.3.0
 
