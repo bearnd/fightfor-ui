@@ -6,6 +6,7 @@ import * as auth0 from 'auth0-js';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs-compat/add/observable/timer';
+import swal from 'sweetalert2';
 
 import { environment } from '../../environments/environment';
 
@@ -52,6 +53,7 @@ export class AuthService {
     redirectUri: environment.auth0.redirectUri,
     scope: environment.auth0.scope,
     audience: environment.auth0.audience,
+    auto_login: false,
   });
 
   // The Auth0 user-profile for the currently logged-in user.
@@ -95,6 +97,18 @@ export class AuthService {
       } else if (err) {
         const result = this.router.navigate(['/']);
         result.then();
+
+        swal({
+          title: 'Failed to log you in!',
+          text: err.errorDescription,
+          footer: '<p>Email <a href="mailto:support@fightfor.app">support@fightfor.app</a></p>',
+          showCancelButton: false,
+          showConfirmButton: true,
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-rose',
+          confirmButtonText: 'Got it',
+          type: 'error'
+        }).catch(swal.noop);
       }
     });
   }
