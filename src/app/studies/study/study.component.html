@@ -1259,7 +1259,7 @@
                 >
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      {{ location.facility.facilityCanonical.name }}
+                      {{ (location.facility.facilityCanonical?.name) || "Location address unavailable" }}
                     </mat-panel-title>
                     <mat-panel-description>
                       {{ getLocationStatusMessage(location.status) }}
@@ -1267,33 +1267,33 @@
                   </mat-expansion-panel-header>
                   <div
                     class="row"
-                    *ngIf="location.facility.facilityCanonical.address"
+                    *ngIf="location.facility.facilityCanonical?.address"
                   >
                     <div class="col-md-1 card-description">
                       <i class="material-icons">location_on</i>
                     </div>
                     <div class="col-md-11">
                       <p class="card-description">
-                        {{ location.facility.facilityCanonical.address }}
+                        {{ (location.facility.facilityCanonical?.address) || "Location address unavailable" }}
                       </p>
                     </div>
                   </div>
                   <div
                     class="row"
-                    *ngIf="location.facility.facilityCanonical.phoneNumber"
+                    *ngIf="location.facility.facilityCanonical?.phoneNumber"
                   >
                     <div class="col-md-1 card-description">
                       <i class="material-icons">phone</i>
                     </div>
                     <div class="col-md-11">
                       <p class="card-description">
-                        {{ location.facility.facilityCanonical.phoneNumber }}
+                        {{ (location.facility.facilityCanonical?.phoneNumber) || "Location phone number unavailable"  }}
                       </p>
                     </div>
                   </div>
                   <div
                     class="row"
-                    *ngIf="location.facility.facilityCanonical.url"
+                    *ngIf="location.facility.facilityCanonical?.url"
                   >
                     <div class="col-md-1 card-description">
                       <i class="material-icons">public</i>
@@ -1301,9 +1301,9 @@
                     <div class="col-md-11">
                       <a
                         class="card-description"
-                        href="{{ location.facility.facilityCanonical.url }}"
+                        href="{{ location.facility.facilityCanonical?.url }}"
                       >
-                        {{ location.facility.facilityCanonical.url }}
+                        {{ (location.facility.facilityCanonical?.url) || "Location URL unavailable"  }}
                       </a>
                     </div>
                   </div>
