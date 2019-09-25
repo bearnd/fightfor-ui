@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.8.0
+
+- [ch1396]: Updated the `StudyComponent` and updated its template adding canonical facility guards and fallback strings when the canonical facility is not available.
+
 ### v0.7.1
 
 - [ch1383]: Updated the `ngOnInit` method of the `StudiesListComponent` class to set `this.studies` to an empty array when undefined to avoid errors on conditions using `this.studies.length.
