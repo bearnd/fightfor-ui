@@ -518,9 +518,17 @@ export class UserConfigService {
     return null;
   }
 
+  /**
+   * Retrieve a user-study through its NCT ID.
+   * @param nctId The NCT ID of the study to retrieve.
+   * @returns The retrieved study or null if no study matching the given NCT
+   * ID was found.
+   */
   getUserStudy(nctId: string): StudyInterface | null {
-    // Iterate over the user studies and return the one matching the provided
-    // NCT ID or null if no matching search is found.
+    if (!this.userStudies) {
+      return null;
+    }
+
     for (const study of this.userStudies) {
       if (study.nctId === nctId) {
         return study;
