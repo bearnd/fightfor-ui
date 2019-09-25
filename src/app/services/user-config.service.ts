@@ -507,9 +507,10 @@ export class UserConfigService {
    * was found.
    */
   getUserSearch(searchUuid: string): SearchInterface | null {
+    if (!this.userSearches) {
+      return null;
+    }
 
-    // Iterate over the user searches and return the one matching the provided
-    // UUID or null if no matching search is found.
     for (const search of this.userSearches) {
       if (search.searchUuid === searchUuid) {
         return search;
