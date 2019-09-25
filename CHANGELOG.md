@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.9.0
+
+- Story No. 1425: getUserStudy: TypeError: Cannot read property 'length' of undefined.
+
 ### v0.8.0
 
 - [ch1396]: Updated the `StudyComponent` and updated its template adding canonical facility guards and fallback strings when the canonical facility is not available.
