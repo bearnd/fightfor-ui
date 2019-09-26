@@ -151,7 +151,18 @@
                             type="button"
                             (click)="onDetectLocation()"
                           >
-                            <span class="mat-button-wrapper">Detect</span>
+                            <mat-icon
+                              class="fa-spin"
+                              *ngIf="isLoadingCurrentLocation | async"
+                            >
+                              refresh
+                            </mat-icon>
+                            <span
+                              class="mat-button-wrapper"
+                              *ngIf="!(isLoadingCurrentLocation | async)"
+                            >
+                              Detect
+                            </span>
                           </button>
                         </div>
 
