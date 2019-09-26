@@ -21,6 +21,7 @@ export class SentryErrorHandler implements ErrorHandler {
 
   private authService: AuthService;
   private httpClient: HttpClient;
+  private isDialogOpen = false;
 
   constructor(private injector: Injector) {
     setTimeout(
@@ -81,21 +82,11 @@ export class SentryErrorHandler implements ErrorHandler {
   }
 
   /**
-   * Handles any error not explicitly caught and sends information regarding
-   * that error to Sentry. In addition it displays a feedback dialog allowing
-   * the user to provide information regarding the error.
-   * @param error The error that occurred.
+   * Display a SweetAlert feedback dialog so that the user can provide feedback
+   * over the encountered error.
+   * @param eventId The ID of the Sentry event created over a new error.
    */
-  handleError(error: any) {
-    // Capture the error and create a new Sentry event.
-    const eventId = Sentry
-      .captureException(error.originalError || error);
-
-    // Log the error in the console as long as we're not running in production.
-    if (!environment.production) {
-      console.error(error);
-    }
-
+  showFeedbackDialog(eventId: string) {
     // Define the components of the feedback dialog.
     const title = 'Oops seems you encountered an error!';
     const subtitle = 'Feel free to leave some feedback as to what you were ' +
@@ -105,9 +96,7 @@ export class SentryErrorHandler implements ErrorHandler {
     const name = _.has(
       this.authService, ['userProfile', 'name']
     ) ? this.authService.userProfile.name : 'support@fightfor.app';
-    const email = _.has(
-      this.authService, ['userProfile', 'email']
-    ) ? this.authService.userProfile.email : 'support@fightfor.app';
+    const email = 'support@fightfor.app';
     const footer = '<p>Email <a href="mailto:support@fightfor.app">' +
       'support@fightfor.app</a></p>';
 
@@ -143,5 +132,24 @@ export class SentryErrorHandler implements ErrorHandler {
         ).subscribe();
       }
     }).catch(swal.noop);
+  }
+
+  /**
+   * Handles any error not explicitly caught and sends information regarding
+   * that error to Sentry. In addition it displays a feedback dialog allowing
+   * the user to provide information regarding the error.
+   * @param error The error that occurred.
+   */
+  handleError(error: any) {
+    // Capture the error and create a new Sentry event.
+    const eventId = Sentry
+      .captureException(error.originalError || error);
+
+    // Log the error in the console as long as we're not running in production.
+    if (!environment.production) {
+      console.error(error);
+    }
+
+    this.showFeedbackDialog(eventId);
   }
 }
