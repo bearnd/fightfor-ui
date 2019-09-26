@@ -2,6 +2,7 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 import * as Sentry from '@sentry/browser';
+import * as _ from 'lodash';
 
 import { AuthService } from '../services/auth.service';
 
@@ -41,28 +42,17 @@ export class SentryErrorHandler implements ErrorHandler {
       console.error(error);
     }
 
-    if (this.authService.userProfile) {
-      Sentry.showReportDialog({
-        eventId: eventId,
-        dsn: environment.sentry.dsn,
-        user: {
-          name: this.authService.userProfile.name,
-          email: this.authService.userProfile.email,
-        },
-        title: 'Oops seems you encountered an error!',
-        subtitle: 'Feel free to leave some feedback as to what you were ' +
-                  'doing or to just yell at us.',
-        labelComments: 'Your feedback'
-      });
-    } else {
-      Sentry.showReportDialog({
-        eventId: eventId,
-        dsn: environment.sentry.dsn,
-        title: 'Oops seems you encountered an error!',
-        subtitle: 'Feel free to leave some feedback as to what you were ' +
-                  'doing or to just yell at us.',
-        labelComments: 'Your feedback'
-      });
-    }
+    Sentry.showReportDialog({
+      eventId: eventId,
+      dsn: environment.sentry.dsn,
+      user: {
+        name: _.has(this.authService, ['userProfile', 'name']) ? this.authService.userProfile.name : null,
+        email: _.has(this.authService, ['userProfile', 'email']) ? this.authService.userProfile.email : null,
+      },
+      title: 'Oops seems you encountered an error!',
+      subtitle: 'Feel free to leave some feedback as to what you were ' +
+                'doing or to just yell at us.',
+      labelComments: 'Your feedback'
+    });
   }
 }
