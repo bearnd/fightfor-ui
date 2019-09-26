@@ -7,3 +7,9 @@ mat-expansion-panel:first-of-type {
 mat-expansion-panel:last-of-type {
   margin-bottom: 20px !important;
 }
+
+button {
+  mat-icon {
+    font-size: 24px;
+  }
+}
