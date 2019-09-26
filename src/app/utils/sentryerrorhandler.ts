@@ -87,6 +87,13 @@ export class SentryErrorHandler implements ErrorHandler {
    * @param eventId The ID of the Sentry event created over a new error.
    */
   showFeedbackDialog(eventId: string) {
+    // Skip feedback dialog if one is already open.
+    if (this.isDialogOpen) {
+      return null;
+    }
+
+    this.isDialogOpen = true;
+
     // Define the components of the feedback dialog.
     const title = 'Oops seems you encountered an error!';
     const subtitle = 'Feel free to leave some feedback as to what you were ' +
@@ -129,9 +136,14 @@ export class SentryErrorHandler implements ErrorHandler {
           ),
           this.assembleSentryFeedbackFormData(name, email, result.value),
           {headers: headers},
-        ).subscribe();
+        ).subscribe(response => this.isDialogOpen = false);
       }
-    }).catch(swal.noop);
+    }).catch(
+      (reason: any) => {
+        this.isDialogOpen = false;
+        return swal.noop;
+      }
+    );
   }
 
   /**
@@ -150,6 +162,7 @@ export class SentryErrorHandler implements ErrorHandler {
       console.error(error);
     }
 
+    // Display the user feedback dialog.
     this.showFeedbackDialog(eventId);
   }
 }
