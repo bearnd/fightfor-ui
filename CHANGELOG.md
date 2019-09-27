@@ -1,5 +1,13 @@
 ## Changelog
 
+### v0.10.0
+
+- Story No. 1452: Preclude SentryErrorHandler from flooding the user with errors.
+- Story No. 945: Replace Sentry feedback dialog with custom SweetAlert one.
+- Story No. 1003: Create social-media accounts/pages.
+- Story No. 1201: Establish active spinners for buttons that cause a delayed action.
+- Story No. 1203: Gender radio buttons under `Eligibility` in `StudyComponent` are not disabled.
+
 ### v0.9.0
 
 - Story No. 1425: getUserStudy: TypeError: Cannot read property 'length' of undefined.
