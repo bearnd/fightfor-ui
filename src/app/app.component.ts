@@ -9,6 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  // URL paths to which deep-linking is permitted.
+  private pathsWhitelistedDeepLinking: string[] = [
+    '/pricing',
+    '/faq',
+    '/tos',
+    '/privacy',
+  ];
+
   constructor(
     public auth: AuthService,
     private router: Router,
@@ -18,7 +26,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const result = this.router.navigate(['']);
+    // If the URL path is one of the whitelisted ones then permit deep-linking.
+    // Otherwise redirect to the homepage.
+    if (!this.pathsWhitelistedDeepLinking.includes(window.location.pathname)) {
+      const result = this.router.navigate(['']);
     result.then();
+    }
   }
 }
