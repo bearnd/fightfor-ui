@@ -50,6 +50,8 @@ import {
   orderObjectArray,
   orderStringArray
 } from '../../shared/utils';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 
 interface EnumInterface {
@@ -155,6 +157,11 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
 
   // The studies returned by the search.
   public studies: StudyInterface[];
+
+  private loadingCurrentLocation: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isLoadingCurrentLocation: Observable<boolean>
+    = this.loadingCurrentLocation.asObservable();
 
   constructor(
     private authService: AuthService,
@@ -780,6 +787,9 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
    * input.
    */
   onDetectLocation() {
+    // Update the 'loading' observable to indicate that loading is in progress.
+    this.loadingCurrentLocation.next(true);
+
     // Get the current location coordinates through the browser.
     this.geolocationService.getCurrentPositionBrowser({})
       .subscribe(
@@ -805,9 +815,14 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
                   break;
                 }
               }
-            }
+              // Update the 'loading' observable to indicate that loading is in
+              // progress.
+              this.loadingCurrentLocation.next(false);
+            },
+            error => this.loadingCurrentLocation.next(false)
           );
-        }
+        },
+        error => this.loadingCurrentLocation.next(false)
       );
   }
 

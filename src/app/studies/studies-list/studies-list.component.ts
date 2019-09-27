@@ -54,6 +54,8 @@ import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 
 interface EnumInterface {
@@ -180,6 +182,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptionIsUpdatingUserStudies: Subscription = null;
 
   public overallStatusGroup = 'all';
+
+  private loadingCurrentLocation: BehaviorSubject<boolean>
+    = new BehaviorSubject<boolean>(false);
+  public isLoadingCurrentLocation: Observable<boolean>
+    = this.loadingCurrentLocation.asObservable();
 
   constructor(
     private authService: AuthService,
@@ -1028,6 +1035,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
    * input.
    */
   onDetectLocation() {
+    // Update the 'loading' observable to indicate that loading is in progress.
+    this.loadingCurrentLocation.next(true);
+
     // Get the current location coordinates through the browser.
     this.geolocationService.getCurrentPositionBrowser({})
       .subscribe(
@@ -1053,9 +1063,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
                   break;
                 }
               }
-            }
+              // Update the 'loading' observable to indicate that loading is in
+              // progress.
+              this.loadingCurrentLocation.next(false);
+            },
+            error => this.loadingCurrentLocation.next(false)
           );
-        }
+        },
+        error => this.loadingCurrentLocation.next(false)
       );
   }
 
