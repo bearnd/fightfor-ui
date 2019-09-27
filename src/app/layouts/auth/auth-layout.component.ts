@@ -17,12 +17,14 @@ export class AuthLayoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.authService.userProfile) {
-      this.userProfile = this.authService.userProfile;
-    } else {
-      this.authService.getProfile((err, profile) => {
-        this.userProfile = profile;
-      });
+    if (this.authService.isAuthenticated()) {
+      if (this.authService.userProfile) {
+        this.userProfile = this.authService.userProfile;
+      } else {
+        this.authService.getProfile((err, profile) => {
+          this.userProfile = profile;
+        });
+      }
     }
   }
 
