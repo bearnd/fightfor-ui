@@ -9,7 +9,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
  * @param enumeration The enumeration to cast.
  * @returns The enumeration casted to an array of objects.
  */
-export function castEnumToArray(enumeration): {id: string, name: string}[] {
+export function castEnumToArray(enumeration): { id: string, name: string }[] {
   // Initialize an empty array to be populated with the casted enumeration.
   const arr: { id: string, name: string }[] = [];
 
