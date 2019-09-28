@@ -10,6 +10,7 @@ import {
 } from './braintree-gateway.interface';
 import { BraintreeGatewayService } from './braintree-gateway.service';
 import { Auth0UserProfileInterface } from './auth.service';
+import { getUserId } from '../shared/utils';
 
 
 @Injectable()
@@ -42,10 +43,8 @@ export class PaymentService {
     // Store the Auth0 user-profile.
     this.userProfile = userProfile;
 
-    // Retrieve the customer ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const customerId = this.userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the customer ID.
+    const customerId = getUserId(this.userProfile);
 
     // Retrieve the Braintree customer for the given ID.
     this.braintreeGatewayService.getCustomer(customerId)

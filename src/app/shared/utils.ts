@@ -1,7 +1,10 @@
 import * as momentParser from 'moment-parser';
 import * as moment from 'moment';
+import * as _ from 'lodash';
 import { FacilityCanonicalInterface } from '../interfaces/study.interface';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Auth0UserProfileInterface } from '../services/auth.service';
+
 
 /**
  * Casts an enumeration into an array of objects with and `id` property holding
@@ -9,7 +12,7 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
  * @param enumeration The enumeration to cast.
  * @returns The enumeration casted to an array of objects.
  */
-export function castEnumToArray(enumeration): {id: string, name: string}[] {
+export function castEnumToArray(enumeration): { id: string, name: string }[] {
   // Initialize an empty array to be populated with the casted enumeration.
   const arr: { id: string, name: string }[] = [];
 
@@ -190,4 +193,31 @@ export function filterValues(
  */
 export function getAccessToken(): string {
   return localStorage.getItem('access_token');
+}
+
+/**
+ * Retrieves the user ID by removing the `provider-name|` prefix from the
+ * `sub` property value of the Auth0 user profile.
+ * @param userProfile The Auth0 user profile from which to retrieve the user
+ * ID.
+ * @returns The user ID.
+ */
+export function getUserId(
+  userProfile: Auth0UserProfileInterface
+): string | null {
+  // Return null if the `sub` is not defined.
+  if (!_.has(userProfile, ['sub'])) {
+    return null;
+  }
+
+  // Split the string on the `|` which separates the auth provider and the
+  // user ID.
+  const pieces = userProfile.sub.split('|');
+
+  if (!pieces) {
+    return null;
+  }
+
+  // Return the last piece of the `sub` which should be the user ID.
+  return pieces[pieces.length - 1];
 }

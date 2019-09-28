@@ -16,6 +16,7 @@ import {
 import { Auth0UserProfileInterface } from './auth.service';
 import { DescriptorInterface } from '../interfaces/descriptor.interface';
 import { StudyInterface } from '../interfaces/study.interface';
+import { getUserId } from '../shared/utils';
 
 
 interface VariablesGetUser {
@@ -338,10 +339,8 @@ export class UserConfigService {
     // Update the 'loading' subject to indicate that loading is in progress.
     this.loadingUser.next(true);
 
-    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const auth0UserId = userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the user ID.
+    const auth0UserId = getUserId(userProfile);
 
     // Retrieve the DB user for the current Auth0 user. If the user exists then
     // set its configuration under `this.userConfig` and deep-copy the user's
@@ -415,10 +414,8 @@ export class UserConfigService {
     // in progress.
     this.creatingNewSearch.next(true);
 
-    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const auth0UserId = userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the user ID.
+    const auth0UserId = getUserId(userProfile);
 
     // Retrieve the IDs out of the provided MeSH descriptors.
     const descriptorIds: number[] = descriptors.map(
@@ -469,10 +466,8 @@ export class UserConfigService {
       return;
     }
 
-    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const auth0UserId = userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the user ID.
+    const auth0UserId = getUserId(userProfile);
 
     // Delete the defined search in the database and remove it from
     // `this.userSearches` and update the corresponding subject.
@@ -539,10 +534,8 @@ export class UserConfigService {
   }
 
   followStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
-    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const auth0UserId = userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the user ID.
+    const auth0UserId = getUserId(userProfile);
 
     // If the given study is already followed by the user the return.
     if (this.getUserStudy(nctId)) {
@@ -576,10 +569,8 @@ export class UserConfigService {
   }
 
   unfollowStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
-    // Retrieve the user ID by removing the `auth0|` prefix from the Auth0
-    // user ID.
-    const auth0UserId = userProfile.sub
-      .replace('auth0|', '');
+    // Retrieve the user ID.
+    const auth0UserId = getUserId(userProfile);
 
     // If the given study is not already followed by the user the return.
     if (!this.getUserStudy(nctId)) {
