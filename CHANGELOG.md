@@ -1,5 +1,10 @@
 ## Changelog
 
+### v0.11.0
+
+- Story No. 1325: Request to `https://bearnd.auth0.com/userinfo` returns 401.
+- Story No. 1479: Could not create customer with ID 'facebook|10219772538845615': Customer ID is invalid.
+
 ### v0.10.0
 
 - Story No. 1452: Preclude SentryErrorHandler from flooding the user with errors.
