@@ -616,7 +616,11 @@ export class SearchResultsSummaryComponent implements OnInit {
         // the minimum opacity 50%.
         const alphaValue = (entry.countStudies - mapMin) / mapMax + 0.50;
         // Populate objects.
-        data[code] = {numTrials: entry.countStudies, fillKey: code};
+        data[code] = {
+          numTrials: entry.countStudies,
+          fillKey: code,
+          countryName: entry.country,
+        };
         fills[code] = 'rgba(246, 92, 80,' + alphaValue + ' )';
       }
     }
