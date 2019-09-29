@@ -69,6 +69,7 @@
     <mat-sidenav
       fxLayout="column"
       [opened]="showSidebar"
+      (closed)="onSidenavClosed()"
       position="end"
       mode="over"
       fxHide.gt-sm="true"
