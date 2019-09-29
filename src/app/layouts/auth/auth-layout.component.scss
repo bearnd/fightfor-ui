@@ -15,6 +15,15 @@ mat-toolbar {
   background: white;
   height: 64px;
 }
+.inner-sidenav-content {
+  overflow: auto;
+  //position: top;  // TODO: re-evaluate
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 64px;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
