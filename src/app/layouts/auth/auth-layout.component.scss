@@ -1,3 +1,10 @@
+.top-level-container {
+  //position:absolute;  // TODO: re-evaluate
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
 .spacer {
   flex: 1 1 auto;
 }
