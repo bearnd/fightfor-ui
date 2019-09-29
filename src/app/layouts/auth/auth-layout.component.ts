@@ -45,4 +45,12 @@ export class AuthLayoutComponent implements OnInit {
   toggleSidebar() {
     this.showSidebar = !this.showSidebar;
   }
+
+  /**
+   * Sets the `showSidebar` member variable to `false` when then sidebar is
+   * closed (typically by clicking outside the sidebar).
+   */
+  onSidenavClosed() {
+    this.showSidebar = false;
+  }
 }
