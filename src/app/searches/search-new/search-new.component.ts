@@ -125,6 +125,10 @@ export class SearchNewComponent implements OnInit, OnDestroy {
           ageBeg: Math.floor(range.ageBeg / 31536000.0),
           ageEnd: Math.ceil(range.ageEnd / 31536000.0),
         };
+        this.studyEligibilityAgeRangeSelected.ageBeg =
+          this.studyEligibilityAgeRangeAll.ageBeg;
+        this.studyEligibilityAgeRangeSelected.ageEnd =
+          this.studyEligibilityAgeRangeAll.ageEnd;
       }
     );
 
