@@ -15,6 +15,17 @@ mat-toolbar {
   background: white;
   height: 64px;
 }
+
+mat-sidenav-container {
+  height:100%;
+  width:100%;
+}
+
+.sidenav-mat-nav-list {
+  position: fixed;
+  margin-top: 64px;
+}
+
 .inner-sidenav-content {
   overflow: auto;
   //position: top;  // TODO: re-evaluate
