@@ -616,7 +616,11 @@ export class SearchResultsSummaryComponent implements OnInit {
         // the minimum opacity 50%.
         const alphaValue = (entry.countStudies - mapMin) / mapMax + 0.50;
         // Populate objects.
-        data[code] = {numTrials: entry.countStudies, fillKey: code};
+        data[code] = {
+          numTrials: entry.countStudies,
+          fillKey: code,
+          countryName: entry.country,
+        };
         fills[code] = 'rgba(246, 92, 80,' + alphaValue + ' )';
       }
     }
@@ -624,6 +628,19 @@ export class SearchResultsSummaryComponent implements OnInit {
     // Instantiate the map.
     this.worldMap = new Datamap({
       element: document.getElementById('worldMap'),
+      done: (datamap) => {
+        datamap.svg.selectAll('.datamaps-subunit')
+          .on(
+            'click',
+            (geography) => {
+              if (datamap.options.data[geography.id]) {
+                this.onNavigateToCountry(
+                  datamap.options.data[geography.id].countryName
+                );
+              }
+            }
+          );
+      },
       scope: 'world',
       projection: 'mercator',
       setProjection: (element) => {
