@@ -628,6 +628,19 @@ export class SearchResultsSummaryComponent implements OnInit {
     // Instantiate the map.
     this.worldMap = new Datamap({
       element: document.getElementById('worldMap'),
+      done: (datamap) => {
+        datamap.svg.selectAll('.datamaps-subunit')
+          .on(
+            'click',
+            (geography) => {
+              if (datamap.options.data[geography.id]) {
+                this.onNavigateToCountry(
+                  datamap.options.data[geography.id].countryName
+                );
+              }
+            }
+          );
+      },
       scope: 'world',
       projection: 'mercator',
       setProjection: (element) => {
