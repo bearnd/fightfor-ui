@@ -1,5 +1,14 @@
 ## Changelog
 
+### v0.12.0
+
+- Story No. 1487: Find a way to show the whole study title in the results tables.
+- Story No. 1332: Fix or remove the responsive nav bar on the `AuthLayoutComponent`.
+- Story No. 1493: Increase margins between table columns.
+- Story No. 1466: Age slider defaults to an incomplete range.
+- Story No. 1010: Connect clicking on map countries to the pre-filtered `StudiesListComponent`.
+- Story No. 1306: Redo homepage features.
+
 ### v0.11.0
 
 - Story No. 1325: Request to `https://bearnd.auth0.com/userinfo` returns 401.
