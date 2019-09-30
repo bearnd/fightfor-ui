@@ -339,6 +339,44 @@ export class UserConfigService {
   }
 
   /**
+   * Retrieve a user-search through its UUID.
+   * @param searchUuid The UUID of the search to be retrieved.
+   * @returns The retrieved search or null if no search matching the given UUID
+   * was found.
+   */
+  getUserSearch(searchUuid: string): SearchInterface | null {
+    if (!this.userSearches) {
+      return null;
+    }
+
+    for (const search of this.userSearches) {
+      if (search.searchUuid === searchUuid) {
+        return search;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Retrieve a user-study through its NCT ID.
+   * @param nctId The NCT ID of the study to retrieve.
+   * @returns The retrieved study or null if no study matching the given NCT
+   * ID was found.
+   */
+  getUserStudy(nctId: string): StudyInterface | null {
+    if (!this.userStudies) {
+      return null;
+    }
+
+    for (const study of this.userStudies) {
+      if (study.nctId === nctId) {
+        return study;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Retrieve the DB user for the current Auth0 user. If a DB user does not
    * exist a new one is created.
    * @param userProfile The Auth0 user-profile for which a DB will be retrieved.
@@ -484,44 +522,6 @@ export class UserConfigService {
         }]
       }
     ).subscribe();
-  }
-
-  /**
-   * Retrieve a user-search through its UUID.
-   * @param searchUuid The UUID of the search to be retrieved.
-   * @returns The retrieved search or null if no search matching the given UUID
-   * was found.
-   */
-  getUserSearch(searchUuid: string): SearchInterface | null {
-    if (!this.userSearches) {
-      return null;
-    }
-
-    for (const search of this.userSearches) {
-      if (search.searchUuid === searchUuid) {
-        return search;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Retrieve a user-study through its NCT ID.
-   * @param nctId The NCT ID of the study to retrieve.
-   * @returns The retrieved study or null if no study matching the given NCT
-   * ID was found.
-   */
-  getUserStudy(nctId: string): StudyInterface | null {
-    if (!this.userStudies) {
-      return null;
-    }
-
-    for (const study of this.userStudies) {
-      if (study.nctId === nctId) {
-        return study;
-      }
-    }
-    return null;
   }
 
   followStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
