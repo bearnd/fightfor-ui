@@ -330,6 +330,20 @@ export class UserConfigService {
   }
 
   /**
+   * Updates the local copy of the user configuration.
+   * @param userConfig The user configuration to copy.
+   */
+  updateUserConfig(userConfig: UserInterface) {
+    this.userConfig = userConfig;
+
+    this.copySearches(this.userConfig.searches);
+
+    this.updatingUserStudies.next(true);
+    this.userStudies = cloneDeep(this.userConfig.studies);
+    this.updatingUserStudies.next(false);
+  }
+
+  /**
    * Retrieve the DB user for the current Auth0 user. If a DB user does not
    * exist a new one is created.
    * @param userProfile The Auth0 user-profile for which a DB will be retrieved.
@@ -353,9 +367,7 @@ export class UserConfigService {
       }
     }).subscribe(
       (response: ApolloQueryResult<ResponseGetUser>) => {
-        this.userConfig = response.data.users.byAuth0Id;
-        this.copySearches(this.userConfig.searches);
-        this.userStudies = cloneDeep(this.userConfig.studies);
+        this.updateUserConfig(response.data.users.byAuth0Id);
         this.loadingUser.next(false);
       },
       (error: GraphQLError) => {
@@ -368,9 +380,7 @@ export class UserConfigService {
             }
           }).subscribe(
             (response: ApolloQueryResult<ResponseUpsertUser>) => {
-              this.userConfig = response.data.upsertUser.user;
-              this.copySearches(this.userConfig.searches);
-              this.userStudies = cloneDeep(this.userConfig.studies);
+              this.updateUserConfig(response.data.upsertUser.user);
               this.loadingUser.next(false);
             }
           );
