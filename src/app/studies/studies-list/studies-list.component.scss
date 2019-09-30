@@ -13,3 +13,9 @@ button {
     font-size: 24px;
   }
 }
+
+// Add padding to table cells to keep the text from sticking between cells.
+td.mat-cell {
+  padding-left: 5px;
+  padding-right: 5px;
+}

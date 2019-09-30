@@ -1,7 +1,7 @@
-<div style="height: 100vh;">
-  <mat-toolbar style="background: white;">
+<div class="top-level-container">
+  <mat-toolbar>
     <span>
-      <a [routerLink]="['/features']">
+      <a routerLink="/features">
         <img
           src="../../../assets/img/android-chrome-512x512.png"
           alt="Fight for logo"
@@ -17,12 +17,12 @@
     <div fxShow="true" fxHide.lt-md="true">
 
       <mat-nav-list class="list-horizontal">
-        <mat-list-item [routerLink]="['/features']">Features</mat-list-item>
-        <mat-list-item [routerLink]="['/pricing']">Pricing</mat-list-item>
-        <mat-list-item [routerLink]="['/faq']">FAQ</mat-list-item>
+        <mat-list-item routerLink="/features">Features</mat-list-item>
+        <mat-list-item routerLink="/pricing">Pricing</mat-list-item>
+        <mat-list-item routerLink="/faq">FAQ</mat-list-item>
         <mat-list-item
           *ngIf="authService.isAuthenticated()"
-          [routerLink]="['/app']"
+          routerLink="/app"
         >Go to app
         </mat-list-item>
         <mat-list-item
@@ -58,7 +58,6 @@
     </div>
 
     <div fxShow="true" fxHide.gt-sm="true">
-      <!--<a href="#" (click)="toggleSidebar()">Show Side Menu</a>-->
       <button mat-button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <mat-icon *ngIf="!showSidebar">reorder</mat-icon>
         <mat-icon *ngIf="showSidebar">close</mat-icon>
@@ -70,18 +69,20 @@
     <mat-sidenav
       fxLayout="column"
       [opened]="showSidebar"
+      (closed)="onSidenavClosed()"
       position="end"
       mode="over"
+      fxHide.gt-sm="true"
     >
       <div fxLayout="column">
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="['/features']">Features</a>
-          <a mat-list-item [routerLink]="['/pricing']">Pricing</a>
-          <a mat-list-item [routerLink]="['/faq']">FAQ</a>
+        <mat-nav-list class="sidenav-mat-nav-list">
+          <a mat-list-item routerLink="/features">Features</a>
+          <a mat-list-item routerLink="/pricing">Pricing</a>
+          <a mat-list-item routerLink="/faq">FAQ</a>
           <a
             mat-list-item
             *ngIf="authService.isAuthenticated()"
-            [routerLink]="['/app']"
+            routerLink="/app"
           >Go to app</a>
           <a
             mat-list-item
@@ -116,11 +117,12 @@
         </mat-nav-list>
       </div>
     </mat-sidenav>
-    <!--<mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>-->
     <mat-sidenav-content fxFlexFill>
-      <div style="flex: 1">
-        <router-outlet></router-outlet>
-        <app-footer></app-footer>
+      <div class="inner-sidenav-content">
+        <div style="flex: 1">
+          <router-outlet></router-outlet>
+          <app-footer></app-footer>
+        </div>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

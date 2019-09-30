@@ -1,6 +1,41 @@
+.top-level-container {
+  //position:absolute;  // TODO: re-evaluate
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}
+
+mat-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100% !important;
+  background: white;
+  height: 64px;
+}
+
+mat-sidenav-container {
+  height:100%;
+  width:100%;
+}
+
+.sidenav-mat-nav-list {
+  position: fixed;
+  margin-top: 64px;
+}
+
+.inner-sidenav-content {
+  overflow: auto;
+  //position: top;  // TODO: re-evaluate
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: 64px;
+}
+
 .spacer {
-  /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
   flex: 1 1 auto;
 }
 

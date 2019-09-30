@@ -5,7 +5,7 @@ const hostApiGateway = 'api.fightfor.app';
 export const environment = {
   production: true,
   protocol: protocol,
-  version: '0.11.0',
+  version: '0.12.0',
   apiGateway: {
     domain: hostApiGateway,
   },
