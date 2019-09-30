@@ -30,6 +30,7 @@ import {
 } from '../../services/study-stats-retriever.service';
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
+import { SearchInterface } from '../../interfaces/user-config.interface';
 
 
 @Component({
@@ -46,6 +47,8 @@ export class SearchNewComponent implements OnInit, OnDestroy {
 
   // Subscription to the observable returned by `getMeshDescriptorsBySynonym`.
   subscriptionDescriptors: Subscription;
+  // Subscription to the `userConfigService.searchesLatest` behavior-subject.
+  subscriptionSearchesLatest: Subscription = null;
 
   // `FormGroup` to encompass the form controls.
   form: FormGroup;
@@ -155,13 +158,14 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       }
     );
 
-    // Subscribe to the `userConfigService.isCreatingNewSearch` observable.
-    this.userConfigService.isCreatingNewSearch.subscribe(
-      (isCreating: boolean) => {
-        // If the new search UUID has been set (which happens in the `onSubmit`
-        // method) and the new search is finished being created then navigate
-        // the result summary page for this new search.
-        if (!isCreating && this.newSearchUuid !== null) {
+    // Subscribe to the `userConfigService.searchesLatest` behavior subject. If
+    // the new search UUID has been set (which happens in the `onSubmit` method)
+    // and the new search is finished being created then navigate to the result
+    // summary page for this new search.
+    this.subscriptionSearchesLatest = this.userConfigService
+      .searchesLatest.subscribe(
+      (searches: SearchInterface[]) => {
+        if (searches && this.newSearchUuid !== null) {
           if (this.userConfigService.getUserSearch(this.newSearchUuid)) {
             const result = this.router.navigate(
               ['/app', 'searches', this.newSearchUuid]
@@ -263,6 +267,9 @@ export class SearchNewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscriptionDescriptors) {
       this.subscriptionDescriptors.unsubscribe();
+    }
+    if (this.subscriptionSearchesLatest) {
+      this.subscriptionSearchesLatest.unsubscribe();
     }
   }
 }
