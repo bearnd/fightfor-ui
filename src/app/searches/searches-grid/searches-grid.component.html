@@ -32,6 +32,14 @@
           <div class="card-body">
             <h4 class="card-title">
               Search Parameters
+              <mat-icon
+                class="pull-right"
+                matTooltip="Delete Search"
+                [matTooltipPosition]="'below'"
+                style="cursor:pointer; color: #999"
+                (click)="onDeleteSearch(search.searchUuid)"
+              >delete
+              </mat-icon>
             </h4>
 
             <app-mesh-term-chip-list
