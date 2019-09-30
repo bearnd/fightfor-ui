@@ -524,6 +524,11 @@ export class UserConfigService {
     ).subscribe();
   }
 
+  /**
+   * Adds a clinical-trials study as followed under the user configuration.
+   * @param userProfile The profile of the user to add the study to.
+   * @param nctId The NCT ID of the clinical-trial study to add.
+   */
   followStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
     // Retrieve the user ID.
     const auth0UserId = getUserId(userProfile);
@@ -554,6 +559,11 @@ export class UserConfigService {
     ).subscribe();
   }
 
+  /**
+   * Removes a clinical-trials study as followed from the user configuration.
+   * @param userProfile The profile of the user to remove the study from.
+   * @param nctId The NCT ID of the clinical-trial study to remove.
+   */
   unfollowStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
     // Retrieve the user ID.
     const auth0UserId = getUserId(userProfile);
