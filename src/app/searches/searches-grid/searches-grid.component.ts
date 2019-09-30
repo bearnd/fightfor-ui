@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Subscription } from 'rxjs/Subscription';
 
 import { SearchInterface } from '../../interfaces/user-config.interface';
 import { UserConfigService } from '../../services/user-config.service';
@@ -11,7 +13,10 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './searches-grid.component.html',
   styleUrls: ['./searches-grid.component.scss']
 })
-export class SearchesGridComponent implements OnInit {
+export class SearchesGridComponent implements OnInit, OnDestroy {
+
+  // Subscription to the `userConfigService.searchesLatest` behavior-subject.
+  subscriptionSearchesLatest: Subscription = null;
 
   searches: SearchInterface[];
 
@@ -22,14 +27,15 @@ export class SearchesGridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Copy the user's searches from the `UserConfigService` and store them
+    // in reverse order.
     this.searches = Object.keys(this.userConfigService.userSearches)
-      .map(key => this.userConfigService.userSearches[key]);
+      .map(key => this.userConfigService.userSearches[key]).reverse();
 
-    // Subscribe to the `UserConfigService.searchesLatest` observable. Each
-    // time the searches are updated retrieve them and set them under
-    // `this.searches` (in reverse order so that the latest searches appear
-    // first).
-    this.userConfigService.searchesLatest.subscribe(
+    // Subscribe to the searchesLatest behavior subject and replace the
+    // user's searches whenever they are updated.
+    this.subscriptionSearchesLatest = this.userConfigService
+      .searchesLatest.subscribe(
       (searches: SearchInterface[]) => {
         if (searches) {
           this.searches = Object.keys(searches)
@@ -50,6 +56,17 @@ export class SearchesGridComponent implements OnInit {
   }
 
   /**
+   * Deletes a given search via its UUID and the `UserConfigService`.
+   * @param searchUuid The UUID of the search to be deleted.
+   */
+  onDeleteSearch(searchUuid: string) {
+    this.userConfigService.deleteSearch(
+      this.authService.userProfile,
+      searchUuid,
+    );
+  }
+
+  /**
    * Redirects the user to the results summary of a given search.
    * @param searchUuid The search for which the user-results will be displayed.
    */
@@ -58,5 +75,11 @@ export class SearchesGridComponent implements OnInit {
       ['/app', 'searches', searchUuid]
     );
     result.then();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscriptionSearchesLatest) {
+      this.subscriptionSearchesLatest.unsubscribe();
+    }
   }
 }
