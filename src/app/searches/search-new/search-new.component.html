@@ -59,7 +59,7 @@
                     (optionSelected)="onDescriptorSelected($event)"
                   >
                     <mat-option *ngFor="let descriptor of descriptorsAll" [value]="descriptor">
-                      {{ descriptor.name }}
+                      {{ descriptor.name }} ({{ getIconClass(descriptor).category }})
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field>
