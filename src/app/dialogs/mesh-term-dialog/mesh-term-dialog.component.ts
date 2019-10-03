@@ -176,8 +176,8 @@ export class MeshTermDialogComponent implements OnInit {
   ngOnInit() {}
 
   /**
-   * Returns an object specifying the icon and name of the currently displayed
-   * MeSH descriptor.
+   * Returns an object specifying the icon and category of the currently
+   * displayed MeSH descriptor.
    */
   getIconClass() {
     return getDescriptorIconClass(this.descriptor.treeNumbers[0].treeNumber);

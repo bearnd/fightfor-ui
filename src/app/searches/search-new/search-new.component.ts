@@ -31,6 +31,7 @@ import {
 import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { SearchInterface } from '../../interfaces/user-config.interface';
+import { getDescriptorIconClass } from '../../utils/mesh-term.utils';
 
 
 @Component({
@@ -262,6 +263,16 @@ export class SearchNewComponent implements OnInit, OnDestroy {
       = event.from || this.studyEligibilityAgeRangeAll.ageBeg;
     this.studyEligibilityAgeRangeSelected.ageEnd
       = event.to || this.studyEligibilityAgeRangeAll.ageEnd;
+  }
+
+  /**
+   * Returns an object specifying the icon and category of a MeSH descriptor.
+   * @param descriptor The MeSH descriptor to specify the icon and category of.
+   */
+  getIconClass(
+    descriptor: DescriptorInterface,
+  ): { iconClass: string, category: string } {
+    return getDescriptorIconClass(descriptor.treeNumbers[0].treeNumber);
   }
 
   ngOnDestroy() {
