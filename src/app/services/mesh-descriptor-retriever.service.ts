@@ -55,6 +55,10 @@ export class MeshDescriptorRetrieverService {
           descriptorId,
           ui,
           name,
+          treeNumbers {
+            treeNumberId,
+            treeNumber,
+          },
         }
       }
     }
