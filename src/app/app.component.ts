@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,16 @@ export class AppComponent implements OnInit {
     // Otherwise redirect to the homepage.
     if (!this.pathsWhitelistedDeepLinking.includes(window.location.pathname)) {
       const result = this.router.navigate(['']);
-    result.then();
+      result.then();
     }
+
+    // Listener to scroll each page to the top when routed to it. Based on
+    // https://stackoverflow.com/a/39601987.
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
 }
