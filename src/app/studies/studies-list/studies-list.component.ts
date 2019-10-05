@@ -178,7 +178,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private mode: Mode = null;
 
   // The studies the component will display.
-  public studies: StudyInterface[];
+  public studies: StudyInterface[] = [];
   private subscriptionIsUpdatingUserStudies: Subscription = null;
 
   public overallStatusGroup = 'all';
@@ -211,24 +211,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     const search: SearchInterface
       = this.userConfigService.getUserSearch(searchUuid);
 
-    // If the component was called with a search UUID defined in the path but
-    // the search cannot be found in the `userConfigService` then redirect the
-    // user to the `SearchesGridComponent`.
-    if (searchUuid) {
-      if (search) {
-        this.studies = search.studies || [];
-        this.mode = Mode.SEARCH;
-      } else {
-        const result = this.router.navigate(['/app', 'searches']);
-        result.then();
-      }
-      // If the component was called without a search UUID defined in the path
-      // then the user's saved studies are retrieved instead and displayed.
-    } else {
-      this.studies = this.userConfigService.userStudies || [];
-      this.mode = Mode.SAVED;
-    }
-
     // Retrieve the referenced overall-status and fallback to `all` if
     // undefined.
     if (this.route.snapshot.params['overallStatus']) {
@@ -248,6 +230,42 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
           };
         }
       );
+
+    // If the component was called with a search UUID defined in the path but
+    // the search cannot be found in the `userConfigService` then redirect the
+    // user to the `SearchesGridComponent`.
+    if (searchUuid) {
+      if (search) {
+        this.mode = Mode.SEARCH;
+
+        // If a subset of study overall-statuses was selected upon navigating to
+        // this component then set `this.studies` to the studies with an
+        // overall-status matching the ones defined in `this.overallStatuses` to
+        // preclude studies with a non-matching overall-status from populating
+        // the subsequent with values that will conflict with the selected
+        // overall-statuses. Otherwise, if all overall-statuses have been
+        // selected then simply copy over all of the search's studies.
+        if (this.overallStatusGroup === 'all') {
+          this.studies = search.studies;
+        } else {
+          for (const study of search.studies) {
+            for (const overallStatus of this.overallStatuses) {
+              if (overallStatus.id === study.overallStatus.toString()) {
+                this.studies.push(study);
+              }
+            }
+          }
+        }
+      } else {
+        const result = this.router.navigate(['/app', 'searches']);
+        result.then();
+      }
+      // If the component was called without a search UUID defined in the path
+      // then the user's saved studies are retrieved instead and displayed.
+    } else {
+      this.mode = Mode.SAVED;
+      this.studies = this.userConfigService.userStudies || [];
+    }
 
     this.dataSourceStudies = new StudiesDataSource(this.studyRetrieverService);
 
