@@ -2,10 +2,80 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
+
         <div class="card">
           <div class="card-header card-header-icon card-header-rose">
             <div class="card-icon">
-              <i class="material-icons">account_circle</i>
+              <i class="material-icons icon-size">account_circle</i>
+            </div>
+            <h4 class="card-title">Profile</h4>
+          </div>
+
+          <div class="card-top-offset card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="large-lines">
+                      Username
+                    </label>
+                  </div>
+                  <div class="col-md-8">
+                    <label href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.nickname ||
+                    authService.userProfile?.name ||
+                    authService.userProfile?.email}}
+                    </label>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="large-lines">
+                      Email
+                    </label>
+                  </div>
+                  <div class="col-md-8">
+                    <label href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.email}}
+                    </label>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <label class="large-lines">
+                      Signed up with
+                    </label>
+                  </div>
+                  <div class="col-md-8">
+                    <label href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.email}}
+                    </label>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-md-4">
+                <div class="photo center">
+                  <img
+                    [src]="authService.userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+                    alt="avatar" class="user"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
             </div>
             <h4 class="card-title">Account</h4>
             <div class="card-body">
