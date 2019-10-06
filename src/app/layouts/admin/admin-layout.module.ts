@@ -59,6 +59,9 @@ import {
 import {
   MeshTermChipComponent
 } from '../../mesh-term-chip-list/mesh-term-chip.component';
+import {
+  UserSettingsComponent
+} from '../../user-settings/user-settings.component';
 
 
 @NgModule({
@@ -103,6 +106,7 @@ import {
     MeshTermDialogComponent,
     MeshTermChipComponent,
     MeshTermChipListComponent,
+    UserSettingsComponent,
   ],
   providers: [],
   entryComponents: [
