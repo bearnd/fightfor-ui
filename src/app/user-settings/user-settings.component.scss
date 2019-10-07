@@ -63,3 +63,9 @@ a:hover {
 /* selected link */
 a:active {
 }
+
+.card-maxwidth-lg {
+    max-width: 900px;
+    margin: 0 auto !important;
+    float: none !important;
+}
