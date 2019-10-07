@@ -1,30 +1,28 @@
-const protocol = 'http';
 const host = window.location.host;
-const hostApiGateway = '192.168.0.12';
+const hostApiGateway = 'api.fightfor.app';
 
 export const environment = {
   production: false,
-  protocol: protocol,
-  version: '0.12.0',
+  version: '0.13.0',
   apiGateway: {
     domain: hostApiGateway,
   },
   graphql: {
-    uri: protocol + '://' + hostApiGateway + '/fightfor-graphql/graphql',
+    uri: 'https://' + hostApiGateway + '/fightfor-graphql/graphql',
   },
   mapbox: {
-    uri: protocol + '://' + hostApiGateway + '/mapbox',
+    uri: 'https://' + hostApiGateway + '/mapbox',
   },
   auth0: {
-    clientID: 'owOhMvKuo0cEjsuObyBfxk4y6F0jP8P1',
+    clientID: 'e8OIuAxekw31C33sllws23hPUGcxS80A',
     domain: 'bearnd.auth0.com',
     responseType: 'token id_token',
-    redirectUri: protocol + '://' + host + '/callback',
+    redirectUri: 'http://' + host + '/callback',
     scope: 'openid profile email user_metadata app_metadata',
-    audience: 'fightfor-backend-dev',
+    audience: 'fightfor-backend',
   },
   braintreeGateway: {
-    uri: protocol + '://' + hostApiGateway + '/braintree-gateway',
+    uri: 'https://' + hostApiGateway + '/braintree-gateway',
     planId: 'fightfor_premium_monthly'
   },
   sentry: {

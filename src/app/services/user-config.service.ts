@@ -102,19 +102,14 @@ export class UserConfigService {
   public isUpdatingUserStudies: Observable<boolean>
     = this.updatingUserStudies.asObservable();
 
-  // Private subject and public observable to indicate when a new search is
-  // being created.
-  private creatingNewSearch: BehaviorSubject<boolean>
+  // Behavior subject to indicate when a new search is being created.
+  public creatingNewSearch: BehaviorSubject<boolean>
     = new BehaviorSubject<boolean>(false);
-  public isCreatingNewSearch: Observable<boolean>
-    = this.creatingNewSearch.asObservable();
 
   // Private subject and public observable to update observers on the latest
   // user searches.
-  private subSearchesLatest: Subject<SearchInterface[]>
+  public searchesLatest: Subject<SearchInterface[]>
     = new Subject<SearchInterface[]>();
-  public searchesLatest: Observable<SearchInterface[]>
-    = this.subSearchesLatest.asObservable();
 
   // The stored user configuration.
   public userConfig: UserInterface = null;
@@ -309,7 +304,7 @@ export class UserConfigService {
 
   /**
    * Deep-copies an array of searches into `this.userSearches` using the
-   * `cloneSearch` method and updates the `this.subSearchesLatest` subject.
+   * `cloneSearch` method and updates the `this.searchesLatest` subject.
    * @param searches The array of searches to deep-copy.
    */
   copySearches(searches: SearchInterface[]) {
@@ -326,7 +321,59 @@ export class UserConfigService {
     }
 
     // Update the subject.
-    this.subSearchesLatest.next(this.userSearches);
+    this.searchesLatest.next(this.userSearches);
+  }
+
+  /**
+   * Updates the local copy of the user configuration.
+   * @param userConfig The user configuration to copy.
+   */
+  updateUserConfig(userConfig: UserInterface) {
+    this.userConfig = userConfig;
+
+    this.copySearches(this.userConfig.searches);
+
+    this.updatingUserStudies.next(true);
+    this.userStudies = cloneDeep(this.userConfig.studies);
+    this.updatingUserStudies.next(false);
+  }
+
+  /**
+   * Retrieve a user-search through its UUID.
+   * @param searchUuid The UUID of the search to be retrieved.
+   * @returns The retrieved search or null if no search matching the given UUID
+   * was found.
+   */
+  getUserSearch(searchUuid: string): SearchInterface | null {
+    if (!this.userSearches) {
+      return null;
+    }
+
+    for (const search of this.userSearches) {
+      if (search.searchUuid === searchUuid) {
+        return search;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Retrieve a user-study through its NCT ID.
+   * @param nctId The NCT ID of the study to retrieve.
+   * @returns The retrieved study or null if no study matching the given NCT
+   * ID was found.
+   */
+  getUserStudy(nctId: string): StudyInterface | null {
+    if (!this.userStudies) {
+      return null;
+    }
+
+    for (const study of this.userStudies) {
+      if (study.nctId === nctId) {
+        return study;
+      }
+    }
+    return null;
   }
 
   /**
@@ -346,16 +393,14 @@ export class UserConfigService {
     // set its configuration under `this.userConfig` and deep-copy the user's
     // searches updating the corresponding subjects. If the user does not exist
     // then upsert the user and copy the configuration and searches.
-    this.apollo.query<ResponseGetUser, VariablesGetUser>({
+    this.apollo.watchQuery<ResponseGetUser, VariablesGetUser>({
       query: this.queryGetUser,
       variables: {
         auth0UserId: auth0UserId
       }
-    }).subscribe(
+    }).valueChanges.subscribe(
       (response: ApolloQueryResult<ResponseGetUser>) => {
-        this.userConfig = response.data.users.byAuth0Id;
-        this.copySearches(this.userConfig.searches);
-        this.userStudies = cloneDeep(this.userConfig.studies);
+        this.updateUserConfig(response.data.users.byAuth0Id);
         this.loadingUser.next(false);
       },
       (error: GraphQLError) => {
@@ -368,9 +413,7 @@ export class UserConfigService {
             }
           }).subscribe(
             (response: ApolloQueryResult<ResponseUpsertUser>) => {
-              this.userConfig = response.data.upsertUser.user;
-              this.copySearches(this.userConfig.searches);
-              this.userStudies = cloneDeep(this.userConfig.studies);
+              this.updateUserConfig(response.data.upsertUser.user);
               this.loadingUser.next(false);
             }
           );
@@ -438,16 +481,12 @@ export class UserConfigService {
         ageBeg: ageBeg,
         ageEnd: ageEnd,
         meshDescriptorIds: descriptorIds,
-      }
-    }).subscribe(
-      (response: ApolloQueryResult<ResponseUpsertSearch>) => {
-        this.userSearches.push(
-          this.cloneSearch(response.data.upsertSearch.search)
-        );
-        this.creatingNewSearch.next(false);
-      }
-    );
-
+      },
+      refetchQueries: [{
+        query: this.queryGetUser,
+        variables: {auth0UserId: auth0UserId},
+      }]
+    }).subscribe();
   }
 
   /**
@@ -469,70 +508,27 @@ export class UserConfigService {
     // Retrieve the user ID.
     const auth0UserId = getUserId(userProfile);
 
-    // Delete the defined search in the database and remove it from
-    // `this.userSearches` and update the corresponding subject.
+    // Delete the defined search in the database and repeat the `queryGetUser`
+    // query to update the entire user configuration.
     this.apollo.mutate<ResponseDeleteSearch, VariablesDeleteSearch>({
         mutation: this.mutationDeleteSearch,
         variables: {
           auth0UserId: auth0UserId,
           searchUuid: searchUuid,
-        }
+        },
+        refetchQueries: [{
+          query: this.queryGetUser,
+          variables: {auth0UserId: auth0UserId},
+        }]
       }
-    ).subscribe(
-      (response: ApolloQueryResult<ResponseDeleteSearch>) => {
-        // Retrieve the search out of the deletion response.
-        const search: SearchInterface =
-          this.cloneSearch(response.data.deleteSearch.search);
-
-        // Find the index of the given search and delete it off
-        // `this.userSearches`.
-        const idxSearch = this.userSearches.indexOf(search);
-        this.userSearches.splice(idxSearch, 1);
-
-        // Update the subject.
-        this.subSearchesLatest.next(this.userSearches);
-      }
-    );
+    ).subscribe();
   }
 
   /**
-   * Retrieve a user-search through its UUID.
-   * @param searchUuid The UUID of the search to be retrieved.
-   * @returns The retrieved search or null if no search matching the given UUID
-   * was found.
+   * Adds a clinical-trials study as followed under the user configuration.
+   * @param userProfile The profile of the user to add the study to.
+   * @param nctId The NCT ID of the clinical-trial study to add.
    */
-  getUserSearch(searchUuid: string): SearchInterface | null {
-    if (!this.userSearches) {
-      return null;
-    }
-
-    for (const search of this.userSearches) {
-      if (search.searchUuid === searchUuid) {
-        return search;
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Retrieve a user-study through its NCT ID.
-   * @param nctId The NCT ID of the study to retrieve.
-   * @returns The retrieved study or null if no study matching the given NCT
-   * ID was found.
-   */
-  getUserStudy(nctId: string): StudyInterface | null {
-    if (!this.userStudies) {
-      return null;
-    }
-
-    for (const study of this.userStudies) {
-      if (study.nctId === nctId) {
-        return study;
-      }
-    }
-    return null;
-  }
-
   followStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
     // Retrieve the user ID.
     const auth0UserId = getUserId(userProfile);
@@ -544,8 +540,8 @@ export class UserConfigService {
 
     this.updatingUserStudies.next(true);
 
-    // Add the defined user study in the database and add it to the
-    // `this.userStudies` and update the corresponding subject.
+    // Add the defined user study in the database and repeat the `queryGetUser`
+    // query to update the entire user configuration.
     this.apollo.mutate<
       ResponseUpsertUserStudy,
       VariablesUpsertDeleteUserStudy
@@ -554,20 +550,20 @@ export class UserConfigService {
         variables: {
           auth0UserId: auth0UserId,
           nctId: nctId,
-        }
+        },
+        refetchQueries: [{
+          query: this.queryGetUser,
+          variables: {auth0UserId: auth0UserId},
+        }]
       }
-    ).subscribe(
-      (response: ApolloQueryResult<ResponseUpsertUserStudy>) => {
-
-        this.userStudies
-          = cloneDeep(response.data.upsertUserStudy.user.studies);
-
-        // Update the subject.
-        this.updatingUserStudies.next(false);
-      }
-    );
+    ).subscribe();
   }
 
+  /**
+   * Removes a clinical-trials study as followed from the user configuration.
+   * @param userProfile The profile of the user to remove the study from.
+   * @param nctId The NCT ID of the clinical-trial study to remove.
+   */
   unfollowStudy(userProfile: Auth0UserProfileInterface, nctId: string) {
     // Retrieve the user ID.
     const auth0UserId = getUserId(userProfile);
@@ -579,8 +575,8 @@ export class UserConfigService {
 
     this.updatingUserStudies.next(true);
 
-    // Delete the defined user study in the database and remove it from the
-    // `this.userStudies` and update the corresponding subject.
+    // Delete the defined user study in the database and repeat the
+    // `queryGetUser` query to update the entire user configuration.
     this.apollo.mutate<
       ResponseDeleteUserStudy,
       VariablesUpsertDeleteUserStudy
@@ -589,18 +585,12 @@ export class UserConfigService {
         variables: {
           auth0UserId: auth0UserId,
           nctId: nctId,
-        }
+        },
+        refetchQueries: [{
+          query: this.queryGetUser,
+          variables: {auth0UserId: auth0UserId},
+        }]
       }
-    ).subscribe(
-      (response: ApolloQueryResult<ResponseDeleteUserStudy>) => {
-
-        this.userStudies
-          = cloneDeep(response.data.deleteUserStudy.user.studies);
-
-        // Update the subject.
-        this.updatingUserStudies.next(false);
-      }
-    );
+    ).subscribe();
   }
-
 }

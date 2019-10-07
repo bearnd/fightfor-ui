@@ -27,7 +27,21 @@
 
         <div class="card search-card">
           <div class="card-header card-header-rose">
-            <h4 class="card-title card-title-trunc">{{ search.title }}</h4>
+            <div class="row">
+              <div class="col-md-9">
+                <h4 class="card-title card-title-trunc">{{ search.title }}</h4>
+              </div>
+              <div class="col-md-3">
+                <mat-icon
+                  class="pull-right right-align"
+                  matTooltip="Delete Search"
+                  [matTooltipPosition]="'below'"
+                  style="cursor:pointer; color: #FFFFFF"
+                  (click)="onDeleteSearch(search.searchUuid)"
+                >delete_forever
+                </mat-icon>
+              </div>
+            </div>
           </div>
           <div class="card-body">
             <h4 class="card-title">
@@ -57,10 +71,12 @@
       </div>
     </div>
 
-    <p class="card-description"><small>
-      Searches on fightfor.app contain U.S. National Library of Medicine (NLM) Medical
-      Subject Heading (<a href="https://www.nlm.nih.gov/mesh/meshhome.html">MeSH</a>) terms.
-      Please refer to our <a href="" [routerLink]="['/tos']">Terms of Service</a>.
-    </small></p>
+    <p class="card-description">
+      <small>
+        Searches on fightfor.app contain U.S. National Library of Medicine (NLM) Medical
+        Subject Heading (<a href="https://www.nlm.nih.gov/mesh/meshhome.html">MeSH</a>) terms.
+        Please refer to our <a href="" [routerLink]="['/tos']">Terms of Service</a>.
+      </small>
+    </p>
   </div>
 </div>

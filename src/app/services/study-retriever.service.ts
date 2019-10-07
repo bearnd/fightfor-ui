@@ -135,6 +135,7 @@ export class StudyRetrieverService {
         ) {
             studyId,
             nctId,
+            overallStatus,
         }
       }
     }
