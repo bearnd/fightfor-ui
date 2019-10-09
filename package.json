@@ -62,7 +62,6 @@
     "ngx-page-scroll": "^6.0.2",
     "ngx-page-scroll-core": "^6.0.2",
     "npm": "^6.2.0",
-    "perfect-scrollbar": "1.1.0",
     "popper.js": "1.14.4",
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.2",
