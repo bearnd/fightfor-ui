@@ -625,6 +625,10 @@ export class SearchResultsSummaryComponent implements OnInit {
       }
     }
 
+    if (!document.getElementById('worldMap')) {
+      return null;
+    }
+
     // Instantiate the map.
     this.worldMap = new Datamap({
       element: document.getElementById('worldMap'),
