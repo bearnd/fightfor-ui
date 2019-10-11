@@ -30,6 +30,7 @@ export interface Auth0UserProfileInterface {
   nickname?: string;
   created_at?: Date;
   sub?: string;
+  identityProvider?: UserIdentityProvider;
 }
 
 
@@ -220,6 +221,8 @@ export class AuthService {
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
+        self.userProfile.identityProvider = AuthService
+          .getUserIdentityProvider(profile.sub);
       }
       callback(err, profile);
     });
