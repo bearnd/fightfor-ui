@@ -225,7 +225,7 @@
               </div>
 
               <!--Study Conditions: Heading-->
-              <div class="row" *ngIf="studyConditionMeshTerms.length">
+              <div class="row row-margin" *ngIf="studyConditionMeshTerms.length">
                 <div class="col-md-12">
                   <h4 class="card-title">Conditions</h4>
                 </div>
@@ -233,7 +233,7 @@
               <!--Study Conditions: Heading: END-->
 
               <!--Study Conditions: Chips-->
-              <div class="row">
+              <div class="row row-new-section">
                 <div class="col-md-12">
                   <app-mesh-term-chip-list
                     [descriptors]="studyConditionMeshTerms"
@@ -244,7 +244,7 @@
               <!--Study Conditions: Chips: END-->
 
               <!--Study Interventions: Heading-->
-              <div class="row" *ngIf="studyInterventionMeshTerms.length">
+              <div class="row row-margin" *ngIf="studyInterventionMeshTerms.length">
                 <div class="col-md-12">
                   <h4 class="card-title">Interventions</h4>
                 </div>
@@ -252,7 +252,7 @@
               <!--Study Interventions: Heading: END-->
 
               <!--Study Interventions: Chips-->
-              <div class="row">
+              <div class="row row-new-section">
                 <div class="col-md-12">
                   <app-mesh-term-chip-list
                     [descriptors]="studyInterventionMeshTerms"

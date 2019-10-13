@@ -12,6 +12,12 @@ import { environment } from '../../environments/environment';
 
 (window as any).global = window;
 
+export enum UserIdentityProvider {
+  AUTH0 = 'AUTH0',
+  GOOGLE = 'GOOGLE',
+  FACEBOOK = 'FACEBOOK',
+}
+
 /**
  * Interface to the Auth0 user-profile object.
  */
@@ -24,6 +30,7 @@ export interface Auth0UserProfileInterface {
   nickname?: string;
   created_at?: Date;
   sub?: string;
+  identityProvider?: UserIdentityProvider;
 }
 
 
@@ -66,6 +73,27 @@ export class AuthService {
 
   // Access-token renewal subscription.
   private refreshSubscription: any;
+
+  /**
+   * Identifies the identity provider of the user based on the `sub` field of
+   * their Auth0 profile.
+   * @param sub The `sub` field of the user's Auth0 profile.
+   * @return The enumeration member representing the user's identity provider
+   * or null if no match was found.
+   */
+  private static getUserIdentityProvider(
+    sub: string
+  ): UserIdentityProvider | null {
+    if (sub.includes('auth0')) {
+      return UserIdentityProvider.AUTH0;
+    } else if (sub.includes('google')) {
+      return UserIdentityProvider.GOOGLE;
+    } else if (sub.includes('facebook')) {
+      return UserIdentityProvider.FACEBOOK;
+    }
+
+    return null;
+  }
 
   constructor(public router: Router) {
   }
@@ -193,6 +221,8 @@ export class AuthService {
     this.auth0.client.userInfo(accessToken, (err, profile) => {
       if (profile) {
         self.userProfile = profile;
+        self.userProfile.identityProvider = AuthService
+          .getUserIdentityProvider(profile.sub);
       }
       callback(err, profile);
     });

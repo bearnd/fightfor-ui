@@ -18,7 +18,7 @@ export function getDescriptorIconClass(treeNumber: string): {
     return {
       iconClass: 'fa-chart-bar',
       category: 'Analytical, Diagnostic and Therapeutic Techniques, and ' +
-        'Equipment ',
+        'Equipment',
     };
   } else if (treeNumber.startsWith('F')) {
     return {iconClass: 'fa-brain', category: 'Psychiatry and Psychology'};

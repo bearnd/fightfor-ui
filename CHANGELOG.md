@@ -1,5 +1,17 @@
 ## Changelog
 
+### v0.13.0
+
+- Story No. 1507: Replace manual user-config management with GraphQL re-querying.
+- Story No. 1204: Search deletion error: GraphQL error: tuple index out of range.
+- Story No. 1520: Add descriptor 'type' in new search dropdown.
+- Story No. 1516: Remove `Features` button from menu.
+- Story No. 887: Change single page design from routing links to the same position on the page (e.g. when going to TOS page, loads at bottom).
+- Story No. 1323: Possible filter values set to `All` studies in `StudiesListComponent`.
+- Story No. 1511: Restyle the search-deletion.
+- Story No. 1436: Remove Helvetica font-family from privacy.component.html and from tos.component.html (allow font to default).
+- Story No. 1329: Increase the margins between the intervention/condition chips and the headers in `StudyComponent`.
+
 ### v0.12.0
 
 - Story No. 1487: Find a way to show the whole study title in the results tables.

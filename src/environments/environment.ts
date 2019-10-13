@@ -3,7 +3,7 @@ const hostApiGateway = 'api.fightfor.app';
 
 export const environment = {
   production: false,
-  version: '0.12.0',
+  version: '0.13.0',
   apiGateway: {
     domain: hostApiGateway,
   },
@@ -28,5 +28,9 @@ export const environment = {
   sentry: {
     dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
     environment: 'development'
+  },
+  clubhouse: {
+    uri: 'https://' + hostApiGateway + '/clubhouse',
+    supportProjectId: 1618,
   },
 };
