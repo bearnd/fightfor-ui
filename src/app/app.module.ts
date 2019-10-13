@@ -62,6 +62,7 @@ import {
   StudiesBreadcrumbResolverService
 } from './components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
 import { getAccessToken } from './shared/utils';
+import { ClubhouseService } from './services/clubhouse.service';
 
 
 @NgModule({
@@ -121,6 +122,7 @@ import { getAccessToken } from './shared/utils';
     UserConfigService,
     StudyBreadcrumbResolverService,
     StudiesBreadcrumbResolverService,
+    ClubhouseService,
     {
       provide: ErrorHandler,
       useClass: SentryErrorHandler
