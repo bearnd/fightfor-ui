@@ -29,4 +29,8 @@ export const environment = {
     dsn: 'https://8471eee156ee4de8bd5086f92a3a4105@sentry.io/1438884',
     environment: 'development'
   },
+  clubhouse: {
+    uri: 'https://' + hostApiGateway + '/clubhouse',
+    supportProjectId: 1618,
+  },
 };

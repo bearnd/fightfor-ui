@@ -101,8 +101,7 @@ export class GeolocationService {
     latitude: number,
   ): Observable<MapBoxGeocodeResponse> {
 
-    // Assemble the request URL including the coordinates query and MapBox API
-    // key.
+    // Assemble the request URL including the coordinates query.
     const url = urljoin(
       environment.mapbox.uri,
       'geocoding/v5/mapbox.places',
@@ -120,7 +119,7 @@ export class GeolocationService {
    * @returns The request observable.
    */
   geocodeForward(query: string): Observable<MapBoxGeocodeResponse> {
-    // Assemble the request URL including the query and MapBox API key.
+    // Assemble the request URL including the query.
     const url = urljoin(
       environment.mapbox.uri,
       'geocoding/v5/mapbox.places',
