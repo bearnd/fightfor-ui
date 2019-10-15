@@ -97,4 +97,52 @@ export class UserSettingsComponent implements OnInit {
     }).catch(swal.noop);
   }
 
+  /**
+   * Shows an alert explaining the process of account-deletion to the user and
+   * allows them to change the email address to which verification will be sent.
+   */
+  onRequestDeletion() {
+    swal({
+      title: 'Request deletion of your account and data',
+      text: 'Per GDPR you are entitled to requesting the deletion of your ' +
+        'account and personal data this service is storing and processing. ' +
+        'This is a manual process that may take up to 30 days following the ' +
+        'request. Verification will be sent to your registered email address ' +
+        'shown below unless you wish to use a different address.',
+      footer: this.footer,
+      showCancelButton: true,
+      showConfirmButton: true,
+      buttonsStyling: false,
+      confirmButtonClass: 'btn btn-primary btn-dark-blue',
+      confirmButtonText: 'Request',
+      cancelButtonClass: 'btn btn-rose',
+      type: 'info',
+      allowOutsideClick: true,
+      input: 'text',
+      inputPlaceholder: this.authService.userProfile.email,
+    }).then(result => {
+      if (!result.dismiss) {
+        const userEmail = result.value
+          ? result.value
+          : this.authService.userProfile.email;
+        this.clubhouseService.createStory({
+          name: 'GDPR Deletion Request: ' + userEmail,
+          description: 'User ' + userEmail + ' requested deletion of their ' +
+            'account and stored data.',
+          project_id: environment.clubhouse.supportProjectId,
+          story_type: 'chore',
+        }).subscribe(
+          (_: ClubhousePostStoryResponse) => {
+            swal({
+              title: 'Submitted',
+              text: 'Your request has been submitted.',
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-primary btn-dark-blue',
+              type: 'success'
+            }).catch(swal.noop);
+          }
+        );
+      }
+    }).catch(swal.noop);
+  }
 }
