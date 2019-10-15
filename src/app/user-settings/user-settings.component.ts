@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import swal from 'sweetalert2';
 
 import { AuthService, UserIdentityProvider } from '../services/auth.service';
@@ -21,6 +23,7 @@ export class UserSettingsComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private clubhouseService: ClubhouseService,
+    private router: Router,
   ) {
   }
 
@@ -144,5 +147,13 @@ export class UserSettingsComponent implements OnInit {
         );
       }
     }).catch(swal.noop);
+  }
+
+  /**
+   * Redirects the user to the pricing page.
+   */
+  onNavigateToPricing() {
+    const result = this.router.navigate(['/pricing']);
+    result.then();
   }
 }
