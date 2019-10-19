@@ -26,6 +26,9 @@ import {
 import {
   StudiesBreadcrumbResolverService
 } from '../../components/navbar/breadcrumbs/resolvers/studies-breadcrumb-resolver.service';
+import {
+  UserSettingsComponent
+} from '../../user-settings/user-settings.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -144,5 +147,12 @@ export const AdminLayoutRoutes: Routes = [
         },
       },
     ],
+  },
+  {
+    path: 'settings',
+    component: UserSettingsComponent,
+    data: {
+      breadcrumbs: 'Settings'
+    },
   }
 ];
