@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,10 +11,13 @@ import { AuthService } from '../services/auth.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private router: Router,
+  ) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   /**
    * Redirects the user to log in or register via Auth0.
@@ -21,4 +26,11 @@ export class HomeComponent implements OnInit {
     this.authService.login();
   }
 
+  /**
+   * Redirects the user to the app.
+   */
+  onGoToApp() {
+    const result = this.router.navigate(['/app']);
+    result.then();
+  }
 }
