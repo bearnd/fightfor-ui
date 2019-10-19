@@ -56,37 +56,23 @@
 }
 
 .rw-words-1 span:nth-child(2) {
-  -webkit-animation-delay: 2s;
-  -ms-animation-delay: 2s;
-  animation-delay: 2s;
+  -webkit-animation-delay: 3s;
+  -ms-animation-delay: 3s;
+  animation-delay: 3s;
   color: #F65C50;
 }
 
 .rw-words-1 span:nth-child(3) {
-  -webkit-animation-delay: 4s;
-  -ms-animation-delay: 4s;
-  animation-delay: 4s;
-  color: #F65C50;
-}
-
-.rw-words-1 span:nth-child(4) {
   -webkit-animation-delay: 6s;
   -ms-animation-delay: 6s;
   animation-delay: 6s;
   color: #F65C50;
 }
 
-.rw-words-1 span:nth-child(5) {
-  -webkit-animation-delay: 8s;
-  -ms-animation-delay: 8s;
-  animation-delay: 8s;
-  color: #F65C50;
-}
-
-.rw-words-1 span:nth-child(6) {
-  -webkit-animation-delay: 10s;
-  -ms-animation-delay: 10s;
-  animation-delay: 10s;
+.rw-words-1 span:nth-child(4) {
+  -webkit-animation-delay: 9s;
+  -ms-animation-delay: 9s;
+  animation-delay: 9s;
   color: #F65C50;
 }
 
