@@ -58,7 +58,8 @@ export class UserSettingsComponent implements OnInit {
   onRequestRetrieval() {
     swal({
       title: 'Request your stored personal data',
-      text: 'Per Art. 15 GDPR Right of access by the data subject, ' +
+      html: 'Per <a href="https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-of-access/">' +
+        'Art. 15 GDPR Right of access by the data subject</a>, ' +
         'you are entitled to retrieve a copy the personal data pertaining to you ' +
         'that is stored and processed by this service.' +
         'This is a manual process and may take up to one calendar month ' +
@@ -112,7 +113,8 @@ export class UserSettingsComponent implements OnInit {
   onRequestDeletion() {
     swal({
       title: 'Request deletion of your account and data',
-      text: 'Per Art. 17 GDPR Right to erasure (‘right to be forgotten’), ' +
+      html: 'Per <a href="https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-to-erasure/">' +
+        'Art. 17 GDPR Right to erasure (‘right to be forgotten’)</a>, ' +
         'you are entitled to request the deletion of your ' +
         'account and the personal data that is stored and processed by this service. ' +
         'Please note, this right does not apply in all circumstances and is not absolute. ' +
