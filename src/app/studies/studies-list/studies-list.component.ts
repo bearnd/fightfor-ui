@@ -131,6 +131,11 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   // Possible facility  values (to be populated in `ngOnInit`).
   private studyFacilities: UniqueFacility[] = [];
 
+  // Predefined geographical entities.
+  private predefinedCountry: string = null;
+  private predefinedState: string = null;
+  private predefinedCity: string = null;
+  private predefinedFacility: FacilityCanonicalInterface = null;
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
