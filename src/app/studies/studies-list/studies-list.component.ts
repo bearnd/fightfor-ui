@@ -136,6 +136,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private predefinedState: string = null;
   private predefinedCity: string = null;
   private predefinedFacility: FacilityCanonicalInterface = null;
+
+  // Whether the `Detect Location` button should be enabled.
+  public isDetectLocationEnabled = true;
+
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
