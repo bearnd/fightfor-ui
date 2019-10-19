@@ -58,11 +58,16 @@ export class UserSettingsComponent implements OnInit {
   onRequestRetrieval() {
     swal({
       title: 'Request your stored personal data',
-      text: 'Per GDPR you are entitled to retrieving a copy of your personal ' +
-        'data this service is storing and processing. This is a manual process' +
-        'that may take up to 30 days following the request. Your collected data' +
-        'will be sent to your registered email address shown below unless you ' +
-        'wish to use a different address.',
+      text: 'Per Art. 15 GDPR Right of access by the data subject, ' +
+        'you are entitled to retrieve a copy the personal data pertaining to you ' +
+        'that is stored and processed by this service.' +
+        'This is a manual process and may take up to one calendar month ' +
+        'to process. ' +
+        'This processing period begins on the date we receive a complete ' +
+        'and verified request. ' +
+        'Verification will be sent to your registered email address ' +
+        '(shown below). If you wish to submit this request via a different email, ' +
+        'please enter this below.',
       footer: this.footer,
       showCancelButton: true,
       showConfirmButton: true,
@@ -107,11 +112,17 @@ export class UserSettingsComponent implements OnInit {
   onRequestDeletion() {
     swal({
       title: 'Request deletion of your account and data',
-      text: 'Per GDPR you are entitled to requesting the deletion of your ' +
-        'account and personal data this service is storing and processing. ' +
-        'This is a manual process that may take up to 30 days following the ' +
-        'request. Verification will be sent to your registered email address ' +
-        'shown below unless you wish to use a different address.',
+      text: 'Per Art. 17 GDPR Right to erasure (‘right to be forgotten’), ' +
+        'you are entitled to request the deletion of your ' +
+        'account and the personal data that is stored and processed by this service. ' +
+        'Please note, this right does not apply in all circumstances and is not absolute. ' +
+        'This is a manual process and may take up to one calendar month ' +
+        'to process. ' +
+        'This processing period begins on the date we receive a complete ' +
+        'and verified request. ' +
+        'Verification will be sent to your registered email address ' +
+        '(shown below). If you wish to submit this request via a different email, ' +
+        'please enter this below.',
       footer: this.footer,
       showCancelButton: true,
       showConfirmButton: true,
@@ -119,7 +130,7 @@ export class UserSettingsComponent implements OnInit {
       confirmButtonClass: 'btn btn-primary btn-dark-blue',
       confirmButtonText: 'Request',
       cancelButtonClass: 'btn btn-rose',
-      type: 'info',
+      type: 'warning',
       allowOutsideClick: true,
       input: 'text',
       inputPlaceholder: this.authService.userProfile.email,
