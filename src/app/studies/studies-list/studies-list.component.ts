@@ -348,14 +348,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // defined then set it as the only possible country option in the form
     // controls and disable the controls.
     if (history.state.country) {
-      // Create a singleton array containing only the predefined country.
-      this.studyCountries = [{id: 0, name: history.state.country}];
-      this.studyCountriesFiltered.next(this.studyCountries);
-      // Set the single country as the current value.
-      this.formFilters.get('selectStudyCountry').setValue(this.studyCountries);
-      // Disable the country filter controls.
-      this.formFilters.get('selectStudyCountry').disable();
-      this.formFilters.get('filterStudyCountry').disable();
+      this.predefineCountry(history.state.country);
     }
 
     // Retrieve the initial set of studies.
@@ -655,6 +648,22 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /**
+   * Defines a predefined country as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param countryName The predefined country name.
+   */
+  private predefineCountry(countryName: string): void {
+    this.predefinedCountry = countryName;
+    // Create a singleton array containing only the predefined country.
+    this.studyCountries = [{id: 0, name: this.predefinedCountry}];
+    this.studyCountriesFiltered.next(this.studyCountries);
+    // Set the single country as the current value.
+    this.formFilters.get('selectStudyCountry').setValue(this.studyCountries);
+    // Disable the country filter controls.
+    this.formFilters.get('selectStudyCountry').disable();
+    this.formFilters.get('filterStudyCountry').disable();
+  }
   /**
    * Sets the initial value after the filteredBanks are loaded initially
    */
