@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {}
 
-    /**
+  /**
    * Redirects the user to log in or register via Auth0.
    */
   onLoginRegister() {
