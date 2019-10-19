@@ -37,9 +37,19 @@
             mat-raised-button
             type="button"
             class="btn btn-round btn-rose mat-raised-button"
+            *ngIf="!(authService.isAuthenticated())"
             (click)="onLoginRegister()"
           >
             <span class="mat-button-wrapper">Sign Up</span>
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            class="btn btn-round btn-rose mat-raised-button"
+            *ngIf="authService.isAuthenticated()"
+            (click)="onGoToApp()"
+          >
+            <span class="mat-button-wrapper">Go To App</span>
           </button>
         </div>
       </div>
