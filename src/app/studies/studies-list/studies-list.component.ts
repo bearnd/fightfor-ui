@@ -366,7 +366,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique countries for this search's studies. If an initial
     // country was defined then skip this step.
-    if (!history.state.country && this.studies.length) {
+    if (!this.predefinedCountry && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCountries(
         this.studies,
       ).map(
@@ -397,8 +397,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
-    // Retrieve the unique states/regions for this search's studies.
-    if (this.studies.length) {
+    // Retrieve the unique states for this search's studies. If an initial
+    // state was defined then skip this step.
+    if (!this.predefinedState && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueStates(
         this.studies,
       ).map(
@@ -429,8 +430,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
-    // Retrieve the unique cities for this search's studies.
-    if (this.studies.length) {
+    // Retrieve the unique cities for this search's studies. If an initial
+    // city was defined then skip this step.
+    if (!this.predefinedCity && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCities(
         this.studies,
       ).map(
@@ -1064,10 +1066,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.formFilters.get('filterPhase').reset();
     this.formFilters.get('selectStudyType').reset();
     this.formFilters.get('filterStudyType').reset();
-    this.formFilters.get('selectStudyState').reset();
-    this.formFilters.get('filterStudyState').reset();
-    this.formFilters.get('selectStudyCity').reset();
-    this.formFilters.get('filterStudyCity').reset();
     this.formFilters.get('currentLocation').reset();
     this.formFilters.get('selectDistanceMax').reset();
 
@@ -1076,9 +1074,19 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.formFilters.get('filterStudyFacility').reset();
     }
 
-    if (!history.state.country) {
+    if (!this.predefinedCountry) {
       this.formFilters.get('selectStudyCountry').reset();
       this.formFilters.get('filterStudyCountry').reset();
+    }
+
+    if (!this.predefinedState) {
+      this.formFilters.get('selectStudyState').reset();
+      this.formFilters.get('filterStudyState').reset();
+    }
+
+    if (!this.predefinedCity) {
+      this.formFilters.get('selectStudyCity').reset();
+      this.formFilters.get('filterStudyCity').reset();
     }
 
     // Refresh the studies to reflect the reset filters.
@@ -1174,10 +1182,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
               // progress.
               this.loadingCurrentLocation.next(false);
             },
-            error => this.loadingCurrentLocation.next(false)
+            _ => this.loadingCurrentLocation.next(false)
           );
         },
-        error => this.loadingCurrentLocation.next(false)
+        _ => this.loadingCurrentLocation.next(false)
       );
   }
 
