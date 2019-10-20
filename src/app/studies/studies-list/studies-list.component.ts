@@ -357,6 +357,14 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (history.state.state) {
       this.predefineState(history.state.state);
     }
+
+    // If, prior to navigating to this component, an initial city value was
+    // defined then set it as the only possible city option in the form
+    // controls and disable the controls.
+    if (history.state.city) {
+      this.predefineCity(history.state.city);
+    }
+
     // Retrieve the initial set of studies.
     this.getStudiesPage();
 
@@ -686,6 +694,23 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // Disable the state filter controls.
     this.formFilters.get('selectStudyState').disable();
     this.formFilters.get('filterStudyState').disable();
+  }
+
+  /**
+   * Defines a predefined city as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param cityName The predefined city name.
+   */
+  private predefineCity(cityName: string): void {
+    this.predefinedCity = cityName;
+    // Create a singleton array containing only the predefined city.
+    this.studyCities = [{id: 0, name: this.predefinedCity}];
+    this.studyCitiesFiltered.next(this.studyCities);
+    // Set the single city as the current value.
+    this.formFilters.get('selectStudyCity').setValue(this.studyCities);
+    // Disable the state filter controls.
+    this.formFilters.get('selectStudyCity').disable();
+    this.formFilters.get('filterStudyCity').disable();
   }
   /**
    * Sets the initial value after the filteredBanks are loaded initially
