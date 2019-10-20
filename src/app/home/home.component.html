@@ -12,11 +12,9 @@
                 <span>Fight for</span>
                 <div class="rw-words rw-words-1">
                   <span>health</span>
-                  <span>happiness</span>
-                  <span>well-being</span>
-                  <span>strength</span>
                   <span>a cure</span>
                   <span>life</span>
+                  <span>strength</span>
                 </div>
               </h2>
             </section>
@@ -39,9 +37,19 @@
             mat-raised-button
             type="button"
             class="btn btn-round btn-rose mat-raised-button"
+            *ngIf="!(authService.isAuthenticated())"
             (click)="onLoginRegister()"
           >
             <span class="mat-button-wrapper">Sign Up</span>
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            class="btn btn-round btn-rose mat-raised-button"
+            *ngIf="authService.isAuthenticated()"
+            (click)="onGoToApp()"
+          >
+            <span class="mat-button-wrapper">Go To App</span>
           </button>
         </div>
       </div>
@@ -135,7 +143,7 @@
 
 
   <section class="light_container">
-  <div class="container container-features light_container" id="features">
+  <div class="container container-features light_container">
     <div class="row">
       <div class="col-md-12 text-center">
         <h3 class="bold_h3">

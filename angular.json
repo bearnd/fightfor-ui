@@ -23,7 +23,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.skinFlat.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
@@ -35,7 +34,6 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
               "node_modules/moment/moment.js",
-              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
@@ -91,14 +89,12 @@
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
               "node_modules/moment/moment.js",
-              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
               "node_modules/bootstrap-notify/bootstrap-notify.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
               "node_modules/auth0-js/build/auth0.js"
             ],
             "styles": [
-              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.skinFlat.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",

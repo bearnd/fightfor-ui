@@ -1,0 +1,169 @@
+<div class="main-content">
+  <div class="container-fluid card-maxwidth-lg">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons icon-size">account_circle</i>
+            </div>
+            <h4 class="card-title">Profile</h4>
+          </div>
+
+          <div class="card-top-offset card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="large-lines">
+                      Username
+                    </p>
+                  </div>
+                  <div class="col-md-8">
+                    <p href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.nickname ||
+                    authService.userProfile?.name ||
+                    authService.userProfile?.email}}
+                    </p>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="large-lines">
+                      Email
+                    </p>
+                  </div>
+                  <div class="col-md-8">
+                    <p href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.email}}
+                    </p>
+                  </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <p class="large-lines">
+                      Sign-up method: {{ getUserIdentityProvider() }}
+                    </p>
+                  </div>
+                  <div class="col-md-8">
+                    <p href="#userMenu" class="large-lines">
+                      {{authService.userProfile?.email}}
+                    </p>
+                  </div>
+                </div>
+
+
+              </div>
+              <div class="col-md-4">
+                <div class="photo center">
+                  <img
+                    [src]="authService.userProfile?.picture || '../../../assets/img/placeholder.jpg'"
+                    alt="avatar" class="user"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 layout-row">
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons icon-size">settings</i>
+            </div>
+            <h4 class="card-title">Account</h4>
+          </div>
+
+          <div class="card-top-offset card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p class="large-lines">
+                  Download my data
+                </p>
+              </div>
+              <div class="col-md-6">
+                <button
+                  mat-raised-button
+                  type="button"
+                  class="btn btn-round btn-primary mat-raised-button btn-dark-blue"
+                  (click)="onRequestRetrieval()"
+                >
+                  <span class="mat-button-wrapper">Request Data</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <p class="large-lines">
+                  Delete my account
+                </p>
+              </div>
+              <div class="col-md-6">
+                <button
+                  mat-raised-button
+                  type="button"
+                  class="btn btn-round btn-primary mat-raised-button btn-rose"
+                  (click)="onRequestDeletion()"
+                >
+                  <span class="mat-button-wrapper">Request Deletion</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 layout-row">
+
+
+        <div class="card">
+          <div class="card-header card-header-icon card-header-rose">
+            <div class="card-icon">
+              <i class="material-icons icon-size">payment</i>
+            </div>
+            <h4 class="card-title">Subscription</h4>
+          </div>
+
+          <div class="card-top-offset card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <p class="large-lines">
+                  Subscription
+                </p>
+              </div>
+              <div class="col-md-8">
+                <a href="" [routerLink]="['/pricing']" class="large-lines">
+                  Premium
+                </a>
+                <button
+                  mat-raised-button
+                  type="button"
+                  class="btn btn-round btn-primary mat-raised-button btn-dark-blue left-offset"
+                  (click)="onNavigateToPricing()"
+                >
+                  <span class="mat-button-wrapper">Change</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+

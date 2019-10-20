@@ -1,5 +1,16 @@
 ## Changelog
 
+### v0.14.0
+
+- Story No. 1386: Align attributions to the bottom of the page.
+- Story No. 1664: Fix word carousel on home page - currently there is blank space where "happiness" and "well-being" previously were.
+- Story No. 1499: Hook up "Sign up" round button to gray-out once disappeared.
+- Story No. 1610: Remove `perfect-scrollbar` package.
+- Story No. 1580: TypeError: Cannot read property 'offsetWidth' of null.
+- Story No. 1565: Define user identity provider.
+- Story No. 1568: Implement service to raise tickets in Clubhouse.
+- Story No. 987: Create user settings page.
+
 ### v0.13.0
 
 - Story No. 1507: Replace manual user-config management with GraphQL re-querying.

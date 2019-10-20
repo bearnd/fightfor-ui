@@ -1,0 +1,71 @@
+.icon-size {
+  width: 120%;
+  height: 120%;
+}
+
+.card-top-offset{
+  padding-top: 5%;
+}
+
+.large-lines{
+  line-height: 3em;
+}
+
+hr {
+  width: 90%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0rem;
+  margin-bottom: 0.4rem;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.user{
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+}
+
+.left-offset {
+  margin-left: 2rem !important;
+}
+
+.center {
+  align-content: center;
+  vertical-align: middle;
+  margin-bottom: 10%;
+}
+
+.layout-row{
+
+  display: flex;
+  align-items: stretch;
+}
+
+/* unvisited link */
+a:link {
+}
+
+/* visited link */
+a:visited {
+}
+
+/* mouse over link */
+a:hover {
+}
+
+/* selected link */
+a:active {
+}
+
+.card-maxwidth-lg {
+    max-width: 900px;
+    margin: 0 auto !important;
+    float: none !important;
+}
