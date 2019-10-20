@@ -330,18 +330,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // defined then set it as the only possible facility option in the form
     // controls and disable the controls.
     if (history.state.facilityCanonical) {
-      // Create a singleton array containing only the predefined facility.
-      this.studyFacilities = [{
-        id: history.state.facilityCanonical.facilityCanonicalId,
-        name: history.state.facilityCanonical.name,
-        facility: history.state.facilityCanonical,
-      }];
-      this.studyFacilitiesFiltered.next(this.studyFacilities);
-      // Set the single facility as the current value.
-      this.formFilters.get('selectStudyFacility').setValue(this.studyFacilities);
-      // Disable the facility filter controls.
-      this.formFilters.get('selectStudyFacility').disable();
-      this.formFilters.get('filterStudyFacility').disable();
+      this.predefineFacility(history.state.facilityCanonical);
     }
 
     // If, prior to navigating to this component, an initial country value was
@@ -712,6 +701,40 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.formFilters.get('selectStudyCity').disable();
     this.formFilters.get('filterStudyCity').disable();
   }
+
+  /**
+   * Defines a predefined facility as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param facility The predefined facility.
+   */
+  private predefineFacility(facility: FacilityCanonicalInterface): void {
+    this.predefinedFacility = facility;
+    // Create a singleton array containing only the predefined facility.
+    this.studyFacilities = [{
+      id: this.predefinedFacility.facilityCanonicalId,
+      name: this.predefinedFacility.name,
+      facility: this.predefinedFacility,
+    }];
+    this.studyFacilitiesFiltered.next(this.studyFacilities);
+    // Set the single facility as the current value.
+    this.formFilters.get('selectStudyFacility').setValue(this.studyFacilities);
+    // Disable the facility filter controls.
+    this.formFilters.get('selectStudyFacility').disable();
+    this.formFilters.get('filterStudyFacility').disable();
+    // Disable the current-location controls.
+    this.formFilters.get('currentLocation').disable();
+    this.formFilters.get('selectDistanceMax').disable();
+    // Disable the `Detect Location` button.
+    this.isDetectLocationEnabled = false;
+
+    // Since a pre-defined facility defines a country, state, and city predefine
+    // those quantities so that their corresponding controls are updated and
+    // disabled.
+    this.predefineCountry(this.predefinedFacility.country);
+    this.predefineState(this.predefinedFacility.administrativeAreaLevel1);
+    this.predefineCity(this.predefinedFacility.locality);
+  }
+
   /**
    * Sets the initial value after the filteredBanks are loaded initially
    */
