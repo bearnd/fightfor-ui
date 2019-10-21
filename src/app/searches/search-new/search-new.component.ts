@@ -141,6 +141,16 @@ export class SearchNewComponent implements OnInit, OnDestroy {
     // debounce so that we don't perform a search for every keystroke.
     this.form.get('descriptors')
       .valueChanges
+      // As the chips don't count as a value in the field, should the user
+      // delete the empty space added after a chip the field label will overlap
+      // the chips. Thus we intercept the value and set it to a single space
+      // should it become an empty string.
+      .map(value => {
+        if (this.descriptorsSelected.length && !value) {
+          this.inputDescriptors.nativeElement.value = ' ';
+        }
+        return value;
+      })
       .pipe(debounceTime(400))
       .subscribe(
       (value) => {
