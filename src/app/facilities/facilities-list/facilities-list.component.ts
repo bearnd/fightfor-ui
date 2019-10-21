@@ -52,6 +52,7 @@ import {
   orderObjectArray,
   orderStringArray
 } from '../../shared/utils';
+import { validateDistanceLocation } from '../../utils/form-filters-validators';
 
 
 interface EnumInterface {
@@ -218,35 +219,37 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for overall-status.
-      selectOverallStatus: new FormControl(null),
-      // Filter for overall-status.
-      filterOverallStatus: new FormControl(null),
-      // Multi-select for intervention.
-      selectIntervention: new FormControl(null),
-      // Filter for intervention.
-      filterIntervention: new FormControl(null),
-      // Multi-select for condition.
-      selectCondition: new FormControl(null),
-      // Filter for condition.
-      filterCondition: new FormControl(null),
-      // Multi-select for facility-country.
-      selectFacilityCountry: new FormControl(null),
-      // Filter for facility-country.
-      filterFacilityCountry: new FormControl(null),
-      // Multi-select for facility-state.
-      selectFacilityState: new FormControl(null),
-      // Filter for facility-state.
-      filterFacilityState: new FormControl(null),
-      // Multi-select for facility-city.
-      selectFacilityCity: new FormControl(null),
-      // Filter for facility-city.
-      filterFacilityCity: new FormControl(null),
-      // Current location input.
-      currentLocation: new FormControl(null),
-      // Select for the maximum distance from the current location.
-      selectDistanceMax: new FormControl(null),
-    });
+        // Multi-select for overall-status.
+        selectOverallStatus: new FormControl(null),
+        // Filter for overall-status.
+        filterOverallStatus: new FormControl(null),
+        // Multi-select for intervention.
+        selectIntervention: new FormControl(null),
+        // Filter for intervention.
+        filterIntervention: new FormControl(null),
+        // Multi-select for condition.
+        selectCondition: new FormControl(null),
+        // Filter for condition.
+        filterCondition: new FormControl(null),
+        // Multi-select for facility-country.
+        selectFacilityCountry: new FormControl(null),
+        // Filter for facility-country.
+        filterFacilityCountry: new FormControl(null),
+        // Multi-select for facility-state.
+        selectFacilityState: new FormControl(null),
+        // Filter for facility-state.
+        filterFacilityState: new FormControl(null),
+        // Multi-select for facility-city.
+        selectFacilityCity: new FormControl(null),
+        // Filter for facility-city.
+        filterFacilityCity: new FormControl(null),
+        // Current location input.
+        currentLocation: new FormControl(null),
+        // Select for the maximum distance from the current location.
+        selectDistanceMax: new FormControl(null),
+      },
+      validateDistanceLocation
+    );
 
     this.dataSourceFacilities.facilitiesSubject.subscribe(
       (results: StudiesCountByFacilityInterface[]) => {
