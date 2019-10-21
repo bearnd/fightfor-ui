@@ -15,6 +15,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
@@ -50,8 +52,6 @@ import {
   orderObjectArray,
   orderStringArray
 } from '../../shared/utils';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
 
 
 interface EnumInterface {
@@ -92,7 +92,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   formFilters: FormGroup;
 
   // Possible overall-status values (to be populated in `ngOnInit`).
-  private overallStatuses: {id: string, name: string}[];
+  private overallStatuses: { id: string, name: string }[];
   // Possible intervention values (to be populated in `ngOnInit`).
   private interventions: UniqueDescriptor[];
   // Possible condition values (to be populated in `ngOnInit`).
@@ -105,7 +105,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   private facilityCities: StudyLocationInterface[] = [];
   // Current position defined either through auto-detection or provided via a
   // location search.
-  private currentPosition: {longitude: number, latitude: number} = null;
+  private currentPosition: { longitude: number, latitude: number } = null;
   // Possible locations retrieved by forward geocoding via the
   // `GeoLocationService`.
   public locationsAll: ReplaySubject<MapBoxFeature[]> =
@@ -114,7 +114,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
     10, 25, 50, 100, 500, 1000, 5000, 1000000
   ];
 
-    // Replay-subject storing the latest filtered overall-statuses.
+  // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
   // Replay-subject storing the latest filtered interventions.
@@ -153,7 +153,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   // Total number of facilities used in the facilities-table paginator.
   facilitiesCount: number;
 
-  public topFacilityMeshTerms: {[key: string]: DescriptorInterface[]} = {};
+  public topFacilityMeshTerms: { [key: string]: DescriptorInterface[] } = {};
 
   // The studies returned by the search.
   public studies: StudyInterface[];
@@ -254,12 +254,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         // intervention MeSH descriptors per facility.
         for (const result of results) {
           this.studyStatsRetrieverService
-          .getCountStudiesByFacilityDescriptor(
-            this.studies,
-            [result.facilityCanonical.facilityCanonicalId],
-            MeshTermType.INTERVENTION,
-            3
-          ).subscribe(
+            .getCountStudiesByFacilityDescriptor(
+              this.studies,
+              [result.facilityCanonical.facilityCanonicalId],
+              MeshTermType.INTERVENTION,
+              3
+            ).subscribe(
             (response) => {
               this.topFacilityMeshTerms[
                 result.facilityCanonical.facilityCanonicalId
@@ -353,7 +353,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueCountries: string[]) => {
         let counter = 1;
-        const uniqueCountriesMap: {id: number, name: string}[] = [];
+        const uniqueCountriesMap: { id: number, name: string }[] = [];
         for (const country of uniqueCountries) {
           if (!country) {
             continue;
@@ -364,7 +364,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueCountriesMap;
       }
     ).subscribe(
-      (uniqueCountriesMap: {id: number, name: string}[]) => {
+      (uniqueCountriesMap: { id: number, name: string }[]) => {
         this.facilityCountries = uniqueCountriesMap;
         this.facilityCountriesFiltered.next(uniqueCountriesMap);
       }
@@ -383,7 +383,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueStates: string[]) => {
         let counter = 1;
-        const uniqueStatesMap: {id: number, name: string}[] = [];
+        const uniqueStatesMap: { id: number, name: string }[] = [];
         for (const state of uniqueStates) {
           if (!state) {
             continue;
@@ -394,7 +394,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueStatesMap;
       }
     ).subscribe(
-      (uniqueStatesMap: {id: number, name: string}[]) => {
+      (uniqueStatesMap: { id: number, name: string }[]) => {
         this.facilityStates = uniqueStatesMap;
         this.facilityStatesFiltered.next(uniqueStatesMap);
       }
@@ -413,7 +413,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueCities: string[]) => {
         let counter = 1;
-        const uniqueCitiesMap: {id: number, name: string}[] = [];
+        const uniqueCitiesMap: { id: number, name: string }[] = [];
         for (const city of uniqueCities) {
           uniqueCitiesMap.push({id: counter, name: city});
           counter++;
@@ -421,7 +421,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueCitiesMap;
       }
     ).subscribe(
-      (uniqueCitiesMap: {id: number, name: string}[]) => {
+      (uniqueCitiesMap: { id: number, name: string }[]) => {
         this.facilityCities = uniqueCitiesMap;
         this.facilityCitiesFiltered.next(uniqueCitiesMap);
       }
@@ -512,20 +512,20 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(debounceTime(400))
       .subscribe(
-      (query) => {
-        // If the incoming value is of type `string` then perform a synonym
-        // search through the `GeolocationService` and update the `locationsAll`
-        // subject with the results.
-        if (typeof query === 'string') {
-          this.geolocationService.geocodeForward(query)
-            .subscribe(
-              (response: MapBoxGeocodeResponse) => {
-                this.locationsAll.next(response.features);
-              }
-            );
+        (query) => {
+          // If the incoming value is of type `string` then perform a synonym
+          // search through the `GeolocationService` and update the `locationsAll`
+          // subject with the results.
+          if (typeof query === 'string') {
+            this.geolocationService.geocodeForward(query)
+              .subscribe(
+                (response: MapBoxGeocodeResponse) => {
+                  this.locationsAll.next(response.features);
+                }
+              );
+          }
         }
-      }
-    );
+      );
   }
 
   ngAfterViewInit() {
@@ -819,10 +819,10 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
               // progress.
               this.loadingCurrentLocation.next(false);
             },
-            error => this.loadingCurrentLocation.next(false)
+            _ => this.loadingCurrentLocation.next(false)
           );
         },
-        error => this.loadingCurrentLocation.next(false)
+        _ => this.loadingCurrentLocation.next(false)
       );
   }
 

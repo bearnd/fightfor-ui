@@ -15,7 +15,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
@@ -54,8 +56,6 @@ import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
 
 
 interface EnumInterface {
@@ -107,7 +107,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   formFilters: FormGroup;
 
   // Possible overall-status values (to be populated in `ngOnInit`).
-  private overallStatuses: {id: string, name: string}[];
+  private overallStatuses: { id: string, name: string }[];
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -120,7 +120,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyCities: StudyLocationInterface[] = [];
   // Current position defined either through auto-detection or provided via a
   // location search.
-  private currentPosition: {longitude: number, latitude: number} = null;
+  private currentPosition: { longitude: number, latitude: number } = null;
   // Possible locations retrieved by forward geocoding via the
   // `GeoLocationService`.
   public locationsAll: ReplaySubject<MapBoxFeature[]> =
