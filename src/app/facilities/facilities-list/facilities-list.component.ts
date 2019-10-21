@@ -815,6 +815,9 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
                 if (feature.place_type.indexOf('locality') > -1) {
                   this.formFilters
                     .get('currentLocation').setValue(feature.place_name);
+                  // Mark the form as `touched` to enable the filter-reset
+                  // button.
+                  this.formFilters.markAsTouched();
                   break;
                 }
               }
