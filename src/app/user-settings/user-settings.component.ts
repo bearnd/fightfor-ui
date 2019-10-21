@@ -60,7 +60,7 @@ export class UserSettingsComponent implements OnInit {
       title: 'Request your stored personal data',
       html: 'Per <a href="https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/individual-rights/right-of-access/">' +
         'Art. 15 GDPR Right of access by the data subject</a>, ' +
-        'you are entitled to retrieve a copy the personal data pertaining to you ' +
+        'you are entitled to retrieve a copy of the personal data pertaining to you ' +
         'that is stored and processed by this service.' +
         'This is a manual process and may take up to one calendar month ' +
         'to process. ' +
