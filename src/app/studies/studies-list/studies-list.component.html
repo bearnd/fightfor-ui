@@ -149,6 +149,7 @@
                             mat-raised-button
                             class="btn btn-rose mat-raised-button"
                             type="button"
+                            [disabled]="!isDetectLocationEnabled"
                             (click)="onDetectLocation()"
                           >
                             <mat-icon
