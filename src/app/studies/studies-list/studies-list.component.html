@@ -142,6 +142,7 @@
                               </mat-option>
                             </mat-autocomplete>
                           </mat-form-field>
+                          <mat-error *ngIf="formFilters.hasError('locationWithoutDistance')">Please set 'Maximum Distance'</mat-error>
                         </div>
 
                         <div class="col-md-2">
@@ -181,6 +182,7 @@
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
+                          <mat-error *ngIf="formFilters.hasError('distanceWithoutLocation')">Please set 'Current Location'</mat-error>
                         </div>
                       </div>
 
