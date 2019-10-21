@@ -307,6 +307,7 @@
                             type="button"
                             class="btn btn-rose mat-raised-button"
                             (click)="onResetFilters()"
+                            [disabled]="!formFilters.touched"
                           >
                             <span class="mat-button-wrapper">Reset Filters</span>
                           </button>
@@ -314,6 +315,7 @@
                             mat-raised-button
                             type="submit"
                             class="btn btn-rose mat-raised-button"
+                            [disabled]="!formFilters.touched || !(formFilters.errors === null)"
                           >
                             <span class="mat-button-wrapper">Filter</span>
                           </button>
