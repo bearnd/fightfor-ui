@@ -1274,9 +1274,14 @@
                       <i class="material-icons">location_on</i>
                     </div>
                     <div class="col-md-11">
-                      <p class="card-description">
+                      <a
+                        (click)="onNavigateGoogleMaps(location.facility.facilityCanonical)"
+                        style="cursor: pointer;"
+                        matTooltip="Open in Google Maps"
+                        matTooltipPosition="right"
+                      >
                         {{ (location.facility.facilityCanonical?.address) || "Location address unavailable" }}
-                      </p>
+                      </a>
                     </div>
                   </div>
                   <div
@@ -1301,8 +1306,10 @@
                     </div>
                     <div class="col-md-11">
                       <a
-                        class="card-description"
-                        href="{{ location.facility.facilityCanonical?.url }}"
+                        (click)="onNavigateFacilityUrl(location.facility.facilityCanonical)"
+                        style="cursor: pointer;"
+                        matTooltip="Open in new tab"
+                        matTooltipPosition="right"
                       >
                         {{ (location.facility.facilityCanonical?.url) || "Location URL unavailable"  }}
                       </a>
