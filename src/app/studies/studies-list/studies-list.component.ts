@@ -15,7 +15,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
@@ -54,8 +56,7 @@ import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { validateDistanceLocation } from '../../utils/form-filters-validators';
 
 
 interface EnumInterface {
@@ -107,7 +108,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   formFilters: FormGroup;
 
   // Possible overall-status values (to be populated in `ngOnInit`).
-  private overallStatuses: {id: string, name: string}[];
+  private overallStatuses: { id: string, name: string }[];
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -120,7 +121,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyCities: StudyLocationInterface[] = [];
   // Current position defined either through auto-detection or provided via a
   // location search.
-  private currentPosition: {longitude: number, latitude: number} = null;
+  private currentPosition: { longitude: number, latitude: number } = null;
   // Possible locations retrieved by forward geocoding via the
   // `GeoLocationService`.
   public locationsAll: ReplaySubject<MapBoxFeature[]> =
@@ -280,39 +281,41 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for overall-status.
-      selectOverallStatus: new FormControl(null),
-      // Filter for overall-status.
-      filterOverallStatus: new FormControl(null),
-      // Multi-select for phase.
-      selectPhase: new FormControl(null),
-      // Filter for phase.
-      filterPhase: new FormControl(null),
-      // Multi-select for study-type.
-      selectStudyType: new FormControl(null),
-      // Filter for study-type.
-      filterStudyType: new FormControl(null),
-      // Multi-select for study-country.
-      selectStudyCountry: new FormControl(null),
-      // Filter for study-country.
-      filterStudyCountry: new FormControl(null),
-      // Multi-select for study-state.
-      selectStudyState: new FormControl(null),
-      // Filter for study-state.
-      filterStudyState: new FormControl(null),
-      // Multi-select for study-city.
-      selectStudyCity: new FormControl(null),
-      // Filter for study-city.
-      filterStudyCity: new FormControl(null),
-      // Current location input.
-      currentLocation: new FormControl(null),
-      // Select for the maximum distance from the current location.
-      selectDistanceMax: new FormControl(null),
-      // Multi-select for study-facility.
-      selectStudyFacility: new FormControl(null),
-      // Filter for study-facility.
-      filterStudyFacility: new FormControl(null),
-    });
+        // Multi-select for overall-status.
+        selectOverallStatus: new FormControl(null),
+        // Filter for overall-status.
+        filterOverallStatus: new FormControl(null),
+        // Multi-select for phase.
+        selectPhase: new FormControl(null),
+        // Filter for phase.
+        filterPhase: new FormControl(null),
+        // Multi-select for study-type.
+        selectStudyType: new FormControl(null),
+        // Filter for study-type.
+        filterStudyType: new FormControl(null),
+        // Multi-select for study-country.
+        selectStudyCountry: new FormControl(null),
+        // Filter for study-country.
+        filterStudyCountry: new FormControl(null),
+        // Multi-select for study-state.
+        selectStudyState: new FormControl(null),
+        // Filter for study-state.
+        filterStudyState: new FormControl(null),
+        // Multi-select for study-city.
+        selectStudyCity: new FormControl(null),
+        // Filter for study-city.
+        filterStudyCity: new FormControl(null),
+        // Current location input.
+        currentLocation: new FormControl(null),
+        // Select for the maximum distance from the current location.
+        selectDistanceMax: new FormControl(null),
+        // Multi-select for study-facility.
+        selectStudyFacility: new FormControl(null),
+        // Filter for study-facility.
+        filterStudyFacility: new FormControl(null),
+      },
+      validateDistanceLocation
+    );
 
     if (this.mode === Mode.SAVED) {
       this.subscriptionIsUpdatingUserStudies
@@ -1175,6 +1178,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
                 if (feature.place_type.indexOf('locality') > -1) {
                   this.formFilters
                     .get('currentLocation').setValue(feature.place_name);
+                  // Mark the form as `touched` to enable the filter-reset
+                  // button.
+                  this.formFilters.markAsTouched();
                   break;
                 }
               }
