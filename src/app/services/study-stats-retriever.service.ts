@@ -134,6 +134,7 @@ interface ResponseGetUniqueDescriptors {
 
 interface VariablesGetUniqueCities {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueCities {
@@ -307,10 +308,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueCities = gql`
     query getUniqueCities(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueCities(
           studyIds: $studyIds,
+          countries: $countries,
         )
       }
     }
@@ -862,11 +865,13 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the unique cities for given studies.
    * @param studies The studies for which the unique cities will be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueCities(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<string[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -879,7 +884,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueCities>
       ({
         query: this.queryGetUniqueCities,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueCities;
       });
