@@ -972,10 +972,14 @@ type TypeStudiesStats {
   ): [TypeLatestDescriptor]
   "Retrieves the unique canonical facilities pertaining to a list of clinical-trial studies."
   getUniqueCanonicalFacilities(
+    #A list of countries to filter by.
+    countries: [String],
     #A list of clinical-trial study PK IDs to perform theoperation within.
     studyIds: [Int]!
   ): [TypeFacilityCanonical]
   getUniqueCities(
+    #A list of countries to filter by.
+    countries: [String],
     #A list of clinical-trial study PK IDs to perform theoperation within.
     studyIds: [Int]!
   ): [String]
@@ -991,6 +995,8 @@ type TypeStudiesStats {
     studyIds: [Int]!
   ): [TypeDescriptor]
   getUniqueStates(
+    #A list of countries to filter by.
+    countries: [String],
     #A list of clinical-trial study PK IDs to perform theoperation within.
     studyIds: [Int]!
   ): [String]
