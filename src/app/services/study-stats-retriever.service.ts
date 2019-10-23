@@ -186,6 +186,7 @@ interface ResponseGetEligibilityAgeRange {
 
 interface VariablesGetUniqueCanonicalFacilities {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueCanonicalFacilities {
@@ -468,10 +469,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueCanonicalFacilities = gql`
     query getUniqueCanonicalFacilities(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueCanonicalFacilities(
           studyIds: $studyIds,
+          countries: $countries,
         ) {
           facilityCanonicalId,
           name,
@@ -1022,11 +1025,13 @@ export class StudyStatsRetrieverService {
    * Retrieve the unique canonical facilities for given studies.
    * @param studies The studies for which the unique canonical facilities will
    * be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueCanonicalFacilities(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<FacilityCanonicalInterface[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -1039,7 +1044,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueCanonicalFacilities>
       ({
         query: this.queryGetUniqueCanonicalFacilities,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueCanonicalFacilities;
       });
