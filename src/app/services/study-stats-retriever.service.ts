@@ -145,6 +145,7 @@ interface ResponseGetUniqueCities {
 
 interface VariablesGetUniqueStates {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueStates {
@@ -322,10 +323,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueStates = gql`
     query getUniqueStates(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueStates(
           studyIds: $studyIds,
+          countries: $countries,
         )
       }
     }
@@ -896,11 +899,13 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the unique states for given studies.
    * @param studies The studies for which the unique states will be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueStates(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<string[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -913,7 +918,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueStates>
       ({
         query: this.queryGetUniqueStates,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueStates;
       });
