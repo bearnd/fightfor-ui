@@ -15,7 +15,7 @@ import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-pricing',
-  templateUrl: './pricing.component.html'
+  templateUrl: './pricing.component.html',
   styleUrls: ['./pricing.component.scss']
 })
 export class PricingComponent implements OnInit {
