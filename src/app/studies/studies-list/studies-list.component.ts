@@ -405,6 +405,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.predefinedState && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueStates(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned states alphabetically.
         (uniqueStates: string[]) => {
@@ -438,6 +439,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.predefinedCity && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCities(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned cities alphabetically.
         (uniqueCities: string[]) => {
@@ -468,6 +470,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!history.state.facilityCanonical && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned cities alphabetically.
         (uniqueFacilities: FacilityCanonicalInterface[]) => {
