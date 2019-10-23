@@ -3,3 +3,14 @@
     margin-bottom: 10px;
   }
 }
+
+.col-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+.action-icon {
+  font-size: 24px !important;
+}

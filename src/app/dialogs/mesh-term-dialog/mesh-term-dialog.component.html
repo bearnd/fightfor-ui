@@ -13,10 +13,10 @@
         <i [class]="'fa fa-lg ' + getIconClass().iconClass"></i>
       </div>
     <div class="row">
-      <div class="col-md-11">
+      <div class="col-md-8">
         <h4 class="card-title">{{ getIconClass().category }}</h4>
       </div>
-      <div class="col-md-1">
+      <div class="col-md-4 col-actions">
         <button
           mat-raised-button
           type="button"
@@ -25,9 +25,22 @@
           [disableRipple]="true"
         >
           <mat-icon
+            class="action-icon"
             (click)="onNavigateToNewSearch()"
-            style="background-color: transparent"
           >search
+          </mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          type="button"
+          class="btn btn-rose btn-round btn-just-icon btn-link mat-raised-button btn-fab"
+          (click)="dialogRef.close()"
+          [disableRipple]="true"
+        >
+          <mat-icon
+            class="action-icon"
+            (click)="dialogRef.close()"
+          >close
           </mat-icon>
         </button>
       </div>
