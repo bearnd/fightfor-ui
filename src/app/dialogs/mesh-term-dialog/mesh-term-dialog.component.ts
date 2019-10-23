@@ -153,7 +153,7 @@ export class MeshTermDialogComponent implements OnInit {
   public definitions: DescriptorDefinitionBundle[] = null;
 
   constructor(
-    private dialogRef: MatDialogRef<MeshTermDialogComponent>,
+    public dialogRef: MatDialogRef<MeshTermDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public meshDescriptorRetrieverService: MeshDescriptorRetrieverService,
     private router: Router,
