@@ -8,6 +8,7 @@ import { UserConfigService } from '../../services/user-config.service';
 import { StudyRetrieverService } from '../../services/study-retriever.service';
 import {
   ContactInterface,
+  FacilityCanonicalInterface,
   InterventionInterface,
   InterventionType,
   InvestigatorInterface,
@@ -29,7 +30,7 @@ import { AgeRange } from '../../shared/common.interface';
 import {
   StudyStatsRetrieverService
 } from '../../services/study-stats-retriever.service';
-import { intervalToSec } from '../../shared/utils';
+import { intervalToSec, navigateGoogleMaps } from '../../shared/utils';
 import { AuthService } from '../../services/auth.service';
 import {
   DescriptorInterface
@@ -816,4 +817,30 @@ export class StudyComponent implements OnInit, OnDestroy {
       '&body=' + body ;
   }
 
+  /**
+   * Opens the Google Maps URL for the given facility in a new tab.
+   * @param facilityCanonical The facility for which the Google Maps URL will
+   * be assembled and navigated to.
+   */
+  onNavigateGoogleMaps(
+    facilityCanonical: FacilityCanonicalInterface
+  ): void {
+    navigateGoogleMaps(facilityCanonical);
+  }
+
+  /**
+   * Opens the facility URL in a new tab.
+   * @param facilityCanonical The facility for which the URL will navigated to.
+   */
+  onNavigateFacilityUrl(
+    facilityCanonical: FacilityCanonicalInterface
+  ): void {
+    // Escape clause.
+    if (!facilityCanonical.url) {
+      return;
+    }
+
+    // Open in a new tab.
+    window.open(facilityCanonical.url, '_blank');
+  }
 }

@@ -15,7 +15,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
@@ -54,8 +56,7 @@ import { UserConfigService } from '../../services/user-config.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { validateDistanceLocation } from '../../utils/form-filters-validators';
 
 
 interface EnumInterface {
@@ -107,7 +108,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   formFilters: FormGroup;
 
   // Possible overall-status values (to be populated in `ngOnInit`).
-  private overallStatuses: {id: string, name: string}[];
+  private overallStatuses: { id: string, name: string }[];
   // Possible study-phase values.
   private phases = castEnumToArray(StudyPhase);
   // Possible study-type values.
@@ -120,7 +121,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   private studyCities: StudyLocationInterface[] = [];
   // Current position defined either through auto-detection or provided via a
   // location search.
-  private currentPosition: {longitude: number, latitude: number} = null;
+  private currentPosition: { longitude: number, latitude: number } = null;
   // Possible locations retrieved by forward geocoding via the
   // `GeoLocationService`.
   public locationsAll: ReplaySubject<MapBoxFeature[]> =
@@ -130,6 +131,15 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
   // Possible facility  values (to be populated in `ngOnInit`).
   private studyFacilities: UniqueFacility[] = [];
+
+  // Predefined geographical entities.
+  private predefinedCountry: string = null;
+  private predefinedState: string = null;
+  private predefinedCity: string = null;
+  private predefinedFacility: FacilityCanonicalInterface = null;
+
+  // Whether the `Detect Location` button should be enabled.
+  public isDetectLocationEnabled = true;
 
   // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
@@ -271,39 +281,41 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for overall-status.
-      selectOverallStatus: new FormControl(null),
-      // Filter for overall-status.
-      filterOverallStatus: new FormControl(null),
-      // Multi-select for phase.
-      selectPhase: new FormControl(null),
-      // Filter for phase.
-      filterPhase: new FormControl(null),
-      // Multi-select for study-type.
-      selectStudyType: new FormControl(null),
-      // Filter for study-type.
-      filterStudyType: new FormControl(null),
-      // Multi-select for study-country.
-      selectStudyCountry: new FormControl(null),
-      // Filter for study-country.
-      filterStudyCountry: new FormControl(null),
-      // Multi-select for study-state.
-      selectStudyState: new FormControl(null),
-      // Filter for study-state.
-      filterStudyState: new FormControl(null),
-      // Multi-select for study-city.
-      selectStudyCity: new FormControl(null),
-      // Filter for study-city.
-      filterStudyCity: new FormControl(null),
-      // Current location input.
-      currentLocation: new FormControl(null),
-      // Select for the maximum distance from the current location.
-      selectDistanceMax: new FormControl(null),
-      // Multi-select for study-facility.
-      selectStudyFacility: new FormControl(null),
-      // Filter for study-facility.
-      filterStudyFacility: new FormControl(null),
-    });
+        // Multi-select for overall-status.
+        selectOverallStatus: new FormControl(null),
+        // Filter for overall-status.
+        filterOverallStatus: new FormControl(null),
+        // Multi-select for phase.
+        selectPhase: new FormControl(null),
+        // Filter for phase.
+        filterPhase: new FormControl(null),
+        // Multi-select for study-type.
+        selectStudyType: new FormControl(null),
+        // Filter for study-type.
+        filterStudyType: new FormControl(null),
+        // Multi-select for study-country.
+        selectStudyCountry: new FormControl(null),
+        // Filter for study-country.
+        filterStudyCountry: new FormControl(null),
+        // Multi-select for study-state.
+        selectStudyState: new FormControl(null),
+        // Filter for study-state.
+        filterStudyState: new FormControl(null),
+        // Multi-select for study-city.
+        selectStudyCity: new FormControl(null),
+        // Filter for study-city.
+        filterStudyCity: new FormControl(null),
+        // Current location input.
+        currentLocation: new FormControl(null),
+        // Select for the maximum distance from the current location.
+        selectDistanceMax: new FormControl(null),
+        // Multi-select for study-facility.
+        selectStudyFacility: new FormControl(null),
+        // Filter for study-facility.
+        filterStudyFacility: new FormControl(null),
+      },
+      validateDistanceLocation
+    );
 
     if (this.mode === Mode.SAVED) {
       this.subscriptionIsUpdatingUserStudies
@@ -321,32 +333,28 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     // defined then set it as the only possible facility option in the form
     // controls and disable the controls.
     if (history.state.facilityCanonical) {
-      // Create a singleton array containing only the predefined facility.
-      this.studyFacilities = [{
-        id: history.state.facilityCanonical.facilityCanonicalId,
-        name: history.state.facilityCanonical.name,
-        facility: history.state.facilityCanonical,
-      }];
-      this.studyFacilitiesFiltered.next(this.studyFacilities);
-      // Set the single facility as the current value.
-      this.formFilters.get('selectStudyFacility').setValue(this.studyFacilities);
-      // Disable the facility filter controls.
-      this.formFilters.get('selectStudyFacility').disable();
-      this.formFilters.get('filterStudyFacility').disable();
+      this.predefineFacility(history.state.facilityCanonical);
     }
 
     // If, prior to navigating to this component, an initial country value was
     // defined then set it as the only possible country option in the form
     // controls and disable the controls.
     if (history.state.country) {
-      // Create a singleton array containing only the predefined country.
-      this.studyCountries = [{id: 0, name: history.state.country}];
-      this.studyCountriesFiltered.next(this.studyCountries);
-      // Set the single country as the current value.
-      this.formFilters.get('selectStudyCountry').setValue(this.studyCountries);
-      // Disable the country filter controls.
-      this.formFilters.get('selectStudyCountry').disable();
-      this.formFilters.get('filterStudyCountry').disable();
+      this.predefineCountry(history.state.country);
+    }
+
+    // If, prior to navigating to this component, an initial state value was
+    // defined then set it as the only possible state option in the form
+    // controls and disable the controls.
+    if (history.state.state) {
+      this.predefineState(history.state.state);
+    }
+
+    // If, prior to navigating to this component, an initial city value was
+    // defined then set it as the only possible city option in the form
+    // controls and disable the controls.
+    if (history.state.city) {
+      this.predefineCity(history.state.city);
     }
 
     // Retrieve the initial set of studies.
@@ -361,7 +369,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // Retrieve the unique countries for this search's studies. If an initial
     // country was defined then skip this step.
-    if (!history.state.country && this.studies.length) {
+    if (!this.predefinedCountry && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCountries(
         this.studies,
       ).map(
@@ -392,10 +400,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
-    // Retrieve the unique states/regions for this search's studies.
-    if (this.studies.length) {
+    // Retrieve the unique states for this search's studies. If an initial
+    // state was defined then skip this step.
+    if (!this.predefinedState && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueStates(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned states alphabetically.
         (uniqueStates: string[]) => {
@@ -424,10 +434,12 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       );
     }
 
-    // Retrieve the unique cities for this search's studies.
-    if (this.studies.length) {
+    // Retrieve the unique cities for this search's studies. If an initial
+    // city was defined then skip this step.
+    if (!this.predefinedCity && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCities(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned cities alphabetically.
         (uniqueCities: string[]) => {
@@ -458,6 +470,7 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!history.state.facilityCanonical && this.studies.length) {
       this.studyStatsRetrieverService.getUniqueCanonicalFacilities(
         this.studies,
+        this.predefinedCountry ? [this.predefinedCountry] : null,
       ).map(
         // Sort returned cities alphabetically.
         (uniqueFacilities: FacilityCanonicalInterface[]) => {
@@ -644,6 +657,90 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.subscriptionIsUpdatingUserStudies) {
       this.subscriptionIsUpdatingUserStudies.unsubscribe();
     }
+  }
+
+  /**
+   * Defines a predefined country as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param countryName The predefined country name.
+   */
+  private predefineCountry(countryName: string): void {
+    this.predefinedCountry = countryName;
+    // Create a singleton array containing only the predefined country.
+    this.studyCountries = [{id: 0, name: this.predefinedCountry}];
+    this.studyCountriesFiltered.next(this.studyCountries);
+    // Set the single country as the current value.
+    this.formFilters.get('selectStudyCountry').setValue(this.studyCountries);
+    // Disable the country filter controls.
+    this.formFilters.get('selectStudyCountry').disable();
+    this.formFilters.get('filterStudyCountry').disable();
+  }
+
+  /**
+   * Defines a predefined state as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param stateName The predefined state name.
+   */
+  private predefineState(stateName: string): void {
+    this.predefinedState = stateName;
+    // Create a singleton array containing only the predefined state.
+    this.studyStates = [{id: 0, name: this.predefinedState}];
+    this.studyStatesFiltered.next(this.studyStates);
+    // Set the single state as the current value.
+    this.formFilters.get('selectStudyState').setValue(this.studyStates);
+    // Disable the state filter controls.
+    this.formFilters.get('selectStudyState').disable();
+    this.formFilters.get('filterStudyState').disable();
+  }
+
+  /**
+   * Defines a predefined city as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param cityName The predefined city name.
+   */
+  private predefineCity(cityName: string): void {
+    this.predefinedCity = cityName;
+    // Create a singleton array containing only the predefined city.
+    this.studyCities = [{id: 0, name: this.predefinedCity}];
+    this.studyCitiesFiltered.next(this.studyCities);
+    // Set the single city as the current value.
+    this.formFilters.get('selectStudyCity').setValue(this.studyCities);
+    // Disable the state filter controls.
+    this.formFilters.get('selectStudyCity').disable();
+    this.formFilters.get('filterStudyCity').disable();
+  }
+
+  /**
+   * Defines a predefined facility as the only option under the filter controls
+   * and disables those controls so that they can't be updated.
+   * @param facility The predefined facility.
+   */
+  private predefineFacility(facility: FacilityCanonicalInterface): void {
+    this.predefinedFacility = facility;
+    // Create a singleton array containing only the predefined facility.
+    this.studyFacilities = [{
+      id: this.predefinedFacility.facilityCanonicalId,
+      name: this.predefinedFacility.name,
+      facility: this.predefinedFacility,
+    }];
+    this.studyFacilitiesFiltered.next(this.studyFacilities);
+    // Set the single facility as the current value.
+    this.formFilters.get('selectStudyFacility').setValue(this.studyFacilities);
+    // Disable the facility filter controls.
+    this.formFilters.get('selectStudyFacility').disable();
+    this.formFilters.get('filterStudyFacility').disable();
+    // Disable the current-location controls.
+    this.formFilters.get('currentLocation').disable();
+    this.formFilters.get('selectDistanceMax').disable();
+    // Disable the `Detect Location` button.
+    this.isDetectLocationEnabled = false;
+
+    // Since a pre-defined facility defines a country, state, and city predefine
+    // those quantities so that their corresponding controls are updated and
+    // disabled.
+    this.predefineCountry(this.predefinedFacility.country);
+    this.predefineState(this.predefinedFacility.administrativeAreaLevel1);
+    this.predefineCity(this.predefinedFacility.locality);
   }
 
   /**
@@ -975,10 +1072,6 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
     this.formFilters.get('filterPhase').reset();
     this.formFilters.get('selectStudyType').reset();
     this.formFilters.get('filterStudyType').reset();
-    this.formFilters.get('selectStudyState').reset();
-    this.formFilters.get('filterStudyState').reset();
-    this.formFilters.get('selectStudyCity').reset();
-    this.formFilters.get('filterStudyCity').reset();
     this.formFilters.get('currentLocation').reset();
     this.formFilters.get('selectDistanceMax').reset();
 
@@ -987,9 +1080,19 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.formFilters.get('filterStudyFacility').reset();
     }
 
-    if (!history.state.country) {
+    if (!this.predefinedCountry) {
       this.formFilters.get('selectStudyCountry').reset();
       this.formFilters.get('filterStudyCountry').reset();
+    }
+
+    if (!this.predefinedState) {
+      this.formFilters.get('selectStudyState').reset();
+      this.formFilters.get('filterStudyState').reset();
+    }
+
+    if (!this.predefinedCity) {
+      this.formFilters.get('selectStudyCity').reset();
+      this.formFilters.get('filterStudyCity').reset();
     }
 
     // Refresh the studies to reflect the reset filters.
@@ -1078,6 +1181,9 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
                 if (feature.place_type.indexOf('locality') > -1) {
                   this.formFilters
                     .get('currentLocation').setValue(feature.place_name);
+                  // Mark the form as `touched` to enable the filter-reset
+                  // button.
+                  this.formFilters.markAsTouched();
                   break;
                 }
               }
@@ -1085,10 +1191,10 @@ export class StudiesListComponent implements OnInit, AfterViewInit, OnDestroy {
               // progress.
               this.loadingCurrentLocation.next(false);
             },
-            error => this.loadingCurrentLocation.next(false)
+            _ => this.loadingCurrentLocation.next(false)
           );
         },
-        error => this.loadingCurrentLocation.next(false)
+        _ => this.loadingCurrentLocation.next(false)
       );
   }
 

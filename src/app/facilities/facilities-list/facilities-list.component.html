@@ -142,6 +142,7 @@
                               </mat-option>
                             </mat-autocomplete>
                           </mat-form-field>
+                          <mat-error *ngIf="formFilters.hasError('locationWithoutDistance')">Please set 'Maximum Distance'</mat-error>
                         </div>
 
                         <div class="col-md-2">
@@ -180,6 +181,7 @@
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
+                          <mat-error *ngIf="formFilters.hasError('distanceWithoutLocation')">Please set 'Current Location'</mat-error>
                         </div>
                       </div>
 
@@ -275,6 +277,7 @@
                             type="button"
                             class="btn btn-rose mat-raised-button"
                             (click)="onResetFilters()"
+                            [disabled]="!formFilters.touched"
                           >
                             <span class="mat-button-wrapper">Reset Filters</span>
                           </button>
@@ -282,6 +285,7 @@
                             mat-raised-button
                             type="submit"
                             class="btn btn-rose mat-raised-button pull-right"
+                            [disabled]="!formFilters.touched || !(formFilters.errors === null)"
                           >
                             <span class="mat-button-wrapper">Filter</span>
                           </button>
@@ -345,10 +349,10 @@
                             btn-fab
                           "
                           (click)="onNavigateGoogleMaps(entry.facilityCanonical)"
-                          matTooltip="Open on Google Maps"
+                          matTooltip="Open in Google Maps"
                           [matTooltipPosition]="'left'"
                         >
-                          <i class="material-icons">public</i>
+                          <i class="material-icons">location_on</i>
                         </button>
                       </td>
                     </ng-container>

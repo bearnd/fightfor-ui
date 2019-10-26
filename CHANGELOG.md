@@ -1,5 +1,16 @@
 ## Changelog
 
+### v0.15.0
+
+- Story No. 1552: Limit filter values to specified facility in StudiesListComponent.
+- Story No. 1668: Add informational tooltips to the new search screen.
+- Story No. 878: Add validator to ensure that current-location and max-distance are used together.
+- Story No. 1423: Consider renaming `Therapies` under `SearchResultsSummaryComponent`.
+- Story No. 1387: Consider adding Google Maps link to the `Contact` card in `StudyComponent`.
+- Story No. 1502: Background resizes with accordion expansion in FAQ.
+- Story No. 1550: Limit filter values to specified country in StudiesListComponent.
+- Story No. 1676: Add closing button to MeSH dialog.
+
 ### v0.14.0
 
 - Story No. 1386: Align attributions to the bottom of the page.

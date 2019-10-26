@@ -134,6 +134,7 @@ interface ResponseGetUniqueDescriptors {
 
 interface VariablesGetUniqueCities {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueCities {
@@ -144,6 +145,7 @@ interface ResponseGetUniqueCities {
 
 interface VariablesGetUniqueStates {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueStates {
@@ -184,6 +186,7 @@ interface ResponseGetEligibilityAgeRange {
 
 interface VariablesGetUniqueCanonicalFacilities {
   studyIds: number[];
+  countries?: String[];
 }
 
 interface ResponseGetUniqueCanonicalFacilities {
@@ -307,10 +310,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueCities = gql`
     query getUniqueCities(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueCities(
           studyIds: $studyIds,
+          countries: $countries,
         )
       }
     }
@@ -319,10 +324,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueStates = gql`
     query getUniqueStates(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueStates(
           studyIds: $studyIds,
+          countries: $countries,
         )
       }
     }
@@ -462,10 +469,12 @@ export class StudyStatsRetrieverService {
   queryGetUniqueCanonicalFacilities = gql`
     query getUniqueCanonicalFacilities(
       $studyIds: [Int]!,
+      $countries: [String],
     ) {
       studiesStats {
         getUniqueCanonicalFacilities(
           studyIds: $studyIds,
+          countries: $countries,
         ) {
           facilityCanonicalId,
           name,
@@ -862,11 +871,13 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the unique cities for given studies.
    * @param studies The studies for which the unique cities will be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueCities(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<string[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -879,7 +890,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueCities>
       ({
         query: this.queryGetUniqueCities,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueCities;
       });
@@ -888,11 +902,13 @@ export class StudyStatsRetrieverService {
   /**
    * Retrieve the unique states for given studies.
    * @param studies The studies for which the unique states will be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueStates(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<string[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -905,7 +921,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueStates>
       ({
         query: this.queryGetUniqueStates,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueStates;
       });
@@ -1006,11 +1025,13 @@ export class StudyStatsRetrieverService {
    * Retrieve the unique canonical facilities for given studies.
    * @param studies The studies for which the unique canonical facilities will
    * be retrieved.
+   * @param countries The countries within which the unique cities will be
+   * retrieved.
    */
   getUniqueCanonicalFacilities(
     studies: StudyInterface[],
+    countries?: String[],
   ): Observable<FacilityCanonicalInterface[]> {
-
     // Retrieve the IDs out of the provided studies.
     const studyIds: number[] = studies.map(
       function (d) {
@@ -1023,7 +1044,10 @@ export class StudyStatsRetrieverService {
         VariablesGetUniqueCanonicalFacilities>
       ({
         query: this.queryGetUniqueCanonicalFacilities,
-        variables: {studyIds: studyIds},
+        variables: {
+          studyIds: studyIds,
+          countries: countries,
+        },
       }).map((response) => {
         return response.data.studiesStats.getUniqueCanonicalFacilities;
       });

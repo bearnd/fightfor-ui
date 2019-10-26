@@ -12,7 +12,7 @@ import { MeshTermDialogComponent } from '../dialogs/mesh-term-dialog/mesh-term-d
 export class MeshTermChipComponent {
 
   @Input() descriptor: DescriptorInterface;
-  @Input() trailingIcon = 'remove_red_eye';
+  @Input() trailingIcon = 'info_outline';
   @Input() removeIcon = null;
   @Input() selectable = false;
   @Input() selected = false;

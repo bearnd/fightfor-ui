@@ -230,6 +230,7 @@ export class StudyRetrieverService {
             },
             facility {
               facilityCanonical {
+                googlePlaceId,
                 name,
                 address,
                 phoneNumber,

@@ -15,6 +15,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
 import { debounceTime, merge, take, takeUntil, tap } from 'rxjs/operators';
@@ -47,11 +49,11 @@ import { overallStatusGroups } from '../../shared/common.interface';
 import { DescriptorInterface } from '../../interfaces/descriptor.interface';
 import {
   filterValues,
+  navigateGoogleMaps,
   orderObjectArray,
   orderStringArray
 } from '../../shared/utils';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { validateDistanceLocation } from '../../utils/form-filters-validators';
 
 
 interface EnumInterface {
@@ -92,7 +94,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   formFilters: FormGroup;
 
   // Possible overall-status values (to be populated in `ngOnInit`).
-  private overallStatuses: {id: string, name: string}[];
+  private overallStatuses: { id: string, name: string }[];
   // Possible intervention values (to be populated in `ngOnInit`).
   private interventions: UniqueDescriptor[];
   // Possible condition values (to be populated in `ngOnInit`).
@@ -105,7 +107,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   private facilityCities: StudyLocationInterface[] = [];
   // Current position defined either through auto-detection or provided via a
   // location search.
-  private currentPosition: {longitude: number, latitude: number} = null;
+  private currentPosition: { longitude: number, latitude: number } = null;
   // Possible locations retrieved by forward geocoding via the
   // `GeoLocationService`.
   public locationsAll: ReplaySubject<MapBoxFeature[]> =
@@ -114,7 +116,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
     10, 25, 50, 100, 500, 1000, 5000, 1000000
   ];
 
-    // Replay-subject storing the latest filtered overall-statuses.
+  // Replay-subject storing the latest filtered overall-statuses.
   public overallStatusesFiltered: ReplaySubject<EnumInterface[]> =
     new ReplaySubject<EnumInterface[]>(1);
   // Replay-subject storing the latest filtered interventions.
@@ -153,7 +155,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
   // Total number of facilities used in the facilities-table paginator.
   facilitiesCount: number;
 
-  public topFacilityMeshTerms: {[key: string]: DescriptorInterface[]} = {};
+  public topFacilityMeshTerms: { [key: string]: DescriptorInterface[] } = {};
 
   // The studies returned by the search.
   public studies: StudyInterface[];
@@ -218,35 +220,37 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
 
     // Initialize the filter-form controls.
     this.formFilters = new FormGroup({
-      // Multi-select for overall-status.
-      selectOverallStatus: new FormControl(null),
-      // Filter for overall-status.
-      filterOverallStatus: new FormControl(null),
-      // Multi-select for intervention.
-      selectIntervention: new FormControl(null),
-      // Filter for intervention.
-      filterIntervention: new FormControl(null),
-      // Multi-select for condition.
-      selectCondition: new FormControl(null),
-      // Filter for condition.
-      filterCondition: new FormControl(null),
-      // Multi-select for facility-country.
-      selectFacilityCountry: new FormControl(null),
-      // Filter for facility-country.
-      filterFacilityCountry: new FormControl(null),
-      // Multi-select for facility-state.
-      selectFacilityState: new FormControl(null),
-      // Filter for facility-state.
-      filterFacilityState: new FormControl(null),
-      // Multi-select for facility-city.
-      selectFacilityCity: new FormControl(null),
-      // Filter for facility-city.
-      filterFacilityCity: new FormControl(null),
-      // Current location input.
-      currentLocation: new FormControl(null),
-      // Select for the maximum distance from the current location.
-      selectDistanceMax: new FormControl(null),
-    });
+        // Multi-select for overall-status.
+        selectOverallStatus: new FormControl(null),
+        // Filter for overall-status.
+        filterOverallStatus: new FormControl(null),
+        // Multi-select for intervention.
+        selectIntervention: new FormControl(null),
+        // Filter for intervention.
+        filterIntervention: new FormControl(null),
+        // Multi-select for condition.
+        selectCondition: new FormControl(null),
+        // Filter for condition.
+        filterCondition: new FormControl(null),
+        // Multi-select for facility-country.
+        selectFacilityCountry: new FormControl(null),
+        // Filter for facility-country.
+        filterFacilityCountry: new FormControl(null),
+        // Multi-select for facility-state.
+        selectFacilityState: new FormControl(null),
+        // Filter for facility-state.
+        filterFacilityState: new FormControl(null),
+        // Multi-select for facility-city.
+        selectFacilityCity: new FormControl(null),
+        // Filter for facility-city.
+        filterFacilityCity: new FormControl(null),
+        // Current location input.
+        currentLocation: new FormControl(null),
+        // Select for the maximum distance from the current location.
+        selectDistanceMax: new FormControl(null),
+      },
+      validateDistanceLocation
+    );
 
     this.dataSourceFacilities.facilitiesSubject.subscribe(
       (results: StudiesCountByFacilityInterface[]) => {
@@ -254,12 +258,12 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         // intervention MeSH descriptors per facility.
         for (const result of results) {
           this.studyStatsRetrieverService
-          .getCountStudiesByFacilityDescriptor(
-            this.studies,
-            [result.facilityCanonical.facilityCanonicalId],
-            MeshTermType.INTERVENTION,
-            3
-          ).subscribe(
+            .getCountStudiesByFacilityDescriptor(
+              this.studies,
+              [result.facilityCanonical.facilityCanonicalId],
+              MeshTermType.INTERVENTION,
+              3
+            ).subscribe(
             (response) => {
               this.topFacilityMeshTerms[
                 result.facilityCanonical.facilityCanonicalId
@@ -353,7 +357,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueCountries: string[]) => {
         let counter = 1;
-        const uniqueCountriesMap: {id: number, name: string}[] = [];
+        const uniqueCountriesMap: { id: number, name: string }[] = [];
         for (const country of uniqueCountries) {
           if (!country) {
             continue;
@@ -364,7 +368,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueCountriesMap;
       }
     ).subscribe(
-      (uniqueCountriesMap: {id: number, name: string}[]) => {
+      (uniqueCountriesMap: { id: number, name: string }[]) => {
         this.facilityCountries = uniqueCountriesMap;
         this.facilityCountriesFiltered.next(uniqueCountriesMap);
       }
@@ -383,7 +387,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueStates: string[]) => {
         let counter = 1;
-        const uniqueStatesMap: {id: number, name: string}[] = [];
+        const uniqueStatesMap: { id: number, name: string }[] = [];
         for (const state of uniqueStates) {
           if (!state) {
             continue;
@@ -394,7 +398,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueStatesMap;
       }
     ).subscribe(
-      (uniqueStatesMap: {id: number, name: string}[]) => {
+      (uniqueStatesMap: { id: number, name: string }[]) => {
         this.facilityStates = uniqueStatesMap;
         this.facilityStatesFiltered.next(uniqueStatesMap);
       }
@@ -413,7 +417,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       // properties that can be used in a multi-select component.
       (uniqueCities: string[]) => {
         let counter = 1;
-        const uniqueCitiesMap: {id: number, name: string}[] = [];
+        const uniqueCitiesMap: { id: number, name: string }[] = [];
         for (const city of uniqueCities) {
           uniqueCitiesMap.push({id: counter, name: city});
           counter++;
@@ -421,7 +425,7 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
         return uniqueCitiesMap;
       }
     ).subscribe(
-      (uniqueCitiesMap: {id: number, name: string}[]) => {
+      (uniqueCitiesMap: { id: number, name: string }[]) => {
         this.facilityCities = uniqueCitiesMap;
         this.facilityCitiesFiltered.next(uniqueCitiesMap);
       }
@@ -512,20 +516,20 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
       .valueChanges
       .pipe(debounceTime(400))
       .subscribe(
-      (query) => {
-        // If the incoming value is of type `string` then perform a synonym
-        // search through the `GeolocationService` and update the `locationsAll`
-        // subject with the results.
-        if (typeof query === 'string') {
-          this.geolocationService.geocodeForward(query)
-            .subscribe(
-              (response: MapBoxGeocodeResponse) => {
-                this.locationsAll.next(response.features);
-              }
-            );
+        (query) => {
+          // If the incoming value is of type `string` then perform a synonym
+          // search through the `GeolocationService` and update the `locationsAll`
+          // subject with the results.
+          if (typeof query === 'string') {
+            this.geolocationService.geocodeForward(query)
+              .subscribe(
+                (response: MapBoxGeocodeResponse) => {
+                  this.locationsAll.next(response.features);
+                }
+              );
+          }
         }
-      }
-    );
+      );
   }
 
   ngAfterViewInit() {
@@ -812,6 +816,9 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
                 if (feature.place_type.indexOf('locality') > -1) {
                   this.formFilters
                     .get('currentLocation').setValue(feature.place_name);
+                  // Mark the form as `touched` to enable the filter-reset
+                  // button.
+                  this.formFilters.markAsTouched();
                   break;
                 }
               }
@@ -819,10 +826,10 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
               // progress.
               this.loadingCurrentLocation.next(false);
             },
-            error => this.loadingCurrentLocation.next(false)
+            _ => this.loadingCurrentLocation.next(false)
           );
         },
-        error => this.loadingCurrentLocation.next(false)
+        _ => this.loadingCurrentLocation.next(false)
       );
   }
 
@@ -849,21 +856,9 @@ export class FacilitiesListComponent implements OnInit, AfterViewInit, OnDestroy
    * @param facilityCanonical The facility for which the Google Maps URL will
    * be assembled and navigated to.
    */
-  onNavigateGoogleMaps(facilityCanonical: FacilityCanonicalInterface): void {
-    // Escape clause.
-    if (!facilityCanonical.googlePlaceId) {
-      return;
-    }
-
-    // Assemble the Google Maps URL as per
-    // https://developers.google.com/maps/documentation/urls/guide#search-action
-    // and https://stackoverflow.com/a/44137931/403211.
-    const url = 'https://www.google.com/maps/search/' +
-      '?api=1&query=Google' +
-      '&query_place_id=' + facilityCanonical.googlePlaceId;
-
-    // Open in a new tab.
-    window.open(url, '_blank');
+  onNavigateGoogleMaps(
+    facilityCanonical: FacilityCanonicalInterface
+  ): void {
+    navigateGoogleMaps(facilityCanonical);
   }
-
 }
